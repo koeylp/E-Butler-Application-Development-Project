@@ -5,10 +5,14 @@
 package com.ebutler.swp.dao;
 
 import com.ebutler.swp.dto.CustomerDTO;
+import com.ebutler.swp.dto.ProductCategoryDTO;
 import com.ebutler.swp.utils.DBUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -51,36 +55,36 @@ public class CustomerDAO {
         return false;
     }
 
-//    public static List<ProductCategoryDTO> getProductCategoryList() throws SQLException{
-//        Connection conn = null;
-//        PreparedStatement ptm = null;
-//        ResultSet rs = null;
-//        List<ProductCategoryDTO> list = new ArrayList<>();
-//        
-//        try {
-//            conn = DBUtils.getConnection();
-//            if(conn != null){
-//                ptm = conn.prepareStatement(GET_PRODUCT_CATEGORY_LIST);
-//                rs = ptm.executeQuery();
-//                while(rs.next()){
-//                    list.add(new ProductCategoryDTO(rs.getString(1), rs.getString(2), rs.getString(3)));
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }finally{
-//            if (rs != null) {
-//                rs.close();
-//            }
-//            if (ptm != null) {
-//                ptm.close();
-//            }
-//            if (conn != null) {
-//                conn.close();
-//            }
-//        }
-//        return list;
-//    }
+    public static List<ProductCategoryDTO> getProductCategoryList() throws SQLException{
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        List<ProductCategoryDTO> list = new ArrayList<>();
+        
+        try {
+            conn = DBUtils.getConnection();
+            if(conn != null){
+                ptm = conn.prepareStatement(GET_PRODUCT_CATEGORY_LIST);
+                rs = ptm.executeQuery();
+                while(rs.next()){
+                    list.add(new ProductCategoryDTO(rs.getString(1), rs.getString(2), rs.getString(3)));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
    
 }
 

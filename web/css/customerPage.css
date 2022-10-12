@@ -1,0 +1,132 @@
+
+/* Help Block Start */
+
+.help-block__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.help-block__img {
+    text-align: center;
+}
+
+.help-block__img > img{
+    width: 50%;
+    height: 50%;
+}
+
+.help-block__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Help Block End */
+
+/* product card start*/
+.block__title {
+    width: 100%;
+    background-color: black;
+    color: white;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    height: 15%;
+    top: -3%;
+    visibility: hidden;
+    transition: all ease-in-out 0.15s;
+}
+
+.block__text {
+    width: 100%;
+}
+
+.card-extend {
+    visibility: hidden;
+    transition: all ease-in-out 0.15s;
+    padding: 4px 12px;
+}
+
+.block__item--category:hover {
+    transform: translateY(-5%);
+    cursor: pointer;
+}
+/* product card end */
+
+/* Card start*/
+.card {
+    height: 200px;
+    border-radius: 20px;
+    border: none;
+    flex: 1 0 100%;
+}
+
+.card-item:nth-of-type(4n+1) .card {
+    background-color: var(--yellow-bg);
+}
+
+.card-item:nth-of-type(4n+2) .card {
+    background-color: var(--blue-bg);
+}
+
+.card-item:nth-of-type(4n+3) .card {
+    background-color: var(--purple-bg);
+}
+
+.card-item:nth-of-type(4n) .card {
+    background-color: var(--red-bg);
+}
+
+.card-detail {
+    height: 100%;
+}
+/* Card end */
+
+/* Slider start*/
+.slider-main {
+    position: relative;
+}
+
+.direction {
+    border-radius: 9999px;
+    padding: 8px 16px;
+    border: 3px solid transparent;
+    position: absolute;
+    z-index: 1;
+    background-color: var(--primary-color);
+    color: white;
+    transition: all ease-in-out 0.15s;
+}
+
+.direction:hover {
+    cursor: pointer;
+    background-color: #b81f32;
+}
+/* Slider end */
+
+
+@media (min-width: 1024px) {
+    .card {
+        height: 250px;
+    }
+}
+
+@media (max-width: 1023px) {
+    .content > p {
+        display: none;
+    }
+
+    .direction {
+        display: none;
+    }
+    
+    .grid {
+        overflow: scroll;
+    }
+
+    .block__title {
+        visibility: visible;
+    }
+}

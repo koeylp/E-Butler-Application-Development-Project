@@ -290,10 +290,7 @@ INSERT INTO tblProvider(username, password , role_ID , phone , email , name , lo
 INSERT INTO tblProvider(username, password , role_ID , phone , email , name , logo , status) VALUES ('homeimprovement' , '1' , 'PRO','0918134948' ,'homeimprovement@gmail.com','Home Improvement','https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg',1)
 INSERT INTO tblProvider(username, password , role_ID , phone , email , name , logo , status) VALUES ('plumbers' , '1' , 'PRO','0918134945' ,'plumbers@gmail.com','Plumbers','https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg',1)
 INSERT INTO tblProvider(username, password , role_ID , phone , email , name , logo , status) VALUES ('laundry' , '1' , 'PRO','0918134947' ,'dryClean@gmail.com','Laundry / Dry Clean','https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg',1)
-/*<<<<<<< Updated upstream
--- bảng tỉnh thành
-=======
->>>>>>> Stashed changes*/
+
 
 -- Bảng tỉnh/thành
 INSERT INTO tblProvince_City ([province_Name], [province_ID]) VALUES 
@@ -1103,7 +1100,9 @@ INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('16','BAR'
 
 INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('17','OSH','Flower Vase ','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDfBBGXBGkLiZHhCG5oea688yruCW7oKnnRA&usqp=CAU')
 INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('18','OSH','Fire Extinguisher','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDfBBGXBGkLiZHhCG5oea688yruCW7oKnnRA&usqp=CAU')
+
 --Bảng sản phẩm chi tiết theo từng sản phẩm cứng 
+
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Dinner Spoon Silver',50,30000, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , null ,1 )
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Cake Fork Silver',50,20000, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , null ,1 )
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Tea Spoon Gold',50,86000, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , null ,1 )
@@ -1278,12 +1277,15 @@ INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, ima
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','18','Powder Fire Extinguisher 4kg',50,385000, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , null ,1 )
 
 --Bảng loại dịch vụ theo nhóm 
+
 INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('HC', 'Home Cleaning', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg')
 INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('HI', 'Home Improvement', 'https://thumbs.dreamstime.com/z/couple-living-room-avatar-character-vector-illustration-desing-couple-living-room-avatar-character-145224593.jpg')
 INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('DC', 'Laundry/Dry Clean', 'https://thumbs.dreamstime.com/z/bedroom-interior-vector-illustration-bed-nightstands-wardrobe-shelves-windows-45016633.jpg')
 INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('PBS', 'Plumbers', 'https://thumbs.dreamstime.com/z/set-flat-bright-vector-elements-items-modern-stylish-bathroom-interior-construction-bath-shampoo-toilet-towels-68381087.jpg')
 INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('IT', 'IT Service', 'https://thumbs.dreamstime.com/z/set-flat-bright-vector-elements-items-modern-stylish-bathroom-interior-construction-bath-shampoo-toilet-towels-68381087.jpg')
+
 --Bảng loại dịch vụ 
+
 INSERT INTO tblService(service_ID, category_ID, name , image) VALUES ('1','HC','Deep Cleaning','https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg')
 INSERT INTO tblService(service_ID, category_ID, name , image) VALUES ('2','HC','Sofa Cleaning','https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg')
 INSERT INTO tblService(service_ID, category_ID, name , image) VALUES ('3','HC','Exterior Cleaning','https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg')
@@ -1314,7 +1316,9 @@ INSERT INTO tblService(service_ID, category_ID, name , image) VALUES ('24','IT',
 INSERT INTO tblService(service_ID, category_ID, name , image) VALUES ('25','IT','Wifi','https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg')
 INSERT INTO tblService(service_ID, category_ID, name , image) VALUES ('26','IT','Computers','https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg')
 INSERT INTO tblService(service_ID, category_ID, name , image) VALUES ('27','IT','Home CCTV','https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg')
+
 --bảng nhân viên
+
 INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Nguyen The Viet','550422001234',null,1)
 INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Tran Nhat Minh','550422001235',null,1)
 INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Tran Nguyen Dat Phu','550422001422',null,1)

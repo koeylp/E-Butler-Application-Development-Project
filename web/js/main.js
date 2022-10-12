@@ -79,3 +79,31 @@
     
 })(jQuery);
 
+// Search js start
+
+var navi_heading = document.querySelectorAll('.navigator')
+
+
+const search_open = document.querySelector('.search-open')
+const search_close = document.querySelector('.search-close')
+
+const search = document.querySelector('.search')
+
+search_open.addEventListener('click', function() {
+    search.classList.remove('hide')
+    
+    for(var index in navi_heading) {
+        navi_heading[index].classList.add('hide')
+    }
+})
+
+search_close.addEventListener('click', function() {
+    search.classList.add('hide')
+
+    for(var index in navi_heading) {
+        navi_heading[index].classList.remove('hide')
+    }
+})
+
+// Search js End
+

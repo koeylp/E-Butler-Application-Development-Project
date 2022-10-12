@@ -16,6 +16,8 @@
     --purple-bg: #F3E8FF;
     --purple-txt: #6B21A8;
     --border-color: #E5E7EB;
+    --hover-bg: #273A89;
+    --hover-color: white;
     --grey-bg: #F9FAFB;
     --round: 9999px; 
     --opacity: 1;
@@ -88,7 +90,6 @@ ul {
 /* Margin end */
 
 /* Padding start */
-
 .pad-0 {
     padding: .5rem;
 }
@@ -316,7 +317,7 @@ ul {
         -ms-overflow-style: none;
         scrollbar-width: none;
     }
-    
+
     /* clickable */
 
     .clickable {
@@ -423,17 +424,6 @@ ul {
     cursor: pointer;
 }
 
-/* Border css start */
-.border-bot {
-    border-bottom: 1px solid #E2E8F0;
-}
-
-.border-top {
-    border-top: 1px solid #E2E8F0;
-}
-
-/* Border css end */
-
 /* Slider start */
 .slider {
     flex-wrap: nowrap;
@@ -456,95 +446,18 @@ ul {
 /* image start */
 
 .img {
-    border-radius: 20px;
     overflow: hidden;
     width: 100%;
     height: 100%;
 }
 
-.img>img {
+.img > img {
     width: 100%;
     height: 100%;
-    height: auto;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 /* image end */
-
-/* margin css start */
-.my-32 {
-    margin: 32px 0;
-}
-
-.my-24 {
-    margin: 24px 0;
-}
-
-.mx-24 {
-    margin: 0 24px;
-}
-
-.my-12 {
-    margin: 12px 0;
-}
-
-.mx-12 {
-    margin: 0 12px;
-}
-
-.mx-8 {
-    margin: 0 8px;
-}
-
-/* margin css end */
-
-/* padding css start */
-.pad-y-32 {
-    padding: 32px 0;
-}
-
-.pad-x-32 {
-    padding: 0 32px;
-}
-
-.pad-y-20 {
-    padding: 20px 0;
-}
-
-.pad-x-20 {
-    padding: 0 20px;
-}
-
-.pad-y-60 {
-    padding: 60px 0;
-}
-
-.pad-x-60 {
-    padding: 0 60px;
-}
-
-.pad-x-12 {
-    padding: 0 12px;
-}
-
-.pad-y-12 {
-    padding: 12px 0;
-}
-
-/* padding css end */
-
-.flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.flex-bottom {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-}
 
 /* text css start */
 .txt-border-md {
@@ -706,7 +619,7 @@ ul {
 
 /* img css end */
 
-/* Button css start */
+/* Button start */
 .my-btn,
 .sort-btn {
     border-radius: 20px;
@@ -768,7 +681,7 @@ ul {
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-/* Button css end */
+/* Button end */
 
 /* Select start */
 .select {
@@ -805,6 +718,11 @@ ul {
         top: 0;
     }
 
+    .clickable:hover {
+        background-color: var(--hover-bg);
+        color: var(--hover-color);
+    }
+
     /* Slider end */
 }
 
@@ -820,3 +738,7 @@ ul {
         display: none;
     }
 }
+
+/* Animation start*/
+
+/* Animation end */
