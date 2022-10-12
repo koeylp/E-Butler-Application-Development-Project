@@ -3,6 +3,8 @@
 const provider_role = document.getElementById('PRO')
 const customer_role = document.getElementById('CUS')
 
+//const back_register_form = document.querrSelector('.back-register-form')
+
 const auth_form = document.querySelectorAll('.Register-form')
 
 const register_form_customer = document.getElementById('register-form-customer');
@@ -10,6 +12,7 @@ const register_form_provider = document.getElementById('register-form-provider')
 
 customer_role.addEventListener('click', openCustomerForm)
 provider_role.addEventListener('click', openProviderForm)
+
 
 
 function openCustomerForm() {
@@ -28,18 +31,12 @@ function hideAllForm() {
     }
 }
 
-document.querySelectorAll('.policy-check')[0].onclick = function (e) {
-    var btn_login = document.getElementById('btn-register');
-    if (this.checked) {
-        btn_login.classList.remove("btn--disable");
-        btn_login.removeAttribute('disabled');
-    } else {
-        btn_login.classList.add("btn--disable");
-        btn_login.setAttribute('disabled', 'disabled');
-    }
-};
 
-document.querySelectorAll('.policy-check')[1].onclick = function (e) {
+document.querySelector('.policy-check-pro').addEventListener('click', EnableButton)
+
+document.querySelector('.policy-check-cus').addEventListener('click', EnableButton)
+
+function EnableButton() {
     var btn_login = document.getElementById('btn-register');
     if (this.checked) {
         btn_login.classList.remove("btn--disable");
@@ -48,4 +45,5 @@ document.querySelectorAll('.policy-check')[1].onclick = function (e) {
         btn_login.classList.add("btn--disable");
         btn_login.setAttribute('disabled', 'disabled');
     }
-};
+}
+

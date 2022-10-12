@@ -49,13 +49,12 @@ public class RegisterController extends HttpServlet {
             if(!isRegister) return;
             
 //            Lấy thông tin user
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            String confirm_password = request.getParameter("confirm_password");
-            String phone = request.getParameter("phone");
-            String email = request.getParameter("email");
-            String name = request.getParameter("name");
-            String street = request.getParameter("address");
+            String username = request.getParameter("username").trim();
+            String password = request.getParameter("password").trim();
+            String confirm_password = request.getParameter("confirm_password").trim();
+            String phone = request.getParameter("phone").trim();
+            String email = request.getParameter("email").trim();
+            String name = request.getParameter("name").trim();
             
 //            Lấy user role
             String role_id = request.getParameter("role_id");
@@ -80,7 +79,7 @@ public class RegisterController extends HttpServlet {
                     customerError.setUsername("Username has already existed!");
                     checkValidation = false;
                 }
-                if(ValiUtils.isNonWhiteSpaceString(username)) {
+                if(ValiUtils.isValidUsername(username)) {
                     customerError.setUsername("Invalid username!");
                     checkValidation = false;
                 }
@@ -91,7 +90,11 @@ public class RegisterController extends HttpServlet {
                 if (!ValiUtils.isValidLength(name, 2, 30)) {
                     customerError.setName("Name must be includes at leaset 2 charaters and less than 30 characters");
                     checkValidation = false;
-                }                
+                }           
+                if(!ValiUtils.isValidString(name)) {
+                    customerError.setName("Invalid name");
+                    checkValidation = false;
+                }
                 if(!ValiUtils.isPhone(phone)) {
                     customerError.setPhone("Invalid phone number");
                     checkValidation = false;
@@ -102,6 +105,9 @@ public class RegisterController extends HttpServlet {
                 
                 if (!password.equals(confirm_password)) {
                     customerError.setPassword("Password do not match");
+                    checkValidation = false;
+                } else if (!ValiUtils.isValidPassword(password)) {
+                    customerError.setPassword("Invalid password!");
                     checkValidation = false;
                 }
                 
@@ -131,8 +137,12 @@ public class RegisterController extends HttpServlet {
                     providerError.setUsername("Username has already existed!");
                     checkValidation = false;
                 }
-                if(!ValiUtils.isNonWhiteSpaceString(username)) {
+                if(ValiUtils.isValidUsername(username)) {
                     providerError.setUsername("Invalid username!");
+                    checkValidation = false;
+                }
+                if(!ValiUtils.isValidString(name)) {
+                    providerError.setName("Invalid name");
                     checkValidation = false;
                 }
                 if(userDAO.isExistedEmail(email)) {
@@ -153,6 +163,9 @@ public class RegisterController extends HttpServlet {
                 }
                 if (!password.equals(confirm_password)) {
                     providerError.setPassword("Password do not match");
+                    checkValidation = false;
+                } else if (!ValiUtils.isValidPassword(password)) {
+                    providerError.setPassword("Invalid password!");
                     checkValidation = false;
                 }
                 

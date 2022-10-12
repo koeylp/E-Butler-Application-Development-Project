@@ -316,6 +316,12 @@ ul {
         -ms-overflow-style: none;
         scrollbar-width: none;
     }
+    
+    /* clickable */
+
+    .clickable {
+        cursor: pointer;
+    }
 
     /* text */
 

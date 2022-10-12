@@ -212,7 +212,7 @@ CREATE TRIGGER trig_cus_insert ON tblCustomer
 FOR INSERT
 AS
 BEGIN 
-	DECLARE @username nvarchar(30), @password nvarchar(30), @role_ID nvarchar(10), @phone decimal (11), @email nvarchar(30), @status decimal(1)
+	DECLARE @username nvarchar(30), @password nvarchar(30), @role_ID nvarchar(10), @phone nvarchar (11), @email nvarchar(30), @status decimal(1)
 	
 	SELECT @username = username, @password = password, @role_ID = role_ID, @phone = phone, @email = email, @status = status
 	FROM inserted
@@ -227,7 +227,7 @@ FOR UPDATE
 AS
 BEGIN 
 	
-	DECLARE @username nvarchar(30), @password nvarchar(30), @phone decimal (11), @email nvarchar(30), @status decimal(1)
+	DECLARE @username nvarchar(30), @password nvarchar(30), @phone nvarchar (11), @email nvarchar(30), @status decimal(1)
 	
 	SELECT @password = password, @phone = phone, @email = email, @status = status
 	FROM inserted
@@ -241,7 +241,7 @@ CREATE TRIGGER trig_pro_insert ON tblProvider
 FOR INSERT
 AS
 BEGIN 
-	DECLARE @username nvarchar(30), @password nvarchar(30), @role_ID nvarchar(10), @phone decimal (11), @email nvarchar(30), @status decimal(1)
+	DECLARE @username nvarchar(30), @password nvarchar(30), @role_ID nvarchar(10), @phone nvarchar (11), @email nvarchar(30), @status decimal(1)
 	
 	SELECT @username = username, @password = password, @role_ID = role_ID, @phone = phone, @email = email, @status = status
 	FROM inserted
@@ -256,7 +256,7 @@ FOR UPDATE
 AS
 BEGIN 
 	
-	DECLARE @username nvarchar(30), @password nvarchar(30), @phone decimal (11), @email nvarchar(30), @status decimal(1)
+	DECLARE @username nvarchar(30), @password nvarchar(30), @phone nvarchar (11), @email nvarchar(30), @status decimal(1)
 	
 	SELECT @password = password, @phone = phone, @email = email, @status = status
 	FROM inserted
@@ -270,8 +270,6 @@ GO
 
 INSERT INTO tblUserRole(role_ID, role_Name, description) VALUES ('CUS','Customer', 'Welcome to shopping and using our service, manage your home, your building facilities') 
 INSERT INTO tblUserRole(role_ID, role_Name, description) VALUES ('PRO','Provider', 'Experience our services to promote products and make profits') 
-
-SELECT role_ID, role_Name, description FROM tblUserRole
 
 --Bảng thông tin provider 
 		--Theo Product

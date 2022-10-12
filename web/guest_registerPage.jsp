@@ -53,7 +53,6 @@
             provider = (provider == null) ? new ProviderDTO() : provider;
             role_id = (role_id == null) ? "" : role_id;
 //            role_list = (role_list == null) ? new ArrayList<RoleDTO>() : role_list; 
-            
 
             String class_Hide = "hide";
         %>
@@ -133,13 +132,18 @@
 
                             <!-- Customer Form -->
                             <div id="register-form-customer" class="Register-form auth-form <%if (!role_id.equals("CUS")) {%><%=class_Hide%><% }%>">
-                                <div class="auth-form__header">
-                                    <h3 class="auth-form__heading">As a member?</h3>
-                                    <form action="MainController" method="POST">
-                                        <button type="submit" class="dropdown-item login--link auth-form__heading auth-form__switch-btn">Login</button>
-                                        <input value="Login" name="action" type="hidden">
-                                        <input value="false" name="isLogin" type="hidden">
-                                    </form>
+                                <div class="auth-form__header flex-between">
+                                    <a style="margin-left: 2rem; cursor: pointer;" class="back-register-form">
+                                        <i class="fa-solid fa-arrow-left"></i>
+                                    </a>
+                                    <div class="auth-form__header">
+                                        <h3 class="auth-form__heading">As a member?</h3>
+                                        <form action="MainController" method="POST">
+                                            <button type="submit" class="dropdown-item login--link auth-form__heading auth-form__switch-btn">Login</button>
+                                            <input value="Login" name="action" type="hidden">
+                                            <input value="false" name="isLogin" type="hidden">
+                                        </form>
+                                    </div>
                                 </div>
 
                                 <div class="auth-form__body">
@@ -228,7 +232,7 @@
 
                                                 </div>
                                             </div>
-                                                    
+
                                             <div class="flex-vetical-center m-y-0">
                                                 <span class="auth-form__info">Gender</span>
                                                 <select class="auth-form__selection border-bottom m-x-2" name="gender">
@@ -278,7 +282,7 @@
                                         </div>
 
                                         <div class="auth-form__aside m-y-1">
-                                            <input type="checkbox" name="" class="policy-check">
+                                            <input type="checkbox" name="" class="policy-check-cus">
                                             <p class="auth-form__policy-text">By register you have accepted with E-Butler about
                                                 <a href="" class="auth-form__policy-link">Services</a> &
                                                 <a href="" class="auth-form__policy-link">Security Policy</a>
@@ -307,7 +311,7 @@
                                     <form action="MainController" method="POST">
                                         <input type="hidden" name="action" value="Register">
                                         <input type="hidden" name="isRegister" value="true">
-                                        <input type="hidden" name="role_id" value="CUS">
+                                        <input type="hidden" name="role_id" value="PRO">
                                         <div class="auth-form__form">
                                             <div class="auth-form__title">
                                                 <p>Be member of E-Butler</p>
@@ -412,7 +416,7 @@
                                         </div>
 
                                         <div class="auth-form__aside m-y-1">
-                                            <input type="checkbox" name="" class="policy-check">
+                                            <input type="checkbox" name="" class="policy-check-pro">
                                             <p class="auth-form__policy-text">By register you have accepted with E-Butler about
                                                 <a href="" class="auth-form__policy-link">Services</a> &
                                                 <a href="" class="auth-form__policy-link">Security Policy</a>
@@ -420,7 +424,7 @@
                                         </div>
 
                                         <div class="auth-form__controls m-y-1">
-                                            <button name="action" value="Register" id="btn-register" class="btn btn-size-s btn-primary btn--disable" disabled>Create Account</button>
+                                            <button name="action" value="Register" id="btn-register" class="btn btn-size-s btn-primary">Create Account</button>
                                         </div>
                                     </form>
                                 </div>
