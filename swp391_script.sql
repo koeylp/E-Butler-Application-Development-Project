@@ -271,6 +271,8 @@ GO
 INSERT INTO tblUserRole(role_ID, role_Name, description) VALUES ('CUS','Customer', 'Welcome to shopping and using our service, manage your home, your building facilities') 
 INSERT INTO tblUserRole(role_ID, role_Name, description) VALUES ('PRO','Provider', 'Experience our services to promote products and make profits') 
 
+SELECT role_ID, role_Name, description FROM tblUserRole
+
 --Bảng thông tin provider 
 		--Theo Product
 INSERT INTO tblProvider(username, password , role_ID , phone , email , name , logo , status) VALUES ('provider1' , '1' , 'PRO','0344350704' ,'provider1@gmail.com','Bach Hoa Xanh','https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg',1)
