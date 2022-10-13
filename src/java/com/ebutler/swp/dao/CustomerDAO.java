@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class CustomerDAO {
     private final String INSERT = "INSERT INTO tblCustomer (username, password, role_ID, phone, email, name, gender, dob, avatar, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String GET_PRODUCT_CATEGORY_LIST = "SELECT category_ID, name, image FROM tblProduct_Category";
+    private static final String GET_PRODUCT_CATEGORY_LIST = "SELECT category_ID, name, image FROM tblProductCategory";
     
 
     public boolean InsertCus(CustomerDTO customer) throws SQLException {

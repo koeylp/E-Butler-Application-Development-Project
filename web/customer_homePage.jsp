@@ -1,3 +1,7 @@
+<%@page import="com.ebutler.swp.dto.ServiceCategoryDTO"%>
+<%@page import="com.ebutler.swp.dto.ProductCategoryDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="com.ebutler.swp.dto.ProductDTO"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,6 +43,11 @@
     </head>
 
     <body>
+        <%
+            List<ProductCategoryDTO> productCategorylist = (List<ProductCategoryDTO>) request.getAttribute("PRODUCT_CATEGORY_BY_PLACE_LIST");
+            List<ServiceCategoryDTO> serviceCategoryList = (List<ServiceCategoryDTO>) request.getAttribute("SERVICE_CATEGORY_BY_PLACE_LIST");
+
+        %>
         <div class="container-xxl bg-white p-0">
             <!-- Spinner Start -->
             <div id="spinner"
@@ -83,7 +92,7 @@
                                     <a class="dropdown-item register--link">logout</a>
                                 </div>
                             </div>
-                            <a class="nav-item nav-link search-open"><i class="fa-solid fa-magnifying-glass"></i></a>
+                            <a class="nav-item nav-link search-open "><i class="fa-solid fa-magnifying-glass"></i></a>
                             <a class="nav-item nav-link"><i class="fa-solid fa-cart-shopping"></i></a>
                         </div>
                     </div>
@@ -208,84 +217,45 @@
                             <span class="direction text-md font-medium direct-product-next right center">
                                 <i class="fa-solid fa-angle-right"></i>
                             </span>
-                            <div class="row slider-card slider-product m-y-1">
-                                <div class="col l-5 m-7 s-12 card-item">
-                                    <div class="card">
-                                        <div class="row card-detail product-card">
-                                            <div class="col l-o-1 m-o-1 s-o-1">
-                                                <div class="content pad-y-1">
-                                                    <p class="m-y-1">Explore new arrivals</p>
-                                                    <h4 class="m-y-1">Shop the latest from top brands</h4>
-                                                    <button class="my-btn text font-medium">Show me all</button>
-                                                </div>
-                                            </div>
-                                            <div class="col l-6">
-                                                <div class="block-img pad-y-1 pad-x-12">
-                                                    <img src="https://image.thanhnien.vn/w1024/Uploaded/2022/apluwaj/2020_09_01/xgk1583991219_eunq.png"
-                                                         alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
+
+                            <div class="row slider-card slider-product m-y-1">
+                                <!-- Edit start -->
+                                <%                                        for (ProductCategoryDTO category : productCategorylist) {
+                                %>
                                 <div class="col l-5 m-7 s-12 card-item">
-                                    <div class="card">
-                                        <div class="row card-detail product-card">
-                                            <div class="col l-o-1 m-o-1 s-o-1">
-                                                <div class="content pad-y-1">
-                                                    <p class="m-y-1">Explore new arrivals</p>
-                                                    <h4 class="m-y-1">Shop the latest from top brands</h4>
-                                                    <button class="my-btn text font-medium">Show me all</button>
+                                    <form action="MainController">
+                                        <div class="card">
+                                            <div class="row card-detail product-card">
+                                                <div class="col l-o-1 m-o-1 s-o-1">
+                                                    <div class="pad-y-1 flex-col flex-between full-h">
+                                                        <div>
+                                                            <p class="m-y-0">Explore new arrivals</p>
+                                                            <h5 class="m-y-0">Shop the latest for </h5>
+                                                            <h3 class="m-y-1"><%=category.getName()%></h3>
+                                                        </div>
+
+                                                        <div>
+                                                            <button class="my-btn txt-lg bold" name="action" value="GoToProductPageByPlace">Show me all</button>
+                                                            <input type="hidden" name="category_ID" value="<%=category.getCategory_ID()%>"/>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col l-6">
-                                                <div class="block-img pad-y-1 pad-x-1">
-                                                    <img src="https://i.pinimg.com/originals/a8/b4/0f/a8b40f5f12379bea4da7a57bc1caf5f4.png"
-                                                         alt="">
+                                                <div class="col l-6 full-h full-w">
+                                                    <div class="img pad-1">
+                                                        <img src="<%=category.getImage()%>"
+                                                             alt="">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
-                                <div class="col l-5 m-7 s-12 card-item">
-                                    <div class="card">
-                                        <div class="row card-detail product-card">
-                                            <div class="col l-o-1 m-o-1 s-o-1">
-                                                <div class="content pad-y-1">
-                                                    <p class="m-y-1">Explore new arrivals</p>
-                                                    <h4 class="m-y-1">Shop the latest from top brands</h4>
-                                                    <button class="my-btn text font-medium">Show me all</button>
-                                                </div>
-                                            </div>
-                                            <div class="col l-6">
-                                                <div class="block-img pad-y-1 pad-x-1">
-                                                    <img src="https://image.thanhnien.vn/w1024/Uploaded/2022/apluwaj/2020_09_01/xgk1583991219_eunq.png"
-                                                         alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col l-5 m-7 s-12 card-item">
-                                    <div class="card">
-                                        <div class="row card-detail product-card">
-                                            <div class="col l-o-1 m-o-1 s-o-1">
-                                                <div class="content pad-y-1">
-                                                    <p class="m-y-1">Explore new arrivals</p>
-                                                    <h4 class="m-y-1">Shop the latest from top brands</h4>
-                                                    <button class="my-btn text font-medium">Show me all</button>
-                                                </div>
-                                            </div>
-                                            <div class="col l-6">
-                                                <div class="block-img pad-y-1 pad-x-1">
-                                                    <img src="https://i.pinimg.com/originals/a8/b4/0f/a8b40f5f12379bea4da7a57bc1caf5f4.png"
-                                                         alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <%
+                                    }
+                                %>
+
+                                <!-- Edit end -->
                             </div>
                         </div>
                     </div>
@@ -313,6 +283,7 @@
                 <div class="row m-y-1">
                     <div class="col l-12">
                         <div class="grid slider-main">
+
                             <span class="direction text-md font-medium direct-service-prev left center">
                                 <i class="fa-solid fa-angle-left"></i>
                             </span>
@@ -320,84 +291,45 @@
                             <span class="direction text-md font-medium direct-service-next right center">
                                 <i class="fa-solid fa-angle-right"></i>
                             </span>
-                            <div class="row slider-card slider-service m-y-1">
-                                <div class="col l-5 m-7 s-12 card-item">
-                                    <div class="card">
-                                        <div class="row card-detail service-card">
-                                            <div class="col l-o-1 m-o-1 s-o-1">
-                                                <div class="content pad-y-1">
-                                                    <p class="text m-y-1">Explore new arrivals</p>
-                                                    <h4 class="m-y-1">Shop the latest from top brands</h4>
-                                                    <button class="my-btn text font-medium">Show me all</button>
-                                                </div>
-                                            </div>
-                                            <div class="col l-6">
-                                                <div class="block-img pad-y-1 pad-x-1">
-                                                    <img src="https://image.thanhnien.vn/w1024/Uploaded/2022/apluwaj/2020_09_01/xgk1583991219_eunq.png"
-                                                         alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
+                            <div class="row slider-card slider-service m-y-1">
+
+                                <!-- Edit start-->
+                                <%                                        for (ServiceCategoryDTO category : serviceCategoryList) {
+                                %>
                                 <div class="col l-5 m-7 s-12 card-item">
-                                    <div class="card">
-                                        <div class="row card-detail service-card">
-                                            <div class="col l-o-1 m-o-1 s-o-1">
-                                                <div class="content pad-y-1">
-                                                    <p class="text m-y-1">Explore new arrivals</p>
-                                                    <h4 class="m-y-1">Shop the latest from top brands</h4>
-                                                    <button class="my-btn text font-medium">Show me all</button>
+                                    <form action="MainController">
+                                        <div class="card">
+                                            <div class="row card-detail service-card">
+                                                <div class="col l-o-1 m-o-1 s-o-1">
+                                                    <div class="pad-y-1 flex-col flex-between full-h">
+                                                        <div>
+                                                            <p class="m-y-0">Explore new arrivals</p>
+                                                            <h5 class="m-y-0">Shop the latest for </h5>
+                                                            <h3 class="m-y-1"><%=category.getName()%></h3>
+                                                        </div>
+
+                                                        <div>
+                                                            <button class="my-btn txt-lg bold" name="action" value="GoToProductPageByPlace">Show me all</button>
+                                                            <input type="hidden" name="category_ID" value="<%=category.getCategory_ID()%>"/>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col l-6">
-                                                <div class="block-img pad-y-1 pad-x-1">
-                                                    <img src="https://i.pinimg.com/originals/a8/b4/0f/a8b40f5f12379bea4da7a57bc1caf5f4.png"
-                                                         alt="">
+                                                <div class="col l-6 full-h full-w">
+                                                    <div class="img pad-1">
+                                                        <img src="<%=category.getImage()%>"
+                                                             alt="">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
-                                <div class="col l-5 m-7 s-12 card-item">
-                                    <div class="card">
-                                        <div class="row card-detail service-card">
-                                            <div class="col l-o-1 m-o-1 s-o-1">
-                                                <div class="content pad-y-1">
-                                                    <p class="text m-y-1">Explore new arrivals</p>
-                                                    <h4 class="m-y-1">Shop the latest from top brands</h4>
-                                                    <button class="my-btn text font-medium">Show me all</button>
-                                                </div>
-                                            </div>
-                                            <div class="col l-6">
-                                                <div class="block-img pad-y-1 pad-x-1">
-                                                    <img src="https://image.thanhnien.vn/w1024/Uploaded/2022/apluwaj/2020_09_01/xgk1583991219_eunq.png"
-                                                         alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col l-5 m-7 s-12 card-item">
-                                    <div class="card">
-                                        <div class="row card-detail service-card">
-                                            <div class="col l-o-1 m-o-1 s-o-1">
-                                                <div class="content pad-y-1">
-                                                    <p class="text m-y-1">Explore new arrivals</p>
-                                                    <h4 class="m-y-1">Shop the latest from top brands</h4>
-                                                    <button class="my-btn text font-medium">Show me all</button>
-                                                </div>
-                                            </div>
-                                            <div class="col l-6">
-                                                <div class="block-img pad-y-1 pad-x-1">
-                                                    <img src="https://i.pinimg.com/originals/a8/b4/0f/a8b40f5f12379bea4da7a57bc1caf5f4.png"
-                                                         alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <%
+                                    }
+                                %>
+                                <!-- Edit end-->
+
                             </div>
                         </div>
                     </div>
@@ -469,7 +401,7 @@
             <!-- Purchasing help End -->
 
             <!-- Footer Start -->
-            <div class="container-fluid bg-dark text-white-50 footer pt-5  wow fadeIn" data-wow-delay="0.1s">
+            <div class="container-fluid bg-dark text-white-50 footer pt-5  wow fadeIn m-y-2" data-wow-delay="0.1s">
                 <div class="container py-5">
                     <div class="row g-5">
                         <div class="col-lg-3 col-md-6">
