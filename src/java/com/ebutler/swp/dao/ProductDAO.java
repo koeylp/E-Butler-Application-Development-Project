@@ -379,4 +379,8 @@ public class ProductDAO {
 //         }
 
     }
+
+    public List<ProductDTO> getSearchProductCategory(String category_ID, String searchProductCategory) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

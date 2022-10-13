@@ -5,9 +5,8 @@
 package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.ProductDAO;
-import com.ebutler.swp.dto.ProductDetailDTO;
+import com.ebutler.swp.dto.ProductDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,28 +18,24 @@ import javax.servlet.http.HttpSession;
  *
  * @author Admin
  */
-public class ProductDetailByTypeController extends HttpServlet {
+public class SortProductDetailPriceUpController extends HttpServlet {
     
-    private static final String SUCCESS = "customer_productPage.jsp";
-    private static final String ERROR = "errorPage.jsp";
+    private String ERROR = "errorPage.jsp";
+    private String SUCCESS = "customer_productPage.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String productID = request.getParameter("product_ID");
             HttpSession session = request.getSession();
-            session.setAttribute("PRODUCTID", productID);
             String category_ID = (String) session.getAttribute("CATEGORYID");
+            String product_ID = (String) session.getAttribute("PRODUCTID");
             ProductDAO dao = new ProductDAO();
-            
-            List<ProductDetailDTO> list = dao.getListProductByPlaceDetail(category_ID, productID);
+            List<ProductDTO> list = dao.sortListProductPriceUP(category_ID);
             session.setAttribute("PRODUCT_DETAIL_BY_TYPE", list);
             url = SUCCESS;
-            
         } catch (Exception e) {
-            log("Error at ProductDetailByTypeController: "+e.getMessage());
         }finally{
             request.getRequestDispatcher(url).forward(request, response);
         }

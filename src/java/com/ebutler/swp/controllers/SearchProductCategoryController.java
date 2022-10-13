@@ -5,9 +5,8 @@
 package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.ProductDAO;
-import com.ebutler.swp.dto.ProductDetailDTO;
+import com.ebutler.swp.dto.ProductDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,28 +18,25 @@ import javax.servlet.http.HttpSession;
  *
  * @author Admin
  */
-public class ProductDetailByTypeController extends HttpServlet {
-    
-    private static final String SUCCESS = "customer_productPage.jsp";
-    private static final String ERROR = "errorPage.jsp";
+public class SearchProductCategoryController extends HttpServlet {
+
+    private static String SUCCESS = "customer_productCategoryPage.jsp";
+    private static String ERROR = "errorPage.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String productID = request.getParameter("product_ID");
             HttpSession session = request.getSession();
-            session.setAttribute("PRODUCTID", productID);
             String category_ID = (String) session.getAttribute("CATEGORYID");
+            String searchProductCategory = request.getParameter("searchProductCategory");
             ProductDAO dao = new ProductDAO();
-            
-            List<ProductDetailDTO> list = dao.getListProductByPlaceDetail(category_ID, productID);
-            session.setAttribute("PRODUCT_DETAIL_BY_TYPE", list);
+            List<ProductDTO> list = dao.getSearchProductCategory(category_ID, searchProductCategory);
+            session.setAttribute("CUSTOMER_PRODUCT_LIST", list);
             url = SUCCESS;
-            
         } catch (Exception e) {
-            log("Error at ProductDetailByTypeController: "+e.getMessage());
+            log("Error at SearchProductCategoryController: "+e.getMessage());
         }finally{
             request.getRequestDispatcher(url).forward(request, response);
         }

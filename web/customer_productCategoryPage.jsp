@@ -1,3 +1,4 @@
+<%@page import="com.ebutler.swp.dto.UserDTO"%>
 <%@page import="com.ebutler.swp.dto.ProductDTO"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
@@ -42,11 +43,12 @@
 
     <body>
         <%
-            List<ProductDTO> productList = (List<ProductDTO>) request.getAttribute("CUSTOMER_PRODUCT_LIST");
+            List<ProductDTO> productList = (List<ProductDTO>) session.getAttribute("CUSTOMER_PRODUCT_LIST");
 
-            String category_id = (String) request.getAttribute("CATEGORYID");
+            String category_id = (String) session.getAttribute("CATEGORYID");
 
             category_id = (category_id == null) ? "" : category_id;
+            UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
         %>
         <div class="container-xxl bg-white p-0">
             <!-- Spinner Start -->
@@ -88,7 +90,7 @@
                             <div class="nav-item dropdown">
                                 <a class="nav-link"><i class="fa-solid fa-user"></i></a>
                                 <div class="dropdown-menu rounded-0 m-12">
-                                    <a style="color: var(--primary-color); font-weight: bold;" class="dropdown-item login--link">username</a>
+                                    <a style="color: var(--primary-color); font-weight: bold;" class="dropdown-item login--link"><%=login_user.getUsername()%></a>
                                     <a class="dropdown-item register--link">logout</a>
                                 </div>
                             </div>
@@ -117,13 +119,13 @@
             <div style="max-height: var(--list-h);" class="grid wide border-bot border-top">
                 <div class="grid">
                     <div class="row m-y-2">
-                        <form style="padding: 0;" class="col l-10 s-8" action="MainController?action=SearchProductDetailByType" method="POST">
+                        <form style="padding: 0;" class="col l-10 s-8" action="MainController?action=SearchProductCategory" method="POST">
 
                             <div style="min-width: 100%;" class="flex-center sort-btn">
                                 <a><i class="fa-solid fa-magnifying-glass"></i></a>
                                 <input
                                     style="flex: 1; background-color: transparent;"
-                                    type="text" placeholder="Type and press enter" class="border-no m-x-1" name="searchProductDetail">
+                                    type="text" placeholder="Type and press enter..." class="border-no m-x-1" name="searchProductCategory">
                                 <a class="opacity"><i class="fa-solid fa-xmark"></i></a>
                             </div>
 

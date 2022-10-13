@@ -59,15 +59,19 @@ public class MainController extends HttpServlet {
 //    Sort
     private final String SORT_PRODUCT_DETAIL_PRICE_UP = "PriceDetailUp";
     private final String SORT_PRODUCT_DETAIL_PRICE_UP_CONTROLLER = "SortProductDetailPriceUpController";
+    
     private final String SORT_PRODUCT_DETAIL_PRICE_DOWN = "PriceDetailDown";
     private final String SORT_PRODUCT_PRICE_DOWN_CONTROLLER = "SortProductPriceDownController";
+    
     private final String SORT_PRODUCT_DETAIL_WORD_DOWN = "WordDetailDown";
     private final String SORT_PRODUCT_DETAIL_WORD_DOWN_CONTROLLER = "WordDetailDownController";
+    
     private final String SORT_PRODUCT_DETAIL_WORD_UP = "WordDetailUp";
     private final String SORT_PRODUCT_DETAIL_WORD_UP_CONTROLLER = "WordDetailUpController";
     
     private final String SORT_PRODUCT_CATEGORY_WORD_UP = "WordProductCategoryUp";
     private final String SORT_PRODUCT_CATEGORY_WORD_UP_CONTROLLER = "WordProductCategoryUpController";
+    
     private final String SORT_PRODUCT_CATEGORY_WORD_DOWN = "WordProductCategoryDown";
     private final String SORT_PRODUCT_CATEGORY_WORD_DOWN_CONTROLLER = "WordProductCategoryDownController";
     
@@ -81,13 +85,14 @@ public class MainController extends HttpServlet {
     //Search    
     private final String SEARCH_PRODUCT_DETAIL_BY_TYPE = "SearchProductDetailByType";
     private final String SEARCH_PRODUCT_DETAIL_BY_TYPE_CONTROLLER = "SearchProductDetailByTypeController";
+    
     private final String SEARCH_PRODUCT_CATEGORY = "SearchProductCategory";
     private final String SEARCH_PRODUCT_CATEGORY_CONTROLLER = "SearchProductCategoryController";
     
     private final String SEARCH_SERVICE_CATEGORY = "SearchServiceCategory";
     private final String SEARCH_SERVICE_CATEGORY_CONTROLLER = "SearchServiceCategoryController";
     
-    
+//    Change password
     private final String CHANGE_CUSTOMER_PASSWORD = "ChangeCustomerPassword";
     private final String CHANGE_CUSTOMER_PASSWORD_CONTROLLER = "ChangeCustomerPasswordController";
     
@@ -119,6 +124,16 @@ public class MainController extends HttpServlet {
                 url = PRODUCT_PAGE_CONTROLLER;
             } else if (action.equals(GO_TO_PRODUCT_DETAIL_BY_TYPE_PAGE)) {
                 url = PRODUCT_DETAIL_BY_TYPE_CONTROLLER;
+            } else if (action.equals(GO_TO_USER_PROFILE)) {
+                url = GO_TO_USER_PROFILE_CONTROLLER;
+            } else if (action.equals(SEARCH_PRODUCT_DETAIL_BY_TYPE)) {
+                url = SEARCH_PRODUCT_DETAIL_BY_TYPE_CONTROLLER;
+            } else if (action.equals(SEARCH_PRODUCT_CATEGORY)) {
+                url = SEARCH_PRODUCT_CATEGORY_CONTROLLER;
+            } else if (action.equals(SORT_PRODUCT_DETAIL_PRICE_UP)) {
+                url = SORT_PRODUCT_DETAIL_PRICE_UP_CONTROLLER;
+            } else if (action.equals(CHANGE_CUSTOMER_PASSWORD)) {
+                url = CHANGE_CUSTOMER_PASSWORD_CONTROLLER;
             }
         }
         catch (Exception e) {

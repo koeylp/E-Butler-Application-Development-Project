@@ -1,3 +1,4 @@
+<%@page import="com.ebutler.swp.dto.UserDTO"%>
 <%@page import="com.ebutler.swp.dto.ProductDetailDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.List"%>
@@ -43,10 +44,12 @@
 
     <body>
         <%
-            List<ProductDetailDTO> productList = (List<ProductDetailDTO>) request.getAttribute("PRODUCT_DETAIL_BY_TYPE");
-            String product_id = (String) request.getAttribute("PRODUCT_ID");
+            List<ProductDetailDTO> productList = (List<ProductDetailDTO>) session.getAttribute("PRODUCT_DETAIL_BY_TYPE");
+            String product_id = (String) session.getAttribute("PRODUCT_ID");
 
             product_id = (product_id == null) ? "" : product_id;
+            
+            UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
         %>
         <div class="container-xxl bg-white p-0">
             <!-- Spinner Start -->
@@ -88,8 +91,8 @@
                             <div class="nav-item dropdown">
                                 <a class="nav-link"><i class="fa-solid fa-user"></i></a>
                                 <div class="dropdown-menu rounded-0 m-12">
-                                    <a style="color: var(--primary-color); font-weight: bold;" class="dropdown-item login--link">username</a>
-                                    <a class="dropdown-item register--link">logout</a>
+                                    <a style="color: var(--primary-color); font-weight: bold;" href="MainController?action=GoToUserProfile" class="dropdown-item login--link"><%=login_user.getUsername()%></a>
+                                    <a href="MainController?action=Logout" class="dropdown-item register--link">logout</a>
                                 </div>
                             </div>
                             <a class="nav-item nav-link search-open"><i class="fa-solid fa-magnifying-glass"></i></a>

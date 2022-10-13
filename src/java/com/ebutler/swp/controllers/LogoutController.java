@@ -4,11 +4,8 @@
  */
 package com.ebutler.swp.controllers;
 
-import com.ebutler.swp.dao.ProductDAO;
-import com.ebutler.swp.dto.ProductDetailDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,29 +16,27 @@ import javax.servlet.http.HttpSession;
  *
  * @author Admin
  */
-public class ProductDetailByTypeController extends HttpServlet {
+public class LogoutController extends HttpServlet {
     
-    private static final String SUCCESS = "customer_productPage.jsp";
     private static final String ERROR = "errorPage.jsp";
+    private static final String SUCCESS = "guest_landingPage.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String productID = request.getParameter("product_ID");
-            HttpSession session = request.getSession();
-            session.setAttribute("PRODUCTID", productID);
-            String category_ID = (String) session.getAttribute("CATEGORYID");
-            ProductDAO dao = new ProductDAO();
-            
-            List<ProductDetailDTO> list = dao.getListProductByPlaceDetail(category_ID, productID);
-            session.setAttribute("PRODUCT_DETAIL_BY_TYPE", list);
-            url = SUCCESS;
-            
+            HttpSession session = request.getSession(false);
+            if(session != null)
+            {
+                session.invalidate();
+                url = SUCCESS;
+            }
         } catch (Exception e) {
-            log("Error at ProductDetailByTypeController: "+e.getMessage());
-        }finally{
+            log("ERROR at LogoutController: " + e.toString());
+        }
+        finally
+        {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

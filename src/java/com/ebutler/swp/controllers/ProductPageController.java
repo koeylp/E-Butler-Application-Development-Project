@@ -33,9 +33,10 @@ public class ProductPageController extends HttpServlet {
             
             ProductDAO dao = new ProductDAO();
             List<ProductDTO> list = dao.getListProductByPlace(category_ID);
+            HttpSession session = request.getSession();
             
-            request.setAttribute("CATEGORYID", category_ID);
-            request.setAttribute("CUSTOMER_PRODUCT_LIST", list);
+            session.setAttribute("CATEGORYID", category_ID);
+            session.setAttribute("CUSTOMER_PRODUCT_LIST", list);
             url = SUCCESS;
         } catch (Exception e) {
             log("Error at ProductPageController: "+e.getMessage());

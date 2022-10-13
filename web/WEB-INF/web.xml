@@ -24,6 +24,30 @@
         <servlet-name>ProductDetailByTypeController</servlet-name>
         <servlet-class>com.ebutler.swp.controllers.ProductDetailByTypeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GoToUserProfileController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.GoToUserProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.LogoutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchProductDetailByTypeController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.SearchProductDetailByTypeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchProductCategoryController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.SearchProductCategoryController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SortProductDetailPriceUpController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.SortProductDetailPriceUpController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeCustomerPasswordController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.ChangeCustomerPasswordController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -47,6 +71,30 @@
     <servlet-mapping>
         <servlet-name>ProductDetailByTypeController</servlet-name>
         <url-pattern>/ProductDetailByTypeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GoToUserProfileController</servlet-name>
+        <url-pattern>/GoToUserProfileController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/LogoutController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchProductDetailByTypeController</servlet-name>
+        <url-pattern>/SearchProductDetailByTypeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchProductCategoryController</servlet-name>
+        <url-pattern>/SearchProductCategoryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SortProductDetailPriceUpController</servlet-name>
+        <url-pattern>/SortProductDetailPriceUpController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeCustomerPasswordController</servlet-name>
+        <url-pattern>/ChangeCustomerPasswordController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

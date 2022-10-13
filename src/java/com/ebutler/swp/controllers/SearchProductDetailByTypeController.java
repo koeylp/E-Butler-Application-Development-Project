@@ -19,28 +19,26 @@ import javax.servlet.http.HttpSession;
  *
  * @author Admin
  */
-public class ProductDetailByTypeController extends HttpServlet {
-    
-    private static final String SUCCESS = "customer_productPage.jsp";
-    private static final String ERROR = "errorPage.jsp";
+public class SearchProductDetailByTypeController extends HttpServlet {
+
+    private static String SUCCESS = "customer_productPage.jsp";
+    private static String ERROR = "errorPage.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String productID = request.getParameter("product_ID");
             HttpSession session = request.getSession();
-            session.setAttribute("PRODUCTID", productID);
             String category_ID = (String) session.getAttribute("CATEGORYID");
+            String product_ID = (String) session.getAttribute("PRODUCTID");
+            String searchProductDetail = request.getParameter("searchProductDetail");
             ProductDAO dao = new ProductDAO();
-            
-            List<ProductDetailDTO> list = dao.getListProductByPlaceDetail(category_ID, productID);
+            List<ProductDetailDTO> list = dao.getSearchProductDetailByType(category_ID, product_ID, searchProductDetail);
             session.setAttribute("PRODUCT_DETAIL_BY_TYPE", list);
             url = SUCCESS;
-            
         } catch (Exception e) {
-            log("Error at ProductDetailByTypeController: "+e.getMessage());
+            log("Error at SearchProductDetailByTypeController: "+e.getMessage());
         }finally{
             request.getRequestDispatcher(url).forward(request, response);
         }

@@ -226,17 +226,17 @@ END;
 GO
 
 --- bảng customer: chỉnh sửa thông tin -> cập nhật bảng user
+drop trigger trig_cus_updateStatus
 CREATE TRIGGER trig_cus_updateStatus ON tblCustomer 
-FOR UPDATE
+AFTER UPDATE
 AS
 BEGIN 
-	
 	DECLARE @username nvarchar(30), @password nvarchar(30), @phone nvarchar (11), @email nvarchar(30), @status decimal(1)
 	
-	SELECT @password = password, @phone = phone, @email = email, @status = status
+	SELECT @username = username, @password = password, @phone = phone, @email = email, @status = status
 	FROM inserted
 	
-	UPDATE tblUser SET password = @password, phone = @phone, email = @email,  status = @status WHERE username = @username
+	UPDATE tblUser SET password = @password, phone = @phone, email = @email,  status = @status WHERE username LIKE @username
 END;
 GO
 
@@ -256,13 +256,13 @@ GO
 
 --- bảng provider: chỉnh sửa thông tin -> cập nhật bảng user
 CREATE TRIGGER trig_pro_updateStatus ON tblProvider 
-FOR UPDATE
+AFTER UPDATE
 AS
 BEGIN 
 	
 	DECLARE @username nvarchar(30), @password nvarchar(30), @phone nvarchar (11), @email nvarchar(30), @status decimal(1)
 	
-	SELECT @password = password, @phone = phone, @email = email, @status = status
+	SELECT @username = username, @password = password, @phone = phone, @email = email, @status = status
 	FROM inserted
 	
 	UPDATE tblUser SET password = @password, phone = @phone, email = @email,  status = @status WHERE username = @username

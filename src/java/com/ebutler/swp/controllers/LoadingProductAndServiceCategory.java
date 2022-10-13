@@ -37,17 +37,15 @@ public class LoadingProductAndServiceCategory extends HttpServlet {
             ServiceDAO serviceDAO = new ServiceDAO();
             List<ProductCategoryDTO> productCategorylist = customerDAO.getProductCategoryList();
             List<ServiceCategoryDTO> serviceCategoryList = serviceDAO.getListServiceCategory();
-//            HttpSession session = request.getSession();
+            HttpSession session = request.getSession();
             
-            request.setAttribute("PRODUCT_CATEGORY_BY_PLACE_LIST", productCategorylist);
-            request.setAttribute("SERVICE_CATEGORY_BY_PLACE_LIST", serviceCategoryList);
-            
-            url = SUCCESS;
+            session.setAttribute("PRODUCT_CATEGORY_BY_PLACE_LIST", productCategorylist);
+            session.setAttribute("SERVICE_CATEGORY_BY_PLACE_LIST", serviceCategoryList);
 
         } catch (Exception e) {
             log("Error at LoadingProductAndServiceCategory: "+e.getMessage());
         } finally{
-            request.getRequestDispatcher(url).forward(request, response);
+            request.getRequestDispatcher(SUCCESS).forward(request, response);
         }
     }
 
