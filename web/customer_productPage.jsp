@@ -204,13 +204,13 @@
                                 <div class="pad-2">
                                     <div class="row scrollable-y">
                                         <div class="col l-6 m-6">
-                                            <div style="height: 400px;" class="img">
+                                            <div style="height: 65vh;" class="img">
                                                 <img src="<%=product.getImage()%>"
                                                      alt="">
                                             </div>
                                         </div>
                                         <div class="col l-6 m-6">
-                                            <div style="height: 400px;" class="content flex-between flex-col">
+                                            <div style="height: 65vh;" class="content flex-between flex-col">
                                                 <div>
                                                     <h2><%=product.getName()%></h2>
                                                     <div class="flex m-y-0">

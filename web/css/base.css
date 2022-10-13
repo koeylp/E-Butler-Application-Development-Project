@@ -408,8 +408,8 @@ ul {
 }
 
 .popup {
-    width: 75%;
-    height: 80%;
+    width: 70vw;
+    height: 70vh;
     background-color: white;
     border-radius: 20px;
 }

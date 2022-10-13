@@ -1,21 +1,19 @@
-const overlay = document.querySelector('.overlay')
-const popup_close = document.querySelector('.popup-close')
-
+const overlay = document.querySelectorAll('.overlay')
+const popup_close = document.querySelectorAll('.popup-close')
 var quick_view = document.querySelectorAll('.quick-view')
 
-popup_close.addEventListener('click', PopupClose)
-overlay.addEventListener('click', PopupClose)
 
-function PopupOpen() {
-    for(var index in quick_view) {
-        quick_view[index].addEventListener('click', function() {
-            overlay.classList.remove('hide')
-        })
-    }
+for(let i = 0; i < popup_close.length; i++) {
+    popup_close[i].addEventListener('click', () => overlay[i].classList.add('hide'))
+    overlay[i].addEventListener('click', () => overlay[i].classList.add('hide'))
 }
 
-PopupOpen()
-
-function PopupClose() {
-    overlay.classList.add('hide')
+for(let i = 0; i < quick_view.length; i++) {
+    quick_view[i].addEventListener('click', function() {
+        overlay[i].classList.remove('hide')
+    })
 }
+
+
+
+

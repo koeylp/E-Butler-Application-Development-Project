@@ -81,6 +81,8 @@ CREATE TABLE tblProductCategory (
 	[image] [nvarchar](max) NOT NULL
 )
 
+SELECT detail.id, detail.provider_ID, detail.product_ID, detail.name, detail.quantity, detail.price, detail.image, detail.description, detail.status FROM tblProduct product JOIN tblProductDetail detail on product.product_ID = detail.product_ID JOIN tblProductCategory cate ON cate.category_ID = product.category_ID WHERE cate.category_ID = 'BAR' AND product.product_ID = 15
+
 CREATE TABLE tblProduct (
 	product_ID nvarchar(10) PRIMARY KEY NOT NULL , 
 	category_ID nvarchar(10) REFERENCES tblProductCategory(category_ID) NOT NULL,
