@@ -36,17 +36,61 @@ public class MainController extends HttpServlet {
     private final String GO_TO_PRODUCT_PAGE = "GoToProductPageByPlace";
     private final String PRODUCT_PAGE_CONTROLLER = "ProductPageController";
     
+//    Service Page
+    private final String GO_TO_SERVICE_PAGE = "GoToServicePageByPlace";
+    private final String SERVICE_PAGE_CONTROLLER = "ServicePageController";
     
+//    Product Detail
+    private final String GO_TO_PRODUCT_DETAIL_BY_TYPE_PAGE = "GoToProductDetailByType";
+    private final String PRODUCT_DETAIL_BY_TYPE_CONTROLLER = "ProductDetailByTypeController";
+    
+//    Search
     private final String SEARCH_PRODUCT = "SearchProduct";
     private final String SEARCH_PRODUCT_CONTROLLER = "SearchProductController";
-    private final String SORT_PRODUCT_PRICE_UP = "SortProductPriceUp";
-    private final String SORT_PRODUCT_PRICE_UP_CONTROLLER = "SortProductPriceUpController";
-    private final String SORT_PRODUCT_PRICE_DOWN = "SortProductPriceDown";
+    
+//    User profile Page
+    private final String GO_TO_USER_PROFILE = "GoToUserProfile";
+    private final String GO_TO_USER_PROFILE_CONTROLLER = "GoToUserProfileController";
+    
+//    Update profile
+    private final String UPDATE_USER_PROFILE = "UpdateCustomerInfo";
+    private final String UPDATE_USER_PROFILE_CONTROLLER = "UpdateCustomerInfoController";
+
+//    Sort
+    private final String SORT_PRODUCT_DETAIL_PRICE_UP = "PriceDetailUp";
+    private final String SORT_PRODUCT_DETAIL_PRICE_UP_CONTROLLER = "SortProductDetailPriceUpController";
+    private final String SORT_PRODUCT_DETAIL_PRICE_DOWN = "PriceDetailDown";
     private final String SORT_PRODUCT_PRICE_DOWN_CONTROLLER = "SortProductPriceDownController";
-    private final String SORT_PRODUCT_WORD_DOWN = "SortProductWordDown";
-    private final String SORT_PRODUCT_WORD_DOWN_CONTROLLER = "SortProductWordDownController";
-    private final String SORT_PRODUCT_WORD_UP = "SortProductWordUp";
-    private final String SORT_PRODUCT_WORD_UP_CONTROLLER = "SortProductWordUpController";
+    private final String SORT_PRODUCT_DETAIL_WORD_DOWN = "WordDetailDown";
+    private final String SORT_PRODUCT_DETAIL_WORD_DOWN_CONTROLLER = "WordDetailDownController";
+    private final String SORT_PRODUCT_DETAIL_WORD_UP = "WordDetailUp";
+    private final String SORT_PRODUCT_DETAIL_WORD_UP_CONTROLLER = "WordDetailUpController";
+    
+    private final String SORT_PRODUCT_CATEGORY_WORD_UP = "WordProductCategoryUp";
+    private final String SORT_PRODUCT_CATEGORY_WORD_UP_CONTROLLER = "WordProductCategoryUpController";
+    private final String SORT_PRODUCT_CATEGORY_WORD_DOWN = "WordProductCategoryDown";
+    private final String SORT_PRODUCT_CATEGORY_WORD_DOWN_CONTROLLER = "WordProductCategoryDownController";
+    
+    
+    
+    private final String SORT_SERVICE_CATEGORY_WORD_UP = "WordServiceCategoryUp";
+    private final String SORT_SERVICE_CATEGORY_WORD_UP_CONTROLLER = "WordServiceCategoryUpController";
+    private final String SORT_SERVICE_CATEGORY_WORD_DOWN = "WordServiceCategoryDown";
+    private final String SORT_SERVICE_CATEGORY_WORD_DOWN_CONTROLLER = "WordServiceCategoryDownController";
+    
+    //Search    
+    private final String SEARCH_PRODUCT_DETAIL_BY_TYPE = "SearchProductDetailByType";
+    private final String SEARCH_PRODUCT_DETAIL_BY_TYPE_CONTROLLER = "SearchProductDetailByTypeController";
+    private final String SEARCH_PRODUCT_CATEGORY = "SearchProductCategory";
+    private final String SEARCH_PRODUCT_CATEGORY_CONTROLLER = "SearchProductCategoryController";
+    
+    private final String SEARCH_SERVICE_CATEGORY = "SearchServiceCategory";
+    private final String SEARCH_SERVICE_CATEGORY_CONTROLLER = "SearchServiceCategoryController";
+    
+    
+    private final String CHANGE_CUSTOMER_PASSWORD = "ChangeCustomerPassword";
+    private final String CHANGE_CUSTOMER_PASSWORD_CONTROLLER = "ChangeCustomerPasswordController";
+    
     private final String ADD_TO_CART = "AddToCart";
     private final String ADD_TO_CART_CONTROLLER = "AddToCartController";
     private final String DELETE_CART = "DeleteCart";
@@ -55,7 +99,6 @@ public class MainController extends HttpServlet {
     private final String CHECKOUT_CONTROLLER = "CheckoutController";
     private final String LOAD_CART_DATA = "LoadCartData";
     private final String LOAD_CART_DATA_CONTROLLER = "LoadCartDataController";
-    
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -74,6 +117,8 @@ public class MainController extends HttpServlet {
                 url = LOGOUT_CONTROLLER;
             } else if (action.equals(GO_TO_PRODUCT_PAGE)) {
                 url = PRODUCT_PAGE_CONTROLLER;
+            } else if (action.equals(GO_TO_PRODUCT_DETAIL_BY_TYPE_PAGE)) {
+                url = PRODUCT_DETAIL_BY_TYPE_CONTROLLER;
             }
         }
         catch (Exception e) {

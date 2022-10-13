@@ -20,6 +20,10 @@
         <servlet-name>ProductPageController</servlet-name>
         <servlet-class>com.ebutler.swp.controllers.ProductPageController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProductDetailByTypeController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.ProductDetailByTypeController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>ProductPageController</servlet-name>
         <url-pattern>/ProductPageController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductDetailByTypeController</servlet-name>
+        <url-pattern>/ProductDetailByTypeController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -117,27 +117,30 @@
             <div style="max-height: var(--list-h);" class="grid wide border-bot border-top">
                 <div class="grid">
                     <div class="row m-y-2">
-                        <div style="padding: 0;" class="col l-10 s-8">
+                        <form style="padding: 0;" class="col l-10 s-8" action="MainController?action=SearchProductDetailByType" method="POST">
+
                             <div style="min-width: 100%;" class="flex-center sort-btn">
                                 <a><i class="fa-solid fa-magnifying-glass"></i></a>
                                 <input
-                                    style="flex: 1; background-color: transparent; border: none; outline: none; margin: 0 20px;"
-                                    type="text" placeholder="Type and press enter">
+                                    style="flex: 1; background-color: transparent;"
+                                    type="text" placeholder="Type and press enter" class="border-no m-x-1" name="searchProductDetail">
                                 <a class="opacity"><i class="fa-solid fa-xmark"></i></a>
                             </div>
-                        </div>
 
-                        <div style="padding: 0;" class="col l-2 s-4 flex-end">
+                        </form>
+
+                        <form style="padding: 0;" class="col l-2 s-4 flex-end" action="MainController" method="POST">
                             <div class="sort-btn">
                                 <i class="fa-solid fa-sort"></i>
-                                <select style="text-align: center;" class="border-no select" name="" id="">
+                                <select name="action" style="text-align: center;" class="border-no select" name="" id="" onChange="this.form.submit()">
                                     <option value="">Sort order</option>
-                                    <option value="">Sort 1</option>
-                                    <option value="">Sort 2</option>
-                                    <option value="">Sort 3</option>
+                                    <option value="PriceDetailUp">Price up</option>
+                                    <option value="PriceDetailDown">Price down</option>
+                                    <option value="WordDetailUp">Word up</option>
+                                    <option value="WordDetailDown">Word down</option>
                                 </select>
                             </div>
-                        </div>
+                        </form>
                     </div>
 
                     <div class="row m-y-2">
@@ -150,7 +153,7 @@
                                 <div class="block__img flex-center relative">
                                     <img src="<%=product.getImage()%>"
                                          alt="">
-                                    <a href="MainController?action=GoToProductDetailByType&product_ID=<%=product.getProduct_ID()%>" style="background-color: black; color: white;"
+                                    <a href="MainController?action=GoToProductDetailByType&product_ID=<%=product.getProduct_ID()%>&category_ID=<%=product.getCategory_ID()%>" style="background-color: black; color: white;"
                                        class="txt-border link absolute card-extend bot quick-view">
                                         <i class="fa-solid fa-expand"></i>
                                         View Detail
