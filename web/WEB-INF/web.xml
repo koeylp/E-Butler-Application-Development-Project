@@ -48,6 +48,10 @@
         <servlet-name>ChangeCustomerPasswordController</servlet-name>
         <servlet-class>com.ebutler.swp.controllers.ChangeCustomerPasswordController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServicePageController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.ServicePageController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -95,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>ChangeCustomerPasswordController</servlet-name>
         <url-pattern>/ChangeCustomerPasswordController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServicePageController</servlet-name>
+        <url-pattern>/ServicePageController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

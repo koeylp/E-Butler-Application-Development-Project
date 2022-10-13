@@ -134,6 +134,8 @@ public class MainController extends HttpServlet {
                 url = SORT_PRODUCT_DETAIL_PRICE_UP_CONTROLLER;
             } else if (action.equals(CHANGE_CUSTOMER_PASSWORD)) {
                 url = CHANGE_CUSTOMER_PASSWORD_CONTROLLER;
+            } else if (action.equals(GO_TO_SERVICE_PAGE)) {
+                url = SERVICE_PAGE_CONTROLLER;
             }
         }
         catch (Exception e) {
