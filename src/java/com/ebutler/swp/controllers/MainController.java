@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 public class MainController extends HttpServlet {
     
 //    Error Page
-    private final String ERROR = "error.jsp";
+    private final String ERROR = "errorPage.jsp";
     
 //    Register
     private final String REGISTER = "Register";
@@ -32,9 +32,11 @@ public class MainController extends HttpServlet {
     private final String LOGOUT = "Logout";
     private final String LOGOUT_CONTROLLER = "LogoutController";
     
-    
-    private final String GO_TO_PRODUCT_PAGE = "GoToProductPage";
+//    Product Page
+    private final String GO_TO_PRODUCT_PAGE = "GoToProductPageByPlace";
     private final String PRODUCT_PAGE_CONTROLLER = "ProductPageController";
+    
+    
     private final String SEARCH_PRODUCT = "SearchProduct";
     private final String SEARCH_PRODUCT_CONTROLLER = "SearchProductController";
     private final String SORT_PRODUCT_PRICE_UP = "SortProductPriceUp";
@@ -70,7 +72,9 @@ public class MainController extends HttpServlet {
                 url = LOGIN_CONTROLLER;
             } else if (action.equals(LOGOUT)){
                 url = LOGOUT_CONTROLLER;
-            } 
+            } else if (action.equals(GO_TO_PRODUCT_PAGE)) {
+                url = PRODUCT_PAGE_CONTROLLER;
+            }
         }
         catch (Exception e) {
             log("Error at MainController: " + e.toString());

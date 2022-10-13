@@ -468,9 +468,9 @@
                 </div>
             </div>
 
+            <!-- Footer End -->
         </div>
 
-        <!-- Footer End -->
 
 
         <!-- Back to Top -->

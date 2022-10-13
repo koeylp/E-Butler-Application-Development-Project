@@ -16,6 +16,10 @@
         <servlet-name>LoadingProductAndServiceCategory</servlet-name>
         <servlet-class>com.ebutler.swp.controllers.LoadingProductAndServiceCategory</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProductPageController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.ProductPageController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>LoadingProductAndServiceCategory</servlet-name>
         <url-pattern>/LoadingProductAndServiceCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductPageController</servlet-name>
+        <url-pattern>/ProductPageController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -72,6 +72,8 @@ CREATE TABLE tblAddress(
 	[user_ID] nvarchar(30) REFERENCES tblUser(username) NOT NULL
 )
 
+SELECT category_ID, name, image FROM tblProductCategory
+
 -----PRODUCT-----
 CREATE TABLE tblProductCategory (
 	category_ID nvarchar(10) PRIMARY KEY NOT NULL , 
