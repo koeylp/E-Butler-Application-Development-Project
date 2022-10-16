@@ -48,7 +48,7 @@
             String product_id = (String) session.getAttribute("PRODUCT_ID");
 
             product_id = (product_id == null) ? "" : product_id;
-            
+
             UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
         %>
         <div class="container-xxl bg-white p-0">
@@ -96,7 +96,7 @@
                                 </div>
                             </div>
                             <a class="nav-item nav-link search-open"><i class="fa-solid fa-magnifying-glass"></i></a>
-                            <a class="nav-item nav-link"><i class="fa-solid fa-cart-shopping"></i></a>
+                            <a href="MainController?action=MoveToCart" class="nav-item nav-link"><i class="fa-solid fa-cart-shopping"></i></a>
                         </div>
                     </div>
                 </nav>
@@ -158,7 +158,8 @@
                                 <div class="block__img flex-center relative">
                                     <img src="<%=product.getImage()%>"
                                          alt="">
-                                    <a style="background-color: black; color: white; right: 52%;"
+                                    <a href="MainController?action=AddToCart&product_ID=<%= product.getId()%>"
+                                       style="background-color: black; color: white; right: 52%;"
                                        class="txt-border link absolute card-extend bot">
                                         <i class="fa-solid fa-bag-shopping"></i>
                                         Add to bag
@@ -178,7 +179,7 @@
                                             </p>
                                         </div>
                                     </div>
-                                            
+
                                     <div class="row">
                                         <div class="col l-6 m-y-0">
                                             <div style="color: #4ADE80; border: 2px solid #4ADE80; width: fit-content; --rounded: 0.5rem; padding: .2rem;"

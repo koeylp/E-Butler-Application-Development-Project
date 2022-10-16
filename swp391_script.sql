@@ -38,6 +38,11 @@ CREATE TABLE tblCustomer (
 )
 GO
 
+--INSERT INTO tblUser(username, password, role_ID, phone, email, status) 
+--VALUES('hello', '1', 'CUS', '0123456789', 'hello@gmail.com', 1)
+
+
+
 
 CREATE TABLE tblProvider (
 	[username] nvarchar(30) PRIMARY KEY,
@@ -72,7 +77,7 @@ CREATE TABLE tblAddress(
 	[user_ID] nvarchar(30) REFERENCES tblUser(username) NOT NULL
 )
 
-SELECT category_ID, name, image FROM tblProductCategory
+--SELECT category_ID, name, image FROM tblProductCategory
 
 -----PRODUCT-----
 CREATE TABLE tblProductCategory (
@@ -81,7 +86,7 @@ CREATE TABLE tblProductCategory (
 	[image] [nvarchar](max) NOT NULL
 )
 
-SELECT detail.id, detail.provider_ID, detail.product_ID, detail.name, detail.quantity, detail.price, detail.image, detail.description, detail.status FROM tblProduct product JOIN tblProductDetail detail on product.product_ID = detail.product_ID JOIN tblProductCategory cate ON cate.category_ID = product.category_ID WHERE cate.category_ID = 'BAR' AND product.product_ID = 15
+--SELECT detail.id, detail.provider_ID, detail.product_ID, detail.name, detail.quantity, detail.price, detail.image, detail.description, detail.status FROM tblProduct product JOIN tblProductDetail detail on product.product_ID = detail.product_ID JOIN tblProductCategory cate ON cate.category_ID = product.category_ID WHERE cate.category_ID = 'BAR' AND product.product_ID = 15
 
 CREATE TABLE tblProduct (
 	product_ID nvarchar(10) PRIMARY KEY NOT NULL , 
@@ -226,7 +231,7 @@ END;
 GO
 
 --- bảng customer: chỉnh sửa thông tin -> cập nhật bảng user
-drop trigger trig_cus_updateStatus
+--drop trigger trig_cus_updateStatus
 CREATE TRIGGER trig_cus_updateStatus ON tblCustomer 
 AFTER UPDATE
 AS

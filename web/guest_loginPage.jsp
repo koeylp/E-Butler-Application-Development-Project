@@ -102,7 +102,7 @@
                                             </a>
                                         </div>
 
-                                        <input type="text" name="username" class="auth-form__input border-bottom m-y-1 pad-x-0" required="" placeholder="User name">
+                                        <input type="text" name="username" class="auth-form__input border-bottom m-y-1 pad-x-0" required="" placeholder="Username">
 
                                         <input type="password" name="password" class="auth-form__input border-bottom m-y-1 pad-x-0" required="" placeholder="Password">
 

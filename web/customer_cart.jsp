@@ -4,6 +4,8 @@
     Author : thekh
 --%>
 
+<%@page import="com.ebutler.swp.dto.ServiceDetailDTO"%>
+<%@page import="com.ebutler.swp.dto.CartServiceDTO"%>
 <%@page import="com.ebutler.swp.dto.QuantityStockDTO"%>
 <%@page import="com.ebutler.swp.dto.ProductDetailDTO"%>
 <%@page import="com.ebutler.swp.dto.CartDTO"%>
@@ -111,9 +113,9 @@
             <!-- Header End -->
             <%
                 CartDTO cart = (CartDTO) session.getAttribute("CART");
+                CartServiceDTO cartService = (CartServiceDTO) session.getAttribute(("CART_SERVICE"));
                 QuantityStockDTO quantityStock = (QuantityStockDTO) session.getAttribute("STOCK");
-                if (cart != null) {
-                    double total = 0;
+                double total = 0;
             %>
             <!-- Cart start -->
             <div class="grid m-y-32">
@@ -138,9 +140,10 @@
                                 <form action="MainController" method="POST">
                                     <div class="pad-2">
                                         <%
-                                            for (ProductDetailDTO product : cart.getCart().values()) {
-                                                double sub_total = 0;
-                                                sub_total += product.getPrice() * product.getQuantity();
+                                            if (cart != null) {
+                                                for (ProductDetailDTO product : cart.getCart().values()) {
+                                                    double sub_total = 0;
+                                                    sub_total += product.getPrice() * product.getQuantity();
                                         %>
                                         <div class="order-card m-y-12">
                                             <div class="flex">
@@ -220,6 +223,10 @@
                                             }
                                         %>
 
+                                        <%
+                                            }
+                                        %>
+
 
                                     </div>
                                 </form>
@@ -227,6 +234,7 @@
                             <!-- Product cart end -->
 
                             <!-- Service cart start-->
+
                             <div class="flex-col grid m-y-32 block-border">
                                 <!-- Order head -->
                                 <div style="background-color: #F9FAFB;" class="flex-between pad-2">
@@ -240,81 +248,56 @@
                                     </div>
                                 </div>
                                 <!-- Order detail -->
-                                <div class="pad-2">
-                                    <div class="order-card m-y-12">
-                                        <div class="flex">
-                                            <div class="flex-center order-img">
-                                                <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
-                                                     alt="">
-                                            </div>
-                                            <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                                <div class="flex-between">
-                                                    <div class="flex-col flex-horizon-center">
-                                                        <span class="txt-lg bold">Staff: name</span>
-                                                        <div class="flex-horizon-center flex-center">
-                                                            <span class="txt-sm">Service</span>
-                                                            <span class="m-x-12">|</span>
-                                                            <span class="txt-sm">Service Category</span>
+                                <form action="MainController" method="POST">
+                                    <div class="pad-2">
+                                        <%
+                                            double sub_total_service = 0;
+                                            if (cartService != null) {
+                                                for (ServiceDetailDTO service : cartService.getCart().values()) {
+                                        %>
+                                        <div class="order-card m-y-12">
+                                            <div class="flex">
+                                                <div class="flex-center order-img">
+                                                    <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
+                                                         alt="">
+                                                </div>
+                                                <div style="flex: 1; margin-left: 1rem;" class="flex-col">
+                                                    <div class="flex-between">
+                                                        <div class="flex-col flex-horizon-center">
+                                                            <span class="txt-lg bold">Staff: name</span>
+                                                            <div class="flex-horizon-center flex-center">
+                                                                <span class="txt-sm"><%= service.getName()%></span>
+                                                                <span class="m-x-12">|</span>
+                                                                <span class="txt-sm">Service</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="order-price bold txt-sm">
+                                                            <span>
+                                                                <%= service.getPrice()%>
+                                                            </span>
                                                         </div>
                                                     </div>
-                                                    <div class="order-price bold txt-sm">
-                                                        <span>
-                                                            $369.000
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div style="height: 50%;" class="flex-end flex-col">
-                                                    <div class="flex-between">
-                                                        <span class="label txt-xs danger">
-                                                            <i class="fa-solid fa-ban"></i>
-                                                            Suspension
-                                                        </span>
-                                                        <button style="color: var(--primary-color); border: none; outline: none; background-color: transparent;" class="bold txt-md">
-                                                            Remove
-                                                        </button>
+                                                    <div style="height: 50%;" class="flex-end flex-col">
+                                                        <div class="flex-between">
+                                                            <span class="label txt-xs danger">
+                                                                <i class="fa-solid fa-ban"></i>
+                                                                Suspension
+                                                            </span>
+                                                            <button style="color: var(--primary-color); border: none; outline: none; background-color: transparent;" class="bold txt-md">
+                                                                <a href="MainController?action=DeleteCart&service_ID=<%= service.getId()%>"><span><i class="fa-solid fa-trash"></i></span></a>
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <%
+                                                    total += sub_total_service;
+                                                }
+                                            }
+                                        %>
                                     </div>
-                                    <div class="order-card m-y-12">
-                                        <div class="flex">
-                                            <div class="flex-center order-img">
-                                                <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
-                                                     alt="">
-                                            </div>
-                                            <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                                <div class="flex-between">
-                                                    <div class="flex-col flex-horizon-center">
-                                                        <span class="txt-lg bold">Staff: name</span>
-                                                        <div class="flex-horizon-center flex-center">
-                                                            <span class="txt-sm">Service</span>
-                                                            <span class="m-x-12">|</span>
-                                                            <span class="txt-sm">Service Category</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="order-price bold txt-sm">
-                                                        <span>
-                                                            $369.000
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div style="height: 50%;" class="flex-end flex-col">
-                                                    <div class="flex-between">
-                                                        <span class="label txt-xs safe">
-                                                            <i class="fa-solid fa-check"></i>
-                                                            Available
-                                                        </span>
-                                                        <button style="color: var(--primary-color); border: none; outline: none; background-color: transparent;" class="bold txt-md">
-                                                            Remove
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
+                                </form>
                             </div>
                         </div>
                         <!-- Service cart end-->
@@ -353,9 +336,7 @@
                     </div>
                 </div>
             </div>
-            <%
-                }
-            %>
+
             <!-- Cart end -->
 
 
