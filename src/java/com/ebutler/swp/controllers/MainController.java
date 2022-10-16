@@ -44,6 +44,10 @@ public class MainController extends HttpServlet {
     private final String GO_TO_PRODUCT_DETAIL_BY_TYPE_PAGE = "GoToProductDetailByType";
     private final String PRODUCT_DETAIL_BY_TYPE_CONTROLLER = "ProductDetailByTypeController";
     
+//    Service Detail
+    private final String GO_TO_SERVICE_DETAIL_BY_TYPE_PAGE = "GoToServiceDetailByType";
+    private final String SERVICE_DETAIL_BY_TYPE_CONTROLLER = "ServiceDetailByTypeController";
+    
 //    Search
     private final String SEARCH_PRODUCT = "SearchProduct";
     private final String SEARCH_PRODUCT_CONTROLLER = "SearchProductController";
@@ -146,6 +150,14 @@ public class MainController extends HttpServlet {
                 url = SORT_PRODUCT_DETAIL_WORD_DOWN_CONTROLLER;
             } else if (action.equals(SORT_PRODUCT_DETAIL_WORD_UP)) {
                 url = SORT_PRODUCT_DETAIL_WORD_UP_CONTROLLER;
+            } else if (action.equals(SEARCH_SERVICE_CATEGORY)) {
+                url = SEARCH_SERVICE_CATEGORY_CONTROLLER;
+            } else if (action.equals(SORT_SERVICE_CATEGORY_WORD_UP)) {
+                url = SORT_SERVICE_CATEGORY_WORD_UP_CONTROLLER;
+            } else if (action.equals(SORT_SERVICE_CATEGORY_WORD_DOWN)) {
+                url = SORT_SERVICE_CATEGORY_WORD_DOWN_CONTROLLER;
+            } else if (action.equals(GO_TO_SERVICE_DETAIL_BY_TYPE_PAGE)) {
+                url = SERVICE_DETAIL_BY_TYPE_CONTROLLER;
             }
         }
         catch (Exception e) {

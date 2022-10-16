@@ -72,6 +72,22 @@
         <servlet-name>WordDetailUpController</servlet-name>
         <servlet-class>com.ebutler.swp.controllers.WordDetailUpController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchServiceCategoryController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.SearchServiceCategoryController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>WordServiceCategoryUpController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.WordServiceCategoryUpController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>WordServiceCategoryDownController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.WordServiceCategoryDownController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServiceDetailByTypeController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.ServiceDetailByTypeController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -143,6 +159,22 @@
     <servlet-mapping>
         <servlet-name>WordDetailUpController</servlet-name>
         <url-pattern>/WordDetailUpController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchServiceCategoryController</servlet-name>
+        <url-pattern>/SearchServiceCategoryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WordServiceCategoryUpController</servlet-name>
+        <url-pattern>/WordServiceCategoryUpController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WordServiceCategoryDownController</servlet-name>
+        <url-pattern>/WordServiceCategoryDownController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceDetailByTypeController</servlet-name>
+        <url-pattern>/ServiceDetailByTypeController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

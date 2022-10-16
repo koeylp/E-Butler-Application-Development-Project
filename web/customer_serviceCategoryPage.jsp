@@ -105,8 +105,8 @@
             <!-- Slider Start -->
             <div class="grid relative">
                 <div class="col l-9 s-12 m-12 absolute abs-center left">
-                    <h1 class="m-y-2">Product Category</h1>
-                    <span class="txt-lg">We not only help you design exceptional products, but also make it easy for you
+                    <h1 class="m-y-2">Service Category</h1>
+                    <span class="txt-lg">We not only help you design exceptional services, but also make it easy for you
                         to share your designs with more like-minded people.</span>
                 </div>
                 <div style="background-color: var(--blue-bg);" class="row">
@@ -119,13 +119,13 @@
             <div style="max-height: var(--list-h);" class="grid wide border-bot border-top">
                 <div class="grid">
                     <div class="row m-y-2">
-                        <form style="padding: 0;" class="col l-10 s-8" action="MainController?action=SearchProductCategory" method="POST">
+                        <form style="padding: 0;" class="col l-10 s-8" action="MainController?action=SearchServiceCategory" method="POST">
 
                             <div style="min-width: 100%;" class="flex-center sort-btn">
                                 <a><i class="fa-solid fa-magnifying-glass"></i></a>
                                 <input
                                     style="flex: 1; background-color: transparent;"
-                                    type="text" placeholder="Type and press enter..." class="border-no m-x-1" name="searchProductCategory">
+                                    type="text" placeholder="Type and press enter..." class="border-no m-x-1" name="searchServiceCategory">
                                 <a class="opacity"><i class="fa-solid fa-xmark"></i></a>
                             </div>
 
@@ -136,10 +136,8 @@
                                 <i class="fa-solid fa-sort"></i>
                                 <select name="action" style="text-align: center;" class="border-no select" name="" id="" onChange="this.form.submit()">
                                     <option value="">Sort order</option>
-                                    <option value="PriceDetailUp">Price up</option>
-                                    <option value="PriceDetailDown">Price down</option>
-                                    <option value="WordDetailUp">Word up</option>
-                                    <option value="WordDetailDown">Word down</option>
+                                    <option value="WordServiceCategoryUp">Name's increase</option>
+                                    <option value="WordServiceCategoryDown">Name's decrease</option>
                                 </select>
                             </div>
                         </form>
@@ -155,7 +153,7 @@
                                 <div class="block__img flex-center relative">
                                     <img src="<%=service.getImage()%>"
                                          alt="">
-                                    <a href="MainController?action=GoToProductDetailByType&product_ID=<%=service.getService_ID()%>&category_ID=<%=service.getCategory_ID()%>" style="background-color: black; color: white;"
+                                    <a href="MainController?action=GoToServiceDetailByType&product_ID=<%=service.getService_ID()%>&category_ID=<%=service.getCategory_ID()%>" style="background-color: black; color: white;"
                                        class="txt-border link absolute card-extend bot quick-view">
                                         <i class="fa-solid fa-expand"></i>
                                         View Detail
