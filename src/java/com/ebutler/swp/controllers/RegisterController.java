@@ -83,7 +83,10 @@ public class RegisterController extends HttpServlet {
                     customerError.setUsername("Invalid username!");
                     checkValidation = false;
                 }
-                if(userDAO.isExistedEmail(email)) {
+                if(!ValiUtils.isValidEmail(email)) {
+                    customerError.setEmail("Invalid email");
+                    checkValidation = false;
+                } else if(userDAO.isExistedEmail(email)) {
                     customerError.setEmail("Email has already existed");
                     checkValidation = false;
                 }

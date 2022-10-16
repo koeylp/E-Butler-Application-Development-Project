@@ -52,6 +52,26 @@
         <servlet-name>ServicePageController</servlet-name>
         <servlet-class>com.ebutler.swp.controllers.ServicePageController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>WordProductCategoryUpController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.WordProductCategoryUpController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>WordProductCategoryDownController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.WordProductCategoryDownController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SortProductPriceDownController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.SortProductPriceDownController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>WordDetailDownController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.WordDetailDownController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>WordDetailUpController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.WordDetailUpController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -103,6 +123,26 @@
     <servlet-mapping>
         <servlet-name>ServicePageController</servlet-name>
         <url-pattern>/ServicePageController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WordProductCategoryUpController</servlet-name>
+        <url-pattern>/WordProductCategoryUpController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WordProductCategoryDownController</servlet-name>
+        <url-pattern>/WordProductCategoryDownController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SortProductPriceDownController</servlet-name>
+        <url-pattern>/SortProductPriceDownController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WordDetailDownController</servlet-name>
+        <url-pattern>/WordDetailDownController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WordDetailUpController</servlet-name>
+        <url-pattern>/WordDetailUpController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

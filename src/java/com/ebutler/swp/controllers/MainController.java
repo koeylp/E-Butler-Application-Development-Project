@@ -136,6 +136,16 @@ public class MainController extends HttpServlet {
                 url = CHANGE_CUSTOMER_PASSWORD_CONTROLLER;
             } else if (action.equals(GO_TO_SERVICE_PAGE)) {
                 url = SERVICE_PAGE_CONTROLLER;
+            } else if (action.equals(SORT_PRODUCT_CATEGORY_WORD_UP)) {
+                url = SORT_PRODUCT_CATEGORY_WORD_UP_CONTROLLER;
+            } else if (action.equals(SORT_PRODUCT_CATEGORY_WORD_DOWN)) {
+                url = SORT_PRODUCT_CATEGORY_WORD_DOWN_CONTROLLER;
+            } else if (action.equals(SORT_PRODUCT_DETAIL_PRICE_DOWN)) {
+                url = SORT_PRODUCT_PRICE_DOWN_CONTROLLER;
+            } else if (action.equals(SORT_PRODUCT_DETAIL_WORD_DOWN)) {
+                url = SORT_PRODUCT_DETAIL_WORD_DOWN_CONTROLLER;
+            } else if (action.equals(SORT_PRODUCT_DETAIL_WORD_UP)) {
+                url = SORT_PRODUCT_DETAIL_WORD_UP_CONTROLLER;
             }
         }
         catch (Exception e) {

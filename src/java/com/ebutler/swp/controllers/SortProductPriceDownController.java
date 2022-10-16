@@ -7,6 +7,7 @@ package com.ebutler.swp.controllers;
 import com.ebutler.swp.dao.ProductDAO;
 import com.ebutler.swp.dto.ProductDetailDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,8 +19,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Admin
  */
-public class SortProductDetailPriceUpController extends HttpServlet {
-    
+public class SortProductPriceDownController extends HttpServlet {
+
     private String ERROR = "errorPage.jsp";
     private String SUCCESS = "customer_productPage.jsp";
     
@@ -32,7 +33,7 @@ public class SortProductDetailPriceUpController extends HttpServlet {
             String category_ID = (String) session.getAttribute("CATEGORYID");
             String product_ID = (String) session.getAttribute("PRODUCTID");
             ProductDAO dao = new ProductDAO();
-            List<ProductDetailDTO> list = dao.sortListProductDetailPriceUP(category_ID, product_ID);
+            List<ProductDetailDTO> list = dao.sortListProductDetailPriceDOWN(category_ID, product_ID);
             session.setAttribute("PRODUCT_DETAIL_BY_TYPE", list);
             url = SUCCESS;
         } catch (Exception e) {

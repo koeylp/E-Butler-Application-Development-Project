@@ -13,6 +13,8 @@ public class ValiUtils {
     private static final String USERNAME_PATTERN = "^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$";
     private static final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
     private static final String STRING_PATTERN = "[a-zA-Z ]+";
+    private static final String EMAIL_PATTERN_TYPE_1 = "^[A-Za-z0-9+_.-]+@gmail.com";
+    private static final String EMAIL_PATTERN_TYPE_2 = "^[A-Za-z0-9+_.-]+@fpt.edu.vn";
     
     public static boolean isPhone(String phone) {
         return phone.trim().matches(PHONE_PATTERN);
@@ -28,6 +30,10 @@ public class ValiUtils {
     
     public static boolean isValidString(String parameter) {
         return parameter.matches(STRING_PATTERN);
+    }
+    
+    public static boolean isValidEmail(String parameter) {
+        return (parameter.matches(EMAIL_PATTERN_TYPE_1) || parameter.matches(EMAIL_PATTERN_TYPE_2));
     }
     
     public static boolean isValidLength(String parameter, int min, int max) {

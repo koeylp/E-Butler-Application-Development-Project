@@ -5,7 +5,7 @@
 package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.ProductDAO;
-import com.ebutler.swp.dto.ProductDetailDTO;
+import com.ebutler.swp.dto.ProductDTO;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -18,10 +18,10 @@ import javax.servlet.http.HttpSession;
  *
  * @author Admin
  */
-public class SortProductDetailPriceUpController extends HttpServlet {
+public class WordProductCategoryUpController extends HttpServlet {
     
     private String ERROR = "errorPage.jsp";
-    private String SUCCESS = "customer_productPage.jsp";
+    private String SUCCESS = "customer_productCategoryPage.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -29,13 +29,14 @@ public class SortProductDetailPriceUpController extends HttpServlet {
         String url = ERROR;
         try {
             HttpSession session = request.getSession();
-            String category_ID = (String) session.getAttribute("CATEGORYID");
-            String product_ID = (String) session.getAttribute("PRODUCTID");
+            String categoryID = (String) session.getAttribute("CATEGORYID");
             ProductDAO dao = new ProductDAO();
-            List<ProductDetailDTO> list = dao.sortListProductDetailPriceUP(category_ID, product_ID);
-            session.setAttribute("PRODUCT_DETAIL_BY_TYPE", list);
+            List<ProductDTO> list = dao.sortListProductCategoryWordUP(categoryID);
+            
+            session.setAttribute("CUSTOMER_PRODUCT_LIST", list);
             url = SUCCESS;
         } catch (Exception e) {
+            log("Error at WordProductCategoryUpController: "+e.getMessage());
         }finally{
             request.getRequestDispatcher(url).forward(request, response);
         }

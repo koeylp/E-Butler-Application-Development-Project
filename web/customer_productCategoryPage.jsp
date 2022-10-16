@@ -130,16 +130,14 @@
                             </div>
 
                         </form>
-
+                        
                         <form style="padding: 0;" class="col l-2 s-4 flex-end" action="MainController" method="POST">
                             <div class="sort-btn">
                                 <i class="fa-solid fa-sort"></i>
                                 <select name="action" style="text-align: center;" class="border-no select" name="" id="" onChange="this.form.submit()">
                                     <option value="">Sort order</option>
-                                    <option value="PriceDetailUp">Price up</option>
-                                    <option value="PriceDetailDown">Price down</option>
-                                    <option value="WordDetailUp">Word up</option>
-                                    <option value="WordDetailDown">Word down</option>
+                                    <option value="WordProductCategoryUp">Name's increase</option>
+                                    <option value="WordProductCategoryDown">Name's decrease</option>
                                 </select>
                             </div>
                         </form>

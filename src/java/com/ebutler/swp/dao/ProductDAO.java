@@ -31,25 +31,19 @@ public class ProductDAO {
     private static final String GET_SEARCH_PRODUCT = "SELECT product.product_ID, product.category_ID ,product.name, product.image FROM tblProductCategory cate JOIN tblProduct product ON cate.category_ID = product.category_ID where product.name LIKE ? AND cate.category_ID = ?";
     private static final String GET_SEARCH_PRODUCT1 = "SELECT t.id, provider_ID, t.product_ID, name, quantity, price, image, description, status FROM tblProductDetail t JOIN tblProduct h ON t.product_ID = h.product_ID JOIN tblProductCategory c ON c.category_ID = h.category_ID where product_Name like ? and t.product_ID = ?";
     private static final String GET_SEARCH_PRODUCT_DETAIL_BY_TYPE = "SELECT detail.id, detail.provider_ID, detail.product_ID, detail.name, detail.quantity, detail.price, detail.image, detail.description, detail.status FROM tblProduct product JOIN tblProductDetail detail on product.product_ID = detail.product_ID JOIN tblProductCategory cate ON cate.category_ID = product.category_ID WHERE cate.category_ID = ? AND product.product_ID = ? AND detail.name like ?";
+    private static final String GET_SEARCH_PRODUCT_CATEGORY = "SELECT product.product_ID, product.category_ID, product.name, product.image FROM tblProduct product JOIN tblProductCategory cate on product.category_ID = cate.category_ID WHERE product.category_ID = ? AND product.name LIKE ?";
     
+    private static final String GET_PRODUCT_BY_ID = "SELECT p.name, p.id, p.provider_ID, p.product_ID, p.name, p.image, p.price, p.quantity, p.image, p.description, p.status FROM tblProduct_Category c JOIN tblProduct t  ON c.category_ID = t.category_ID INNER JOIN tblProduct_Detail p ON p.product_ID = t.product_ID WHERE p.product_ID = ?";
 
+    private static final String SORT_PRODUCT_DETAIL_PRICE_UP = "SELECT detail.id, detail.provider_ID, detail.product_ID, detail.name, detail.quantity, detail.price, detail.image, detail.description, detail.status FROM tblProduct product JOIN tblProductDetail detail on product.product_ID = detail.product_ID JOIN tblProductCategory cate ON cate.category_ID = product.category_ID WHERE cate.category_ID = ? AND product.product_ID = ? ORDER BY detail.price ASC";
+    private static final String SORT_PRODUCT_DETAIL_PRICE_DOWN = "SELECT detail.id, detail.provider_ID, detail.product_ID, detail.name, detail.quantity, detail.price, detail.image, detail.description, detail.status FROM tblProduct product JOIN tblProductDetail detail on product.product_ID = detail.product_ID JOIN tblProductCategory cate ON cate.category_ID = product.category_ID WHERE cate.category_ID = ? AND product.product_ID = ? ORDER BY detail.price DESC";
+    private static final String SORT_PRODUCT_DETAIL_WORD_UP = "SELECT detail.id, detail.provider_ID, detail.product_ID, detail.name, detail.quantity, detail.price, detail.image, detail.description, detail.status FROM tblProduct product JOIN tblProductDetail detail on product.product_ID = detail.product_ID JOIN tblProductCategory cate ON cate.category_ID = product.category_ID WHERE cate.category_ID = ? AND product.product_ID = ? ORDER BY detail.name ASC";
+    private static final String SORT_PRODUCT_DETAIL_WORD_DOWN = "SELECT detail.id, detail.provider_ID, detail.product_ID, detail.name, detail.quantity, detail.price, detail.image, detail.description, detail.status FROM tblProduct product JOIN tblProductDetail detail on product.product_ID = detail.product_ID JOIN tblProductCategory cate ON cate.category_ID = product.category_ID WHERE cate.category_ID = ? AND product.product_ID = ? ORDER BY detail.name DESC";
 
+    private static final String SORT_PRODUCT_CATEGORY_WORD_UP = "SELECT pro.product_ID, pro.category_ID, pro.name, pro.image from tblProductCategory cate JOIN tblProduct pro on cate.category_ID = pro.category_ID where cate.category_ID = ? ORDER BY pro.name ASC";
+    private static final String SORT_PRODUCT_CATEGORY_WORD_DOWN = "SELECT pro.product_ID, pro.category_ID, pro.name, pro.image from tblProductCategory cate JOIN tblProduct pro on cate.category_ID = pro.category_ID where cate.category_ID = ? ORDER BY pro.name DESC";
 
-    private static final String GET_PRODUCT_BY_ID = "SELECT provider_ID, product_ID, name, quantity, price, image, description, status FROM tblProductDetail WHERE id = ?";
-
-    private static final String SORT_PRODUCT_PRICE_UP = "SELECT p.name, p.id, p.provider_ID, p.product_ID, p.name, p.image, p.price, p.quantity, p.image, p.description, p.status FROM tblProduct_Category c JOIN tblProduct t  ON c.category_ID = t.category_ID INNER JOIN tblProduct_Detail p ON p.product_ID = t.product_ID where c.category_ID = ? order by price ASC";
-    private static final String SORT_PRODUCT_PRICE_DOWN = "SELECT p.name, p.id, p.provider_ID, p.product_ID, p.name, p.image, p.price, p.quantity, p.image, p.description, p.status FROM tblProduct_Category c JOIN tblProduct t  ON c.category_ID = t.category_ID INNER JOIN tblProduct_Detail p ON p.product_ID = t.product_ID where c.category_ID = ? order by price DESC";
-
-////  private static final String SORT_PRODUCT_PRICE_DOWN = "SELECT product_Provider_ID, provider_ID, product_ID, product_Name, quantity, price, image, description, status FROM tblProduct_Provider ORDER BY price DESC";
-//    private static final String SORT_PRODUCT_WORD_UP = "SELECT product.product_ID, product.category_ID ,product.name, product.image FROM tblProductCategory cate JOIN tblProduct product ON cate.category_ID = product.category_ID where cate.category_ID = ? ORDER BY product.name ASC";
-//    private static final String SORT_PRODUCT_WORD_DOWN = "SELECT product.product_ID, product.category_ID ,product.name, product.image FROM tblProductCategory cate JOIN tblProduct product ON cate.category_ID = product.category_ID where cate.category_ID = ? ORDER BY product.name DESC";
-//
-//    public static List<ProductDTO> getListProductByPlace(String categoty_ID) throws SQLException {
-
-    private static final String SORT_PRODUCT_WORD_UP = "SELECT p.name, p.id, p.provider_ID, p.product_ID, p.name, p.image, p.price, p.quantity, p.image, p.description, p.status FROM tblProduct_Category c JOIN tblProduct t  ON c.category_ID = t.category_ID INNER JOIN tblProduct_Detail p ON p.product_ID = t.product_ID where c.category_ID = ? order by product_Name ASC";
-    private static final String SORT_PRODUCT_WORD_DOWN = "SELECT p.name, p.id, p.provider_ID, p.product_ID, p.name, p.image, p.price, p.quantity, p.image, p.description, p.status FROM tblProduct_Category c JOIN tblProduct t  ON c.category_ID = t.category_ID INNER JOIN tblProduct_Detail p ON p.product_ID = t.product_ID where c.category_ID = ? order by product_Name DESC";
-    
-    public static List<ProductDTO> getListProduct(String categoty_ID) throws SQLException {
+    public static List<ProductDTO> getListProductByPlace(String categoty_ID) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -141,31 +135,60 @@ public class ProductDAO {
 
         return list;
     }
+     
+      public static List<ProductDTO> getSearchProductCategory(String categoty_ID, String search) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        List<ProductDTO> list = new ArrayList();
+        try {
+            conn = DBUtils.getConnection();
+            ptm = conn.prepareStatement(GET_SEARCH_PRODUCT_CATEGORY);
+            ptm.setString(1, categoty_ID);
+            ptm.setString(2, "%"+search+"%");
+            rs = ptm.executeQuery();
+            while (rs.next()) {
+                list.add(new ProductDTO(rs.getString("product_ID"), rs.getString("category_ID"), rs.getString("name"), rs.getString("image")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return list;
+    }
 
 
-    public static ProductDetailDTO getProductByID(String product_ID) throws SQLException {
-        ProductDetailDTO product = new ProductDetailDTO();
+    public static ProductDTO getProductByID(String product_ID) throws SQLException {
+        ProductDTO product = new ProductDTO();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
-//provider_ID, product_ID, name, quantity, price, image, description, status
+//            category_Name, category_Image, , p.description, p.status
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(GET_PRODUCT_BY_ID);
                 ptm.setString(1, product_ID);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
-                    
-                    String provider_ID = rs.getString("provider_ID"); 
-                    String productID = rs.getString("product_ID");
-                    String name = rs.getString("name");
-                    int quantity = rs.getInt("quantity");
+                    String product_Provider_ID = rs.getString("id");
+                    String provider_ID = rs.getString("provider_ID");
+                    String product_Name = rs.getString("name");
+                    String image = rs.getString("image");
                     double price = rs.getDouble("price");
-                    String img = rs.getString("image");
-                    String description = "";
-                    int status = rs.getInt("status");
-                    product = new ProductDetailDTO(productID, provider_ID, product_ID, name, quantity, price, img, description, status);
+
+                    int quantity = rs.getInt("quantity");
+//                    product = new ProductDTO(product_Provider_ID, provider_ID, product_ID, product_Name, quantity, price, image, "", 0);
                 }
             }
         } catch (Exception e) {
@@ -217,19 +240,20 @@ public class ProductDAO {
         return list;
     }
 
-    public static List<ProductDTO> sortListProductPriceUP(String categoryID) throws SQLException {
+    public static List<ProductDetailDTO> sortListProductDetailPriceUP(String categoryID, String productID) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
-        List<ProductDTO> list = new ArrayList();
+        List<ProductDetailDTO> list = new ArrayList();
         try {
             conn = DBUtils.getConnection();
-            ptm = conn.prepareStatement(SORT_PRODUCT_PRICE_UP);
+            ptm = conn.prepareStatement(SORT_PRODUCT_DETAIL_PRICE_UP);
             ptm.setString(1, categoryID);
+            ptm.setString(2, productID);
 
             rs = ptm.executeQuery();
             while (rs.next()) {
-//                list.add(new ProductDTO(rs.getString("id"), rs.getString("provider_ID"), rs.getString("product_ID"), rs.getString("name"), rs.getInt("quantity"), rs.getDouble("price"), rs.getString("image"), rs.getString("description"), rs.getInt("status")));
+                list.add(new ProductDetailDTO(rs.getString("id"), rs.getString("provider_ID"), rs.getString("product_ID"), rs.getString("name"), rs.getInt("quantity"), rs.getDouble("price"), rs.getString("image"), rs.getString("description"), rs.getInt("status")));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -247,19 +271,20 @@ public class ProductDAO {
 
         return list;
     }
-
-    public static List<ProductDTO> sortListProductPriceDOWN(String categoryID) throws SQLException {
+    public static List<ProductDetailDTO> sortListProductDetailPriceDOWN(String categoryID, String productID) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
-        List<ProductDTO> list = new ArrayList();
+        List<ProductDetailDTO> list = new ArrayList();
         try {
             conn = DBUtils.getConnection();
-            ptm = conn.prepareStatement(SORT_PRODUCT_PRICE_DOWN);
+            ptm = conn.prepareStatement(SORT_PRODUCT_DETAIL_PRICE_DOWN);
             ptm.setString(1, categoryID);
+            ptm.setString(2, productID);
+
             rs = ptm.executeQuery();
             while (rs.next()) {
-//                list.add(new ProductDTO(rs.getString("id"), rs.getString("provider_ID"), rs.getString("product_ID"), rs.getString("name"), rs.getInt("quantity"), rs.getDouble("price"), rs.getString("image"), rs.getString("description"), rs.getInt("status")));
+                list.add(new ProductDetailDTO(rs.getString("id"), rs.getString("provider_ID"), rs.getString("product_ID"), rs.getString("name"), rs.getInt("quantity"), rs.getDouble("price"), rs.getString("image"), rs.getString("description"), rs.getInt("status")));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -277,23 +302,85 @@ public class ProductDAO {
 
         return list;
     }
+    public static List<ProductDetailDTO> sortListProductDetailWordUP(String categoryID, String productID) throws SQLException {
+       Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        List<ProductDetailDTO> list = new ArrayList();
+        try {
+            conn = DBUtils.getConnection();
+            ptm = conn.prepareStatement(SORT_PRODUCT_DETAIL_WORD_UP);
+            ptm.setString(1, categoryID);
+            ptm.setString(2, productID);
 
-    public static List<ProductDTO> sortListProductWordUP(String categoryID) throws SQLException {
+            rs = ptm.executeQuery();
+            while (rs.next()) {
+                list.add(new ProductDetailDTO(rs.getString("id"), rs.getString("provider_ID"), rs.getString("product_ID"), rs.getString("name"), rs.getInt("quantity"), rs.getDouble("price"), rs.getString("image"), rs.getString("description"), rs.getInt("status")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return list;
+    }
+    public static List<ProductDetailDTO> sortListProductDetailWordDOWN(String categoryID, String productID) throws SQLException {
+       Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        List<ProductDetailDTO> list = new ArrayList();
+        try {
+            conn = DBUtils.getConnection();
+            ptm = conn.prepareStatement(SORT_PRODUCT_DETAIL_WORD_UP);
+            ptm.setString(1, categoryID);
+            ptm.setString(2, productID);
+
+            rs = ptm.executeQuery();
+            while (rs.next()) {
+                list.add(new ProductDetailDTO(rs.getString("id"), rs.getString("provider_ID"), rs.getString("product_ID"), rs.getString("name"), rs.getInt("quantity"), rs.getDouble("price"), rs.getString("image"), rs.getString("description"), rs.getInt("status")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return list;
+    }
+    
+    public static List<ProductDTO> sortListProductCategoryWordUP(String categoryID) throws SQLException{
+        List<ProductDTO> list = new ArrayList();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
-        List<ProductDTO> list = new ArrayList();
         try {
             conn = DBUtils.getConnection();
-            ptm = conn.prepareStatement(SORT_PRODUCT_WORD_UP);
+            ptm = conn.prepareStatement(SORT_PRODUCT_CATEGORY_WORD_UP);
             ptm.setString(1, categoryID);
-            rs = ptm.executeQuery();
+             rs = ptm.executeQuery();
             while (rs.next()) {
                 list.add(new ProductDTO(rs.getString("product_ID"), rs.getString("category_ID"), rs.getString("name"), rs.getString("image")));
             }
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
+             e.printStackTrace();
+        }finally{
             if (rs != null) {
                 rs.close();
             }
@@ -304,26 +391,24 @@ public class ProductDAO {
                 conn.close();
             }
         }
-
         return list;
     }
-
-    public static List<ProductDTO> sortListProductWordDOWN(String categoryID) throws SQLException {
+    public static List<ProductDTO> sortListProductCategoryWordDOWN(String categoryID) throws SQLException{
+        List<ProductDTO> list = new ArrayList();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
-        List<ProductDTO> list = new ArrayList();
         try {
             conn = DBUtils.getConnection();
-            ptm = conn.prepareStatement(SORT_PRODUCT_WORD_DOWN);
+            ptm = conn.prepareStatement(SORT_PRODUCT_CATEGORY_WORD_DOWN);
             ptm.setString(1, categoryID);
-            rs = ptm.executeQuery();
+             rs = ptm.executeQuery();
             while (rs.next()) {
                 list.add(new ProductDTO(rs.getString("product_ID"), rs.getString("category_ID"), rs.getString("name"), rs.getString("image")));
             }
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
+             e.printStackTrace();
+        }finally{
             if (rs != null) {
                 rs.close();
             }
@@ -334,53 +419,6 @@ public class ProductDAO {
                 conn.close();
             }
         }
-
         return list;
-    }
-    public static List<ProductDTO> getListProductByPlace(String categoty_ID) throws SQLException {
-        Connection conn = null;
-        PreparedStatement ptm = null;
-        ResultSet rs = null;
-        List<ProductDTO> list = new ArrayList();
-        try {
-            conn = DBUtils.getConnection();
-            ptm = conn.prepareStatement(GET_LIST_PRODUCT_BY_TYPE);
-            ptm.setString(1, categoty_ID);
-            rs = ptm.executeQuery();
-            while (rs.next()) {
-                list.add(new ProductDTO(rs.getString("product_ID"), rs.getString("category_ID"), rs.getString("name"), rs.getString("image")));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        }
-
-        return list;
-    }
-    public static void main(String[] args) throws SQLException {
-        ProductDTO pro = new ProductDTO();
-        ProductDetailDTO detail = new ProductDetailDTO();
-
-//        List<ProductDetailDTO> list = getListProductByPlaceDetail("KC", "1");
-        
-        detail = getProductByID("12");
-        System.out.println(detail);
-//         for (ProductDetailDTO x : list) {
-//             System.out.println(x);
-//         }
-
-    }
-
-    public List<ProductDTO> getSearchProductCategory(String category_ID, String searchProductCategory) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
