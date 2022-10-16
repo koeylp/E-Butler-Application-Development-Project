@@ -153,7 +153,7 @@
                                 <div class="block__img flex-center relative">
                                     <img src="<%=service.getImage()%>"
                                          alt="">
-                                    <a href="MainController?action=GoToServiceDetailByType&product_ID=<%=service.getService_ID()%>&category_ID=<%=service.getCategory_ID()%>" style="background-color: black; color: white;"
+                                    <a href="MainController?action=GoToServiceDetailByType&service_ID=<%=service.getService_ID()%>&category_ID=<%=service.getCategory_ID()%>" style="background-color: black; color: white;"
                                        class="txt-border link absolute card-extend bot quick-view">
                                         <i class="fa-solid fa-expand"></i>
                                         View Detail

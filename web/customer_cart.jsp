@@ -4,6 +4,7 @@
     Author : thekh
 --%>
 
+<%@page import="com.ebutler.swp.dto.UserDTO"%>
 <%@page import="com.ebutler.swp.dto.ServiceDetailDTO"%>
 <%@page import="com.ebutler.swp.dto.CartServiceDTO"%>
 <%@page import="com.ebutler.swp.dto.QuantityStockDTO"%>
@@ -49,6 +50,9 @@
     </head>
 
     <body>
+        <%
+            UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
+        %>
         <div class="container-xxl bg-white p-0">
             <!-- Spinner Start -->
             <div id="spinner"
@@ -73,7 +77,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav ms-auto">
-                            <a href="#" class="nav-item nav-link navigator">Home</a>
+                            <a href="#" class="nav-item nav-link active navigator">Home</a>
                             <a href="#product" class="nav-item nav-link navigator">Product</a>
                             <div class="nav-item dropdown">
                                 <a href="#service" class="nav-link navigator">Service</a>
@@ -87,14 +91,13 @@
                                 <a class="search-close opacity"><i class="fa-solid fa-xmark"></i></a>
                             </div>
                             <div class="nav-item dropdown">
-                                <a class="nav-link active"><i class="fa-solid fa-user"></i></a>
+                                <a class="nav-link"><i class="fa-solid fa-user"></i></a>
                                 <div class="dropdown-menu rounded-0 m-12">
-                                    <a style="color: var(--primary-color); font-weight: bold;"
-                                       class="dropdown-item login--link">username</a>
-                                    <a class="dropdown-item register--link">logout</a>
+                                    <a style="color: var(--primary-color); font-weight: bold;" href="MainController?action=GoToUserProfile" class="dropdown-item login--link"><%=login_user.getUsername()%></a>
+                                    <a href="MainController?action=Logout" class="dropdown-item register--link">logout</a>
                                 </div>
                             </div>
-                            <a class="nav-item nav-link search-open"><i class="fa-solid fa-magnifying-glass"></i></a>
+                            <a class="nav-item nav-link search-open "><i class="fa-solid fa-magnifying-glass"></i></a>
                             <a class="nav-item nav-link"><i class="fa-solid fa-cart-shopping"></i></a>
                         </div>
                     </div>

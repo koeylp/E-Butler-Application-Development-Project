@@ -7,7 +7,6 @@ package com.ebutler.swp.controllers;
 import com.ebutler.swp.dao.ServiceDAO;
 import com.ebutler.swp.dto.ServiceDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,10 +19,10 @@ import javax.servlet.http.HttpSession;
  * @author Admin
  */
 public class ServicePageController extends HttpServlet {
-    
+
     private static final String SUCCESS = "customer_serviceCategoryPage.jsp";
     private static final String ERROR = "errorPage.jsp";
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -31,16 +30,16 @@ public class ServicePageController extends HttpServlet {
         try {
             String category_ID = request.getParameter("category_ID");
             ServiceDAO dao = new ServiceDAO();
-            
-             List<ServiceDTO> list = dao.getListService(category_ID);
-            
+
+            List<ServiceDTO> list = dao.getListService(category_ID);
+
             HttpSession session = request.getSession();
             session.setAttribute("CATEGORYID", category_ID);
             session.setAttribute("CUSTOMER_SERVICE_LIST", list);
             url = SUCCESS;
         } catch (Exception e) {
-            log("Error at ServicePageController: "+e.getMessage());
-        }finally{
+            log("Error at ServicePageController: " + e.getMessage());
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
