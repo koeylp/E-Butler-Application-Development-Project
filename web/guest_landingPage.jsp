@@ -61,7 +61,7 @@
                             </div>
                             <a href="#contact_us" class="nav-item nav-link">Contact</a>
                             <div class="nav-item dropdown">
-                                <a href="accessPage.html" class="nav-link dropdown-toggle">Join</a>
+                                <a class="nav-link dropdown-toggle">Join</a>
                                 <div method="POST" class="dropdown-menu rounded-0 m-12">
                                     <form action="MainController" method="POST">
                                         <button type="submit" class="dropdown-item login--link">Login</button>

@@ -4,6 +4,7 @@
     Author     : thekh
 --%>
 
+<%@page import="com.ebutler.swp.dto.ServiceDetailDTO"%>
 <%@page import="com.ebutler.swp.dto.UserDTO"%>
 <%@page import="com.ebutler.swp.dto.CartServiceDTO"%>
 <%@page import="com.ebutler.swp.dto.ProductDetailDTO"%>
@@ -1241,52 +1242,52 @@
         <!-- Spinner End -->
 
         <!-- Navbar Start -->
-            <div class="container-fluid nav-bar bg-transparent">
-                <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4 relative">
-                    <a href="landingPage.html" class="navbar-brand d-flex align-items-center text-center">
-                        <div class="p-2 me-2">
-                            <img class="img-fluid" src="img/logo.png" alt="Icon" style="width: 40px; height: 40px;">
-                        </div>
-                        <h1 class="text-primary">E-Butler</h1>
-                    </a>
-                    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <div class="navbar-nav ms-auto">
-                            <a href="#" class="nav-item nav-link active navigator">Home</a>
-                            <a href="#product" class="nav-item nav-link navigator">Product</a>
-                            <div class="nav-item dropdown">
-                                <a href="#service" class="nav-link navigator">Service</a>
-                            </div>
-                            <a href="#help" class="nav-item nav-link navigator">Help</a>
-                            <div class="search absolute hide">
-                                <a><i class="fa-solid fa-magnifying-glass"></i></a>
-                                <input
-                                    style="flex: 1; background-color: transparent; border: none; outline: none; margin: 0 20px;"
-                                    type="text" placeholder="Type and press enter">
-                                <a class="search-close opacity"><i class="fa-solid fa-xmark"></i></a>
-                            </div>
-                            <div class="nav-item dropdown">
-                                <a class="nav-link"><i class="fa-solid fa-user"></i></a>
-                                <div class="dropdown-menu rounded-0 m-12">
-                                    <a style="color: var(--primary-color); font-weight: bold;" href="MainController?action=GoToUserProfile" class="dropdown-item login--link"><%=login_user.getUsername()%></a>
-                                    <a href="MainController?action=Logout" class="dropdown-item register--link">logout</a>
-                                </div>
-                            </div>
-                            <a class="nav-item nav-link search-open "><i class="fa-solid fa-magnifying-glass"></i></a>
-                            <a class="nav-item nav-link"><i class="fa-solid fa-cart-shopping"></i></a>
-                        </div>
+        <div class="container-fluid nav-bar bg-transparent">
+            <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4 relative">
+                <a href="landingPage.html" class="navbar-brand d-flex align-items-center text-center">
+                    <div class="p-2 me-2">
+                        <img class="img-fluid" src="img/logo.png" alt="Icon" style="width: 40px; height: 40px;">
                     </div>
-                </nav>
-            </div>
-            <!-- Navbar End -->
+                    <h1 class="text-primary">E-Butler</h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto">
+                        <a href="#" class="nav-item nav-link active navigator">Home</a>
+                        <a href="#product" class="nav-item nav-link navigator">Product</a>
+                        <div class="nav-item dropdown">
+                            <a href="#service" class="nav-link navigator">Service</a>
+                        </div>
+                        <a href="#help" class="nav-item nav-link navigator">Help</a>
+                        <div class="search absolute hide">
+                            <a><i class="fa-solid fa-magnifying-glass"></i></a>
+                            <input
+                                style="flex: 1; background-color: transparent; border: none; outline: none; margin: 0 20px;"
+                                type="text" placeholder="Type and press enter">
+                            <a class="search-close opacity"><i class="fa-solid fa-xmark"></i></a>
+                        </div>
+                        <div class="nav-item dropdown">
+                            <a class="nav-link"><i class="fa-solid fa-user"></i></a>
+                            <div class="dropdown-menu rounded-0 m-12">
+                                <a style="color: var(--primary-color); font-weight: bold;" href="MainController?action=GoToUserProfile" class="dropdown-item login--link"><%=login_user.getUsername()%></a>
+                                <a href="MainController?action=Logout" class="dropdown-item register--link">logout</a>
+                            </div>
+                        </div>
+                        <a class="nav-item nav-link search-open "><i class="fa-solid fa-magnifying-glass"></i></a>
+                        <a href="MainController?action=MoveToCart" class="nav-item nav-link"><i class="fa-solid fa-cart-shopping"></i></a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!-- Navbar End -->
 
         <%
             CartServiceDTO cartService = (CartServiceDTO) session.getAttribute("CART_SERVICE");
             CartDTO cart = (CartDTO) session.getAttribute("CART");
-            if (cart != null) {
-                double total = 0;
+
+            double total = 0;
         %>
         <!-- Checkout Section Begin -->
         <section class="checkout spad">
@@ -1351,16 +1352,33 @@
                                             <span class="top__text__right">Total</span>
                                         </li>
                                         <%
-                                            for (ProductDetailDTO product : cart.getCart().values()) {
-                                                double sub_total = 0;
-                                                sub_total += product.getPrice() * product.getQuantity();
+                                            if (cart != null) {
+                                                for (ProductDetailDTO product : cart.getCart().values()) {
+                                                    double sub_total = 0;
+                                                    sub_total += product.getPrice() * product.getQuantity();
                                         %>
                                         <li> <%= product.getName()%> <span> <%= sub_total%> </span></li>               
                                         <input type="hidden" name="id" value="<%=product.getId()%>">
                                         <input type="hidden" name="quantity" value="<%=product.getQuantity()%>">  
                                         <input type="hidden" name="price" value="<%=product.getPrice()%>">          
                                         <%
-                                                total += sub_total;
+                                                    total += sub_total;
+                                                }
+                                            }
+                                        %>
+                                        <%
+                                            if (cartService != null) {
+                                                for (ServiceDetailDTO service : cartService.getCart().values()) {
+                                                    double sub_total = 0;
+                                                    sub_total += service.getPrice();
+                                        %>
+                                        <li> <%= service.getName()%> <span> <%= sub_total%> </span></li>               
+                                        <input type="hidden" name="id" value="<%=service.getId()%>">
+
+                                        <input type="hidden" name="price" value="<%=service.getPrice()%>">          
+                                        <%
+                                                    total += sub_total;
+                                                }
                                             }
                                         %>
                                     </ul>
@@ -1394,9 +1412,7 @@
                 </form>
             </div>
         </section>
-        <%
-            }
-        %>
+
         <!-- Checkout Section End -->
 
 

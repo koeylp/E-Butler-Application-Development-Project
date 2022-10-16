@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "AddServiceToCartController", urlPatterns = {"/AddServiceToCartController"})
 public class AddServiceToCartController extends HttpServlet {
 
-    private static final String ERROR = "error.jsp";
+    private static final String ERROR = "errorPage.jsp";
     private static final String SUCCESS = "customer_servicePage.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

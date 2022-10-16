@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "DeleteCartController", urlPatterns = {"/DeleteCartController"})
 public class DeleteCartController extends HttpServlet {
 
-    private static final String ERROR = "error.jsp";
+    private static final String ERROR = "errorPage.jsp";
     private static final String SUCCESS = "customer_cart.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

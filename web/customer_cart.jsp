@@ -98,7 +98,7 @@
                                 </div>
                             </div>
                             <a class="nav-item nav-link search-open "><i class="fa-solid fa-magnifying-glass"></i></a>
-                            <a class="nav-item nav-link"><i class="fa-solid fa-cart-shopping"></i></a>
+                            <a href="MainController?action=MoveToCart" class="nav-item nav-link"><i class="fa-solid fa-cart-shopping"></i></a>
                         </div>
                     </div>
                 </nav>
@@ -166,10 +166,7 @@
                                                         </div>
 
                                                         <div style="height: 50%;" class="flex-center col-3">
-                                                            <!--                                                        <button class="btn-circle flex-center txt-xs"
-                                                                                                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                                                                                        <i class="fas fa-minus"></i>
-                                                                                                                    </button>-->
+                                                           
                                                             <div class="">
                                                                 <input
                                                                     style="text-align: center; outline: none; font-weight: bold; border: none;"
@@ -178,11 +175,7 @@
                                                                 <input type="hidden" name="id" value="<%= product.getId()%>"/>
                                                             </div>
 
-                                                            <!--                                                        <button class=" btn-circle flex-center txt-xs"
-                                                                                                                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                                                                                        <i class="fas fa-plus"></i>
-                                                                                                                        <input type="hidden" name="plus" value="Plus">
-                                                                                                                    </button>-->
+                                                           
                                                         </div>
                                                         <div class="order-price txt-sm bold">
                                                             <span>
@@ -222,14 +215,10 @@
                                             </div>
                                         </div>
                                         <%
-                                                total += sub_total;
+                                                    total += sub_total;
+                                                }
                                             }
                                         %>
-
-                                        <%
-                                            }
-                                        %>
-
 
                                     </div>
                                 </form>
@@ -253,8 +242,7 @@
                                 <!-- Order detail -->
                                 <form action="MainController" method="POST">
                                     <div class="pad-2">
-                                        <%
-                                            double sub_total_service = 0;
+                                        <%                                            double sub_total_service = 0;
                                             if (cartService != null) {
                                                 for (ServiceDetailDTO service : cartService.getCart().values()) {
                                         %>
@@ -282,10 +270,24 @@
                                                     </div>
                                                     <div style="height: 50%;" class="flex-end flex-col">
                                                         <div class="flex-between">
+                                                            <%
+                                                                if (service.getStatus() == 0) {
+                                                            %>
                                                             <span class="label txt-xs danger">
                                                                 <i class="fa-solid fa-ban"></i>
                                                                 Suspension
                                                             </span>
+                                                            <%
+                                                            } else {
+                                                            %>
+                                                            <span class="label txt-xs safe">
+                                                                <i class="fa-solid fa-check"></i>
+                                                                Available
+                                                            </span>
+                                                            <%
+                                                                }
+                                                            %>
+
                                                             <button style="color: var(--primary-color); border: none; outline: none; background-color: transparent;" class="bold txt-md">
                                                                 <a href="MainController?action=DeleteCart&service_ID=<%= service.getId()%>"><span><i class="fa-solid fa-trash"></i></span></a>
                                                             </button>

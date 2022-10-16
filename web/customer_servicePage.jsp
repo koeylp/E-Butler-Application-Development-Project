@@ -97,7 +97,7 @@
                                 </div>
                             </div>
                             <a class="nav-item nav-link search-open"><i class="fa-solid fa-magnifying-glass"></i></a>
-                            <a class="nav-item nav-link"><i class="fa-solid fa-cart-shopping"></i></a>
+                            <a href="MainController?action=MoveToCart" class="nav-item nav-link"><i class="fa-solid fa-cart-shopping"></i></a>
                         </div>
                     </div>
                 </nav>
@@ -159,7 +159,8 @@
                                 <div class="block__img flex-center relative">
                                     <img src=""
                                          alt="">
-                                    <a style="background-color: black; color: white; right: 52%;"
+                                    <a href="MainController?action=AddServiceToCart&service_ID=<%= service.getId()%>"
+                                       style="background-color: black; color: white; right: 52%;"
                                        class="txt-border link absolute card-extend bot">
                                         <i class="fa-solid fa-bag-shopping"></i>
                                         Add to bag

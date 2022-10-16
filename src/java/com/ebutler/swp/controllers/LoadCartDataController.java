@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "LoadCartDataController", urlPatterns = {"/LoadCartDataController"})
 public class LoadCartDataController extends HttpServlet {
 
-    private static final String ERROR = "cart.jsp";
+    private static final String ERROR = "errorPage.jsp";
     private static final String SUCCESS = "customer_checkout.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

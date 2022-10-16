@@ -70,7 +70,7 @@ public class CheckoutController extends HttpServlet {
                         statement = confirmation.getSuccess();
                     }
                 }
-                if (cartService == null) {
+                if (cartService != null) {
                     /*count para to check whether the status of staff is 1 or 0
                     if 1 --> success | 0 --> fail*/
                     int count = 0;
