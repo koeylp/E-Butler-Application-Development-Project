@@ -33,12 +33,12 @@ public class LoadCartDataController extends HttpServlet {
             if (session != null) {
                 CartDTO cart = (CartDTO) session.getAttribute("CART");
                 CartServiceDTO cartService = (CartServiceDTO) session.getAttribute("CART_SERVICE");
-                if (cart == null) {
-                    cart = new CartDTO();
-                }
-                if (cartService == null) {
-                    cartService = new CartServiceDTO();
-                }
+//                if (cart == null) {
+//                    cart = new CartDTO();
+//                }
+//                if (cartService == null) {
+//                    cartService = new CartServiceDTO();
+//                }
                 session.setAttribute("CART", cart);
                 session.setAttribute("CART_SERVICE", cartService);
                 url = SUCCESS;

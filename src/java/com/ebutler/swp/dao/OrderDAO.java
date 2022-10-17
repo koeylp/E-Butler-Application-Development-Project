@@ -23,7 +23,7 @@ public class OrderDAO {
     private static final String INSERT = "INSERT INTO tblOrder(order_Date, customer_ID, status, total) VALUES(?, ?, ?, ?)";
     private static final String INSERT_DETAIL = "INSERT INTO tblOrder_Product_Detail(product_detail_ID, order_ID, quantity, price, [status]) VALUES(?, ?, ?, ?, ?)";
     private static final String GET_ALL_ORDER = "SELECT order_ID, order_Date, customer_ID, status, total FROM tblOrder";
-    private static final String INSERT_SERVICE_DETAIL = "INSERT INTO tblOrder_Product_Detail(staff_ID, service_Detail_ID, order_ID, price, [status]) VALUES(?, ?, ?, ?, ?)";
+    private static final String INSERT_SERVICE_DETAIL = "INSERT INTO tblOrder_Service_Detail(staff_ID, service_Detail_ID, order_ID, price, [status]) VALUES(?, ?, ?, ?, ?)";
 
     public static void insertOrder(Date date, String username, int status, double total) throws SQLException {
         Connection conn = null;
@@ -140,11 +140,13 @@ public class OrderDAO {
     public static void main(String[] args) {
         try {
 //           insertOrder(java.sql.Date.valueOf(java.time.LocalDate.now()), "hello", 0, 2);
-            insertOrderDetail("12", 2, 1, 66, 0);
-            List<OrderDTO> list = getAllOrder();
-            for (OrderDTO order : list) {
-                System.out.println(order);
-            }
+//            insertOrderDetail("12", 2, 1, 66, 0);
+//            List<OrderDTO> list = getAllOrder();
+//            for (OrderDTO order : list) {
+//                System.out.println(order);
+//            }
+            
+            insertOrderServiceDetail(1, 1, 1, 2000, 0);
         } catch (Exception e) {
         }
 

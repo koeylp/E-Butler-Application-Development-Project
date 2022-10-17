@@ -75,21 +75,28 @@ public class CheckoutController extends HttpServlet {
                     if 1 --> success | 0 --> fail*/
                     int count = 0;
                     for (ServiceDetailDTO service : cartService.getCart().values()) {
-                        if (service.getStatus() != 1) {
+                        if (service.getStatus() == 1) {
                             count++;
                         }
                     }
 //                    Insert
                     if (count == cartService.getCart().values().size()) {
-                        orderDao.insertOrder(java.sql.Date.valueOf(java.time.LocalDate.now()), "hello", 0, total);
+                        if (cart == null) {
+                            orderDao.insertOrder(java.sql.Date.valueOf(java.time.LocalDate.now()), user.getUsername(), 0, total);
+                            statement = confirmation.getSuccess();
+                        }
                         for (ServiceDetailDTO service : cartService.getCart().values()) {
-                            int order_ID = orderDao.getAllOrder().size() + 1;
+                            int order_ID = orderDao.getAllOrder().size();
                             orderDao.insertOrderServiceDetail(service.getStaff_ID(), Integer.parseInt(service.getService_ID()), order_ID, service.getPrice(), 0);
                         }
+
                     }
                 }
             }
+            session.setAttribute("CART", null);
+            session.setAttribute("CART_SERVICE", null);
             session.setAttribute("STATEMENT", statement);
+
             url = SUCCESS;
         } catch (Exception e) {
             log("Error at CheckoutController" + e.toString());

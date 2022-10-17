@@ -50,9 +50,7 @@
     </head>
 
     <body>
-        <%
-            UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
-        %>
+
         <div class="container-xxl bg-white p-0">
             <!-- Spinner Start -->
             <div id="spinner"
@@ -62,7 +60,9 @@
                 </div>
             </div>
             <!-- Spinner End -->
-
+            <%
+                UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
+            %>
             <!-- Navbar Start -->
             <div class="container-fluid nav-bar bg-transparent">
                 <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4 relative">
@@ -132,22 +132,20 @@
                                 <div style="background-color: #F9FAFB;" class="flex-between pad-2">
                                     <div class="flex-col flex-horizon-center">
                                         <span class="txt-lg bold">Product</span>
-                                        <div class="flex-center">
-                                            <span class="txt-md">order-date</span>
-                                            <span class="m-x-12">-</span>
-                                            <span class="delivered">delivered</span>
-                                        </div>
+
                                     </div>
                                 </div>
                                 <!-- Order detail -->
+                                <%
+                                    double sub_product_total = 0;
+                                    if (cart != null) {
+                                        for (ProductDetailDTO product : cart.getCart().values()) {
+
+                                            sub_product_total += product.getPrice() * product.getQuantity();
+                                %>
                                 <form action="MainController" method="POST">
                                     <div class="pad-2">
-                                        <%
-                                            if (cart != null) {
-                                                for (ProductDetailDTO product : cart.getCart().values()) {
-                                                    double sub_total = 0;
-                                                    sub_total += product.getPrice() * product.getQuantity();
-                                        %>
+
                                         <div class="order-card m-y-12">
                                             <div class="flex">
                                                 <div class="flex-center order-img">
@@ -166,7 +164,7 @@
                                                         </div>
 
                                                         <div style="height: 50%;" class="flex-center col-3">
-                                                           
+
                                                             <div class="">
                                                                 <input
                                                                     style="text-align: center; outline: none; font-weight: bold; border: none;"
@@ -175,7 +173,7 @@
                                                                 <input type="hidden" name="id" value="<%= product.getId()%>"/>
                                                             </div>
 
-                                                           
+
                                                         </div>
                                                         <div class="order-price txt-sm bold">
                                                             <span>
@@ -214,14 +212,16 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <%
-                                                    total += sub_total;
-                                                }
-                                            }
-                                        %>
+
 
                                     </div>
                                 </form>
+                                <%
+
+                                        }
+                                        total += sub_product_total;
+                                    }
+                                %>
                             </div>
                             <!-- Product cart end -->
 
@@ -232,19 +232,17 @@
                                 <div style="background-color: #F9FAFB;" class="flex-between pad-2">
                                     <div class="flex-col flex-horizon-center">
                                         <span class="txt-lg bold">Service</span>
-                                        <div class="flex-center">
-                                            <span class="txt-md">order-date</span>
-                                            <span class="m-x-12">-</span>
-                                            <span class="delivered">delivered</span>
-                                        </div>
+
                                     </div>
                                 </div>
                                 <!-- Order detail -->
                                 <form action="MainController" method="POST">
                                     <div class="pad-2">
-                                        <%                                            double sub_total_service = 0;
+                                        <%
+                                            double sub_total_service = 0;
                                             if (cartService != null) {
                                                 for (ServiceDetailDTO service : cartService.getCart().values()) {
+                                                    sub_total_service += service.getPrice();
                                         %>
                                         <div class="order-card m-y-12">
                                             <div class="flex">
@@ -297,8 +295,9 @@
                                             </div>
                                         </div>
                                         <%
-                                                    total += sub_total_service;
+
                                                 }
+                                                total += sub_total_service;
                                             }
                                         %>
                                     </div>
@@ -321,19 +320,19 @@
                                 </div>
                                 <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB" class="flex-between txt-sm">
                                     <span>Order product total</span>
-                                    <span class="bold">$400.000</span>
+                                    <span class="bold"><%=  sub_product_total%></span>
                                 </div>
                                 <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB" class="flex-between txt-sm">
                                     <span>Order service total</span>
-                                    <span class="bold">$400.000</span>
+                                    <span class="bold"> <%=  sub_total_service%></span>
                                 </div>
                                 <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB" class="flex-between txt-sm">
                                     <span>Tax estimate</span>
-                                    <span class="bold">$400.000</span>
+                                    <span class="bold">$4</span>
                                 </div>
                                 <div style="padding: 1rem 0;" class="flex-between txt-lg bold">
                                     <span>Order total</span>
-                                    <span class="bold"><%= total%></span>
+                                    <span class="bold"><%= total + 4%></span>
                                 </div>
                                 <button  style="width: 100%;" class="btn-lg m-y-12 txt-md"><a style="color:white" href="MainController?action=LoadCartData">Checkout</a></button>
                             </div>

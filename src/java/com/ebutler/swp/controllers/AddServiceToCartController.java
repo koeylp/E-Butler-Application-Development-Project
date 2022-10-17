@@ -47,9 +47,7 @@ public class AddServiceToCartController extends HttpServlet {
                 }
 
             }
-//            for (ServiceDetailDTO a : cart.getCart().values()) {
-//                serviceDetail = a;
-//            }
+
         } catch (Exception e) {
             log("Error at AddServiceToCartController: " + e.getMessage());
         } finally {

@@ -4,6 +4,7 @@
  */
 package com.ebutler.swp.controllers;
 
+import com.ebutler.swp.dto.UserDTO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,6 +30,8 @@ public class MoveToCartController extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             if (session != null) {
+                UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
+                session.setAttribute("LOGIN_USER", login_user);
                 url = SUCCESS;
             }
         } catch (Exception e) {
