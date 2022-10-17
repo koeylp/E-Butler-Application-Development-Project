@@ -336,8 +336,8 @@
                                                 </a>
                                             </div>
 
-                                            <div class="auth-form__block flex-between">
-                                                <div class="auth-form__group">
+                                            <div class="auth-form__block row">
+                                                <div class="auth-form__group col l-6">
                                                     <input name="name" class="auth-form__input border-bottom m-y-0" required="" value="<%=provider.getName()%>" placeholder="Name Of Company">
                                                     <div class="auth-form__aside">
                                                         <%
@@ -352,7 +352,7 @@
                                                         %>
                                                     </div>
                                                 </div>
-                                                <div class="auth-form__group">
+                                                <div class="auth-form__group col l-6">
                                                     <input name="username" class="auth-form__input border-bottom m-y-0" required="" value="<%=provider.getUsername()%>" placeholder="User Name">
                                                     <div class="auth-form__aside">
                                                         <%
