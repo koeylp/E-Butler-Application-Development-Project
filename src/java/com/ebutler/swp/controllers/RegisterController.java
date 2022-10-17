@@ -80,22 +80,18 @@ public class RegisterController extends HttpServlet {
                     checkValidation = false;
                 }
                 if(ValiUtils.isValidUsername(username)) {
-                    customerError.setUsername("Invalid username!");
+                    customerError.setUsername("User name must be between [3,30], and only accepts underscore, dot, no white space!");
                     checkValidation = false;
                 }
                 if(!ValiUtils.isValidEmail(email)) {
-                    customerError.setEmail("Invalid email");
+                    customerError.setEmail("Email must be in pattern ___@gmail.com or ___@fpt.edu.vn");
                     checkValidation = false;
                 } else if(userDAO.isExistedEmail(email)) {
                     customerError.setEmail("Email has already existed");
                     checkValidation = false;
-                }
-                if (!ValiUtils.isValidLength(name, 2, 30)) {
-                    customerError.setName("Name must be includes at leaset 2 charaters and less than 30 characters");
-                    checkValidation = false;
-                }           
+                }         
                 if(!ValiUtils.isValidString(name)) {
-                    customerError.setName("Invalid name");
+                    customerError.setName("Name must be between [3, 30], and only accepts alphabet characters, no EMPTY!");
                     checkValidation = false;
                 }
                 if(!ValiUtils.isPhone(phone)) {
@@ -105,13 +101,15 @@ public class RegisterController extends HttpServlet {
                     customerError.setPhone("Phone has already existed");
                     checkValidation = false;
                 }     
-                
                 if (!password.equals(confirm_password)) {
                     customerError.setPassword("Password do not match");
                     checkValidation = false;
                 } else if (!ValiUtils.isValidPassword(password)) {
-                    customerError.setPassword("Invalid password!");
-                    checkValidation = false;
+//                    customerError.setPassword("Invalid password!");
+//                    checkValidation = false;
+                }
+                if(!ValiUtils.isValidDob(dob)) {
+                    customerError.setDob("Please enter a correct date!!");
                 }
                 
                 if(checkValidation) {
@@ -141,21 +139,17 @@ public class RegisterController extends HttpServlet {
                     checkValidation = false;
                 }
                 if(ValiUtils.isValidUsername(username)) {
-                    providerError.setUsername("Invalid username!");
+                    providerError.setUsername("User name must be between [3,30], and only accepts underscore, dot, no white space!");
                     checkValidation = false;
                 }
                 if(!ValiUtils.isValidString(name)) {
-                    providerError.setName("Invalid name");
+                    providerError.setName("Name must be between [3, 30], and only accepts alphabet characters, no EMPTY!");
                     checkValidation = false;
                 }
                 if(userDAO.isExistedEmail(email)) {
                     providerError.setEmail("Email has already existed");
                     checkValidation = false;
-                }
-                if (!ValiUtils.isValidLength(name, 2, 30)) {
-                    providerError.setName("Name must be includes at leaset 2 charaters and less than 30 characters");
-                    checkValidation = false;
-                }                
+                }             
                 if(!ValiUtils.isPhone(phone)) {
                     providerError.setPhone("Invalid phone number");
                     checkValidation = false;
@@ -168,8 +162,8 @@ public class RegisterController extends HttpServlet {
                     providerError.setPassword("Password do not match");
                     checkValidation = false;
                 } else if (!ValiUtils.isValidPassword(password)) {
-                    providerError.setPassword("Invalid password!");
-                    checkValidation = false;
+//                    providerError.setPassword("Invalid password!");
+//                    checkValidation = false;
                 }
                 
                 if(checkValidation) {

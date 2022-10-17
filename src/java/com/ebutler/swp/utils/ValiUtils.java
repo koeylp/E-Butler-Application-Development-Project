@@ -4,39 +4,47 @@
  */
 package com.ebutler.swp.utils;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  *
  * @author Admin
  */
 public class ValiUtils {
+
     private static final String PHONE_PATTERN = "^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$";
-    private static final String USERNAME_PATTERN = "^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$";
+    private static final String USERNAME_PATTERN = "^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,30}[a-zA-Z0-9]$";
     private static final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
-    private static final String STRING_PATTERN = "[a-zA-Z ]+";
+    private static final String STRING_PATTERN = "[a-zA-Z ]{2,30}";
     private static final String EMAIL_PATTERN_TYPE_1 = "^[A-Za-z0-9+_.-]+@gmail.com";
     private static final String EMAIL_PATTERN_TYPE_2 = "^[A-Za-z0-9+_.-]+@fpt.edu.vn";
-    
+
     public static boolean isPhone(String phone) {
         return phone.trim().matches(PHONE_PATTERN);
     }
-    
+
     public static boolean isValidUsername(String parameter) {
         return !parameter.matches(USERNAME_PATTERN);
     }
-    
+
     public static boolean isValidPassword(String parameter) {
         return parameter.matches(PASSWORD_PATTERN);
     }
-    
+
     public static boolean isValidString(String parameter) {
         return parameter.matches(STRING_PATTERN);
     }
-    
+
     public static boolean isValidEmail(String parameter) {
         return (parameter.matches(EMAIL_PATTERN_TYPE_1) || parameter.matches(EMAIL_PATTERN_TYPE_2));
     }
-    
-    public static boolean isValidLength(String parameter, int min, int max) {
-        return (parameter.length() >= min && parameter.length() <= max);
+
+    public static boolean isValidDob(String parameter) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        String currentDate = dtf.format(now);
+        
+        return currentDate.compareTo(parameter) > 0;
     }
 }

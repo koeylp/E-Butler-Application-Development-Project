@@ -90,7 +90,7 @@
             <!-- Navbar Start -->
             <div class="container-fluid nav-bar bg-transparent">
                 <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4 relative">
-                    <a href="landingPage.html" class="navbar-brand d-flex align-items-center text-center">
+                    <a href="guest_landingPage.jsp" class="navbar-brand d-flex align-items-center text-center">
                         <div class="p-2 me-2">
                             <img class="img-fluid" src="img/logo.png" alt="Icon" style="width: 40px; height: 40px;">
                         </div>
@@ -142,8 +142,8 @@
                     </div>
                     <div style="border-top: 2px solid #E2E8F0; border-bottom: 2px solid #E2E8F0"
                          class="flex-vertical-center m-y-32">
-                        <a class="relative txt-lg pad-y-32 navi--link account">Account info</a>
-                        <a class="relative txt-lg pad-y-32 navi--link order-his bold">My order</a>
+                        <a class="relative txt-lg pad-y-32 navi--link account bold">Account info</a>
+                        <a class="relative txt-lg pad-y-32 navi--link order-his">My order</a>
                         <a class="relative txt-lg pad-y-32 navi--link address">My address</a>
                         <a class="relative txt-lg pad-y-32 navi--link password">Change password</a>
                     </div>

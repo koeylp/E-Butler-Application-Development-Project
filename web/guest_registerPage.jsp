@@ -52,7 +52,7 @@
             customer = (customer == null) ? new CustomerDTO() : customer;
             provider = (provider == null) ? new ProviderDTO() : provider;
             role_id = (role_id == null) ? "" : role_id;
-//            role_list = (role_list == null) ? new ArrayList<RoleDTO>() : role_list; 
+            role_list = (role_list == null) ? new ArrayList<RoleDTO>() : role_list; 
 
             String class_Hide = "hide";
         %>
@@ -96,13 +96,18 @@
                         <!-- Register Form Start -->
                         <div class="auth-form">
                             <div class="Register-form Selection-role-form <%if (!role_id.isEmpty()) {%><%=class_Hide%><% } %>">
-                                <div class="auth-form__header">
-                                    <h3 class="auth-form__heading">As a member?</h3>
-                                    <form action="MainController" method="POST">
-                                        <button type="submit" class="dropdown-item login--link auth-form__heading auth-form__switch-btn">Login</button>
-                                        <input value="Login" name="action" type="hidden">
-                                        <input value="false" name="isLogin" type="hidden">
-                                    </form>
+                                <div class="auth-form__header flex-between">
+                                    <a href="guest_landingPage.jsp" style="cursor: pointer;" class="back-register-form">
+                                        <i class="fa-solid fa-arrow-left"></i>
+                                    </a>
+                                    <div class="auth-form__header">
+                                        <h3 class="auth-form__heading">As a member?</h3>
+                                        <form action="MainController" method="POST">
+                                            <button type="submit" class="dropdown-item login--link auth-form__heading auth-form__switch-btn">Login</button>
+                                            <input value="Login" name="action" type="hidden">
+                                            <input value="false" name="isLogin" type="hidden">
+                                        </form>
+                                    </div>
                                 </div>
 
                                 <!-- USER ROLE Start -->
@@ -133,7 +138,7 @@
                             <!-- Customer Form -->
                             <div id="register-form-customer" class="Register-form auth-form <%if (!role_id.equals("CUS")) {%><%=class_Hide%><% }%>">
                                 <div class="auth-form__header flex-between">
-                                    <a style="margin-left: 2rem; cursor: pointer;" class="back-register-form">
+                                    <a href="MainController?action=Register" style="margin-left: 2rem; cursor: pointer;" class="back-register-form">
                                         <i class="fa-solid fa-arrow-left"></i>
                                     </a>
                                     <div class="auth-form__header">
@@ -165,8 +170,8 @@
                                                 </a>
                                             </div>
 
-                                            <div class="auth-form__block flex-between">
-                                                <div class="auth-form__group">
+                                            <div class="auth-form__block row">
+                                                <div class="auth-form__group col l-6">
                                                     <input name="name" class="auth-form__input border-bottom m-y-0" required="" value="<%=customer.getName()%>" placeholder="Full Name">
                                                     <div class="auth-form__aside">
                                                         <%
@@ -181,7 +186,7 @@
                                                         %>
                                                     </div>
                                                 </div>
-                                                <div class="auth-form__group">
+                                                <div class="auth-form__group col l-6">
                                                     <input name="username" class="auth-form__input border-bottom m-y-0" required="" value="<%=customer.getUsername()%>" placeholder="User Name">
                                                     <div class="auth-form__aside">
                                                         <%
@@ -236,9 +241,9 @@
                                             <div class="flex-vetical-center m-y-0">
                                                 <span class="auth-form__info">Gender</span>
                                                 <select class="auth-form__selection border-bottom m-x-2" name="gender">
-                                                    <option value="0">Male</option>
-                                                    <option value="1">Female</option>
-                                                    <option value="2">Option</option>
+                                                    <option value="0" <%if(customer.getGender() == 0) {%>selected<%}%>>Male</option>
+                                                    <option value="1" <%if(customer.getGender() == 1) {%>selected<%}%>>Female</option>
+                                                    <option value="2" <%if(customer.getGender() == 2) {%>selected<%}%>>Option</option>
                                                 </select>
                                             </div>
 
@@ -298,13 +303,18 @@
 
                             <!-- Provider Form -->
                             <div id="register-form-provider" class="Register-form auth-form <%if (!role_id.equals("PRO")) {%><%=class_Hide%><% }%>">
-                                <div class="auth-form__header">
-                                    <h3 class="auth-form__heading">As a member?</h3>
-                                    <form action="MainController" method="POST">
-                                        <button type="submit" class="dropdown-item login--link auth-form__heading auth-form__switch-btn">Login</button>
-                                        <input value="Login" name="action" type="hidden">
-                                        <input value="false" name="isLogin" type="hidden">
-                                    </form>
+                                <div class="auth-form__header flex-between">
+                                    <a href="MainController?action=Register" style="margin-left: 2rem; cursor: pointer;" class="back-register-form">
+                                        <i class="fa-solid fa-arrow-left"></i>
+                                    </a>
+                                    <div class="auth-form__header">
+                                        <h3 class="auth-form__heading">As a member?</h3>
+                                        <form action="MainController" method="POST">
+                                            <button type="submit" class="dropdown-item login--link auth-form__heading auth-form__switch-btn">Login</button>
+                                            <input value="Login" name="action" type="hidden">
+                                            <input value="false" name="isLogin" type="hidden">
+                                        </form>
+                                    </div>
                                 </div>
 
                                 <div class="auth-form__body">
