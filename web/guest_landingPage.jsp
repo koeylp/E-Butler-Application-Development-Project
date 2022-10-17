@@ -42,7 +42,7 @@
             <!-- Navbar Start -->
             <div style="z-index: 9999;" class="container-fluid nav-bar bg-transparent">
                 <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
-                    <a href="landingPage.html" class="navbar-brand d-flex align-items-center text-center">
+                    <a href="guest_landingPage.jsp" class="navbar-brand d-flex align-items-center text-center">
                         <div class="p-2 me-2">
                             <img class="img-fluid" src="img/logo.png" alt="Icon" style="width: 40px; height: 40px;">
                         </div>
@@ -61,7 +61,7 @@
                             </div>
                             <a href="#contact_us" class="nav-item nav-link">Contact</a>
                             <div class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle">Join</a>
+                                <a class="nav-link dropdown-toggle" disabled>Join</a>
                                 <div method="POST" class="dropdown-menu rounded-0 m-12">
                                     <form action="MainController" method="POST">
                                         <button type="submit" class="dropdown-item login--link">Login</button>

@@ -88,6 +88,10 @@
         <servlet-name>ServiceDetailByTypeController</servlet-name>
         <servlet-class>com.ebutler.swp.controllers.ServiceDetailByTypeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateCustomerInfoController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.UpdateCustomerInfoController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -175,6 +179,10 @@
     <servlet-mapping>
         <servlet-name>ServiceDetailByTypeController</servlet-name>
         <url-pattern>/ServiceDetailByTypeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCustomerInfoController</servlet-name>
+        <url-pattern>/UpdateCustomerInfoController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -295,6 +295,28 @@ ul {
     .border-right {
         border-right: 1px solid var(--border-color);
     }
+    
+    /* label start*/
+    .label {
+        padding: .375rem .625rem;
+        border: 1px solid;
+        border-radius: 9999px;
+    }
+    /* label end */
+
+    /* state start */
+    .danger {
+        color: red;
+    }
+
+    .warning {
+        color: yellow;
+    }
+
+    .safe {
+        color: green;
+    }
+    /* state end */
 
     /* scrollable */
 
@@ -361,6 +383,16 @@ ul {
     .bold {
         color: #0F172A;
         font-weight: 700;
+    }
+    
+    .ellipsis {
+        display: block;
+        flex-wrap: wrap;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        word-wrap: break-word;
     }
     
     /* opacity */

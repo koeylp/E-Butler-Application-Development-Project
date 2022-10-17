@@ -45,7 +45,7 @@
         <link rel="stylesheet" href="css/grid.css">
 
         <!-- My Stylesheet -->
-        <link rel="stylesheet" href="css/myStyle.css">
+        <link rel="stylesheet" href="css/base.css">
         <link rel="stylesheet" href="css/customer_profilePage.css">
     </head>
 
@@ -66,7 +66,7 @@
             <!-- Navbar Start -->
             <div class="container-fluid nav-bar bg-transparent">
                 <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4 relative">
-                    <a href="landingPage.html" class="navbar-brand d-flex align-items-center text-center">
+                    <a href="MainController?action=LoadingProductAndServiceCategory" class="navbar-brand d-flex align-items-center text-center">
                         <div class="p-2 me-2">
                             <img class="img-fluid" src="img/logo.png" alt="Icon" style="width: 40px; height: 40px;">
                         </div>
@@ -153,10 +153,13 @@
                                                          alt="">
                                                 </div>
                                                 <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                                    <div class="flex-between">
-                                                        <div class="flex-col flex-horizon-center">
-                                                            <span class="txt-lg bold"><%= product.getName()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                                            <div class="flex-horizon-center flex-center">
+                                                    <div class="flex-between roww">
+                                                        <div class="flex-col flex-horizon-center col l-6">
+                                                            <div style="-webkit-line-clamp: 1;" class="ellipsis txt-lg m-y-0 bold">
+                                                                <p><%= product.getName()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                                                            </div>
+
+                                                            <div class="flex-vertical-center">
                                                                 <span class="txt-sm">Category</span>
                                                                 <span class="m-x-12">:</span>
                                                                 <span class="txt-sm">Product</span>
@@ -164,6 +167,13 @@
                                                         </div>
 
                                                         <div style="height: 50%;" class="flex-center col-3">
+<<<<<<< HEAD
+=======
+                                                            <button type="button" class="btn-circle flex-center txt-xs"
+                                                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                                <i class="fas fa-minus"></i>
+                                                            </button>
+>>>>>>> d74875413b775da31b821012fefa18fa5beff79c
 
                                                             <div class="">
                                                                 <input
@@ -173,7 +183,15 @@
                                                                 <input type="hidden" name="id" value="<%= product.getId()%>"/>
                                                             </div>
 
+<<<<<<< HEAD
 
+=======
+                                                            <button type="button" class=" btn-circle flex-center txt-xs"
+                                                                    onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                                <i class="fas fa-plus"></i>
+                                                                <input type="hidden" name="plus" value="Plus">
+                                                            </button>
+>>>>>>> d74875413b775da31b821012fefa18fa5beff79c
                                                         </div>
                                                         <div class="order-price txt-sm bold">
                                                             <span>
@@ -183,7 +201,6 @@
                                                     </div>
 
                                                     <div style="height: 50%;" class="flex-end flex-col">
-
                                                         <div class="flex-between">
                                                             <%
                                                                 if (quantityStock.getQuantityStock().get(product.getId()) <= 0) {
@@ -202,10 +219,12 @@
                                                             <%
                                                                 }
                                                             %>
-                                                            <button class="btn" type="submit" name="action" value="EditQuantity"><i class="fa-solid fa-pen"></i></button>
-                                                            <button style="color: var(--primary-color); border: none; outline: none; background-color: transparent;" class="bold txt-md">
-                                                                <a href="MainController?action=DeleteCart&product_ID=<%= product.getId()%>"><span><i class="fa-solid fa-trash"></i></span></a>
-                                                            </button>
+                                                            <div>
+                                                                <button class="btn" type="submit" name="action" value="EditQuantity"><i class="fa-solid fa-pen"></i></button>
+                                                                <button style="color: var(--primary-color); border: none; outline: none; background-color: transparent;" class="bold txt-md">
+                                                                    <a href="MainController?action=DeleteCart&product_ID=<%= product.getId()%>"><span><i class="fa-solid fa-trash"></i></span></a>
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
 

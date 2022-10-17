@@ -176,6 +176,8 @@ public class MainController extends HttpServlet {
                 url = EDIT_QUANTITY_CONTROLLER;
             } else if (action.equals(ADD_SERVICE_TO_CART)) {
                 url = ADD_SERVICE_TO_CART_CONTROLLER;
+            } else if (action.equals(UPDATE_USER_PROFILE)) {
+                url = UPDATE_USER_PROFILE_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
