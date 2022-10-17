@@ -167,13 +167,13 @@
                                                         </div>
 
                                                         <div style="height: 50%;" class="flex-center col-3">
-<<<<<<< HEAD
-=======
+
+
                                                             <button type="button" class="btn-circle flex-center txt-xs"
                                                                     onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                                                                 <i class="fas fa-minus"></i>
                                                             </button>
->>>>>>> d74875413b775da31b821012fefa18fa5beff79c
+
 
                                                             <div class="">
                                                                 <input
@@ -183,15 +183,13 @@
                                                                 <input type="hidden" name="id" value="<%= product.getId()%>"/>
                                                             </div>
 
-<<<<<<< HEAD
 
-=======
                                                             <button type="button" class=" btn-circle flex-center txt-xs"
                                                                     onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                                                                 <i class="fas fa-plus"></i>
                                                                 <input type="hidden" name="plus" value="Plus">
                                                             </button>
->>>>>>> d74875413b775da31b821012fefa18fa5beff79c
+
                                                         </div>
                                                         <div class="order-price txt-sm bold">
                                                             <span>
@@ -345,13 +343,13 @@
                                     <span>Order service total</span>
                                     <span class="bold"> <%=  sub_total_service%></span>
                                 </div>
-                                <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB" class="flex-between txt-sm">
+<!--                                <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB" class="flex-between txt-sm">
                                     <span>Tax estimate</span>
                                     <span class="bold">$4</span>
-                                </div>
+                                </div>-->
                                 <div style="padding: 1rem 0;" class="flex-between txt-lg bold">
                                     <span>Order total</span>
-                                    <span class="bold"><%= total + 4%></span>
+                                    <span class="bold"><%= total %></span>
                                 </div>
                                 <button  style="width: 100%;" class="btn-lg m-y-12 txt-md"><a style="color:white" href="MainController?action=LoadCartData">Checkout</a></button>
                             </div>
