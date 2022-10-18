@@ -13,6 +13,7 @@ CREATE TABLE tblUserRole (
 	[description] [nvarchar](Max) 
 )
 GO
+select * from tblUser
 
 -----USER-----
 CREATE TABLE tblUser(
@@ -1080,27 +1081,27 @@ INSERT INTO tblDistrict ([district_ID], [city_name], prefix, [province_ID]) VALU
 
 -- bảng loại sản phẩm theo khu vực
 
-INSERT INTO tblProductCategory(category_ID, name, image) VALUES ('KC', 'Kitchen', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg')
-INSERT INTO tblProductCategory(category_ID, name, image) VALUES ('LVR', 'LivingRoom', 'https://thumbs.dreamstime.com/z/couple-living-room-avatar-character-vector-illustration-desing-couple-living-room-avatar-character-145224593.jpg')
-INSERT INTO tblProductCategory(category_ID, name, image) VALUES ('BR', 'BedRoom', 'https://thumbs.dreamstime.com/z/bedroom-interior-vector-illustration-bed-nightstands-wardrobe-shelves-windows-45016633.jpg')
-INSERT INTO tblProductCategory(category_ID, name, image) VALUES ('OSH', 'Outside Home', 'https://thumbs.dreamstime.com/z/print-154650696.jpg')
-INSERT INTO tblProductCategory(category_ID, name, image) VALUES ('BAR', 'BathRoom', 'https://thumbs.dreamstime.com/z/set-flat-bright-vector-elements-items-modern-stylish-bathroom-interior-construction-bath-shampoo-toilet-towels-68381087.jpg')
+INSERT INTO tblProductCategory(category_ID, name, image) VALUES ('KC', 'Kitchen', 'https://png.pngtree.com/png-clipart/20220823/original/pngtree-cartoon-kitchen-png-png-image_8476833.png')
+INSERT INTO tblProductCategory(category_ID, name, image) VALUES ('LVR', 'LivingRoom', 'https://static.vecteezy.com/system/resources/thumbnails/009/586/037/small/interior-moderm-living-room-isometric-view-3d-render-png.png')
+INSERT INTO tblProductCategory(category_ID, name, image) VALUES ('BR', 'BedRoom', 'https://png.pngtree.com/png-clipart/20220823/original/pngtree-isentropic-bedroom-png-png-image_8474318.png')
+INSERT INTO tblProductCategory(category_ID, name, image) VALUES ('OSH', 'Outside Home', 'https://png.pngtree.com/png-clipart/20220228/original/pngtree-yellow-flower-in-vase-png-image_7325173.png')
+INSERT INTO tblProductCategory(category_ID, name, image) VALUES ('BAR', 'BathRoom', 'https://www.transparentpng.com/thumb/bathtub/bathtub-icons-png-10.png')
 
 -- bảng loại sản phẩm
-INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('1','KC','Spoon','https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg')
-INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('2','KC','Bowl','https://thumbs.dreamstime.com/z/empty-bowl-icon-isolated-white-background-vector-illustration-flat-design-113482225.jpg')
-INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('3','KC','Cooking Pot','https://thumbs.dreamstime.com/z/red-cooking-pot-d-illustration-58062870.jpg')
-INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('4','KC','Rice Cooker','https://thumbs.dreamstime.com/z/rice-cooker-close-up-electric-52334238.jpg')
-INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('5','KC','Soap','https://en.pimg.jp/063/967/246/1/63967246.jpg')
-INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('6','KC','Gas','https://cdn3.vectorstock.com/i/1000x1000/72/82/liquid-propane-gas-icon-symbol-design-vector-21097282.jpg')
-INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('7','KC','Water Bottle','https://en.pimg.jp/068/808/204/1/68808204.jpg')
-INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('8','KC','Fridge','https://cdn-icons-png.flaticon.com/512/187/187952.png') 
-INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('9','KC','Food','https://cdn-icons-png.flaticon.com/512/187/187952.png')
+INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('1','KC','Spoon','https://www.freeiconspng.com/thumbs/fork-and-knife-png/fork-and-knife-png-spoon--24.png')
+INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('2','KC','Bowl','https://www.pngall.com/wp-content/uploads/2018/05/Bowl-PNG-Image.png')
+INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('3','KC','Cooking Pot','https://www.pngall.com/wp-content/uploads/10/Cooking-Pot-PNG-Photos.png')
+INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('4','KC','Rice Cooker','https://www.weightwatchers.com/us/shop/assets-proxy/weight-watchers/image/upload/q_auto/v1/prod/en-us-ec/static-asset/US_RICE_COOKER_520321-9969_TRANSPARENT_1200x1200.png?auto=webp')
+INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('5','KC','Soap','https://pngimg.com/uploads/soap/soap_PNG55.png')
+INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('6','KC','Gas','https://gas24h.com.vn/upload/products/2020/06/size2/1636352267-0-s-gas-xanh-duong.png')
+INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('7','KC','Water Bottle','https://www.transparentpng.com/thumb/water-bottle/fO4Ttp-water-bottle-vector.png')
+INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('8','KC','Fridge','https://www.fisherpaykel.com/dw/image/v2/BCJJ_PRD/on/demandware.static/-/Sites-fpa-master-catalog/default/dw65aad765/pdp/fp-02-RF730QZUVB1-10-mug-dp.png?sw=585&sh=706&sm=fit') 
+INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('9','KC','Food','https://freepngimg.com/save/13869-healthy-food-png-picture/740x560')
 
-INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('10','LVR','Television','https://www.nicepng.com/png/detail/1-18346_tv-icon-tv-icon.png')
-INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('11','LVR','Table & Chair','https://cdn1.vectorstock.com/i/1000x1000/85/05/living-room-table-icon-outline-style-vector-21728505.jpg')
+INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('10','LVR','Television','https://www.pngmart.com/files/7/LED-Television-PNG-Transparent.png')
+INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('11','LVR','Table & Chair','https://png.pngtree.com/png-clipart/20220117/original/pngtree-simple-hand-painted-table-and-chair-transparent-material-png-image_7122618.png')
 
-INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('12','BR','Bed','https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg')
+INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('12','BR','Bed','https://www.transparentpng.com/thumb/bed/luxury-leather-storage-bed-transparent-png-XlWqDj.png')
 INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('13','BR','Curtain','https://static.vecteezy.com/system/resources/previews/006/331/503/original/curtain-icon-isolated-free-vector.jpg')
 INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('14','BR','Wardrobe & Mirror ','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDfBBGXBGkLiZHhCG5oea688yruCW7oKnnRA&usqp=CAU')
 

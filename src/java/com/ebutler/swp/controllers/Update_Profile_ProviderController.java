@@ -5,11 +5,9 @@
 package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.ProviderDAO;
-import com.ebutler.swp.dao.UserDAO;
 import com.ebutler.swp.dto.ProductDetailDTO;
 import com.ebutler.swp.dto.ProviderDTO;
 import com.ebutler.swp.dto.ProviderServiceDTO1;
-import com.ebutler.swp.dto.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -21,60 +19,50 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Admin
+ * @author DELL
  */
-public class LoginController extends HttpServlet {
-    
-   private final String ERROR = "errorPage.jsp";
-    private final String CUS_ROLE = "CUS"; 
-    private final String CUS_PAGE = "LoadingProductAndServiceCategory";
-    private final String PRO_ROLE = "PRO"; 
-    private final String PRO_PAGE = "Provider_ProductController";
-    private final String NOT_PASS = "guest_loginPage.jsp";
-    private final String PRO_PAGE_PRODUCT = "Provider_ProductController";
-    private final String PRO_PAGE_SERVICE = "Provider_ServiceController";
-    
+public class Update_Profile_ProviderController extends HttpServlet {
+
+    private static final String PRO = "Provider_ProductController";
+    private static final String SER = "Provider_ServiceController";
+    private static final String ERROR = "Provider_ProductController";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = NOT_PASS;
+        String url = ERROR;
         try {
-            boolean isLogin = Boolean.parseBoolean(request.getParameter("isLogin"));
-          
-            if(!isLogin) return;
-            
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            
-            UserDAO userDAO = new UserDAO();
-            
-            UserDTO login_user = userDAO.Login(username, password);
-            
+            boolean check = false;
+            boolean check2 = false;
+            boolean checkValidation = true;
+
+            String fullName = request.getParameter("lastName");
+            String email = request.getParameter("email");
+            String phoneNumber = request.getParameter("phoneNumber");
             HttpSession session = request.getSession();
-            session.setAttribute("LOGIN_USER", login_user);
-            ProviderDAO providerdao = new ProviderDAO() ; 
-            ProviderDTO provider = providerdao.getProvider(username, password) ;
-            
-            if(login_user.getRole_id().equals(CUS_ROLE)) url = CUS_PAGE;
-            else if(userDAO.Login(username, password).getRole_id().equals(PRO_ROLE)) {
-                session.setAttribute("LOGIN_PROVIDER", provider);
-                ProviderDAO providerDAO = new ProviderDAO() ; 
-                List<ProductDetailDTO> listProduct = providerDAO.loadListProduct(provider) ; 
-                List<ProviderServiceDTO1> listService = providerDAO.loadListService(provider) ;  
-                if (listProduct.isEmpty() && listService != null) {
-                    url = PRO_PAGE_SERVICE;
-                } else if (listProduct != null && listService.isEmpty()) {
-                    url = PRO_PAGE_PRODUCT;
-                }else {
-                    url = PRO_PAGE_PRODUCT ; 
+            ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER");
+            ProviderDAO providerDAO = new ProviderDAO();
+            check = providerDAO.editProviderProfile(provider, phoneNumber, email, fullName);
+            check2 = providerDAO.editProviderProfileTOO(provider, phoneNumber, email);
+            List<ProductDetailDTO> listProduct = (List<ProductDetailDTO>) session.getAttribute("Provider_ListProduct");
+            List<ProviderServiceDTO1> listService = (List<ProviderServiceDTO1>) session.getAttribute("Providder_ListService");
+            if (check) {
+                ProviderDTO provider2 = providerDAO.getProvider(provider.getUsername(), provider.getPassword());
+                session.setAttribute("LOGIN_PROVIDER", provider2);
+                if (check2) {
+                    if (listProduct.isEmpty()) {
+                        url = SER;
+                    } else if (listService.isEmpty()) {
+                        url = PRO ;
+                    } else {
+                        url = SER ; 
+                    }
                 }
-                
+            } else {
+                request.setAttribute("MESSAGE", "Oops!! Some Problems");
             }
-            else request.setAttribute("LOGIN_ERROR", "Incorect username or password");
-            
-        }catch(Exception e) {
-            log("ERROR at LoginController: " + e.toString());
-        }finally {
+        } catch (Exception e) {
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

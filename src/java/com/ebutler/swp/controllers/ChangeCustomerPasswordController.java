@@ -40,7 +40,6 @@ public class ChangeCustomerPasswordController extends HttpServlet {
             CustomerDTO customer = (CustomerDTO)session.getAttribute("CURRENT_CUSTOMER");
             CustomerDAO dao = new CustomerDAO();
             String currentPasswordDAO = dao.getCurrentCustomerPassword(customer.getUsername());
-            boolean checkUpdatePassword = dao.updateCurrentPassword(newPassword ,customer.getUsername());
             
             if(currentUser != null){
                 //current password
@@ -58,6 +57,7 @@ public class ChangeCustomerPasswordController extends HttpServlet {
                     if(!newPassword.equals(currentPassword)){
                         
                         if(newPassword.equals(confirmNewPassword)){
+                            boolean checkUpdatePassword = dao.updateCurrentPassword(newPassword ,customer.getUsername());
                             if(checkUpdatePassword){
                                 url = SUCCESS;
                             }

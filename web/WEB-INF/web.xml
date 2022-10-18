@@ -45,10 +45,6 @@
         <servlet-class>com.ebutler.swp.controllers.SortProductDetailPriceUpController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ChangeCustomerPasswordController</servlet-name>
-        <servlet-class>com.ebutler.swp.controllers.ChangeCustomerPasswordController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ServicePageController</servlet-name>
         <servlet-class>com.ebutler.swp.controllers.ServicePageController</servlet-class>
     </servlet>
@@ -91,6 +87,94 @@
     <servlet>
         <servlet-name>UpdateCustomerInfoController</servlet-name>
         <servlet-class>com.ebutler.swp.controllers.UpdateCustomerInfoController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Add_NewProduct_Controller</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.Add_NewProduct_Controller</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Add_NewService_Controller</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.Add_NewService_Controller</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Add_NewStaff_Controller</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.Add_NewStaff_Controller</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Provider_ChangePasswordController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.Provider_ChangePasswordController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Provider_Delete_ProductController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.Provider_Delete_ProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Provider_Delete_ServiceController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.Provider_Delete_ServiceController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Provider_Delete_StaffController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.Provider_Delete_StaffController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Provider_Edit_ProductController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.Provider_Edit_ProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Provider_Edit_ServiceController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.Provider_Edit_ServiceController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Provider_Edit_StaffController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.Provider_Edit_StaffController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Provider_Filter_ProductController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.Provider_Filter_ProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Provider_Filter_ServiceController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.Provider_Filter_ServiceController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Provider_Filter_StaffController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.Provider_Filter_StaffController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Provider_OrderController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.Provider_OrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Provider_ProductController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.Provider_ProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Provider_ServiceController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.Provider_ServiceController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Provider_StaffController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.Provider_StaffController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Search_Provider_ProductController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.Search_Provider_ProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Search_Provider_ServiceController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.Search_Provider_ServiceController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Search_Provider_StaffController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.Search_Provider_StaffController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Update_Profile_ProviderController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.Update_Profile_ProviderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeCustomerPasswordController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.ChangeCustomerPasswordController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -137,10 +221,6 @@
         <url-pattern>/SortProductDetailPriceUpController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ChangeCustomerPasswordController</servlet-name>
-        <url-pattern>/ChangeCustomerPasswordController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ServicePageController</servlet-name>
         <url-pattern>/ServicePageController</url-pattern>
     </servlet-mapping>
@@ -183,6 +263,94 @@
     <servlet-mapping>
         <servlet-name>UpdateCustomerInfoController</servlet-name>
         <url-pattern>/UpdateCustomerInfoController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Add_NewProduct_Controller</servlet-name>
+        <url-pattern>/Add_NewProduct_Controller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Add_NewService_Controller</servlet-name>
+        <url-pattern>/Add_NewService_Controller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Add_NewStaff_Controller</servlet-name>
+        <url-pattern>/Add_NewStaff_Controller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Provider_ChangePasswordController</servlet-name>
+        <url-pattern>/Provider_ChangePasswordController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Provider_Delete_ProductController</servlet-name>
+        <url-pattern>/Provider_Delete_ProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Provider_Delete_ServiceController</servlet-name>
+        <url-pattern>/Provider_Delete_ServiceController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Provider_Delete_StaffController</servlet-name>
+        <url-pattern>/Provider_Delete_StaffController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Provider_Edit_ProductController</servlet-name>
+        <url-pattern>/Provider_Edit_ProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Provider_Edit_ServiceController</servlet-name>
+        <url-pattern>/Provider_Edit_ServiceController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Provider_Edit_StaffController</servlet-name>
+        <url-pattern>/Provider_Edit_StaffController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Provider_Filter_ProductController</servlet-name>
+        <url-pattern>/Provider_Filter_ProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Provider_Filter_ServiceController</servlet-name>
+        <url-pattern>/Provider_Filter_ServiceController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Provider_Filter_StaffController</servlet-name>
+        <url-pattern>/Provider_Filter_StaffController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Provider_OrderController</servlet-name>
+        <url-pattern>/Provider_OrderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Provider_ProductController</servlet-name>
+        <url-pattern>/Provider_ProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Provider_ServiceController</servlet-name>
+        <url-pattern>/Provider_ServiceController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Provider_StaffController</servlet-name>
+        <url-pattern>/Provider_StaffController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Search_Provider_ProductController</servlet-name>
+        <url-pattern>/Search_Provider_ProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Search_Provider_ServiceController</servlet-name>
+        <url-pattern>/Search_Provider_ServiceController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Search_Provider_StaffController</servlet-name>
+        <url-pattern>/Search_Provider_StaffController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Update_Profile_ProviderController</servlet-name>
+        <url-pattern>/Update_Profile_ProviderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeCustomerPasswordController</servlet-name>
+        <url-pattern>/ChangeCustomerPasswordController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

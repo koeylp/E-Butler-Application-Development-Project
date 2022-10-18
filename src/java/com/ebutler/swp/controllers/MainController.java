@@ -112,6 +112,94 @@ public class MainController extends HttpServlet {
     private final String EDIT_QUANTITY_CONTROLLER = "EditQuantityController";
     private final String ADD_SERVICE_TO_CART = "AddServiceToCart";
     private final String ADD_SERVICE_TO_CART_CONTROLLER = "AddServiceToCartController";
+    // -----PROVIDER-----   
+                                        //UPDATE PROFILE
+                                private final String PROVIDER_UPDATE_PROFILE = "UpdateProfileProvider" ; 
+                                private final String PROVIDER_UPDATE_PROFILE_CONTROLLER = "Update_Profile_ProviderController" ; 
+        //1.PRODUCT PROVIDER
+                //1.Load List
+            private final String PROVIDER_PRODUCT = "ProviderProduct" ;
+            private final String PROVIDER_PRODUCT_CONTROLLER = "Provider_ProductController" ; 
+            private final String PRODUCT_CATEGORY_CHOOSE = "ChooseFromCategory_Product" ; 
+            private final String PRODUCT_CATEGORY_CHOOSE_CONTROLLER = "Provider_ProductController" ; 
+                //2.Search        
+            private final String SEARCH_PROVIDER_PRODUCT = "SearchProviderProduct" ;
+            private final String SEARCH_PPROVIDER_PRODUCT_CONTROLLER = "Search_Provider_ProductController" ; 
+                
+                //3.Filter List
+            private final String FILTER_PRODUCT_NAME = "Pro_sortByName" ;
+            private final String FILTER_PRODUCT_PRICE_UP = "Pro_sortByPriceUp" ;
+            private final String FILTER_PRODUCT_PRICE_DOWN = "Pro_sortByPriceDown" ; 
+            private final String FILTER_PRODUCT_CONTROLLER = "Provider_Filter_ProductController" ;
+                //4.Edit Product
+            private final String PROVIDER_EDIT_PRODUCT = "ProviderEditProduct" ; 
+            private final String PROVIDER_EDIT_PRODUCT_CONTROLLER = "Provider_Edit_ProductController" ; 
+                //5.Delete Product
+            private final String PROVIDER_DELETE_PRODUCT = "ProviderDeleteProduct" ; 
+            private final String PROVIDER_DELETE_PRODUCT_CONTROLLER = "Provider_Delete_ProductController" ; 
+                //6.Logout
+            private final String LOGOUT_PROVIDER = "LogoutProvider" ;
+            private final String LOGOUT_PROVIDER_CONTROLLER = "LogoutController" ;
+                //7.Add Product
+            private final String PROVIDER_ADD_PRODUCT = "AddNewProduct" ;
+            private final String PROVIDER_ADD_PRODUCT_CONTROLLER = "Add_NewProduct_Controller" ; 
+                //CHANGE PASSWORD
+            private final String CHANGEPASSWORD_PROVIDER = "ChangePasswordProvider" ;  
+            private final String CHANGEPASSWORD_PROVIDER_CONTROLLER = "Provider_ChangePasswordController" ;  
+        
+        //2.SERVICE PROVIDER
+                //1.Load List    
+            private final String PROVIDER_SERVICE = "ProviderService" ;
+            private final String PROVIDER_SERVICE_CONTROLLER = "Provider_ServiceController" ; 
+            private final String SERVICE_CATEGORY_CHOOSE = "ChooseFromCategory_Service" ; 
+            private final String SERVICE_CATEGORY_CHOOSE_CONTROLLER = "Provider_ServiceController" ;
+                //2.Search
+            private final String SEARCH_PROVIDER_SERVICE = "SearchProviderService" ;
+            private final String SEARCH_PPROVIDER_SERVICE_CONTROLLER = "Search_Provider_ServiceController" ; 
+                //3.Filter List
+            private final String FILTER_SERVICE_NAME = "Ser_sortByName" ;
+            private final String FILTER_SERVICE_PRICE_UP = "Ser_sortByPriceUp" ;
+            private final String FILTER_SERVICE_PRICE_DOWN = "Ser_sortByPriceDown" ; 
+            private final String FILTER_SERVICE_CONTROLLER = "Provider_Filter_ServiceController" ;
+                //4.Edit Service 
+            private final String PROVIDER_EDIT_SERVICE = "ProviderEditService" ; 
+            private final String PROVIDER_EDIT_SERVICE_CONTROLLER = "Provider_Edit_ServiceController" ; 
+                //5.Delete Service
+            private final String PROVIDER_SERVICE_PRODUCT = "ProviderDeleteService" ; 
+            private final String PROVIDER_DELETE_SERVICE_CONTROLLER = "Provider_Delete_ServiceController" ; 
+                //7.Add Service
+            private final String PROVIDER_ADD_SERVICE = "AddNewService" ;
+            private final String PROVIDER_ADD_SERVICE_CONTROLLER = "Add_NewService_Controller" ; 
+        //3.ORDER PROVIDER
+             //1.Load List  
+            private final String PROVIDER_ORDER = "ProviderOrder" ;
+            private final String PROVIDER_ORDER_CONTROLLER = "Provider_OrderController" ;
+             
+        //4.STAFF PROVIDER
+            //1.Load List  
+            private final String PROVIDER_STAFF = "ProviderStaff" ;
+            private final String PROVIDER_STAFF_CONTROLLER = "Provider_StaffController" ;
+            private final String STAFF_CATEGORY_CHOOSE = "ChooseFromCategory_Staff" ; 
+            private final String STAFF_CATEGORY_CHOOSE_CONTROLLER = "Provider_StaffController" ; 
+            //2.Search
+            private final String SEARCH_PROVIDER_STAFF = "SearchProviderStaff" ;
+            private final String SEARCH_PPROVIDER_STAFF_CONTROLLER = "Search_Provider_StaffController" ; 
+            //3.Filter List
+            private final String FILTER_STAFF_NAME = "Staff_sortByName" ;
+            private final String FILTER_STAFF_CONTROLLER = "Provider_Filter_StaffController" ;
+            private final String FILTER_STAFF_PENDING = "Staff_sortByPedding" ;
+            private final String FILTER_STAFF_PENDING_CONTROLLER = "Provider_Filter_StaffController" ;
+                //4.Edit Service 
+            private final String PROVIDER_EDIT_STAFF = "ProviderStaffEdit" ; 
+            private final String PROVIDER_EDIT_STAFF_CONTROLLER = "Provider_Edit_StaffController" ; 
+                //5.Delete Service
+            private final String PROVIDER_DELETE_STAFF = "ProviderDeleteStaff" ; 
+            private final String PROVIDER_DELETE_STAFF_CONTROLLER = "Provider_Delete_StaffController" ; 
+                //6.Add Staff
+            private final String PROVIDER_ADD_STAFF = "AddNewStaff" ; 
+            private final String PROVIDER_ADD_STAFF_CONTROLLER = "Add_NewStaff_Controller" ; 
+            
+    // -----PROVIDER----- 
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -178,7 +266,65 @@ public class MainController extends HttpServlet {
                 url = ADD_SERVICE_TO_CART_CONTROLLER;
             } else if (action.equals(UPDATE_USER_PROFILE)) {
                 url = UPDATE_USER_PROFILE_CONTROLLER;
+            }else if (action.equals(PROVIDER_SERVICE)) {
+                url = PROVIDER_SERVICE_CONTROLLER;
             }
+            else if (action.equals(PROVIDER_PRODUCT)) {
+                url = PROVIDER_PRODUCT_CONTROLLER;
+            }
+            else if (action.equals(SEARCH_PROVIDER_PRODUCT)) {
+                url = SEARCH_PPROVIDER_PRODUCT_CONTROLLER;
+            }else if (action.equals(SEARCH_PROVIDER_SERVICE)) {
+                url = SEARCH_PPROVIDER_SERVICE_CONTROLLER; 
+            }
+            else if (action.equals(FILTER_PRODUCT_NAME) || action.equals(FILTER_PRODUCT_PRICE_UP) || action.equals(FILTER_PRODUCT_PRICE_DOWN) ) {
+                url = FILTER_PRODUCT_CONTROLLER;
+            }else if (action.equals(FILTER_SERVICE_NAME) || action.equals(FILTER_SERVICE_PRICE_UP) || action.equals(FILTER_SERVICE_PRICE_DOWN) ) {
+                url = FILTER_SERVICE_CONTROLLER;
+            }
+            else if (action.equals(FILTER_STAFF_NAME) || action.equals(FILTER_STAFF_PENDING))   { 
+                url = FILTER_STAFF_CONTROLLER; 
+            }
+            else if (action.equals(PROVIDER_EDIT_PRODUCT)) {
+                url = PROVIDER_EDIT_PRODUCT_CONTROLLER;
+            }else if (action.equals(PROVIDER_DELETE_PRODUCT)) {
+                url = PROVIDER_DELETE_PRODUCT_CONTROLLER;
+            }else if (action.equals(LOGOUT_PROVIDER)) {
+                url = LOGOUT_PROVIDER_CONTROLLER;
+            }else if (action.equals(PROVIDER_SERVICE_PRODUCT)) {
+                url = PROVIDER_DELETE_SERVICE_CONTROLLER;
+            } 
+            else if (action.equals(PROVIDER_STAFF)) {
+                url = PROVIDER_STAFF_CONTROLLER;
+            }
+            else if (action.equals(SEARCH_PROVIDER_STAFF)) {
+                url = SEARCH_PPROVIDER_STAFF_CONTROLLER;
+            } 
+            else if (action.equals(PROVIDER_DELETE_STAFF)) {
+                url = PROVIDER_DELETE_STAFF_CONTROLLER ; 
+            } else if (action.equals(PRODUCT_CATEGORY_CHOOSE)) {
+                url = PRODUCT_CATEGORY_CHOOSE_CONTROLLER ; 
+            }else if (action.equals(CHANGEPASSWORD_PROVIDER)) {
+                url = CHANGEPASSWORD_PROVIDER_CONTROLLER ; 
+            }else if (action.equals(PROVIDER_EDIT_SERVICE)) {
+                url = PROVIDER_EDIT_SERVICE_CONTROLLER ;  
+            }else if (action.equals(PROVIDER_EDIT_STAFF)) {
+                url = PROVIDER_EDIT_STAFF_CONTROLLER ;  
+            }else if (action.equals(PROVIDER_UPDATE_PROFILE)) {
+                url = PROVIDER_UPDATE_PROFILE_CONTROLLER ;  
+            }
+            else if (action.equals(PROVIDER_ADD_PRODUCT)) {
+                url = PROVIDER_ADD_PRODUCT_CONTROLLER ;  
+            }else if (action.equals(SERVICE_CATEGORY_CHOOSE)) {
+                url = SERVICE_CATEGORY_CHOOSE_CONTROLLER ;  
+            }else if (action.equals(PROVIDER_ADD_SERVICE)) {
+                url = PROVIDER_ADD_SERVICE_CONTROLLER ;  
+            } else if (action.equals(PROVIDER_ADD_STAFF)) {
+                url = PROVIDER_ADD_STAFF_CONTROLLER ;  
+            } 
+            else if (action.equals(STAFF_CATEGORY_CHOOSE)) {
+                url = STAFF_CATEGORY_CHOOSE_CONTROLLER ;   
+            } 
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
         } finally {

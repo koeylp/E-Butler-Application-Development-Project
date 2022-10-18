@@ -90,8 +90,8 @@ public class RegisterController extends HttpServlet {
                     customerError.setEmail("Email has already existed");
                     checkValidation = false;
                 }         
-                if(!ValiUtils.isValidString(name)) {
-                    customerError.setName("Name must be between [3, 30], and only accepts alphabet characters, no EMPTY!");
+                if(!ValiUtils.isValidCustomerName(name)) {
+                    customerError.setName("Name must be between [3, 30], and only accepts alphabet characters, and no EMPTY!");
                     checkValidation = false;
                 }
                 if(!ValiUtils.isPhone(phone)) {
@@ -142,14 +142,18 @@ public class RegisterController extends HttpServlet {
                     providerError.setUsername("User name must be between [3,30], and only accepts underscore, dot, no white space!");
                     checkValidation = false;
                 }
-                if(!ValiUtils.isValidString(name)) {
-                    providerError.setName("Name must be between [3, 30], and only accepts alphabet characters, no EMPTY!");
+                if(!ValiUtils.isValidProviderName(name)) {
+                    providerError.setName("Name must be between [3, 30], and only accepts alphabet characters, number, and no EMPTY!");
                     checkValidation = false;
                 }
-                if(userDAO.isExistedEmail(email)) {
+                if (!ValiUtils.isValidEmail(email)) {
+                    providerError.setEmail("Email must be in pattern ___@gmail.com or ___@fpt.edu.vn");
+                    checkValidation = false;
+                }
+                else if(userDAO.isExistedEmail(email)) {
                     providerError.setEmail("Email has already existed");
                     checkValidation = false;
-                }             
+                }    
                 if(!ValiUtils.isPhone(phone)) {
                     providerError.setPhone("Invalid phone number");
                     checkValidation = false;

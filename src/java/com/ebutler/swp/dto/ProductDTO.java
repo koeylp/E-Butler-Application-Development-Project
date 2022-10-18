@@ -20,6 +20,11 @@ public class ProductDTO {
         this.name = "";
         this.image = "";
     }
+    public ProductDTO(String category_ID, String name, String image) {
+        this.category_ID = category_ID;
+        this.name = name;
+        this.image = image;
+    }
 
     public ProductDTO(String product_ID, String category_ID, String name, String image) {
         this.product_ID = product_ID;

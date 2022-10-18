@@ -16,7 +16,8 @@ public class ValiUtils {
     private static final String PHONE_PATTERN = "^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$";
     private static final String USERNAME_PATTERN = "^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,30}[a-zA-Z0-9]$";
     private static final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
-    private static final String STRING_PATTERN = "[a-zA-Z ]{2,30}";
+    private static final String CUSTOMER_NAME_PATTERN = "[a-zA-Z ]{2,30}";
+    private static final String PROVIDER_NAME_PATTERN = "[a-zA-Z0-9 ]{2,30}";
     private static final String EMAIL_PATTERN_TYPE_1 = "^[A-Za-z0-9+_.-]+@gmail.com";
     private static final String EMAIL_PATTERN_TYPE_2 = "^[A-Za-z0-9+_.-]+@fpt.edu.vn";
 
@@ -32,8 +33,12 @@ public class ValiUtils {
         return parameter.matches(PASSWORD_PATTERN);
     }
 
-    public static boolean isValidString(String parameter) {
-        return parameter.matches(STRING_PATTERN);
+    public static boolean isValidCustomerName(String parameter) {
+        return parameter.matches(CUSTOMER_NAME_PATTERN);
+    }
+    
+    public static boolean isValidProviderName(String parameter) {
+        return parameter.matches(PROVIDER_NAME_PATTERN);
     }
 
     public static boolean isValidEmail(String parameter) {

@@ -66,7 +66,7 @@
             <!-- Navbar Start -->
             <div class="container-fluid nav-bar bg-transparent">
                 <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4 relative">
-                    <a href="MainController?action=LoadingProductAndServiceCategory" class="navbar-brand d-flex align-items-center text-center">
+                    <a href="LoadingProductAndServiceCategory" class="navbar-brand d-flex align-items-center text-center">
                         <div class="p-2 me-2">
                             <img class="img-fluid" src="img/logo.png" alt="Icon" style="width: 40px; height: 40px;">
                         </div>
@@ -77,7 +77,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav ms-auto">
-                            <a href="#" class="nav-item nav-link active navigator">Home</a>
+                            <a href="LoadingProductAndServiceCategory" class="nav-item nav-link active navigator">Home</a>
                             <a href="#product" class="nav-item nav-link navigator">Product</a>
                             <div class="nav-item dropdown">
                                 <a href="#service" class="nav-link navigator">Service</a>
@@ -152,8 +152,8 @@
                                                     <img src="<%= product.getImage()%>"
                                                          alt="">
                                                 </div>
-                                                <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                                    <div class="flex-between roww">
+                                                <div style="flex: 1; margin-left: 1rem;" class="flex-col flex-between">
+                                                    <div class="flex-between">
                                                         <div class="flex-col flex-horizon-center col l-6">
                                                             <div style="-webkit-line-clamp: 1;" class="ellipsis txt-lg m-y-0 bold">
                                                                 <p><%= product.getName()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
@@ -168,8 +168,7 @@
 
                                                         <div style="height: 50%;" class="flex-center col-3">
 
-
-                                                            <button type="button" class="btn-circle flex-center txt-xs"
+                                                            <button style="padding: .5rem;" type="button" class="btn-circle flex-center txt-xs"
                                                                     onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                                                                 <i class="fas fa-minus"></i>
                                                             </button>
@@ -184,7 +183,7 @@
                                                             </div>
 
 
-                                                            <button type="button" class=" btn-circle flex-center txt-xs"
+                                                            <button style="padding: .5rem;" type="button" class=" btn-circle flex-center txt-xs"
                                                                     onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                                                                 <i class="fas fa-plus"></i>
                                                                 <input type="hidden" name="plus" value="Plus">
@@ -198,34 +197,33 @@
                                                         </div>
                                                     </div>
 
-                                                    <div style="height: 50%;" class="flex-end flex-col">
-                                                        <div class="flex-between">
+                                                    <div class="flex-between flex-vertical-center">
+                                                        <div class="pad-x-1">
                                                             <%
                                                                 if (quantityStock.getQuantityStock().get(product.getId()) <= 0) {
                                                             %>
-                                                            <span class="label txt-xs danger">
+                                                            <span style="padding: .375rem .625rem; border: 1px solid; border-radius: 9999px; color: red;" class="label txt-xs danger">
                                                                 <i class="fa-solid fa-ban"></i>
                                                                 Sold out
                                                             </span>
                                                             <%
                                                             } else {
                                                             %>
-                                                            <span class="label txt-xs safe">
+                                                            <span style="padding: .375rem .625rem; border: 1px solid; border-radius: 9999px; color: green;" class="label txt-xs safe">
                                                                 <i class="fa-solid fa-check"></i>
                                                                 In Stock
                                                             </span>
                                                             <%
                                                                 }
                                                             %>
-                                                            <div>
-                                                                <button class="btn" type="submit" name="action" value="EditQuantity"><i class="fa-solid fa-pen"></i></button>
-                                                                <button style="color: var(--primary-color); border: none; outline: none; background-color: transparent;" class="bold txt-md">
-                                                                    <a href="MainController?action=DeleteCart&product_ID=<%= product.getId()%>"><span><i class="fa-solid fa-trash"></i></span></a>
-                                                                </button>
-                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <button class="btn" type="submit" name="action" value="EditQuantity"><i class="fa-solid fa-pen"></i></button>
+                                                            <button type="button" style="color: var(--primary-color); border: none; outline: none; background-color: transparent;" class="bold txt-md">
+                                                                <a href="MainController?action=DeleteCart&product_ID=<%= product.getId()%>"><span><i class="fa-solid fa-trash"></i></span></a>
+                                                            </button>
                                                         </div>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
@@ -303,7 +301,7 @@
                                                                 }
                                                             %>
 
-                                                            <button style="color: var(--primary-color); border: none; outline: none; background-color: transparent;" class="bold txt-md">
+                                                            <button type="button" style="color: var(--primary-color); border: none; outline: none; background-color: transparent;" class="bold txt-md">
                                                                 <a href="MainController?action=DeleteCart&service_ID=<%= service.getId()%>"><span><i class="fa-solid fa-trash"></i></span></a>
                                                             </button>
                                                         </div>
@@ -343,15 +341,15 @@
                                     <span>Order service total</span>
                                     <span class="bold"> <%=  sub_total_service%></span>
                                 </div>
-<!--                                <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB" class="flex-between txt-sm">
-                                    <span>Tax estimate</span>
-                                    <span class="bold">$4</span>
-                                </div>-->
+                                <!--                                <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB" class="flex-between txt-sm">
+                                                                    <span>Tax estimate</span>
+                                                                    <span class="bold">$4</span>
+                                                                </div>-->
                                 <div style="padding: 1rem 0;" class="flex-between txt-lg bold">
                                     <span>Order total</span>
-                                    <span class="bold"><%= total %></span>
+                                    <span class="bold"><%= total%></span>
                                 </div>
-                                <button  style="width: 100%;" class="btn-lg m-y-12 txt-md"><a style="color:white" href="MainController?action=LoadCartData">Checkout</a></button>
+                                <button type="button" style="width: 100%;" class="btn-lg m-y-12 txt-md"><a style="color:white" href="MainController?action=LoadCartData">Checkout</a></button>
                             </div>
                         </div>
                     </div>

@@ -448,3 +448,35 @@
     padding-right: 0;
     border-right: none;
 }
+.Cont {
+    margin-bottom: 20px ; 
+}
+input.priceData {
+    width: 100px ; 
+}
+.flexStatus {
+    display: flex ;
+}
+.changeStatus {
+    margin-top: 8px ; 
+}
+input.shortTitle {
+    width: 140px ; 
+}
+input.shortID {
+    max-width: 60px ; 
+}
+input::placeholder { 
+  color: black;
+  
+}
+input.type {
+    width: 500px ; 
+}
+input.shortTitle2 {
+    width: 150px ; 
+}
+button {
+    background-color: white ; 
+    border: none ; 
+}
