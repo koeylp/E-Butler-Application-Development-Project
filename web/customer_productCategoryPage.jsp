@@ -90,8 +90,8 @@
                             <div class="nav-item dropdown">
                                 <a class="nav-link"><i class="fa-solid fa-user"></i></a>
                                 <div class="dropdown-menu rounded-0 m-12">
-                                    <a style="color: var(--primary-color); font-weight: bold;" class="dropdown-item login--link"><%=login_user.getUsername()%></a>
-                                    <a class="dropdown-item register--link">logout</a>
+                                    <a style="color: var(--primary-color); font-weight: bold;" href="MainController?action=GoToUserProfile" class="dropdown-item login--link"><%=login_user.getUsername()%></a>
+                                    <a href="MainController?action=Logout" class="dropdown-item register--link">logout</a>
                                 </div>
                             </div>
                             <a class="nav-item nav-link search-open"><i class="fa-solid fa-magnifying-glass"></i></a>

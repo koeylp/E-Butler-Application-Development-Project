@@ -219,7 +219,7 @@
                                                         </div>
                                                         <div>
                                                             <button class="btn" type="submit" name="action" value="EditQuantity"><i class="fa-solid fa-pen"></i></button>
-                                                            <button style="color: var(--primary-color); border: none; outline: none; background-color: transparent;" class="bold txt-md">
+                                                            <button type="button" style="color: var(--primary-color); border: none; outline: none; background-color: transparent;" class="bold txt-md">
                                                                 <a href="MainController?action=DeleteCart&product_ID=<%= product.getId()%>"><span><i class="fa-solid fa-trash"></i></span></a>
                                                             </button>
                                                         </div>
@@ -301,7 +301,7 @@
                                                                 }
                                                             %>
 
-                                                            <button style="color: var(--primary-color); border: none; outline: none; background-color: transparent;" class="bold txt-md">
+                                                            <button type="button" style="color: var(--primary-color); border: none; outline: none; background-color: transparent;" class="bold txt-md">
                                                                 <a href="MainController?action=DeleteCart&service_ID=<%= service.getId()%>"><span><i class="fa-solid fa-trash"></i></span></a>
                                                             </button>
                                                         </div>
@@ -349,7 +349,7 @@
                                     <span>Order total</span>
                                     <span class="bold"><%= total%></span>
                                 </div>
-                                <button  style="width: 100%;" class="btn-lg m-y-12 txt-md"><a style="color:white" href="MainController?action=LoadCartData">Checkout</a></button>
+                                <button type="button" style="width: 100%;" class="btn-lg m-y-12 txt-md"><a style="color:white" href="MainController?action=LoadCartData">Checkout</a></button>
                             </div>
                         </div>
                     </div>
