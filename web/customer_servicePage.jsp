@@ -65,11 +65,11 @@
             <!-- Navbar Start -->
             <div class="container-fluid nav-bar bg-transparent">
                 <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4 relative">
-<<<<<<< HEAD
+
                     <a href="" class="navbar-brand d-flex align-items-center text-center">
-=======
+
                     <a href="LoadingProductAndServiceCategory" class="navbar-brand d-flex align-items-center text-center">
->>>>>>> 0553c59c478944e9e7cd1fb2a2149a074ffd77dd
+
                         <div class="p-2 me-2">
                             <img class="img-fluid" src="img/logo.png" alt="Icon" style="width: 40px; height: 40px;">
                         </div>
