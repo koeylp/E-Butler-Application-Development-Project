@@ -176,6 +176,26 @@
         <servlet-name>ChangeCustomerPasswordController</servlet-name>
         <servlet-class>com.ebutler.swp.controllers.ChangeCustomerPasswordController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServicePriceDetailUpController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.ServicePriceDetailUpController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServicePriceDetailDownController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.ServicePriceDetailDownController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServiceWordDetailDownController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.ServiceWordDetailDownController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServiceWordDetailUpController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.ServiceWordDetailUpController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchServiceDetailByTypeController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.SearchServiceDetailByTypeController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -351,6 +371,26 @@
     <servlet-mapping>
         <servlet-name>ChangeCustomerPasswordController</servlet-name>
         <url-pattern>/ChangeCustomerPasswordController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServicePriceDetailUpController</servlet-name>
+        <url-pattern>/ServicePriceDetailUpController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServicePriceDetailDownController</servlet-name>
+        <url-pattern>/ServicePriceDetailDownController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceWordDetailDownController</servlet-name>
+        <url-pattern>/ServiceWordDetailDownController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceWordDetailUpController</servlet-name>
+        <url-pattern>/ServiceWordDetailUpController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchServiceDetailByTypeController</servlet-name>
+        <url-pattern>/SearchServiceDetailByTypeController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
