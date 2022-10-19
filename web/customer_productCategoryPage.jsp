@@ -151,7 +151,7 @@
                         <div class="col l-3 s-6 m-y-1">
                             <div class="block__item">
                                 <div class="block__img flex-center relative">
-                                    <img src="<%=product.getImage()%>"
+                                    <img src="https://static.vecteezy.com/system/resources/previews/009/664/965/non_2x/empty-porcelain-ceramic-bowl-on-transparent-background-file-free-png.png"
                                          alt="">
                                     <a href="MainController?action=GoToProductDetailByType&product_ID=<%=product.getProduct_ID()%>&category_ID=<%=product.getCategory_ID()%>" style="background-color: black; color: white;"
                                        class="txt-border link absolute card-extend bot quick-view">
