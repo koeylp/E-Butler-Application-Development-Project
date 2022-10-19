@@ -153,7 +153,14 @@ CREATE TABLE tblStaff (
 	[status] decimal(1) NOT NULL,
 )
 GO
+select * from tblServiceCategory
+select * from tblService
+select * from tblServiceDetail
+select * from tblStaff
 
+select staff.staff_ID, staff.provider_ID, staff.service_ID, staff.name, staff.id_card, staff.avatar, staff.status from tblStaff staff where staff.service_ID = 1
+select staff.staff_ID, staff.provider_ID, staff.service_ID, staff.name, staff.id_card, staff.avatar, staff.status from tblStaff staff JOIN tblServiceDetail detail ON staff.service_ID = detail.service_ID  WHERE staff.service_ID = 1 AND detail.name = 'Deep Cleaning'; 
+select staff.staff_ID, staff.provider_ID, staff.service_ID, staff.name, staff.id_card, staff.avatar, staff.status from tblStaff staff JOIN tblServiceDetail detail ON staff.service_ID = detail.service_ID  WHERE staff.service_ID = 1 
 CREATE TABLE tblServiceDetail(
 	id [int] IDENTITY(1,1) PRIMARY KEY , 
 	provider_ID nvarchar(30) REFERENCES tblProvider(username) NOT NULL , 

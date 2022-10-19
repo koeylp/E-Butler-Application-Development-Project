@@ -1,3 +1,4 @@
+<%@page import="com.ebutler.swp.dto.StaffDTO"%>
 <%@page import="com.ebutler.swp.dto.ServiceDetailDTO"%>
 <%@page import="com.ebutler.swp.dto.UserDTO"%>
 <%@page import="com.ebutler.swp.dto.ProductDetailDTO"%>
@@ -46,8 +47,9 @@
     <body>
         <%
             List<ServiceDetailDTO> serviceList = (List<ServiceDetailDTO>) session.getAttribute("SERVICE_DETAIL_BY_TYPE");
+            List<StaffDTO> staffList = (List<StaffDTO>) session.getAttribute("STAFF_LIST_BY_TYPE");
+            
             String service_id = (String) session.getAttribute("SERVICE_ID");
-
             service_id = (service_id == null) ? "" : service_id;
 
             UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
@@ -140,10 +142,10 @@
                                 <i class="fa-solid fa-sort"></i>
                                 <select name="action" style="text-align: center;" class="border-no select" name="" id="" onChange="this.form.submit()">
                                     <option value="">Sort order</option>
-                                    <option value="PriceDetailUp">Price up</option>
-                                    <option value="PriceDetailDown">Price down</option>
-                                    <option value="WordDetailUp">Word up</option>
-                                    <option value="WordDetailDown">Word down</option>
+                                    <option value="ServicePriceDetailUp">Price up</option>
+                                    <option value="ServicePriceDetailDown">Price down</option>
+                                    <option value="ServiceWordDetailUp">Word up</option>
+                                    <option value="ServiceWordDetailDown">Word down</option>
                                 </select>
                             </div>
                         </form>
@@ -204,12 +206,19 @@
                         </div>
 
                         <div class="overlay fixed top bot left right flex-center hide">
+                           
                             <div class="popup relative">
                                 <div style="margin: 1rem 2rem;" class="absolute right p-2 text-md opacity popup-close">
                                     <i class="fa-solid fa-xmark"></i>
                                 </div>
                                 <div style="margin: auto 0;" class="pad-2 scrollable-y full-h">
                                     <!-- Staff start -->
+                                    
+                                    <% for (StaffDTO x : staffList) {
+                                    
+                                    %>
+                                    
+                                   
                                     <div style="height: 200px;" class="flex-between border-bot pad-y-1">
                                         <div class="full-h">
                                             <div class="img full-h full-w">
@@ -225,7 +234,7 @@
                                             </div>
                                             <div class="flex-between">
                                                 <div>
-                                                    <span class="txt-lg bold">Staff Name</span>
+                                                    <span class="txt-lg bold">${x.name}</span>
                                                 </div>
                                                 <div class="order-price txt-sm bold col l-2">
                                                     <span>
@@ -245,10 +254,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-
+                                    </div
+                                    
+                                         <%                       
+                                        }
+                                    %>
                                     <!-- Staff start -->
-                                    <div style="height: 200px;" class="flex-between border-bot pad-y-1">
+<!--                                    <div style="height: 200px;" class="flex-between border-bot pad-y-1">
                                         <div class="full-h">
                                             <div class="img full-h full-w">
                                                 <img src="https://chisnghiax.com/ciseco/static/media/detail1.f45e3a4d9bfeafd2f70b.jpg"
@@ -283,7 +295,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
+                                    
                                 </div>
                             </div>
                         </div>

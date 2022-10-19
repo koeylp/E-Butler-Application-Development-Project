@@ -82,6 +82,15 @@ public class MainController extends HttpServlet {
     private final String SORT_SERVICE_CATEGORY_WORD_UP_CONTROLLER = "WordServiceCategoryUpController";
     private final String SORT_SERVICE_CATEGORY_WORD_DOWN = "WordServiceCategoryDown";
     private final String SORT_SERVICE_CATEGORY_WORD_DOWN_CONTROLLER = "WordServiceCategoryDownController";
+    
+    private final String SORT_SERVICE_DETAIL_PRICE_UP = "ServicePriceDetailUp";
+    private final String SORT_SERVICE_DETAIL_PRICE_UP_CONTROLLER = "ServicePriceDetailUpController";
+    private final String SORT_SERVICE_DETAIL_PRICE_DOWN = "ServicePriceDetailDown";
+    private final String SORT_SERVICE_PRICE_DOWN_CONTROLLER = "ServicePriceDetailDownController";
+    private final String SORT_SERVICE_DETAIL_WORD_DOWN = "ServiceWordDetailDown";
+    private final String SORT_SERVICE_DETAIL_WORD_DOWN_CONTROLLER = "ServiceWordDetailDownController";
+    private final String SORT_SERVICE_DETAIL_WORD_UP = "ServiceWordDetailUp";
+    private final String SORT_SERVICE_DETAIL_WORD_UP_CONTROLLER = "ServiceWordDetailUpController";
 
     //Search    
     private final String SEARCH_PRODUCT_DETAIL_BY_TYPE = "SearchProductDetailByType";
@@ -92,6 +101,9 @@ public class MainController extends HttpServlet {
 
     private final String SEARCH_SERVICE_CATEGORY = "SearchServiceCategory";
     private final String SEARCH_SERVICE_CATEGORY_CONTROLLER = "SearchServiceCategoryController";
+    
+    private final String SEARCH_SERVICE_DETAIL_BY_TYPE = "SearchServiceDetailByType";
+    private final String SEARCH_SERVICE_DETAIL_BY_TYPE_CONTROLLER = "SearchServiceDetailByTypeController";
 
 //    Change password
     private final String CHANGE_CUSTOMER_PASSWORD = "ChangeCustomerPassword";
@@ -324,7 +336,17 @@ public class MainController extends HttpServlet {
             } 
             else if (action.equals(STAFF_CATEGORY_CHOOSE)) {
                 url = STAFF_CATEGORY_CHOOSE_CONTROLLER ;   
-            } 
+            } else if (action.equals(SEARCH_SERVICE_DETAIL_BY_TYPE)) {
+                url = SEARCH_SERVICE_DETAIL_BY_TYPE_CONTROLLER;
+            }else if (action.equals(SORT_SERVICE_DETAIL_PRICE_UP)) {
+                url = SORT_SERVICE_DETAIL_PRICE_UP_CONTROLLER;
+            }else if (action.equals(SORT_SERVICE_DETAIL_PRICE_DOWN)) {
+                url = SORT_SERVICE_PRICE_DOWN_CONTROLLER;
+            }else if (action.equals(SORT_SERVICE_DETAIL_WORD_DOWN)) {
+                url = SORT_SERVICE_DETAIL_WORD_DOWN_CONTROLLER;
+            }else if (action.equals(SORT_SERVICE_DETAIL_WORD_UP)) {
+                url = SORT_SERVICE_DETAIL_WORD_UP_CONTROLLER;
+            }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
         } finally {
