@@ -1,3 +1,4 @@
+<%@page import="com.ebutler.swp.dto.StaffDTO"%>
 <%@page import="com.ebutler.swp.dto.ServiceDetailDTO"%>
 <%@page import="com.ebutler.swp.dto.UserDTO"%>
 <%@page import="com.ebutler.swp.dto.ProductDetailDTO"%>
@@ -46,8 +47,9 @@
     <body>
         <%
             List<ServiceDetailDTO> serviceList = (List<ServiceDetailDTO>) session.getAttribute("SERVICE_DETAIL_BY_TYPE");
+            List<StaffDTO> staffList = (List<StaffDTO>) session.getAttribute("STAFF_LIST_BY_TYPE");
+            
             String service_id = (String) session.getAttribute("SERVICE_ID");
-
             service_id = (service_id == null) ? "" : service_id;
 
             UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
@@ -65,42 +67,41 @@
             <!-- Navbar Start -->
             <div class="container-fluid nav-bar bg-transparent">
                 <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4 relative">
-                    <a href="" class="navbar-brand d-flex align-items-center text-center">
-                        <a href="LoadingProductAndServiceCategory" class="navbar-brand d-flex align-items-center text-center">
-                            <div class="p-2 me-2">
-                                <img class="img-fluid" src="img/logo.png" alt="Icon" style="width: 40px; height: 40px;">
-                            </div>
-                            <h1 class="text-primary">E-Butler</h1>
-                        </a>
-                        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarCollapse">
-                            <div class="navbar-nav ms-auto">
-                                <a href="LoadingProductAndServiceCategory" class="nav-item nav-link navigator">Home</a>
-                                <a href="#product" class="nav-item nav-link navigator active">Product</a>
-                                <div class="nav-item dropdown">
-                                    <a href="#service" class="nav-link navigator">Service</a>
-                                </div>
-                                <a href="#help" class="nav-item nav-link navigator">Help</a>
-                                <div class="search absolute hide">
-                                    <a><i class="fa-solid fa-magnifying-glass"></i></a>
-                                    <input
-                                        style="flex: 1; background-color: transparent; border: none; outline: none; margin: 0 20px;"
-                                        type="text" placeholder="Type and press enter">
-                                    <a class="search-close opacity"><i class="fa-solid fa-xmark"></i></a>
-                                </div>
-                                <div class="nav-item dropdown">
-                                    <a class="nav-link"><i class="fa-solid fa-user"></i></a>
-                                    <div class="dropdown-menu rounded-0 m-12">
-                                        <a style="color: var(--primary-color); font-weight: bold;" href="MainController?action=GoToUserProfile" class="dropdown-item login--link"><%=login_user.getUsername()%></a>
-                                        <a href="MainController?action=Logout" class="dropdown-item register--link">logout</a>
-                                    </div>
-                                </div>
-                                <a class="nav-item nav-link search-open"><i class="fa-solid fa-magnifying-glass"></i></a>
-                                <a href="MainController?action=MoveToCart" class="nav-item nav-link"><i class="fa-solid fa-cart-shopping"></i></a>
-                            </div>
+                    <a href="landingPage.html" class="navbar-brand d-flex align-items-center text-center">
+                        <div class="p-2 me-2">
+                            <img class="img-fluid" src="img/logo.png" alt="Icon" style="width: 40px; height: 40px;">
                         </div>
+                        <h1 class="text-primary">E-Butler</h1>
+                    </a>
+                    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <div class="navbar-nav ms-auto">
+                            <a href="#" class="nav-item nav-link active navigator">Home</a>
+                            <a href="#product" class="nav-item nav-link navigator">Product</a>
+                            <div class="nav-item dropdown">
+                                <a href="#service" class="nav-link navigator">Service</a>
+                            </div>
+                            <a href="#help" class="nav-item nav-link navigator">Help</a>
+                            <div class="search absolute hide">
+                                <a><i class="fa-solid fa-magnifying-glass"></i></a>
+                                <input
+                                    style="flex: 1; background-color: transparent; border: none; outline: none; margin: 0 20px;"
+                                    type="text" placeholder="Type and press enter">
+                                <a class="search-close opacity"><i class="fa-solid fa-xmark"></i></a>
+                            </div>
+                            <div class="nav-item dropdown">
+                                <a class="nav-link"><i class="fa-solid fa-user"></i></a>
+                                <div class="dropdown-menu rounded-0 m-12">
+                                    <a style="color: var(--primary-color); font-weight: bold;" href="MainController?action=GoToUserProfile" class="dropdown-item login--link"><%=login_user.getUsername()%></a>
+                                    <a href="MainController?action=Logout" class="dropdown-item register--link">logout</a>
+                                </div>
+                            </div>
+                            <a class="nav-item nav-link search-open "><i class="fa-solid fa-magnifying-glass"></i></a>
+                            <a href="MainController?action=MoveToCart" class="nav-item nav-link"><i class="fa-solid fa-cart-shopping"></i></a>
+                        </div>
+                    </div>
                 </nav>
             </div>
             <!-- Navbar End -->
@@ -140,10 +141,10 @@
                                 <i class="fa-solid fa-sort"></i>
                                 <select name="action" style="text-align: center;" class="border-no select" name="" id="" onChange="this.form.submit()">
                                     <option value="">Sort order</option>
-                                    <option value="PriceDetailUp">Price up</option>
-                                    <option value="PriceDetailDown">Price down</option>
-                                    <option value="WordDetailUp">Word up</option>
-                                    <option value="WordDetailDown">Word down</option>
+                                    <option value="ServicePriceDetailUp">Price up</option>
+                                    <option value="ServicePriceDetailDown">Price down</option>
+                                    <option value="ServiceWordDetailUp">Word up</option>
+                                    <option value="ServiceWordDetailDown">Word down</option>
                                 </select>
                             </div>
                         </form>
@@ -204,12 +205,19 @@
                         </div>
 
                         <div class="overlay fixed top bot left right flex-center hide">
+                           
                             <div class="popup relative">
                                 <div style="margin: 1rem 2rem;" class="absolute right p-2 text-md opacity popup-close">
                                     <i class="fa-solid fa-xmark"></i>
                                 </div>
                                 <div style="margin: auto 0;" class="pad-2 scrollable-y full-h">
                                     <!-- Staff start -->
+                                    
+                                    <% for (StaffDTO x : staffList) {
+                                    
+                                    %>
+                                    
+                                   
                                     <div style="height: 200px;" class="flex-between border-bot pad-y-1">
                                         <div class="full-h">
                                             <div class="img full-h full-w">
@@ -225,7 +233,7 @@
                                             </div>
                                             <div class="flex-between">
                                                 <div>
-                                                    <span class="txt-lg bold">Staff Name</span>
+                                                    <span class="txt-lg bold">${x.name}</span>
                                                 </div>
                                                 <div class="order-price txt-sm bold col l-2">
                                                     <span>
@@ -245,10 +253,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-
+                                    </div
+                                    
+                                         <%                       
+                                        }
+                                    %>
                                     <!-- Staff start -->
-                                    <div style="height: 200px;" class="flex-between border-bot pad-y-1">
+<!--                                    <div style="height: 200px;" class="flex-between border-bot pad-y-1">
                                         <div class="full-h">
                                             <div class="img full-h full-w">
                                                 <img src="https://chisnghiax.com/ciseco/static/media/detail1.f45e3a4d9bfeafd2f70b.jpg"
@@ -283,7 +294,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
+                                    
                                 </div>
                             </div>
                         </div>

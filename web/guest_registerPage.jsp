@@ -1,3 +1,4 @@
+<%@page import="com.ebutler.swp.dto.GoogleUserDTO"%>
 <%@page import="com.ebutler.swp.dto.ProviderDTO"%>
 <%@page import="com.ebutler.swp.dto.CustomerDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -40,7 +41,12 @@
     <body>
         <%
             ArrayList<RoleDTO> role_list = (ArrayList<RoleDTO>) request.getAttribute("ROLE_LIST");
-
+            GoogleUserDTO googleUser = (GoogleUserDTO) request.getAttribute("GOOGLE_USER");
+            if (googleUser == null) {
+                googleUser = new GoogleUserDTO();
+                googleUser.setName("");
+                googleUser.setEmail("");
+            }
             CustomerDTO customer = (CustomerDTO) request.getAttribute("CUS_INFO");
             CustomerDTO customerError = (CustomerDTO) request.getAttribute("CUS_ERROR");
             ProviderDTO provider = (ProviderDTO) request.getAttribute("PRO_INFO");
@@ -52,7 +58,7 @@
             customer = (customer == null) ? new CustomerDTO() : customer;
             provider = (provider == null) ? new ProviderDTO() : provider;
             role_id = (role_id == null) ? "" : role_id;
-            role_list = (role_list == null) ? new ArrayList<RoleDTO>() : role_list; 
+            role_list = (role_list == null) ? new ArrayList<RoleDTO>() : role_list;
 
             String class_Hide = "hide";
         %>
@@ -172,7 +178,7 @@
 
                                             <div class="auth-form__block row">
                                                 <div class="auth-form__group col l-6">
-                                                    <input name="name" class="auth-form__input border-bottom m-y-0" required="" value="<%=customer.getName()%>" placeholder="Full Name">
+                                                    <input name="name" value="<%= googleUser.getName() %>" class="auth-form__input border-bottom m-y-0" required="" value="<%=customer.getName()%>" placeholder="Full Name">
                                                     <div class="auth-form__aside">
                                                         <%
                                                             if (!customerError.getName().isEmpty()) {
@@ -205,7 +211,7 @@
                                             </div>
 
                                             <div class="auth-form__group">
-                                                <input type="email" name="email" class="auth-form__input border-bottom m-y-0" required="" value="<%=customer.getEmail()%>" placeholder="Email">
+                                                <input type="email" name="email" value="<%= googleUser.getEmail() %>" class="auth-form__input border-bottom m-y-0" required="" value="<%=customer.getEmail()%>" placeholder="Email">
                                                 <div class="auth-form__aside">
                                                     <%
                                                         if (!customerError.getEmail().isEmpty()) {
@@ -241,9 +247,9 @@
                                             <div class="flex-vetical-center m-y-0">
                                                 <span class="auth-form__info">Gender</span>
                                                 <select class="auth-form__selection border-bottom m-x-2" name="gender">
-                                                    <option value="0" <%if(customer.getGender() == 0) {%>selected<%}%>>Male</option>
-                                                    <option value="1" <%if(customer.getGender() == 1) {%>selected<%}%>>Female</option>
-                                                    <option value="2" <%if(customer.getGender() == 2) {%>selected<%}%>>Option</option>
+                                                    <option value="0" <%if (customer.getGender() == 0) {%>selected<%}%>>Male</option>
+                                                    <option value="1" <%if (customer.getGender() == 1) {%>selected<%}%>>Female</option>
+                                                    <option value="2" <%if (customer.getGender() == 2) {%>selected<%}%>>Option</option>
                                                 </select>
                                             </div>
 
@@ -353,7 +359,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="auth-form__group col l-6">
-                                                    <input name="username" class="auth-form__input border-bottom m-y-0" required="" value="<%=provider.getUsername()%>" placeholder="User Name">
+                                                    <input name="username" class="auth-form__input border-bottom m-y-0" required="" value="<%=provider.getUsername()%>" placeholder="Username">
                                                     <div class="auth-form__aside">
                                                         <%
                                                             if (!providerError.getUsername().isEmpty()) {
@@ -371,7 +377,7 @@
                                             </div>
 
                                             <div class="auth-form__group">
-                                                <input type="email" name="email" class="auth-form__input border-bottom m-y-0" required="" value="<%=provider.getEmail()%>" placeholder="Email">
+                                                <input type="email" name="email" value="<%= googleUser.getEmail() %>" class="auth-form__input border-bottom m-y-0" required="" value="<%=provider.getEmail()%>" placeholder="Email">
                                                 <div class="auth-form__aside">
                                                     <%
                                                         if (!providerError.getEmail().isEmpty()) {

@@ -5,7 +5,9 @@
 package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.ServiceDAO;
+import com.ebutler.swp.dao.StaffDAO;
 import com.ebutler.swp.dto.ServiceDetailDTO;
+import com.ebutler.swp.dto.StaffDTO;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -33,9 +35,12 @@ public class ServiceDetailByTypeController extends HttpServlet {
             session.setAttribute("SERVICEID", serviceID);
             String category_ID = (String) session.getAttribute("CATEGORYID");
             ServiceDAO dao = new ServiceDAO();
+            StaffDAO staffDAO = new StaffDAO();
             
+            List<StaffDTO> staffList = staffDAO.getListStaffByServiceDetail(serviceID);
             List<ServiceDetailDTO> list = dao.getListServiceDetailByType(category_ID, serviceID);
             session.setAttribute("SERVICE_DETAIL_BY_TYPE", list);
+            session.setAttribute("STAFF_LIST_BY_TYPE", staffList);
             url = SUCCESS;
             
         } catch (Exception e) {
