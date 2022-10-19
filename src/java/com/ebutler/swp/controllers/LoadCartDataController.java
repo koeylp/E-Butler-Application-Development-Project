@@ -4,8 +4,11 @@
  */
 package com.ebutler.swp.controllers;
 
+import com.ebutler.swp.dao.CustomerDAO;
 import com.ebutler.swp.dto.CartDTO;
 import com.ebutler.swp.dto.CartServiceDTO;
+import com.ebutler.swp.dto.CustomerDTO;
+import com.ebutler.swp.dto.UserDTO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,8 +25,8 @@ import javax.servlet.http.HttpSession;
 public class LoadCartDataController extends HttpServlet {
 
     private static final String ERROR = "errorPage.jsp";
-    private static final String SUCCESS = "customer_checkout.jsp";
-    
+    private static final String SUCCESS = "customer_checkoutPage.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -31,6 +34,8 @@ public class LoadCartDataController extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             if (session != null) {
+                UserDTO currentUser = (UserDTO) session.getAttribute("LOGIN_USER");
+                CustomerDAO dao = new CustomerDAO();
                 CartDTO cart = (CartDTO) session.getAttribute("CART");
                 CartServiceDTO cartService = (CartServiceDTO) session.getAttribute("CART_SERVICE");
 //                if (cart == null) {
@@ -41,6 +46,8 @@ public class LoadCartDataController extends HttpServlet {
 //                }
                 session.setAttribute("CART", cart);
                 session.setAttribute("CART_SERVICE", cartService);
+                CustomerDTO customer = dao.getCurrentCustomer(currentUser.getUsername());
+                session.setAttribute("CURRENT_CUSTOMER", customer);
                 url = SUCCESS;
             }
         } catch (Exception e) {

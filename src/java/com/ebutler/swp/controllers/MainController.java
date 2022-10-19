@@ -328,11 +328,11 @@ public class MainController extends HttpServlet {
             } else if (action.equals(PROVIDER_ADD_SERVICE)) {
                 url = PROVIDER_ADD_SERVICE_CONTROLLER;
             } else if (action.equals(PROVIDER_ADD_STAFF)) {
-<<<<<<< HEAD
+
                 url = PROVIDER_ADD_STAFF_CONTROLLER;
             } else if (action.equals(STAFF_CATEGORY_CHOOSE)) {
                 url = STAFF_CATEGORY_CHOOSE_CONTROLLER;
-=======
+
                 url = PROVIDER_ADD_STAFF_CONTROLLER ;  
             } 
             else if (action.equals(STAFF_CATEGORY_CHOOSE)) {
@@ -347,7 +347,7 @@ public class MainController extends HttpServlet {
                 url = SORT_SERVICE_DETAIL_WORD_DOWN_CONTROLLER;
             }else if (action.equals(SORT_SERVICE_DETAIL_WORD_UP)) {
                 url = SORT_SERVICE_DETAIL_WORD_UP_CONTROLLER;
->>>>>>> 378e218a99804af6013fafb140469cc673fe981d
+
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
