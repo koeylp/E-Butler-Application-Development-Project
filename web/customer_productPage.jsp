@@ -155,7 +155,7 @@
                         %>
                         <div class="col l-3 s-6 m-y-1">
                             <div class="block__item flex-between">
-                                <div class="block__img flex-center relative">
+                                <div style="max-height: 15rem; min-height: 15rem;" class="block__img flex-center relative">
                                     <img src="<%=product.getImage()%>"
                                          alt="">
                                     <a href="MainController?action=AddToCart&product_ID=<%= product.getId()%>"

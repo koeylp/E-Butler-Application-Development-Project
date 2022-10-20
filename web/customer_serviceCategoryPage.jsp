@@ -149,7 +149,7 @@
                             for (ServiceDTO service : productList) {
                         %>
                         <div class="col l-3 s-6 m-y-1">
-                            <div class="block__item">
+                            <div style="max-height: 15rem; min-height: 15rem;" class="block__item">
                                 <div class="block__img flex-center relative">
                                     <img src="<%=service.getImage()%>"
                                          alt="">
