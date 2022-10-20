@@ -13,7 +13,8 @@ CREATE TABLE tblUserRole (
 	[description] [nvarchar](Max) 
 )
 GO
-select * from tblUser
+
+
 
 -----USER-----
 CREATE TABLE tblUser(
@@ -38,9 +39,6 @@ CREATE TABLE tblCustomer (
 	[status] [decimal](1)
 )
 GO
-
---INSERT INTO tblUser(username, password, role_ID, phone, email, status) 
---VALUES('hello', '1', 'CUS', '0123456789', 'hello@gmail.com', 1)
 
 
 
@@ -78,7 +76,7 @@ CREATE TABLE tblAddress(
 	[user_ID] nvarchar(30) REFERENCES tblUser(username) NOT NULL
 )
 
---SELECT category_ID, name, image FROM tblProductCategory
+
 
 -----PRODUCT-----
 CREATE TABLE tblProductCategory (
@@ -87,7 +85,6 @@ CREATE TABLE tblProductCategory (
 	[image] [nvarchar](max) NOT NULL
 )
 
---SELECT detail.id, detail.provider_ID, detail.product_ID, detail.name, detail.quantity, detail.price, detail.image, detail.description, detail.status FROM tblProduct product JOIN tblProductDetail detail on product.product_ID = detail.product_ID JOIN tblProductCategory cate ON cate.category_ID = product.category_ID WHERE cate.category_ID = 'BAR' AND product.product_ID = 15
 
 CREATE TABLE tblProduct (
 	product_ID nvarchar(10) PRIMARY KEY NOT NULL , 
@@ -153,14 +150,8 @@ CREATE TABLE tblStaff (
 	[status] decimal(1) NOT NULL,
 )
 GO
-select * from tblServiceCategory
-select * from tblService
-select * from tblServiceDetail
-select * from tblStaff
 
-select staff.staff_ID, staff.provider_ID, staff.service_ID, staff.name, staff.id_card, staff.avatar, staff.status from tblStaff staff where staff.service_ID = 1
-select staff.staff_ID, staff.provider_ID, staff.service_ID, staff.name, staff.id_card, staff.avatar, staff.status from tblStaff staff JOIN tblServiceDetail detail ON staff.service_ID = detail.service_ID  WHERE staff.service_ID = 1 AND detail.name = 'Deep Cleaning'; 
-select staff.staff_ID, staff.provider_ID, staff.service_ID, staff.name, staff.id_card, staff.avatar, staff.status from tblStaff staff JOIN tblServiceDetail detail ON staff.service_ID = detail.service_ID  WHERE staff.service_ID = 1 
+
 CREATE TABLE tblServiceDetail(
 	id [int] IDENTITY(1,1) PRIMARY KEY , 
 	provider_ID nvarchar(30) REFERENCES tblProvider(username) NOT NULL , 
@@ -1120,184 +1111,442 @@ INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('18','OSH'
 
 --Bảng sản phẩm chi tiết theo từng sản phẩm cứng 
 
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Dinner Spoon Silver',50,30000, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Cake Fork Silver',50,20000, 'https://img.christofle.com/image/upload/s--2MQbtDgo--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/media/catalog/product/C/a/Cake_20fork_20America_20_20Silver_20plated_00001046000101_F_2_1.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Tea Spoon Gold',50,86000, 'https://www.nicepng.com/png/full/137-1375331_milano-tea-spoon-gold-plated-gold-spoon-png.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Tea Spoon Wooden Gold',50,77000, 'https://cdn.shopify.com/s/files/1/0548/9229/8282/products/SHSPO-4ZSGOL_1_800x.png?v=1656403634' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Tea Spoon Chrome',50,65000, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , null ,1 )
 
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','1','Table Knife Gold',50,50000, 'https://img.christofle.com/image/upload/s--1noiI0BK--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/Products/02327012001101_STQ_qvsbbn.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','1',' Dinner Fork Gold',50,30000, 'https://img.christofle.com/image/upload/s--2Wk8N2t9--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/Products/354003_F_pnpdg2.png' , null ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Dinner Spoon Silver',50,30000, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Cake Fork Silver',50,20000, 'https://img.christofle.com/image/upload/s--2MQbtDgo--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/media/catalog/product/C/a/Cake_20fork_20America_20_20Silver_20plated_00001046000101_F_2_1.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Tea Spoon Gold',50,86000, 'https://www.nicepng.com/png/full/137-1375331_milano-tea-spoon-gold-plated-gold-spoon-png.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Tea Spoon Wooden Gold',50,77000, 'https://cdn.shopify.com/s/files/1/0548/9229/8282/products/SHSPO-4ZSGOL_1_800x.png?v=1656403634' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Tea Spoon Chrome',50,65000, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider4','1','Table Knife Gold',50,50000, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider4','1',' Dinner Fork Gold',50,30000, 'https://img.christofle.com/image/upload/s--2Wk8N2t9--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/Products/354003_F_pnpdg2.png' , null ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','1','Table Knife Gold',50,50000, 'https://img.christofle.com/image/upload/s--1noiI0BK--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/Products/02327012001101_STQ_qvsbbn.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','1',' Dinner Fork Gold',50,30000, 'https://img.christofle.com/image/upload/s--2Wk8N2t9--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/Products/354003_F_pnpdg2.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','1','Table Knife Gold',50,50000, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','1',' Dinner Fork Gold',50,30000, 'https://img.christofle.com/image/upload/s--2Wk8N2t9--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/Products/354003_F_pnpdg2.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 
 
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','2','Speckle Rice Bowl White',50,45000, 'http://cdn.shopify.com/s/files/1/2270/8601/products/ace6984-hr_vrij_01_grande.png?v=1632137970' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','2','Speckle Rice Bowl Blue',50,30000, 'https://assets.kogan.com/images/butlerco/BTR-505m/1-f198e87c17-505m-removebg-preview.png?auto=webp&canvas=340%2C226&fit=bounds&height=226&quality=90&width=340' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','2','Platinum Rim Salad Bowl Ivory',50,86000, 'https://cdn.shopify.com/s/files/1/0253/0590/7299/products/312895010059_Plumes_or_Coupe_salade_Individual_salad_bowl_1024x1024@2x.png?v=1622543521' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','2','Botanical Salad Bowl Green',50,77000, 'https://chairish-prod.freetls.fastly.net/image/product/master/f7dab701-5b6b-44f9-9abc-70f743e60edf/1990s-mikasa-queens-garden-ivy-leaf-pattern-salad-serving-set-5-pieces-1865' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','2','Regale Soup Bowl Black & Gold',50,65000, 'https://sslimages.shoppersstop.com/sys-master/images/h75/hd2/8899184197662/9633369_9999.png_2000Wx3000H' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','2','Polka Soup Bowl',50,50000, 'https://cdn.shopify.com/s/files/1/1317/9515/products/IMG_20150929_210249_edit_1024x1024@2x.png?v=1536599901' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','2','Nurina Cereal Bowl Dcream',50,70000, 'https://www.seekpng.com/png/detail/990-9900037_800-x-596-8-cereal-bowl-with-cereal.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','2','Wooden Bowl',50,50000, 'https://lofory.com/wp-content/uploads/2021/11/Natural-Wooden-Salad-Bowl-6.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','2','Ceramic Bowl',50,120000, 'https://static.vecteezy.com/system/resources/previews/009/664/965/non_2x/empty-porcelain-ceramic-bowl-on-transparent-background-file-free-png.png' , null ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','2','Speckle Rice Bowl White',50,45000, 'http://cdn.shopify.com/s/files/1/2270/8601/products/ace6984-hr_vrij_01_grande.png?v=1632137970' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','2','Speckle Rice Bowl Blue',50,30000, 'https://assets.kogan.com/images/butlerco/BTR-505m/1-f198e87c17-505m-removebg-preview.png?auto=webp&canvas=340%2C226&fit=bounds&height=226&quality=90&width=340' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','2','Platinum Rim Salad Bowl Ivory',50,86000, 'https://cdn.shopify.com/s/files/1/0253/0590/7299/products/312895010059_Plumes_or_Coupe_salade_Individual_salad_bowl_1024x1024@2x.png?v=1622543521' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','2','Botanical Salad Bowl Green',50,77000, 'https://chairish-prod.freetls.fastly.net/image/product/master/f7dab701-5b6b-44f9-9abc-70f743e60edf/1990s-mikasa-queens-garden-ivy-leaf-pattern-salad-serving-set-5-pieces-1865' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','2','Regale Soup Bowl Black & Gold',50,65000, 'https://sslimages.shoppersstop.com/sys-master/images/h75/hd2/8899184197662/9633369_9999.png_2000Wx3000H' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','2','Polka Soup Bowl',50,50000, 'https://cdn.shopify.com/s/files/1/1317/9515/products/IMG_20150929_210249_edit_1024x1024@2x.png?v=1536599901' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','2','Nurina Cereal Bowl Dcream',50,70000, 'https://www.seekpng.com/png/detail/990-9900037_800-x-596-8-cereal-bowl-with-cereal.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','2','Wooden Bowl',50,50000, 'https://lofory.com/wp-content/uploads/2021/11/Natural-Wooden-Salad-Bowl-6.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','2','Ceramic Bowl',50,120000, 'https://static.vecteezy.com/system/resources/previews/009/664/965/non_2x/empty-porcelain-ceramic-bowl-on-transparent-background-file-free-png.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','3','Ferric Iron Fry Pan',50,90000, 'https://hellokitchen.com.au/wp-content/uploads/2021/09/PC220312-2.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','3','Ferric Cast Iron Kadai Black',50,98000, 'https://mrbutlers.com/pub/media/catalog/product/cache/cf2a296d1dbef50483d61587672f6c7d/p/n/pngs-fileartboard-7_1.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','3','Classic Deep Pan',50,60000, 'https://vietnamshine.com/wp-content/uploads/2017/11/ih-classic-deep-pan-26cm.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','3','Pietra-e-legno Sauce Pot',50,77000, 'https://services.electrolux-medialibrary.com/118ed4c0ee6546f4a7684c7fef8c985aNrZmYkM861d1f/view/WS_PN/PSAAPL170PE00007.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','3','Classic Deep Pan',50,95000, 'https://vietnamshine.com/wp-content/uploads/2017/11/ih-classic-deep-pan-26cm.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','3','Gourmet Sauce Pot',50,100000, 'https://www.aegnewzealand.co.nz/remote.jpg.ashx?width=3200&urlb64=aHR0cHM6Ly9yZXNvdXJjZS5lbGVjdHJvbHV4LmNvbS5hdS9QdWJsaWMvSW1hZ2UyL3Byb2R1Y3QvMjgzMjUvNTIxMTAvQkUtQUVHSGVyb0Nhcm91c2VsL0FFR0hlcm9DYXJvdXNlbC5wbmc&hmac=iqIYRok8jtw' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','3','Classic Cooking Pot 22cm',50,150000, 'https://cdn11.bigcommerce.com/s-1fdhnzvx71/images/stencil/532x532/products/128/407/PSL31320I_2017_10_27_20_11_39_UTC__22917.1581348822.386.513__17625.1588179770.png?c=1' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','3','Classic Cooking Pot 26cm',50,200000, 'https://cdn11.bigcommerce.com/s-1fdhnzvx71/images/stencil/532x532/products/127/404/PSL31320I_2017_10_27_20_11_39_UTC__78759.1581349083.386.513__48351.1588179416.png?c=1' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','3','Maximus Cooking Pot ',50,120000, 'https://www.dehomebiz.com.my/image/dehomebiz/image/cache/data/all_product_images/product-729/morphy_richards_562010_multi_cooker_photo_10-810x585.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','3','Pro-x Deep Cooking Pot',50,120000, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','3','Forever Sauce Pan',50,120000, 'https://cdn11.bigcommerce.com/s-jta5lqjn53/images/stencil/532x532/products/573/1084/6720c__56824.1581430091.png?c=1' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','3','Marburg Grill Pan Black',50,120000, 'https://assets.kogan.com/images/sirjohnsgifts/SJG-1331223855140/1-1907e02c68-107190.png?auto=webp&canvas=340%2C226&fit=bounds&height=226&quality=90&width=340' , null ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','3','Ferric Iron Fry Pan',50,90000, 'https://hellokitchen.com.au/wp-content/uploads/2021/09/PC220312-2.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','3','Ferric Cast Iron Kadai Black',50,98000, 'https://mrbutlers.com/pub/media/catalog/product/cache/cf2a296d1dbef50483d61587672f6c7d/p/n/pngs-fileartboard-7_1.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','3','Classic Deep Pan',50,60000, 'https://vietnamshine.com/wp-content/uploads/2017/11/ih-classic-deep-pan-26cm.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','3','Pietra-e-legno Sauce Pot',50,77000, 'https://services.electrolux-medialibrary.com/118ed4c0ee6546f4a7684c7fef8c985aNrZmYkM861d1f/view/WS_PN/PSAAPL170PE00007.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','3','Classic Deep Pan',50,95000, 'https://vietnamshine.com/wp-content/uploads/2017/11/ih-classic-deep-pan-26cm.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','3','Gourmet Sauce Pot',50,100000, 'https://www.aegnewzealand.co.nz/remote.jpg.ashx?width=3200&urlb64=aHR0cHM6Ly9yZXNvdXJjZS5lbGVjdHJvbHV4LmNvbS5hdS9QdWJsaWMvSW1hZ2UyL3Byb2R1Y3QvMjgzMjUvNTIxMTAvQkUtQUVHSGVyb0Nhcm91c2VsL0FFR0hlcm9DYXJvdXNlbC5wbmc&hmac=iqIYRok8jtw' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','3','Classic Cooking Pot 22cm',50,150000, 'https://cdn11.bigcommerce.com/s-1fdhnzvx71/images/stencil/532x532/products/128/407/PSL31320I_2017_10_27_20_11_39_UTC__22917.1581348822.386.513__17625.1588179770.png?c=1' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','3','Classic Cooking Pot 26cm',50,200000, 'https://cdn11.bigcommerce.com/s-1fdhnzvx71/images/stencil/532x532/products/127/404/PSL31320I_2017_10_27_20_11_39_UTC__78759.1581349083.386.513__48351.1588179416.png?c=1' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','3','Maximus Cooking Pot ',50,120000, 'https://www.dehomebiz.com.my/image/dehomebiz/image/cache/data/all_product_images/product-729/morphy_richards_562010_multi_cooker_photo_10-810x585.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','3','Pro-x Deep Cooking Pot',50,120000, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','3','Forever Sauce Pan',50,120000, 'https://cdn11.bigcommerce.com/s-jta5lqjn53/images/stencil/532x532/products/573/1084/6720c__56824.1581430091.png?c=1' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','3','Marburg Grill Pan Black',50,120000, 'https://assets.kogan.com/images/sirjohnsgifts/SJG-1331223855140/1-1907e02c68-107190.png?auto=webp&canvas=340%2C226&fit=bounds&height=226&quality=90&width=340' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','4','Kangaroo 1.8l high frequency',50,2000000, 'https://www.seingayhar.com/image/cache/catalog/Product/Home%20Appliance,%20Electronic%20and%20Accessories/8936060680031-270x270.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','4','Toshiba 1.8l Rice Cooker',50,2700000, 'https://www.toshiba-lifestyle.com/content/dam/toshiba-aem/my/small-home-appliances/rice-cooker/1-8l-digital-rice-cooker-rc-18dr1nmy/gallery1.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','4','Kangaroo 1.2l Rice Cooker',50,560000, 'https://bepxanh.com/Uploads/noi-com-nap-gai-kangaroo-kg22r1-22-lit.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','4','Toshiba 1.2l Rice Cooker',50,2007000, 'https://vn-live-01.slatic.net/p/a66dce23da62677dfacbf93e777877e4.png_q80_.webp' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','4','Toshiba 1.8l Digital Cooker',50,1950000, 'https://shoplineimg.com/609a5555404902005c2299bb/62e24c1c96afeb0032a1ee14/800x.png?' , null ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','4','Kangaroo 1.8l high frequency',50,2000000, 'https://www.seingayhar.com/image/cache/catalog/Product/Home%20Appliance,%20Electronic%20and%20Accessories/8936060680031-270x270.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','4','Toshiba 1.8l Rice Cooker',50,2700000, 'https://www.toshiba-lifestyle.com/content/dam/toshiba-aem/my/small-home-appliances/rice-cooker/1-8l-digital-rice-cooker-rc-18dr1nmy/gallery1.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','4','Kangaroo 1.2l Rice Cooker',50,560000, 'https://bepxanh.com/Uploads/noi-com-nap-gai-kangaroo-kg22r1-22-lit.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','4','Toshiba 1.2l Rice Cooker',50,2007000, 'https://vn-live-01.slatic.net/p/a66dce23da62677dfacbf93e777877e4.png_q80_.webp' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','4','Toshiba 1.8l Digital Cooker',50,1950000, 'https://shoplineimg.com/609a5555404902005c2299bb/62e24c1c96afeb0032a1ee14/800x.png?' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','4','SunHouse 1l Rice Cooker',50,1000000, 'https://trumgiadung.com/uploads/images/video/noi-com-dien-sunhouse-shd8955-4.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','4','Cuckoo 1l Rice Cooker',50,1500000, 'https://samnec.com.vn/uploads/san-pham/2022-09-05-16-00-27cr-0690fsiwhcrvncv.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','4','Ava 1l Rice Cooker',50,500000, 'https://sg-live-01.slatic.net/p/bc091a4d22da96467c979647cc21dbb2.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','4','Toshiba 1.2l Rice Cooker',50,1200000, 'https://tchome.vn/Data/images/tuanup/10-3/t40/product_12731_3.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','4','HappyCook 1.2l Rice Cooker',50,1200000, 'https://salt.tikicdn.com/ts/product/22/56/de/3f94a1e353909adc1ffd8ecb7d558f3c.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','4','HappyCook 1.8l Rice Cooker',50,210000, 'https://salt.tikicdn.com/ts/product/26/8a/29/84b2d31e29b2cf887830d0ee91f94027.png' , null ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider2','4','Cuckoo 1l Rice Cooker',50,1500000,
+'https://samnec.com.vn/uploads/san-pham/2022-09-05-16-00-27cr-0690fsiwhcrvncv.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider2','4','Ava 1l Rice Cooker',50,500000, 'https://sg-live-01.slatic.net/p/bc091a4d22da96467c979647cc21dbb2.png'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider2','4','Toshiba 1.2l Rice Cooker',50,1200000,
+'https://tchome.vn/Data/images/tuanup/10-3/t40/product_12731_3.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider2','4','HappyCook 1.2l Rice Cooker',50,1200000,
+'https://salt.tikicdn.com/ts/product/22/56/de/3f94a1e353909adc1ffd8ecb7d558f3c.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider2','4','HappyCook 1.8l Rice Cooker',50,210000,
+'https://salt.tikicdn.com/ts/product/26/8a/29/84b2d31e29b2cf887830d0ee91f94027.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','5','Lix Dishwashing liquid',50,56000, 'https://cdn.shopify.com/s/files/1/2297/2851/products/Dish-washingLiquidLIXFreshLemonSize400gbottle_700x700.png?v=1597204384' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','5','SunLight Dishwashing liquid',50,75000, 'https://cdn.shopify.com/s/files/1/0403/2203/9970/products/CP_3_F.png?v=1607953014' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','5','SurF Dishwashing liquid',50,70000, 'https://vn-live-05.slatic.net/p/44b65bcdcc81a8c4278a9ef08bb4c8b4.png_525x525q80.jpg' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','5','IziHome Dishwashing liquid',50,79000, 'https://cf.shopee.vn/file/30b38cfaebd50eefcd45e300b78a0ed0' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','5','EazyClean Dishwashing liquid',50,75000, 'http://ezeecares.com/wp-content/uploads/2013/09/ezee-dish-gel-yellow-green.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','5','Net Dishwashing liquid',50,65000, 'https://asmart.com.vn/wp-content/uploads/2021/09/NRC-NET-DD-huong-chanh-800g.jpg' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','5','Gift Dishwashing liquid',50,55000, 'https://vn-test-11.slatic.net/p/f87a22d9aa4acf8527cdc286c798b9bc.jpg' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','5','LifeBouy',50,131000, 'https://www.lifebuoy.in/content/dam/brands/lifebuoy/india/2133695-lifebuoy-innovation-total-soap-wrapper-125g---total-10.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','5','Biore ShowerGel',50,120000, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','5','Hazeline ShowerGel',50,115000, 'https://fujimart.vn/image/cache/catalog/sanpham-nhatban/S%E1%BB%AFa%20t%E1%BA%AFm%20kh%E1%BB%AD%20m%C3%B9i%20MENS%20BIORE%20h%C6%B0%C6%A1ng%20x%C3%A0%20ph%C3%B2ng%20th%C6%A1m-502x502.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','5','Dove ShowerGel',50,105000, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','5','DoubleRich ShowerGel',50,175000, 'https://sovina.vn/wp-content/uploads/2016/10/DBR1.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','5','Puri ShowerGel',50,125000, 'https://media.ulta.com/i/ulta/2581853?w=720' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','5','Palmolive ShowerGel',50,150000, 'https://www.cincottachemist.com.au/10280-product_zoom/palmolive-natural-shower-gel-milk-honey-1l.jpg' , null ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','5','Lix Dishwashing liquid',50,56000,
+'https://cdn.shopify.com/s/files/1/2297/2851/products/Dish-washingLiquidLIXFreshLemonSize400gbottle_700x700.png?v=1597204384'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','5','SunLight Dishwashing liquid',50,75000,
+'https://cdn.shopify.com/s/files/1/0403/2203/9970/products/CP_3_F.png?v=1607953014' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','5','SurF Dishwashing liquid',50,70000,
+'https://vn-live-05.slatic.net/p/44b65bcdcc81a8c4278a9ef08bb4c8b4.png_525x525q80.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','5','IziHome Dishwashing liquid',50,79000, 'https://cf.shopee.vn/file/30b38cfaebd50eefcd45e300b78a0ed0' ,
+'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','5','EazyClean Dishwashing liquid',50,75000,
+'http://ezeecares.com/wp-content/uploads/2013/09/ezee-dish-gel-yellow-green.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','5','Net Dishwashing liquid',50,65000,
+'https://asmart.com.vn/wp-content/uploads/2021/09/NRC-NET-DD-huong-chanh-800g.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','5','Gift Dishwashing liquid',50,55000,
+'https://vn-test-11.slatic.net/p/f87a22d9aa4acf8527cdc286c798b9bc.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','5','LifeBouy',50,131000,
+'https://www.lifebuoy.in/content/dam/brands/lifebuoy/india/2133695-lifebuoy-innovation-total-soap-wrapper-125g---total-10.png'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','5','Biore ShowerGel',50,120000,
+'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','5','Hazeline ShowerGel',50,115000,
+'https://fujimart.vn/image/cache/catalog/sanpham-nhatban/S%E1%BB%AFa%20t%E1%BA%AFm%20kh%E1%BB%AD%20m%C3%B9i%20MENS%20BIORE%20h%C6%B0%C6%A1ng%20x%C3%A0%20ph%C3%B2ng%20th%C6%A1m-502x502.png'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','5','Dove ShowerGel',50,105000,
+'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','5','DoubleRich ShowerGel',50,175000, 'https://sovina.vn/wp-content/uploads/2016/10/DBR1.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','5','Puri ShowerGel',50,125000, 'https://media.ulta.com/i/ulta/2581853?w=720' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','5','Palmolive ShowerGel',50,150000,
+'https://www.cincottachemist.com.au/10280-product_zoom/palmolive-natural-shower-gel-milk-honey-1l.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('petro','6','Composite CPS Gas',50,460000, 'https://dailygashcm.com/wp-content/uploads/2018/07/Dai_Ly_Gas_Miss_binh-gas-chong-chay-no-composite-muc-nuoc-gas.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('petro','6','PetroVietNam Bink Gas',50,1460000, 'https://gasviet.vn/wp-content/uploads/2018/12/gasviet-5.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('petro','6','Composite 6kg Gas',50,236000, 'https://hethonggasbinhminh.vn/wp-content/uploads/2021/03/Dai_Ly_Gas_Miss_Conposite.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('petro','6','Oil Grey Gas',50,384000, 'https://www.swift-fuels.com/wp-content/uploads/2020/04/11kg-patio-gas-refill.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('petro','6','ELF Gaz 12kg',50,384000, 'https://gasluaxanh.com/wp-content/uploads/2021/04/total-elf-redbig.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('petro','6','Family Gas 12kg',50,404000, 'https://gasluaxanh.com/wp-content/uploads/2021/04/gas-gia-dinh-do-12kg-793x800-2.jpg' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('petro','6','Family Gas 45kg',50,1386000, 'https://gasluaxanh.com/wp-content/uploads/2021/04/Binh-Gas-Gia-Dinh-Xam-45-Kg.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('petro','6','Family Gas Red 12kg',50,404000, 'https://gastuchau.vn/files/product/binh-gas-gia-dinh-do12-kg-gsnmvptl.jpg' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('petro','6','Oil Green Gas',50,394000, 'https://www.nicepng.com/png/full/74-743171_all-you-need-to-know-about-lpg-gas.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('petro','6','Family Gas Blue 12kg',50,406000, 'https://images.squarespace-cdn.com/content/v1/5defa892a8313b70e3c9dab6/1596113910190-K9B91HYK4DRGAIE001H3/12kg+butane.png?format=1000w' , null ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('petro','6','Composite CPS Gas',50,460000,
+'https://dailygashcm.com/wp-content/uploads/2018/07/Dai_Ly_Gas_Miss_binh-gas-chong-chay-no-composite-muc-nuoc-gas.png' ,
+'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('petro','6','PetroVietNam Bink Gas',50,1460000, 'https://gasviet.vn/wp-content/uploads/2018/12/gasviet-5.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1
+)
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('petro','6','Composite 6kg Gas',50,236000,
+'https://hethonggasbinhminh.vn/wp-content/uploads/2021/03/Dai_Ly_Gas_Miss_Conposite.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('petro','6','Oil Grey Gas',50,384000,
+'https://www.swift-fuels.com/wp-content/uploads/2020/04/11kg-patio-gas-refill.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('petro','6','ELF Gaz 12kg',50,384000, 'https://gasluaxanh.com/wp-content/uploads/2021/04/total-elf-redbig.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.'
+,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('petro','6','Family Gas 12kg',50,404000,
+'https://gasluaxanh.com/wp-content/uploads/2021/04/gas-gia-dinh-do-12kg-793x800-2.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('petro','6','Family Gas 45kg',50,1386000,
+'https://gasluaxanh.com/wp-content/uploads/2021/04/Binh-Gas-Gia-Dinh-Xam-45-Kg.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('petro','6','Family Gas Red 12kg',50,404000,
+'https://gastuchau.vn/files/product/binh-gas-gia-dinh-do12-kg-gsnmvptl.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('petro','6','Oil Green Gas',50,394000,
+'https://www.nicepng.com/png/full/74-743171_all-you-need-to-know-about-lpg-gas.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('petro','6','Family Gas Blue 12kg',50,406000,
+'https://images.squarespace-cdn.com/content/v1/5defa892a8313b70e3c9dab6/1596113910190-K9B91HYK4DRGAIE001H3/12kg+butane.png?format=1000w'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','7','Satori Water 20L',50,56000, 'https://bizweb.dktcdn.net/100/422/803/products/satori.png?v=1625619757127' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','7','Vihawa Water 20L',50,61000, 'https://thienhau.vn/wp-content/uploads/2014/07/nuoc-tinh-khiet-vihawa-20-lit-600x600.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','7','Bidrico Water 20L',50,35000, 'https://dailynuockhoang.vn/wp-content/uploads/2019/10/Nuoc-Bidrico-20l-co-voi-600x614.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','7','I-on Life Water 20L',50,70000, 'https://www.queanhwater.com/wp-content/uploads/2019/07/b%C3%ACnh-n%C6%B0%E1%BB%9Bc-ion-life-19l_qu%E1%BA%BF-anh-food.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','7','Lavi Water 20L',50,69000, 'https://nuockhoanglavievn.com/wp-content/uploads/2019/11/b%C3%ACnh-s%E1%BB%A9.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','7','Viva Water 20L',50,62000, 'https://nuocuongtruongphat.com/wp-content/uploads/2020/03/nuoc-lavie-co-voi.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','7','Aquafina 350ml *24',50,98000, 'https://sangphatwater.vn/Upload/product/nuoc-aquafina-350l-8276.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','7','Aquafina 500ml *24',50,103000, 'https://nuocsuoisala.com/wp-content/uploads/2022/07/aquafina-500l.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','7','Lavie 500ml *24',50,88000, 'https://nuockhoanglaviehanoi.com/wp-content/uploads/2019/04/1-thung-lavie-bao-nhieu-chai.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','7','Satori 500ml *24',50,107000, 'https://nuocsuoisala.com/wp-content/uploads/2022/07/Satori-500ml.png' , null ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','7','Satori Water 20L',50,56000,
+'https://bizweb.dktcdn.net/100/422/803/products/satori.png?v=1625619757127' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','7','Vihawa Water 20L',50,61000,
+'https://thienhau.vn/wp-content/uploads/2014/07/nuoc-tinh-khiet-vihawa-20-lit-600x600.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','7','Bidrico Water 20L',50,35000,
+'https://dailynuockhoang.vn/wp-content/uploads/2019/10/Nuoc-Bidrico-20l-co-voi-600x614.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','7','I-on Life Water 20L',50,70000,
+'https://www.queanhwater.com/wp-content/uploads/2019/07/b%C3%ACnh-n%C6%B0%E1%BB%9Bc-ion-life-19l_qu%E1%BA%BF-anh-food.png'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','7','Lavi Water 20L',50,69000,
+'https://nuockhoanglavievn.com/wp-content/uploads/2019/11/b%C3%ACnh-s%E1%BB%A9.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','7','Viva Water 20L',50,62000,
+'https://nuocuongtruongphat.com/wp-content/uploads/2020/03/nuoc-lavie-co-voi.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','7','Aquafina 350ml *24',50,98000, 'https://sangphatwater.vn/Upload/product/nuoc-aquafina-350l-8276.png' ,
+'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','7','Aquafina 500ml *24',50,103000, 'https://nuocsuoisala.com/wp-content/uploads/2022/07/aquafina-500l.png'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','7','Lavie 500ml *24',50,88000,
+'https://nuockhoanglaviehanoi.com/wp-content/uploads/2019/04/1-thung-lavie-bao-nhieu-chai.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','7','Satori 500ml *24',50,107000, 'https://nuocsuoisala.com/wp-content/uploads/2022/07/Satori-500ml.png' ,
+'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','8','Samsung Inverter 236l',50,7300000, 'https://2momart.vn/upload/products/082020/tu-lanh-samsung-inverter-rt22m4032dx-sv-gia-re.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','8','Toshiba Inverter 180l',50,5300000, 'https://prices.vn/storage/photos/7/product/1594787705-tu-lanh-toshiba-inverter-gr-b22vu-ukg-180l0.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','8','Toshiba Inverter 90l',50,3100000, 'https://vn-test-11.slatic.net/p/dc71e47775b9a4d4ccbe7700472fa481.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','8','Samsung Inverter 208l',50,6100000, 'https://bizweb.dktcdn.net/100/184/135/products/1-43.png?v=1599541482817' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','8','Panasonic Inverter 322l',50,16000000, 'https://2momart.vn/upload/products/052021/tu-lanh-panasonic-nr-bc360qkvn-nghieng-trai.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','8','Panasonic Inverter 322l',50,15700000, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','8','Panasonic Inverter 170l',50,6500000, 'https://samnec.com.vn/uploads/san-pham-slide/2020-12-25-11-09-32NR-BA190PPVN-3.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','8','Samsung Inverter 307l',50,14000000, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','8','LG Inverter 266l',50,8000000, 'https://cdn.tgdd.vn/Products/Images/1943/106246/tu-lanh-lg-gn-l702sd-300x300.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','8','Panasonic Inverter 417l',50,20400000, 'https://www.panasonic.com/content/dam/pim/vn/vi/NR/NR-BX4/NR-BX471GPK/ast-1271373.png.pub.thumb.644.644.png' , null ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider2','8','Samsung Inverter 236l',50,7300000,
+'https://2momart.vn/upload/products/082020/tu-lanh-samsung-inverter-rt22m4032dx-sv-gia-re.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider2','8','Toshiba Inverter 180l',50,5300000,
+'https://prices.vn/storage/photos/7/product/1594787705-tu-lanh-toshiba-inverter-gr-b22vu-ukg-180l0.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider2','8','Toshiba Inverter 90l',50,3100000,
+'https://vn-test-11.slatic.net/p/dc71e47775b9a4d4ccbe7700472fa481.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider2','8','Samsung Inverter 208l',50,6100000,
+'https://bizweb.dktcdn.net/100/184/135/products/1-43.png?v=1599541482817' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider2','8','Panasonic Inverter 322l',50,16000000,
+'https://2momart.vn/upload/products/052021/tu-lanh-panasonic-nr-bc360qkvn-nghieng-trai.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider3','8','Panasonic Inverter 322l',50,15700000,
+'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider3','8','Panasonic Inverter 170l',50,6500000,
+'https://samnec.com.vn/uploads/san-pham-slide/2020-12-25-11-09-32NR-BA190PPVN-3.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider3','8','Samsung Inverter 307l',50,14000000,
+'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider3','8','LG Inverter 266l',50,8000000,
+'https://cdn.tgdd.vn/Products/Images/1943/106246/tu-lanh-lg-gn-l702sd-300x300.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider3','8','Panasonic Inverter 417l',50,20400000,
+'https://www.panasonic.com/content/dam/pim/vn/vi/NR/NR-BX4/NR-BX471GPK/ast-1271373.png.pub.thumb.644.644.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1
+)
 
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','9','Australian beef thighs 250g',50,114000, 'https://cdn.gdaymeat.com.au/wp-content/uploads/2022/03/Chucksteak666.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','9','Beef encrusted 250g',50,84000, 'https://cdn.shopify.com/s/files/1/0278/9765/9462/products/groundbeef_250x250@2x.png?v=1591194631' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','9','Australian beef middle 250g',50,89000, 'https://cdn.shopify.com/s/files/1/2297/2851/products/AustralianWagyuChuckEyeSteakSize300g-400g_Priceperkg_800x800.png?v=1628223330' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','9','Bacon 250g',50,97000, 'https://dtgxwmigmg3gc.cloudfront.net/imagery/assets/derivations/icon/512/512/true/eyJpZCI6IjQ1ZjA5ZTU0Zjk0NzI3ZmI0NDRmOGM4Yjc3MGE1YTBjIiwic3RvcmFnZSI6InB1YmxpY19zdG9yZSJ9?signature=f96f37b69f389ae8fa821a36e4985d192b08fac01aea5a56ab6ea1397a9dbf05' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','9','Australian beef thighs 500g',50,130000, 'https://cdn.shopify.com/s/files/1/2297/2851/products/AustralianWagyuChuckEyeSteakSize300g-400g_Priceperkg_800x800.png?v=1628223330' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','9','Combo Grilled Meat 560g',50,265000, 'https://www.youtube.com/watch?v=AnZ5n0_Q1gs' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','9','Australian beef ribs 500g',50,130000, 'https://cdn.shopify.com/s/files/1/0269/7723/9113/products/Beefcubeswhite_97668cbf-ab96-42ed-8815-84ff5d773cea_400x.png?v=1602324399' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','9','Frozen Salmon 300g',50,121000, 'https://product.hstatic.net/200000077081/product/c_3f4771a6d5264caf998330d76d71abf6_1024x1024.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','9','Frozen Fins Salmon 200g',50,30000, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','9','Shirmp 500g',50,158000, 'https://www.balbiino.ee/wp-content/uploads/2019/12/KRR039-MARINE-koormiata-krevett-70-90-500g.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','9','Saba Fish 400g',50,35000, 'https://images.squarespace-cdn.com/content/v1/5b182f57b105981d7e0a93d7/1530229488856-EWS2J3NQM0U2U041AQR7/4.png?format=1000w' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','9','Orange Fish 1.3kg',50,115000, 'https://salmon-farm.com/wp-content/uploads/2021/12/27-12-2021.png' , null ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','9','Australian beef thighs 250g',50,114000,
+'https://cdn.gdaymeat.com.au/wp-content/uploads/2022/03/Chucksteak666.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','9','Beef encrusted 250g',50,84000,
+'https://cdn.shopify.com/s/files/1/0278/9765/9462/products/groundbeef_250x250@2x.png?v=1591194631' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','9','Australian beef middle 250g',50,89000,
+'https://cdn.shopify.com/s/files/1/2297/2851/products/AustralianWagyuChuckEyeSteakSize300g-400g_Priceperkg_800x800.png?v=1628223330'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','9','Bacon 250g',50,97000,
+'https://dtgxwmigmg3gc.cloudfront.net/imagery/assets/derivations/icon/512/512/true/eyJpZCI6IjQ1ZjA5ZTU0Zjk0NzI3ZmI0NDRmOGM4Yjc3MGE1YTBjIiwic3RvcmFnZSI6InB1YmxpY19zdG9yZSJ9?signature=f96f37b69f389ae8fa821a36e4985d192b08fac01aea5a56ab6ea1397a9dbf05'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','9','Australian beef thighs 500g',50,130000,
+'https://cdn.shopify.com/s/files/1/2297/2851/products/AustralianWagyuChuckEyeSteakSize300g-400g_Priceperkg_800x800.png?v=1628223330'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','9','Combo Grilled Meat 560g',50,265000, 'https://www.youtube.com/watch?v=AnZ5n0_Q1gs' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','9','Australian beef ribs 500g',50,130000,
+'https://cdn.shopify.com/s/files/1/0269/7723/9113/products/Beefcubeswhite_97668cbf-ab96-42ed-8815-84ff5d773cea_400x.png?v=1602324399'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','9','Frozen Salmon 300g',50,121000,
+'https://product.hstatic.net/200000077081/product/c_3f4771a6d5264caf998330d76d71abf6_1024x1024.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','9','Frozen Fins Salmon 200g',50,30000,
+'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','9','Shirmp 500g',50,158000,
+'https://www.balbiino.ee/wp-content/uploads/2019/12/KRR039-MARINE-koormiata-krevett-70-90-500g.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','9','Saba Fish 400g',50,35000,
+'https://images.squarespace-cdn.com/content/v1/5b182f57b105981d7e0a93d7/1530229488856-EWS2J3NQM0U2U041AQR7/4.png?format=1000w'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','9','Orange Fish 1.3kg',50,115000, 'https://salmon-farm.com/wp-content/uploads/2021/12/27-12-2021.png' ,
+'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','10','Samsung SmartTV 55inch',50,14800000, 'https://images.samsung.com/is/image/samsung/p6pim/vn/ua55au7002kxxv/gallery/vn-uhd-au7002-ua55au7002kxxv-531928752?$650_519_PNG$' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','10','LG SmartTV',50,14000000, 'https://bizweb.dktcdn.net/thumb/1024x1024/100/443/782/products/smart-tivi-lg-75uq8050psb-4k-75-inch-1.png?v=1664265469930' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','10','Sony GoogleTV',50,15400000, 'https://tuson.vn/uploads/product/Tivi/Sony/2022/KD-65X75K/KD-65X75K%20AVATAR.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','10','Samsung SmartTV 43inch',50,11800000, 'https://images.samsung.com/is/image/samsung/vn-uhd-nu7090-ua50nu7090kxxv-frontblack-108921423?$650_519_PNG$' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','10','TCL SmartTV 55inch',50,10900000, 'https://pre-dispatcher.tclking.com/content/dam/brandsite/region/vietnam/tivi-tcl-55-inch/Q716-front.png?auto=webp,smallest' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','10','LG SmartTV 55inch',50,13000000, 'https://pre-dispatcher.tclking.com/content/dam/brandsite/region/vietnam/tivi-tcl-55-inch/Q716-front.png?auto=webp,smallest' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','10','Samsung SmartTV 50inch',50,13800000, 'https://images.samsung.com/is/image/samsung/p6pim/vn/ua50au7700kxxv/gallery/vn-uhd-au7000-383862-ua50au7700kxxv-421623795?$650_519_PNG$' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','10','Sony SmartTV 55inch',50,14800000, 'https://d13o3tuo14g2wf.cloudfront.net/thumbnails%2Flarge%2FAsset+Hierarchy%2FConsumer+Assets%2FTelevision%2FBRAVIA+LCD+HDTV%2FFY+22%2FX85K%2FProduct+shots%2FX85K_55_65_75%2FeComm%2F1--X85K-65-Sony-FRNT.png.png?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9kMTNvM3R1bzE0ZzJ3Zi5jbG91ZGZyb250Lm5ldC90aHVtYm5haWxzJTJGbGFyZ2UlMkZBc3NldCtIaWVyYXJjaHklMkZDb25zdW1lcitBc3NldHMlMkZUZWxldmlzaW9uJTJGQlJBVklBK0xDRCtIRFRWJTJGRlkrMjIlMkZYODVLJTJGUHJvZHVjdCtzaG90cyUyRlg4NUtfNTVfNjVfNzUlMkZlQ29tbSUyRjEtLVg4NUstNjUtU29ueS1GUk5ULnBuZy5wbmciLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjIxNDU3NjIwMDB9fX1dfQ__&Signature=TSRDmdrCnA7UhvXLkMZLkzYIkCK-apxdu4nxJ66CSLOLOTxIm8L9Dcb9H7CGgJ5jQ7mEsuOy6PxyVqrw9CSk2xwmm3Ja03PTiRWAoMPwAPyYF9lkHN5vzgeiR7ipLUmia-i-rCX8kKm27bWgb~xK11EfSMfbvlaBQov9yQGgMjzY5yXfjmaQ~baIFdHJ-9Prvl8DdfBsxAu4r-6LmZfra3yRGk41lqPOksfde3XAp55YYbVzPLC6eLK28uaVlu~76T0g-h0SbxfLgL1nF9hA8~e04WVvzxuo2iI58C7LVJdxqhzW15bGFt0~zXE80FyN5KRryRjxoc3pGvLCItG9kQ__&Key-Pair-Id=K37BLT9C6HMMJ0' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','10','Sony SmartTV 55inch',50,13800000, 'https://d13o3tuo14g2wf.cloudfront.net/thumbnails%2Flarge%2FAsset+Hierarchy%2FConsumer+Assets%2FTelevision%2FBRAVIA+LCD+HDTV%2FFY+22%2FX85K%2FProduct+shots%2FX85K_55_65_75%2FeComm%2F1--X85K-65-Sony-FRNT.png.png?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9kMTNvM3R1bzE0ZzJ3Zi5jbG91ZGZyb250Lm5ldC90aHVtYm5haWxzJTJGbGFyZ2UlMkZBc3NldCtIaWVyYXJjaHklMkZDb25zdW1lcitBc3NldHMlMkZUZWxldmlzaW9uJTJGQlJBVklBK0xDRCtIRFRWJTJGRlkrMjIlMkZYODVLJTJGUHJvZHVjdCtzaG90cyUyRlg4NUtfNTVfNjVfNzUlMkZlQ29tbSUyRjEtLVg4NUstNjUtU29ueS1GUk5ULnBuZy5wbmciLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjIxNDU3NjIwMDB9fX1dfQ__&Signature=TSRDmdrCnA7UhvXLkMZLkzYIkCK-apxdu4nxJ66CSLOLOTxIm8L9Dcb9H7CGgJ5jQ7mEsuOy6PxyVqrw9CSk2xwmm3Ja03PTiRWAoMPwAPyYF9lkHN5vzgeiR7ipLUmia-i-rCX8kKm27bWgb~xK11EfSMfbvlaBQov9yQGgMjzY5yXfjmaQ~baIFdHJ-9Prvl8DdfBsxAu4r-6LmZfra3yRGk41lqPOksfde3XAp55YYbVzPLC6eLK28uaVlu~76T0g-h0SbxfLgL1nF9hA8~e04WVvzxuo2iI58C7LVJdxqhzW15bGFt0~zXE80FyN5KRryRjxoc3pGvLCItG9kQ__&Key-Pair-Id=K37BLT9C6HMMJ0' , null ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider2','10','Samsung SmartTV 55inch',50,14800000,
+'https://images.samsung.com/is/image/samsung/p6pim/vn/ua55au7002kxxv/gallery/vn-uhd-au7002-ua55au7002kxxv-531928752?$650_519_PNG$'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider2','10','LG SmartTV',50,14000000,
+'https://bizweb.dktcdn.net/thumb/1024x1024/100/443/782/products/smart-tivi-lg-75uq8050psb-4k-75-inch-1.png?v=1664265469930'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider2','10','Sony GoogleTV',50,15400000,
+'https://tuson.vn/uploads/product/Tivi/Sony/2022/KD-65X75K/KD-65X75K%20AVATAR.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','10','Samsung SmartTV 43inch',50,11800000,
+'https://images.samsung.com/is/image/samsung/vn-uhd-nu7090-ua50nu7090kxxv-frontblack-108921423?$650_519_PNG$' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1
+)
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','10','TCL SmartTV 55inch',50,10900000,
+'https://pre-dispatcher.tclking.com/content/dam/brandsite/region/vietnam/tivi-tcl-55-inch/Q716-front.png?auto=webp,smallest'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','10','LG SmartTV 55inch',50,13000000,
+'https://pre-dispatcher.tclking.com/content/dam/brandsite/region/vietnam/tivi-tcl-55-inch/Q716-front.png?auto=webp,smallest'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','10','Samsung SmartTV 50inch',50,13800000,
+'https://images.samsung.com/is/image/samsung/p6pim/vn/ua50au7700kxxv/gallery/vn-uhd-au7000-383862-ua50au7700kxxv-421623795?$650_519_PNG$'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','10','Sony SmartTV 55inch',50,14800000,
+'https://d13o3tuo14g2wf.cloudfront.net/thumbnails%2Flarge%2FAsset+Hierarchy%2FConsumer+Assets%2FTelevision%2FBRAVIA+LCD+HDTV%2FFY+22%2FX85K%2FProduct+shots%2FX85K_55_65_75%2FeComm%2F1--X85K-65-Sony-FRNT.png.png?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9kMTNvM3R1bzE0ZzJ3Zi5jbG91ZGZyb250Lm5ldC90aHVtYm5haWxzJTJGbGFyZ2UlMkZBc3NldCtIaWVyYXJjaHklMkZDb25zdW1lcitBc3NldHMlMkZUZWxldmlzaW9uJTJGQlJBVklBK0xDRCtIRFRWJTJGRlkrMjIlMkZYODVLJTJGUHJvZHVjdCtzaG90cyUyRlg4NUtfNTVfNjVfNzUlMkZlQ29tbSUyRjEtLVg4NUstNjUtU29ueS1GUk5ULnBuZy5wbmciLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjIxNDU3NjIwMDB9fX1dfQ__&Signature=TSRDmdrCnA7UhvXLkMZLkzYIkCK-apxdu4nxJ66CSLOLOTxIm8L9Dcb9H7CGgJ5jQ7mEsuOy6PxyVqrw9CSk2xwmm3Ja03PTiRWAoMPwAPyYF9lkHN5vzgeiR7ipLUmia-i-rCX8kKm27bWgb~xK11EfSMfbvlaBQov9yQGgMjzY5yXfjmaQ~baIFdHJ-9Prvl8DdfBsxAu4r-6LmZfra3yRGk41lqPOksfde3XAp55YYbVzPLC6eLK28uaVlu~76T0g-h0SbxfLgL1nF9hA8~e04WVvzxuo2iI58C7LVJdxqhzW15bGFt0~zXE80FyN5KRryRjxoc3pGvLCItG9kQ__&Key-Pair-Id=K37BLT9C6HMMJ0'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider2','10','Sony SmartTV 55inch',50,13800000,
+'https://d13o3tuo14g2wf.cloudfront.net/thumbnails%2Flarge%2FAsset+Hierarchy%2FConsumer+Assets%2FTelevision%2FBRAVIA+LCD+HDTV%2FFY+22%2FX85K%2FProduct+shots%2FX85K_55_65_75%2FeComm%2F1--X85K-65-Sony-FRNT.png.png?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9kMTNvM3R1bzE0ZzJ3Zi5jbG91ZGZyb250Lm5ldC90aHVtYm5haWxzJTJGbGFyZ2UlMkZBc3NldCtIaWVyYXJjaHklMkZDb25zdW1lcitBc3NldHMlMkZUZWxldmlzaW9uJTJGQlJBVklBK0xDRCtIRFRWJTJGRlkrMjIlMkZYODVLJTJGUHJvZHVjdCtzaG90cyUyRlg4NUtfNTVfNjVfNzUlMkZlQ29tbSUyRjEtLVg4NUstNjUtU29ueS1GUk5ULnBuZy5wbmciLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjIxNDU3NjIwMDB9fX1dfQ__&Signature=TSRDmdrCnA7UhvXLkMZLkzYIkCK-apxdu4nxJ66CSLOLOTxIm8L9Dcb9H7CGgJ5jQ7mEsuOy6PxyVqrw9CSk2xwmm3Ja03PTiRWAoMPwAPyYF9lkHN5vzgeiR7ipLUmia-i-rCX8kKm27bWgb~xK11EfSMfbvlaBQov9yQGgMjzY5yXfjmaQ~baIFdHJ-9Prvl8DdfBsxAu4r-6LmZfra3yRGk41lqPOksfde3XAp55YYbVzPLC6eLK28uaVlu~76T0g-h0SbxfLgL1nF9hA8~e04WVvzxuo2iI58C7LVJdxqhzW15bGFt0~zXE80FyN5KRryRjxoc3pGvLCItG9kQ__&Key-Pair-Id=K37BLT9C6HMMJ0'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('zarahome','11','Wood Trestle Table',50,5000000, 'https://optimise2.assets-servd.host/fine-elk/production/images/Products/WEB_Oxford-trestle-table_metal-frame-bespoke.png?w=1200&q=80&fm=webp&fit=crop&crop=focalpoint&fp-x=0.5&fp-y=0.5&dm=1519299764&s=002a1d317198f96c03fbc516e8905490' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('zarahome','11','Wood Mango Coffee Table',50,7000000, 'https://static.henkschram.com/images/77004%20(1).png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('zarahome','11','Square Wood Mango Table',50,1000000, 'https://5.imimg.com/data5/SELLER/Default/2022/5/ON/KL/IA/138536105/6-500x500.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('zarahome','11','Cement Finish Table',50,2000000, 'http://static1.squarespace.com/static/57239bd5f8baf385ff553066/5f96ea5ccc17a47254c7b088/5f986a7960c99853043154d9/1604436153903/?format=1500w' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('zarahome','11','Square Wood Mango Table',50,7000000, 'https://5.imimg.com/data5/SELLER/Default/2022/5/ON/KL/IA/138536105/6-500x500.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('zarahome','11','Leather Sofa',50,10000000, 'https://leathersofaco.com/reddot/uploads/img/content/cID_1307/canto-leather-sofa.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('zarahome','11','L Shaped Sofa',50,7500000, 'https://cdn.shopify.com/s/files/1/2405/3057/products/TINA_dimension_-01_2048x.png?v=1657697978' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('zarahome','11','Oak ArmChair',50,4500000, 'https://cdn.shopify.com/s/files/1/0174/2162/products/DYKE_AND_DEAN_DE_MACHINEKAMER_Hans_Fauteuil_OAK_ARMCHAIR_GREY.png?v=1657655861' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('zarahome','11','OBeveled Wood Table',50,5500000, 'https://www.cherrystonefurniture.com/images/thumbs/0000249_flare-oval-coffee-table_450.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('zarahome','11','Lacquered Chair',50,550000, 'https://pilma.com/wp-content/uploads/2021/05/0743-657RJ-SILLA-NIZA-LACADO-ROJO.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('zarahome','11','Small Tool Chair',50,250000, 'https://cdn.pixabay.com/photo/2014/12/21/23/50/stool-576147__340.png' , null ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('zarahome','11','Wood Trestle Table',50,5000000,
+'https://optimise2.assets-servd.host/fine-elk/production/images/Products/WEB_Oxford-trestle-table_metal-frame-bespoke.png?w=1200&q=80&fm=webp&fit=crop&crop=focalpoint&fp-x=0.5&fp-y=0.5&dm=1519299764&s=002a1d317198f96c03fbc516e8905490'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('zarahome','11','Wood Mango Coffee Table',50,7000000, 'https://static.henkschram.com/images/77004%20(1).png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1
+)
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('zarahome','11','Square Wood Mango Table',50,1000000,
+'https://5.imimg.com/data5/SELLER/Default/2022/5/ON/KL/IA/138536105/6-500x500.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('zarahome','11','Cement Finish Table',50,2000000,
+'http://static1.squarespace.com/static/57239bd5f8baf385ff553066/5f96ea5ccc17a47254c7b088/5f986a7960c99853043154d9/1604436153903/?format=1500w'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('zarahome','11','Square Wood Mango Table',50,7000000,
+'https://5.imimg.com/data5/SELLER/Default/2022/5/ON/KL/IA/138536105/6-500x500.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('zarahome','11','Leather Sofa',50,10000000,
+'https://leathersofaco.com/reddot/uploads/img/content/cID_1307/canto-leather-sofa.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('zarahome','11','L Shaped Sofa',50,7500000,
+'https://cdn.shopify.com/s/files/1/2405/3057/products/TINA_dimension_-01_2048x.png?v=1657697978' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('zarahome','11','Oak ArmChair',50,4500000,
+'https://cdn.shopify.com/s/files/1/0174/2162/products/DYKE_AND_DEAN_DE_MACHINEKAMER_Hans_Fauteuil_OAK_ARMCHAIR_GREY.png?v=1657655861'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('zarahome','11','OBeveled Wood Table',50,5500000,
+'https://www.cherrystonefurniture.com/images/thumbs/0000249_flare-oval-coffee-table_450.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('zarahome','11','Lacquered Chair',50,550000,
+'https://pilma.com/wp-content/uploads/2021/05/0743-657RJ-SILLA-NIZA-LACADO-ROJO.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('zarahome','11','Small Tool Chair',50,250000, 'https://cdn.pixabay.com/photo/2014/12/21/23/50/stool-576147__340.png' ,
+'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','12','Wooden Box Bed',50,4990000, 'https://www.godrejinterio.com/imagestore/B2C/MONC00016/MONC00016_01_1500x1500.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','12','White Box Bed',50,4990000, 'https://cdn4.afydecor.com/Beds/364/364.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','12','Bed With tail Drawer',50,8990000, 'https://sleepshop.ca/wp-content/uploads/2020/09/Webp.net-resizeimage-11.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','12','Hotel Bed',50,2990000, 'https://i.pinimg.com/originals/9d/85/e6/9d85e62e83ed9a35caf92635b2c9e1cf.png' , null ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('homefurniture','12','Wooden Box Bed',50,4990000,
+'https://www.godrejinterio.com/imagestore/B2C/MONC00016/MONC00016_01_1500x1500.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('homefurniture','12','White Box Bed',50,4990000, 'https://cdn4.afydecor.com/Beds/364/364.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('homefurniture','12','Bed With tail Drawer',50,8990000,
+'https://sleepshop.ca/wp-content/uploads/2020/09/Webp.net-resizeimage-11.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('homefurniture','12','Hotel Bed',50,2990000,
+'https://i.pinimg.com/originals/9d/85/e6/9d85e62e83ed9a35caf92635b2c9e1cf.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('zarahome','13','linen Curtain With Piping',50,590000, 'https://static.wixstatic.com/media/8cc929_8d50830520e442b6af50a06c8961fd39~mv2.png/v1/fill/w_420,h_420,al_c,lg_1,q_85,enc_auto/8cc929_8d50830520e442b6af50a06c8961fd39~mv2.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('zarahome','13','Cottan Curtain',50,390000, 'https://www.decorist.com/static/finds/product_images/full_size/125802-indigo-blue-cotton-morris-curtains-set-of-2.9dc3c0adc5f75fe11f9073f87299cf8f.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','13','Cut-out Linen Curtain',50,490000, 'https://www.decorist.com/static/cache-thumbnail/ee/33/ee3385ffe2210e41af5aa24806445a56.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','13','White Linen Curtain',50,500000, 'https://i.pinimg.com/originals/1b/98/fc/1b98fcd65b6c372023898e800a84fbad.png' , null ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('zarahome','13','linen Curtain With Piping',50,590000,
+'https://static.wixstatic.com/media/8cc929_8d50830520e442b6af50a06c8961fd39~mv2.png/v1/fill/w_420,h_420,al_c,lg_1,q_85,enc_auto/8cc929_8d50830520e442b6af50a06c8961fd39~mv2.png'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('zarahome','13','Cottan Curtain',50,390000,
+'https://www.decorist.com/static/finds/product_images/full_size/125802-indigo-blue-cotton-morris-curtains-set-of-2.9dc3c0adc5f75fe11f9073f87299cf8f.png'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('homefurniture','13','Cut-out Linen Curtain',50,490000,
+'https://www.decorist.com/static/cache-thumbnail/ee/33/ee3385ffe2210e41af5aa24806445a56.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('homefurniture','13','White Linen Curtain',50,500000,
+'https://i.pinimg.com/originals/1b/98/fc/1b98fcd65b6c372023898e800a84fbad.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','14','Aberton 6 Door Wardrobe',50,5000000, 'https://akhonafurnishers.co.za/wp-content/uploads/2020/05/410-Mahogany-6-Doors-Imported-1030x706.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','14','Janousek 6 Door Wardrobe',50,4000000, 'https://secure.img1-cg.wfcdn.com/im/68746066/compr-r85/9819/98192010/carlsson-6-door-wardrobe.jpg' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','14','Claudius 3 Door Wardrobe',50,3000000, 'https://www.zadinteriors.com/store/wp-content/uploads/2021/06/6-x-4-side-view_3Door_dim.jpg' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','14','Milan Collection 3 Door',50,2000000, 'https://www.highcountrydoors.com/mfg_photos/Milan_collection_03.jpg' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','14','Heinrich 6 Door Wardrobe',50,1000000, 'https://image.made-in-china.com/2f0j00pWrzPveMEjqZ/Modern-Home-Six-Door-Wardrobes-Furniture-Sets-Designs-6-Door-MDF-Wooden-Bedroom-Wardrobe.jpg' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','14','Ranstead 2 Door Wardrobe',50,700000, 'https://cdnprod.mafretailproxy.com/sys-master-root/h02/h26/12826476642334/011NFM1900023_media_2_480Wx480H' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','14','Preystin Mirror 40x150cm',50,700000, 'https://m.media-amazon.com/images/I/41-i-GYwLBL._AC_UL320_.jpg' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','14','Syrah Wall Mirror 19x133cm',50,700000, 'https://www.panemirates.com/qatar/en/images/pan-akira-wall-mirror-60x90cm-silver-p32997-140856_thumb.jpg' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','14','Galen Wall Mirror Gold 62x62cm',50,700000, 'https://www.panemirates.com/images/pan-galen-wall-mirror-gold-62x62cm-p25441-104195_image.jpg' , null ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('homefurniture','14','Aberton 6 Door Wardrobe',50,5000000,
+'https://akhonafurnishers.co.za/wp-content/uploads/2020/05/410-Mahogany-6-Doors-Imported-1030x706.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('homefurniture','14','Janousek 6 Door Wardrobe',50,4000000,
+'https://secure.img1-cg.wfcdn.com/im/68746066/compr-r85/9819/98192010/carlsson-6-door-wardrobe.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('homefurniture','14','Claudius 3 Door Wardrobe',50,3000000,
+'https://www.zadinteriors.com/store/wp-content/uploads/2021/06/6-x-4-side-view_3Door_dim.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('homefurniture','14','Milan Collection 3 Door',50,2000000,
+'https://www.highcountrydoors.com/mfg_photos/Milan_collection_03.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('homefurniture','14','Heinrich 6 Door Wardrobe',50,1000000,
+'https://image.made-in-china.com/2f0j00pWrzPveMEjqZ/Modern-Home-Six-Door-Wardrobes-Furniture-Sets-Designs-6-Door-MDF-Wooden-Bedroom-Wardrobe.jpg'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('homefurniture','14','Ranstead 2 Door Wardrobe',50,700000,
+'https://cdnprod.mafretailproxy.com/sys-master-root/h02/h26/12826476642334/011NFM1900023_media_2_480Wx480H' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('homefurniture','14','Preystin Mirror 40x150cm',50,700000,
+'https://m.media-amazon.com/images/I/41-i-GYwLBL._AC_UL320_.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('homefurniture','14','Syrah Wall Mirror 19x133cm',50,700000,
+'https://www.panemirates.com/qatar/en/images/pan-akira-wall-mirror-60x90cm-silver-p32997-140856_thumb.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('homefurniture','14','Galen Wall Mirror Gold 62x62cm',50,700000,
+'https://www.panemirates.com/images/pan-galen-wall-mirror-gold-62x62cm-p25441-104195_image.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','15','Shower By Plastic EL-H109',50,230000, 'https://salt.tikicdn.com/cache/w1200/ts/product/0f/7f/25/e11a9bd40c22a7d263ad4dc46ac22717.jpg' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','15','Shower By Inox EL-H110',50,30000, 'https://dienmay.vatbau.com/Products/Images/9338/230939/eurolife-el-h110-2-2-org.jpg' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','15','Shower Mitsubishi Cleansui',50,990000, 'https://www.mitsubishicleansui.vn/voisenkhuclo/wp-content/uploads/sites/3/2020/09/ES301_luxury.png' , null ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider3','15','Shower By Plastic EL-H109',50,230000,
+'https://salt.tikicdn.com/cache/w1200/ts/product/0f/7f/25/e11a9bd40c22a7d263ad4dc46ac22717.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider3','15','Shower By Inox EL-H110',50,30000,
+'https://dienmay.vatbau.com/Products/Images/9338/230939/eurolife-el-h110-2-2-org.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider3','15','Shower Mitsubishi Cleansui',50,990000,
+'https://www.mitsubishicleansui.vn/voisenkhuclo/wp-content/uploads/sites/3/2020/09/ES301_luxury.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','16','Electric ToothBrush Halio',50,1100000, 'https://lh3.googleusercontent.com/xjIOWSy1Q2gOt9GjZT-zGk2QrWuApsk-0VfjYRCtoJT0YaOh3SvwSxl5z6kZLbN6YK8gzeLtzzJVFIzga4hJEOmWeub_XpGX' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','16','Electric ToothBrush Halio',50,1200000, 'https://product.hstatic.net/1000006063/product/ht_1024x1024_2x_c7d5207180434e55b1c5d169a000814d_1024x1024.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','16','Electric ToothBrush P/S',50,1100000, 'https://crestoralbproshop.com/media/wysiwyg/00069055132494_C1N0.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','16','Bamboo Charcoal ToothPaste',50,40000, 'https://www.colgate.com/content/dam/cp-sites/oral-care/oral-care-center/en-in/product-detail-pages/toothpaste/colgate-charcoal-clean.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','16','PS ToothPaste',50,990000, 'https://product.hstatic.net/1000190126/product/ps_nguasaurang_vt-1367645-png_d3974f6f1e3543b6bedae40c62d01931.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','16','Dental Clinic ToothPaste',50,590000, 'https://ibeaudy.vn/wp-content/uploads/2021/01/unnamed-300x300.png' , null ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','16','Electric ToothBrush Halio',50,1100000,
+'https://lh3.googleusercontent.com/xjIOWSy1Q2gOt9GjZT-zGk2QrWuApsk-0VfjYRCtoJT0YaOh3SvwSxl5z6kZLbN6YK8gzeLtzzJVFIzga4hJEOmWeub_XpGX'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','16','Electric ToothBrush Halio',50,1200000,
+'https://product.hstatic.net/1000006063/product/ht_1024x1024_2x_c7d5207180434e55b1c5d169a000814d_1024x1024.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.'
+,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','16','Electric ToothBrush P/S',50,1100000,
+'https://crestoralbproshop.com/media/wysiwyg/00069055132494_C1N0.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','16','Bamboo Charcoal ToothPaste',50,40000,
+'https://www.colgate.com/content/dam/cp-sites/oral-care/oral-care-center/en-in/product-detail-pages/toothpaste/colgate-charcoal-clean.png'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','16','PS ToothPaste',50,990000,
+'https://product.hstatic.net/1000190126/product/ps_nguasaurang_vt-1367645-png_d3974f6f1e3543b6bedae40c62d01931.png' ,
+'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','16','Dental Clinic ToothPaste',50,590000,
+'https://ibeaudy.vn/wp-content/uploads/2021/01/unnamed-300x300.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','17','Table Flower Vase',50,85000, 'https://i.pinimg.com/originals/19/d4/ca/19d4ca41435bfd70f475ffce7a96f3b1.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider1','17','Table Flower Vase',50,75000, 'https://www.picng.com/upload/vase/png_vase_25246.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','17','Table Flower Vase',50,65000, 'https://cdn.shopify.com/s/files/1/2566/7252/products/0321-3-5-5_1200x1200.png?v=1646346669' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','17','Table Flower Vase',50,55000, 'https://cdn.pixabay.com/photo/2018/01/11/10/00/rose-3075776__340.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','17','Table Flower Vase',50,45000, 'https://ae01.alicdn.com/kf/H1a00a8aab20f483d923885edd5fb9223U/Modern-Black-Face-Vase-Ceramic-Head-Flower-Pot-Flower-Arrangement-Container-Living-Room-Dining-Table-Flower.jpg' , null ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','17','Table Flower Vase',50,85000,
+'https://i.pinimg.com/originals/19/d4/ca/19d4ca41435bfd70f475ffce7a96f3b1.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider1','17','Table Flower Vase',50,75000, 'https://www.picng.com/upload/vase/png_vase_25246.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider3','17','Table Flower Vase',50,65000,
+'https://cdn.shopify.com/s/files/1/2566/7252/products/0321-3-5-5_1200x1200.png?v=1646346669' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider3','17','Table Flower Vase',50,55000, 'https://cdn.pixabay.com/photo/2018/01/11/10/00/rose-3075776__340.png' ,
+'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider3','17','Table Flower Vase',50,45000,
+'https://ae01.alicdn.com/kf/H1a00a8aab20f483d923885edd5fb9223U/Modern-Black-Face-Vase-Ceramic-Head-Flower-Pot-Flower-Arrangement-Container-Living-Room-Dining-Table-Flower.jpg'
+, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','18','Globural Fire Extinguisher 6kg',50,600000, 'https://media1.svb-media.de/en/images/517538/gloria-pd6ga-powder-fire-extinguisher-6-kg-fire-class-abc.jpg' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','18','Globural Fire Extinguisher 8kg',50,700000, 'http://sc04.alicdn.com/kf/Hd9f07c037ab8417fa2d52ad28fd5c978F.jpg' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','18','Powder Fire Extinguisher 2kg',50,185000, 'https://eversafe.net/wp-content/uploads/2021/07/Home-Safety-Kit-04.png' , null ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','18','Powder Fire Extinguisher 4kg',50,385000, 'https://www.uniquefire.com/wp-content/uploads/2019/04/4-kg-fire-extinguisher-1.png' , null ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider3','18','Globural Fire Extinguisher 6kg',50,600000,
+'https://media1.svb-media.de/en/images/517538/gloria-pd6ga-powder-fire-extinguisher-6-kg-fire-class-abc.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider3','18','Globural Fire Extinguisher 8kg',50,700000,
+'http://sc04.alicdn.com/kf/Hd9f07c037ab8417fa2d52ad28fd5c978F.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider3','18','Powder Fire Extinguisher 2kg',50,185000,
+'https://eversafe.net/wp-content/uploads/2021/07/Home-Safety-Kit-04.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
+('provider3','18','Powder Fire Extinguisher 4kg',50,385000,
+'https://www.uniquefire.com/wp-content/uploads/2019/04/4-kg-fire-extinguisher-1.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 
 --Bảng loại dịch vụ theo nhóm 
 
 INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('HC', 'Home Cleaning', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg')
 INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('HI', 'Home Improvement', 'https://thumbs.dreamstime.com/z/couple-living-room-avatar-character-vector-illustration-desing-couple-living-room-avatar-character-145224593.jpg')
-INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('DC', 'Laundry/Dry Clean', 'https://thumbs.dreamstime.com/z/bedroom-interior-vector-illustration-bed-nightstands-wardrobe-shelves-windows-45016633.jpg')
 INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('PBS', 'Plumbers', 'https://thumbs.dreamstime.com/z/set-flat-bright-vector-elements-items-modern-stylish-bathroom-interior-construction-bath-shampoo-toilet-towels-68381087.jpg')
 INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('IT', 'IT Service', 'https://thumbs.dreamstime.com/z/set-flat-bright-vector-elements-items-modern-stylish-bathroom-interior-construction-bath-shampoo-toilet-towels-68381087.jpg')
 
@@ -1336,106 +1585,106 @@ INSERT INTO tblService(service_ID, category_ID, name , image) VALUES ('27','IT',
 
 --bảng nhân viên
 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Nguyen The Viet','550422001234',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Tran Nhat Minh','550422001235',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Tran Nguyen Dat Phu','550422001422',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Trang Quoc Dat','550422121235',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Nguyen The Phong','554122001234',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Nguyen Hoang Thai Quy','594122111294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Nguyen Le Thai Viet','941230012940',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Nguyen Thai Dat Trang','599122001294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','2','Nguyen Trang Quoc','000422001234',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','2','Tran Nhat Minh Hai','590421001235',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','2','Nguyen Tran Phu','000498001422',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','2','Nguyen Tien Tai','550422129640',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','2','Le The Phong','000122001234',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','2','Le Ton Nu Hoang','114122111294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','2','Le Thai Nguyen','943210012940',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','2','Tran Tien Trang','000000001294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','3','Nguyen Trang Quoc Phu','001422001234',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','3','Nguyen Thanh Tra','500421001235',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','3','Bui Nguyen Thanh Mai','100498001422',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','3','Tran Phung Hoang Minh','120422129640',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','4','Le The Phong Dat','000122000000',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','4','Le Ton Nu','114198111294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','4','Le Thai Thi Nguyen','003210012940',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','4','Tran Tien Trang','000010001294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','5','Tran Thi Thuy An','300498001422',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','5','Nguyen Phan Hoang Vy','210422129640',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','5','Nguyen Thanh Thuy Truc','870122000000',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','6','Nguyen Ngoc Truc','004198111294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','6','Nguyen Quyet Chinh','001230012940',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','6','Nguyen Anh Tuan','000120001294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','7','Tran Nhat Nam','123120001294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','7','Le Thi Ngoc Truc','990120001294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','7','Tran Thuy Tien','800120001294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','7','Do Phuong Thao','060120001294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','7','Tran Nguyen Hoang Phuc','000123001294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','8','Le Chi Minh','670122000000',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','8','Le Nguyen Diem Quynh','004198222294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','9','Truong Nhat Tuyen','001234512940',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','9','Trinh Gia Huy','000970001294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','10','Le Kim Nguyen','000870001294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','10','Do Manh Huy','000770001294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','10','Nguyen Huu Duc','000670001294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homeimprovement','11','Nguyen The Hoang Long','550543001234',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homeimprovement','11','Tran Hoang Phuc Long','405522001235',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homeimprovement','11','Nguyen Tien Hoang','550444441422',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homeimprovement','11','Phong Quoc Dat','761822121235',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homeimprovement','11','Hoang Kieu Long','554643201234',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('moveronline','12','Le Duc Thuan','594122110000',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('moveronline','12','Nguyen Hoang Ton','852360012940',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('moveronline','12','Nguyen Thai Kim','000122001294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('moveronline','12','Nguyen Trang Loan','000564001234',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('moveronline','12','Tran Nhat Hai','220421001235',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('moveronline','13','Doan Ngoc Han','000948001422',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('moveronline','13','Ngoc Tien','550422946640',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('moveronline','13','Le Hoang Phong','001122001234',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('moveronline','13','Le Ton Nu Hue','114112311294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('moveronline','13','Ngo Tuan Tu','043210012940',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('electrician','14','Tran Tien Trang Hoang','000010001295',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('electrician','14','Nguyen Quoc Phu','001422001334',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('electrician','14','Nguyen Thanh Tuan Tu','500461001235',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('electrician','14','Nguyen Thanh Mai','100498009422',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('electrician','14','Tran Hoang Minh','120922129640',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('electrician','14','Le Phong Dat','000122009000',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('electrician','14','Le Ton Nam','114198191294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('electrician','14','Le Thi Nguyen','003910012940',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homeimprovement','15','Tran Tien Trang Anh','000110001294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homeimprovement','15','Tran Thi Thuy Diem','310498001422',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homeimprovement','15','Nguyen Phan Vy','210422729640',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homeimprovement','15','Nguyen Thuy Truc','870127000000',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homeimprovement','16','Nguyen Ngoc Trang','004178111294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homeimprovement','16','Nguyen Quyet Tam','001270012940',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homeimprovement','16','Nguyen Anh Tam','000120701294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('getintouch','17','Nguyen Quoc Phong','011422001334',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('plumbers','17','Nguyen Thanh Tu','100461001235',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('getintouch','18','Nguyen Trong Anh','110498009422',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('plumbers','18','Tran Hoang Man','110922129640',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('getintouch','19','Le Phong Dien','100122009000',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('plumbers','19','Le Tran Tinh','014198191294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('getintouch','20','Le Tran Tien','001910012940',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('plumbers','20','Tran Trong Anh','050110001294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('getintouch','21','Tran Tien Tai','320498001422',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('plumbers','21','Nguyen Phan Tuan Kiet','210429729640',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('getintouch','22','Nguyen Truc Anh Kiet','870927000000',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('plumbers','22','Nguyen Tuan Phong','001178111294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('getintouch','23','Nguyen Tran Tam','001670012940',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('plumbers','23','Nguyen Anh Tam','000125701294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','24','Le Ky Quoc','011922001334',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','24','Nguyen Thanh Tung','180461001235',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','24','Trang Tuan Dat','110468009422',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','25','Nguyen Trong Toan','109922127979',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','25','Doan Gia Bao','100192009000',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','25','Dang Hoang Viet','064198191294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','25','Le The Khoi','001914012940',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','25','Tran Trong Anh Tai','050160001294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','26','Tran Tuan Tai','320498001822',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','26','Nguyen Tuan Kiet','210429929640',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','26','Nguyen Anh Kiet','870927060000',null,1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','27','Nguyen Tien Phong','001176111294',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','27','Nguyen Tran Anh Tam','001640012940',null,1) 
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','27','Nguyen Thi Tam','000125701594',null,1) 
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Nguyen The Viet','550422001234','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Tran Nhat Minh','550422001235','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Tran Nguyen Dat Phu','550422001422','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Trang Quoc Dat','550422121235','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Nguyen The Phong','554122001234','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Nguyen Hoang Thai Quy','594122111294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Nguyen Le Thai Viet','941230012940','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Nguyen Thai Dat Trang','599122001294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','2','Nguyen Trang Quoc','000422001234','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','2','Tran Nhat Minh Hai','590421001235','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','2','Nguyen Tran Phu','000498001422','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','2','Nguyen Tien Tai','550422129640','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','2','Le The Phong','000122001234','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','2','Le Ton Nu Hoang','114122111294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','2','Le Thai Nguyen','943210012940','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','2','Tran Tien Trang','000000001294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','3','Nguyen Trang Quoc Phu','001422001234','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','3','Nguyen Than hTra','500421001235','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','3','Bui Nguyen Thanh Mai','100498001422','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','3','Tran Phung Hoang Minh','120422129640','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','4','Le The Phong Dat','000122000000','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','4','Le Ton Nu','114198111294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','4','Le Thai Thi Nguyen','003210012940','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','4','Tran Tien Trang','000010001294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','5','Tran Thi Thuy An','300498001422','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','5','Nguyen Phan Hoang Vy','210422129640','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','5','Nguyen Thanh Thuy Truc','870122000000','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','6','Nguyen Ngoc Truc','004198111294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','6','Nguyen Quyet Chinh','001230012940','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','6','Nguyen Anh Tuan','000120001294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','7','Tran Nhat Nam','123120001294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','7','Le Thi Ngoc Truc','990120001294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','7','Tran Thuy Tien','800120001294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','7','Do Phuong Thao','060120001294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','7','Tran Nguyen Hoang Phuc','000123001294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','8','Le Chi Minh','670122000000','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','8','Le Nguyen Diem Quynh','004198222294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','9','Truong Nhat Tuyen','001234512940','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','9','Trinh Gia Huy','000970001294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','10','Le Kim Nguyen','000870001294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','10','Do Manh Huy','000770001294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','10','Nguyen Huu Duc','000670001294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homeimprovement','11','Nguyen The Hoang Long','550543001234','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homeimprovement','11','Tran Hoang Phuc Long','405522001235','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homeimprovement','11','Nguyen Tien Hoang','550444441422','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homeimprovement','11','Phong Quoc Dat','761822121235','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homeimprovement','11','Hoang Kieu Long','554643201234','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('moveronline','12','Le Duc Thuan','594122110000','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('moveronline','12','Nguyen Hoang Ton','852360012940','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('moveronline','12','Nguyen Thai Kim','000122001294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('moveronline','12','Nguyen Trang Loan','000564001234','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('moveronline','12','Tran Nhat Hai','220421001235','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('moveronline','13','Doan Ngoc Han','000948001422','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('moveronline','13','Ngoc Tien','550422946640','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('moveronline','13','Le Hoang Phong','001122001234','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('moveronline','13','Le Ton Nu Hue','114112311294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('moveronline','13','Ngo Tuan Tu','043210012940','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('electrician','14','Tran Tien Trang Hoang','000010001295','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('electrician','14','Nguyen Quoc Phu','001422001334','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('electrician','14','Nguyen Thanh Tuan Tu','500461001235','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('electrician','14','Nguyen Thanh Mai','100498009422','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('electrician','14','Tran Hoang Minh','120922129640','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('electrician','14','Le Phong Dat','000122009000','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('electrician','14','Le Ton Nam','114198191294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('electrician','14','Le Thi Nguyen','003910012940','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homeimprovement','15','Tran Tien Trang Anh','000110001294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homeimprovement','15','Tran Thi Thuy Diem','310498001422','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homeimprovement','15','Nguyen Phan Vy','210422729640','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homeimprovement','15','Nguyen Thuy Truc','870127000000','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homeimprovement','16','Nguyen Ngoc Trang','004178111294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homeimprovement','16','Nguyen Quyet Tam','001270012940','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homeimprovement','16','Nguyen Anh Tam','000120701294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('getintouch','17','Nguyen Quoc Phong','011422001334','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('plumbers','17','Nguyen Thanh Tu','100461001235','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('getintouch','18','Nguyen Tron gAnh','110498009422','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('plumbers','18','Tran Hoang Man','110922129640','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('getintouch','19','Le Phong Dien','100122009000','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('plumbers','19','Le Tran Tinh','014198191294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('getintouch','20','Le Tran Tien','001910012940','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('plumbers','20','Tran Trong Anh','050110001294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('getintouch','21','Tran Tien Tai','320498001422','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('plumbers','21','Nguyen Phan Tuan Kiet','210429729640','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('getintouch','22','Nguyen Truc Anh Kiet','870927000000','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('plumbers','22','Nguyen Tuan Phong','001178111294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('getintouch','23','Nguyen Tran Tam','001670012940','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('plumbers','23','Nguyen Anh Tam','000125701294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','24','Le Ky Quoc','011922001334','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','24','Nguyen Thanh Tung','180461001235','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','24','Trang Tuan Dat','110468009422','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','25','Nguyen Trong Toan','109922127979','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','25','Doan Gia Bao','100192009000','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','25','Dang Hoang Viet','064198191294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','25','Le The Khoi','001914012940','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','25','Tran Trong Anh Tai','050160001294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','26','Tran Tuan Tai','320498001822','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','26','Nguyen Tuan Kiet','210429929640','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','26','Nguyen Anh Kiet','870927060000','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','27','Nguyen Tien Phong','001176111294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','27','Nguyen Tran Anh Tam','001640012940','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('fptcompany','27','Nguyen Thi Tam','000125701594','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
 --Bảng detail service
 INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('homecleaning','1','1','Deep Cleaning',100000,null,1)
 INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('homecleaning','1','2','Deep Cleaning',100000,null,1)
@@ -1523,18 +1772,36 @@ INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,descri
 INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('plumbers','22','84','Toilet',60000,null,1)
 INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('getintouch','23','85','Bathtub',120000,null,1)
 INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('plumbers','23','86','Bathtub',140000,null,1)
-INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','24','73','Satellite TV',100000,null,1)
-INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','24','74','Satellite TV',100000,null,1)
-INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','24','75','Satellite TV',100000,null,1)
-INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','25','76','Wifi',50000,null,1)
-INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','25','77','Wifi',50000,null,1)
-INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','25','78','Wifi',50000,null,1)
-INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','25','79','Wifi',50000,null,1)
-INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','25','80','Wifi',50000,null,1)
-INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','26','81','Computers',50000,null,1)
-INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','26','82','Computers',50000,null,1)
-INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','26','83','Computers',50000,null,1)
-INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','27','84','Home CCTV',50000,null,1)
-INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','27','85','Home CCTV',50000,null,1)
-INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','27','86','Home CCTV',50000,null,1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','24','87','Satellite TV',100000,null,1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','24','88','Satellite TV',100000,null,1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','24','89','Satellite TV',100000,null,1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','25','90','Wifi',50000,null,1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','25','91','Wifi',50000,null,1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','25','92','Wifi',50000,null,1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','25','93','Wifi',50000,null,1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','25','94','Wifi',50000,null,1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','26','95','Computers',50000,null,1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','26','96','Computers',50000,null,1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','26','97','Computers',50000,null,1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','27','98','Home CCTV',50000,null,1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','27','99','Home CCTV',50000,null,1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','27','100','Home CCTV',50000,null,1)
+
+INSERT INTO tblUser(username, password, role_ID, phone, email, status) 
+VALUES('hello', '1', 'CUS', '0123456789', 'hello@gmail.com', 1)
+
+SELECT * FROM tblUser
+
+
+
+
+
+
+
+
+
+
+
+
+
 
