@@ -68,42 +68,41 @@
             <!-- Navbar Start -->
             <div class="container-fluid nav-bar bg-transparent">
                 <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4 relative">
-                    <a href="" class="navbar-brand d-flex align-items-center text-center">
-                        <a href="LoadingProductAndServiceCategory" class="navbar-brand d-flex align-items-center text-center">
-                            <div class="p-2 me-2">
-                                <img class="img-fluid" src="img/logo.png" alt="Icon" style="width: 40px; height: 40px;">
-                            </div>
-                            <h1 class="text-primary">E-Butler</h1>
-                        </a>
-                        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarCollapse">
-                            <div class="navbar-nav ms-auto">
-                                <a href="LoadingProductAndServiceCategory" class="nav-item nav-link navigator">Home</a>
-                                <a href="#product" class="nav-item nav-link navigator active">Product</a>
-                                <div class="nav-item dropdown">
-                                    <a href="#service" class="nav-link navigator">Service</a>
-                                </div>
-                                <a href="#help" class="nav-item nav-link navigator">Help</a>
-                                <div class="search absolute hide">
-                                    <a><i class="fa-solid fa-magnifying-glass"></i></a>
-                                    <input
-                                        style="flex: 1; background-color: transparent; border: none; outline: none; margin: 0 20px;"
-                                        type="text" placeholder="Type and press enter">
-                                    <a class="search-close opacity"><i class="fa-solid fa-xmark"></i></a>
-                                </div>
-                                <div class="nav-item dropdown">
-                                    <a class="nav-link"><i class="fa-solid fa-user"></i></a>
-                                    <div class="dropdown-menu rounded-0 m-12">
-                                        <a style="color: var(--primary-color); font-weight: bold;" href="MainController?action=GoToUserProfile" class="dropdown-item login--link"><%=login_user.getUsername()%></a>
-                                        <a href="MainController?action=Logout" class="dropdown-item register--link">logout</a>
-                                    </div>
-                                </div>
-                                <a class="nav-item nav-link search-open"><i class="fa-solid fa-magnifying-glass"></i></a>
-                                <a href="MainController?action=MoveToCart" class="nav-item nav-link"><i class="fa-solid fa-cart-shopping"></i></a>
-                            </div>
+                    <a href="landingPage.html" class="navbar-brand d-flex align-items-center text-center">
+                        <div class="p-2 me-2">
+                            <img class="img-fluid" src="img/logo.png" alt="Icon" style="width: 40px; height: 40px;">
                         </div>
+                        <h1 class="text-primary">E-Butler</h1>
+                    </a>
+                    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <div class="navbar-nav ms-auto">
+                            <a href="#" class="nav-item nav-link active navigator">Home</a>
+                            <a href="#product" class="nav-item nav-link navigator">Product</a>
+                            <div class="nav-item dropdown">
+                                <a href="#service" class="nav-link navigator">Service</a>
+                            </div>
+                            <a href="#help" class="nav-item nav-link navigator">Help</a>
+                            <div class="search absolute hide">
+                                <a><i class="fa-solid fa-magnifying-glass"></i></a>
+                                <input
+                                    style="flex: 1; background-color: transparent; border: none; outline: none; margin: 0 20px;"
+                                    type="text" placeholder="Type and press enter">
+                                <a class="search-close opacity"><i class="fa-solid fa-xmark"></i></a>
+                            </div>
+                            <div class="nav-item dropdown">
+                                <a class="nav-link"><i class="fa-solid fa-user"></i></a>
+                                <div class="dropdown-menu rounded-0 m-12">
+                                    <a style="color: var(--primary-color); font-weight: bold;" href="MainController?action=GoToUserProfile" class="dropdown-item login--link"><%=login_user.getUsername()%></a>
+                                    <a href="MainController?action=Logout" class="dropdown-item register--link">logout</a>
+                                </div>
+                            </div>
+                            <a class="nav-item nav-link search-open "><i class="fa-solid fa-magnifying-glass"></i></a>
+                            <a href="MainController?action=MoveToCart" class="nav-item nav-link"><i class="fa-solid fa-cart-shopping"></i></a>
+                        </div>
+                    </div>
                 </nav>
             </div>
             <!-- Navbar End -->

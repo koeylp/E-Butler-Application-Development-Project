@@ -4,11 +4,13 @@
  */
 package com.ebutler.swp.controllers;
 
-import com.ebutler.swp.dao.CustomerDAO;
-import com.ebutler.swp.dto.CustomerDTO;
+import com.ebutler.swp.dao.UserDAO;
+import com.ebutler.swp.dto.GoogleUserDTO;
 import com.ebutler.swp.dto.UserDTO;
+import com.ebutler.swp.utils.GoogleUtils;
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,27 +18,47 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Admin
+ * @author thekh
  */
-public class GoToUserProfileController extends HttpServlet {
+@WebServlet(name = "LoginWithGoogleController", urlPatterns = {"/LoginWithGoogleController"})
+public class LoginWithGoogleController extends HttpServlet {
 
-   private static final String ERROR = "errorPage.jsp";
-   private static final String SUCCESS = "customer_profilePage.jsp";
+    private static final String ERROR = "errorPage.jsp";
+    private static final String SUCCESS = "RegisterController";
+    private static final String SUCCESS_ALREADY_CUS = "LoadingProductAndServiceCategory";
+    private static final String SUCCESS_ALREADY_PRO = "Provider_ProductController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            HttpSession session = request.getSession();
-            UserDTO currentUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            CustomerDAO dao = new CustomerDAO();
-            CustomerDTO customer = dao.getCurrentCustomer(currentUser.getUsername());
-            session.setAttribute("CURRENT_CUSTOMER", customer);
-            url = SUCCESS;
+            String code = request.getParameter("code");
+            UserDAO dao = new UserDAO();
+            UserDTO loginUser = new UserDTO();
+            if (!code.isEmpty()) {
+                HttpSession session = request.getSession();  
+                String accessToken = GoogleUtils.getToken(code);
+                GoogleUserDTO googleUser = GoogleUtils.getUserInfo(accessToken);
+                if (!dao.isExistedEmail(googleUser.getEmail())) {
+                    request.setAttribute("GOOGLE_USER", googleUser);
+                    url = SUCCESS;
+                } else {
+                    loginUser = dao.getUserByEmail(googleUser.getEmail());
+                    String role = dao.getUserByEmail(googleUser.getEmail()).getRole_id();
+                    if (role.equals("CUS")) {
+                        session.setAttribute("LOGIN_USER", loginUser);
+                        url = SUCCESS_ALREADY_CUS;
+                    } else if (role.equals("PRO")) {
+                        session.setAttribute("LOGIN_USER", loginUser);
+                        url = SUCCESS_ALREADY_PRO;
+                    }
+                }
+                
+            }
         } catch (Exception e) {
-            e.printStackTrace();
-        }finally{
+            log("Error at LoginGoogleController: " + e.toString());
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

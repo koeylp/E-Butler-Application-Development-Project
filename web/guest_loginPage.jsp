@@ -94,10 +94,11 @@
                                         </div>
 
                                         <div class="auth-form__social-connection">
-                                            <a href="" class="btn btn--with-icon--google social-connection__item">
+                                            <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/EButler_swp391/MainController?action=LoginWithGoogle&response_type=code
+                                       &client_id=1081251047556-e4afc0d4vf6ud95n2faf0dufevp65fj5.apps.googleusercontent.com&approval_prompt=force" class="btn btn--with-icon--google social-connection__item">
                                                 <i class="fa-brands fa-google"></i>
                                                 <span class="auth-form__social-connection__title">
-                                                    Connect with Google
+                                                    Login with Google
                                                 </span> 
                                             </a>
                                         </div>
