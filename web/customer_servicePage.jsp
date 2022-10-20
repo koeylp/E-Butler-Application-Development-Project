@@ -214,9 +214,7 @@
                                 <div style="margin: auto 0;" class="pad-2 scrollable-y full-h">
                                     <!-- Staff start -->
                                     
-                                   
-                                    
-                                    <c:forEach items="${sessionScope.SERVICE_DETAIL_BY_TYPE}" var="o">
+                                    <c:forEach items="${sessionScope.STAFF_LIST_BY_TYPE}" var="o">
                                     <div style="height: 200px;" class="flex-between border-bot pad-y-1">
                                         <div class="full-h">
                                             <div class="img full-h full-w">
@@ -232,7 +230,7 @@
                                             </div>
                                             <div class="flex-between">
                                                 <div>
-                                                    <span class="txt-lg bold">${x.name}</span>
+                                                    <span class="txt-lg bold">${o.name}</span>
                                                 </div>
                                                 <div class="order-price txt-sm bold col l-2">
                                                     <span>
@@ -253,9 +251,14 @@
                                             </div>
                                         </div>
                                     </div
-                                    </c:forEach>
+                                    
+                                    
+                                    
                                     <!--------------------->
-<!--                                    <div style="height: 200px;" class="flex-between border-bot pad-y-1">
+                                    </c:forEach>
+                                    
+                                    
+<!--                                 <div style="height: 200px;" class="flex-between border-bot pad-y-1">
                                         <div class="full-h">
                                             <div class="img full-h full-w">
                                                 <img src="https://chisnghiax.com/ciseco/static/media/detail1.f45e3a4d9bfeafd2f70b.jpg"
