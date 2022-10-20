@@ -4,10 +4,11 @@
  */
 package com.ebutler.swp.controllers;
 
-import com.ebutler.swp.dao.CustomerDAO;
-import com.ebutler.swp.dto.CustomerDTO;
-import com.ebutler.swp.dto.UserDTO;
+import com.ebutler.swp.dao.ServiceDAO;
+import com.ebutler.swp.dto.ServiceDetailDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,26 +17,25 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Admin
+ * @author Dang Viet
  */
-public class GoToUserProfileController extends HttpServlet {
+public class ServiceWordDetailDownController extends HttpServlet {
 
-   private static final String ERROR = "errorPage.jsp";
-   private static final String SUCCESS = "customer_profilePage.jsp";
-
+    private String ERROR = "error.jsp";
+    private String SUCCESS = "customer_servicePage.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
             HttpSession session = request.getSession();
-            UserDTO currentUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            CustomerDAO dao = new CustomerDAO();
-            CustomerDTO customer = dao.getCurrentCustomer(currentUser.getUsername());
-            session.setAttribute("CURRENT_CUSTOMER", customer);
+            String category_ID = (String) session.getAttribute("CATEGORYID");
+            String service_ID = (String) session.getAttribute("SERVICEID");
+            ServiceDAO dao = new ServiceDAO();
+            List<ServiceDetailDTO> list = dao.sortListServiceDetailByTypeWordDOWN(category_ID, service_ID);
+            session.setAttribute("SERVICE_DETAIL_BY_TYPE", list);
             url = SUCCESS;
         } catch (Exception e) {
-            e.printStackTrace();
         }finally{
             request.getRequestDispatcher(url).forward(request, response);
         }

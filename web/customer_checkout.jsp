@@ -1390,7 +1390,6 @@
                                                                         </label>
                                                                     </div>-->
                                     <input type="hidden" name="total" value="<%=total%>">
-
                                     <button style="background: blue" type="submit" name="action" value="Checkout" class="site-btn">Proceed</button>
                                 </div>
                             </div>

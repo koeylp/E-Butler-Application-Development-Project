@@ -15,6 +15,7 @@ CREATE TABLE tblUserRole (
 GO
 
 
+
 -----USER-----
 CREATE TABLE tblUser(
 	username nvarchar(30) PRIMARY KEY,
@@ -75,7 +76,7 @@ CREATE TABLE tblAddress(
 	[user_ID] nvarchar(30) REFERENCES tblUser(username) NOT NULL
 )
 
---SELECT category_ID, name, image FROM tblProductCategory
+
 
 -----PRODUCT-----
 CREATE TABLE tblProductCategory (
@@ -84,7 +85,6 @@ CREATE TABLE tblProductCategory (
 	[image] [nvarchar](max) NOT NULL
 )
 
---SELECT detail.id, detail.provider_ID, detail.product_ID, detail.name, detail.quantity, detail.price, detail.image, detail.description, detail.status FROM tblProduct product JOIN tblProductDetail detail on product.product_ID = detail.product_ID JOIN tblProductCategory cate ON cate.category_ID = product.category_ID WHERE cate.category_ID = 'BAR' AND product.product_ID = 15
 
 CREATE TABLE tblProduct (
 	product_ID nvarchar(10) PRIMARY KEY NOT NULL , 
@@ -150,6 +150,7 @@ CREATE TABLE tblStaff (
 	[status] decimal(1) NOT NULL,
 )
 GO
+
 
 CREATE TABLE tblServiceDetail(
 	id [int] IDENTITY(1,1) PRIMARY KEY , 
@@ -1110,6 +1111,7 @@ INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('18','OSH'
 
 --Bảng sản phẩm chi tiết theo từng sản phẩm cứng 
 
+
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Dinner Spoon Silver',50,30000, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Cake Fork Silver',50,20000, 'https://img.christofle.com/image/upload/s--2MQbtDgo--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/media/catalog/product/C/a/Cake_20fork_20America_20_20Silver_20plated_00001046000101_F_2_1.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Tea Spoon Gold',50,86000, 'https://www.nicepng.com/png/full/137-1375331_milano-tea-spoon-gold-plated-gold-spoon-png.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
@@ -1584,8 +1586,7 @@ INSERT INTO tblService(service_ID, category_ID, name , image) VALUES ('27','IT',
 --bảng nhân viên
 
 INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Nguyen The Viet','550422001234','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Tran Nhat
-Minh','550422001235','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Tran Nhat Minh','550422001235','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
 INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Tran Nguyen Dat Phu','550422001422','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
 INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Trang Quoc Dat','550422121235','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
 INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Nguyen The Phong','554122001234','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)

@@ -87,17 +87,18 @@
                             </div>
 
                             <div class="auth-form__body">
-                                <form action="MainController" method="POST">
+                                <form action="MainController" method="POST" id="form">
                                     <div class="auth-form__form">
                                         <div class="auth-form__title">
                                             <p>Connect to E-Butler</p>
                                         </div>
 
                                         <div class="auth-form__social-connection">
-                                            <a href="" class="btn btn--with-icon--google social-connection__item">
+                                            <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/EButler_swp391/MainController?action=LoginWithGoogle&response_type=code
+                                       &client_id=1081251047556-e4afc0d4vf6ud95n2faf0dufevp65fj5.apps.googleusercontent.com&approval_prompt=force" class="btn btn--with-icon--google social-connection__item">
                                                 <i class="fa-brands fa-google"></i>
                                                 <span class="auth-form__social-connection__title">
-                                                    Connect with Google
+                                                    Login with Google
                                                 </span> 
                                             </a>
                                         </div>
@@ -105,6 +106,11 @@
                                         <input type="text" name="username" class="auth-form__input border-bottom m-y-1 pad-x-0" required="" placeholder="Username">
 
                                         <input type="password" name="password" class="auth-form__input border-bottom m-y-1 pad-x-0" required="" placeholder="Password">
+                                        
+                                         <!-- Recapcha -->
+                                            <div class="g-recaptcha" data-sitekey="6LcR5ZUiAAAAAJEVFWk0F2s2WVeoFhAnRHQDaCGW"></div>
+                                            <div id="error"></div>
+                                            <!-- Recapcha -->
 
                                     </div>
 
@@ -129,6 +135,7 @@
                                     <div class="auth-form__controls m-y-2">
                                         <button type="submit" name="action" value="Login" id="btn-login" class="btn btn-size-s btn-primary px-5 py-2">Login</button>
                                         <input type="hidden" name="isLogin" value="true">
+                                         <input type="hidden" name="action" value="Login">
                                     </div>
                                 </form>
                             </div>
@@ -147,9 +154,11 @@
                                     <button type="submit" class="dropdown-item login--link auth-form__heading auth-form__switch-btn">Login</button>
                                     <input value="Login" name="action" type="hidden">
                                     <input value="false" name="isLogin" type="hidden">
-                                </form>
+                                </form>                     
                             </div>
+                            
                             <div class="forgot-password-form-container">
+                                 
                                 <img style="width: 160px; height: 160px" src="https://scontent.fsgn16-1.fna.fbcdn.net/v/t1.15752-9/306726020_513456713943336_4656678356879644206_n.png?_nc_cat=111&ccb=1-7&_nc_sid=ae9488&_nc_ohc=uxAtFMpSQXcAX-Wzu8F&_nc_ht=scontent.fsgn16-1.fna&oh=03_AVKUncPUZhez3W-9IlAzLja65ocWn5f4EZlifA9Glk3_-A&oe=635385F9" alt="">
                                 <h1>FORGOT PASSWORD?</h1>
                                 <h5>Don't worry! Enter your email below and we'll email you with instruction on how to reset your password.</h5>
@@ -160,6 +169,9 @@
                         <!-- Forgot password End -->
                     </div>
                 </div>
+                                
+                                         
+        
             </div>
             <!-- Header End -->
 
@@ -250,6 +262,27 @@
 
         <!-- javascript -->
         <script src="js/login.js"></script>
+        
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <script>
+          window.onload = function(){
+              let isValid = false;
+              const form = document.getElementById("form");
+              const error = document.getElementById("error");
+              
+              form.addEventListener("submit", function(e){
+                  e.preventDefault();
+                  const response = grecaptcha.getResponse();
+                  console.log(response);
+                  if(response){
+                      form.submit();
+                  }else{
+                      error.innerHTML = "Please check";
+                  }
+              });
+          }
+      </script>
+      
     </body>
 
 </html>
