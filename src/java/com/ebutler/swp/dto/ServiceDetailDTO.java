@@ -28,9 +28,19 @@ public class ServiceDetailDTO {
         this.description = "";
         this.status = 0;
     }
-
-    public ServiceDetailDTO(int id, String provider_ID, String service_ID, int staff_ID, String name, double price, String description, int status) {
+    
+    public ServiceDetailDTO(int id ,String provider_ID, String service_ID, int staff_ID, String name, double price, String description, int status) {
         this.id = id;
+        this.provider_ID = provider_ID;
+        this.service_ID = service_ID;
+        this.staff_ID = staff_ID;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.status = status;
+    }
+
+    public ServiceDetailDTO(String provider_ID, String service_ID, int staff_ID, String name, double price, String description, int status) {
         this.provider_ID = provider_ID;
         this.service_ID = service_ID;
         this.staff_ID = staff_ID;
@@ -42,10 +52,6 @@ public class ServiceDetailDTO {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getProvider_ID() {

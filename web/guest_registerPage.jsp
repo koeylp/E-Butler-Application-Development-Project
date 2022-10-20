@@ -42,11 +42,7 @@
         <%
             ArrayList<RoleDTO> role_list = (ArrayList<RoleDTO>) request.getAttribute("ROLE_LIST");
             GoogleUserDTO googleUser = (GoogleUserDTO) request.getAttribute("GOOGLE_USER");
-            if (googleUser == null) {
-                googleUser = new GoogleUserDTO();
-                googleUser.setName("");
-                googleUser.setEmail("");
-            }
+            
             CustomerDTO customer = (CustomerDTO) request.getAttribute("CUS_INFO");
             CustomerDTO customerError = (CustomerDTO) request.getAttribute("CUS_ERROR");
             ProviderDTO provider = (ProviderDTO) request.getAttribute("PRO_INFO");
@@ -59,6 +55,12 @@
             provider = (provider == null) ? new ProviderDTO() : provider;
             role_id = (role_id == null) ? "" : role_id;
             role_list = (role_list == null) ? new ArrayList<RoleDTO>() : role_list;
+            
+            if (googleUser == null) {
+                googleUser = new GoogleUserDTO();
+                googleUser.setName(customer.getName());
+                googleUser.setEmail(customer.getEmail());
+            }
 
             String class_Hide = "hide";
         %>
