@@ -1,3 +1,5 @@
+<%@page import="com.ebutler.swp.dto.ServiceDetailDTO"%>
+<%@page import="com.ebutler.swp.dto.ProductDetailDTO"%>
 <%@page import="com.ebutler.swp.dto.CustomerDTO"%>
 <%@page import="com.ebutler.swp.dto.CartDTO"%>
 <%@page import="com.ebutler.swp.dto.CartServiceDTO"%>
@@ -69,7 +71,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav ms-auto">
-                            <a href="#" class="nav-item nav-link active navigator">Home</a>
+                            <a href="LoadingProductAndServiceCategory" class="nav-item nav-link active navigator">Home</a>
                             <a href="#product" class="nav-item nav-link navigator">Product</a>
                             <div class="nav-item dropdown">
                                 <a href="#service" class="nav-link navigator">Service</a>
@@ -127,8 +129,8 @@
                                         <div style="margin-left: 2rem;" class="flex-col">
                                             <span class="txt-lg">CONTACT INFO</span>
                                             <div class="flex-between txt-sm bold">
-                                                <span><%= customer.getName() %></span>
-                                                <span style="margin-left: 1rem;"> <%= customer.getPhone() %></span>
+                                                <span><%= customer.getName()%></span>
+                                                <span style="margin-left: 1rem;"> <%= customer.getPhone()%></span>
                                             </div>
                                         </div>
                                     </div>
@@ -231,440 +233,242 @@
                                 <div class="flex-between txt-lg bold">
                                     <span>Order Summary</span>
                                 </div>
-                                <!-- Order head -->
-                                <div style="background-color: #F9FAFB;" class="pad-1 m-y-12">
+                                <!-- Order head product-->
+                                <div style="background-color: #9A9DA1;" class="pad-1 m-y-12">
                                     <div class="flex-between flex-verticle-center">
                                         <span class="txt-lg bold">Product</span>
-                                        <span class="txt-md">order-date</span>
+
                                     </div>
                                 </div>
                                 <div style="max-height: 320px;" class="product scrollable-y">
                                     <!-- Order detail -->
+                                    <%
+                                        double sub_product_total = 0;
+                                        if (cart != null) {
+                                            for (ProductDetailDTO product : cart.getCart().values()) {
+                                                sub_product_total += product.getPrice() * product.getQuantity();
+                                    %>
                                     <div class="pad-y-12">
                                         <div class="order-card m-y-12">
                                             <div class="flex">
-                                                <div class="flex-center order-img">
-                                                    <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
+                                                <div style="margin-left: 10px" class="flex-center order-img">
+                                                    <img src="<%= product.getImage()%>"
                                                          alt="">
                                                 </div>
                                                 <div style="flex: 1; margin-left: 1rem;" class="flex-col">
                                                     <div class="flex-between">
                                                         <div class="flex-col flex-horizon-center">
-                                                            <span class="txt-md bold">Product name</span>
-                                                            <div class="flex-horizon-center flex-center">
-                                                                <span class="txt-xs">Product</span>
-                                                                <span class="m-x-12">|</span>
-                                                                <span class="txt-xs">Product Category</span>
-                                                            </div>
+                                                            <span class="txt-md bold"><%= product.getName()%></span>
                                                         </div>
 
                                                         <div class="order-price txt-sm bold">
                                                             <span>
-                                                                $369.000
+                                                                <%= product.getPrice() * product.getQuantity() %>
                                                             </span>
                                                         </div>
                                                     </div>
                                                     <div style="height: 50%;" class="flex-end flex-col">
                                                         <div class="flex-between">
                                                             <div style="height: 50%;" class="flex-center col-5">
-                                                                <button class="btn-circle flex-center txt-xs"
-                                                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                                    <i class="fas fa-minus"></i>
-                                                                </button>
+                                                                <!--                                                                <button class="btn-circle flex-center txt-xs"
+                                                                                                                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                                                                                                   <i class="fas fa-minus"></i>
+                                                                                                                                </button>-->
 
                                                                 <div class="">
                                                                     <input
                                                                         style="text-align: center; outline: none; font-weight: bold; border: none;"
-                                                                        min="1" value="1" name="quantity" type="number"
-                                                                        class="form-control" />
+                                                                        min="1" value="<%= product.getQuantity()%>" name="quantity" type="number"
+                                                                        class="form-control" readonly="" />
                                                                 </div>
 
-                                                                <button class=" btn-circle flex-center txt-xs"
-                                                                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                                    <i class="fas fa-plus"></i>
-                                                                    <input type="hidden" name="plus" value="Plus">
-                                                                </button>
+                                                                <!--                                                                <button class=" btn-circle flex-center txt-xs"
+                                                             </button>-->
                                                             </div>
-                                                            <button
-                                                                style="color: var(--primary-color); border: none; outline: none; background-color: transparent;"
-                                                                class="bold txt-md">
-                                                                Remove
-                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="pad-y-12">
-                                        <div class="order-card m-y-12">
-                                            <div class="flex">
-                                                <div class="flex-center order-img">
-                                                    <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
-                                                         alt="">
-                                                </div>
-                                                <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                                    <div class="flex-between">
-                                                        <div class="flex-col flex-horizon-center">
-                                                            <span class="txt-md bold">Product name</span>
-                                                            <div class="flex-horizon-center flex-center">
-                                                                <span class="txt-xs">Product</span>
-                                                                <span class="m-x-12">|</span>
-                                                                <span class="txt-xs">Product Category</span>
-                                                            </div>
-                                                        </div>
+                                    <%
+                                            }
+                                            total += sub_product_total;
+                                        }
+                                    %>
 
-                                                        <div class="order-price txt-sm bold">
-                                                            <span>
-                                                                $369.000
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div style="height: 50%;" class="flex-end flex-col">
-                                                        <div class="flex-between">
-                                                            <div style="height: 50%;" class="flex-center col-5">
-                                                                <button class="btn-circle flex-center txt-xs"
-                                                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                                    <i class="fas fa-minus"></i>
-                                                                </button>
 
-                                                                <div class="">
-                                                                    <input
-                                                                        style="text-align: center; outline: none; font-weight: bold; border: none;"
-                                                                        min="1" value="1" name="quantity" type="number"
-                                                                        class="form-control" />
-                                                                </div>
-
-                                                                <button class=" btn-circle flex-center txt-xs"
-                                                                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                                    <i class="fas fa-plus"></i>
-                                                                    <input type="hidden" name="plus" value="Plus">
-                                                                </button>
-                                                            </div>
-                                                            <button
-                                                                style="color: var(--primary-color); border: none; outline: none; background-color: transparent;"
-                                                                class="bold txt-md">
-                                                                Remove
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="pad-y-12">
-                                        <div class="order-card m-y-12">
-                                            <div class="flex">
-                                                <div class="flex-center order-img">
-                                                    <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
-                                                         alt="">
-                                                </div>
-                                                <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                                    <div class="flex-between">
-                                                        <div class="flex-col flex-horizon-center">
-                                                            <span class="txt-md bold">Product name</span>
-                                                            <div class="flex-horizon-center flex-center">
-                                                                <span class="txt-xs">Product</span>
-                                                                <span class="m-x-12">|</span>
-                                                                <span class="txt-xs">Product Category</span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="order-price txt-sm bold">
-                                                            <span>
-                                                                $369.000
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div style="height: 50%;" class="flex-end flex-col">
-                                                        <div class="flex-between">
-                                                            <div style="height: 50%;" class="flex-center col-5">
-                                                                <button class="btn-circle flex-center txt-xs"
-                                                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                                    <i class="fas fa-minus"></i>
-                                                                </button>
-
-                                                                <div class="">
-                                                                    <input
-                                                                        style="text-align: center; outline: none; font-weight: bold; border: none;"
-                                                                        min="1" value="1" name="quantity" type="number"
-                                                                        class="form-control" />
-                                                                </div>
-
-                                                                <button class=" btn-circle flex-center txt-xs"
-                                                                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                                    <i class="fas fa-plus"></i>
-                                                                    <input type="hidden" name="plus" value="Plus">
-                                                                </button>
-                                                            </div>
-                                                            <button
-                                                                style="color: var(--primary-color); border: none; outline: none; background-color: transparent;"
-                                                                class="bold txt-md">
-                                                                Remove
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
-                                <!-- Order head -->
-                                <div style="background-color: #F9FAFB;" class="pad-1 m-y-12">
+                                <!-- Order head service -->
+                                <div style="background-color: #9A9DA1;" class="pad-1 m-y-12">
                                     <div class="flex-between flex-verticle-center">
                                         <span class="txt-lg bold">Service</span>
-                                        <span class="txt-md">order-date</span>
+
                                     </div>
                                 </div>
+
                                 <div style="max-height: 320px;" class="product scrollable-y">
                                     <!-- Order detail -->
+                                    <%
+                                        double sub_total_service = 0;
+                                        if (cartService != null) {
+                                            for (ServiceDetailDTO service : cartService.getCart().values()) {
+                                                sub_total_service += service.getPrice();
+                                    %>
                                     <div class="pad-y-12">
                                         <div class="order-card m-y-12">
                                             <div class="flex">
                                                 <div class="flex-center order-img">
-                                                    <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
+                                                    <img src="https://www.clipartmax.com/png/middle/165-1653455_absolute-shine-cleaning-services-cleaning-services.png"
                                                          alt="">
                                                 </div>
                                                 <div style="flex: 1; margin-left: 1rem;" class="flex-col">
                                                     <div class="flex-between">
                                                         <div class="flex-col flex-horizon-center">
-                                                            <span class="txt-md bold">Service name</span>
-                                                            <div class="flex-horizon-center flex-center">
-                                                                <span class="txt-xs">Service</span>
-                                                                <span class="m-x-12">|</span>
-                                                                <span class="txt-xs">Service Category</span>
-                                                            </div>
+                                                            <span class="txt-md bold"><%= service.getName()%></span>
                                                         </div>
-
                                                         <div class="order-price txt-sm bold">
                                                             <span>
-                                                                $369.000
+                                                                <%= service.getPrice() %>
                                                             </span>
                                                         </div>
                                                     </div>
-                                                    <div style="height: 50%;" class="flex-end flex-col">
-                                                        <div class="flex-between">
-                                                            <div style="height: 50%;" class="flex-center col-5">
-                                                            </div>
-                                                            <button
-                                                                style="color: var(--primary-color); border: none; outline: none; background-color: transparent;"
-                                                                class="bold txt-md">
-                                                                Remove
-                                                            </button>
-                                                        </div>
-                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="pad-y-12">
-                                        <div class="order-card m-y-12">
-                                            <div class="flex">
-                                                <div class="flex-center order-img">
-                                                    <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
-                                                         alt="">
-                                                </div>
-                                                <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                                    <div class="flex-between">
-                                                        <div class="flex-col flex-horizon-center">
-                                                            <span class="txt-md bold">Staff Name</span>
-                                                            <div class="flex-horizon-center flex-center">
-                                                                <span class="txt-xs">Service</span>
-                                                                <span class="m-x-12">|</span>
-                                                                <span class="txt-xs">Service Category</span>
-                                                            </div>
-                                                        </div>
+                                    <%
+                                            }
+                                            total += sub_total_service;
+                                        }
+                                    %>
 
-                                                        <div class="order-price txt-sm bold">
-                                                            <span>
-                                                                $369.000
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div style="height: 50%;" class="flex-end flex-col">
-                                                        <div class="flex-between">
-                                                            <div style="height: 50%;" class="flex-center col-5">
-                                                            </div>
-                                                            <button
-                                                                style="color: var(--primary-color); border: none; outline: none; background-color: transparent;"
-                                                                class="bold txt-md">
-                                                                Remove
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                    <div class="m-y-32">
+                                        <div class="flex-col sticky">
+                                            <div class="flex-between txt-md bold">
+                                                <span>Discount code</span>
+                                            </div>
+                                            <div class="flex-between m-y-12">
+                                                <input style="border-radius: 1rem; flex: 1; margin-right: 1rem" type="text"
+                                                       class="txt-sm p-2">
+                                                <button class="btn-md txt-sm bold">Apply</button>
+                                            </div>
+                                            <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB"
+                                                 class="flex-between txt-sm">
+                                                <span>Order product total</span>
+                                                <span class="bold"><%= sub_product_total %></span>
+                                            </div>
+                                            <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB"
+                                                 class="flex-between txt-sm">
+                                                <span>Order service total</span>
+                                                <span class="bold"><%= sub_total_service %></span>
+                                            </div>
+
+                                            <div style="padding: 1rem 0;" class="flex-between txt-lg bold">
+                                                <span>Order total</span>
+                                                <span class="bold"><%= total %></span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="pad-y-12">
-                                        <div class="order-card m-y-12">
-                                            <div class="flex">
-                                                <div class="flex-center order-img">
-                                                    <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
-                                                         alt="">
-                                                </div>
-                                                <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                                    <div class="flex-between">
-                                                        <div class="flex-col flex-horizon-center">
-                                                            <span class="txt-md bold">Staff: Name</span>
-                                                            <div class="flex-horizon-center flex-center">
-                                                                <span class="txt-xs">Service</span>
-                                                                <span class="m-x-12">|</span>
-                                                                <span class="txt-xs">Service Category</span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="order-price txt-sm bold">
-                                                            <span>
-                                                                $369.000
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div style="height: 50%;" class="flex-end flex-col">
-                                                        <div class="flex-between">
-                                                            <div style="height: 50%;" class="flex-center col-5">
-
-                                                            </div>
-                                                            <button
-                                                                style="color: var(--primary-color); border: none; outline: none; background-color: transparent;"
-                                                                class="bold txt-md">
-                                                                Remove
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <button type="button" style="width: 100%;" class="btn-lg m-y-12 txt-md">
+                                        <a href="MainController?action=Checkout&total=<%= total %>">Confirm order</a>
+                                    </button>
                                 </div>
-
-                                <div class="m-y-32">
-                                    <div class="flex-col sticky">
-                                        <div class="flex-between txt-md bold">
-                                            <span>Discount code</span>
-                                        </div>
-                                        <div class="flex-between m-y-12">
-                                            <input style="border-radius: 1rem; flex: 1; margin-right: 1rem" type="text"
-                                                   class="txt-sm p-2">
-                                            <button class="btn-md txt-sm bold">Apply</button>
-                                        </div>
-                                        <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB"
-                                             class="flex-between txt-sm">
-                                            <span>Order product total</span>
-                                            <span class="bold">$400.000</span>
-                                        </div>
-                                        <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB"
-                                             class="flex-between txt-sm">
-                                            <span>Order service total</span>
-                                            <span class="bold">$400.000</span>
-                                        </div>
-                                        <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB"
-                                             class="flex-between txt-sm">
-                                            <span>Tax estimate</span>
-                                            <span class="bold">$400.000</span>
-                                        </div>
-                                        <div style="padding: 1rem 0;" class="flex-between txt-lg bold">
-                                            <span>Order total</span>
-                                            <span class="bold">$400.000</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button style="width: 100%;" class="btn-lg m-y-12 txt-md">Confirm order</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Cart end -->
+                <!-- Cart end -->
 
 
 
-            <!-- Footer Start -->
-            <div class="container-fluid bg-dark text-white-50 footer pt-5  wow fadeIn" data-wow-delay="0.1s">
-                <div class="container py-5">
-                    <div class="row g-5">
-                        <div class="col-lg-3 col-md-6">
-                            <h5 class="text-white mb-4">Get In Touch</h5>
-                            <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Lô E2a-7, ???ng D1, ?. D1, Long Th?nh
-                                M?, Thành Ph? Th? ??c, Thành ph? H? Chí Minh</p>
-                            <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                            <p class="mb-2"><i class="fa fa-envelope me-3"></i>SE1111@e-butler.com</p>
-                            <div class="d-flex pt-2">
-                                <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
-                                <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <h5 class="text-white mb-4">Quick Links</h5>
-                            <a class="btn btn-link text-white-50" href="">About Us</a>
-                            <a class="btn btn-link text-white-50" href="">Contact Us</a>
-                            <a class="btn btn-link text-white-50" href="">Our Services</a>
-                            <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
-                            <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <h5 class="text-white mb-4">Photo Gallery</h5>
-                            <div class="row g-2 pt-2">
-                                <div class="col-4">
-                                    <img class="img-fluid rounded bg-light p-1"
-                                         src="https://cf.shopee.vn/file/d4bbea4570b93bfd5fc652ca82a262a8" alt="">
-                                </div>
-                                <div class="col-4">
-                                    <img class="img-fluid rounded bg-light p-1"
-                                         src="https://cf.shopee.vn/file/a0a9062ebe19b45c1ae0506f16af5c16" alt="">
-                                </div>
-                                <div class="col-4">
-                                    <img class="img-fluid rounded bg-light p-1"
-                                         src="https://cf.shopee.vn/file/38fd98e55806c3b2e4535c4e4a6c4c08" alt="">
-                                </div>
-                                <div class="col-4">
-                                    <img class="img-fluid rounded bg-light p-1"
-                                         src="https://cf.shopee.vn/file/2c46b83d84111ddc32cfd3b5995d9281" alt="">
-                                </div>
-                                <div class="col-4">
-                                    <img class="img-fluid rounded bg-light p-1"
-                                         src="https://cf.shopee.vn/file/77bf96a871418fbc21cc63dd39fb5f15" alt="">
-                                </div>
-                                <div class="col-4">
-                                    <img class="img-fluid rounded bg-light p-1"
-                                         src="https://cf.shopee.vn/file/3900aefbf52b1c180ba66e5ec91190e5" alt="">
+                <!-- Footer Start -->
+                <div class="container-fluid bg-dark text-white-50 footer pt-5  wow fadeIn" data-wow-delay="0.1s">
+                    <div class="container py-5">
+                        <div class="row g-5">
+                            <div class="col-lg-3 col-md-6">
+                                <h5 class="text-white mb-4">Get In Touch</h5>
+                                <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Lô E2a-7, ???ng D1, ?. D1, Long Th?nh
+                                    M?, Thành Ph? Th? ??c, Thành ph? H? Chí Minh</p>
+                                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                                <p class="mb-2"><i class="fa fa-envelope me-3"></i>SE1111@e-butler.com</p>
+                                <div class="d-flex pt-2">
+                                    <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                                    <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <h5 class="text-white mb-4">Newsletter</h5>
-                            <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-                            <div class="position-relative mx-auto" style="max-width: 400px;">
-                                <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text"
-                                       placeholder="Your email">
-                                <button type="button"
-                                        class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                            <div class="col-lg-3 col-md-6">
+                                <h5 class="text-white mb-4">Quick Links</h5>
+                                <a class="btn btn-link text-white-50" href="">About Us</a>
+                                <a class="btn btn-link text-white-50" href="">Contact Us</a>
+                                <a class="btn btn-link text-white-50" href="">Our Services</a>
+                                <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
+                                <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <h5 class="text-white mb-4">Photo Gallery</h5>
+                                <div class="row g-2 pt-2">
+                                    <div class="col-4">
+                                        <img class="img-fluid rounded bg-light p-1"
+                                             src="https://cf.shopee.vn/file/d4bbea4570b93bfd5fc652ca82a262a8" alt="">
+                                    </div>
+                                    <div class="col-4">
+                                        <img class="img-fluid rounded bg-light p-1"
+                                             src="https://cf.shopee.vn/file/a0a9062ebe19b45c1ae0506f16af5c16" alt="">
+                                    </div>
+                                    <div class="col-4">
+                                        <img class="img-fluid rounded bg-light p-1"
+                                             src="https://cf.shopee.vn/file/38fd98e55806c3b2e4535c4e4a6c4c08" alt="">
+                                    </div>
+                                    <div class="col-4">
+                                        <img class="img-fluid rounded bg-light p-1"
+                                             src="https://cf.shopee.vn/file/2c46b83d84111ddc32cfd3b5995d9281" alt="">
+                                    </div>
+                                    <div class="col-4">
+                                        <img class="img-fluid rounded bg-light p-1"
+                                             src="https://cf.shopee.vn/file/77bf96a871418fbc21cc63dd39fb5f15" alt="">
+                                    </div>
+                                    <div class="col-4">
+                                        <img class="img-fluid rounded bg-light p-1"
+                                             src="https://cf.shopee.vn/file/3900aefbf52b1c180ba66e5ec91190e5" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <h5 class="text-white mb-4">Newsletter</h5>
+                                <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                                <div class="position-relative mx-auto" style="max-width: 400px;">
+                                    <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text"
+                                           placeholder="Your email">
+                                    <button type="button"
+                                            class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- Footer End -->
             </div>
-            <!-- Footer End -->
+
+            <!-- Back to Top -->
+            <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
         </div>
 
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-    </div>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/wow/wow.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="js/main.js"></script>
 
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-
-    <!-- javascript -->
-</body>
+        <!-- javascript -->
+    </body>
 
 </html>

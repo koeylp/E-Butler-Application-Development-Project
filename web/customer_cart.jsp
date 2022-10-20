@@ -349,7 +349,7 @@
                                     <span>Order total</span>
                                     <span class="bold"><%= total%></span>
                                 </div>
-                                <button type="button" style="width: 100%;" class="btn-lg m-y-12 txt-md"><a style="color:white" href="MainController?action=LoadCartData">Checkout</a></button>
+                                <button type="button" style="width: 100%;" class="btn-lg m-y-12 txt-md"><a style="color:white" href="MainController?action=LoadCartData">Proceed to checkout</a></button>
                             </div>
                         </div>
                     </div>
