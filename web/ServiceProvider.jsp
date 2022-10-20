@@ -4,6 +4,8 @@
     Author     : DELL
 --%>
 
+<%@page import="com.ebutler.swp.dto.ServiceErrorDTO"%>
+<%@page import="com.ebutler.swp.dto.ServiceDetailDTO"%>
 <%@page import="com.ebutler.swp.dto.ProviderDTO"%>
 <%@page import="com.ebutler.swp.dto.ProviderDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -40,9 +42,19 @@
         <link
             href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
             rel="stylesheet" />
+        <!-- CSS -->
+        <link rel="stylesheet" href="./css/base.css" />
+        <link rel="stylesheet" href="./css/guestPage.css" />
     </head>
 
     <body>
+        <%
+            ServiceDetailDTO service_info = (ServiceDetailDTO) request.getAttribute("SERVICE_INFO");
+            ServiceErrorDTO service_error = (ServiceErrorDTO) request.getAttribute("SERVICE_ERROR");
+
+            service_info = (service_info == null) ? new ServiceDetailDTO() : service_info;
+            service_error = (service_error == null) ? new ServiceErrorDTO() : service_error;
+        %>
         <div class="container-xxl">
             <div class="container-fluid nav-bar bg-white px-0">
 
@@ -91,7 +103,7 @@
                             </img>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-start">
                                 <li><a data-bs-target="#basicModal1" data-bs-toggle="modal" class="dropdown-item" href="javascript:void(0);"><i class="bx bx-user m-2"></i>My Profile</a></li>
-                                            <li><a class="dropdown-item" href="changePassword.jsp"><i class="bx bx-lock m-2">
+                                <li><a class="dropdown-item" href="changePassword.jsp"><i class="bx bx-lock m-2">
                                         </i>Change Password</a>
                                 </li>
                                 <!-- <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li> -->
@@ -337,7 +349,7 @@
                                             </strong></td>
                                         <td> <input class="form-control me-2 shortTitle2" type="text" name="ServiceCategoryName" value="<%= service.getServiceCategoryName()%>" readonly="" />
                                         </td>
-                                        <td> <input class="form-control me-2 shortTitle2" type="text" name="ServiceCategoryName" value="<%= service.getServiceDetailName() %>" readonly="" />
+                                        <td> <input class="form-control me-2 shortTitle2" type="text" name="ServiceCategoryName" value="<%= service.getServiceDetailName()%>" readonly="" />
                                         </td>
                                         <td>
                                             <img class="img-product"
@@ -345,7 +357,7 @@
                                         </td>
                                         <td> <input class="form-control me-2 priceData" type="text" name="ServicePrice" value="<%= service.getPrice()%>" />
                                             <input type="hidden" name="oldServicePrice" value="<%= service.getPrice()%>" />
-                                                   </td>
+                                        </td>
 
                                         <td>
                                             <div class="flexStatus">
@@ -418,7 +430,7 @@
                                                 <%
                                                     List<ProviderServiceDTO1> listCategory = (List<ProviderServiceDTO1>) session.getAttribute("Providder_ListServiceCategory");
                                                     String categoryName = (String) request.getAttribute("choose");
-                                                    
+
                                                     if (categoryName == null) {
                                                         categoryName = "";
                                                     }
@@ -454,40 +466,47 @@
                                             <label for="nameBasic" class="form-label type">Service Type</label>
                                             <%
                                                 List<ProviderServiceDTO1> listCategoryChoose = (List<ProviderServiceDTO1>) session.getAttribute("Providder_ListServiceCategoryChoose");
-                                                
+
                                             %>
                                             <select class="form-select type " name="IDService" >  
-                                                <%
-                                                  
-                                                    for (int i = 0; i < listCategoryChoose.size(); i++) {
-                                                            
-                                                        
+                                                <%                                                    for (int i = 0; i < listCategoryChoose.size(); i++) {
+
+
                                                 %>  
-                                                <option value="<%= listCategoryChoose.get(i).getServiceID() %> "><%= listCategoryChoose.get(i).getServiceName()%>
-                                                   
+                                                <option value="<%= listCategoryChoose.get(i).getServiceID()%> "><%= listCategoryChoose.get(i).getServiceName()%>
+
                                                 </option>  
-                                                 <%
-                                                        
-                                                 %> 
                                                 <%
-                                                    }
+
+                                                %> 
+                                                <%                                                    }
                                                 %>
 
                                             </select>
-                                              
+
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                   <div class="col mb-3">
+                                    <div class="col mb-3">
                                         <label for="nameBasic"  class="form-label">Service Name</label>
-                                        <input type="text" name="ServiceName" class="form-control" >  
+                                        <input type="text" name="ServiceName" class="form-control" value="<%=service_info.getName()%>">  
+                                        <%
+                                            if (!service_error.getName().isEmpty()) {
+                                        %>
+                                        <span class="auth-form__notify">
+                                            <i class="fa-solid fa-triangle-exclamation"></i>
+                                            <p><%=service_error.getName()%></p>
+                                        </span> 
+                                        <%
+                                            }
+                                        %>
                                     </div>
                                 </div>
-                                    <div class="row">
-                                   <div class="col mb-3">
+                                <div class="row">
+                                    <div class="col mb-3">
                                         <label for="nameBasic"  class="form-label">Provider Owner Service</label>
-                                        <input type="text" class="form-control" value="<%= provider.getName() %>" readonly=""> 
+                                        <input type="text" class="form-control" value="<%= provider.getName()%>" readonly=""> 
                                     </div>
                                 </div>
                                 <div class="row g-2">
@@ -497,13 +516,23 @@
                                     </div>
                                     <div class="col mb-3">
                                         <label for="quantity" class="form-label">Price</label>
-                                        <input name="ServicePrice" type="text" class="form-control" placeholder="0">
+                                        <input name="ServicePrice" type="number" min="1" class="form-control" value="<%=service_info.getPrice()%>" required="">
+                                        <%
+                                            if (!service_error.getPrice().isEmpty()) {
+                                        %>
+                                        <span class="auth-form__notify">
+                                            <i class="fa-solid fa-triangle-exclamation"></i>
+                                            <p><%=service_error.getPrice()%></p>
+                                        </span> 
+                                        <%
+                                            }
+                                        %>
                                     </div>
                                 </div>
-                               
+
                                 <div class="col mb-3">
                                     <label for="Description" class="form-label">Description</label>
-                                    <input name="DescriptionService" type="text" name="Description" class="form-control" placeholder="Description">
+                                    <textarea name="DescriptionService" type="text" name="Description" class="form-control" placeholder="Description"></textarea>
                                 </div>
 
 

@@ -4,6 +4,7 @@
     Author     : DELL
 --%>
 
+<%@page import="com.ebutler.swp.dto.ProductErrorDTO"%>
 <%@page import="com.ebutler.swp.dto.ProviderDTO"%>
 <%@page import="com.ebutler.swp.dto.ProductDTO"%>
 <%@page import="com.ebutler.swp.dto.ProductDetailDTO"%>
@@ -39,9 +40,20 @@
         <link
             href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
             rel="stylesheet" />
+        
+         <!-- CSS -->
+         <link rel="stylesheet" href="./css/base.css" />
+         <link rel="stylesheet" href="./css/guestPage.css" />
     </head>
 
     <body>
+        <%
+            ProductDetailDTO product_info = (ProductDetailDTO) request.getAttribute("PRODUCT_INFO");
+            ProductErrorDTO product_error = (ProductErrorDTO) request.getAttribute("PRODUCT_ERROR");
+
+            product_info = (product_info == null) ? new ProductDetailDTO() : product_info;
+            product_error = (product_error == null) ? new ProductErrorDTO() : product_error;
+        %>
         <div class="container-xxl">
             <div class="container-fluid nav-bar bg-white px-0">
 
@@ -396,101 +408,132 @@
 
                     </div> 
 
-                  
-                <%
-                    }
-                %>
-            </div>
-              <div id="AddProduct" class="Cont"> 
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" >Add Product</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
 
-                                <div class="modal-body">
-                                    <form action="MainController" method="post" id="form1"> 
-                                        <div class="row">
-                                            <div class="col mb-3">
-                                                <label for="category" class="form-label">Category</label>
-                                                <%
-                                                    List<ProductDTO> listCategory = (List<ProductDTO>) session.getAttribute("Provider_ListProductCategory");
-                                                    String categoryName = (String) request.getAttribute("choose");
-                                                    if (categoryName == null) {
-                                                        categoryName = "";
-                                                    }
+                    <%
+                        }
+                    %>
+                </div>
+                <div id="AddProduct" class="Cont"> 
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" >Add Product</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
 
-                                                %>
-                                                <select class="form-select "  name="productID_ADD" onchange='this.form.submit()'> 
-                                                    <option style="color:blue;" >
-
-                                                        <%= categoryName%>
-
-                                                    </option>
-                                                    <%
-                                                        for (ProductDTO category : listCategory) {
-                                                    %>  
-
-                                                    <option value="<%= category.getName()%> " 
-                                                            <% if (categoryName.equals(category.getName())) {
-                                                            %>selected<%
-                                                                }%>    
-
-                                                            > <%= category.getName()%> </option> 
-
-                                                    <%
-                                                        }
-                                                    %>
-                                                    <input type="hidden" name="action" value="ChooseFromCategory_Product" />
-                                                </select>
-                                            </div>
-                                    </form>    
-
-                                    <div class="col mb-3">
-                                        <form action="MainController" method="post" id="form2" >   
-                                            <label for="nameBasic" class="form-label">Product Type</label>
+                            <div class="modal-body">
+                                <form action="MainController" method="post" id="form1"> 
+                                    <div class="row">
+                                        <div class="col mb-3">
+                                            <label for="category" class="form-label">Category</label>
                                             <%
-                                                List<ProductDTO> listCategoryChoose = (List<ProductDTO>) session.getAttribute("Provider_ListProductCategoryChoose");
+                                                List<ProductDTO> listCategory = (List<ProductDTO>) session.getAttribute("Provider_ListProductCategory");
+                                                String categoryName = (String) request.getAttribute("choose");
+                                                if (categoryName == null) {
+                                                    categoryName = "";
+                                                }
+
                                             %>
-                                            <select class="form-select " name="categoryName" >  
+                                            <select class="form-select "  name="productID_ADD" onchange='this.form.submit()'> 
+                                                <option style="color:blue;" >
+
+                                                    <%= categoryName%>
+
+                                                </option>
                                                 <%
-                                                    for (ProductDTO category : listCategoryChoose) {
+                                                    for (ProductDTO category : listCategory) {
                                                 %>  
-                                                <option value="<%= category.getProduct_ID()%> "><%= category.getName()%></option> 
+
+                                                <option value="<%= category.getName()%> " 
+                                                        <% if (categoryName.equals(category.getName())) {
+                                                        %>selected<%
+                                                            }%>    
+
+                                                        > <%= category.getName()%> </option> 
 
                                                 <%
                                                     }
                                                 %>
-
+                                                <input type="hidden" name="action" value="ChooseFromCategory_Product" />
                                             </select>
-                                    </div>
+                                        </div>
+                                </form>    
+
+                                <div class="col mb-3">
+                                    <form action="MainController" method="post" id="form2" >   
+                                        <label for="nameBasic" class="form-label">Product Type</label>
+                                        <%
+                                            List<ProductDTO> listCategoryChoose = (List<ProductDTO>) session.getAttribute("Provider_ListProductCategoryChoose");
+                                        %>
+                                        <select class="form-select " name="categoryName" >  
+                                            <%
+                                                for (ProductDTO category : listCategoryChoose) {
+                                            %>  
+                                            <option value="<%= category.getProduct_ID()%> "><%= category.getName()%></option> 
+
+                                            <%
+                                                }
+                                            %>
+
+                                        </select>
                                 </div>
+                            </div>
 
 
-                                <div class="row">
-                                    <div class="col mb-3">
-                                        <label for="nameBasic"  class="form-label">Name</label>
-                                        <input type="text" name="NameProduct" class="form-control" placeholder="Enter Name">
-                                    </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="nameBasic"  class="form-label">Name</label>
+                                    <input type="text" name="NameProduct" class="form-control" value="<%=product_info.getName()%>" placeholder="Enter Name" required="">
+                                    <%
+                                        if (!product_error.getName().isEmpty()) {
+                                    %>
+                                    <span class="auth-form__notify">
+                                        <i class="fa-solid fa-triangle-exclamation"></i>
+                                        <p><%=product_error.getName()%></p>
+                                    </span> 
+                                    <%
+                                        }
+                                    %>
+
                                 </div>
-                                <div class="row g-2">
-                                    <div class="col mb-3">
-                                        <label for="price" class="form-label">Quantity</label>
-                                        <input type="text" name="QuantityProduct" class="form-control" placeholder="0">
-                                    </div>
-                                    <div class="col mb-3">
-                                        <label for="quantity" class="form-label">Price</label>
-                                        <input name="PriceProduct" type="text" class="form-control" placeholder="0">
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Image</label>
-                                    <input name="ImageProduct" type="file" class="form-control">
+                            </div>
+                            <div class="row g-2">
+                                <div class="col mb-3">
+                                    <label for="price" class="form-label">Quantity</label>
+                                    <input type="number" min="1" name="QuantityProduct" class="form-control"  value="<%=product_info.getQuantity()%>" required="">
+                                    <%
+                                        if (!product_error.getQuantity().isEmpty()) {
+                                    %>
+                                    <span class="auth-form__notify">
+                                        <i class="fa-solid fa-triangle-exclamation"></i>
+                                        <p><%=product_error.getQuantity()%></p>
+                                    </span> 
+                                    <%
+                                        }
+                                    %>
                                 </div>
                                 <div class="col mb-3">
-                                    <label for="Description" class="form-label">Description</label>
-                                    <input name="DescriptionProduct" type="text" name="Description" class="form-control" placeholder="Description">
+                                    <label for="quantity" class="form-label">Price</label>
+                                    <input type="number" min="1" name="PriceProduct" class="form-control" value="<%=product_info.getPrice()%>" required="">
+                                    <%
+                                        if (!product_error.getPrice().isEmpty()) {
+                                    %>
+                                    <span class="auth-form__notify">
+                                        <i class="fa-solid fa-triangle-exclamation"></i>
+                                        <p><%=product_error.getPrice()%></p>
+                                    </span> 
+                                    <%
+                                        }
+                                    %>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Image</label>
+                                <input name="ImageProduct" type="file" value="<%=product_info.getImage()%>" class="form-control">
+                            </div>
+                            <div class="col mb-3">
+                                <label for="Description" class="form-label">Description</label>
+                                <textarea name="DescriptionProduct" type="text" name="Description" value="<%=product_info.getDescription()%>" class="form-control" placeholder="Description"></textarea>
                                 </div>
 
 
