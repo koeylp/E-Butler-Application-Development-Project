@@ -4,7 +4,9 @@
  */
 package com.ebutler.swp.controllers;
 
+import com.ebutler.swp.dao.CustomerDAO;
 import com.ebutler.swp.dao.UserDAO;
+import com.ebutler.swp.dto.CustomerDTO;
 import com.ebutler.swp.dto.GoogleUserDTO;
 import com.ebutler.swp.dto.UserDTO;
 import com.ebutler.swp.utils.GoogleUtils;
@@ -34,26 +36,59 @@ public class LoginWithGoogleController extends HttpServlet {
         String url = ERROR;
         try {
             String code = request.getParameter("code");
-            UserDAO dao = new UserDAO();
+            UserDAO userDAO = new UserDAO();
+            CustomerDAO customerDAO = new CustomerDAO();
             UserDTO loginUser = new UserDTO();
             if (!code.isEmpty()) {
                 HttpSession session = request.getSession();  
                 String accessToken = GoogleUtils.getToken(code);
                 GoogleUserDTO googleUser = GoogleUtils.getUserInfo(accessToken);
-                if (!dao.isExistedEmail(googleUser.getEmail())) {
-                    request.setAttribute("GOOGLE_USER", googleUser);
-                    url = SUCCESS;
-                } else {
-                    loginUser = dao.getUserByEmail(googleUser.getEmail());
-                    String role = dao.getUserByEmail(googleUser.getEmail()).getRole_id();
-                    if (role.equals("CUS")) {
-                        session.setAttribute("LOGIN_USER", loginUser);
-                        url = SUCCESS_ALREADY_CUS;
-                    } else if (role.equals("PRO")) {
-                        session.setAttribute("LOGIN_USER", loginUser);
-                        url = SUCCESS_ALREADY_PRO;
-                    }
-                }
+                
+              String username = googleUser.getName();
+              String name = googleUser.getGiven_name();
+              String email = googleUser.getEmail();
+              String password = "123";  
+              String roleID = "CUS";
+              String phone = "";
+              int gender = 1;
+              String dob = "";
+              String avatar = "";
+              int status = 1;
+              
+              CustomerDTO customer = new CustomerDTO(username, password, roleID, phone, email, name, gender, dob, avatar, status);
+              boolean checkDuplicate = customerDAO.checkExistAccount(username);
+              
+              if(checkDuplicate){
+                  boolean createAccount = customerDAO.createCustomer(customer);
+                  if(createAccount){
+                      session.setAttribute("LOGIN_USER", customer);
+                       url = SUCCESS_ALREADY_CUS;
+                        return;
+                  }
+              }else{
+                  UserDTO user = userDAO.Login(username, password);
+                  session.setAttribute("LOGIN_USER", user);
+                   url = SUCCESS_ALREADY_CUS;
+              }
+                
+               
+               
+                
+                
+//                if (!dao.isExistedEmail(googleUser.getEmail())) {
+//                    request.setAttribute("GOOGLE_USER", googleUser);
+//                    url = SUCCESS;
+//                } else {
+//                    loginUser = dao.getUserByEmail(googleUser.getEmail());
+//                    String role = dao.getUserByEmail(googleUser.getEmail()).getRole_id();
+//                    if (role.equals("CUS")) {
+//                        session.setAttribute("LOGIN_USER", loginUser);
+//                        url = SUCCESS_ALREADY_CUS;
+//                    } else if (role.equals("PRO")) {
+//                        session.setAttribute("LOGIN_USER", loginUser);
+//                        url = SUCCESS_ALREADY_PRO;
+//                    }
+//                }
                 
             }
         } catch (Exception e) {

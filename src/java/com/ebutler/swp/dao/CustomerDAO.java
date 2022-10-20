@@ -25,6 +25,8 @@ public class CustomerDAO {
     private final String GET_CURRENT_PSW = "SELECT password from tblCustomer WHERE username = ?";
     private final String UPDATE_CURRENT_PSW = "UPDATE tblCustomer SET password=? WHERE username=?";
     private final String UPDATE_CURRENT_CUSTOMER_INFO = "UPDATE tblCustomer SET avatar=?,name=?, email=?,dob= ?, gender=?, phone=?  WHERE username= ?";
+    private static final String CHECK_EXIST_ACCOUNT = "select username from tblCustomer where username = ?";
+    private static final String CREATE_CUSTOMER = "insert into tblCustomer([username], [password], [role_ID], [phone], [email], [name], gender, dob, avatar, [status]) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     public boolean InsertCus(CustomerDTO customer) throws SQLException {
         Connection conn = null;
@@ -56,6 +58,72 @@ public class CustomerDAO {
         }
         
         return false;
+    }
+    public static boolean checkExistAccount(String username) throws SQLException{
+        boolean check = true;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(CHECK_EXIST_ACCOUNT);
+                ptm.setString(1, username);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    check = false;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+      public static boolean createCustomer(CustomerDTO customer) throws SQLException{
+        boolean result = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(CREATE_CUSTOMER);
+                ptm.setString(1, customer.getUsername());
+                ptm.setString(2, customer.getPassword());
+                ptm.setString(3, customer.getRole_id());
+                ptm.setString(4, customer.getPhone());
+                ptm.setString(5, customer.getEmail());
+                ptm.setString(6, customer.getName());
+                ptm.setInt(7, customer.getGender());
+                ptm.setString(8, customer.getDob());
+                ptm.setString(9, customer.getAvatar());
+                ptm.setInt(10, customer.getStatus());
+                result = ptm.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return result;
     }
 
     public static List<ProductCategoryDTO> getProductCategoryList() throws SQLException{

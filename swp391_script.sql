@@ -38,6 +38,11 @@ CREATE TABLE tblCustomer (
 	avatar nvarchar(max) ,
 	[status] [decimal](1)
 )
+select * from tblCustomer
+
+insert into tblCustomer values([username], [password])
+
+
 GO
 
 
