@@ -65,6 +65,7 @@ public class ProviderDAO {
     private final String PROVIDER_ADD_SERVICE = "INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID , name , price , description , status) VALUES (? , ? , null , ? , ? , null , 1 )" ; 
     private final String ADD_STAFF = "INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES (?,?,?,?,null,3)" ;
     private final String FILTER_STAFF_PENDING = "SELECT Staff.staff_ID,S.name , Staff.name, Staff.id_card, Staff.avatar, Staff.status FROM tblStaff Staff JOIN tblService S ON Staff.service_ID = S.service_ID WHERE Staff.provider_ID = ? AND status = 3" ;
+    
     public boolean InsertPro(ProviderDTO provider) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;

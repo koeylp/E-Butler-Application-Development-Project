@@ -5,9 +5,11 @@
 package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.ProviderDAO;
+import com.ebutler.swp.dto.ProductDetailDTO;
+import com.ebutler.swp.dto.ProductErrorDTO;
 import com.ebutler.swp.dto.ProviderDTO;
+import com.ebutler.swp.utils.ValiUtils;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,29 +22,55 @@ import javax.servlet.http.HttpSession;
  */
 public class Add_NewProduct_Controller extends HttpServlet {
 
-     private static final String SUCCESS = "Provider_ProductController" ; 
-    private static final String ERROR = "Provider_ProductController" ; 
-    
+    private static final String SUCCESS = "Provider_ProductController";
+    private static final String ERROR = "Provider_ProductController";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR ; 
+        String url = ERROR;
         try {
-            boolean check = false ;
-            String productID = request.getParameter("categoryName") ;  
-            String nameProduct = request.getParameter("NameProduct") ; 
-            String quantityProduct = request.getParameter("QuantityProduct") ; 
-            String price = request.getParameter("PriceProduct") ;  
-            HttpSession session = request.getSession() ; 
-            ProviderDAO providerDAO = new ProviderDAO() ;
-            ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER") ; 
-            check = providerDAO.providerAddProduct(provider, productID, nameProduct, quantityProduct, price) ;
-            if (check) {
-                url = SUCCESS ; 
-                
+            boolean check = false;
+
+            boolean isValidated = true;
+            String productID = request.getParameter("categoryName");
+            String nameProduct = request.getParameter("NameProduct");
+            String quantityProduct = request.getParameter("QuantityProduct") + "";
+            String price = Double.parseDouble(request.getParameter("PriceProduct")) + "";
+            HttpSession session = request.getSession();
+            ProviderDAO providerDAO = new ProviderDAO();
+            ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER");
+
+            ProductErrorDTO productError = new ProductErrorDTO();
+//            Validation value
+            if (!ValiUtils.isValidProductName(nameProduct)) {
+                productError.setName("Name must be include at least 2 characters, and accepted [_-]");
+                isValidated = false;
+            }
+            if (!ValiUtils.isValidQuantity(quantityProduct)) {
+                productError.setQuantity("Should be valid number");
+                isValidated = false;
+            }
+            if (!ValiUtils.isValidPrice(price)) {
+                productError.setPrice("Should be valid number");
+                isValidated = false;
+            }
+            
+            ProductDetailDTO product = new ProductDetailDTO(productID, nameProduct, "", Double.parseDouble(price), Integer.parseInt(quantityProduct), "", 0);
+            request.setAttribute("PRODUCT_INFO", product);
+            
+            if (isValidated) {
+                check = providerDAO.providerAddProduct(provider, productID, nameProduct.trim(), quantityProduct, price);
+
+                if (check) {
+                    url = SUCCESS;
+                }
+            }else {
+                url = ERROR;
+                request.setAttribute("PRODUCT_ERROR", productError);
             }
         } catch (Exception e) {
-        }finally {
+        } finally {
             request.getRequestDispatcher(url).include(request, response);
         }
     }
