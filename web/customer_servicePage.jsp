@@ -4,6 +4,7 @@
 <%@page import="com.ebutler.swp.dto.ProductDetailDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -213,11 +214,9 @@
                                 <div style="margin: auto 0;" class="pad-2 scrollable-y full-h">
                                     <!-- Staff start -->
                                     
-                                    <% for (StaffDTO x : staffList) {
-                                    
-                                    %>
-                                    
                                    
+                                    
+                                    <c:forEach items="${sessionScope.SERVICE_DETAIL_BY_TYPE}" var="o">
                                     <div style="height: 200px;" class="flex-between border-bot pad-y-1">
                                         <div class="full-h">
                                             <div class="img full-h full-w">
@@ -254,12 +253,86 @@
                                             </div>
                                         </div>
                                     </div
-                                    
-                                         <%                       
-                                        }
-                                    %>
-                                    <!-- Staff start -->
+                                    </c:forEach>
+                                    <!--------------------->
 <!--                                    <div style="height: 200px;" class="flex-between border-bot pad-y-1">
+                                        <div class="full-h">
+                                            <div class="img full-h full-w">
+                                                <img src="https://chisnghiax.com/ciseco/static/media/detail1.f45e3a4d9bfeafd2f70b.jpg"
+                                                     alt="">
+                                            </div>
+                                        </div>
+                                        <div style="flex: 1;" class="flex-col flex-between pad-x-1">
+                                            <div class="flex-vertical-center">
+                                                <span class="txt-sm">Service</span>
+                                                <span class="m-x-0">|</span>
+                                                <span class="txt-sm">Service Category</span>
+                                            </div>
+                                            <div class="flex-between">
+                                                <div>
+                                                    <span class="txt-lg bold">${x.name}</span>
+                                                </div>
+                                                <div class="order-price txt-sm bold col l-2">
+                                                    <span>
+                                                        $369.000
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="content flex-between flex-col ">
+                                                <div class="flex-between">
+                                                    <div class="full-w">
+                                                        <button style="background-color: #0F172A; color: white;"
+                                                                class="btn-lg full-w">
+                                                            <i class="fa-solid fa-bag-shopping"></i>
+                                                            <span style="margin-left: .75rem">Booking</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div
+                                    ---------------->
+<!--                                  <div style="height: 200px;" class="flex-between border-bot pad-y-1">
+                                        <div class="full-h">
+                                            <div class="img full-h full-w">
+                                                <img src="https://chisnghiax.com/ciseco/static/media/detail1.f45e3a4d9bfeafd2f70b.jpg"
+                                                     alt="">
+                                            </div>
+                                        </div>
+                                        <div style="flex: 1;" class="flex-col flex-between pad-x-1">
+                                            <div class="flex-vertical-center">
+                                                <span class="txt-sm">Service</span>
+                                                <span class="m-x-0">|</span>
+                                                <span class="txt-sm">Service Category</span>
+                                            </div>
+                                            <div class="flex-between">
+                                                <div>
+                                                    <span class="txt-lg bold">${x.name}</span>
+                                                </div>
+                                                <div class="order-price txt-sm bold col l-2">
+                                                    <span>
+                                                        $369.000
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="content flex-between flex-col ">
+                                                <div class="flex-between">
+                                                    <div class="full-w">
+                                                        <button style="background-color: #0F172A; color: white;"
+                                                                class="btn-lg full-w">
+                                                            <i class="fa-solid fa-bag-shopping"></i>
+                                                            <span style="margin-left: .75rem">Booking</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div
+                                   
+                                    
+                                    --------------
+                                     Staff start 
+                                    <div style="height: 200px;" class="flex-between border-bot pad-y-1">
                                         <div class="full-h">
                                             <div class="img full-h full-w">
                                                 <img src="https://chisnghiax.com/ciseco/static/media/detail1.f45e3a4d9bfeafd2f70b.jpg"
