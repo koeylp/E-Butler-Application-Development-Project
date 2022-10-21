@@ -1190,8 +1190,6 @@ INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, ima
 'https://www.lifebuoy.in/content/dam/brands/lifebuoy/india/2133695-lifebuoy-innovation-total-soap-wrapper-125g---total-10.png'
 , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
-
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
 ('provider1','5','DoubleRich ShowerGel',50,17, 'https://sovina.vn/wp-content/uploads/2016/10/DBR1.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
 ('provider1','5','Puri ShowerGel',50,12, 'https://media.ulta.com/i/ulta/2581853?w=720' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
@@ -1282,6 +1280,7 @@ INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, ima
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
 ('provider3','8','Panasonic Inverter 322l',50,157,
 'https://2momart.vn/upload/products/052021/tu-lanh-panasonic-nr-bc360qkvn-nghieng-trai.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
 ('provider3','8','Samsung Inverter 307l',50,140,
 'http://anhchinh.vn/media/product/14975_rb27n4190bu.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
@@ -1291,7 +1290,6 @@ INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, ima
 ('provider3','8','Panasonic Inverter 417l',50,204,
 'https://www.panasonic.com/content/dam/pim/vn/vi/NR/NR-BX4/NR-BX471GPK/ast-1271373.png.pub.thumb.644.644.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1
 )
-
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
 ('provider1','9','Australian beef thighs 250g',50,11,
 'https://cdn.gdaymeat.com.au/wp-content/uploads/2022/03/Chucksteak666.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
