@@ -170,6 +170,10 @@ ul {
     justify-content: space-between;
 }
 
+.flex-around {
+    justify-content: space-around;
+}
+
 .flex-end {
     justify-content: flex-end;
 }
@@ -200,6 +204,12 @@ ul {
     z-index: 1;
 }
 
+.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
 .abs-center {
     top: 50%;
     transform: translateY(-50%);
@@ -228,6 +238,13 @@ ul {
 /* Position end */
 
 /* Size start */
+.width-5 {
+    width: 5rem;
+}
+
+.height-5 {
+    height: 5rem;
+}
 
 .half-w {
     width: 50%;
@@ -295,7 +312,11 @@ ul {
     .border-right {
         border-right: 1px solid var(--border-color);
     }
-    
+
+    .box-shadow-no {
+        box-shadow: none !important;
+    }
+
     /* label start*/
     .label {
         padding: .375rem .625rem;
@@ -384,7 +405,7 @@ ul {
         color: #0F172A;
         font-weight: 700;
     }
-    
+
     .ellipsis {
         display: block;
         flex-wrap: wrap;
@@ -412,8 +433,8 @@ ul {
 .separate {
     border: 0.5px solid #CBD5E1;
     text-align: center;
-    height: 30px;
-    margin: 0 24px;
+    height: 1.5rem;
+    margin: auto 1.5rem;
 }
 
 /* search start */
@@ -486,7 +507,9 @@ ul {
 .img > img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
+    vertical-align: middle;
+    object-position: center;
 }
 
 /* image end */
@@ -523,19 +546,6 @@ ul {
     cursor: pointer;
 }
 
-.text {
-    font-size: 1rem;
-    line-height: 1.25rem;
-    height: 2.5rem;
-    display: block;
-    flex-wrap: wrap;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    word-wrap: break-word;
-}
-
 .text-center {
     text-align: center;
 }
@@ -559,14 +569,6 @@ ul {
     width: fit-content;
     padding: 4px 12px;
     font-size: 0.8rem;
-    font-weight: bold;
-}
-
-.txt-border-5 {
-    border-radius: 5px;
-    width: fit-content;
-    padding: 4px 12px;
-    font-size: 1rem;
     font-weight: bold;
 }
 
@@ -618,6 +620,7 @@ ul {
 .block__item {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     text-align: center;
     height: 100%;
@@ -701,7 +704,8 @@ ul {
     border-radius: 9999px;
 }
 
-.btn-lg {
+.btn-lg,
+.btn-md {
     padding: .875rem 1.5rem;
     background-color: #0F172A;
     color: white;
@@ -710,6 +714,10 @@ ul {
     --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
     box-shadow: 0 0 #0000, 0 0 #0000, var(--tw-shadow);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.btn-md {
+
 }
 
 /* Button end */
