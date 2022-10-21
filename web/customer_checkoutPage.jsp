@@ -56,6 +56,8 @@
             <%
                 UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
                 CustomerDTO customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
+                
+                customer = (customer == null)? new CustomerDTO() : customer;
             %>
             <!-- Navbar Start -->
             <div class="container-fluid nav-bar bg-transparent">
@@ -183,17 +185,49 @@
                                         </div>
                                     </div>
                                     <div class="flex-center">
-                                        <button class="btn-md txt-sm bold">Change</button>
+                                        <button style="--round: .5rem"
+                                                class="txt-sm bold rounded-f border-no pad-0">Change</button>
                                     </div>
                                 </div>
-                                <div style="width: 100%;border: 1px solid #E5E7EB; border-radius: 1rem;"
-                                     class="bot">
+                                <div style="width: 100%;border: 1px solid #E5E7EB; border-radius: 1rem;" class="bot">
                                     <div class="pad-2">
+                                        <div style="padding: 0;" class="flex-col">
+                                            <div class="row">
+                                                <div class="flex-horizon-center flex-col m-y-12 col l-6">
+                                                    <span class="txt-md m-y-12">Province</span>
+                                                    <select
+                                                        style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
+                                                        class="input txt-sm" type="password">
+                                                        <option>Province</option>
+                                                    </select>
+                                                </div>
+                                                <div class="flex-horizon-center flex-col m-y-12 col l-6">
+                                                    <span class="txt-md m-y-12">City</span>
+                                                    <select
+                                                        style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
+                                                        class="input txt-sm" type="password">
+                                                        <option>City</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="flex-horizon-center flex-col m-y-12">
+                                                <span class="txt-md m-y-12">Address</span>
+                                                <input
+                                                    style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
+                                                    class="input txt-sm" type="password">
+                                            </div>
+                                            <div class="flex-vertical-center">
+                                                <button class="btn-lg txt-md bold m-y-32">Save and next to shipping</button>
+                                                <button style="margin-left: 1rem; background-color: #EFEFEF; color: black"
+                                                        class="btn-lg txt-md bold m-y-32 border-no box-shadow-no">Cancel</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- Shipping Address end -->
 
+                            <!-- Payment method start -->
                             <div class="relative m-y-32">
                                 <div style="border: 1px solid #E5E7EB; border-radius: 1rem;" class="pad-2 flex-between">
                                     <div class="flex-between">
@@ -208,17 +242,35 @@
                                         </div>
                                     </div>
                                     <div class="flex-center">
-                                        <button class="btn-md txt-sm bold">Change</button>
+                                        <button style="--round: .5rem"
+                                                class="txt-sm bold rounded-f border-no pad-0">Change</button>
                                     </div>
                                 </div>
-                                <div style="width: 100%;border: 1px solid #E5E7EB; border-radius: 1rem;"
-                                     class="bot">
+                                <div style="width: 100%;border: 1px solid #E5E7EB; border-radius: 1rem;" class="bot">
                                     <div class="pad-2">
+                                        <div class="flex">
+                                            <input id="radio-1" name="payment" type="radio" checked>
+                                            <div>
+                                                <span class="border">
+                                                    <i class="fa-brands fa-cc-paypal"></i>
+                                                </span>
+                                                <label for="radio-1" class="radio-label">
+                                                    Paypal
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <input id="radio-2" name="payment" type="radio">
+                                            <label for="radio-2" class="radio-label">
+                                                <i class="fa-solid fa-wallet"></i>
+                                                COD
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
+                        <!-- Payment method end -->
 
 
                         <div class="col l-1 m-y-32">
@@ -263,7 +315,7 @@
 
                                                         <div class="order-price txt-sm bold">
                                                             <span>
-                                                                <%= product.getPrice() * product.getQuantity() %>
+                                                                <%= product.getPrice() * product.getQuantity()%>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -329,7 +381,7 @@
                                                         </div>
                                                         <div class="order-price txt-sm bold">
                                                             <span>
-                                                                <%= service.getPrice() %>
+                                                                <%= service.getPrice()%>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -357,22 +409,22 @@
                                             <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB"
                                                  class="flex-between txt-sm">
                                                 <span>Order product total</span>
-                                                <span class="bold"><%= sub_product_total %></span>
+                                                <span class="bold"><%= sub_product_total%></span>
                                             </div>
                                             <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB"
                                                  class="flex-between txt-sm">
                                                 <span>Order service total</span>
-                                                <span class="bold"><%= sub_total_service %></span>
+                                                <span class="bold"><%= sub_total_service%></span>
                                             </div>
 
                                             <div style="padding: 1rem 0;" class="flex-between txt-lg bold">
                                                 <span>Order total</span>
-                                                <span class="bold"><%= total %></span>
+                                                <span class="bold"><%= total%></span>
                                             </div>
                                         </div>
                                     </div>
                                     <button type="button" style="width: 100%;" class="btn-lg m-y-12 txt-md">
-                                        <a href="MainController?action=Checkout&total=<%= total %>">Confirm order</a>
+                                        <a href="MainController?action=Checkout&total=<%= total%>">Confirm order</a>
                                     </button>
                                 </div>
                             </div>
