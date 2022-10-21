@@ -155,14 +155,14 @@
 
                         <!-- service item -->
                         <%
-                            for (ServiceDetailDTO service : serviceList) {
+                            for (StaffDTO x : staffList) {
                         %>
                         <div class="col l-3 s-6 m-y-1">
                             <div class="block__item flex-between">
                                 <div style="max-height: 15rem; min-height: 15rem;" class="block__img flex-center relative">
-                                    <img src=""
+                                    <img src="<%= x.getAvatar() %>"
                                          alt="">
-                                    <a href="MainController?action=AddServiceToCart&service_ID=<%= service.getId()%>"
+                                    <a href="MainController?action=AddServiceToCart&service_ID=<%= x.getStaff_ID()%>"
                                        style="background-color: black; color: white; right: 52%;"
                                        class="txt-border link absolute card-extend bot">
                                         <i class="fa-solid fa-bag-shopping"></i>
@@ -176,10 +176,10 @@
                                 </div>
                                 <div class="block__text pad-y-1 flex-col flex-between full-h">
                                     <div class="flex-col">
-                                        <h5 style="text-align: start;" class="m-y-0 product-name"><%=service.getName()%></h5>
+                                        <h5 style="text-align: start;" class="m-y-0 product-name"><%=x.getName()%></h5>
                                         <div class="ellipsis txt-sm m-y-0">
                                             <p style="text-align: start;">
-                                                <%=service.getDescription()%>
+                                               description
                                             </p>
                                         </div>
                                     </div>
@@ -189,7 +189,7 @@
                                             <div style="color: #4ADE80; border: 2px solid #4ADE80; width: fit-content; --rounded: 0.5rem; padding: .2rem;"
                                                  class="txt-sm rounded bold">
                                                 <p>
-                                                    $ <%=service.getPrice()%>
+                                                    $ <%=x.getPrice()%>
                                                 </p>
                                             </div>
                                         </div>

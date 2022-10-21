@@ -486,7 +486,7 @@
                                 <span class="txt-lg bold m-y-12"><%= emptyField%></span>
                                 <span class="txt-lg bold m-y-12">Current password</span>
                                 <input name="current-password" style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
-                                       class="input txt-sm" type="password">
+                                       class="input txt-sm" type="password" placeholder="<%= customer.getPassword() %>">
                                 <span class="txt-lg bold m-y-12"><%= duplicatePassword%></span>
                             </div>
                             <div class="flex-horizon-center flex-col m-y-12">
