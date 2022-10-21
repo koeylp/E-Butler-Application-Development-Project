@@ -56,8 +56,8 @@
             <%
                 UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
                 CustomerDTO customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
-                
-                customer = (customer == null)? new CustomerDTO() : customer;
+
+                customer = (customer == null) ? new CustomerDTO() : customer;
             %>
             <!-- Navbar Start -->
             <div class="container-fluid nav-bar bg-transparent">
@@ -216,6 +216,38 @@
                                                     style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
                                                     class="input txt-sm" type="password">
                                             </div>
+                                            <div class="flex-around m-y-0">
+                                                <div class="flex">
+                                                    <input id="radio-1" name="payment" type="radio" checked class="m-x-0">
+                                                    <div class="flex-center">
+                                                        <label for="radio-1" class="radio-label m-x-0">
+                                                            <div style="width: 2.5rem;" class="img">
+                                                                <img src="https://static.topcv.vn/company_logos/3hGPe93OfHOUL2QUpNJijMwJ6s0uZ3Gr_1637140440____ea75d9fb6acf791dbeee91c457f6863e.png" alt="">
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="flex">   
+                                                    <input id="radio-2" name="payment" type="radio" checked class="m-x-0">
+                                                    <div class="flex-center">
+                                                        <label for="radio-2" class="radio-label m-x-0">
+                                                            <div style="width: 2.5rem;" class="img">
+                                                                <img src="https://cdn.worldvectorlogo.com/logos/grab-2.svg" alt="">
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="flex">   
+                                                    <input id="radio-2" name="payment" type="radio" checked class="m-x-0">
+                                                    <div class="flex-center">
+                                                        <label for="radio-3" class="radio-label m-x-0">
+                                                            <div style="width: 2.5rem;" class="img">
+                                                                <img src="https://play-lh.googleusercontent.com/rHa7AFzrNd5vw2ZKr05ANvOsSgaIk_vhKq_G9rcnG3HWjb0zCxr_mK4Ap552m5FdIA" alt="">
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="flex-vertical-center">
                                                 <button class="btn-lg txt-md bold m-y-32">Save and next to shipping</button>
                                                 <button style="margin-left: 1rem; background-color: #EFEFEF; color: black"
@@ -248,29 +280,42 @@
                                 </div>
                                 <div style="width: 100%;border: 1px solid #E5E7EB; border-radius: 1rem;" class="bot">
                                     <div class="pad-2">
-                                        <div class="flex">
-                                            <input id="radio-1" name="payment" type="radio" checked>
-                                            <div>
-                                                <span class="border">
-                                                    <i class="fa-brands fa-cc-paypal"></i>
-                                                </span>
-                                                <label for="radio-1" class="radio-label">
-                                                    Paypal
-                                                </label>
+                                        <div class="flex-around">
+                                            <div class="flex">
+                                                <input id="radio-1" name="payment" type="radio" checked class="m-x-0">
+                                                <div class="flex-center">
+                                                    <label for="radio-1" class="radio-label m-x-0">
+                                                        <div style="width: 3rem;" class="img">
+                                                            <img src="https://1000logos.net/wp-content/uploads/2017/05/Color-Paypal-Logo.jpg" alt="">
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="flex">   
+                                                <input id="radio-2" name="payment" type="radio" checked class="m-x-0">
+                                                <div class="flex-center">
+                                                    <label for="radio-2" class="radio-label m-x-0">
+                                                        <div style="width: 5rem;" class="img">
+                                                            <img src="https://png.pngtree.com/png-clipart/20210523/original/pngtree-yellow-cash-on-delivery-design-with-a-truck-png-image_6330480.png" alt="">
+                                                        </div>
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div>
-                                            <input id="radio-2" name="payment" type="radio">
-                                            <label for="radio-2" class="radio-label">
-                                                <i class="fa-solid fa-wallet"></i>
-                                                COD
-                                            </label>
+
+
+                                        <div class="flex-vertical-center">
+                                            <button class="btn-lg txt-md bold m-y-32">Save and next to shipping</button>
+                                            <button style="margin-left: 1rem; background-color: #EFEFEF; color: black"
+                                                    class="btn-lg txt-md bold m-y-32 border-no box-shadow-no">Cancel</button>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
+
+                            <!-- Payment method end -->
                         </div>
-                        <!-- Payment method end -->
 
 
                         <div class="col l-1 m-y-32">
