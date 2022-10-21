@@ -16,6 +16,7 @@ public class StaffDTO {
     private String id_card;
     private String avatar;
     private int status;
+    private double price;
 
     public StaffDTO() {
         this.staff_ID = 0;
@@ -25,6 +26,7 @@ public class StaffDTO {
         this.id_card = "";
         this.avatar = "";
         this.status = 0;
+        this.price = 0;
     }
 
     public StaffDTO(int staff_ID, String provider_ID, String service_ID, String name, String id_card, String avatar, int status) {
@@ -35,6 +37,16 @@ public class StaffDTO {
         this.id_card = id_card;
         this.avatar = avatar;
         this.status = status;
+    }
+    public StaffDTO(int staff_ID, String provider_ID, String service_ID, String name, String id_card, String avatar, int status, double price) {
+        this.staff_ID = staff_ID;
+        this.provider_ID = provider_ID;
+        this.service_ID = service_ID;
+        this.name = name;
+        this.id_card = id_card;
+        this.avatar = avatar;
+        this.status = status;
+        this.price = price;
     }
 
     public int getStaff_ID() {
@@ -93,9 +105,17 @@ public class StaffDTO {
         this.status = status;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
-        return "StaffDTO{" + "staff_ID=" + staff_ID + ", provider_ID=" + provider_ID + ", service_ID=" + service_ID + ", name=" + name + ", id_card=" + id_card + ", avatar=" + avatar + ", status=" + status + '}';
+        return "StaffDTO{" + "staff_ID=" + staff_ID + ", provider_ID=" + provider_ID + ", service_ID=" + service_ID + ", name=" + name + ", id_card=" + id_card + ", avatar=" + avatar + ", status=" + status + " ,price: "+ price +'}';
     }
     
     

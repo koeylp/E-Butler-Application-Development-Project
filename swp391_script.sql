@@ -1113,10 +1113,8 @@ INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, ima
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Tea Spoon Wooden Gold',50,7, 'https://cdn.shopify.com/s/files/1/0548/9229/8282/products/SHSPO-4ZSGOL_1_800x.png?v=1656403634' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Tea Spoon Chrome',50,6, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','1','Table Knife Gold',50,5, 'https://img.christofle.com/image/upload/s--1noiI0BK--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/Products/02327012001101_STQ_qvsbbn.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','1',' Dinner Fork Gold',50,3, 'https://img.christofle.com/image/upload/s--2Wk8N2t9--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/Products/354003_F_pnpdg2.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','1','Table Knife Gold',50,5, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','1','Table Knife Gold',50,5, 'https://img.christofle.com/image/upload/s--1noiI0BK--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/Products/02327012001101_STQ_qvsbbn.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','1',' Dinner Fork Gold',50,3, 'https://img.christofle.com/image/upload/s--2Wk8N2t9--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/Products/354003_F_pnpdg2.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','2','Speckle Rice Bowl White',50,5, 'http://cdn.shopify.com/s/files/1/2270/8601/products/ace6984-hr_vrij_01_grande.png?v=1632137970' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
@@ -1148,6 +1146,7 @@ INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, ima
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','4','Toshiba 1.2l Rice Cooker',50,100, 'https://vn-live-01.slatic.net/p/a66dce23da62677dfacbf93e777877e4.png_q80_.webp' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','4','Toshiba 1.8l Digital Cooker',50,195, 'https://shoplineimg.com/609a5555404902005c2299bb/62e24c1c96afeb0032a1ee14/800x.png?' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','4','SunHouse 1l Rice Cooker',50,100, 'https://trumgiadung.com/uploads/images/video/noi-com-dien-sunhouse-shd8955-4.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
 ('provider2','4','Cuckoo 1l Rice Cooker',50,150,
 'https://samnec.com.vn/uploads/san-pham/2022-09-05-16-00-27cr-0690fsiwhcrvncv.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
@@ -1191,15 +1190,7 @@ INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, ima
 'https://www.lifebuoy.in/content/dam/brands/lifebuoy/india/2133695-lifebuoy-innovation-total-soap-wrapper-125g---total-10.png'
 , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
-('provider1','5','Biore ShowerGel',50,12,
-'https://product.hstatic.net/200000117693/product/soap-front-380ml_ce71104f0f9a402e8245d3028fca3e43_1024x1024.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
-('provider1','5','Hazeline ShowerGel',50,11,
-'https://fujimart.vn/image/cache/catalog/sanpham-nhatban/S%E1%BB%AFa%20t%E1%BA%AFm%20kh%E1%BB%AD%20m%C3%B9i%20MENS%20BIORE%20h%C6%B0%C6%A1ng%20x%C3%A0%20ph%C3%B2ng%20th%C6%A1m-502x502.png'
-, 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
-('provider1','5','Dove ShowerGel',50,10,
-'https://www.dove.com/content/dam/unilever/dove/bahrain/pack_shot/8717163743638-1962255-png.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
 ('provider1','5','DoubleRich ShowerGel',50,17, 'https://sovina.vn/wp-content/uploads/2016/10/DBR1.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
@@ -1291,10 +1282,6 @@ INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, ima
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
 ('provider3','8','Panasonic Inverter 322l',50,157,
 'https://2momart.vn/upload/products/052021/tu-lanh-panasonic-nr-bc360qkvn-nghieng-trai.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
-('provider3','8','Panasonic Inverter 170l',50,65,
-'https://samnec.com.vn/uploads/san-pham-slide/2020-12-25-11-09-32NR-BA190PPVN-3.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
 ('provider3','8','Samsung Inverter 307l',50,140,
 'http://anhchinh.vn/media/product/14975_rb27n4190bu.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
@@ -1333,8 +1320,8 @@ INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, ima
 ('provider1','9','Frozen Salmon 300g',50,12,
 'https://product.hstatic.net/200000077081/product/c_3f4771a6d5264caf998330d76d71abf6_1024x1024.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
-('provider1','9','Frozen Fins Salmon 200g',50,3,
-'https://sprestinesea.com/images/151993239126274330%20(3).png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+('provider1','9','Frozen Fins Salmon 200g',50,30000,
+'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
 ('provider1','9','Shirmp 500g',50,15,
 'https://www.balbiino.ee/wp-content/uploads/2019/12/KRR039-MARINE-koormiata-krevett-70-90-500g.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
@@ -1539,10 +1526,10 @@ INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, ima
 
 --Bảng loại dịch vụ theo nhóm 
 
-INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('HC', 'Home Cleaning', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg')
-INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('HI', 'Home Improvement', 'https://thumbs.dreamstime.com/z/couple-living-room-avatar-character-vector-illustration-desing-couple-living-room-avatar-character-145224593.jpg')
-INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('PBS', 'Plumbers', 'https://thumbs.dreamstime.com/z/set-flat-bright-vector-elements-items-modern-stylish-bathroom-interior-construction-bath-shampoo-toilet-towels-68381087.jpg')
-INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('IT', 'IT Service', 'https://thumbs.dreamstime.com/z/set-flat-bright-vector-elements-items-modern-stylish-bathroom-interior-construction-bath-shampoo-toilet-towels-68381087.jpg')
+INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('HC', 'Home Cleaning', 'https://housecleaningservicemarcela.files.wordpress.com/2020/08/rsz_2cleaning-supplies.png?w=450')
+INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('HI', 'Home Improvement', 'https://www.credible.com/blog/wp-content/uploads/2021/10/15-Home-Improvement-Projects-to-Complete-Before-You-List-Your-Home-F9F6EE-600x437.png')
+INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('PBS', 'Plumbers', 'https://static.wixstatic.com/media/403b64_dc829afea69b46108304d88808cfe46e~mv2.png/v1/fill/w_416,h_350,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Yelm-Plumbing-and-Pumps-Sewer-Line-Repai.png')
+INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('IT', 'IT Service', 'https://www.pngplay.com/wp-content/uploads/13/Software-IT-Services-Transparent-Background.png')
 
 --Bảng loại dịch vụ 
 
