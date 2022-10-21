@@ -469,7 +469,7 @@
                                         </div>
                                     </div>
                                     <button type="button" style="width: 100%;" class="btn-lg m-y-12 txt-md">
-                                        <a href="MainController?action=Checkout&total=<%= total%>">Confirm order</a>
+                                        <a href="MainController?action=Checkout&total=<%= total%>&payment=PayPal">Confirm order</a>
                                     </button>
                                 </div>
                             </div>

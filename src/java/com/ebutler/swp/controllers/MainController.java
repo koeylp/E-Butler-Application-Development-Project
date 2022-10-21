@@ -120,6 +120,7 @@ public class MainController extends HttpServlet {
     private final String DELETE_CART_CONTROLLER = "DeleteCartController";
     private final String CHECKOUT = "Checkout";
     private final String CHECKOUT_CONTROLLER = "CheckoutController";
+    private final String AUTHORIZE_PAYMENT_CONTROLLER = "AuthorizePaymentController";
     private final String LOAD_CART_DATA = "LoadCartData";
     private final String LOAD_CART_DATA_CONTROLLER = "LoadCartDataController";
     private final String MOVE_TO_CART = "MoveToCart";
@@ -224,7 +225,7 @@ public class MainController extends HttpServlet {
 
         try {
             String action = request.getParameter("action");
-
+            String payment = request.getParameter("payment");
             if (action.equals(REGISTER)) {
                 url = REGISTER_CONTROLLER;
             } else if (action.equals(LOGIN)) {
@@ -273,8 +274,10 @@ public class MainController extends HttpServlet {
                 url = DELETE_CART_CONTROLLER;
             } else if (action.equals(LOAD_CART_DATA)) {
                 url = LOAD_CART_DATA_CONTROLLER;
-            } else if (action.equals(CHECKOUT)) {
+            } else if (action.equals(CHECKOUT) && payment.equals("COD")) {
                 url = CHECKOUT_CONTROLLER;
+            } else if (action.equals(CHECKOUT) && payment.equals("PayPal")) {
+                url = AUTHORIZE_PAYMENT_CONTROLLER;
             } else if (action.equals(MOVE_TO_CART)) {
                 url = MOVE_TO_CART_CONTROLLER;
             } else if (action.equals(EDIT_QUANTITY)) {
