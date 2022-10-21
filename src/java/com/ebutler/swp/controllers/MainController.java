@@ -215,6 +215,10 @@ public class MainController extends HttpServlet {
     //6.Add Staff
     private final String PROVIDER_ADD_STAFF = "AddNewStaff";
     private final String PROVIDER_ADD_STAFF_CONTROLLER = "Add_NewStaff_Controller";
+    
+//    Select province
+    private final String SELECT_PROVICE = "SelectProvince";
+    private final String SELECT_PROVICE_CONTROLLER = "SelectProvinceController";
 
     // -----PROVIDER----- 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -351,6 +355,8 @@ public class MainController extends HttpServlet {
             }else if (action.equals(SORT_SERVICE_DETAIL_WORD_UP)) {
                 url = SORT_SERVICE_DETAIL_WORD_UP_CONTROLLER;
 
+            }else if (action.equals(SELECT_PROVICE)) {
+                url = SELECT_PROVICE_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

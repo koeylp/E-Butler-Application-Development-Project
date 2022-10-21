@@ -1,3 +1,7 @@
+<%@page import="com.ebutler.swp.dto.CityDTO"%>
+<%@page import="com.ebutler.swp.dto.ProvinceDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.ebutler.swp.dto.ServiceDetailDTO"%>
 <%@page import="com.ebutler.swp.dto.ProductDetailDTO"%>
 <%@page import="com.ebutler.swp.dto.CustomerDTO"%>
@@ -192,24 +196,57 @@
                                 <div style="width: 100%;border: 1px solid #E5E7EB; border-radius: 1rem;" class="bot">
                                     <div class="pad-2">
                                         <div style="padding: 0;" class="flex-col">
-                                            <div class="row">
-                                                <div class="flex-horizon-center flex-col m-y-12 col l-6">
-                                                    <span class="txt-md m-y-12">Province</span>
-                                                    <select
-                                                        style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
-                                                        class="input txt-sm" type="password">
-                                                        <option>Province</option>
-                                                    </select>
+
+                                            <form action="MainController?action=SelectProvince" method="POST">
+                                                <div class="row">
+                                                    <div class="flex-horizon-center flex-col m-y-12 col l-6">
+                                                        <span class="txt-md m-y-12">Province</span>
+                                                        <%
+                                                            ArrayList<ProvinceDTO> province_list = (ArrayList<ProvinceDTO>) session.getAttribute("PROVINCE_LIST");
+                                                            String province_id = (String) request.getAttribute("PROVINCE_ID");
+                                                            
+                                                            province_id = (province_id == null) ? "" : province_id;
+                                                            province_list = (province_list == null) ? new ArrayList<ProvinceDTO>() : province_list;
+                                                        %>
+                                                        <select
+                                                            style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
+                                                            class="input txt-sm" type="password" onchange="this.form.submit()" name="province_id">
+                                                            <option>Select Province</option>
+                                                            <%
+                                                                for (ProvinceDTO province : province_list) {
+                                                            %>
+                                                            <option value="<%=province.getId()%>" <%if(province.getId().equals(province_id)){%>selected<%}%>><%=province.getName()%></option>
+                                                            <%
+                                                                }
+                                                            %>
+
+                                                        </select>
+                                                    </div>
+                                                    <div class="flex-horizon-center flex-col m-y-12 col l-6">
+                                                        <span class="txt-md m-y-12">City</span>
+                                                        
+                                                        <%
+                                                            ArrayList<CityDTO> city_list = (ArrayList<CityDTO>) request.getAttribute("CITY_LIST");
+
+                                                            city_list = (city_list == null) ? new ArrayList<CityDTO>() : city_list;
+                                                        %>
+                                                        <select
+                                                            style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
+                                                            class="input txt-sm" type="password" name="city_id">
+                                                            <option>Select City</option>
+                                                            <%
+                                                                for (CityDTO city : city_list) {
+                                                            %>
+                                                            <option value="<%=city.getId()%>"><%=city.getName()%></option>
+                                                            <%
+                                                                }
+                                                            %>
+
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                                <div class="flex-horizon-center flex-col m-y-12 col l-6">
-                                                    <span class="txt-md m-y-12">City</span>
-                                                    <select
-                                                        style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
-                                                        class="input txt-sm" type="password">
-                                                        <option>City</option>
-                                                    </select>
-                                                </div>
-                                            </div>
+                                            </form>
+
                                             <div class="flex-horizon-center flex-col m-y-12">
                                                 <span class="txt-md m-y-12">Address</span>
                                                 <input
