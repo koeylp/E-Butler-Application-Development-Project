@@ -208,7 +208,7 @@
                                                         </div>
                                                         <div class="order-price txt-sm bold">
                                                             <span>
-                                                                <%= product.getQuantity() * product.getPrice()%>
+                                                                $<%= product.getQuantity() * product.getPrice()%>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -293,7 +293,7 @@
                                                         </div>
                                                         <div class="order-price bold txt-sm">
                                                             <span>
-                                                                <%= service.getPrice()%>
+                                                                $<%= service.getPrice()%>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -351,11 +351,11 @@
                                 </div>
                                 <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB" class="flex-between txt-sm">
                                     <span>Order product total</span>
-                                    <span class="bold"><%=  sub_product_total%></span>
+                                    <span class="bold">$<%=  sub_product_total%></span>
                                 </div>
                                 <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB" class="flex-between txt-sm">
                                     <span>Order service total</span>
-                                    <span class="bold"> <%=  sub_total_service%></span>
+                                    <span class="bold"> $<%=  sub_total_service%></span>
                                 </div>
                                 <!--                                <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB" class="flex-between txt-sm">
                                                                     <span>Tax estimate</span>
@@ -363,7 +363,7 @@
                                                                 </div>-->
                                 <div style="padding: 1rem 0;" class="flex-between txt-lg bold">
                                     <span>Order total</span>
-                                    <span class="bold"><%= total%></span>
+                                    <span class="bold">$<%= total%></span>
                                 </div>
                                 <button type="button" style="width: 100%;" class="btn-lg m-y-12 txt-md"><a style="color:white" href="MainController?action=LoadCartData">Proceed to checkout</a></button>
                             </div>
