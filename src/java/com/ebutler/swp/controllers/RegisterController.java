@@ -80,7 +80,7 @@ public class RegisterController extends HttpServlet {
                     checkValidation = false;
                 }
                 if(ValiUtils.isValidUsername(username)) {
-                    customerError.setUsername("User name must be between [3,30], and only accepts underscore, dot, no white space!");
+                    customerError.setUsername("User name must be between [7,30], and only accepts underscore, dot, no white space!");
                     checkValidation = false;
                 }
                 if(!ValiUtils.isValidEmail(email)) {
@@ -139,7 +139,7 @@ public class RegisterController extends HttpServlet {
                     checkValidation = false;
                 }
                 if(ValiUtils.isValidUsername(username)) {
-                    providerError.setUsername("User name must be between [3,30], and only accepts underscore, dot, no white space!");
+                    providerError.setUsername("User name must be between [7,30], and only accepts underscore, dot, no white space!");
                     checkValidation = false;
                 }
                 if(!ValiUtils.isValidProviderName(name)) {
