@@ -161,7 +161,7 @@
                                             </div>
                                         </div>
                                         <div class="flex-center">
-                                            <button type="button" style="--round: .5rem; background-color: #F9FAFB" class="txt-sm bold rounded-f border-no pad-0">Change</button>
+                                            <button type="button" style="--round: .5rem; background-color: #F9FAFB" class="txt-sm bold rounded-f border-no pad-0 change_info">Change</button>
                                         </div>
                                     </div>
                                     <div style="width: 100%;border: 1px solid #E5E7EB;" class="info_detail detail">
@@ -184,9 +184,9 @@
                                                         class="input txt-sm" type="password">
                                                 </div>
                                                 <div class="flex-vertical-center">
-                                                    <button class="btn-lg txt-md bold m-y-32">Save and next to shipping</button>
-                                                    <button style="margin-left: 1rem; background-color: #EFEFEF; color: black"
-                                                            class="btn-lg txt-md bold m-y-32 border-no box-shadow-no">Cancel</button>
+                                                    <button type="button" class="btn-lg txt-md bold m-y-32">Save and next to shipping</button>
+                                                    <button type="button" style="margin-left: 1rem; background-color: #EFEFEF; color: black"
+                                                            class="btn-lg txt-md bold m-y-32 border-no box-shadow-no close_info">Cancel</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -210,7 +210,7 @@
                                         </div>
                                         <div class="flex-center">
                                             <button type="button" style="--round: .5rem; background-color: #F9FAFB"
-                                                    class="txt-sm bold rounded-f border-no pad-0">Change</button>
+                                                    class="txt-sm bold rounded-f border-no pad-0 change_address">Change</button>
                                         </div>
                                     </div>
                                     <div style="width: 100%;border: 1px solid #E5E7EB;" class="address_detail detail">
@@ -306,9 +306,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex-vertical-center">
-                                                    <button class="btn-lg txt-md bold m-y-32">Save and next to shipping</button>
-                                                    <button style="margin-left: 1rem; background-color: #EFEFEF; color: black"
-                                                            class="btn-lg txt-md bold m-y-32 border-no box-shadow-no">Cancel</button>
+                                                    <button type="button" class="btn-lg txt-md bold m-y-32">Save and next to shipping</button>
+                                                    <button type="button" style="margin-left: 1rem; background-color: #EFEFEF; color: black"
+                                                            class="btn-lg txt-md bold m-y-32 border-no box-shadow-no close_address">Cancel</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -618,7 +618,7 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-
+    <script src="js/checkout.js"></script>
     <!-- javascript -->
 </body>
 
