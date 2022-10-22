@@ -86,10 +86,6 @@
                             </div>   
                         </div>
 
-
-
-
-
                         <!-- On hover dropdown button -->
 
                         <!-- <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a> -->
@@ -345,10 +341,10 @@
                                         <td>
                                             <input class="form-control me-2" type="text" name="ProductName" value="<%= product.getName()%>" />
                                         </td>
-                                        <td><input class="form-control me-2 priceData" type="text" name="ProductID" value="<%= product.getProduct_ID()%>" readonly="" /></td>
+                                        <td><input class="form-control me-2 priceData" type="text" name="ProductID" value="<%= product.getId() %>" readonly="" /></td>
                                         <td>
                                             <img class="img-product"
-                                                 src="https://cdn.tgdd.vn/Products/Images/2513/282955/bhx/gao-trang-thien-nhat-tui-5kg-202206220935467038.jpg"
+                                                 src=<%= product.getImage() %> 
                                                  alt="">
                                         </td>
                                         <td>

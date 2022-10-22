@@ -196,6 +196,10 @@
         <servlet-name>SearchServiceDetailByTypeController</servlet-name>
         <servlet-class>com.ebutler.swp.controllers.SearchServiceDetailByTypeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Provider_Order_DetailController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.Provider_Order_DetailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -391,6 +395,10 @@
     <servlet-mapping>
         <servlet-name>SearchServiceDetailByTypeController</servlet-name>
         <url-pattern>/SearchServiceDetailByTypeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Provider_Order_DetailController</servlet-name>
+        <url-pattern>/Provider_Order_DetailController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

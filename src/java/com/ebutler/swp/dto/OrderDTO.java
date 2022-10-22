@@ -16,7 +16,8 @@ public class OrderDTO {
     private String customer_ID;
     private int status;
     private double total;
-
+    private String providerID ; 
+    
     public OrderDTO() {
         this.order_ID = 0;
         this.order_date = null;
@@ -33,6 +34,24 @@ public class OrderDTO {
         this.total = total;
     }
 
+    public OrderDTO(int order_ID, Date order_date, String customer_ID, int status, double total, String providerID) {
+        this.order_ID = order_ID;
+        this.order_date = order_date;
+        this.customer_ID = customer_ID;
+        this.status = status;
+        this.total = total;
+        this.providerID = providerID;
+    }
+
+    public String getProviderID() {
+        return providerID;
+    }
+
+    public void setProviderID(String providerID) {
+        this.providerID = providerID;
+    }
+    
+    
     public int getOrder_ID() {
         return order_ID;
     }

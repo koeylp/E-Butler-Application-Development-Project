@@ -1769,8 +1769,20 @@ INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,descri
 INSERT INTO tblUser(username, password, role_ID, phone, email, status) 
 VALUES('hello', '1', 'CUS', '0123456789', 'hello@gmail.com', 1)
 
+SELECT * FROM tblOrder
+SELECT * FROM tblOrder_Product_Detail 
+SELECT * FROM tblOrder_Service_Detail
+SELECT * FROM tblProductDetail
+SELECT * FROM tblServiceDetail
+SELECT * FROM tblOrder
+SELECT * FROM tblUser
+SELECT * FROM tblOrder_Product_Detail WHERE order_ID = 1
+SELECT * FROM tblOrder_Service_Detail WHERE order_ID = 1
+SELECT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = 'provider3'
+SELECT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Service_Detail OrdS ON Ord.order_ID = OrdS.order_ID ) JOIN tblServiceDetail PD ON PD.id = OrdS.service_detail_ID WHERE PD.provider_ID = 'homecleaning'
 
-
+SELECT * FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = 'provider3'
+SELECT * FROM ( tblOrder Ord JOIN tblOrder_Service_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblServiceDetail PD ON PD.id = OrdP.id WHERE PD.provider_ID = 'homecleaning'
 
 
 

@@ -327,7 +327,7 @@
                                         <td><input class="form-control me-2 " type="text" name="StaffName" value="<%= staff.getStaff_Name() %>" /></td>
                                         <td><input class="form-control me-2 shortTitle" type="text" name="StaffIDCard" value="<%= staff.getStaff_IDCard() %>" /></td>
                                         <td><img class="avatar avatar-lg rounded"
-                                                 src="https://i.bloganchoi.com/bloganchoi.com/wp-content/uploads/2017/03/naruto-uzumaki-696x696.jpg?fit=700%2C20000&quality=95&ssl=1"
+                                                 src=<%= staff.getImage() %>
                                                  alt="" srcset=""></td>
                                         <td>
                                             <div class="flexStatus">
