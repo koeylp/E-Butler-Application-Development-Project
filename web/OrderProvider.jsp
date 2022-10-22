@@ -4,6 +4,10 @@
     Author     : DELL
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.ebutler.swp.dto.OrderDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +32,7 @@
   <link rel="stylesheet" href="./vendor/css/theme-default.css" class="template-customizer-theme-css" />
   <link rel="stylesheet" href="./css/demo.css" />
   <link rel="icon" type="image/x-icon" href="./img/favicon/favicon.ico" />
-  <link rel="stylesheet" href="../vendor/fonts/boxicons.css" />
+  <link rel="stylesheet" href="./vendor/fonts/boxicons.css" />
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -41,57 +45,65 @@
   <div class="container-xxl">
     <div class="container-fluid nav-bar bg-white px-0">
 
-      <nav class="navbar navbar-expand-lg  navbar-light py-0 px-5">
-        <a class="navbar-brand d-flex align-items-center text-center">
-          <div class="icon p-2 me-2">
-            <img class="img-fluid"
-              src="https://scontent.fsgn2-4.fna.fbcdn.net/v/t1.15752-9/307058616_802160467603859_5558839303148788245_n.png?stp=dst-png_p1080x2048&_nc_cat=109&ccb=1-7&_nc_sid=ae9488&_nc_ohc=vGhbAQumiiwAX8TbYC2&tn=nHI45FEgylR7fWDG&_nc_ht=scontent.fsgn2-4.fna&oh=03_AVJuwn5Dqs20uZj9NKDP_eqwggpHhYGN5cC90Kw1btakKQ&oe=6363B3B1"
-              alt="Icon" style="width: 30px; height: 30px;">
-          </div>
-          <h1 class="m-0 " style="color:#273A89 ;">E-Butler</h1>
-        </a>
-        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <div class="navbar-nav ms-auto">
-
-            <a style="font-weight: bold;" href="ProviderProduct.html" class="nav-item nav-link " id="product" onclick=activeProduct() >Product</a>
-            <a style="font-weight: bold;" href="ProviderService.html" class="nav-item nav-link" id="service"
-            onclick=activeService()>Service</a>
-            <a style="font-weight: bold;" href="ProviderOrders.html" class="nav-item nav-link" id="order"
-            onclick=activeOrder()>Orders</a>
-            <a style="font-weight: bold;" href="ProviderStaff.html" class="nav-item nav-link" id="staff"
-            onclick=activeStaff()>Staff</a>
+      <form action="MainController" method="post">
+                    <nav class="navbar navbar-expand-lg  navbar-light py-0 px-5">
+                        <a class="navbar-brand d-flex align-items-center text-center">
+                            <div class="icon p-2 me-2">
+                                <img class="img-fluid"
+                                     src="https://scontent.fsgn2-4.fna.fbcdn.net/v/t1.15752-9/307058616_802160467603859_5558839303148788245_n.png?stp=dst-png_p1080x2048&_nc_cat=109&ccb=1-7&_nc_sid=ae9488&_nc_ohc=vGhbAQumiiwAX8TbYC2&tn=nHI45FEgylR7fWDG&_nc_ht=scontent.fsgn2-4.fna&oh=03_AVJuwn5Dqs20uZj9NKDP_eqwggpHhYGN5cC90Kw1btakKQ&oe=6363B3B1"
+                                     alt="Icon" style="width: 30px; height: 30px;">
+                            </div>
+                            <h1 class="m-0 " style="color:#273A89 ;">E-Butler</h1>
+                        </a>
+                        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
 
 
 
-          </div>
+                        <div class="collapse navbar-collapse" id="navbarCollapse">
+                            <div class="navbar-nav ms-auto">
+                                <button style="font-weight: bold;" name="action" value="ProviderProduct" class="nav-item nav-link " id="product"
+                                        onclick="activeProduct()">Product</button> 
+                                <button style="font-weight: bold;" name="action" value="ProviderService"  class="nav-item nav-link" id="service"
+                                        onclick="activeService()">Service</button>
+                                <button style="font-weight: bold;" name="action" value="ProviderOrder"  class="nav-item nav-link" id="order"
+                                        onclick="activeOrder()">Orders</button>
+                                <button style="font-weight: bold;" name="action" value="ProviderStaff" class="nav-item nav-link" id="staff"
+                                        onclick="activeStaff()">Staff</button>
+                            </div>   
+                        </div>
 
-          <!-- On hover dropdown button -->
 
-          <!-- <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a> -->
-        </div>
-        <div class="btn-group me-3">
 
-          <img class="avatar avatar-md rounded-circle "
-            src="https://i.bloganchoi.com/bloganchoi.com/wp-content/uploads/2021/07/avatar-doi-ban-than-2021-21-696x696.jpeg?fit=700%2C20000&quality=95&ssl=1"
-            id="dropdownMenuButton" data-bs-toggle="dropdown" data-bs-display="static">
 
-          </img>
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-start">
-            <li><a data-bs-target="#basicModal1" data-bs-toggle="modal" class="dropdown-item"
-                href="javascript:void(0);"><i class="bx bx-user m-2"></i>My Profile</a></li>
-            <li><a class="dropdown-item" href="changePassword"><i class="bx bx-lock m-2"></i>Change Password</a>
-            </li>
-            <!-- <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li> -->
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-log-out m-2"></i>Logout</a></li>
-          </ul>
-        </div>
-      </nav>
+
+                        <!-- On hover dropdown button -->
+
+                        <!-- <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a> -->
+                        <div class="btn-group me-3">
+
+                            <img class="avatar avatar-md rounded-circle "
+                                 src="https://i.bloganchoi.com/bloganchoi.com/wp-content/uploads/2021/07/avatar-doi-ban-than-2021-21-696x696.jpeg?fit=700%2C20000&quality=95&ssl=1"
+                                 id="dropdownMenuButton" data-bs-toggle="dropdown" data-bs-display="static">
+
+                            </img>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-start">
+                                <li><a data-bs-target="#basicModal1" data-bs-toggle="modal" class="dropdown-item" href="javascript:void(0);"><i class="bx bx-user m-2"></i>My Profile</a></li>
+                                <li><a class="dropdown-item" href="changePassword.jsp"><i class="bx bx-lock m-2"></i>Change Password</a>
+                                </li>
+                                <!-- <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li> -->
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <button class="dropdown-item"  name="action" value="LogoutProvider" ><i class="bx bx-log-out m-2"></i>Logout</button>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </nav>
+                </form>
       <!-- Breadcrumb -->
       <div class="mx-5 mt-3">
         <nav aria-label="breadcrumb m-5">
@@ -366,6 +378,15 @@
 
 
         </div>
+          <%
+                        List<OrderDTO> orderList = new ArrayList();
+                        orderList = (List<OrderDTO>) session.getAttribute("Providder_ListOrder");
+                        if (orderList.isEmpty()) {
+                    %>    
+                    <h3 style="text-align: center; color: black ; font-size: 25px ; padding-top: 25px ;">Your Company Don't Serve This Service</h3>
+                    <%
+                    } else {
+                    %>
         <div class="layout-container-fluid   " style="border-radius:5px ;">
           <div class="table-responsive bg-white " style="border-radius:5px ;">
             <table class="table ">
@@ -373,65 +394,84 @@
                 <tr>
                   <th>Orders ID</th>
                   <th>Date</th>
-                  <th>Total</th>
+                  <th>Customer ID</th>
+                  <th>Order Total</th>
                   <th>Status</th>
                   <th>Actions</th>
 
                 </tr>
               </thead>
               <tbody>
+                  <%
+                    for (OrderDTO order : orderList ) {
+                            
+                  %>
                 <tr>
-                    <td><strong><a class="text-dark" data-bs-target="#orders" data-bs-toggle="modal" href="">
-                        O101</a></strong></td>
-                    <td>10/10/2022</td>
+                    <td><strong>
+                        <%= order.getOrder_ID() %> </strong></td>
+                    <td> <%= order.getOrder_date() %></td>
 
-                    <td>120.000VND</td>
+                    <td><%= order.getCustomer_ID()  %></td>
+                    <td><%= order.getTotal()  %></td>
 
-                   <td><span class="badge bg-label-warning me-1">Active</span></td>
-                   <!-- danger : đỏ 
-                        info   : xanh
-                        success : xanh lá cây
-                        warning : vàng
-                       -->
+                   <td>
+                                            <div class="flexStatus">
+                                                <div>
+                                                    <%
+                                                        int status = order.getStatus();
+                                                        if (status == 1) {
+                                                    %>
+                                                    <span class="badge bg-label-info me-1 changeStatus">InProgress</span>
+                                                    <%
+                                                    } else if (status == 2) {
+
+                                                    %>
+                                                    <span class="badge bg-label-success me-1 changeStatus">InActive</span>
+                                                    <% } else if (status == 0) {
+                                                    %>
+                                                    <span class="badge bg-label-warning me-1 changeStatus">Pending</span>
+                                                    <%
+                                                        }
+                                                    %>
+                                                </div>
+                                                <div>
+                                                    <select class="form-select " name="ProductStatus" aria-label="Default select example">
+                                                        <option selected value="Choose status" >Choose status</option>
+                                                        <option value="1">Active</option>
+                                                        <option value="2">Inactive</option>              
+                                                    </select>
+                                                    <input type="hidden" name="oldStatus" value="<%= order.getStatus()%>" /> 
+                                                </div>  
+                                            </div>
+                                        </td>
 
                     <td>
                       <div>
-                          <button type="button" data-target="#modalToggle" data-toggle="modal" href="javascript:void(0);"><i
-                           class="bx bx-edit-alt me-1"></i>Edit</button> 
-
-                        <a href="javascript:void(0);"><i class="bx bx-trash me-1"></i>Delete</a>
+                          <button name="action" value="ProviderEditOrder" ><i class="bx bx-edit-alt me-1"></i>Edit</button>
+                      </td> 
+                      <td>
+                         <div>
+                                <button name="action" value="ProviderDeleteOrder" ><i class="bx bx-trash me-1"></i>Delete</button>
+                         </div>
+                      </div>
+                        <td>
+                            <button name="action" value="ProviderOrderDetail" ><i class='bx bx-info-circle'></i>View Detail</button> 
+                            <input type="hidden" name="orderID" value="<%= order.getOrder_ID() %>" />
                       </div>
 
                    </td>
                 </tr>
-                <tr>
-                    <td id="id"><strong>0102</strong></td>
-                    <td id="date">10/10/2022</td>
-
-                    <td id="price">120.000VND</td>
-
-                   <td><span class="badge bg-label-warning me-1">Active</span></td>
-                   <!-- danger : đỏ 
-                        info   : xanh
-                        success : xanh lá cây
-                        warning : vàng
-                       -->
-
-                    <td>
-                      <div>
-                         <a data-bs-target="#modalToggle" data-bs-toggle="modal" value="0102" ><i
-                           class="bx bx-edit-alt me-1"></i>Edit</a>
-
-                        <a href="javascript:void(0);"><i class="bx bx-trash me-1"></i>Delete</a>
-                      </div>
-
-                   </td>
-                </tr>
+                <%
+                    }
+                %>
               </tbody>
             </table>
           </div>
 
         </div>
+        <%
+            }
+        %>
       </div>
     </div>
     <!-- Footer Start -->

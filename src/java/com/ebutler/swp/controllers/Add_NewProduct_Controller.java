@@ -48,11 +48,11 @@ public class Add_NewProduct_Controller extends HttpServlet {
                 isValidated = false;
             }
             if (!ValiUtils.isValidQuantity(quantityProduct)) {
-                productError.setQuantity("Should be valid number");
+                productError.setQuantity("Should be valid number. Number should be positive");
                 isValidated = false;
             }
             if (!ValiUtils.isValidPrice(price)) {
-                productError.setPrice("Should be valid number");
+                productError.setPrice("Should be valid number. Number should be positive");
                 isValidated = false;
             }
             

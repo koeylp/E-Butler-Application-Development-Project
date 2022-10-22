@@ -5,9 +5,9 @@
 package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.ProviderDAO;
-import com.ebutler.swp.dto.ProviderOrderDTO;
+import com.ebutler.swp.dto.OrderDTO;
+import com.ebutler.swp.dto.ProviderDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -23,16 +23,17 @@ import javax.servlet.http.HttpSession;
 public class Provider_OrderController extends HttpServlet {
 
     private static final String ERROR = "index.jsp" ; 
-    private static final String SUCCESS = "provider_manageOrder.jsp" ; 
+    private static final String SUCCESS = "OrderProvider.jsp" ;  
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR ; 
         try {
-            List<ProviderOrderDTO> listOrder = new ArrayList(); 
+            List<OrderDTO> listOrder = new ArrayList(); 
             HttpSession session = request.getSession(); 
             ProviderDAO dao = new ProviderDAO(); 
-            listOrder = dao.loadListOrder(); 
+            ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER") ; 
+            listOrder = dao.loadListOrder(provider); 
             if (listOrder != null) {
                 url = SUCCESS ; 
                 session.setAttribute("Providder_ListOrder", listOrder); 
