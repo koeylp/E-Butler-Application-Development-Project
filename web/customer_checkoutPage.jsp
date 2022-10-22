@@ -147,7 +147,7 @@
                             <div class="col l-5">
                                 <!-- Contact info start -->
                                 <div class="relative m-y-32">
-                                    <div style="border: 1px solid #E5E7EB; border-radius: 1rem;" class="pad-2 flex-between">
+                                    <div style="border: 1px solid #E5E7EB;" class="pad-2 flex-between">
                                         <div class="flex-between">
                                             <div class="flex-center">
                                                 <i class="fa-solid fa-user"></i>
@@ -161,10 +161,10 @@
                                             </div>
                                         </div>
                                         <div class="flex-center">
-                                            <button style="--round: .5rem; background-color: #F9FAFB" class="txt-sm bold rounded-f border-no pad-0">Change</button>
+                                            <button type="button" style="--round: .5rem; background-color: #F9FAFB" class="txt-sm bold rounded-f border-no pad-0">Change</button>
                                         </div>
                                     </div>
-                                    <div style="width: 100%;border: 1px solid #E5E7EB; border-radius: 1rem;" class="bot">
+                                    <div style="width: 100%;border: 1px solid #E5E7EB;" class="info_detail detail">
                                         <div class="pad-2">
                                             <div class="flex-vertical-center m-y-12">
                                                 <h1 class="txt-lg bold">Contact information</h1>
@@ -196,7 +196,7 @@
 
                                 <!-- Shipping Address start-->
                                 <div class="relative m-y-32">
-                                    <div style="border: 1px solid #E5E7EB; border-radius: 1rem;" class="pad-2 flex-between">
+                                    <div style="border: 1px solid #E5E7EB;" class="pad-2 flex-between">
                                         <div class="flex-between">
                                             <div class="flex-center txt-md">
                                                 <i class="fa-solid fa-signs-post"></i>
@@ -209,11 +209,11 @@
                                             </div>
                                         </div>
                                         <div class="flex-center">
-                                            <button style="--round: .5rem; background-color: #F9FAFB"
+                                            <button type="button" style="--round: .5rem; background-color: #F9FAFB"
                                                     class="txt-sm bold rounded-f border-no pad-0">Change</button>
                                         </div>
                                     </div>
-                                    <div style="width: 100%;border: 1px solid #E5E7EB; border-radius: 1rem;" class="bot">
+                                    <div style="width: 100%;border: 1px solid #E5E7EB;" class="address_detail detail">
                                         <div class="pad-2">
                                             <div style="padding: 0;" class="flex-col">
 
@@ -442,6 +442,7 @@
                                             }
                                         %>
                                     </div>
+
                                     <div class="m-y-32">
                                         <div class="flex-col">
                                             <div class="flex-between txt-md bold">
@@ -469,6 +470,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <!-- Payment method start -->
                                     <div class="relative m-y-32">
                                         <div style="border: 1px solid #E5E7EB; border-radius: 1rem;" class="pad-2 flex-between">
