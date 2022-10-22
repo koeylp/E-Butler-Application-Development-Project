@@ -4,6 +4,9 @@
     Author     : Dang Viet
 --%>
 
+<%@page import="com.ebutler.swp.dto.CityDTO"%>
+<%@page import="com.ebutler.swp.dto.ProvinceDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.ebutler.swp.dto.UserDTO"%>
 <%@page import="com.ebutler.swp.dto.CustomerDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -42,9 +45,11 @@
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
         <link rel="stylesheet" href="css/grid.css">
+        <link rel="stylesheet" href="css/base.css">
 
         <!-- My Stylesheet -->
         <link rel="stylesheet" href="css/guestPage.css">
+        <link rel="stylesheet" href="css/customerPage.css">
         <link rel="stylesheet" href="css/customer_profilePage.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
@@ -73,8 +78,9 @@
             if (wrongDob == null) {
                 wrongDob = "";
             }
-            
+
             UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
+            customer = (customer == null) ? new CustomerDTO() : customer;
 
         %>
         <div class="container-xxl bg-white p-0">
@@ -115,10 +121,26 @@
                                 <a class="search-close opacity"><i class="fa-solid fa-xmark"></i></a>
                             </div>
                             <div class="nav-item dropdown">
-                                <a class="nav-link active"><i class="fa-solid fa-user"></i></a>
-                                <div class="dropdown-menu rounded-0 m-12">
-                                    <a style="color: var(--primary-color); font-weight: bold;" href="MainController?action=GoToUserProfile" class="dropdown-item login--link"><%=login_user.getUsername()%></a>
-                                    <a href="MainController?action=Logout" class="dropdown-item register--link">logout</a>
+                                <div class="nav-link">
+                                    <div style="width: 1.5rem;" class="img rounded-f">
+                                        <img src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="dropdown-menu rounded-0 flex-col">
+                                    <div class="border-bottom">
+                                        <div style="justify-content: flex-start; cursor: pointer;" class="dropdown-item pad-0">
+                                            <i class="fa-solid fa-user"></i>
+                                            <a href="MainController?action=GoToUserProfile"><%=login_user.getUsername()%></a>
+                                        </div>
+                                        <div style="cursor: pointer;" class="dropdown-item pad-0">
+                                            <i class="fa-solid fa-lock"></i>
+                                            <a href="MainController?action=GoToUserProfile">Change password</a>
+                                        </div>
+                                    </div>
+                                    <div style="cursor: pointer;" class="dropdown-item pad-0">
+                                        <i style="transform: scale(-1, 1);" class="fa-solid fa-right-from-bracket"></i>
+                                        <a href="MainController?action=Logout">Logout</a>
+                                    </div>
                                 </div>
                             </div>
                             <a class="nav-item nav-link search-open"><i class="fa-solid fa-magnifying-glass"></i></a>
@@ -486,7 +508,7 @@
                                 <span class="txt-lg bold m-y-12"><%= emptyField%></span>
                                 <span class="txt-lg bold m-y-12">Current password</span>
                                 <input name="current-password" style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
-                                       class="input txt-sm" type="password" placeholder="<%= customer.getPassword() %>">
+                                       class="input txt-sm" type="password">
                                 <span class="txt-lg bold m-y-12"><%= duplicatePassword%></span>
                             </div>
                             <div class="flex-horizon-center flex-col m-y-12">
@@ -517,18 +539,100 @@
                         <h1 class="txt-xl">Update Your Address</h1>
                     </div>
 
+                    <div class="relative m-y-32">
+                        <div style="border: 1px solid #E5E7EB; border-radius: 1rem;" class="pad-2 flex-between">
+                            <div class="flex-between">
+                                <div class="flex-center txt-md">
+                                    <i class="fa-solid fa-signs-post"></i>
+                                </div>
+                                <div style="margin-left: 2rem;" class="flex-col">
+                                    <span class="txt-lg">UPDATE ADDRESS</span>
+                                    <div class="flex-between txt-sm bold">
+                                        <span>Address</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex-center">
+                                <button style="--round: .5rem"
+                                        class="txt-sm bold rounded-f border-no pad-0">Add</button>
+                            </div>
+                        </div>
+                        <div style="width: 100%;border: 1px solid #E5E7EB; border-radius: 1rem;" class="bot">
+                            <div class="pad-2">
+                                <div style="padding: 0;" class="flex-col">
+                                    <form action="MainController?action=SelectProvince" method="POST">
+                                        <div class="row">
+                                            <div class="flex-horizon-center flex-col m-y-12 col l-6">
+                                                <span class="txt-md m-y-12">Province</span>
+                                                <%
+                                                    ArrayList<ProvinceDTO> province_list = (ArrayList<ProvinceDTO>) session.getAttribute("PROVINCE_LIST");
+                                                    String province_id = (String) request.getAttribute("PROVINCE_ID");
+
+                                                    province_id = (province_id == null) ? "" : province_id;
+                                                    province_list = (province_list == null) ? new ArrayList<ProvinceDTO>() : province_list;
+                                                %>
+                                                <select
+                                                    style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
+                                                    class="input txt-sm" type="password" onchange="this.form.submit()" name="province_id">
+                                                    <option>Select Province</option>
+                                                    <%
+                                                        for (ProvinceDTO province : province_list) {
+                                                    %>
+                                                    <option value="<%=province.getId()%>" <%if (province.getId().equals(province_id)) {%>selected<%}%>><%=province.getName()%></option>
+                                                    <%
+                                                        }
+                                                    %>
+
+                                                </select>
+                                            </div>
+                                            <div class="flex-horizon-center flex-col m-y-12 col l-6">
+                                                <span class="txt-md m-y-12">City</span>
+
+                                                <%
+                                                    ArrayList<CityDTO> city_list = (ArrayList<CityDTO>) request.getAttribute("CITY_LIST");
+
+                                                    city_list = (city_list == null) ? new ArrayList<CityDTO>() : city_list;
+                                                %>
+                                                <select
+                                                    style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
+                                                    class="input txt-sm" type="password" name="city_id">
+                                                    <option>Select City</option>
+                                                    <%
+                                                        for (CityDTO city : city_list) {
+                                                    %>
+                                                    <option value="<%=city.getId()%>"><%=city.getName()%></option>
+                                                    <%
+                                                        }
+                                                    %>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <div class="flex-horizon-center flex-col m-y-12">
+                                        <span class="txt-md m-y-12">Address</span>
+                                        <input
+                                            style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
+                                            class="input txt-sm" type="text">
+                                    </div>
+                                    <div class="flex-vertical-center">
+                                        <button class="btn-lg txt-md bold m-y-32">Save</button>
+                                        <button style="margin-left: 1rem; background-color: #EFEFEF; color: black"
+                                                class="btn-lg txt-md bold m-y-32 border-no box-shadow-no">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row m-y-32">
                         <!-- Order item -->
                         <div class="block-border flex-col grid m-y-32">
                             <!-- Order head -->
                             <div style="background-color: #F9FAFB;" class="flex-between pad-2">
                                 <div class="flex-col flex-horizon-center">
-                                    <span class="txt-lg bold">#orderid</span>
-                                    <div class="flex-center">
-                                        <span class="txt-md">order-date</span>
-                                        <span class="m-x-12">-</span>
-                                        <span class="delivered">delivered</span>
-                                    </div>
+                                    <span class="txt-lg bold">Your address</span>
                                 </div>
                             </div>
                             <!-- Order detail -->
@@ -561,164 +665,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="order-card m-y-12">
-                                    <div class="flex">
-                                        <div class="flex-center order-img">
-                                            <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
-                                                 alt="">
-                                        </div>
-                                        <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                            <div class="flex-between">
-                                                <div class="flex-col flex-horizon-center">
-                                                    <span class="txt-lg bold">Product name</span>
-                                                    <div class="flex-horizon-center">
-                                                        <span class="txt-md">Product</span>
-                                                        <span class="m-x-12">|</span>
-                                                        <span class="txt-md">Product Category</span>
-                                                    </div>
-                                                </div>
-                                                <div class="order-price bold">
-                                                    <span>
-                                                        $369.000
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div style="height: 50%;" class="flex-end flex-col">
-                                                <span class="txt-md bold">Quantity: 1</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="block-border flex-col grid m-y-32">
-                            <!-- Order head -->
-                            <div style="background-color: #F9FAFB;" class="flex-between pad-2">
-                                <div class="flex-col flex-horizon-center">
-                                    <span class="txt-lg bold">#orderid</span>
-                                    <div class="flex-center">
-                                        <span class="txt-md">order-date</span>
-                                        <span class="m-x-12">-</span>
-                                        <span class="pending">pending</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Order detail -->
-                            <div class="pad-2">
-                                <div class="order-card m-y-12">
-                                    <div class="flex">
-                                        <div class="flex-center order-img">
-                                            <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
-                                                 alt="">
-                                        </div>
-                                        <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                            <div class="flex-between">
-                                                <div class="flex-col flex-horizon-center">
-                                                    <span class="txt-lg bold">Product name</span>
-                                                    <div class="flex-horizon-center">
-                                                        <span class="txt-md">Product</span>
-                                                        <span class="m-x-12">|</span>
-                                                        <span class="txt-md">Product Category</span>
-                                                    </div>
-                                                </div>
-                                                <div class="order-price bold">
-                                                    <span>
-                                                        $369.000
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div style="height: 50%;" class="flex-end flex-col">
-                                                <span class="txt-md bold">Quantity: 1</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="order-card m-y-12">
-                                    <div class="flex">
-                                        <div class="flex-center order-img">
-                                            <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
-                                                 alt="">
-                                        </div>
-                                        <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                            <div class="flex-between">
-                                                <div class="flex-col flex-horizon-center">
-                                                    <span class="txt-lg bold">Product name</span>
-                                                    <div class="flex-horizon-center">
-                                                        <span class="txt-md">Product</span>
-                                                        <span class="m-x-12">|</span>
-                                                        <span class="txt-md">Product Category</span>
-                                                    </div>
-                                                </div>
-                                                <div class="order-price bold">
-                                                    <span>
-                                                        $369.000
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div style="height: 50%;" class="flex-end flex-col">
-                                                <span class="txt-md bold">Quantity: 1</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="order-card m-y-12">
-                                    <div class="flex">
-                                        <div class="flex-center order-img">
-                                            <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
-                                                 alt="">
-                                        </div>
-                                        <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                            <div class="flex-between">
-                                                <div class="flex-col flex-horizon-center">
-                                                    <span class="txt-lg bold">Product name</span>
-                                                    <div class="flex-horizon-center">
-                                                        <span class="txt-md">Product</span>
-                                                        <span class="m-x-12">|</span>
-                                                        <span class="txt-md">Product Category</span>
-                                                    </div>
-                                                </div>
-                                                <div class="order-price bold">
-                                                    <span>
-                                                        $369.000
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div style="height: 50%;" class="flex-end flex-col">
-                                                <span class="txt-md bold">Quantity: 1</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="order-card m-y-12">
-                                    <div class="flex">
-                                        <div class="flex-center order-img">
-                                            <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
-                                                 alt="">
-                                        </div>
-                                        <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                            <div class="flex-between">
-                                                <div class="flex-col flex-horizon-center">
-                                                    <span class="txt-lg bold">Product name</span>
-                                                    <div class="flex-horizon-center">
-                                                        <span class="txt-md">Product</span>
-                                                        <span class="m-x-12">|</span>
-                                                        <span class="txt-md">Product Category</span>
-                                                    </div>
-                                                </div>
-                                                <div class="order-price bold">
-                                                    <span>
-                                                        $369.000
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div style="height: 50%;" class="flex-end flex-col">
-                                                <span class="txt-md bold">Quantity: 1</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
                     </div>
@@ -820,35 +766,35 @@
         crossorigin="anonymous"
     ></script>
     <script>
-                                var selDiv = "";
-                                var storedFiles = [];
-                                $(document).ready(function () {
-                                    $("#img").on("change", handleFileSelect);
-                                    selDiv = $("#selectedBanner");
-                                });
+                                                                var selDiv = "";
+                                                                var storedFiles = [];
+                                                                $(document).ready(function () {
+                                                                    $("#img").on("change", handleFileSelect);
+                                                                    selDiv = $("#selectedBanner");
+                                                                });
 
-                                function handleFileSelect(e) {
-                                    var files = e.target.files;
-                                    var filesArr = Array.prototype.slice.call(files);
-                                    filesArr.forEach(function (f) {
-                                        if (!f.type.match("image.*")) {
-                                            return;
-                                        }
-                                        storedFiles.push(f);
+                                                                function handleFileSelect(e) {
+                                                                    var files = e.target.files;
+                                                                    var filesArr = Array.prototype.slice.call(files);
+                                                                    filesArr.forEach(function (f) {
+                                                                        if (!f.type.match("image.*")) {
+                                                                            return;
+                                                                        }
+                                                                        storedFiles.push(f);
 
-                                        var reader = new FileReader();
-                                        reader.onload = function (e) {
-                                            var html =
-                                                    '<img src="' +
-                                                    e.target.result +
-                                                    "\" data-file='" +
-                                                    f.name +
-                                                    "alt='Category Image' height='200px' width='200px'>";
-                                            selDiv.html(html);
-                                        };
-                                        reader.readAsDataURL(f);
-                                    });
-                                }
+                                                                        var reader = new FileReader();
+                                                                        reader.onload = function (e) {
+                                                                            var html =
+                                                                                    '<img src="' +
+                                                                                    e.target.result +
+                                                                                    "\" data-file='" +
+                                                                                    f.name +
+                                                                                    "alt='Category Image' height='200px' width='200px'>";
+                                                                            selDiv.html(html);
+                                                                        };
+                                                                        reader.readAsDataURL(f);
+                                                                    });
+                                                                }
     </script>
 </body>
 
