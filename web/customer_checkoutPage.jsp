@@ -161,7 +161,7 @@
                                             </div>
                                         </div>
                                         <div class="flex-center">
-                                            <button class="btn-md txt-sm bold">Change</button>
+                                            <button style="--round: .5rem; background-color: #F9FAFB" class="txt-sm bold rounded-f border-no pad-0">Change</button>
                                         </div>
                                     </div>
                                     <div style="width: 100%;border: 1px solid #E5E7EB; border-radius: 1rem;" class="bot">
@@ -185,8 +185,8 @@
                                                 </div>
                                                 <div class="flex-vertical-center">
                                                     <button class="btn-lg txt-md bold m-y-32">Save and next to shipping</button>
-                                                    <button style="margin-left: 1rem;"
-                                                            class="btn-lg txt-md bold m-y-32">Cancel</button>
+                                                    <button style="margin-left: 1rem; background-color: #EFEFEF; color: black"
+                                                            class="btn-lg txt-md bold m-y-32 border-no box-shadow-no">Cancel</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -209,7 +209,7 @@
                                             </div>
                                         </div>
                                         <div class="flex-center">
-                                            <button style="--round: .5rem"
+                                            <button style="--round: .5rem; background-color: #F9FAFB"
                                                     class="txt-sm bold rounded-f border-no pad-0">Change</button>
                                         </div>
                                     </div>
@@ -316,9 +316,6 @@
                                 </div>
                                 <!-- Shipping Address end -->
 
-
-
-
                             </div>
 
 
@@ -335,7 +332,7 @@
                                         <span>Order Summary</span>
                                     </div>
                                     <!-- Order head product-->
-                                    <div style="background-color: #9A9DA1;" class="pad-1 m-y-12">
+                                    <div style="background-color: #F9FAFB;" class="pad-1 m-y-12">
                                         <div class="flex-between flex-verticle-center">
                                             <span class="txt-lg bold">Product</span>
 
@@ -401,7 +398,7 @@
 
                                     </div>
                                     <!-- Order head service -->
-                                    <div style="background-color: #9A9DA1;" class="pad-1 m-y-12">
+                                    <div style="background-color: #F9FAFB;" class="pad-1 m-y-12">
                                         <div class="flex-between flex-verticle-center">
                                             <span class="txt-lg bold">Service</span>
 
@@ -444,35 +441,33 @@
                                                 total += sub_total_service;
                                             }
                                         %>
+                                    </div>
+                                    <div class="m-y-32">
+                                        <div class="flex-col">
+                                            <div class="flex-between txt-md bold">
+                                                <span>Discount code</span>
+                                            </div>
+                                            <div class="flex-between m-y-12">
+                                                <input style="border-radius: .5rem; flex: 1; margin-right: 1rem" type="text"
+                                                       class="txt-sm p-2">
+                                                <button style="color: white" class="btn-md txt-sm bold">Apply</button>
+                                            </div>
+                                            <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB"
+                                                 class="flex-between txt-sm">
+                                                <span>Order product total</span>
+                                                <span class="bold">$<%= sub_product_total%></span>
+                                            </div>
+                                            <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB"
+                                                 class="flex-between txt-sm">
+                                                <span>Order service total</span>
+                                                <span class="bold">$<%= sub_total_service%></span>
+                                            </div>
 
-                                        <div class="m-y-32">
-                                            <div class="flex-col sticky">
-                                                <div class="flex-between txt-md bold">
-                                                    <span>Discount code</span>
-                                                </div>
-                                                <div class="flex-between m-y-12">
-                                                    <input style="border-radius: 1rem; flex: 1; margin-right: 1rem" type="text"
-                                                           class="txt-sm p-2">
-                                                    <button class="btn-md txt-sm bold">Apply</button>
-                                                </div>
-                                                <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB"
-                                                     class="flex-between txt-sm">
-                                                    <span>Order product total</span>
-                                                    <span class="bold">$<%= sub_product_total%></span>
-                                                </div>
-                                                <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB"
-                                                     class="flex-between txt-sm">
-                                                    <span>Order service total</span>
-                                                    <span class="bold">$<%= sub_total_service%></span>
-                                                </div>
-
-                                                <div style="padding: 1rem 0;" class="flex-between txt-lg bold">
-                                                    <span>Order total</span>
-                                                    <span class="bold">$<%= total%></span>
-                                                </div>
+                                            <div style="padding: 1rem 0;" class="flex-between txt-lg bold">
+                                                <span>Order total</span>
+                                                <span class="bold">$<%= total%></span>
                                             </div>
                                         </div>
-
                                     </div>
                                     <!-- Payment method start -->
                                     <div class="relative m-y-32">

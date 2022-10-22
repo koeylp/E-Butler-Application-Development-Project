@@ -266,15 +266,16 @@
 
                                     </div>
                                 </div>
+                                <%
+                                    double sub_total_service = 0;
+                                    if (cartService != null) {
+                                        for (ServiceDetailDTO service : cartService.getCart().values()) {
+                                            sub_total_service += service.getPrice();
+                                %>
                                 <!-- Order detail -->
                                 <form action="MainController" method="POST">
                                     <div class="pad-2">
-                                        <%
-                                            double sub_total_service = 0;
-                                            if (cartService != null) {
-                                                for (ServiceDetailDTO service : cartService.getCart().values()) {
-                                                    sub_total_service += service.getPrice();
-                                        %>
+
                                         <div class="order-card m-y-12">
                                             <div class="flex">
                                                 <div class="flex-center order-img">
@@ -325,14 +326,15 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <%
 
-                                                }
-                                                total += sub_total_service;
-                                            }
-                                        %>
                                     </div>
                                 </form>
+                                <%
+
+                                        }
+                                        total += sub_total_service;
+                                    }
+                                %>
                             </div>
                         </div>
                         <!-- Service cart end-->
