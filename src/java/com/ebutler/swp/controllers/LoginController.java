@@ -4,13 +4,16 @@
  */
 package com.ebutler.swp.controllers;
 
+import com.ebutler.swp.dao.AddressDAO;
 import com.ebutler.swp.dao.ProviderDAO;
 import com.ebutler.swp.dao.UserDAO;
 import com.ebutler.swp.dto.ProductDetailDTO;
 import com.ebutler.swp.dto.ProviderDTO;
 import com.ebutler.swp.dto.ProviderServiceDTO1;
+import com.ebutler.swp.dto.ProvinceDTO;
 import com.ebutler.swp.dto.UserDTO;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -54,7 +57,13 @@ public class LoginController extends HttpServlet {
             session.setAttribute("LOGIN_USER", login_user);
             ProviderDAO providerdao = new ProviderDAO();
             ProviderDTO provider = providerdao.getProvider(username, password);
-
+            
+            
+            AddressDAO addressDAO = new AddressDAO();
+            ArrayList<ProvinceDTO> province_list = addressDAO.SelectProvince();
+            
+            if(province_list != null) session.setAttribute("PROVINCE_LIST", province_list);
+            
             if (login_user.getRole_id().equals(CUS_ROLE)) {
                 url = CUS_PAGE;
             } else if (userDAO.Login(username, password).getRole_id().equals(PRO_ROLE)) {

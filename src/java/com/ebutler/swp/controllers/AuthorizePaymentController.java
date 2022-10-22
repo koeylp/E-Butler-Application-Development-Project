@@ -4,11 +4,15 @@
  */
 package com.ebutler.swp.controllers;
 
-import com.ebutler.swp.dao.ProductDAO;
-import com.ebutler.swp.dto.ProductDTO;
+import com.ebutler.swp.dto.CartDTO;
+import com.ebutler.swp.dto.OrderPayPalDetail;
+import com.ebutler.swp.dto.PaymentServiceDTO;
+import com.ebutler.swp.dto.UserDTO;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+
+import com.paypal.base.rest.PayPalRESTException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,11 +20,11 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Admin
+ * @author thekh
  */
-public class ProductPageController extends HttpServlet {
+@WebServlet(name = "AuthorizePaymentController", urlPatterns = {"/AuthorizePaymentController"})
+public class AuthorizePaymentController extends HttpServlet {
     
-    private static final String SUCCESS = "customer_productCategoryPage.jsp";
     private static final String ERROR = "errorPage.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -28,18 +32,20 @@ public class ProductPageController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String category_ID = request.getParameter("category_ID");
-            
-            ProductDAO dao = new ProductDAO();
-            List<ProductDTO> list = dao.getListProductByPlace(category_ID);
+            String total = request.getParameter("total");
             HttpSession session = request.getSession();
+            if (session != null) {
+                UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
+                CartDTO cart = (CartDTO) session.getAttribute("CART");
+                
+                OrderPayPalDetail order = new OrderPayPalDetail(String.valueOf(total), "0", String.valueOf(total));
+                PaymentServiceDTO paymentServices = new PaymentServiceDTO();
+                String approvalLink = paymentServices.authorizePayment(order);
+                response.sendRedirect(approvalLink);
+            }
             
-            session.setAttribute("CATEGORYID", category_ID);
-            session.setAttribute("CUSTOMER_PRODUCT_LIST", list);
-            url = SUCCESS;
-        } catch (Exception e) {
-            log("Error at ProductPageController: "+e.getMessage());
-        }finally{
+        } catch (PayPalRESTException e) {
+            log("Error at AuthorizePaymentController: " + e.getMessage());
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

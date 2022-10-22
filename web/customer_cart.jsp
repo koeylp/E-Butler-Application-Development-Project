@@ -91,10 +91,26 @@
                                 <a class="search-close opacity"><i class="fa-solid fa-xmark"></i></a>
                             </div>
                             <div class="nav-item dropdown">
-                                <a class="nav-link"><i class="fa-solid fa-user"></i></a>
-                                <div class="dropdown-menu rounded-0 m-12">
-                                    <a style="color: var(--primary-color); font-weight: bold;" href="MainController?action=GoToUserProfile" class="dropdown-item login--link"><%=login_user.getUsername()%></a>
-                                    <a href="MainController?action=Logout" class="dropdown-item register--link">logout</a>
+                                <div class="nav-link">
+                                    <div style="width: 1.5rem;" class="img rounded-f">
+                                        <img src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="dropdown-menu rounded-0 flex-col">
+                                    <div class="border-bottom">
+                                        <div style="justify-content: flex-start; cursor: pointer;" class="dropdown-item pad-0">
+                                            <i class="fa-solid fa-user"></i>
+                                            <a href="MainController?action=GoToUserProfile"><%=login_user.getUsername()%></a>
+                                        </div>
+                                        <div style="cursor: pointer;" class="dropdown-item pad-0">
+                                            <i class="fa-solid fa-lock"></i>
+                                            <a href="MainController?action=GoToUserProfile">Change password</a>
+                                        </div>
+                                    </div>
+                                    <div style="cursor: pointer;" class="dropdown-item pad-0">
+                                        <i style="transform: scale(-1, 1);" class="fa-solid fa-right-from-bracket"></i>
+                                        <a href="MainController?action=Logout">Logout</a>
+                                    </div>
                                 </div>
                             </div>
                             <a class="nav-item nav-link search-open "><i class="fa-solid fa-magnifying-glass"></i></a>
@@ -192,7 +208,7 @@
                                                         </div>
                                                         <div class="order-price txt-sm bold">
                                                             <span>
-                                                                <%= product.getQuantity() * product.getPrice()%>
+                                                                $<%= product.getQuantity() * product.getPrice()%>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -250,15 +266,16 @@
 
                                     </div>
                                 </div>
+                                <%
+                                    double sub_total_service = 0;
+                                    if (cartService != null) {
+                                        for (ServiceDetailDTO service : cartService.getCart().values()) {
+                                            sub_total_service += service.getPrice();
+                                %>
                                 <!-- Order detail -->
                                 <form action="MainController" method="POST">
                                     <div class="pad-2">
-                                        <%
-                                            double sub_total_service = 0;
-                                            if (cartService != null) {
-                                                for (ServiceDetailDTO service : cartService.getCart().values()) {
-                                                    sub_total_service += service.getPrice();
-                                        %>
+
                                         <div class="order-card m-y-12">
                                             <div class="flex">
                                                 <div class="flex-center order-img">
@@ -277,7 +294,7 @@
                                                         </div>
                                                         <div class="order-price bold txt-sm">
                                                             <span>
-                                                                <%= service.getPrice()%>
+                                                                $<%= service.getPrice()%>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -309,14 +326,15 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <%
 
-                                                }
-                                                total += sub_total_service;
-                                            }
-                                        %>
                                     </div>
                                 </form>
+                                <%
+
+                                        }
+                                        total += sub_total_service;
+                                    }
+                                %>
                             </div>
                         </div>
                         <!-- Service cart end-->
@@ -335,11 +353,11 @@
                                 </div>
                                 <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB" class="flex-between txt-sm">
                                     <span>Order product total</span>
-                                    <span class="bold"><%=  sub_product_total%></span>
+                                    <span class="bold">$<%=  sub_product_total%></span>
                                 </div>
                                 <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB" class="flex-between txt-sm">
                                     <span>Order service total</span>
-                                    <span class="bold"> <%=  sub_total_service%></span>
+                                    <span class="bold"> $<%=  sub_total_service%></span>
                                 </div>
                                 <!--                                <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB" class="flex-between txt-sm">
                                                                     <span>Tax estimate</span>
@@ -347,7 +365,7 @@
                                                                 </div>-->
                                 <div style="padding: 1rem 0;" class="flex-between txt-lg bold">
                                     <span>Order total</span>
-                                    <span class="bold"><%= total%></span>
+                                    <span class="bold">$<%= total%></span>
                                 </div>
                                 <button type="button" style="width: 100%;" class="btn-lg m-y-12 txt-md"><a style="color:white" href="MainController?action=LoadCartData">Proceed to checkout</a></button>
                             </div>

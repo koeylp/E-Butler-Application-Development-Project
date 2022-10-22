@@ -26,7 +26,7 @@ public class MainController extends HttpServlet {
 //    Login
     private final String LOGIN = "Login";
     private final String LOGIN_CONTROLLER = "LoginController";
-    
+
 //    Login with google
     private final String LOGIN_WITH_GOOGLE = "LoginWithGoogle";
     private final String LOGIN_WITH_GOOGLE_CONTROLLER = "LoginWithGoogleController";
@@ -86,7 +86,7 @@ public class MainController extends HttpServlet {
     private final String SORT_SERVICE_CATEGORY_WORD_UP_CONTROLLER = "WordServiceCategoryUpController";
     private final String SORT_SERVICE_CATEGORY_WORD_DOWN = "WordServiceCategoryDown";
     private final String SORT_SERVICE_CATEGORY_WORD_DOWN_CONTROLLER = "WordServiceCategoryDownController";
-    
+
     private final String SORT_SERVICE_DETAIL_PRICE_UP = "ServicePriceDetailUp";
     private final String SORT_SERVICE_DETAIL_PRICE_UP_CONTROLLER = "ServicePriceDetailUpController";
     private final String SORT_SERVICE_DETAIL_PRICE_DOWN = "ServicePriceDetailDown";
@@ -105,7 +105,7 @@ public class MainController extends HttpServlet {
 
     private final String SEARCH_SERVICE_CATEGORY = "SearchServiceCategory";
     private final String SEARCH_SERVICE_CATEGORY_CONTROLLER = "SearchServiceCategoryController";
-    
+
     private final String SEARCH_SERVICE_DETAIL_BY_TYPE = "SearchServiceDetailByType";
     private final String SEARCH_SERVICE_DETAIL_BY_TYPE_CONTROLLER = "SearchServiceDetailByTypeController";
 
@@ -120,6 +120,9 @@ public class MainController extends HttpServlet {
     private final String DELETE_CART_CONTROLLER = "DeleteCartController";
     private final String CHECKOUT = "Checkout";
     private final String CHECKOUT_CONTROLLER = "CheckoutController";
+    private final String AUTHORIZE_PAYMENT_CONTROLLER = "AuthorizePaymentController";
+    private final String EXECUTE_PAYMENT = "ExecutePayment";
+    private final String EXECUTE_PAYMENT_CONTROLLER = "ExecutePaymentController";
     private final String LOAD_CART_DATA = "LoadCartData";
     private final String LOAD_CART_DATA_CONTROLLER = "LoadCartDataController";
     private final String MOVE_TO_CART = "MoveToCart";
@@ -218,6 +221,10 @@ public class MainController extends HttpServlet {
     private final String PROVIDER_ADD_STAFF = "AddNewStaff";
     private final String PROVIDER_ADD_STAFF_CONTROLLER = "Add_NewStaff_Controller";
 
+//    Select province
+    private final String SELECT_PROVICE = "SelectProvince";
+    private final String SELECT_PROVICE_CONTROLLER = "SelectProvinceController";
+
     // -----PROVIDER----- 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -227,7 +234,7 @@ public class MainController extends HttpServlet {
 
         try {
             String action = request.getParameter("action");
-
+            String payment = request.getParameter("payment");
             if (action.equals(REGISTER)) {
                 url = REGISTER_CONTROLLER;
             } else if (action.equals(LOGIN)) {
@@ -276,8 +283,12 @@ public class MainController extends HttpServlet {
                 url = DELETE_CART_CONTROLLER;
             } else if (action.equals(LOAD_CART_DATA)) {
                 url = LOAD_CART_DATA_CONTROLLER;
-            } else if (action.equals(CHECKOUT)) {
+            } else if (action.equals(CHECKOUT) && payment.equals("COD")) {
                 url = CHECKOUT_CONTROLLER;
+            } else if (action.equals(CHECKOUT) && payment.equals("PayPal")) {
+                url = AUTHORIZE_PAYMENT_CONTROLLER;
+            } else if (action.equals(EXECUTE_PAYMENT)) {
+                url = EXECUTE_PAYMENT_CONTROLLER;
             } else if (action.equals(MOVE_TO_CART)) {
                 url = MOVE_TO_CART_CONTROLLER;
             } else if (action.equals(EDIT_QUANTITY)) {
@@ -336,24 +347,26 @@ public class MainController extends HttpServlet {
             } else if (action.equals(STAFF_CATEGORY_CHOOSE)) {
                 url = STAFF_CATEGORY_CHOOSE_CONTROLLER;
 
-                url = PROVIDER_ADD_STAFF_CONTROLLER ;  
-            } 
-            else if (action.equals(STAFF_CATEGORY_CHOOSE)) {
-                url = STAFF_CATEGORY_CHOOSE_CONTROLLER ;   
+                url = PROVIDER_ADD_STAFF_CONTROLLER;
+            } else if (action.equals(STAFF_CATEGORY_CHOOSE)) {
+                url = STAFF_CATEGORY_CHOOSE_CONTROLLER;
             } else if (action.equals(SEARCH_SERVICE_DETAIL_BY_TYPE)) {
                 url = SEARCH_SERVICE_DETAIL_BY_TYPE_CONTROLLER;
-            }else if (action.equals(SORT_SERVICE_DETAIL_PRICE_UP)) {
+            } else if (action.equals(SORT_SERVICE_DETAIL_PRICE_UP)) {
                 url = SORT_SERVICE_DETAIL_PRICE_UP_CONTROLLER;
-            }else if (action.equals(SORT_SERVICE_DETAIL_PRICE_DOWN)) {
+            } else if (action.equals(SORT_SERVICE_DETAIL_PRICE_DOWN)) {
                 url = SORT_SERVICE_PRICE_DOWN_CONTROLLER;
-            }else if (action.equals(SORT_SERVICE_DETAIL_WORD_DOWN)) {
+            } else if (action.equals(SORT_SERVICE_DETAIL_WORD_DOWN)) {
                 url = SORT_SERVICE_DETAIL_WORD_DOWN_CONTROLLER;
-            }else if (action.equals(SORT_SERVICE_DETAIL_WORD_UP)) {
+            } else if (action.equals(SORT_SERVICE_DETAIL_WORD_UP)) {
                 url = SORT_SERVICE_DETAIL_WORD_UP_CONTROLLER;
             }else if (action.equals(PROVIDER_ORDER)) {
                 url = PROVIDER_ORDER_CONTROLLER;
             }else if (action.equals(PROVIDER_ORDER_DETAIL)) {
                 url = PROVIDER_ORDER_DETAIL_CONTROLLER; 
+
+            } else if (action.equals(SELECT_PROVICE)) {
+                url = SELECT_PROVICE_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
