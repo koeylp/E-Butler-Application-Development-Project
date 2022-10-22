@@ -94,7 +94,7 @@
                                     </div>
                                 </div>
                                 <div class="dropdown-menu rounded-0 flex-col">
-                                    <div class="border-bottom">
+                                    <div class="border-bot">
                                         <div style="justify-content: flex-start; cursor: pointer;" class="dropdown-item pad-0">
                                             <i class="fa-solid fa-user"></i>
                                             <a href="MainController?action=GoToUserProfile"><%=login_user.getUsername()%></a>
@@ -119,9 +119,27 @@
             <!-- Navbar End -->
 
             <!-- Slider Start -->
-            <div class="grid slider">
-                <div style="background-color: var(--blue-bg);" class="row relative">
-                    <img src="https://chisnghiax.com/ciseco/static/media/Moon.bf27dc577d1acccaba48430d353dbbe0.svg">
+            <div class="grid">
+                <div class="relative">
+                    <div class="slider__img">
+                        <img src="https://cf.shopee.vn/file/5b5de1582d99cbbe75a8f9a5c4dae1c2_xxhdpi" style="width:100%">
+                    </div>
+                    <div class="slider__img">
+                        <img src="https://cf.shopee.vn/file/29a513618bd587d238c3134143f93d96_xxhdpi" style="width:100%">
+                    </div>
+                    <div class="slider__img">
+                        <img src="https://cf.shopee.vn/file/1889d97f151eb9902f649437876b6e7f_xxhdpi" style="width:100%">
+                    </div>
+
+                    <a class="prev left" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next right" onclick="plusSlides(1)">&#10095;</a>
+                </div>
+                <br>
+
+                <div class="flex-center">
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
                 </div>
             </div>
             <!-- Slider End -->
@@ -282,10 +300,21 @@
             <!-- Product List End -->
 
             <!-- Slider Start -->
-            <div class="grid slider">
-                <div style="background-color: var(--blue-bg);" class="row">
-                    <img src="https://chisnghiax.com/ciseco/static/media/Moon.bf27dc577d1acccaba48430d353dbbe0.svg">
+            <div class="grid">
+                <div class="relative">
+
+                    <div class="slider__img--2">
+                        <img src="https://cf.shopee.vn/file/e15a61be0bcca9731fdaabdd03360612_xxhdpi" style="width:100%">
+                    </div>
+                    <div class="slider__img--2">
+                        <img src="https://cf.shopee.vn/file/e7133b9860bc43cd37e2141c1fb9437a_xxhdpi" style="width:100%">
+                    </div>
+                    <div class="slider__img--2">
+                        <img src="https://cf.shopee.vn/file/95734f87b93157e5c85bc332f69ea39f_xxhdpi" style="width:100%">
+                    </div>
+
                 </div>
+                <br>
             </div>
             <!-- Slider End -->
 
@@ -508,6 +537,7 @@
 
     <!-- javascript -->
     <script src="js/customer_homePage.js"></script>
+    <script src="js/slider.js"></script>
 
 </body>
 
