@@ -29,10 +29,15 @@ public class GoToUserProfileController extends HttpServlet {
         String url = ERROR;
         try {
             HttpSession session = request.getSession();
+            
+            String current_form = request.getParameter("current_form");
+            
             UserDTO currentUser = (UserDTO) session.getAttribute("LOGIN_USER");
             CustomerDAO dao = new CustomerDAO();
             CustomerDTO customer = dao.getCurrentCustomer(currentUser.getUsername());
             session.setAttribute("CURRENT_CUSTOMER", customer);
+            
+            request.setAttribute("CURRENT_FORM", current_form);
             url = SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();

@@ -19,7 +19,7 @@
     --hover-bg: #273A89;
     --hover-color: white;
     --grey-bg: #F9FAFB;
-    --round: 9999px; 
+    --round: 9999px;
     --opacity: 1;
     --list-h: 2000px;
 }
@@ -266,161 +266,161 @@ ul {
 
 /* Attribute start */
 
-    /* round */
-    .rounded-f {
-        border-radius: var(--round);
-    }
+/* round */
+.rounded-f {
+    border-radius: var(--round);
+}
 
-    .rounded-t-l {
-        border-top-left-radius: var(--round);
-    }
+.rounded-t-l {
+    border-top-left-radius: var(--round);
+}
 
-    .rounded-t-r {
-        border-top-right-radius: var(--round);
-    }
+.rounded-t-r {
+    border-top-right-radius: var(--round);
+}
 
-    .rounded-b-l {
-        border-bottom-left-radius: var(--round);
-    }
+.rounded-b-l {
+    border-bottom-left-radius: var(--round);
+}
 
-    .rounded-b-r {
-        border-bottom-right-radius: var(--round);
-    }
+.rounded-b-r {
+    border-bottom-right-radius: var(--round);
+}
 
-    /* border */
-    .border-no {
-        border: none;
-        outline: none;
-    }
+/* border */
+.border-no {
+    border: none;
+    outline: none;
+}
 
-    .border-f {
-        border: 1px solid var(--border-color);
-    }
+.border-f {
+    border: 1px solid var(--border-color);
+}
 
-    .border-bot {
-        border-bottom: 1px solid var(--border-color);
-    }
+.border-bot {
+    border-bottom: 1px solid var(--border-color);
+}
 
-    .border-top {
-        border-top: 1px solid var(--border-color);
-    }
-    
-    .border-left {
-        border-left: 1px solid var(--border-color);
-    }
+.border-top {
+    border-top: 1px solid var(--border-color);
+}
 
-    .border-right {
-        border-right: 1px solid var(--border-color);
-    }
+.border-left {
+    border-left: 1px solid var(--border-color);
+}
 
-    .box-shadow-no {
-        box-shadow: none !important;
-    }
+.border-right {
+    border-right: 1px solid var(--border-color);
+}
 
-    /* label start*/
-    .label {
-        padding: .375rem .625rem;
-        border: 1px solid;
-        border-radius: 9999px;
-    }
-    /* label end */
+.box-shadow-no {
+    box-shadow: none !important;
+}
 
-    /* state start */
-    .danger {
-        color: red;
-    }
+/* label start*/
+.label {
+    padding: .375rem .625rem;
+    border: 1px solid;
+    border-radius: 9999px;
+}
+/* label end */
 
-    .warning {
-        color: yellow;
-    }
+/* state start */
+.danger {
+    color: red;
+}
 
-    .safe {
-        color: green;
-    }
-    /* state end */
+.warning {
+    color: yellow;
+}
 
-    /* scrollable */
+.safe {
+    color: green;
+}
+/* state end */
 
-    .scrollable-y::-webkit-scrollbar {
-        display: none;
-    }
-    
-    .scrollable-y {
-        overflow-y: scroll;
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
-    
-    .scrollable-x::-webkit-scrollbar {
-        display: none;
-    }
-    
-    .scrollable-x {
-        overflow-x: scroll;
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
+/* scrollable */
 
-    /* clickable */
+.scrollable-y::-webkit-scrollbar {
+    display: none;
+}
 
-    .clickable {
-        cursor: pointer;
-    }
+.scrollable-y {
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
 
-    /* text */
+.scrollable-x::-webkit-scrollbar {
+    display: none;
+}
 
-    .txt-lg,
-    .txt-md,
-    .txt-sm,
-    .txt-xs {
-        color: var(--txt-color);
-    }
+.scrollable-x {
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
 
-    .txt-xl {
-        font-size: 1.875rem;
-        line-height: 2.25rem;
-    }
+/* clickable */
 
-    .txt-lg {
-        font-size: 1.125rem;
-        line-height: 1.75rem;
-    }
+.clickable {
+    cursor: pointer;
+}
 
-    .txt-md {
-        font-size: 1rem;
-        line-height: 1.5rem;
-    }
+/* text */
 
-    .txt-sm {
-        font-size: .875rem;
-        line-height: 1.25rem;
-    }
+.txt-lg,
+.txt-md,
+.txt-sm,
+.txt-xs {
+    color: var(--txt-color);
+}
 
-    .txt-xs {
-        font-size: .75rem;
-        line-height: 1rem;
-    }
+.txt-xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+}
 
-    .bold {
-        color: #0F172A;
-        font-weight: 700;
-    }
+.txt-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+}
 
-    .ellipsis {
-        display: block;
-        flex-wrap: wrap;
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        word-wrap: break-word;
-    }
-    
-    /* opacity */
+.txt-md {
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
 
-    .opacity {
-        opacity: var(--opacity);
-    }
+.txt-sm {
+    font-size: .875rem;
+    line-height: 1.25rem;
+}
+
+.txt-xs {
+    font-size: .75rem;
+    line-height: 1rem;
+}
+
+.bold {
+    color: #0F172A;
+    font-weight: 700;
+}
+
+.ellipsis {
+    display: block;
+    flex-wrap: wrap;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    word-wrap: break-word;
+}
+
+/* opacity */
+
+.opacity {
+    opacity: var(--opacity);
+}
 
 
 /* Attribute end */
@@ -492,6 +492,44 @@ ul {
 .center {
     top: 50%;
     transform: translateY(-50%);
+}
+
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 1rem;
+    color: white;
+    font-weight: bold;
+    font-size: 1.125rem;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    z-index: 99999999;
+}
+
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.dot.active,
+.dot:hover {
+    background-color: var(--primary-color);
 }
 
 /* Slider end */
@@ -776,6 +814,21 @@ ul {
     .navigator {
         display: none;
     }
+}
+
+.dropdown-item {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    line-height: 1.54;
+    font-size: 0.9375rem;
+    width: 100%;
+    font-weight: 400;
+    padding: 0.532rem 1.25rem;
+}
+
+.dropdown-item > i {
+    margin-right: 1rem;
 }
 
 /* Animation start*/

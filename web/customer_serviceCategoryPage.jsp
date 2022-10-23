@@ -1,3 +1,4 @@
+<%@page import="com.ebutler.swp.dto.StaffDTO"%>
 <%@page import="com.ebutler.swp.dto.ServiceDTO"%>
 <%@page import="com.ebutler.swp.dto.UserDTO"%>
 <%@page import="java.util.List"%>
@@ -43,7 +44,7 @@
 
     <body>
         <%
-            List<ServiceDTO> productList = (List<ServiceDTO>) session.getAttribute("CUSTOMER_SERVICE_LIST");
+            List<ServiceDTO> serviceList = (List<ServiceDTO>) session.getAttribute("CUSTOMER_SERVICE_LIST");
 
             String category_id = (String) session.getAttribute("CATEGORYID");
 
@@ -88,10 +89,26 @@
                                 <a class="search-close opacity"><i class="fa-solid fa-xmark"></i></a>
                             </div>
                             <div class="nav-item dropdown">
-                                <a class="nav-link"><i class="fa-solid fa-user"></i></a>
-                                <div class="dropdown-menu rounded-0 m-12">
-                                    <a style="color: var(--primary-color); font-weight: bold;" href="MainController?action=GoToUserProfile" class="dropdown-item login--link"><%=login_user.getUsername()%></a>
-                                    <a href="MainController?action=Logout" class="dropdown-item register--link">logout</a>
+                                <div class="nav-link">
+                                    <div style="width: 1.5rem;" class="img rounded-f">
+                                        <img src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="dropdown-menu rounded-0 flex-col">
+                                    <div class="border-bottom">
+                                        <div style="justify-content: flex-start; cursor: pointer;" class="dropdown-item pad-0">
+                                            <i class="fa-solid fa-user"></i>
+                                            <a href="MainController?action=GoToUserProfile&current_form=account"><%=login_user.getUsername()%></a>
+                                        </div>
+                                        <div style="cursor: pointer;" class="dropdown-item pad-0">
+                                            <i class="fa-solid fa-lock"></i>
+                                            <a href="MainController?action=GoToUserProfile&current_form=change_password">Change password</a>
+                                        </div>
+                                    </div>
+                                    <div style="cursor: pointer;" class="dropdown-item pad-0">
+                                        <i style="transform: scale(-1, 1);" class="fa-solid fa-right-from-bracket"></i>
+                                        <a href="MainController?action=Logout">Logout</a>
+                                    </div>
                                 </div>
                             </div>
                             <a class="nav-item nav-link search-open"><i class="fa-solid fa-magnifying-glass"></i></a>
@@ -146,21 +163,86 @@
                     <div class="row m-y-2">
                         <!-- product item -->
                         <%
-                            for (ServiceDTO service : productList) {
+                            for (ServiceDTO service : serviceList) {
                         %>
-                        <div class="col l-3 s-6 m-y-1">
-                            <div style="max-height: 15rem; min-height: 15rem;" class="block__item">
-                                <div class="block__img flex-center relative">
-                                    <img src="<%=service.getImage()%>"
-                                         alt="">
-                                    <a href="MainController?action=GoToServiceDetailByType&service_ID=<%=service.getService_ID()%>&category_ID=<%=service.getCategory_ID()%>" style="background-color: black; color: white;"
-                                       class="txt-border link absolute card-extend bot quick-view">
-                                        <i class="fa-solid fa-expand"></i>
-                                        View Detail
-                                    </a>
-                                    <span class="block__title absolute flex-center">
-                                        <%=service.getName()%>
-                                    </span>
+                        <div class="col l-4 s-6 m-y-1 category_card">
+                            <div style="height: 20rem; border-radius: 1.5rem; box-shadow: 2px 8px 40px rgb(0 0 0 / 8%); background-color: white; " class="relative pad-1 ">
+
+                                <div class="absolute bot right">
+                                    <div class="category_decoration">
+                                    </div>
+                                </div>
+                                <div class="flex-col flex-between full-h">
+                                    <div class="flex-between">
+                                        <div style="height: 6rem; width: 6rem; background-color: #eaf2fc;" class="img rounded-f pad-1">
+                                            <img src="<%=service.getImage()%>"
+                                                 alt="">
+                                        </div>
+                                        <div class="flex-center">
+                                            <span class="txt-sm bold"><%=service.getStaff_list().size()%> staffs</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex-horizon-center flex-col">
+                                        <span style="color: black" class="txt-xs">Manufacturar</span>
+                                        <span class="txt-lg bold"><%=service.getName()%></span>
+                                    </div>
+                                    <div class="flex-horizon-center flex-col category_detail">
+                                        <a  class="txt-sm quick-view">See Collection <i class="fa-solid fa-arrow-right m-x-0"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="overlay fixed top bot left right flex-center hide">
+                            <div class="popup relative">
+                                <div style="margin: 1rem 2rem;" class="absolute right p-2 text-md opacity popup-close">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </div>
+                                <div style="margin: auto 0;" class="pad-2 scrollable-y full-h">
+                                    <!-- Staff start -->
+
+                                    <%
+                                        for (StaffDTO staff : service.getStaff_list()) {
+                                    %>
+                                    <div style="height: 200px;" class="flex-between border-bot pad-y-1">
+                                        <div class="full-h">
+                                            <div class="img full-h full-w">
+                                                <img src="<%=staff.getAvatar()%>"
+                                                     alt="">
+                                            </div>
+                                        </div>
+                                        <div style="flex: 1;" class="flex-col flex-between pad-x-1">
+                                            <div class="flex-vertical-center">
+                                                <span class="txt-sm">Service</span>
+                                                <span class="m-x-0">|</span>
+                                                <span class="txt-sm">Service Category</span>
+                                            </div>
+                                            <div class="flex-between">
+                                                <div>
+                                                    <span class="txt-lg bold"><%=staff.getName()%></span>
+                                                </div>
+                                                <div class="order-price txt-sm bold col l-2">
+                                                    <span>
+                                                        $15
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="content flex-between flex-col ">
+                                                <div class="flex-between">
+                                                    <div class="full-w">
+                                                        <button style="background-color: #0F172A; color: white;"
+                                                                class="btn-lg full-w">
+                                                            <i class="fa-solid fa-bag-shopping"></i>
+                                                            <span style="margin-left: .75rem">Booking</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%
+                                        }
+                                    %>
                                 </div>
                             </div>
                         </div>

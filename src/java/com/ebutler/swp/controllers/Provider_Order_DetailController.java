@@ -5,11 +5,13 @@
 package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.ProviderDAO;
+import com.ebutler.swp.dto.OrderDetailDTO;
+import com.ebutler.swp.dto.ProductDetailDTO;
 import com.ebutler.swp.dto.ProviderDTO;
-import com.ebutler.swp.dto.ServiceDetailDTO;
-import com.ebutler.swp.dto.ServiceErrorDTO;
-import com.ebutler.swp.utils.ValiUtils;
+import com.ebutler.swp.dto.ProviderServiceDTO1;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,55 +22,31 @@ import javax.servlet.http.HttpSession;
  *
  * @author DELL
  */
-public class Add_NewService_Controller extends HttpServlet {
+public class Provider_Order_DetailController extends HttpServlet {
 
-    private static final String SUCCESS = "Provider_ServiceController";
-    private static final String ERROR = "Provider_ServiceController";
-
+    private final String SUCCESS = "OrderDetailProvider.jsp" ; 
+    private final String ERROR = "OrderProvider.jsp" ; 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
+        String url = ERROR ; 
         try {
-            boolean check = false;
-            boolean isValidated = true;
-
-            ProviderDAO providerDAO = new ProviderDAO();
-            String serviceID = request.getParameter("IDService");
-            String name = request.getParameter("ServiceName");
-            String price = Double.parseDouble(request.getParameter("ServicePrice")) + "";
-            HttpSession session = request.getSession();
-            ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER");
+            List<OrderDetailDTO> listOrderDetail = new ArrayList() ; 
+            List<ProductDetailDTO> listProductDetail = new ArrayList() ; 
+            List<ProviderServiceDTO1> listServiceDetail = new ArrayList() ; 
+            String orderID = request.getParameter("orderID") ; 
+            HttpSession session = request.getSession() ; 
+            ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER") ; 
+            ProviderDAO providerDAO = new ProviderDAO() ; 
+            listProductDetail = providerDAO.loadListProduct(provider) ; 
+            listServiceDetail = providerDAO.loadListService(provider) ;  
+            if (listProductDetail.isEmpty() && listServiceDetail != null) {
+                
+            }else if (listProductDetail != null && listServiceDetail.isEmpty()) {
+                
+            }
             
-
-            ServiceDetailDTO service_info = new ServiceDetailDTO(provider.getUsername(), serviceID, 0, name, Double.parseDouble(price), "", 0);
-            request.setAttribute("SERVICE_INFO", service_info);
-            
-            ServiceErrorDTO serviceError = new ServiceErrorDTO();
-
-//            validation value
-            if (!ValiUtils.isValidServiceName(name)) {
-                serviceError.setName("Name must be include at least 2 characters, and accepted [_-]");
-                isValidated = false;
-            }
-            if (!ValiUtils.isValidPrice(price)) {
-                serviceError.setPrice("Should be valid number. Number should be positive");
-                isValidated = false;
-            }
-
-            if (isValidated) {
-                check = providerDAO.providerAddService(provider, serviceID, name.trim(), price);
-                if (check) {
-                    url = SUCCESS;
-                }
-            } else {
-                url = ERROR;
-                request.setAttribute("SERVICE_ERROR", serviceError);
-            }
-
         } catch (Exception e) {
-        } finally {
-            request.getRequestDispatcher(url).include(request, response);
         }
     }
 

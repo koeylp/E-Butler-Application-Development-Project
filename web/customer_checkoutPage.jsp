@@ -45,6 +45,7 @@
 
         <!-- My Stylesheet -->
         <link rel="stylesheet" href="css/customer_profilePage.css">
+        <link rel="stylesheet" href="css/customerPage.css">
     </head>
 
     <body>
@@ -91,10 +92,26 @@
                                 <a class="search-close opacity"><i class="fa-solid fa-xmark"></i></a>
                             </div>
                             <div class="nav-item dropdown">
-                                <a class="nav-link"><i class="fa-solid fa-user"></i></a>
-                                <div class="dropdown-menu rounded-0 m-12">
-                                    <a style="color: var(--primary-color); font-weight: bold;" href="MainController?action=GoToUserProfile" class="dropdown-item login--link"><%=login_user.getUsername()%></a>
-                                    <a href="MainController?action=Logout" class="dropdown-item register--link">logout</a>
+                                <div class="nav-link">
+                                    <div style="width: 1.5rem;" class="img rounded-f">
+                                        <img src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="dropdown-menu rounded-0 flex-col">
+                                    <div class="border-bottom">
+                                        <div style="justify-content: flex-start; cursor: pointer;" class="dropdown-item pad-0">
+                                            <i class="fa-solid fa-user"></i>
+                                            <a href="MainController?action=GoToUserProfile&current_form=account"><%=login_user.getUsername()%></a>
+                                        </div>
+                                        <div style="cursor: pointer;" class="dropdown-item pad-0">
+                                            <i class="fa-solid fa-lock"></i>
+                                            <a href="MainController?action=GoToUserProfile&current_form=change_password">Change password</a>
+                                        </div>
+                                    </div>
+                                    <div style="cursor: pointer;" class="dropdown-item pad-0">
+                                        <i style="transform: scale(-1, 1);" class="fa-solid fa-right-from-bracket"></i>
+                                        <a href="MainController?action=Logout">Logout</a>
+                                    </div>
                                 </div>
                             </div>
                             <a class="nav-item nav-link search-open "><i class="fa-solid fa-magnifying-glass"></i></a>
@@ -130,7 +147,7 @@
                             <div class="col l-5">
                                 <!-- Contact info start -->
                                 <div class="relative m-y-32">
-                                    <div style="border: 1px solid #E5E7EB; border-radius: 1rem;" class="pad-2 flex-between">
+                                    <div style="border: 1px solid #E5E7EB;" class="pad-2 flex-between">
                                         <div class="flex-between">
                                             <div class="flex-center">
                                                 <i class="fa-solid fa-user"></i>
@@ -144,10 +161,10 @@
                                             </div>
                                         </div>
                                         <div class="flex-center">
-                                            <button class="btn-md txt-sm bold">Change</button>
+                                            <button type="button" style="--round: .5rem; background-color: #F9FAFB" class="txt-sm bold rounded-f border-no pad-0 change_info">Change</button>
                                         </div>
                                     </div>
-                                    <div style="width: 100%;border: 1px solid #E5E7EB; border-radius: 1rem;" class="bot">
+                                    <div style="width: 100%;border: 1px solid #E5E7EB;" class="info_detail detail">
                                         <div class="pad-2">
                                             <div class="flex-vertical-center m-y-12">
                                                 <h1 class="txt-lg bold">Contact information</h1>
@@ -167,9 +184,9 @@
                                                         class="input txt-sm" type="password">
                                                 </div>
                                                 <div class="flex-vertical-center">
-                                                    <button class="btn-lg txt-md bold m-y-32">Save and next to shipping</button>
-                                                    <button style="margin-left: 1rem;"
-                                                            class="btn-lg txt-md bold m-y-32">Cancel</button>
+                                                    <button type="button" class="btn-lg txt-md bold m-y-32">Save and next to shipping</button>
+                                                    <button type="button" style="margin-left: 1rem; background-color: #EFEFEF; color: black"
+                                                            class="btn-lg txt-md bold m-y-32 border-no box-shadow-no close_info">Cancel</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -179,7 +196,7 @@
 
                                 <!-- Shipping Address start-->
                                 <div class="relative m-y-32">
-                                    <div style="border: 1px solid #E5E7EB; border-radius: 1rem;" class="pad-2 flex-between">
+                                    <div style="border: 1px solid #E5E7EB;" class="pad-2 flex-between">
                                         <div class="flex-between">
                                             <div class="flex-center txt-md">
                                                 <i class="fa-solid fa-signs-post"></i>
@@ -192,15 +209,16 @@
                                             </div>
                                         </div>
                                         <div class="flex-center">
-                                            <button style="--round: .5rem"
-                                                    class="txt-sm bold rounded-f border-no pad-0">Change</button>
+                                            <button type="button" style="--round: .5rem; background-color: #F9FAFB"
+                                                    class="txt-sm bold rounded-f border-no pad-0 change_address">Change</button>
                                         </div>
                                     </div>
-                                    <div style="width: 100%;border: 1px solid #E5E7EB; border-radius: 1rem;" class="bot">
+                                    <div style="width: 100%;border: 1px solid #E5E7EB;" class="address_detail detail">
                                         <div class="pad-2">
                                             <div style="padding: 0;" class="flex-col">
 
                                                 <form action="MainController?action=SelectProvince" method="POST">
+                                                    <input type="hidden" name="current_page" value="customer_checkoutPage.jsp">
                                                     <div class="row">
                                                         <div class="flex-horizon-center flex-col m-y-12 col l-6">
                                                             <span class="txt-md m-y-12">Province</span>
@@ -289,18 +307,15 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex-vertical-center">
-                                                    <button class="btn-lg txt-md bold m-y-32">Save and next to shipping</button>
-                                                    <button style="margin-left: 1rem; background-color: #EFEFEF; color: black"
-                                                            class="btn-lg txt-md bold m-y-32 border-no box-shadow-no">Cancel</button>
+                                                    <button type="button" class="btn-lg txt-md bold m-y-32">Save and next to shipping</button>
+                                                    <button type="button" style="margin-left: 1rem; background-color: #EFEFEF; color: black"
+                                                            class="btn-lg txt-md bold m-y-32 border-no box-shadow-no close_address">Cancel</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- Shipping Address end -->
-
-
-
 
                             </div>
 
@@ -318,7 +333,7 @@
                                         <span>Order Summary</span>
                                     </div>
                                     <!-- Order head product-->
-                                    <div style="background-color: #9A9DA1;" class="pad-1 m-y-12">
+                                    <div style="background-color: #F9FAFB;" class="pad-1 m-y-12">
                                         <div class="flex-between flex-verticle-center">
                                             <span class="txt-lg bold">Product</span>
 
@@ -384,7 +399,7 @@
 
                                     </div>
                                     <!-- Order head service -->
-                                    <div style="background-color: #9A9DA1;" class="pad-1 m-y-12">
+                                    <div style="background-color: #F9FAFB;" class="pad-1 m-y-12">
                                         <div class="flex-between flex-verticle-center">
                                             <span class="txt-lg bold">Service</span>
 
@@ -427,36 +442,36 @@
                                                 total += sub_total_service;
                                             }
                                         %>
+                                    </div>
 
-                                        <div class="m-y-32">
-                                            <div class="flex-col sticky">
-                                                <div class="flex-between txt-md bold">
-                                                    <span>Discount code</span>
-                                                </div>
-                                                <div class="flex-between m-y-12">
-                                                    <input style="border-radius: 1rem; flex: 1; margin-right: 1rem" type="text"
-                                                           class="txt-sm p-2">
-                                                    <button class="btn-md txt-sm bold">Apply</button>
-                                                </div>
-                                                <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB"
-                                                     class="flex-between txt-sm">
-                                                    <span>Order product total</span>
-                                                    <span class="bold">$<%= sub_product_total%></span>
-                                                </div>
-                                                <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB"
-                                                     class="flex-between txt-sm">
-                                                    <span>Order service total</span>
-                                                    <span class="bold">$<%= sub_total_service%></span>
-                                                </div>
+                                    <div class="m-y-32">
+                                        <div class="flex-col">
+                                            <div class="flex-between txt-md bold">
+                                                <span>Discount code</span>
+                                            </div>
+                                            <div class="flex-between m-y-12">
+                                                <input style="border-radius: .5rem; flex: 1; margin-right: 1rem" type="text"
+                                                       class="txt-sm p-2">
+                                                <button style="color: white" class="btn-md txt-sm bold">Apply</button>
+                                            </div>
+                                            <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB"
+                                                 class="flex-between txt-sm">
+                                                <span>Order product total</span>
+                                                <span class="bold">$<%= sub_product_total%></span>
+                                            </div>
+                                            <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB"
+                                                 class="flex-between txt-sm">
+                                                <span>Order service total</span>
+                                                <span class="bold">$<%= sub_total_service%></span>
+                                            </div>
 
-                                                <div style="padding: 1rem 0;" class="flex-between txt-lg bold">
-                                                    <span>Order total</span>
-                                                    <span class="bold">$<%= total%></span>
-                                                </div>
+                                            <div style="padding: 1rem 0;" class="flex-between txt-lg bold">
+                                                <span>Order total</span>
+                                                <span class="bold">$<%= total%></span>
                                             </div>
                                         </div>
-
                                     </div>
+
                                     <!-- Payment method start -->
                                     <div class="relative m-y-32">
                                         <div style="border: 1px solid #E5E7EB; border-radius: 1rem;" class="pad-2 flex-between">
@@ -604,7 +619,7 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-
+    <script src="js/checkout.js"></script>
     <!-- javascript -->
 </body>
 

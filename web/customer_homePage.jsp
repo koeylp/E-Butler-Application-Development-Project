@@ -47,7 +47,7 @@
         <%
             List<ProductCategoryDTO> productCategorylist = (List<ProductCategoryDTO>) session.getAttribute("PRODUCT_CATEGORY_BY_PLACE_LIST");
             List<ServiceCategoryDTO> serviceCategoryList = (List<ServiceCategoryDTO>) session.getAttribute("SERVICE_CATEGORY_BY_PLACE_LIST");
-            
+
             UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
         %>
         <div class="container-xxl bg-white p-0">
@@ -88,10 +88,26 @@
                                 <a class="search-close opacity"><i class="fa-solid fa-xmark"></i></a>
                             </div>
                             <div class="nav-item dropdown">
-                                <a class="nav-link"><i class="fa-solid fa-user"></i></a>
-                                <div class="dropdown-menu rounded-0 m-12">
-                                    <a style="color: var(--primary-color); font-weight: bold;" href="MainController?action=GoToUserProfile" class="dropdown-item login--link"><%=login_user.getUsername()%></a>
-                                    <a href="MainController?action=Logout" class="dropdown-item register--link">logout</a>
+                                <div class="nav-link">
+                                    <div style="width: 1.5rem;" class="img rounded-f">
+                                        <img src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="dropdown-menu rounded-0 flex-col">
+                                    <div class="border-bot">
+                                        <div style="justify-content: flex-start; cursor: pointer;" class="dropdown-item pad-0">
+                                            <i class="fa-solid fa-user"></i>
+                                            <a href="MainController?action=GoToUserProfile&current_form=account"><%=login_user.getUsername()%></a>
+                                        </div>
+                                        <div style="cursor: pointer;" class="dropdown-item pad-0">
+                                            <i class="fa-solid fa-lock"></i>
+                                            <a href="MainController?action=GoToUserProfile&current_form=change_password">Change password</a>
+                                        </div>
+                                    </div>
+                                    <div style="cursor: pointer;" class="dropdown-item pad-0">
+                                        <i style="transform: scale(-1, 1);" class="fa-solid fa-right-from-bracket"></i>
+                                        <a href="MainController?action=Logout">Logout</a>
+                                    </div>
                                 </div>
                             </div>
                             <a class="nav-item nav-link search-open "><i class="fa-solid fa-magnifying-glass"></i></a>
@@ -103,9 +119,27 @@
             <!-- Navbar End -->
 
             <!-- Slider Start -->
-            <div class="grid slider">
-                <div style="background-color: var(--blue-bg);" class="row relative">
-                    <img src="https://chisnghiax.com/ciseco/static/media/Moon.bf27dc577d1acccaba48430d353dbbe0.svg">
+            <div class="grid">
+                <div class="relative">
+                    <div class="slider__img">
+                        <img src="https://cf.shopee.vn/file/5b5de1582d99cbbe75a8f9a5c4dae1c2_xxhdpi" style="width:100%">
+                    </div>
+                    <div class="slider__img">
+                        <img src="https://cf.shopee.vn/file/29a513618bd587d238c3134143f93d96_xxhdpi" style="width:100%">
+                    </div>
+                    <div class="slider__img">
+                        <img src="https://cf.shopee.vn/file/1889d97f151eb9902f649437876b6e7f_xxhdpi" style="width:100%">
+                    </div>
+
+                    <a class="prev left" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next right" onclick="plusSlides(1)">&#10095;</a>
+                </div>
+                <br>
+
+                <div class="flex-center">
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
                 </div>
             </div>
             <!-- Slider End -->
@@ -176,7 +210,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col l-3 m-7 s-12">
+                                <div id="product" class="col l-3 m-7 s-12">
                                     <div style="--border-color: black; --round: .5rem;" class="clickable border-bot border-top border-left border-right rounded-f">
                                         <div style="height: 52px;" class="row">
                                             <div class="col l-o-1 l-4">
@@ -199,9 +233,9 @@
                 </div>
             </div>
             <!-- Provider End -->
-
+            
             <!-- Product List Start -->
-            <div id="product" class="grid m-y-1">
+            <div  class="grid m-y-1">
                 <div class="grid wide">
                     <div class="m-y-1">
                         <h1 class="head-txt bold text-center my-24">Product</h1>
@@ -245,7 +279,7 @@
                                                 </div>
                                                 <div class="col l-6 full-h full-w">
                                                     <div class="img pad-1">
-                                                        <img src="<%=category.getImage()%>"
+                                                        <img style="object-fit: contain;" src="<%=category.getImage()%>"
                                                              alt="">
                                                     </div>
                                                 </div>
@@ -266,15 +300,28 @@
             <!-- Product List End -->
 
             <!-- Slider Start -->
-            <div class="grid slider">
-                <div style="background-color: var(--blue-bg);" class="row">
-                    <img src="https://chisnghiax.com/ciseco/static/media/Moon.bf27dc577d1acccaba48430d353dbbe0.svg">
-                </div>
+            <div class="grid">
+                <div class="relative">
+
+                    <div class="slider__img--2">
+                        <img src="https://cf.shopee.vn/file/e15a61be0bcca9731fdaabdd03360612_xxhdpi" style="width:100%">
+                    </div>
+                    <div class="slider__img--2">
+                        <img src="https://cf.shopee.vn/file/e7133b9860bc43cd37e2141c1fb9437a_xxhdpi" style="width:100%">
+                    </div>
+                    <div class="slider__img--2">
+                        <img src="https://cf.shopee.vn/file/95734f87b93157e5c85bc332f69ea39f_xxhdpi" style="width:100%">             
+                       
+                    </div>
+                 <div id="service" ></div>   
+                </div >
+                
+                <br>
             </div>
             <!-- Slider End -->
 
             <!-- Service List Start -->
-            <div id="service" class="grid m-y-1">
+            <div   class="grid m-y-1">
                 <div class="grid wide">
                     <div class="m-y-1">
                         <h1 class="head-txt bold text-center my-24">Service</h1>
@@ -319,7 +366,7 @@
                                                 </div>
                                                 <div class="col l-6 full-h full-w">
                                                     <div class="img pad-1">
-                                                        <img src="<%=category.getImage()%>"
+                                                        <img style="object-fit: contain;" src="<%=category.getImage()%>"
                                                              alt="">
                                                     </div>
                                                 </div>
@@ -492,6 +539,7 @@
 
     <!-- javascript -->
     <script src="js/customer_homePage.js"></script>
+    <script src="js/slider.js"></script>
 
 </body>
 

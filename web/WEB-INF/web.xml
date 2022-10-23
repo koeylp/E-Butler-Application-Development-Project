@@ -197,6 +197,8 @@
         <servlet-class>com.ebutler.swp.controllers.SearchServiceDetailByTypeController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>Provider_Order_DetailController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.Provider_Order_DetailController</servlet-class>
         <servlet-name>SelectProvinceController</servlet-name>
         <servlet-class>com.ebutler.swp.controllers.SelectProvinceController</servlet-class>
     </servlet>
@@ -397,6 +399,8 @@
         <url-pattern>/SearchServiceDetailByTypeController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>Provider_Order_DetailController</servlet-name>
+        <url-pattern>/Provider_Order_DetailController</url-pattern>
         <servlet-name>SelectProvinceController</servlet-name>
         <url-pattern>/SelectProvinceController</url-pattern>
     </servlet-mapping>

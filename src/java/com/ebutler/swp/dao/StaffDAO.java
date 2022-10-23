@@ -20,11 +20,11 @@ import java.util.List;
 public class StaffDAO {
     private static final String GET_LIST_STAFF_BY_SERVICE_DETAIL = "select staff.staff_ID, staff.provider_ID, staff.service_ID, staff.name, staff.id_card, staff.avatar, staff.status, detail.price from tblStaff staff JOIN tblServiceDetail detail ON staff.staff_ID = detail.staff_ID WHERE staff.service_ID = ?";
     
-     public static List<StaffDTO> getListStaffByServiceDetail(String serviceID) throws SQLException {
+     public static ArrayList<StaffDTO> getListStaffByServiceDetail(String serviceID) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
-        List<StaffDTO> list = new ArrayList();
+        ArrayList<StaffDTO> list = new ArrayList();
         try {
             conn = DBUtils.getConnection();
             ptm = conn.prepareStatement(GET_LIST_STAFF_BY_SERVICE_DETAIL);
