@@ -327,9 +327,9 @@
                             <table class="table  ">
                                 <thead>
                                     <tr>
-                                        <th>Service Type</th>
-                                        <th>Service Category</th>
                                         <th>Service Name</th>
+                                        <th>Service Category</th>
+                                        <th>Service Type</th>
                                         <th>Image</th>
                                         <th>Price</th>
 
@@ -344,7 +344,7 @@
                                 <form action="MainController" method="POST">
                                     <tr>
                                         <td><strong>
-                                                <input class="form-control me-2" type="text" name="ServiceName" value="<%= service.getServiceName()%>" />
+                                                <input class="form-control me-2 titleName" type="text" name="ServiceName" value="<%= service.getServiceName()%>" />
                                                 <input type="hidden" name="oldServiceName" value="<%= service.getServiceName()%>" /> 
                                             </strong></td>
                                         <td> <input class="form-control me-2 shortTitle2" type="text" name="ServiceCategoryName" value="<%= service.getServiceCategoryName()%>" readonly="" />
@@ -353,10 +353,10 @@
                                         </td>
                                         <td>
                                             <img class="img-product"
-                                                 src="https://cdn.tgdd.vn/Products/Images/4927/111468/bo-lau-nha-dmx-x4-1-org.jpg" alt="">
+                                                 src=<%= service.getImage() %> alt="">
                                         </td>
-                                        <td> <input class="form-control me-2 priceData" type="text" name="ServicePrice" value="<%= service.getPrice()%>" />
-                                            <input type="hidden" name="oldServicePrice" value="<%= service.getPrice()%>" />
+                                        <td> <input class="form-control me-2 priceData" type="text" name="ServicePrice" value="<%= service.getPrice()%> $" />
+                                            <input type="hidden" name="oldServicePrice" value="<%= service.getPrice()%> " />
                                         </td>
 
                                         <td>
