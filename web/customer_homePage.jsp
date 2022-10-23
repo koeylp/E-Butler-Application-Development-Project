@@ -97,11 +97,11 @@
                                     <div class="border-bot">
                                         <div style="justify-content: flex-start; cursor: pointer;" class="dropdown-item pad-0">
                                             <i class="fa-solid fa-user"></i>
-                                            <a href="MainController?action=GoToUserProfile"><%=login_user.getUsername()%></a>
+                                            <a href="MainController?action=GoToUserProfile&current_form=account"><%=login_user.getUsername()%></a>
                                         </div>
                                         <div style="cursor: pointer;" class="dropdown-item pad-0">
                                             <i class="fa-solid fa-lock"></i>
-                                            <a href="MainController?action=GoToUserProfile">Change password</a>
+                                            <a href="MainController?action=GoToUserProfile&current_form=change_password">Change password</a>
                                         </div>
                                     </div>
                                     <div style="cursor: pointer;" class="dropdown-item pad-0">
@@ -233,7 +233,7 @@
                 </div>
             </div>
             <!-- Provider End -->
-
+            
             <!-- Product List Start -->
             <div id="product" class="grid m-y-1">
                 <div class="grid wide">
