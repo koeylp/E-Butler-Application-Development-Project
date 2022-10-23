@@ -164,19 +164,30 @@
                         <%
                             for (ServiceDTO service : productList) {
                         %>
-                        <div class="col l-3 s-6 m-y-1">
-                            <div style="max-height: 15rem; min-height: 15rem;" class="block__item">
-                                <div class="block__img flex-center relative">
-                                    <img src="<%=service.getImage()%>"
-                                         alt="">
-                                    <a style="background-color: black; color: white;"
-                                       class="txt-border link absolute card-extend bot quick-view">
-                                        <i class="fa-solid fa-expand"></i>
-                                        View Detail
-                                    </a>
-                                    <span class="block__title absolute flex-center">
-                                        <%=service.getName()%>
-                                    </span>
+                        <div class="col l-4 s-6 m-y-1 category_card">
+                            <div style="height: 20rem; border-radius: 1.5rem; box-shadow: 2px 8px 40px rgb(0 0 0 / 8%); background-color: white; " class="relative pad-1 ">
+
+                                <div class="absolute bot right">
+                                    <div class="category_decoration">
+                                    </div>
+                                </div>
+                                <div class="flex-col flex-between full-h">
+                                    <div class="flex-between">
+                                        <div style="height: 6rem; width: 6rem; background-color: #eaf2fc;" class="img rounded-f pad-1">
+                                            <img src="<%=service.getImage()%>"
+                                                 alt="">
+                                        </div>
+                                        <div class="flex-center">
+                                            <span class="txt-sm bold">200 products</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex-horizon-center flex-col">
+                                        <span style="color: black" class="txt-xs">Manufacturar</span>
+                                        <span class="txt-lg bold"><%=service.getName()%></span>
+                                    </div>
+                                    <div class="flex-horizon-center flex-col category_detail">
+                                        <a  class="txt-sm quick-view">See Collection <i class="fa-solid fa-arrow-right m-x-0"></i></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
