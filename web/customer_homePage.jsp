@@ -210,7 +210,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col l-3 m-7 s-12">
+                                <div id="product" class="col l-3 m-7 s-12">
                                     <div style="--border-color: black; --round: .5rem;" class="clickable border-bot border-top border-left border-right rounded-f">
                                         <div style="height: 52px;" class="row">
                                             <div class="col l-o-1 l-4">
@@ -235,7 +235,7 @@
             <!-- Provider End -->
 
             <!-- Product List Start -->
-            <div id="product" class="grid m-y-1">
+            <div  class="grid m-y-1">
                 <div class="grid wide">
                     <div class="m-y-1">
                         <h1 class="head-txt bold text-center my-24">Product</h1>
@@ -310,16 +310,18 @@
                         <img src="https://cf.shopee.vn/file/e7133b9860bc43cd37e2141c1fb9437a_xxhdpi" style="width:100%">
                     </div>
                     <div class="slider__img--2">
-                        <img src="https://cf.shopee.vn/file/95734f87b93157e5c85bc332f69ea39f_xxhdpi" style="width:100%">
+                        <img src="https://cf.shopee.vn/file/95734f87b93157e5c85bc332f69ea39f_xxhdpi" style="width:100%">             
+                       
                     </div>
-
-                </div>
+                 <div id="service" ></div>   
+                </div >
+                
                 <br>
             </div>
             <!-- Slider End -->
 
             <!-- Service List Start -->
-            <div id="service" class="grid m-y-1">
+            <div   class="grid m-y-1">
                 <div class="grid wide">
                     <div class="m-y-1">
                         <h1 class="head-txt bold text-center my-24">Service</h1>
