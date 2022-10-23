@@ -40,7 +40,7 @@ public class ExecutePaymentController extends HttpServlet {
             request.setAttribute("payer", payerInfo);
             request.setAttribute("transaction", transaction);          
  
-            request.getRequestDispatcher("customer_confirmation.jsp").forward(request, response);
+            request.getRequestDispatcher("CheckoutController").forward(request, response);
              
         } catch (PayPalRESTException e) {
             request.setAttribute("errorMessage", e.getMessage());

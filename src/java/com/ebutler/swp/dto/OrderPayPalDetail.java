@@ -20,8 +20,6 @@ public class OrderPayPalDetail {
         this.total = Float.parseFloat(total);
     }
  
-   
- 
     public String getSubtotal() {
         return String.format("%.2f", subtotal);
     }
