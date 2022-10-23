@@ -47,8 +47,11 @@
             List<ServiceDTO> serviceList = (List<ServiceDTO>) session.getAttribute("CUSTOMER_SERVICE_LIST");
 
             String category_id = (String) session.getAttribute("CATEGORYID");
+            String category_name = (String) request.getAttribute("CATEGORY_NAME");
 
             category_id = (category_id == null) ? "" : category_id;
+            category_name = (category_name == null) ? "" : category_name;
+            
             UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
         %>
         <div class="container-xxl bg-white p-0">
@@ -174,7 +177,7 @@
                                 </div>
                                 <div class="flex-col flex-between full-h">
                                     <div class="flex-between">
-                                        <div style="height: 6rem; width: 6rem; background-color: #eaf2fc;" class="img rounded-f pad-1">
+                                        <div style="height: 7rem; width: 7rem; background-color: #eaf2fc;" class="img rounded-f pad-1">
                                             <img src="<%=service.getImage()%>"
                                                  alt="">
                                         </div>
@@ -187,7 +190,7 @@
                                         <span class="txt-lg bold"><%=service.getName()%></span>
                                     </div>
                                     <div class="flex-horizon-center flex-col category_detail">
-                                        <a  class="txt-sm quick-view">See Collection <i class="fa-solid fa-arrow-right m-x-0"></i></a>
+                                        <a  class="txt-sm quick-view">Select staff<i class="fa-solid fa-arrow-right m-x-0"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -213,9 +216,9 @@
                                         </div>
                                         <div style="flex: 1;" class="flex-col flex-between pad-x-1">
                                             <div class="flex-vertical-center">
-                                                <span class="txt-sm">Service</span>
+                                                <span class="txt-sm"><%=category_name%></span>
                                                 <span class="m-x-0">|</span>
-                                                <span class="txt-sm">Service Category</span>
+                                                <span class="txt-sm"><%=service.getName()%></span>
                                             </div>
                                             <div class="flex-between">
                                                 <div>

@@ -361,6 +361,7 @@
                                                         <div>
                                                             <button class="my-btn txt-lg bold" name="action" value="GoToServicePageByPlace">Show me all</button>
                                                             <input type="hidden" name="category_ID" value="<%=category.getCategory_ID()%>"/>
+                                                            <input type="hidden" name="category_name" value="<%=category.getName()%>"/>
                                                         </div>
                                                     </div>
                                                 </div>
