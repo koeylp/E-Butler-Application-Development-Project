@@ -279,7 +279,7 @@
                                                 </div>
                                                 <div class="col l-6 full-h full-w">
                                                     <div class="img pad-1">
-                                                        <img src="<%=category.getImage()%>"
+                                                        <img style="object-fit: contain;" src="<%=category.getImage()%>"
                                                              alt="">
                                                     </div>
                                                 </div>
@@ -364,7 +364,7 @@
                                                 </div>
                                                 <div class="col l-6 full-h full-w">
                                                     <div class="img pad-1">
-                                                        <img src="<%=category.getImage()%>"
+                                                        <img style="object-fit: contain;" src="<%=category.getImage()%>"
                                                              alt="">
                                                     </div>
                                                 </div>
