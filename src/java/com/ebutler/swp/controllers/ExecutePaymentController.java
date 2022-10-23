@@ -4,43 +4,48 @@
  */
 package com.ebutler.swp.controllers;
 
-import com.ebutler.swp.dao.ProductDAO;
-import com.ebutler.swp.dto.ProductDTO;
+import com.ebutler.swp.dto.PaymentServiceDTO;
+import com.paypal.api.payments.PayerInfo;
+import com.paypal.api.payments.Payment;
+import com.paypal.api.payments.Transaction;
+import com.paypal.base.rest.PayPalRESTException;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Admin
+ * @author thekh
  */
-public class ProductPageController extends HttpServlet {
-    
-    private static final String SUCCESS = "customer_productCategoryPage.jsp";
-    private static final String ERROR = "errorPage.jsp";
+@WebServlet(name = "ExecutePaymentController", urlPatterns = {"/ExecutePaymentController"})
+public class ExecutePaymentController extends HttpServlet {
+
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
+        String paymentId = request.getParameter("paymentId");
+        String payerId = request.getParameter("PayerID");
+ 
         try {
-            String category_ID = request.getParameter("category_ID");
+            PaymentServiceDTO paymentServices = new PaymentServiceDTO();
+            Payment payment = paymentServices.executePayment(paymentId, payerId);
             
-            ProductDAO dao = new ProductDAO();
-            List<ProductDTO> list = dao.getListProductByPlace(category_ID);
-            HttpSession session = request.getSession();
-            
-            session.setAttribute("CATEGORYID", category_ID);
-            session.setAttribute("CUSTOMER_PRODUCT_LIST", list);
-            url = SUCCESS;
-        } catch (Exception e) {
-            log("Error at ProductPageController: "+e.getMessage());
-        }finally{
-            request.getRequestDispatcher(url).forward(request, response);
+            PayerInfo payerInfo = payment.getPayer().getPayerInfo();
+            Transaction transaction = payment.getTransactions().get(0);
+             
+            request.setAttribute("payer", payerInfo);
+            request.setAttribute("transaction", transaction);          
+ 
+            request.getRequestDispatcher("customer_confirmation.jsp").forward(request, response);
+             
+        } catch (PayPalRESTException e) {
+            request.setAttribute("errorMessage", e.getMessage());
+            e.printStackTrace();
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 

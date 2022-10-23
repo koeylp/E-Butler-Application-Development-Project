@@ -4,42 +4,41 @@
  */
 package com.ebutler.swp.controllers;
 
-import com.ebutler.swp.dao.ProductDAO;
-import com.ebutler.swp.dto.ProductDTO;
+import com.ebutler.swp.dao.AddressDAO;
+import com.ebutler.swp.dto.CityDTO;
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Admin
  */
-public class ProductPageController extends HttpServlet {
+public class SelectProvinceController extends HttpServlet {
     
-    private static final String SUCCESS = "customer_productCategoryPage.jsp";
-    private static final String ERROR = "errorPage.jsp";
+    private final String ERROR = "errorPage.jsp";
+    private final String SUCCESS = "customer_checkoutPage.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String category_ID = request.getParameter("category_ID");
+            String province_id = request.getParameter("province_id");
             
-            ProductDAO dao = new ProductDAO();
-            List<ProductDTO> list = dao.getListProductByPlace(category_ID);
-            HttpSession session = request.getSession();
+            AddressDAO addressDAO = new AddressDAO();
+            ArrayList<CityDTO> city_list = addressDAO.SelectCity(province_id);
             
-            session.setAttribute("CATEGORYID", category_ID);
-            session.setAttribute("CUSTOMER_PRODUCT_LIST", list);
+            request.setAttribute("CITY_LIST", city_list);
+            request.setAttribute("PROVINCE_ID", province_id);
+            
             url = SUCCESS;
-        } catch (Exception e) {
-            log("Error at ProductPageController: "+e.getMessage());
-        }finally{
+        }catch(Exception e) {
+            log("ERROR at SelectProvinceController: " + e.toString());
+        }finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
