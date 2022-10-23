@@ -20,12 +20,12 @@ import java.util.List;
  */
 public class OrderDAO {
 
-    private static final String INSERT = "INSERT INTO tblOrder(order_Date, customer_ID, status, total) VALUES(?, ?, ?, ?)";
+    private static final String INSERT = "INSERT INTO tblOrder(order_Date, customer_ID, status, total, payment) VALUES(?, ?, ?, ?, ?)";
     private static final String INSERT_DETAIL = "INSERT INTO tblOrder_Product_Detail(product_detail_ID, order_ID, quantity, price, [status]) VALUES(?, ?, ?, ?, ?)";
     private static final String GET_ALL_ORDER = "SELECT order_ID, order_Date, customer_ID, status, total FROM tblOrder";
     private static final String INSERT_SERVICE_DETAIL = "INSERT INTO tblOrder_Service_Detail(staff_ID, service_Detail_ID, order_ID, price, [status]) VALUES(?, ?, ?, ?, ?)";
 
-    public static void insertOrder(Date date, String username, int status, double total) throws SQLException {
+    public static void insertOrder(Date date, String username, int status, double total, String payment) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
@@ -36,6 +36,7 @@ public class OrderDAO {
                 ptm.setString(2, username);
                 ptm.setInt(3, status);
                 ptm.setDouble(4, total);
+                ptm.setString(5, payment);
                 ptm.executeUpdate();
             }
         } catch (Exception e) {

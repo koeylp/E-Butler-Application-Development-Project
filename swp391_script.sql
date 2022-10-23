@@ -104,7 +104,8 @@ CREATE TABLE tblOrder(
 	order_Date [date] NOT NULL ,
 	customer_ID nvarchar(30) REFERENCES tblCustomer(username) NOT NULL, 
 	[status] decimal(1) NOT NULL  , 
-	total decimal(9) NOT NULL 
+	total decimal(9) NOT NULL,
+	payment nvarchar(10)
 ) 
 GO
 

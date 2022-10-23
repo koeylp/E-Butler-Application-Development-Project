@@ -36,7 +36,8 @@ public class CheckoutController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            double total = Double.parseDouble(request.getParameter("total"));
+            String total = request.getParameter("total");
+            String payment = request.getParameter("payment");
             OrderDTO order = new OrderDTO();
             OrderDAO orderDao = new OrderDAO();
             ProductDAO productDao = new ProductDAO();
@@ -44,6 +45,12 @@ public class CheckoutController extends HttpServlet {
             String statement = confirmation.getFail();
             HttpSession session = request.getSession();
             if (session != null) {
+                if (total == null) {
+                    total = (String) session.getAttribute("TOTAL");
+                }
+                if (payment == null) {
+                    payment = (String) session.getAttribute("PAYMENT");
+                }
                 UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
                 CartDTO cart = (CartDTO) session.getAttribute("CART");
                 CartServiceDTO cartService = (CartServiceDTO) session.getAttribute("CART_SERVICE");
@@ -61,7 +68,7 @@ public class CheckoutController extends HttpServlet {
 
 //                  Insert
                     if (count == cart.getCart().values().size()) {
-                        orderDao.insertOrder(java.sql.Date.valueOf(java.time.LocalDate.now()), user.getUsername(), 0, total);
+                        orderDao.insertOrder(java.sql.Date.valueOf(java.time.LocalDate.now()), user.getUsername(), 0, Double.parseDouble(total), payment);
                         for (ProductDetailDTO product : cart.getCart().values()) {
                             int order_ID = orderDao.getAllOrder().size();
                             orderDao.insertOrderDetail(product.getId(), order_ID, product.getQuantity(), product.getPrice(), 1);
@@ -82,7 +89,7 @@ public class CheckoutController extends HttpServlet {
 //                    Insert
                     if (count == cartService.getCart().values().size()) {
                         if (cart == null) {
-                            orderDao.insertOrder(java.sql.Date.valueOf(java.time.LocalDate.now()), user.getUsername(), 0, total);
+                            orderDao.insertOrder(java.sql.Date.valueOf(java.time.LocalDate.now()), user.getUsername(), 0, Double.parseDouble(total), payment);
                             statement = confirmation.getSuccess();
                         }
                         for (ServiceDetailDTO service : cartService.getCart().values()) {
