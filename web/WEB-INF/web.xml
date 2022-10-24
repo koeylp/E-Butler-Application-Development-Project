@@ -199,6 +199,8 @@
     <servlet>
         <servlet-name>Provider_Order_DetailController</servlet-name>
         <servlet-class>com.ebutler.swp.controllers.Provider_Order_DetailController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>SelectProvinceController</servlet-name>
         <servlet-class>com.ebutler.swp.controllers.SelectProvinceController</servlet-class>
     </servlet>
@@ -401,13 +403,13 @@
     <servlet-mapping>
         <servlet-name>Provider_Order_DetailController</servlet-name>
         <url-pattern>/Provider_Order_DetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>SelectProvinceController</servlet-name>
         <url-pattern>/SelectProvinceController</url-pattern>
     </servlet-mapping>
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
     <welcome-file-list>
         <welcome-file>guest_landingPage.jsp</welcome-file>

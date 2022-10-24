@@ -7,6 +7,7 @@ package com.ebutler.swp.controllers;
 import com.ebutler.swp.dao.AddressDAO;
 import com.ebutler.swp.dto.CityDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Admin
  */
 public class SelectProvinceController extends HttpServlet {
-    
+
     private final String ERROR = "errorPage.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
