@@ -22,6 +22,7 @@ import java.util.List;
 public class ServiceDAO {
 
     private static final String GET_SERVICE_CATEGORY_LIST = "SELECT category_ID, name, image FROM tblServiceCategory";
+    private static final String GET_SERVICE_CATEGORY_SERVICE_ID = "select distinct cate.category_ID, cate.name, cate.image, service.service_ID from tblServiceCategory cate JOIN tblService service on cate.category_ID = service.category_ID where cate.category_ID = ?";
     private static final String GET_SERVICE_LIST = "select service_ID, category_ID, name, image from tblService where category_ID = ?";
     private static final String SEARCH_SERVICE_CATEGORY = "select service_ID, category_ID, name, image from tblService where category_ID = ? AND name LIKE ?";
     private static final String SORT_SERVICE_CATEGORY_WORD_UP = "select service_ID, category_ID, name, image from tblService where category_ID = ? ORDER BY name ASC";
@@ -79,6 +80,36 @@ public class ServiceDAO {
             rs = ptm.executeQuery();
             while (rs.next()) {
                 list.add(new ServiceDetailDTO(rs.getInt("id"), rs.getString("provider_ID"), rs.getString("service_ID"), rs.getInt("staff_ID"), rs.getString("name"), rs.getDouble("price"), rs.getString("description"), rs.getInt("status")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return list;
+    }
+    public static List<ServiceCategoryDTO> getListServiceByServiceID(String categoryID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        List<ServiceCategoryDTO> list = new ArrayList();
+        try {
+            conn = DBUtils.getConnection();
+            ptm = conn.prepareStatement(GET_SERVICE_CATEGORY_SERVICE_ID);
+            ptm.setString(1, categoryID);
+            
+            rs = ptm.executeQuery();
+            while (rs.next()) {
+                list.add(new ServiceCategoryDTO(rs.getString("service_ID")));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -414,9 +445,9 @@ public class ServiceDAO {
     }
 
     public static void main(String[] args) throws SQLException {
-        List<ServiceDetailDTO> list = sortListServiceDetailByTypeWordDOWN("HC", "1");
+        List<ServiceCategoryDTO> list = getListServiceByServiceID("HC");
 
-        for (ServiceDetailDTO x : list) {
+        for (ServiceCategoryDTO x : list) {
             System.out.println(x);
         }
     }
