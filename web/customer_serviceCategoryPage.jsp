@@ -168,7 +168,7 @@
                         <%
                             for (ServiceDTO service : serviceList) {
                         %>
-                        <div class="col l-4 s-6 m-y-1 category_card">
+                        <div class="col l-4 s-6 m-y-1 category_card quick-view">
                             <div style="height: 20rem; border-radius: 1.5rem; box-shadow: 2px 8px 40px rgb(0 0 0 / 8%); background-color: white; " class="relative pad-1 ">
 
                                 <div class="absolute bot right">
@@ -190,7 +190,7 @@
                                         <span class="txt-lg bold"><%=service.getName()%></span>
                                     </div>
                                     <div class="flex-horizon-center flex-col category_detail">
-                                        <a  class="txt-sm quick-view">Select staff<i class="fa-solid fa-arrow-right m-x-0"></i></a>
+                                        <a  class="txt-sm">Select staff<i class="fa-solid fa-arrow-right m-x-0"></i></a>
                                     </div>
                                 </div>
                             </div>
