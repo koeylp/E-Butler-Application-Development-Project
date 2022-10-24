@@ -6,7 +6,9 @@ package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.ProviderDAO;
 import com.ebutler.swp.dto.OrderDTO;
+import com.ebutler.swp.dto.ProductDetailDTO;
 import com.ebutler.swp.dto.ProviderDTO;
+import com.ebutler.swp.dto.ProviderServiceDTO1;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,22 +24,29 @@ import javax.servlet.http.HttpSession;
  */
 public class Provider_OrderController extends HttpServlet {
 
-    private static final String ERROR = "index.jsp" ; 
+    private static final String ERROR = "OrderProvider.jsp" ; 
     private static final String SUCCESS = "OrderProvider.jsp" ;  
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR ; 
         try {
-            List<OrderDTO> listOrder = new ArrayList(); 
-            HttpSession session = request.getSession(); 
             ProviderDAO dao = new ProviderDAO(); 
+            HttpSession session = request.getSession(); 
             ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER") ; 
-            listOrder = dao.loadListOrder(provider); 
+            List<OrderDTO> listOrder = new ArrayList();   
+            List<ProductDetailDTO> listProduct = (List<ProductDetailDTO>) session.getAttribute("Provider_ListProduct") ; 
+            List<ProviderServiceDTO1> listService = (List<ProviderServiceDTO1>) session.getAttribute("Providder_ListService") ;   
+             if (listProduct != null) {
+                listOrder = dao.loadListOrder(provider); 
+            } else if (listService != null) { 
+                listOrder = dao.loadListOrderService(provider) ;
+            }
             if (listOrder != null) {
                 url = SUCCESS ; 
-                session.setAttribute("Providder_ListOrder", listOrder); 
+                 session.setAttribute("Providder_ListOrder", listOrder);
             }
+            
         } catch (Exception e) {
         }
         finally {

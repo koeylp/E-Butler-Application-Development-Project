@@ -348,7 +348,10 @@
                                                  alt="">
                                         </td>
                                         <td>
-                                            <input class="form-control me-2 priceData" type="text" name="ProductPrice" value="<%= product.getPrice()%> $" />
+                                            <div class="flexStatus">
+                                                <input class="form-control me-2 priceData" type="text" name="ProductPrice" value="<%= product.getPrice()%>" />$
+                                            </div>
+                                            
                                         </td>
                                         <td>
                                             <input class="form-control me-2 priceData" type="text" name="ProductQuantity" value="<%= product.getQuantity()%>" />
@@ -389,7 +392,7 @@
                                         <td>
                                             <div>
                                                 <button name="action" value="ProviderDeleteProduct" ><i class="bx bx-trash me-1"></i>Delete</button>
-                                                <input type="hidden" name="Provider_ProductID" value="<%= product.getProduct_ID()%>" />
+                                                <input type="hidden" name="Provider_ProductID" value="<%= product.getId() %>" />
 
                                             </div>
                                         </td>
