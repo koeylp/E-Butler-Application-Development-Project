@@ -33,15 +33,16 @@ public class AuthorizePaymentController extends HttpServlet {
         String url = ERROR;
         try {
             String total = request.getParameter("total");
+            String payment = request.getParameter("payment");
             HttpSession session = request.getSession();
             if (session != null) {
-                UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
-                CartDTO cart = (CartDTO) session.getAttribute("CART");
-                
                 OrderPayPalDetail order = new OrderPayPalDetail(String.valueOf(total), "0", String.valueOf(total));
                 PaymentServiceDTO paymentServices = new PaymentServiceDTO();
                 String approvalLink = paymentServices.authorizePayment(order);
+                
                 response.sendRedirect(approvalLink);
+                session.setAttribute("TOTAL", total);
+                session.setAttribute("PAYMENT", payment);
             }
             
         } catch (PayPalRESTException e) {

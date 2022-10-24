@@ -1,3 +1,4 @@
+<%@page import="com.ebutler.swp.dto.StaffDTO"%>
 <%@page import="com.ebutler.swp.dto.ServiceDTO"%>
 <%@page import="com.ebutler.swp.dto.UserDTO"%>
 <%@page import="java.util.List"%>
@@ -43,11 +44,14 @@
 
     <body>
         <%
-            List<ServiceDTO> productList = (List<ServiceDTO>) session.getAttribute("CUSTOMER_SERVICE_LIST");
+            List<ServiceDTO> serviceList = (List<ServiceDTO>) session.getAttribute("CUSTOMER_SERVICE_LIST");
 
             String category_id = (String) session.getAttribute("CATEGORYID");
+            String category_name = (String) request.getAttribute("CATEGORY_NAME");
 
             category_id = (category_id == null) ? "" : category_id;
+            category_name = (category_name == null) ? "" : category_name;
+            
             UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
         %>
         <div class="container-xxl bg-white p-0">
@@ -97,11 +101,11 @@
                                     <div class="border-bottom">
                                         <div style="justify-content: flex-start; cursor: pointer;" class="dropdown-item pad-0">
                                             <i class="fa-solid fa-user"></i>
-                                            <a href="MainController?action=GoToUserProfile"><%=login_user.getUsername()%></a>
+                                            <a href="MainController?action=GoToUserProfile&current_form=account"><%=login_user.getUsername()%></a>
                                         </div>
                                         <div style="cursor: pointer;" class="dropdown-item pad-0">
                                             <i class="fa-solid fa-lock"></i>
-                                            <a href="MainController?action=GoToUserProfile">Change password</a>
+                                            <a href="MainController?action=GoToUserProfile&current_form=change_password">Change password</a>
                                         </div>
                                     </div>
                                     <div style="cursor: pointer;" class="dropdown-item pad-0">
@@ -162,7 +166,7 @@
                     <div class="row m-y-2">
                         <!-- product item -->
                         <%
-                            for (ServiceDTO service : productList) {
+                            for (ServiceDTO service : serviceList) {
                         %>
                         <div class="col l-4 s-6 m-y-1 category_card">
                             <div style="height: 20rem; border-radius: 1.5rem; box-shadow: 2px 8px 40px rgb(0 0 0 / 8%); background-color: white; " class="relative pad-1 ">
@@ -173,12 +177,12 @@
                                 </div>
                                 <div class="flex-col flex-between full-h">
                                     <div class="flex-between">
-                                        <div style="height: 6rem; width: 6rem; background-color: #eaf2fc;" class="img rounded-f pad-1">
+                                        <div style="height: 7rem; width: 7rem; background-color: #eaf2fc;" class="img rounded-f pad-1">
                                             <img src="<%=service.getImage()%>"
                                                  alt="">
                                         </div>
                                         <div class="flex-center">
-                                            <span class="txt-sm bold">200 products</span>
+                                            <span class="txt-sm bold"><%=service.getStaff_list().size()%> staffs</span>
                                         </div>
                                     </div>
                                     <div class="flex-horizon-center flex-col">
@@ -186,14 +190,13 @@
                                         <span class="txt-lg bold"><%=service.getName()%></span>
                                     </div>
                                     <div class="flex-horizon-center flex-col category_detail">
-                                        <a  class="txt-sm quick-view">See Collection <i class="fa-solid fa-arrow-right m-x-0"></i></a>
+                                        <a  class="txt-sm quick-view">Select staff<i class="fa-solid fa-arrow-right m-x-0"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="overlay fixed top bot left right flex-center hide">
-
                             <div class="popup relative">
                                 <div style="margin: 1rem 2rem;" class="absolute right p-2 text-md opacity popup-close">
                                     <i class="fa-solid fa-xmark"></i>
@@ -201,164 +204,48 @@
                                 <div style="margin: auto 0;" class="pad-2 scrollable-y full-h">
                                     <!-- Staff start -->
 
-                                    <c:forEach items="${sessionScope.STAFF_LIST_BY_TYPE}" var="o">
-                                        <div style="height: 200px;" class="flex-between border-bot pad-y-1">
-                                            <div class="full-h">
-                                                <div class="img full-h full-w">
-                                                    <img src="https://chisnghiax.com/ciseco/static/media/detail1.f45e3a4d9bfeafd2f70b.jpg"
-                                                         alt="">
+                                    <%
+                                        for (StaffDTO staff : service.getStaff_list()) {
+                                    %>
+                                    <div style="height: 200px;" class="flex-between border-bot pad-y-1">
+                                        <div class="full-h">
+                                            <div class="img full-h full-w">
+                                                <img src="<%=staff.getAvatar()%>"
+                                                     alt="">
+                                            </div>
+                                        </div>
+                                        <div style="flex: 1;" class="flex-col flex-between pad-x-1">
+                                            <div class="flex-vertical-center">
+                                                <span class="txt-sm"><%=category_name%></span>
+                                                <span class="m-x-0">|</span>
+                                                <span class="txt-sm"><%=service.getName()%></span>
+                                            </div>
+                                            <div class="flex-between">
+                                                <div>
+                                                    <span class="txt-lg bold"><%=staff.getName()%></span>
+                                                </div>
+                                                <div class="order-price txt-sm bold col l-2">
+                                                    <span>
+                                                        $15
+                                                    </span>
                                                 </div>
                                             </div>
-                                            <div style="flex: 1;" class="flex-col flex-between pad-x-1">
-                                                <div class="flex-vertical-center">
-                                                    <span class="txt-sm">Service</span>
-                                                    <span class="m-x-0">|</span>
-                                                    <span class="txt-sm">Service Category</span>
-                                                </div>
+                                            <div class="content flex-between flex-col ">
                                                 <div class="flex-between">
-                                                    <div>
-                                                        <span class="txt-lg bold">${o.name}</span>
-                                                    </div>
-                                                    <div class="order-price txt-sm bold col l-2">
-                                                        <span>
-                                                            $369.000
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="content flex-between flex-col ">
-                                                    <div class="flex-between">
-                                                        <div class="full-w">
-                                                            <button style="background-color: #0F172A; color: white;"
-                                                                    class="btn-lg full-w">
-                                                                <i class="fa-solid fa-bag-shopping"></i>
-                                                                <span style="margin-left: .75rem">Booking</span>
-                                                            </button>
-                                                        </div>
+                                                    <div class="full-w">
+                                                        <button style="background-color: #0F172A; color: white;"
+                                                                class="btn-lg full-w">
+                                                            <i class="fa-solid fa-bag-shopping"></i>
+                                                            <span style="margin-left: .75rem">Booking</span>
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div
-
-
-
-                                        <!--------------------->
-                                    </c:forEach>
-
-
-                                    <!--                                 <div style="height: 200px;" class="flex-between border-bot pad-y-1">
-                                                                            <div class="full-h">
-                                                                                <div class="img full-h full-w">
-                                                                                    <img src="https://chisnghiax.com/ciseco/static/media/detail1.f45e3a4d9bfeafd2f70b.jpg"
-                                                                                         alt="">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div style="flex: 1;" class="flex-col flex-between pad-x-1">
-                                                                                <div class="flex-vertical-center">
-                                                                                    <span class="txt-sm">Service</span>
-                                                                                    <span class="m-x-0">|</span>
-                                                                                    <span class="txt-sm">Service Category</span>
-                                                                                </div>
-                                                                                <div class="flex-between">
-                                                                                    <div>
-                                                                                        <span class="txt-lg bold">${x.name}</span>
-                                                                                    </div>
-                                                                                    <div class="order-price txt-sm bold col l-2">
-                                                                                        <span>
-                                                                                            $369.000
-                                                                                        </span>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="content flex-between flex-col ">
-                                                                                    <div class="flex-between">
-                                                                                        <div class="full-w">
-                                                                                            <button style="background-color: #0F172A; color: white;"
-                                                                                                    class="btn-lg full-w">
-                                                                                                <i class="fa-solid fa-bag-shopping"></i>
-                                                                                                <span style="margin-left: .75rem">Booking</span>
-                                                                                            </button>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div
-                                                                        ---------------->
-                                    <!--                                  <div style="height: 200px;" class="flex-between border-bot pad-y-1">
-                                                                            <div class="full-h">
-                                                                                <div class="img full-h full-w">
-                                                                                    <img src="https://chisnghiax.com/ciseco/static/media/detail1.f45e3a4d9bfeafd2f70b.jpg"
-                                                                                         alt="">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div style="flex: 1;" class="flex-col flex-between pad-x-1">
-                                                                                <div class="flex-vertical-center">
-                                                                                    <span class="txt-sm">Service</span>
-                                                                                    <span class="m-x-0">|</span>
-                                                                                    <span class="txt-sm">Service Category</span>
-                                                                                </div>
-                                                                                <div class="flex-between">
-                                                                                    <div>
-                                                                                        <span class="txt-lg bold">${x.name}</span>
-                                                                                    </div>
-                                                                                    <div class="order-price txt-sm bold col l-2">
-                                                                                        <span>
-                                                                                            $369.000
-                                                                                        </span>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="content flex-between flex-col ">
-                                                                                    <div class="flex-between">
-                                                                                        <div class="full-w">
-                                                                                            <button style="background-color: #0F172A; color: white;"
-                                                                                                    class="btn-lg full-w">
-                                                                                                <i class="fa-solid fa-bag-shopping"></i>
-                                                                                                <span style="margin-left: .75rem">Booking</span>
-                                                                                            </button>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div
-                                                                       
-                                                                        
-                                                                        --------------
-                                                                         Staff start 
-                                                                        <div style="height: 200px;" class="flex-between border-bot pad-y-1">
-                                                                            <div class="full-h">
-                                                                                <div class="img full-h full-w">
-                                                                                    <img src="https://chisnghiax.com/ciseco/static/media/detail1.f45e3a4d9bfeafd2f70b.jpg"
-                                                                                         alt="">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div style="flex: 1;" class="flex-col flex-between pad-x-1">
-                                                                                <div class="flex-vertical-center">
-                                                                                    <span class="txt-sm">Service</span>
-                                                                                    <span class="m-x-0">|</span>
-                                                                                    <span class="txt-sm">Service Category</span>
-                                                                                </div>
-                                                                                <div class="flex-between">
-                                                                                    <div>
-                                                                                        <span class="txt-lg bold">Staff Name</span>
-                                                                                    </div>
-                                                                                    <div class="order-price txt-sm bold col l-2">
-                                                                                        <span>
-                                                                                            $369.000
-                                                                                        </span>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="content flex-between flex-col ">
-                                                                                    <div class="flex-between">
-                                                                                        <div class="full-w">
-                                                                                            <button style="background-color: #0F172A; color: white;"
-                                                                                                    class="btn-lg full-w">
-                                                                                                <i class="fa-solid fa-bag-shopping"></i>
-                                                                                                <span style="margin-left: .75rem">Booking</span>
-                                                                                            </button>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>-->
-
+                                        </div>
+                                    </div>
+                                    <%
+                                        }
+                                    %>
                                 </div>
                             </div>
                         </div>

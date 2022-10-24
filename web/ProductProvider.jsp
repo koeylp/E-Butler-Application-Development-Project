@@ -339,7 +339,7 @@
 
                                         </div>
                                         <td>
-                                            <input class="form-control me-2" type="text" name="ProductName" value="<%= product.getName()%>" />
+                                            <input class="form-control me-2 titleName" type="text" name="ProductName" value="<%= product.getName()%>" />
                                         </td>
                                         <td><input class="form-control me-2 priceData" type="text" name="ProductID" value="<%= product.getId() %>" readonly="" /></td>
                                         <td>
@@ -348,7 +348,7 @@
                                                  alt="">
                                         </td>
                                         <td>
-                                            <input class="form-control me-2 priceData" type="text" name="ProductPrice" value="<%= product.getPrice()%>" />
+                                            <input class="form-control me-2 priceData" type="text" name="ProductPrice" value="<%= product.getPrice()%> $" />
                                         </td>
                                         <td>
                                             <input class="form-control me-2 priceData" type="text" name="ProductQuantity" value="<%= product.getQuantity()%>" />

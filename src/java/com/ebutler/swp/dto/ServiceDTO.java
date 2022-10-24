@@ -4,6 +4,8 @@
  */
 package com.ebutler.swp.dto;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Dang Viet
@@ -14,20 +16,36 @@ public class ServiceDTO {
     private String category_ID;
     private String name;
     private String image;
+    
+//    thêm staff_list
+    private ArrayList<StaffDTO> staff_list;
 
     public ServiceDTO() {
         this.service_ID = "";
         this.category_ID = "";
         this.name = "";
         this.image = "";
+        this.staff_list = new ArrayList<StaffDTO>();
     }
 
-    public ServiceDTO(String service_ID, String category_ID, String name, String image) {
+    public ServiceDTO(String service_ID, String category_ID, String name, String image, ArrayList<StaffDTO> staff_list) {
         this.service_ID = service_ID;
         this.category_ID = category_ID;
         this.name = name;
         this.image = image;
+        this.staff_list = staff_list;
     }
+
+
+    public ArrayList<StaffDTO> getStaff_list() {
+        return staff_list;
+    }
+
+    public void setStaff_list(ArrayList<StaffDTO> staff_list) {
+        this.staff_list = staff_list;
+    }
+
+    
 
     public String getService_ID() {
         return service_ID;

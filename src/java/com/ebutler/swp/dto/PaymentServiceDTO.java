@@ -77,18 +77,7 @@ public class PaymentServiceDTO {
         transaction.setAmount(amount);
         transaction.setDescription("");
 
-        ItemList itemList = new ItemList();
-        List<Item> items = new ArrayList<>();
-
-        Item item = new Item();
-        item.setCurrency("USD");
-        item.setName("");
-        item.setPrice(orderDetail.getSubtotal());
-        item.setQuantity("1");
-
-        items.add(item);
-        itemList.setItems(items);
-        transaction.setItemList(itemList);
+        
 
         List<Transaction> listTransaction = new ArrayList<>();
         listTransaction.add(transaction);

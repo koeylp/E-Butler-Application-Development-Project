@@ -101,11 +101,11 @@
                                     <div class="border-bottom">
                                         <div style="justify-content: flex-start; cursor: pointer;" class="dropdown-item pad-0">
                                             <i class="fa-solid fa-user"></i>
-                                            <a href="MainController?action=GoToUserProfile"><%=login_user.getUsername()%></a>
+                                            <a href="MainController?action=GoToUserProfile&current_form=account"><%=login_user.getUsername()%></a>
                                         </div>
                                         <div style="cursor: pointer;" class="dropdown-item pad-0">
                                             <i class="fa-solid fa-lock"></i>
-                                            <a href="MainController?action=GoToUserProfile">Change password</a>
+                                            <a href="MainController?action=GoToUserProfile&current_form=change_password">Change password</a>
                                         </div>
                                     </div>
                                     <div style="cursor: pointer;" class="dropdown-item pad-0">
@@ -218,6 +218,7 @@
                                             <div style="padding: 0;" class="flex-col">
 
                                                 <form action="MainController?action=SelectProvince" method="POST">
+                                                    <input type="hidden" name="current_page" value="customer_checkoutPage.jsp">
                                                     <div class="row">
                                                         <div class="flex-horizon-center flex-col m-y-12 col l-6">
                                                             <span class="txt-md m-y-12">Province</span>

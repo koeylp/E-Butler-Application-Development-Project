@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 public class SelectProvinceController extends HttpServlet {
     
     private final String ERROR = "errorPage.jsp";
-    private final String SUCCESS = "customer_checkoutPage.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -29,13 +28,21 @@ public class SelectProvinceController extends HttpServlet {
         try {
             String province_id = request.getParameter("province_id");
             
+            String current_page = request.getParameter("current_page");
+            String current_form = request.getParameter("current_form");
+            
+            String action_type = request.getParameter("action_type");
+            
             AddressDAO addressDAO = new AddressDAO();
             ArrayList<CityDTO> city_list = addressDAO.SelectCity(province_id);
             
             request.setAttribute("CITY_LIST", city_list);
             request.setAttribute("PROVINCE_ID", province_id);
+            request.setAttribute("CURRENT_FORM", current_form);
             
-            url = SUCCESS;
+            request.setAttribute("ACTION_TYPE", action_type);
+            
+            url = current_page;
         }catch(Exception e) {
             log("ERROR at SelectProvinceController: " + e.toString());
         }finally {

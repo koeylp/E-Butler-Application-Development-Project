@@ -54,7 +54,10 @@ public class ProductDAO {
             ptm.setString(1, categoty_ID);
             rs = ptm.executeQuery();
             while (rs.next()) {
-                list.add(new ProductDTO(rs.getString("product_ID"), rs.getString("category_ID"), rs.getString("name"), rs.getString("image")));
+                
+                String product_id = rs.getString("product_ID");
+                
+                list.add(new ProductDTO(product_id, rs.getString("category_ID"), rs.getString("name"), rs.getString("image"), getListProductByPlaceDetail(categoty_ID, product_id)));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -148,7 +151,10 @@ public class ProductDAO {
             ptm.setString(2, "%" + search + "%");
             rs = ptm.executeQuery();
             while (rs.next()) {
-                list.add(new ProductDTO(rs.getString("product_ID"), rs.getString("category_ID"), rs.getString("name"), rs.getString("image")));
+                
+                String product_id = rs.getString("product_ID");
+                
+                list.add(new ProductDTO(product_id, rs.getString("category_ID"), rs.getString("name"), rs.getString("image"), getListProductByPlaceDetail(categoty_ID, product_id)));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -279,7 +285,10 @@ public static boolean setQuantiy(String id, int quantity) throws SQLException {
             ptm.setString(2, categoryID);
             rs = ptm.executeQuery();
             while (rs.next()) {
-                list.add(new ProductDTO(rs.getString("product_ID"), rs.getString("category_ID"), rs.getString("name"), rs.getString("image")));
+                
+                String product_id = rs.getString("product_ID");
+                
+                list.add(new ProductDTO(product_id, rs.getString("category_ID"), rs.getString("name"), rs.getString("image"), getListProductByPlaceDetail(categoryID, product_id)));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -437,7 +446,10 @@ public static boolean setQuantiy(String id, int quantity) throws SQLException {
             ptm.setString(1, categoryID);
             rs = ptm.executeQuery();
             while (rs.next()) {
-                list.add(new ProductDTO(rs.getString("product_ID"), rs.getString("category_ID"), rs.getString("name"), rs.getString("image")));
+                
+                String product_id = rs.getString("product_ID");
+                
+                list.add(new ProductDTO(product_id, rs.getString("category_ID"), rs.getString("name"), rs.getString("image"), getListProductByPlaceDetail(categoryID, product_id)));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -466,7 +478,10 @@ public static boolean setQuantiy(String id, int quantity) throws SQLException {
             ptm.setString(1, categoryID);
             rs = ptm.executeQuery();
             while (rs.next()) {
-                list.add(new ProductDTO(rs.getString("product_ID"), rs.getString("category_ID"), rs.getString("name"), rs.getString("image")));
+                
+                String product_id = rs.getString("product_ID");
+                
+                list.add(new ProductDTO(product_id, rs.getString("category_ID"), rs.getString("name"), rs.getString("image"), getListProductByPlaceDetail(categoryID, product_id)));
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -32,6 +32,7 @@ public class ServicePageController extends HttpServlet {
         String url = ERROR;
         try {
             String category_ID = request.getParameter("category_ID");
+            String category_name = request.getParameter("category_name");
             ServiceDAO dao = new ServiceDAO();
             StaffDAO staffDAO = new StaffDAO();
             List<ServiceDTO> list = dao.getListService(category_ID);
@@ -41,6 +42,9 @@ public class ServicePageController extends HttpServlet {
 //            List<StaffDTO> staffList = staffDAO.getListStaffByServiceDetail(serviceID);
             session.setAttribute("CATEGORYID", category_ID);
             session.setAttribute("CUSTOMER_SERVICE_LIST", list);
+            
+            request.setAttribute("CATEGORY_NAME", category_name);
+            
             url = SUCCESS;
         } catch (Exception e) {
             log("Error at ServicePageController: " + e.getMessage());

@@ -97,11 +97,11 @@
                                     <div class="border-bottom">
                                         <div style="justify-content: flex-start; cursor: pointer;" class="dropdown-item pad-0">
                                             <i class="fa-solid fa-user"></i>
-                                            <a href="MainController?action=GoToUserProfile"><%=login_user.getUsername()%></a>
+                                            <a href="MainController?action=GoToUserProfile&current_form=account"><%=login_user.getUsername()%></a>
                                         </div>
                                         <div style="cursor: pointer;" class="dropdown-item pad-0">
                                             <i class="fa-solid fa-lock"></i>
-                                            <a href="MainController?action=GoToUserProfile">Change password</a>
+                                            <a href="MainController?action=GoToUserProfile&current_form=change_password">Change password</a>
                                         </div>
                                     </div>
                                     <div style="cursor: pointer;" class="dropdown-item pad-0">
@@ -173,12 +173,12 @@
                                 </div>
                                 <div class="flex-col flex-between full-h">
                                     <div class="flex-between">
-                                        <div style="height: 6rem; width: 6rem; background-color: #eaf2fc;" class="img rounded-f pad-1">
+                                        <div style="height: 7rem; width: 7rem; background-color: #eaf2fc;" class="img rounded-f pad-1">
                                             <img src="<%=product.getImage()%>"
                                                  alt="">
                                         </div>
                                         <div class="flex-center">
-                                            <span class="txt-sm bold">200 products</span>
+                                            <span class="txt-sm bold"><%=product.getDetail_list().size()%> products</span>
                                         </div>
                                     </div>
                                     <div class="flex-horizon-center flex-col">

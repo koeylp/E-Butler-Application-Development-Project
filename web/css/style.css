@@ -452,7 +452,7 @@
     margin-bottom: 20px ; 
 }
 input.priceData {
-    width: 100px ; 
+    width: 70px ; 
 }
 .flexStatus {
     display: flex ;
@@ -479,4 +479,10 @@ input.shortTitle2 {
 button {
     background-color: white ; 
     border: none ; 
+}
+.head-txt {
+    padding-top: 50px ; 
+}
+input.titleName {
+    font-weight: bold ;
 }

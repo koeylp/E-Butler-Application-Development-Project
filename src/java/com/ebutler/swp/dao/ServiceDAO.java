@@ -46,6 +46,7 @@ public class ServiceDAO {
         try {
             conn = DBUtils.getConnection();
             ptm = conn.prepareStatement(GET_SERVICE_CATEGORY_LIST);
+            
             rs = ptm.executeQuery();
             while (rs.next()) {
                 list.add(new ServiceCategoryDTO(rs.getString("category_ID"), rs.getString("name"), rs.getString("image")));
@@ -296,8 +297,13 @@ public class ServiceDAO {
             ptm = conn.prepareStatement(GET_SERVICE_LIST);
             ptm.setString(1, categoryID);
             rs = ptm.executeQuery();
+            
+            StaffDAO staffDAO = new StaffDAO();
+            
             while (rs.next()) {
-                list.add(new ServiceDTO(rs.getString("service_ID"), rs.getString("category_ID"), rs.getString("name"), rs.getString("image")));
+//                lấy service_id
+                String service_id = rs.getString("service_ID");
+                list.add(new ServiceDTO(service_id, rs.getString("category_ID"), rs.getString("name"), rs.getString("image"), staffDAO.getListStaffByServiceDetail(service_id)));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -326,8 +332,14 @@ public class ServiceDAO {
             ptm = conn.prepareStatement(SORT_SERVICE_CATEGORY_WORD_UP);
             ptm.setString(1, categoryID);
             rs = ptm.executeQuery();
+            
+            StaffDAO staffDAO = new StaffDAO();
+            
             while (rs.next()) {
-                list.add(new ServiceDTO(rs.getString("service_ID"), rs.getString("category_ID"), rs.getString("name"), rs.getString("image")));
+                
+                String service_id = rs.getString("service_ID");
+                
+                list.add(new ServiceDTO(service_id, rs.getString("category_ID"), rs.getString("name"), rs.getString("image"), staffDAO.getListStaffByServiceDetail(service_id)));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -356,8 +368,14 @@ public class ServiceDAO {
             ptm = conn.prepareStatement(SORT_SERVICE_CATEGORY_WORD_DOWN);
             ptm.setString(1, categoryID);
             rs = ptm.executeQuery();
+            
+            StaffDAO staffDAO = new StaffDAO();
+            
             while (rs.next()) {
-                list.add(new ServiceDTO(rs.getString("service_ID"), rs.getString("category_ID"), rs.getString("name"), rs.getString("image")));
+                
+                String service_id = rs.getString("service_ID");
+                
+                list.add(new ServiceDTO(service_id, rs.getString("category_ID"), rs.getString("name"), rs.getString("image"), staffDAO.getListStaffByServiceDetail(service_id)));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -387,8 +405,14 @@ public class ServiceDAO {
             ptm.setString(1, categoryID);
             ptm.setString(2, "%" + search + "%");
             rs = ptm.executeQuery();
+            
+            StaffDAO staffDAO = new StaffDAO();
+            
             while (rs.next()) {
-                list.add(new ServiceDTO(rs.getString("service_ID"), rs.getString("category_ID"), rs.getString("name"), rs.getString("image")));
+                
+                String service_id = rs.getString("service_ID");
+                
+                list.add(new ServiceDTO(service_id, rs.getString("category_ID"), rs.getString("name"), rs.getString("image"), staffDAO.getListStaffByServiceDetail(service_id)));
             }
         } catch (Exception e) {
             e.printStackTrace();

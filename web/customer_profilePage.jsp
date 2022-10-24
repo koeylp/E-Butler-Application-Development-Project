@@ -62,6 +62,8 @@
             String updateSuccess = (String) request.getAttribute("UPDATE_SUCESSFULLY");
             String phoneWrongFormat = (String) request.getAttribute("PHONE_WRONG_LENGTH");
             String wrongDob = (String) request.getAttribute("WRONG_DOB");
+            String current_form = (String) request.getAttribute("CURRENT_FORM");
+            String action_type = (String) request.getAttribute("ACTION_TYPE");
 
             if (emptyInfo == null) {
                 emptyInfo = "";
@@ -81,7 +83,9 @@
 
             UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
             customer = (customer == null) ? new CustomerDTO() : customer;
-
+            
+            current_form = (current_form == null) ? "" : current_form;
+            action_type = (action_type == null) ? "" : action_type;
         %>
         <div class="container-xxl bg-white p-0">
             <!-- Spinner Start -->
@@ -130,11 +134,11 @@
                                     <div class="border-bottom">
                                         <div style="justify-content: flex-start; cursor: pointer;" class="dropdown-item pad-0">
                                             <i class="fa-solid fa-user"></i>
-                                            <a href="MainController?action=GoToUserProfile"><%=login_user.getUsername()%></a>
+                                            <a href="MainController?action=GoToUserProfile&current_form=account"><%=login_user.getUsername()%></a>
                                         </div>
                                         <div style="cursor: pointer;" class="dropdown-item pad-0">
                                             <i class="fa-solid fa-lock"></i>
-                                            <a href="MainController?action=GoToUserProfile">Change password</a>
+                                            <a href="MainController?action=GoToUserProfile&current_form=change_password">Change password</a>
                                         </div>
                                     </div>
                                     <div style="cursor: pointer;" class="dropdown-item pad-0">
@@ -164,17 +168,17 @@
                     </div>
                     <div style="border-top: 2px solid #E2E8F0; border-bottom: 2px solid #E2E8F0"
                          class="flex-vertical-center m-y-32">
-                        <a class="relative txt-lg pad-y-32 navi--link account bold">Account info</a>
-                        <a class="relative txt-lg pad-y-32 navi--link order-his">My order</a>
-                        <a class="relative txt-lg pad-y-32 navi--link address">My address</a>
-                        <a class="relative txt-lg pad-y-32 navi--link password">Change password</a>
+                        <a class="relative txt-lg pad-y-32 navi--link account <%if(current_form.equals("account")) {%>bold<%}%>">Account info</a>
+                        <a class="relative txt-lg pad-y-32 navi--link order-his <%if(current_form.equals("order_history")) {%>bold<%}%>">My order</a>
+                        <a class="relative txt-lg pad-y-32 navi--link address <%if(current_form.equals("address")) {%>bold<%}%>">My address</a>
+                        <a class="relative txt-lg pad-y-32 navi--link password <%if(current_form.equals("change_password")) {%>bold<%}%>">Change password</a>
                     </div>
                 </div>
             </div>
             <!-- Header End -->
 
             <!-- Account information start-->
-            <div class="grid wide form account-form">
+            <div class="grid wide form account-form <%if(!current_form.equals("account"))  {%>hide<%}%>">
                 <div class="flex-vertical-center m-y-32">
                     <h1 class="txt-xl">Account information</h1>
                 </div>
@@ -266,7 +270,7 @@
             <!-- Account information end -->
 
             <!-- Order history start -->
-            <div class="grid hide form order-his-form">
+            <div class="grid form order-his-form <%if(!current_form.equals("order_history"))  {%>hide<%}%>">
                 <div class="grid wide">
                     <div class="flex-vertical-center m-y-32">
                         <h1 class="txt-xl">Order History</h1>
@@ -482,7 +486,7 @@
             <!-- Order history end -->
 
             <!-- Change password start -->
-            <div class="grid wide hide form password-form">
+            <div class="grid wide form password-form <%if(!current_form.equals("change_password"))  {%>hide<%}%>">
                 <div class="flex-vertical-center m-y-32">
                     <h1 class="txt-xl">Update Your Password</h1>
                 </div>
@@ -533,139 +537,204 @@
             <!-- Change password end -->
 
             <!-- Update address start -->
-            <div class="grid hide form address-form">
+            <div class="grid form address-form <%if(!current_form.equals("address"))  {%>hide<%}%>">
                 <div class="grid wide">
                     <div class="flex-vertical-center m-y-32">
                         <h1 class="txt-xl">Update Your Address</h1>
                     </div>
 
-                    <div class="relative m-y-32">
-                        <div style="border: 1px solid #E5E7EB; border-radius: 1rem;" class="pad-2 flex-between">
-                            <div class="flex-between">
-                                <div class="flex-center txt-md">
-                                    <i class="fa-solid fa-signs-post"></i>
-                                </div>
-                                <div style="margin-left: 2rem;" class="flex-col">
-                                    <span class="txt-lg">UPDATE ADDRESS</span>
-                                    <div class="flex-between txt-sm bold">
-                                        <span>Address</span>
-                                    </div>
-                                </div>
+                    <div style="background-color: #F9FAFB;" class="pad-2">
+                        <div class="flex-between flex-vertical-center">
+                            <div class="flex">
+                                <span class="txt-lg bold">My address</span>
                             </div>
-                            <div class="flex-center">
-                                <button style="--round: .5rem"
-                                        class="txt-sm bold rounded-f border-no pad-0">Add</button>
+                            <div class="flex">
+                                <button type="button" style="background-color: var(--primary-color); border-radius: 0;" class="btn-lg border-no txt-md address_add">
+                                    <i class="fa-solid fa-plus"></i>
+                                    Add new address
+                                </button>
                             </div>
                         </div>
-                        <div style="width: 100%;border: 1px solid #E5E7EB; border-radius: 1rem;" class="bot">
-                            <div class="pad-2">
-                                <div style="padding: 0;" class="flex-col">
-                                    <form action="MainController?action=SelectProvince" method="POST">
-                                        <div class="row">
-                                            <div class="flex-horizon-center flex-col m-y-12 col l-6">
-                                                <span class="txt-md m-y-12">Province</span>
-                                                <%
-                                                    ArrayList<ProvinceDTO> province_list = (ArrayList<ProvinceDTO>) session.getAttribute("PROVINCE_LIST");
-                                                    String province_id = (String) request.getAttribute("PROVINCE_ID");
+                    </div>
 
-                                                    province_id = (province_id == null) ? "" : province_id;
-                                                    province_list = (province_list == null) ? new ArrayList<ProvinceDTO>() : province_list;
-                                                %>
-                                                <select
+                    <div class="overlay fixed top left right bot address_detail__add <%if(!action_type.equals("add_address")) {%>hide<%}%>">
+                        <div class="flex-center full-h full-w">
+                            <div class="relative" style="width: 50vw; height: fit-content; background-color: white;">
+                                <div style="width: 100%;">
+                                    <div class="pad-2">
+                                        <div style="padding: 0;" class="flex-col">
+                                            <form action="MainController?action=SelectProvince" method="POST">
+                                                <input type="hidden" name="current_page" value="customer_profilePage.jsp">
+                                                <input type="hidden" name="current_form" value="address">
+                                                <input type="hidden" name="action_type" value="add_address">
+                                                <div class="row">
+                                                    <div class="flex-horizon-center flex-col m-y-12 col l-6">
+                                                        <span class="txt-md m-y-12">Province</span>
+                                                        <%
+                                                            ArrayList<ProvinceDTO> province_list = (ArrayList<ProvinceDTO>) session.getAttribute("PROVINCE_LIST");
+                                                            String province_id = (String) request.getAttribute("PROVINCE_ID");
+
+                                                            province_id = (province_id == null) ? "" : province_id;
+                                                            province_list = (province_list == null) ? new ArrayList<ProvinceDTO>() : province_list;
+                                                        %>
+                                                        <select
+                                                            style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
+                                                            class="input txt-sm" type="password" onchange="this.form.submit()" name="province_id">
+                                                            <option>Select Province</option>
+                                                            <%
+                                                                for (ProvinceDTO province : province_list) {
+                                                            %>
+                                                            <option value="<%=province.getId()%>" <%if (province.getId().equals(province_id)) {%>selected<%}%>><%=province.getName()%></option>
+                                                            <%
+                                                                }
+                                                            %>
+
+                                                        </select>
+                                                    </div>
+                                                    <div class="flex-horizon-center flex-col m-y-12 col l-6">
+                                                        <span class="txt-md m-y-12">City</span>
+
+                                                        <%
+                                                            ArrayList<CityDTO> city_list = (ArrayList<CityDTO>) request.getAttribute("CITY_LIST");
+
+                                                            city_list = (city_list == null) ? new ArrayList<CityDTO>() : city_list;
+                                                        %>
+                                                        <select
+                                                            style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
+                                                            class="input txt-sm" type="password" name="city_id">
+                                                            <option>Select City</option>
+                                                            <%
+                                                                for (CityDTO city : city_list) {
+                                                            %>
+                                                            <option value="<%=city.getId()%>"><%=city.getName()%></option>
+                                                            <%
+                                                                }
+                                                            %>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <div class="flex-horizon-center flex-col m-y-1">
+                                                <span class="txt-md m-y-12">Address</span>
+                                                <input
                                                     style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
-                                                    class="input txt-sm" type="password" onchange="this.form.submit()" name="province_id">
-                                                    <option>Select Province</option>
-                                                    <%
-                                                        for (ProvinceDTO province : province_list) {
-                                                    %>
-                                                    <option value="<%=province.getId()%>" <%if (province.getId().equals(province_id)) {%>selected<%}%>><%=province.getName()%></option>
-                                                    <%
-                                                        }
-                                                    %>
-
-                                                </select>
+                                                    class="input txt-sm" type="password">
                                             </div>
-                                            <div class="flex-horizon-center flex-col m-y-12 col l-6">
-                                                <span class="txt-md m-y-12">City</span>
-
-                                                <%
-                                                    ArrayList<CityDTO> city_list = (ArrayList<CityDTO>) request.getAttribute("CITY_LIST");
-
-                                                    city_list = (city_list == null) ? new ArrayList<CityDTO>() : city_list;
-                                                %>
-                                                <select
-                                                    style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
-                                                    class="input txt-sm" type="password" name="city_id">
-                                                    <option>Select City</option>
-                                                    <%
-                                                        for (CityDTO city : city_list) {
-                                                    %>
-                                                    <option value="<%=city.getId()%>"><%=city.getName()%></option>
-                                                    <%
-                                                        }
-                                                    %>
-
-                                                </select>
+                                            <div class="flex-vertical-center flex-end">
+                                                <button style="margin-right: 1rem; background-color: transparent; color: black; border-radius: 0;"
+                                                        class="btn-lg txt-md bold m-y-32 border-no box-shadow-no close_address">Cancel</button>
+                                                <button type="button" style="background-color: var(--primary-color); border-radius: 0;" class="btn-lg border-no txt-md">
+                                                    Save
+                                                </button>
                                             </div>
                                         </div>
-                                    </form>
-
-                                    <div class="flex-horizon-center flex-col m-y-12">
-                                        <span class="txt-md m-y-12">Address</span>
-                                        <input
-                                            style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
-                                            class="input txt-sm" type="text">
-                                    </div>
-                                    <div class="flex-vertical-center">
-                                        <button class="btn-lg txt-md bold m-y-32">Save</button>
-                                        <button style="margin-left: 1rem; background-color: #EFEFEF; color: black"
-                                                class="btn-lg txt-md bold m-y-32 border-no box-shadow-no">Cancel</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row m-y-32">
-                        <!-- Order item -->
-                        <div class="block-border flex-col grid m-y-32">
-                            <!-- Order head -->
-                            <div style="background-color: #F9FAFB;" class="flex-between pad-2">
-                                <div class="flex-col flex-horizon-center">
-                                    <span class="txt-lg bold">Your address</span>
+                    <div class="pad-2 flex-col">
+                        <!-- Address detail -->
+                        <div class="flex-between pad-y-1 border-bot">
+                            <div class="l-5">
+                                <div class="flex-col">
+                                    <div class="flex">
+                                        <span class="txt-md bold">Name</span>
+                                        <span class="m-x-12">|</span>
+                                        <span class="txt-md">Phone</span>
+                                    </div>
+                                    <div>
+                                        <span class="txt-md"> Address Detail</span>
+                                    </div>
+                                    <div class="m-y-0">
+                                        <span style="color: var(--primary-color); border-radius: 0; padding: 0 .25rem;" class="label bold txt-sm">Default</span>
+                                    </div>
                                 </div>
                             </div>
-                            <!-- Order detail -->
-                            <div class="pad-2">
-                                <div class="order-card m-y-12">
-                                    <div class="flex">
-                                        <div class="flex-center order-img">
-                                            <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
-                                                 alt="">
-                                        </div>
-                                        <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                            <div class="flex-between">
-                                                <div class="flex-col flex-horizon-center">
-                                                    <span class="txt-lg bold">Product name</span>
-                                                    <div class="flex-horizon-center">
-                                                        <span class="txt-md">Product</span>
-                                                        <span class="m-x-12">|</span>
-                                                        <span class="txt-md">Product Category</span>
+                            <div class="flex-col flex-around">
+                                <div class="bold flex-around txt-lg">
+                                    <a class="address_edit" style="cursor: pointer; color: #0FA5EB"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a style="cursor: pointer; color: #eb3b0f"><i class="fa-solid fa-trash"></i></a>
+                                </div>
+                                <div style="border-radius: 0; padding: 0 .5rem;" class="label bold txt-sm m-y-0 flex-center">
+                                    <a style="cursor: pointer;">Set default</a>
+                                </div>
+                            </div>
+
+                            <div class="overlay fixed top left right bot address_detail__edit <%if(!action_type.equals("edit_address")) {%>hide<%}%>">
+                                <div class="flex-center full-h full-w">
+                                    <div class="relative" style="width: 50vw; height: fit-content; background-color: white;">
+                                        <div style="width: 100%;">
+                                            <div class="pad-2">
+                                                <div style="padding: 0;" class="flex-col">
+                                                    <form action="MainController?action=SelectProvince" method="POST">
+                                                        <input type="hidden" name="current_page" value="customer_profilePage.jsp">
+                                                        <input type="hidden" name="current_form" value="address">
+                                                        <input type="hidden" name="action_type" value="edit_address">
+                                                        <div class="row">
+                                                            <div class="flex-horizon-center flex-col m-y-12 col l-6">
+                                                                <span class="txt-md m-y-12">Province</span>
+                                                                <%
+                                                                    province_id = (province_id == null) ? "" : province_id;
+                                                                    province_list = (province_list == null) ? new ArrayList<ProvinceDTO>() : province_list;
+                                                                %>
+                                                                <select
+                                                                    style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
+                                                                    class="input txt-sm" type="password" onchange="this.form.submit()" name="province_id">
+                                                                    <option>Select Province</option>
+                                                                    <%
+                                                                        for (ProvinceDTO province : province_list) {
+                                                                    %>
+                                                                    <option value="<%=province.getId()%>" <%if (province.getId().equals(province_id)) {%>selected<%}%>><%=province.getName()%></option>
+                                                                    <%
+                                                                        }
+                                                                    %>
+
+                                                                </select>
+                                                            </div>
+                                                            <div class="flex-horizon-center flex-col m-y-12 col l-6">
+                                                                <span class="txt-md m-y-12">City</span>
+
+                                                                <%
+                                                                    city_list = (city_list == null) ? new ArrayList<CityDTO>() : city_list;
+                                                                %>
+                                                                <select
+                                                                    style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
+                                                                    class="input txt-sm" type="password" name="city_id">
+                                                                    <option>Select City</option>
+                                                                    <%
+                                                                        for (CityDTO city : city_list) {
+                                                                    %>
+                                                                    <option value="<%=city.getId()%>"><%=city.getName()%></option>
+                                                                    <%
+                                                                        }
+                                                                    %>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                    <div class="flex-horizon-center flex-col m-y-1">
+                                                        <span class="txt-md m-y-12">Address</span>
+                                                        <input
+                                                            style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
+                                                            class="input txt-sm" type="password">
+                                                    </div>
+                                                    <div class="flex-vertical-center flex-end">
+                                                        <button style="margin-right: 1rem; background-color: transparent; color: black; border-radius: 0;"
+                                                                class="btn-lg txt-md bold m-y-32 border-no box-shadow-no close_edit_address">Cancel</button>
+                                                        <button type="button" style="background-color: var(--primary-color); border-radius: 0;" class="btn-lg border-no txt-md">
+                                                            Save
+                                                        </button>
                                                     </div>
                                                 </div>
-                                                <div class="order-price bold">
-                                                    <span>
-                                                        $369.000
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div style="height: 50%;" class="flex-end flex-col">
-                                                <span class="txt-md bold">Quantity: 1</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> 
                         </div>
                     </div>
                 </div>
@@ -766,35 +835,35 @@
         crossorigin="anonymous"
     ></script>
     <script>
-                                                                var selDiv = "";
-                                                                var storedFiles = [];
-                                                                $(document).ready(function () {
-                                                                    $("#img").on("change", handleFileSelect);
-                                                                    selDiv = $("#selectedBanner");
-                                                                });
+                                                                        var selDiv = "";
+                                                                        var storedFiles = [];
+                                                                        $(document).ready(function () {
+                                                                            $("#img").on("change", handleFileSelect);
+                                                                            selDiv = $("#selectedBanner");
+                                                                        });
 
-                                                                function handleFileSelect(e) {
-                                                                    var files = e.target.files;
-                                                                    var filesArr = Array.prototype.slice.call(files);
-                                                                    filesArr.forEach(function (f) {
-                                                                        if (!f.type.match("image.*")) {
-                                                                            return;
+                                                                        function handleFileSelect(e) {
+                                                                            var files = e.target.files;
+                                                                            var filesArr = Array.prototype.slice.call(files);
+                                                                            filesArr.forEach(function (f) {
+                                                                                if (!f.type.match("image.*")) {
+                                                                                    return;
+                                                                                }
+                                                                                storedFiles.push(f);
+
+                                                                                var reader = new FileReader();
+                                                                                reader.onload = function (e) {
+                                                                                    var html =
+                                                                                            '<img src="' +
+                                                                                            e.target.result +
+                                                                                            "\" data-file='" +
+                                                                                            f.name +
+                                                                                            "alt='Category Image' height='200px' width='200px'>";
+                                                                                    selDiv.html(html);
+                                                                                };
+                                                                                reader.readAsDataURL(f);
+                                                                            });
                                                                         }
-                                                                        storedFiles.push(f);
-
-                                                                        var reader = new FileReader();
-                                                                        reader.onload = function (e) {
-                                                                            var html =
-                                                                                    '<img src="' +
-                                                                                    e.target.result +
-                                                                                    "\" data-file='" +
-                                                                                    f.name +
-                                                                                    "alt='Category Image' height='200px' width='200px'>";
-                                                                            selDiv.html(html);
-                                                                        };
-                                                                        reader.readAsDataURL(f);
-                                                                    });
-                                                                }
     </script>
 </body>
 
