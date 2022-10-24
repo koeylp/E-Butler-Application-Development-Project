@@ -51,8 +51,8 @@
 
 
         <link rel="stylesheet" href="customer_css/cart-css.css">
-        <link rel="stylesheet" href="css/myStyle.css">
-        
+        <link rel="stylesheet" href="css/guestPage.css">
+        <link rel="stylesheet" href="css/customerPage.css">
 
         <title>E-Butler</title>
     </head>
