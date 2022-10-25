@@ -51,7 +51,7 @@
 
             category_id = (category_id == null) ? "" : category_id;
             category_name = (category_name == null) ? "" : category_name;
-            
+
             UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
         %>
         <div class="container-xxl bg-white p-0">
@@ -168,7 +168,7 @@
                         <%
                             for (ServiceDTO service : serviceList) {
                         %>
-                        <div class="col l-4 s-6 m-y-1 category_card">
+                        <div class="col l-4 s-6 m-y-1 category_card quick-view">
                             <div style="height: 20rem; border-radius: 1.5rem; box-shadow: 2px 8px 40px rgb(0 0 0 / 8%); background-color: white; " class="relative pad-1 ">
 
                                 <div class="absolute bot right">
@@ -190,7 +190,7 @@
                                         <span class="txt-lg bold"><%=service.getName()%></span>
                                     </div>
                                     <div class="flex-horizon-center flex-col category_detail">
-                                        <a  class="txt-sm quick-view">Select staff<i class="fa-solid fa-arrow-right m-x-0"></i></a>
+                                        <a  class="txt-sm">Select staff<i class="fa-solid fa-arrow-right m-x-0"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -226,7 +226,7 @@
                                                 </div>
                                                 <div class="order-price txt-sm bold col l-2">
                                                     <span>
-                                                        $15
+                                                        <%= staff.getPrice()%>
                                                     </span>
                                                 </div>
                                             </div>
@@ -235,8 +235,10 @@
                                                     <div class="full-w">
                                                         <button style="background-color: #0F172A; color: white;"
                                                                 class="btn-lg full-w">
-                                                            <i class="fa-solid fa-bag-shopping"></i>
-                                                            <span style="margin-left: .75rem">Booking</span>
+                                                            <a style="color: white" href="MainController?action=AddServiceToCart&service_ID=<%= staff.getStaff_ID() %>" >
+                                                                <i class="fa-solid fa-bag-shopping"></i>
+                                                                <span style="margin-left: .75rem">Booking</span></a>
+
                                                         </button>
                                                     </div>
                                                 </div>

@@ -61,7 +61,8 @@ public class ProviderDAO {
     private final String PROVIDER_ADD_SERVICE = "INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID , name , price , description , status) VALUES (? , ? , null , ? , ? , null , 1 )" ; 
     private final String ADD_STAFF = "INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES (?,?,?,?,null,3)" ;
     private final String FILTER_STAFF_PENDING = "SELECT Staff.staff_ID,S.name , Staff.name, Staff.id_card, Staff.avatar, Staff.status FROM tblStaff Staff JOIN tblService S ON Staff.service_ID = S.service_ID WHERE Staff.provider_ID = ? AND status = 3" ;
-    private final String LIST_ORDER = "SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = ? " ;  
+    private final String LIST_ORDER_PRODUCT = "SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = ? " ;  
+    private final String LIST_ORDER_SERVICE = "SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Service_Detail OrdS ON Ord.order_ID = OrdS.order_ID ) JOIN tblServiceDetail PD ON PD.id = OrdS.service_detail_ID WHERE PD.provider_ID = ? " ;  
     private final String LIST_ORDERDETAIL = "" ; 
     public boolean InsertPro(ProviderDTO provider) throws SQLException {
         Connection conn = null;
@@ -1026,7 +1027,7 @@ public class ProviderDAO {
         try {
             conn = DBUtils.getConnection() ; 
             if (conn != null) {
-                ptm = conn.prepareStatement(LIST_ORDER) ; 
+                ptm = conn.prepareStatement(LIST_ORDER_PRODUCT) ;  
                 ptm.setString(1, provider.getUsername());
                 rs = ptm.executeQuery() ; 
                 while (rs.next()) {
@@ -1046,7 +1047,36 @@ public class ProviderDAO {
             }
         }
         return listOrder ; 
-    }
+    } 
+    public List<OrderDTO> loadListOrderService(ProviderDTO provider) throws SQLException {
+        List<OrderDTO> listOrder = new ArrayList() ;
+        Connection conn = null ; 
+        PreparedStatement ptm = null ; 
+        ResultSet rs = null ; 
+        try {
+            conn = DBUtils.getConnection() ; 
+            if (conn != null) {
+                ptm = conn.prepareStatement(LIST_ORDER_SERVICE) ;  
+                ptm.setString(1, provider.getUsername());
+                rs = ptm.executeQuery() ; 
+                while (rs.next()) {
+                    listOrder.add(new OrderDTO(rs.getInt(1), rs.getDate(2), rs.getString(3), rs.getInt(4), rs.getDouble(5))) ; 
+                }
+            }
+        } catch (Exception e) {
+        }finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listOrder ; 
+    } 
     public static void main(String[] args) throws SQLException {
         ProviderDAO dao = new ProviderDAO();
         boolean check = false ; 

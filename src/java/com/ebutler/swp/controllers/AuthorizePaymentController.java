@@ -4,10 +4,8 @@
  */
 package com.ebutler.swp.controllers;
 
-import com.ebutler.swp.dto.CartDTO;
 import com.ebutler.swp.dto.OrderPayPalDetail;
 import com.ebutler.swp.dto.PaymentServiceDTO;
-import com.ebutler.swp.dto.UserDTO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

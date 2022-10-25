@@ -355,7 +355,7 @@
                                             <img class="img-product"
                                                  src=<%= service.getImage() %> alt="">
                                         </td>
-                                        <td> <input class="form-control me-2 priceData" type="text" name="ServicePrice" value="<%= service.getPrice()%> $" />
+                                        <td> <input class="form-control me-2 priceData" type="text" name="ServicePrice" value="<%= service.getPrice()%>" />
                                             <input type="hidden" name="oldServicePrice" value="<%= service.getPrice()%> " />
                                         </td>
 

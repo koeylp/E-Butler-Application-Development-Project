@@ -4,10 +4,13 @@
  */
 package com.ebutler.swp.controllers;
 
+import com.ebutler.swp.dao.AddressDAO;
 import com.ebutler.swp.dao.CustomerDAO;
+import com.ebutler.swp.dto.AddressDTO;
 import com.ebutler.swp.dto.CustomerDTO;
 import com.ebutler.swp.dto.UserDTO;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +39,11 @@ public class GoToUserProfileController extends HttpServlet {
             CustomerDAO dao = new CustomerDAO();
             CustomerDTO customer = dao.getCurrentCustomer(currentUser.getUsername());
             session.setAttribute("CURRENT_CUSTOMER", customer);
+            
+            AddressDAO addressDAO = new AddressDAO();
+            ArrayList<AddressDTO> list_address = addressDAO.SelectAddress(currentUser.getUsername());
+            
+            customer.setAddress_list(list_address);
             
             request.setAttribute("CURRENT_FORM", current_form);
             url = SUCCESS;

@@ -163,34 +163,37 @@
                         <!-- product item -->
                         <%
                             for (ProductDTO product : productList) {
-                        %>                    
+                        %> 
                         <div class="col l-4 s-6 m-y-1 category_card">
-                            <div style="height: 20rem; border-radius: 1.5rem; box-shadow: 2px 8px 40px rgb(0 0 0 / 8%); background-color: white; " class="relative pad-1 ">
+                            <a href="MainController?action=GoToProductDetailByType&product_ID=<%=product.getProduct_ID()%>&category_ID=<%=product.getCategory_ID()%>">
+                                <div style="height: 20rem; border-radius: 1.5rem; box-shadow: 2px 8px 40px rgb(0 0 0 / 8%); background-color: white; " class="relative pad-1 ">
 
-                                <div class="absolute bot right">
-                                    <div class="category_decoration">
-                                    </div>
-                                </div>
-                                <div class="flex-col flex-between full-h">
-                                    <div class="flex-between">
-                                        <div style="height: 7rem; width: 7rem; background-color: #eaf2fc;" class="img rounded-f pad-1">
-                                            <img src="<%=product.getImage()%>"
-                                                 alt="">
-                                        </div>
-                                        <div class="flex-center">
-                                            <span class="txt-sm bold"><%=product.getDetail_list().size()%> products</span>
+                                    <div class="absolute bot right">
+                                        <div class="category_decoration">
                                         </div>
                                     </div>
-                                    <div class="flex-horizon-center flex-col">
-                                        <span style="color: black" class="txt-xs">Manufacturar</span>
-                                        <span class="txt-lg bold"><%=product.getName()%></span>
-                                    </div>
-                                    <div class="flex-horizon-center flex-col category_detail">
-                                        <a href="MainController?action=GoToProductDetailByType&product_ID=<%=product.getProduct_ID()%>&category_ID=<%=product.getCategory_ID()%>" class="txt-sm">See Collection <i class="fa-solid fa-arrow-right m-x-0"></i></a>
+                                    <div class="flex-col flex-between full-h">
+                                        <div class="flex-between">
+                                            <div style="height: 7rem; width: 7rem; background-color: #eaf2fc;" class="img rounded-f pad-1">
+                                                <img src="<%=product.getImage()%>"
+                                                     alt="">
+                                            </div>
+                                            <div class="flex-center">
+                                                <span class="txt-sm bold"><%=product.getDetail_list().size()%> products</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex-horizon-center flex-col">
+                                            <span style="color: black" class="txt-xs">Manufacturar</span>
+                                            <span class="txt-lg bold"><%=product.getName()%></span>
+                                        </div>
+                                        <div class="flex-horizon-center flex-col category_detail">
+                                            <a class="txt-sm">See Collection <i class="fa-solid fa-arrow-right m-x-0"></i></a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
+
                         <%
                             }
                         %>

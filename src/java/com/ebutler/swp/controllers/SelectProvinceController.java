@@ -7,6 +7,7 @@ package com.ebutler.swp.controllers;
 import com.ebutler.swp.dao.AddressDAO;
 import com.ebutler.swp.dto.CityDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Admin
  */
 public class SelectProvinceController extends HttpServlet {
-    
+
     private final String ERROR = "errorPage.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -27,6 +28,7 @@ public class SelectProvinceController extends HttpServlet {
         String url = ERROR;
         try {
             String province_id = request.getParameter("province_id");
+            String city_id = request.getParameter("city_id");
             
             String current_page = request.getParameter("current_page");
             String current_form = request.getParameter("current_form");
@@ -38,6 +40,7 @@ public class SelectProvinceController extends HttpServlet {
             
             request.setAttribute("CITY_LIST", city_list);
             request.setAttribute("PROVINCE_ID", province_id);
+            request.setAttribute("CITY_ID", city_id);
             request.setAttribute("CURRENT_FORM", current_form);
             
             request.setAttribute("ACTION_TYPE", action_type);

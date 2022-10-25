@@ -540,7 +540,7 @@
 
     <!-- javascript -->
     <script src="js/customer_homePage.js"></script>
-    <script src="js/slider.js"></script>
+    <script src="js/mySlider.js"></script>
 
 </body>
 
