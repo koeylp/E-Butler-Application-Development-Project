@@ -14,8 +14,6 @@ CREATE TABLE tblUserRole (
 )
 GO
 
-
-
 -----USER-----
 CREATE TABLE tblUser(
 	username nvarchar(30) PRIMARY KEY,
@@ -67,11 +65,15 @@ CREATE TABLE tblDistrict (
 )
 GO
 
+select street, district_ID, user_ID, status from tblAddress where user_ID = 'doangiabao'
+
+
 CREATE TABLE tblAddress( 
 	[address_ID] [int] IDENTITY(1,1) PRIMARY KEY , 
 	street nvarchar(max) ,
 	[district_ID] nvarchar(10) REFERENCES tblDistrict([district_ID]) NOT NULL ,  
-	[user_ID] nvarchar(30) REFERENCES tblUser(username) NOT NULL
+	[user_ID] nvarchar(30) REFERENCES tblUser(username) NOT NULL,
+	status int
 )
 
 

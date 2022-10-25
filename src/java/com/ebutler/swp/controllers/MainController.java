@@ -225,7 +225,26 @@ public class MainController extends HttpServlet {
     private final String SELECT_PROVICE = "SelectProvince";
     private final String SELECT_PROVICE_CONTROLLER = "SelectProvinceController";
 
-    // -----PROVIDER----- 
+//    Add address
+    private final String ADD_ADDRESS = "AddAddress";
+    private final String ADD_ADDRESS_CONTROLLER = "AddAddressController";
+    
+//    Show address
+    private final String SHOW_LIST_ADDRESS = "ShowListAddress";
+    private final String SHOW_LIST_ADDRESS_CONTROLLER = "ShowListAddressController";
+    
+//    Delete address
+    private final String DELETE_ADDRESS = "DeleteAddress";
+    private final String DELETE_ADDRESS_CONTROLLER = "DeleteAddressController";
+    
+//    Set address default
+    private final String SET_ADDRESS_DEFAULT = "SetAddressDefault";
+    private final String SET_ADDRESS_DEFAULT_CONTROLLER = "SetAddressDefaultController";
+    
+//    Update address
+    private final String UPDATE_ADDRESS = "UpdateAddress";
+    private final String UPDATE_ADDRESS_CONTROLLER = "UpdateAddressController";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -367,6 +386,16 @@ public class MainController extends HttpServlet {
 
             } else if (action.equals(SELECT_PROVICE)) {
                 url = SELECT_PROVICE_CONTROLLER;
+            } else if (action.equals(ADD_ADDRESS)) {
+                url = ADD_ADDRESS_CONTROLLER;
+            } else if (action.equals(SHOW_LIST_ADDRESS)) {
+                url = SHOW_LIST_ADDRESS_CONTROLLER;
+            } else if(action.equals(DELETE_ADDRESS)) {
+                url = DELETE_ADDRESS_CONTROLLER;
+            } else if (action.equals(SET_ADDRESS_DEFAULT)) {
+                url = SET_ADDRESS_DEFAULT_CONTROLLER;
+            } else if (action.equals(UPDATE_ADDRESS)) {
+                url = UPDATE_ADDRESS_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

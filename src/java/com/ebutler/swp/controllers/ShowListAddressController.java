@@ -5,7 +5,9 @@
 package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.AddressDAO;
-import com.ebutler.swp.dto.CityDTO;
+import com.ebutler.swp.dto.AddressDTO;
+import com.ebutler.swp.dto.CustomerDTO;
+import com.ebutler.swp.dto.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -13,44 +15,44 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Admin
  */
-public class SelectProvinceController extends HttpServlet {
+public class ShowListAddressController extends HttpServlet {
 
     private final String ERROR = "errorPage.jsp";
+    private final String SUCCESS = "customer_profilePage.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String province_id = request.getParameter("province_id");
-            String city_id = request.getParameter("city_id");
-            
-            String current_page = request.getParameter("current_page");
             String current_form = request.getParameter("current_form");
             
-            String action_type = request.getParameter("action_type");
+            HttpSession session = request.getSession();
+            
+            UserDTO login_user = (UserDTO)session.getAttribute("LOGIN_USER");
+            CustomerDTO login_customer = (CustomerDTO)session.getAttribute("CURRENT_CUSTOMER");
             
             AddressDAO addressDAO = new AddressDAO();
-            ArrayList<CityDTO> city_list = addressDAO.SelectCity(province_id);
+            ArrayList<AddressDTO> list_address = addressDAO.SelectAddress(login_user.getUsername());
             
-            request.setAttribute("CITY_LIST", city_list);
-            request.setAttribute("PROVINCE_ID", province_id);
-            request.setAttribute("CITY_ID", city_id);
+            login_customer.setAddress_list(list_address);
+            
+            session.setAttribute("CURRENT_CUSTOMER", login_customer);
             request.setAttribute("CURRENT_FORM", current_form);
             
-            request.setAttribute("ACTION_TYPE", action_type);
-            
-            url = current_page;
-        }catch(Exception e) {
-            log("ERROR at SelectProvinceController: " + e.toString());
-        }finally {
+            url = SUCCESS;
+        } catch(Exception e) {
+            log("ERROR at ShowListController: " + e.toString());
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
