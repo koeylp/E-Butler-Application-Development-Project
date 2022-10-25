@@ -12,25 +12,25 @@ import java.util.Map;
  * @author thekh
  */
 public class CartServiceDTO {
-    private Map<String, ServiceDetailDTO> cart;
+    private Map<String, ServiceCartDTO> cart;
 
     public CartServiceDTO() {
     }
 
-    public CartServiceDTO(Map<String, ServiceDetailDTO> cart) {
+    public CartServiceDTO(Map<String, ServiceCartDTO> cart) {
         this.cart = cart;
     }
 
-    public Map<String, ServiceDetailDTO> getCart() {
+    public Map<String, ServiceCartDTO> getCart() {
         return cart;
     }
 
-    public void setCart(Map<String, ServiceDetailDTO> cart) {
+    public void setCart(Map<String, ServiceCartDTO> cart) {
         this.cart = cart;
     }
     
 
-    public boolean add(ServiceDetailDTO service) {
+    public boolean add(ServiceCartDTO service) {
         boolean check = false;
         if (this.cart == null) {
             this.cart = new HashMap<>();

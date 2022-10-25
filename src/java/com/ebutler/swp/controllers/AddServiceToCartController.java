@@ -6,9 +6,9 @@ package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.ServiceDAO;
 import com.ebutler.swp.dto.CartServiceDTO;
+import com.ebutler.swp.dto.ServiceCartDTO;
 import com.ebutler.swp.dto.ServiceDetailDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
 public class AddServiceToCartController extends HttpServlet {
 
     private static final String ERROR = "errorPage.jsp";
-    private static final String SUCCESS = "customer_servicePage.jsp";
+    private static final String SUCCESS = "customer_cart.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -33,6 +33,7 @@ public class AddServiceToCartController extends HttpServlet {
         try {
             String id = request.getParameter("service_ID");
             ServiceDetailDTO serviceDetail = new ServiceDetailDTO();
+            ServiceCartDTO serviceCart = new ServiceCartDTO();
             ServiceDAO serviceDao = new ServiceDAO();
             HttpSession session = request.getSession();
             if (session != null) {
@@ -40,8 +41,9 @@ public class AddServiceToCartController extends HttpServlet {
                 if (cart == null) {
                     cart = new CartServiceDTO();
                 }
-                serviceDetail = serviceDao.getServiceDetailByID(id);
-                if (cart.add(serviceDetail)) {
+//                serviceDetail = serviceDao.getServiceDetailByID(id);
+                serviceCart = serviceDao.getServiceInfoByID(id);
+                if (cart.add(serviceCart)) {
                     session.setAttribute("CART_SERVICE", cart);
                     url = SUCCESS;
                 }

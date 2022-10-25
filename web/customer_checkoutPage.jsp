@@ -1,3 +1,4 @@
+<%@page import="com.ebutler.swp.dto.ServiceCartDTO"%>
 <%@page import="com.ebutler.swp.dto.CityDTO"%>
 <%@page import="com.ebutler.swp.dto.ProvinceDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -411,20 +412,20 @@
                                         <%
                                             double sub_total_service = 0;
                                             if (cartService != null) {
-                                                for (ServiceDetailDTO service : cartService.getCart().values()) {
+                                                for (ServiceCartDTO service : cartService.getCart().values()) {
                                                     sub_total_service += service.getPrice();
                                         %>
                                         <div class="pad-y-12">
                                             <div class="order-card m-y-12">
                                                 <div class="flex">
                                                     <div class="flex-center order-img">
-                                                        <img src="https://www.clipartmax.com/png/middle/165-1653455_absolute-shine-cleaning-services-cleaning-services.png"
+                                                        <img src="<%= service.getAvatar() %>"
                                                              alt="">
                                                     </div>
                                                     <div style="flex: 1; margin-left: 1rem;" class="flex-col">
                                                         <div class="flex-between">
                                                             <div class="flex-col flex-horizon-center">
-                                                                <span class="txt-md bold"><%= service.getName()%></span>
+                                                                <span class="txt-md bold"><%= service.getServiceName() %></span>
                                                             </div>
                                                             <div class="order-price txt-sm bold">
                                                                 <span>

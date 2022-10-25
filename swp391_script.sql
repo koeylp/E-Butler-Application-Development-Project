@@ -213,6 +213,12 @@ CREATE TABLE tblAdmin (
 )
 GO
 
+SELECT se.id, se.staff_ID, se.[name], st.[name], se.price, st.avatar, se.[description], st.[status]
+FROM [tblServiceDetail] se
+JOIN [tblStaff] st ON se.staff_ID = st.staff_ID 
+WHERE se.id = 3;
+
+
 ------------------------------------------------------- TRIGGER ---------------------------------------------------------------
 --- bảng customer: đăng ký account -> cập nhật bảng user
 CREATE TRIGGER trig_cus_insert ON tblCustomer 
