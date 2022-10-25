@@ -235,7 +235,7 @@
                                                     <div class="full-w">
                                                         <button style="background-color: #0F172A; color: white;"
                                                                 class="btn-lg full-w">
-                                                            <a style="color: white" href="MainController?action=AddServiceToCart&service_ID=<%= service.getService_ID()%>" >
+                                                            <a style="color: white" href="MainController?action=AddServiceToCart&service_ID=<%= staff.getStaff_ID() %>" >
                                                                 <i class="fa-solid fa-bag-shopping"></i>
                                                                 <span style="margin-left: .75rem">Booking</span></a>
 
