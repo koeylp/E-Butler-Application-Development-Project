@@ -4,11 +4,8 @@
  */
 package com.ebutler.swp.controllers;
 
-import com.ebutler.swp.dao.AddressDAO;
-import com.ebutler.swp.dto.CityDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,37 +15,28 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class SelectProvinceController extends HttpServlet {
+public class UpdateAddressController extends HttpServlet {
 
     private final String ERROR = "errorPage.jsp";
+    private final String SUCCESS = "customer_profilePage.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String province_id = request.getParameter("province_id");
-            String city_id = request.getParameter("city_id");
-            
-            String current_page = request.getParameter("current_page");
+            String address_id = request.getParameter("address_id");
             String current_form = request.getParameter("current_form");
             
-            String action_type = request.getParameter("action_type");
-            
-            AddressDAO addressDAO = new AddressDAO();
-            ArrayList<CityDTO> city_list = addressDAO.SelectCity(province_id);
-            
-            request.setAttribute("CITY_LIST", city_list);
-            request.setAttribute("PROVINCE_ID", province_id);
-            request.setAttribute("CITY_ID", city_id);
+            request.setAttribute("ADDRESS_ID", address_id);
+            request.setAttribute("ACTION_TYPE", "edit_address");
             request.setAttribute("CURRENT_FORM", current_form);
-            
-            request.setAttribute("ACTION_TYPE", action_type);
-            
-            url = current_page;
-        }catch(Exception e) {
-            log("ERROR at SelectProvinceController: " + e.toString());
-        }finally {
+            url = SUCCESS;
+        }
+        catch(Exception e) {
+            log("ERROR at UpdateAddressController: " + e.toString());
+        }
+        finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

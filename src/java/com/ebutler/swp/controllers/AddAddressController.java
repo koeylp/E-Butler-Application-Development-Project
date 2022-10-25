@@ -5,50 +5,51 @@
 package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.AddressDAO;
-import com.ebutler.swp.dto.CityDTO;
+import com.ebutler.swp.dto.AddressDTO;
+import com.ebutler.swp.dto.CustomerDTO;
+import com.ebutler.swp.dto.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Admin
  */
-public class SelectProvinceController extends HttpServlet {
+public class AddAddressController extends HttpServlet {
 
     private final String ERROR = "errorPage.jsp";
-    
+    private final String SUCCESS = "ShowListAddressController";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String province_id = request.getParameter("province_id");
-            String city_id = request.getParameter("city_id");
-            
-            String current_page = request.getParameter("current_page");
             String current_form = request.getParameter("current_form");
-            
-            String action_type = request.getParameter("action_type");
-            
+
+            String city_id = request.getParameter("city_id");
+            String street = request.getParameter("street");
+
+            HttpSession session = request.getSession();
+            UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
+
             AddressDAO addressDAO = new AddressDAO();
-            ArrayList<CityDTO> city_list = addressDAO.SelectCity(province_id);
-            
-            request.setAttribute("CITY_LIST", city_list);
-            request.setAttribute("PROVINCE_ID", province_id);
-            request.setAttribute("CITY_ID", city_id);
+            AddressDTO address = new AddressDTO(city_id, street, login_user.getUsername(), 0);
+
+            if (addressDAO.InserAddress(address)) {
+                url = SUCCESS;
+            }
+
             request.setAttribute("CURRENT_FORM", current_form);
-            
-            request.setAttribute("ACTION_TYPE", action_type);
-            
-            url = current_page;
-        }catch(Exception e) {
-            log("ERROR at SelectProvinceController: " + e.toString());
-        }finally {
+
+        } catch (Exception e) {
+            log("ERROR at AddAddressController: " + e.toString());
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

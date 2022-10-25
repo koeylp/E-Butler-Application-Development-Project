@@ -204,6 +204,26 @@
         <servlet-name>SelectProvinceController</servlet-name>
         <servlet-class>com.ebutler.swp.controllers.SelectProvinceController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddAddressController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.AddAddressController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowListAddressController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.ShowListAddressController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteAddressController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.DeleteAddressController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SetAddressDefaultController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.SetAddressDefaultController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateAddressController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.UpdateAddressController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -407,6 +427,26 @@
     <servlet-mapping>
         <servlet-name>SelectProvinceController</servlet-name>
         <url-pattern>/SelectProvinceController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddAddressController</servlet-name>
+        <url-pattern>/AddAddressController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowListAddressController</servlet-name>
+        <url-pattern>/ShowListAddressController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteAddressController</servlet-name>
+        <url-pattern>/DeleteAddressController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetAddressDefaultController</servlet-name>
+        <url-pattern>/SetAddressDefaultController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateAddressController</servlet-name>
+        <url-pattern>/UpdateAddressController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

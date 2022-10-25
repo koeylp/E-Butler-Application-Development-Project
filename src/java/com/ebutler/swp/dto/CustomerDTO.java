@@ -4,6 +4,8 @@
  */
 package com.ebutler.swp.dto;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Admin
@@ -19,6 +21,8 @@ public class CustomerDTO {
     private String dob;
     private String avatar;
     private int status;
+    
+    private ArrayList<AddressDTO> address_list = new ArrayList<AddressDTO>();
 
     public CustomerDTO() {
         this.username = "";
@@ -44,6 +48,14 @@ public class CustomerDTO {
         this.dob = dob;
         this.avatar = avatar;
         this.status = status;
+    }
+
+    public ArrayList<AddressDTO> getAddress_list() {
+        return address_list;
+    }
+
+    public void setAddress_list(ArrayList<AddressDTO> address_list) {
+        this.address_list = address_list;
     }
 
     public String getUsername() {

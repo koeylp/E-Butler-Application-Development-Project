@@ -4,6 +4,7 @@
     Author     : Dang Viet
 --%>
 
+<%@page import="com.ebutler.swp.dto.AddressDTO"%>
 <%@page import="com.ebutler.swp.dto.CityDTO"%>
 <%@page import="com.ebutler.swp.dto.ProvinceDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -65,6 +66,8 @@
             String current_form = (String) request.getAttribute("CURRENT_FORM");
             String action_type = (String) request.getAttribute("ACTION_TYPE");
 
+            String address_id = (String) request.getAttribute("ADDRESS_ID");
+
             if (emptyInfo == null) {
                 emptyInfo = "";
             }
@@ -83,9 +86,10 @@
 
             UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
             customer = (customer == null) ? new CustomerDTO() : customer;
-            
+
             current_form = (current_form == null) ? "" : current_form;
             action_type = (action_type == null) ? "" : action_type;
+            address_id = (address_id == null) ? "" : address_id;
         %>
         <div class="container-xxl bg-white p-0">
             <!-- Spinner Start -->
@@ -168,17 +172,17 @@
                     </div>
                     <div style="border-top: 2px solid #E2E8F0; border-bottom: 2px solid #E2E8F0"
                          class="flex-vertical-center m-y-32">
-                        <a class="relative txt-lg pad-y-32 navi--link account <%if(current_form.equals("account")) {%>bold<%}%>">Account info</a>
-                        <a class="relative txt-lg pad-y-32 navi--link order-his <%if(current_form.equals("order_history")) {%>bold<%}%>">My order</a>
-                        <a class="relative txt-lg pad-y-32 navi--link address <%if(current_form.equals("address")) {%>bold<%}%>">My address</a>
-                        <a class="relative txt-lg pad-y-32 navi--link password <%if(current_form.equals("change_password")) {%>bold<%}%>">Change password</a>
+                        <a class="relative txt-lg pad-y-32 navi--link account <%if (current_form.equals("account")) {%>bold<%}%>">Account info</a>
+                        <a class="relative txt-lg pad-y-32 navi--link order-his <%if (current_form.equals("order_history")) {%>bold<%}%>">My order</a>
+                        <a href="MainController?action=ShowListAddress&current_form=address" class="relative txt-lg pad-y-32 navi--link address <%if (current_form.equals("address")) {%>bold<%}%>">My address</a>
+                        <a class="relative txt-lg pad-y-32 navi--link password <%if (current_form.equals("change_password")) {%>bold<%}%>">Change password</a>
                     </div>
                 </div>
             </div>
             <!-- Header End -->
 
             <!-- Account information start-->
-            <div class="grid wide form account-form <%if(!current_form.equals("account"))  {%>hide<%}%>">
+            <div class="grid wide form account-form <%if (!current_form.equals("account")) {%>hide<%}%>">
                 <div class="flex-vertical-center m-y-32">
                     <h1 class="txt-xl">Account information</h1>
                 </div>
@@ -233,11 +237,21 @@
                                 </div>
                                 <div class="flex-horizon-center flex-col relative m-y-12">
                                     <span class="txt-lg bold m-y-12">Address</span>
+
                                     <div class="flex-horizon-center">
                                         <span class="txt-lg input-icon flex-center">
                                             <i class="fa-solid fa-location-dot"></i>
                                         </span>
-                                        <input class="input txt-sm" type="text">
+                                        <%
+                                            for (AddressDTO address : customer.getAddress_list()) {
+                                                if (address.getStatus() != 1)
+                                                    continue;
+                                        %>
+                                        <input class="input txt-sm" type="text" readonly="" value="<%=address.getStreet()%>, Thành phố <%=address.getDistrict_name()%>, Tỉnh <%=address.getProvince_name()%>">
+                                        <%
+                                            }
+                                        %>
+
                                     </div>
                                 </div>
                                 <div class="flex-horizon-center flex-col relative m-y-12">
@@ -270,7 +284,7 @@
             <!-- Account information end -->
 
             <!-- Order history start -->
-            <div class="grid form order-his-form <%if(!current_form.equals("order_history"))  {%>hide<%}%>">
+            <div class="grid form order-his-form <%if (!current_form.equals("order_history")) {%>hide<%}%>">
                 <div class="grid wide">
                     <div class="flex-vertical-center m-y-32">
                         <h1 class="txt-xl">Order History</h1>
@@ -486,7 +500,7 @@
             <!-- Order history end -->
 
             <!-- Change password start -->
-            <div class="grid wide form password-form <%if(!current_form.equals("change_password"))  {%>hide<%}%>">
+            <div class="grid wide form password-form <%if (!current_form.equals("change_password")) {%>hide<%}%>">
                 <div class="flex-vertical-center m-y-32">
                     <h1 class="txt-xl">Update Your Password</h1>
                 </div>
@@ -537,7 +551,7 @@
             <!-- Change password end -->
 
             <!-- Update address start -->
-            <div class="grid form address-form <%if(!current_form.equals("address"))  {%>hide<%}%>">
+            <div class="grid form address-form <%if (!current_form.equals("address")) {%>hide<%}%>">
                 <div class="grid wide">
                     <div class="flex-vertical-center m-y-32">
                         <h1 class="txt-xl">Update Your Address</h1>
@@ -557,7 +571,7 @@
                         </div>
                     </div>
 
-                    <div class="overlay fixed top left right bot address_detail__add <%if(!action_type.equals("add_address")) {%>hide<%}%>">
+                    <div class="overlay fixed top left right bot address_detail__add <%if (!action_type.equals("add_address")) {%>hide<%}%>">
                         <div class="flex-center full-h full-w">
                             <div class="relative" style="width: 50vw; height: fit-content; background-color: white;">
                                 <div style="width: 100%;">
@@ -591,22 +605,26 @@
 
                                                         </select>
                                                     </div>
+
+
                                                     <div class="flex-horizon-center flex-col m-y-12 col l-6">
                                                         <span class="txt-md m-y-12">City</span>
 
                                                         <%
                                                             ArrayList<CityDTO> city_list = (ArrayList<CityDTO>) request.getAttribute("CITY_LIST");
+                                                            String city_id = (String) request.getAttribute("CITY_ID");
 
                                                             city_list = (city_list == null) ? new ArrayList<CityDTO>() : city_list;
+                                                            city_id = (city_id == null) ? "" : city_id;
                                                         %>
                                                         <select
                                                             style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
-                                                            class="input txt-sm" type="password" name="city_id">
+                                                            class="input txt-sm" type="password" name="city_id" onchange="this.form.submit()">
                                                             <option>Select City</option>
                                                             <%
                                                                 for (CityDTO city : city_list) {
                                                             %>
-                                                            <option value="<%=city.getId()%>"><%=city.getName()%></option>
+                                                            <option value="<%=city.getId()%>" <%if (city_id.equals(city.getId())) {%>selected<%}%>><%=city.getName()%></option>
                                                             <%
                                                                 }
                                                             %>
@@ -615,20 +633,28 @@
                                                     </div>
                                                 </div>
                                             </form>
-                                            <div class="flex-horizon-center flex-col m-y-1">
-                                                <span class="txt-md m-y-12">Address</span>
-                                                <input
-                                                    style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
-                                                    class="input txt-sm" type="password">
-                                            </div>
-                                            <div class="flex-vertical-center flex-end">
-                                                <button style="margin-right: 1rem; background-color: transparent; color: black; border-radius: 0;"
-                                                        class="btn-lg txt-md bold m-y-32 border-no box-shadow-no close_address">Cancel</button>
-                                                <button type="button" style="background-color: var(--primary-color); border-radius: 0;" class="btn-lg border-no txt-md">
-                                                    Save
-                                                </button>
-                                            </div>
+
+
+                                            <form action="MainController">
+                                                <input type="hidden" name="action" value="AddAddress">
+                                                <input type="hidden" name="city_id" value="<%=request.getParameter("city_id")%>">
+                                                <input type="hidden" name="current_form" value="address">
+                                                <div class="flex-horizon-center flex-col m-y-1">
+                                                    <span class="txt-md m-y-12">Address</span>
+                                                    <input
+                                                        style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
+                                                        class="input txt-sm" type="text" name="street">
+                                                </div>
+                                                <div class="flex-vertical-center flex-end">
+                                                    <button type="button" style="margin-right: 1rem; background-color: transparent; color: black; border-radius: 0;"
+                                                            class="btn-lg txt-md bold m-y-32 border-no box-shadow-no close_address">Cancel</button>
+                                                    <button type="submit" style="background-color: var(--primary-color); border-radius: 0;" class="btn-lg border-no txt-md">
+                                                        Save
+                                                    </button>
+                                                </div>
+                                            </form>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -636,40 +662,53 @@
                     </div>
 
                     <div class="pad-2 flex-col">
-                        <!-- Address detail -->
+                        <%
+                            ArrayList<AddressDTO> list_address = customer.getAddress_list();
+
+                            for (AddressDTO address : list_address) {
+                        %>
+
                         <div class="flex-between pad-y-1 border-bot">
                             <div class="l-5">
                                 <div class="flex-col">
                                     <div class="flex">
-                                        <span class="txt-md bold">Name</span>
+                                        <span class="txt-md bold"><%=customer.getName()%></span>
                                         <span class="m-x-12">|</span>
-                                        <span class="txt-md">Phone</span>
+                                        <span class="txt-md"><%=customer.getPhone()%></span>
                                     </div>
                                     <div>
-                                        <span class="txt-md"> Address Detail</span>
+                                        <span class="txt-md"><%=address.getStreet()%>, Thành phố <%=address.getDistrict_name()%>, Tỉnh <%=address.getProvince_name()%></span>
                                     </div>
+                                    <%
+                                        if (address.getStatus() == 1) {
+                                    %>
                                     <div class="m-y-0">
                                         <span style="color: var(--primary-color); border-radius: 0; padding: 0 .25rem;" class="label bold txt-sm">Default</span>
                                     </div>
+                                    <%
+                                        }
+                                    %>
+
                                 </div>
                             </div>
                             <div class="flex-col flex-around">
                                 <div class="bold flex-around txt-lg">
-                                    <a class="address_edit" style="cursor: pointer; color: #0FA5EB"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <a style="cursor: pointer; color: #eb3b0f"><i class="fa-solid fa-trash"></i></a>
+                                    <a href="MainController?action=DeleteAddress&current_form=address&address_id=<%=address.getId()%>" style="cursor: pointer; color: #eb3b0f"><i class="fa-solid fa-trash"></i></a>
                                 </div>
+
                                 <div style="border-radius: 0; padding: 0 .5rem;" class="label bold txt-sm m-y-0 flex-center">
-                                    <a style="cursor: pointer;">Set default</a>
+                                    <a href="MainController?action=SetAddressDefault&current_form=address&address_id=<%=address.getId()%>" style="cursor: pointer;">Set default</a>
                                 </div>
+
                             </div>
 
-                            <div class="overlay fixed top left right bot address_detail__edit <%if(!action_type.equals("edit_address")) {%>hide<%}%>">
+                            <div class="overlay fixed top left right bot address_detail__edit <%if (!action_type.equals("edit_address") && !((address.getId() + "").equals(address_id))) {%>hide<%}%>">
                                 <div class="flex-center full-h full-w">
                                     <div class="relative" style="width: 50vw; height: fit-content; background-color: white;">
                                         <div style="width: 100%;">
                                             <div class="pad-2">
-                                                <div style="padding: 0;" class="flex-col">
-                                                    <form action="MainController?action=SelectProvince" method="POST">
+                                                <form action="MainController?action=SelectProvince" method="POST">
+                                                    <div style="padding: 0;" class="flex-col">
                                                         <input type="hidden" name="current_page" value="customer_profilePage.jsp">
                                                         <input type="hidden" name="current_form" value="address">
                                                         <input type="hidden" name="action_type" value="edit_address">
@@ -694,6 +733,10 @@
 
                                                                 </select>
                                                             </div>
+
+
+
+
                                                             <div class="flex-horizon-center flex-col m-y-12 col l-6">
                                                                 <span class="txt-md m-y-12">City</span>
 
@@ -715,126 +758,135 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                    </form>
+                                                </form>
+
+                                                <form action="MainController">
+                                                    <input type="hidden" name="action" value="AddAddress">
+                                                    <input type="hidden" name="city_id" value="<%=request.getParameter("city_id")%>">
+                                                    <input type="hidden" name="current_form" value="address">
                                                     <div class="flex-horizon-center flex-col m-y-1">
                                                         <span class="txt-md m-y-12">Address</span>
                                                         <input
                                                             style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
-                                                            class="input txt-sm" type="password">
+                                                            class="input txt-sm" type="text" name="street">
                                                     </div>
                                                     <div class="flex-vertical-center flex-end">
-                                                        <button style="margin-right: 1rem; background-color: transparent; color: black; border-radius: 0;"
+                                                        <button type="button" style="margin-right: 1rem; background-color: transparent; color: black; border-radius: 0;"
                                                                 class="btn-lg txt-md bold m-y-32 border-no box-shadow-no close_edit_address">Cancel</button>
-                                                        <button type="button" style="background-color: var(--primary-color); border-radius: 0;" class="btn-lg border-no txt-md">
+                                                        <button type="submit" style="background-color: var(--primary-color); border-radius: 0;" class="btn-lg border-no txt-md">
                                                             Save
                                                         </button>
                                                     </div>
-                                                </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div> 
-                        </div>
+                            </div>
+                        </div> 
                     </div>
+                    <%
+                        }
+                    %>
                 </div>
             </div>
-            <!-- Update adddress end -->
-
-
-            <!-- Footer Start -->
-            <div class="container-fluid bg-dark text-white-50 footer pt-5  wow fadeIn" data-wow-delay="0.1s">
-                <div class="container py-5">
-                    <div class="row g-5">
-                        <div class="col-lg-3 col-md-6">
-                            <h5 class="text-white mb-4">Get In Touch</h5>
-                            <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Lô E2a-7, Đường D1, Đ. D1, Long Thạnh
-                                Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh</p>
-                            <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                            <p class="mb-2"><i class="fa fa-envelope me-3"></i>SE1111@e-butler.com</p>
-                            <div class="d-flex pt-2">
-                                <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
-                                <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <h5 class="text-white mb-4">Quick Links</h5>
-                            <a class="btn btn-link text-white-50" href="">About Us</a>
-                            <a class="btn btn-link text-white-50" href="">Contact Us</a>
-                            <a class="btn btn-link text-white-50" href="">Our Services</a>
-                            <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
-                            <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <h5 class="text-white mb-4">Photo Gallery</h5>
-                            <div class="row g-2 pt-2">
-                                <div class="col-4">
-                                    <img class="img-fluid rounded bg-light p-1"
-                                         src="https://cf.shopee.vn/file/d4bbea4570b93bfd5fc652ca82a262a8" alt="">
-                                </div>
-                                <div class="col-4">
-                                    <img class="img-fluid rounded bg-light p-1"
-                                         src="https://cf.shopee.vn/file/a0a9062ebe19b45c1ae0506f16af5c16" alt="">
-                                </div>
-                                <div class="col-4">
-                                    <img class="img-fluid rounded bg-light p-1"
-                                         src="https://cf.shopee.vn/file/38fd98e55806c3b2e4535c4e4a6c4c08" alt="">
-                                </div>
-                                <div class="col-4">
-                                    <img class="img-fluid rounded bg-light p-1"
-                                         src="https://cf.shopee.vn/file/2c46b83d84111ddc32cfd3b5995d9281" alt="">
-                                </div>
-                                <div class="col-4">
-                                    <img class="img-fluid rounded bg-light p-1"
-                                         src="https://cf.shopee.vn/file/77bf96a871418fbc21cc63dd39fb5f15" alt="">
-                                </div>
-                                <div class="col-4">
-                                    <img class="img-fluid rounded bg-light p-1"
-                                         src="https://cf.shopee.vn/file/3900aefbf52b1c180ba66e5ec91190e5" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <h5 class="text-white mb-4">Newsletter</h5>
-                            <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-                            <div class="position-relative mx-auto" style="max-width: 400px;">
-                                <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text"
-                                       placeholder="Your email">
-                                <button type="button"
-                                        class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Footer End -->
         </div>
+        <!-- Update adddress end -->
 
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-white-50 footer pt-5  wow fadeIn" data-wow-delay="0.1s">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">Get In Touch</h5>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Lô E2a-7, Đường D1, Đ. D1, Long Thạnh
+                            Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>SE1111@e-butler.com</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">Quick Links</h5>
+                        <a class="btn btn-link text-white-50" href="">About Us</a>
+                        <a class="btn btn-link text-white-50" href="">Contact Us</a>
+                        <a class="btn btn-link text-white-50" href="">Our Services</a>
+                        <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
+                        <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">Photo Gallery</h5>
+                        <div class="row g-2 pt-2">
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1"
+                                     src="https://cf.shopee.vn/file/d4bbea4570b93bfd5fc652ca82a262a8" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1"
+                                     src="https://cf.shopee.vn/file/a0a9062ebe19b45c1ae0506f16af5c16" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1"
+                                     src="https://cf.shopee.vn/file/38fd98e55806c3b2e4535c4e4a6c4c08" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1"
+                                     src="https://cf.shopee.vn/file/2c46b83d84111ddc32cfd3b5995d9281" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1"
+                                     src="https://cf.shopee.vn/file/77bf96a871418fbc21cc63dd39fb5f15" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1"
+                                     src="https://cf.shopee.vn/file/3900aefbf52b1c180ba66e5ec91190e5" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">Newsletter</h5>
+                        <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                        <div class="position-relative mx-auto" style="max-width: 400px;">
+                            <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text"
+                                   placeholder="Your email">
+                            <button type="button"
+                                    class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
     </div>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div>
 
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="lib/wow/wow.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
-    <!-- javascript -->
-    <script src="js/customer_profilePage.js"></script>
-    <script
-        src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-        crossorigin="anonymous"
-    ></script>
-    <script>
+<!-- Template Javascript -->
+<script src="js/main.js"></script>
+
+<!-- javascript -->
+<script src="js/customer_profilePage.js"></script>
+<script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"
+></script>
+<script>
                                                                         var selDiv = "";
                                                                         var storedFiles = [];
                                                                         $(document).ready(function () {
@@ -864,7 +916,7 @@
                                                                                 reader.readAsDataURL(f);
                                                                             });
                                                                         }
-    </script>
+</script>
 </body>
 
 </html>
