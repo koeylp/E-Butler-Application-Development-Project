@@ -182,12 +182,12 @@
                                                  alt="">
                                         </div>
                                         <div class="flex-center">
-                                            <span class="txt-sm bold"><%=service.getStaff_list().size()%> staffs</span>
+                                            <span class="txt-sm bold"><%= service.getStaff_list().size()%> staffs</span>
                                         </div>
                                     </div>
                                     <div class="flex-horizon-center flex-col">
                                         <span style="color: black" class="txt-xs">Manufacturar</span>
-                                        <span class="txt-lg bold"><%=service.getName()%></span>
+                                        <span class="txt-lg bold"><%= service.getName()%></span>
                                     </div>
                                     <div class="flex-horizon-center flex-col category_detail">
                                         <a  class="txt-sm">Select staff<i class="fa-solid fa-arrow-right m-x-0"></i></a>

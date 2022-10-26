@@ -21,29 +21,29 @@ import java.util.List;
  * @author Dang Viet
  */
 public class ServiceDAO {
-
+    
     private static final String GET_SERVICE_CATEGORY_LIST = "SELECT category_ID, name, image FROM tblServiceCategory";
     private static final String GET_SERVICE_CATEGORY_SERVICE_ID = "select distinct cate.category_ID, cate.name, cate.image, service.service_ID from tblServiceCategory cate JOIN tblService service on cate.category_ID = service.category_ID where cate.category_ID = ?";
     private static final String GET_SERVICE_LIST = "select service_ID, category_ID, name, image from tblService where category_ID = ?";
     private static final String SEARCH_SERVICE_CATEGORY = "select service_ID, category_ID, name, image from tblService where category_ID = ? AND name LIKE ?";
     private static final String SORT_SERVICE_CATEGORY_WORD_UP = "select service_ID, category_ID, name, image from tblService where category_ID = ? ORDER BY name ASC";
     private static final String SORT_SERVICE_CATEGORY_WORD_DOWN = "select service_ID, category_ID, name, image from tblService where category_ID = ? ORDER BY name DESC";
-
+    
     private static final String SORT_SERVICE_DETAIL_WORD_UP = "select detail.id, detail.provider_ID, detail.service_ID, detail.staff_ID, detail.name, detail.price, detail.description, detail.status from tblServiceCategory cate JOIN tblService service ON cate.category_ID = service.category_ID JOIN tblServiceDetail detail ON detail.service_ID = service.service_ID where cate.category_ID = ? AND service.service_ID = ? ORDER BY detail.name ASC";
     private static final String SORT_SERVICE_DETAIL_WORD_DOWN = "select detail.id, detail.provider_ID, detail.service_ID, detail.staff_ID, detail.name, detail.price, detail.description, detail.status from tblServiceCategory cate JOIN tblService service ON cate.category_ID = service.category_ID JOIN tblServiceDetail detail ON detail.service_ID = service.service_ID where cate.category_ID = ? AND service.service_ID = ? ORDER BY detail.name DESC";
-
+    
     private static final String SORT_SERVICE_DETAIL_PRICE_UP = "select detail.id, detail.provider_ID, detail.service_ID, detail.staff_ID, detail.name, detail.price, detail.description, detail.status from tblServiceCategory cate JOIN tblService service ON cate.category_ID = service.category_ID JOIN tblServiceDetail detail ON detail.service_ID = service.service_ID where cate.category_ID = ? AND service.service_ID = ? ORDER BY detail.price ASC";
     private static final String SORT_SERVICE_DETAIL_PRICE_DOWN = "select detail.id, detail.provider_ID, detail.service_ID, detail.staff_ID, detail.name, detail.price, detail.description, detail.status from tblServiceCategory cate JOIN tblService service ON cate.category_ID = service.category_ID JOIN tblServiceDetail detail ON detail.service_ID = service.service_ID where cate.category_ID = ? AND service.service_ID = ? ORDER BY detail.price DESC";
     private static final String SEARCH_SERVICE_DETAIL_BY_NAME = "select detail.id, detail.provider_ID, detail.service_ID, detail.staff_ID, detail.name, detail.price, detail.description, detail.status from tblServiceCategory cate JOIN tblService service ON cate.category_ID = service.category_ID JOIN tblServiceDetail detail ON detail.service_ID = service.service_ID where cate.category_ID = ? AND service.service_ID = ? AND detail.name LIKE ?";
-
+    
     private static final String GET_SERVICE_DETAIL_LIST = "select detail.id, detail.provider_ID, detail.service_ID, detail.staff_ID, detail.name, detail.price, detail.description, detail.status from tblServiceCategory cate JOIN tblService service ON cate.category_ID = service.category_ID JOIN tblServiceDetail detail ON detail.service_ID = service.service_ID where cate.category_ID = ? AND service.service_ID = ?";
     private static final String GET_SERVICE_BY_ID = "SELECT provider_ID, service_ID, staff_ID, name, price, description, status FROM tblServiceDetail WHERE id = ?";
-
+    
     private static final String GET_SERVICE_INFO = "SELECT se.id, se.staff_ID, se.[name], st.[name] as staff_name, se.price, st.avatar, se.[description], st.[status]\n"
             + "FROM [tblServiceDetail] se\n"
             + "JOIN [tblStaff] st ON se.staff_ID = st.staff_ID\n"
             + "WHERE se.id = ?";
-
+    
     public static List<ServiceCategoryDTO> getListServiceCategory() throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -52,7 +52,7 @@ public class ServiceDAO {
         try {
             conn = DBUtils.getConnection();
             ptm = conn.prepareStatement(GET_SERVICE_CATEGORY_LIST);
-
+            
             rs = ptm.executeQuery();
             while (rs.next()) {
                 list.add(new ServiceCategoryDTO(rs.getString("category_ID"), rs.getString("name"), rs.getString("image")));
@@ -70,10 +70,10 @@ public class ServiceDAO {
                 conn.close();
             }
         }
-
+        
         return list;
     }
-
+    
     public static List<ServiceDetailDTO> getListServiceDetailByType(String categoryID, String serviceID) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -101,9 +101,10 @@ public class ServiceDAO {
                 conn.close();
             }
         }
-
+        
         return list;
     }
+
     public static List<ServiceCategoryDTO> getListServiceByServiceID(String categoryID) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -131,10 +132,10 @@ public class ServiceDAO {
                 conn.close();
             }
         }
-
+        
         return list;
     }
-
+    
     public static List<ServiceDetailDTO> sortListServiceDetailByTypeWordUP(String categoryID, String serviceID) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -162,10 +163,10 @@ public class ServiceDAO {
                 conn.close();
             }
         }
-
+        
         return list;
     }
-
+    
     public static List<ServiceDetailDTO> sortListServiceDetailByTypeWordDOWN(String categoryID, String serviceID) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -193,10 +194,10 @@ public class ServiceDAO {
                 conn.close();
             }
         }
-
+        
         return list;
     }
-
+    
     public static List<ServiceDetailDTO> searchListServiceDetailByType(String categoryID, String serviceID, String name) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -225,10 +226,10 @@ public class ServiceDAO {
                 conn.close();
             }
         }
-
+        
         return list;
     }
-
+    
     public static List<ServiceDetailDTO> sortListServiceDetailByTypePriceDOWN(String categoryID, String serviceID) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -239,7 +240,7 @@ public class ServiceDAO {
             ptm = conn.prepareStatement(SORT_SERVICE_DETAIL_WORD_DOWN);
             ptm.setString(1, categoryID);
             ptm.setString(2, serviceID);
-
+            
             rs = ptm.executeQuery();
             while (rs.next()) {
                 list.add(new ServiceDetailDTO(rs.getInt("id"), rs.getString("provider_ID"), rs.getString("service_ID"), rs.getInt("staff_ID"), rs.getString("name"), rs.getDouble("price"), rs.getString("description"), rs.getInt("status")));
@@ -257,10 +258,10 @@ public class ServiceDAO {
                 conn.close();
             }
         }
-
+        
         return list;
     }
-
+    
     public static List<ServiceDetailDTO> sortListServiceDetailByTypePriceUP(String categoryID, String serviceID) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -271,7 +272,7 @@ public class ServiceDAO {
             ptm = conn.prepareStatement(SORT_SERVICE_DETAIL_WORD_UP);
             ptm.setString(1, categoryID);
             ptm.setString(2, serviceID);
-
+            
             rs = ptm.executeQuery();
             while (rs.next()) {
                 list.add(new ServiceDetailDTO(rs.getInt("id"), rs.getString("provider_ID"), rs.getString("service_ID"), rs.getInt("staff_ID"), rs.getString("name"), rs.getDouble("price"), rs.getString("description"), rs.getInt("status")));
@@ -289,10 +290,10 @@ public class ServiceDAO {
                 conn.close();
             }
         }
-
+        
         return list;
     }
-
+    
     public static List<ServiceDTO> getListService(String categoryID) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -303,9 +304,9 @@ public class ServiceDAO {
             ptm = conn.prepareStatement(GET_SERVICE_LIST);
             ptm.setString(1, categoryID);
             rs = ptm.executeQuery();
-
+            
             StaffDAO staffDAO = new StaffDAO();
-
+            
             while (rs.next()) {
 //                lấy service_id
                 String service_id = rs.getString("service_ID");
@@ -324,10 +325,10 @@ public class ServiceDAO {
                 conn.close();
             }
         }
-
+        
         return list;
     }
-
+    
     public static List<ServiceDTO> sortServiceCategoryWordUP(String categoryID) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -338,13 +339,13 @@ public class ServiceDAO {
             ptm = conn.prepareStatement(SORT_SERVICE_CATEGORY_WORD_UP);
             ptm.setString(1, categoryID);
             rs = ptm.executeQuery();
-
+            
             StaffDAO staffDAO = new StaffDAO();
-
+            
             while (rs.next()) {
-
+                
                 String service_id = rs.getString("service_ID");
-
+                
                 list.add(new ServiceDTO(service_id, rs.getString("category_ID"), rs.getString("name"), rs.getString("image"), staffDAO.getListStaffByServiceDetail(service_id)));
             }
         } catch (Exception e) {
@@ -360,10 +361,10 @@ public class ServiceDAO {
                 conn.close();
             }
         }
-
+        
         return list;
     }
-
+    
     public static List<ServiceDTO> sortServiceCategoryWordDOWN(String categoryID) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -374,13 +375,13 @@ public class ServiceDAO {
             ptm = conn.prepareStatement(SORT_SERVICE_CATEGORY_WORD_DOWN);
             ptm.setString(1, categoryID);
             rs = ptm.executeQuery();
-
+            
             StaffDAO staffDAO = new StaffDAO();
-
+            
             while (rs.next()) {
-
+                
                 String service_id = rs.getString("service_ID");
-
+                
                 list.add(new ServiceDTO(service_id, rs.getString("category_ID"), rs.getString("name"), rs.getString("image"), staffDAO.getListStaffByServiceDetail(service_id)));
             }
         } catch (Exception e) {
@@ -396,10 +397,10 @@ public class ServiceDAO {
                 conn.close();
             }
         }
-
+        
         return list;
     }
-
+    
     public static List<ServiceDTO> searhServiceCategory(String categoryID, String search) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -411,13 +412,13 @@ public class ServiceDAO {
             ptm.setString(1, categoryID);
             ptm.setString(2, "%" + search + "%");
             rs = ptm.executeQuery();
-
+            
             StaffDAO staffDAO = new StaffDAO();
-
+            
             while (rs.next()) {
-
+                
                 String service_id = rs.getString("service_ID");
-
+                
                 list.add(new ServiceDTO(service_id, rs.getString("category_ID"), rs.getString("name"), rs.getString("image"), staffDAO.getListStaffByServiceDetail(service_id)));
             }
         } catch (Exception e) {
@@ -433,10 +434,10 @@ public class ServiceDAO {
                 conn.close();
             }
         }
-
+        
         return list;
     }
-
+    
     public static ServiceDetailDTO getServiceDetailByID(String id) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -470,7 +471,7 @@ public class ServiceDAO {
                 conn.close();
             }
         }
-
+        
         return serviceDetail;
     }
 
@@ -508,16 +509,18 @@ public class ServiceDAO {
                 conn.close();
             }
         }
-
+        
         return serviceDetail;
     }
-
+    
     public static void main(String[] args) throws SQLException {
 //        List<ServiceDetailDTO> list = sortListServiceDetailByTypeWordDOWN("HC", "1");
 //
 //        for (ServiceDetailDTO x : list) {
 //            System.out.println(x);
 //        }
-        System.out.println(getServiceInfoByID("3").getStaffName());
+//        System.out.println(getServiceInfoByID("3").getStaffName());
+        System.out.println(StaffDAO.getListStaffByServiceDetail("2"));
+        
     }
 }

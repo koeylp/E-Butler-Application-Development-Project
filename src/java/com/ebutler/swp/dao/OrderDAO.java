@@ -140,14 +140,14 @@ public class OrderDAO {
 
     public static void main(String[] args) {
         try {
-//           insertOrder(java.sql.Date.valueOf(java.time.LocalDate.now()), "hello", 0, 2);
+            insertOrder(java.sql.Date.valueOf(java.time.LocalDate.now()), "khoi le", 0, 2, "COD");
 //            insertOrderDetail("12", 2, 1, 66, 0);
 //            List<OrderDTO> list = getAllOrder();
 //            for (OrderDTO order : list) {
 //                System.out.println(order);
 //            }
-            
-            insertOrderServiceDetail(1, 1, 1, 2000, 0);
+
+//            insertOrderServiceDetail(1, 1, 1, 2000, 0);
         } catch (Exception e) {
         }
 
