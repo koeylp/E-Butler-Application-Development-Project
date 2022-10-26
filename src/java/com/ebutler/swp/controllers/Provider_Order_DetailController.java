@@ -6,11 +6,13 @@ package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.ProviderDAO;
 import com.ebutler.swp.dto.OrderDetailDTO;
+import com.ebutler.swp.dto.OrderDetailInfoDTO;
 import com.ebutler.swp.dto.ProductDetailDTO;
 import com.ebutler.swp.dto.ProviderDTO;
 import com.ebutler.swp.dto.ProviderServiceDTO1;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,22 +34,33 @@ public class Provider_Order_DetailController extends HttpServlet {
         String url = ERROR ; 
         try {
             List<OrderDetailDTO> listOrderDetail = new ArrayList() ; 
+            List<OrderDetailInfoDTO> listDetailInfo = new ArrayList() ; 
             List<ProductDetailDTO> listProductDetail = new ArrayList() ; 
             List<ProviderServiceDTO1> listServiceDetail = new ArrayList() ; 
-            String orderID = request.getParameter("orderID") ; 
+            int orderID = Integer.parseInt(request.getParameter("orderID")) ;
+            String customerID = request.getParameter("customerID") ; 
             HttpSession session = request.getSession() ; 
             ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER") ; 
             ProviderDAO providerDAO = new ProviderDAO() ; 
             listProductDetail = providerDAO.loadListProduct(provider) ; 
-            listServiceDetail = providerDAO.loadListService(provider) ;  
-            if (listProductDetail.isEmpty() && listServiceDetail != null) {
-                
-            }else if (listProductDetail != null && listServiceDetail.isEmpty()) {
-                
+            listServiceDetail = providerDAO.loadListService(provider) ; 
+            listOrderDetail = providerDAO.loadOrderDetail(provider, orderID) ;
+            listDetailInfo = providerDAO.loadOrderInfo(orderID, customerID) ; 
+//            if (listProductDetail.isEmpty() && listServiceDetail != null) {
+//                
+//            }else if (listProductDetail != null && listServiceDetail.isEmpty()) {
+//                
+//            }
+            if (listOrderDetail != null) {
+                url = SUCCESS ; 
+                session.setAttribute("Order_Detail", listOrderDetail);
+                session.setAttribute("Info_Detail", listDetailInfo); 
             }
-            
         } catch (Exception e) {
         }
+        finally {
+            request.getRequestDispatcher(url).forward(request, response);
+        } 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
