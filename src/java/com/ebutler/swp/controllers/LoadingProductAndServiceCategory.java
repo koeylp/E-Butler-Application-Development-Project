@@ -10,7 +10,6 @@ import com.ebutler.swp.dao.ServiceDAO;
 import com.ebutler.swp.dto.ProductCategoryDTO;
 import com.ebutler.swp.dto.ServiceCategoryDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

@@ -19,7 +19,8 @@ import java.util.List;
  */
 public class StaffDAO {
 //    private static final String GET_LIST_STAFF_BY_SERVICE_DETAIL = "select staff.staff_ID, staff.provider_ID, staff.service_ID, staff.name, staff.id_card, staff.avatar, staff.status, detail.price from tblStaff staff JOIN tblServiceDetail detail ON staff.staff_ID = detail.staff_ID WHERE staff.service_ID = ?";
-        private static final String GET_LIST_STAFF_BY_SERVICE_DETAIL = "select staff.staff_ID, staff.provider_ID, staff.service_ID, staff.name, staff.id_card, staff.avatar, staff.status, detail.price from tblStaff staff tblServiceDetail detail ON staff.staff_ID = detail.staff_ID JOIN tblService service ON service.service_ID = detail.service_ID  WHERE staff.service_ID = ?";
+        private static final String GET_LIST_STAFF_BY_SERVICE_DETAIL = "select staff.staff_ID, staff.provider_ID, staff.service_ID, staff.name, staff.id_card, staff.avatar, staff.status, detail.price\n"
+                + "from [tblStaff] staff JOIN [tblServiceDetail] detail ON staff.staff_ID = detail.staff_ID JOIN tblService service ON service.service_ID = detail.service_ID  WHERE staff.service_ID = ?";
 
     
      public static ArrayList<StaffDTO> getListStaffByServiceDetail(String serviceID) throws SQLException {
