@@ -461,7 +461,7 @@
                                     </div>
                                     <div class="flex-around m-y-0">
                                         <div class="flex">
-                                            <input id="radio-1" name="shipping" type="radio" value="ShopeeExpress" class="m-x-0" required>
+                                            <input id="radio-1" name="shipping" type="radio" value="shopee" class="m-x-0" required>
                                             <div class="flex-center">
                                                 <label for="radio-1" class="radio-label m-x-0">
                                                     <div style="width: 2.5rem;" class="img">
@@ -471,7 +471,7 @@
                                             </div>
                                         </div>
                                         <div class="flex">   
-                                            <input id="radio-2" name="shipping" type="radio" value="Grab" class="m-x-0" required>
+                                            <input id="radio-2" name="shipping" type="radio" value="grab" class="m-x-0" required>
                                             <div class="flex-center">
                                                 <label for="radio-2" class="radio-label m-x-0">
                                                     <div style="width: 2.5rem;" class="img">
@@ -481,7 +481,7 @@
                                             </div>
                                         </div>
                                         <div class="flex">   
-                                            <input id="radio-2" name="shipping" type="radio" value="Be" class="m-x-0" required>
+                                            <input id="radio-2" name="shipping" type="radio" value="be" class="m-x-0" required>
                                             <div class="flex-center">
                                                 <label for="radio-3" class="radio-label m-x-0">
                                                     <div style="width: 2.5rem;" class="img">

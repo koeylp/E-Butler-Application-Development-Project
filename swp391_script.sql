@@ -75,36 +75,39 @@ CREATE TABLE tblAddress(
 	street nvarchar(max) ,
 	[district_ID] nvarchar(10) REFERENCES tblDistrict([district_ID]) NOT NULL ,  
 	[user_ID] nvarchar(30) REFERENCES tblUser(username) NOT NULL,
-	status int
+	[status] int
 )
-
+GO
 
 
 -----PRODUCT-----
 CREATE TABLE tblProductCategory (
 	category_ID nvarchar(10) PRIMARY KEY NOT NULL , 
-	name nvarchar(20) UNIQUE NOT NULL,
+	[name] nvarchar(20) UNIQUE NOT NULL,
 	[image] [nvarchar](max) NOT NULL
 )
+GO
 
 CREATE TABLE tblProduct (
 	product_ID nvarchar(10) PRIMARY KEY NOT NULL , 
 	category_ID nvarchar(10) REFERENCES tblProductCategory(category_ID) NOT NULL,
-	name nvarchar(60) UNIQUE NOT NULL,
+	[name] nvarchar(60) UNIQUE NOT NULL,
 	[image] nvarchar(max) NOT NULL,
 )
+GO
+
 CREATE TABLE tblProductDetail(
 	id [int] IDENTITY(1,1) PRIMARY KEY , 
 	provider_ID nvarchar(30) REFERENCES tblProvider(username) NOT NULL, 
 	product_ID nvarchar(10) REFERENCES tblProduct(product_ID) NOT NULL , 
-	name nvarchar(60) NOT NULL,
+	[name] nvarchar(60) NOT NULL,
 	quantity decimal(2) NOT NULL, 
 	price decimal (9)  NOT NULL,
 	[image] nvarchar(max) ,
 	[description] nvarchar(max) , 
 	[status] decimal(1) NOT NULL 
 )
-
+GO
 
 -----ORDER-----
 CREATE TABLE tblOrder(
@@ -124,7 +127,7 @@ CREATE TABLE tblOrder_Product_Detail (
 	order_ID [int] REFERENCES tblOrder(order_ID) NOT NULL ,
 	quantity decimal(2) NOT NULL , 
 	price decimal(9) NOT NULL , 
-	status decimal(1) NOT NULL
+	[status] decimal(1) NOT NULL
 )
 GO
 
@@ -215,7 +218,7 @@ GO
 -----ADMIN-----
 CREATE TABLE tblAdminMaster (
 	[user_Name] nvarchar(30) PRIMARY KEY NOT NULL , 
-	password nvarchar(30) NOT NULL 
+	[password] nvarchar(30) NOT NULL 
 )
 GO
 
@@ -236,9 +239,10 @@ GO
 CREATE TABLE tblShipper (
 	username nvarchar(30) PRIMARY KEY,
 	[password] nvarchar(30),
-	name nvarchar(30),
+	[name] nvarchar(30),
 	[status] int
 )
+GO
 
 CREATE TABLE tblDelivery (
 	id int IDENTITY(1,1) PRIMARY KEY,
@@ -247,20 +251,23 @@ CREATE TABLE tblDelivery (
 	shipper_id nvarchar(30) REFERENCES tblShipper(username),
 	[status] int
 )
+GO
 
 CREATE TABLE tblShipperIncomeByMonth (
 	id int IDENTITY(1,1) PRIMARY KEY,
-	month int,
-	year int,
+	[month] int,
+	[year] int,
 	shipper_id nvarchar(30) REFERENCES tblShipper(username),
 	total decimal(12)
 )
+GO
 
 CREATE TABLE tblShipperIncomeByYear (
-	year int PRIMARY KEY,
+	[year] int PRIMARY KEY,
 	shipper_id nvarchar(30) REFERENCES tblShipper(username),
 	total decimal(12)
 )
+GO
 
 ------------------------------------------------------- TRIGGER ---------------------------------------------------------------
 --- bảng customer: đăng ký account -> cập nhật bảng user
@@ -1817,7 +1824,7 @@ VALUES('hello', '1', 'CUS', '0123456789', 'hello@gmail.com', 1)
 --- bảng delivery ---
 insert into tblShipper(username, password, name, status) values ('grab', '1', 'Grab', 1)
 insert into tblShipper(username, password, name, status) values ('shopee', '1', 'Shopee Express', 1)
-insert into tblShipper(username, password, name, status) values ('beamin', '1', 'Beamin', 1)
+insert into tblShipper(username, password, name, status) values ('be', '1', 'Be', 1)
 
 --- bảng shipper ---
 

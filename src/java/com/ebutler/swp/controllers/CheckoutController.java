@@ -73,8 +73,10 @@ public class CheckoutController extends HttpServlet {
 //                  Insert
                     if (count == cart.getCart().values().size()) {
                         orderDao.insertOrder(java.sql.Date.valueOf(java.time.LocalDate.now()), user.getUsername(), 0, Double.parseDouble(total), payment, shipping);
+                        int order_ID = orderDao.getAllOrder().size();
+                        orderDao.insertDelivery(order_ID, "123 Hollywood Walk of Fame", shipping);
                         for (ProductDetailDTO product : cart.getCart().values()) {
-                            int order_ID = orderDao.getAllOrder().size();
+                            
                             orderDao.insertOrderDetail(product.getId(), order_ID, product.getQuantity(), product.getPrice(), 1);
                             productDao.setQuantiy(product.getId(), product.getQuantity());
                         }
