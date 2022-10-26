@@ -256,6 +256,12 @@ CREATE TABLE tblShipperIncomeByMonth (
 	total decimal(12)
 )
 
+CREATE TABLE tblShipperIncomeByYear (
+	year int PRIMARY KEY,
+	shipper_id nvarchar(30) REFERENCES tblShipper(username),
+	total decimal(12)
+)
+
 ------------------------------------------------------- TRIGGER ---------------------------------------------------------------
 --- bảng customer: đăng ký account -> cập nhật bảng user
 CREATE TRIGGER trig_cus_insert ON tblCustomer 
@@ -1807,6 +1813,13 @@ INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,descri
 
 INSERT INTO tblUser(username, password, role_ID, phone, email, status) 
 VALUES('hello', '1', 'CUS', '0123456789', 'hello@gmail.com', 1)
+
+--- bảng delivery ---
+insert into tblShipper(username, password, name, status) values ('grab', '1', 'Grab', 1)
+insert into tblShipper(username, password, name, status) values ('shopee', '1', 'Shopee Express', 1)
+insert into tblShipper(username, password, name, status) values ('beamin', '1', 'Beamin', 1)
+
+--- bảng shipper ---
 
 SELECT * FROM tblOrder
 SELECT * FROM tblOrder_Product_Detail 
