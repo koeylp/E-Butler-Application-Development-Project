@@ -348,7 +348,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="txt-sm">#1</td>
-                                                    <td class="txt-sm">12A12 Nguy?n Trãi ph??ng 7, Thành ph? M? Tho, T?nh Ti?n Giang</td>
+                                                    <td class="txt-sm">263/6 HÙng V??ng</td>
                                                     <td class="txt-sm">25-10-2022</td>
                                                     <td class="txt-sm">2706$</td>
                                                     <td class="txt-sm bold"><span class="safe">Pendding</span></td>
@@ -388,11 +388,11 @@
         <!--**********************************
             Scripts
         ***********************************-->
-        <script src="plugins/common/common.min.js"></script>
-        <script src="js/custom.min.js"></script>
-        <script src="js/settings.js"></script>
-        <script src="js/gleek.js"></script>
-        <script src="js/styleSwitcher.js"></script>
+        <script src="./plugins/common/common.min.js"></script>
+        <script src="./js/custom.min.js"></script>
+        <script src="./js/settings.js"></script>
+        <script src="./js/gleek.js"></script>
+        <script src="./js/styleSwitcher.js"></script>
 
         <script src="./plugins/tables/js/jquery.dataTables.min.js"></script>
         <script src="./plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
