@@ -22,9 +22,9 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "AuthorizePaymentController", urlPatterns = {"/AuthorizePaymentController"})
 public class AuthorizePaymentController extends HttpServlet {
-    
+
     private static final String ERROR = "errorPage.jsp";
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -32,17 +32,19 @@ public class AuthorizePaymentController extends HttpServlet {
         try {
             String total = request.getParameter("total");
             String payment = request.getParameter("payment");
+            String shipping = request.getParameter("shiping");
             HttpSession session = request.getSession();
             if (session != null) {
                 OrderPayPalDetail order = new OrderPayPalDetail(String.valueOf(total), "0", String.valueOf(total));
                 PaymentServiceDTO paymentServices = new PaymentServiceDTO();
                 String approvalLink = paymentServices.authorizePayment(order);
-                
+
                 response.sendRedirect(approvalLink);
                 session.setAttribute("TOTAL", total);
                 session.setAttribute("PAYMENT", payment);
+                session.setAttribute("SHIPPING", shipping);
             }
-            
+
         } catch (PayPalRESTException e) {
             log("Error at AuthorizePaymentController: " + e.getMessage());
             request.getRequestDispatcher(url).forward(request, response);

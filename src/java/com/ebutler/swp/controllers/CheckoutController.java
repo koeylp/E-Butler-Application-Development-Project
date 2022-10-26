@@ -38,6 +38,7 @@ public class CheckoutController extends HttpServlet {
         try {
             String total = request.getParameter("total");
             String payment = request.getParameter("payment");
+            String shipping = request.getParameter("shipping");
             OrderDTO order = new OrderDTO();
             OrderDAO orderDao = new OrderDAO();
             ProductDAO productDao = new ProductDAO();
@@ -50,6 +51,9 @@ public class CheckoutController extends HttpServlet {
                 }
                 if (payment == null) {
                     payment = (String) session.getAttribute("PAYMENT");
+                }
+                if (shipping == null) {
+                    shipping = (String) session.getAttribute("SHIPPING");
                 }
                 UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
                 CartDTO cart = (CartDTO) session.getAttribute("CART");
@@ -68,7 +72,7 @@ public class CheckoutController extends HttpServlet {
 
 //                  Insert
                     if (count == cart.getCart().values().size()) {
-                        orderDao.insertOrder(java.sql.Date.valueOf(java.time.LocalDate.now()), user.getUsername(), 0, Double.parseDouble(total), payment);
+                        orderDao.insertOrder(java.sql.Date.valueOf(java.time.LocalDate.now()), user.getUsername(), 0, Double.parseDouble(total), payment, shipping);
                         for (ProductDetailDTO product : cart.getCart().values()) {
                             int order_ID = orderDao.getAllOrder().size();
                             orderDao.insertOrderDetail(product.getId(), order_ID, product.getQuantity(), product.getPrice(), 1);
@@ -89,7 +93,7 @@ public class CheckoutController extends HttpServlet {
 //                    Insert
                     if (count == cartService.getCart().values().size()) {
                         if (cart == null) {
-                            orderDao.insertOrder(java.sql.Date.valueOf(java.time.LocalDate.now()), user.getUsername(), 0, Double.parseDouble(total), payment);
+                            orderDao.insertOrder(java.sql.Date.valueOf(java.time.LocalDate.now()), user.getUsername(), 0, Double.parseDouble(total), payment, shipping);
                             statement = confirmation.getSuccess();
                         }
                         for (ServiceCartDTO service : cartService.getCart().values()) {

@@ -103,6 +103,8 @@ CREATE TABLE tblProductDetail(
 	[description] nvarchar(max) , 
 	[status] decimal(1) NOT NULL 
 )
+
+
 -----ORDER-----
 CREATE TABLE tblOrder(
 	order_ID [int] IDENTITY(1,1) PRIMARY KEY , 
@@ -110,7 +112,8 @@ CREATE TABLE tblOrder(
 	customer_ID nvarchar(30) REFERENCES tblCustomer(username) NOT NULL, 
 	[status] decimal(1) NOT NULL  , 
 	total decimal(9) NOT NULL,
-	payment nvarchar(10)
+	payment nvarchar(10),
+	shipping nvarchar(20)
 ) 
 GO
 
@@ -1794,12 +1797,15 @@ SELECT * FROM tblOrder_Product_Detail WHERE order_ID = 1
 SELECT * FROM tblOrder_Service_Detail WHERE order_ID = 1
 SELECT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = 'provider2'
 SELECT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Service_Detail OrdS ON Ord.order_ID = OrdS.order_ID ) JOIN tblServiceDetail PD ON PD.id = OrdS.service_detail_ID WHERE PD.provider_ID = 'homecleaning'
-SELECT OrdP.id , Ord.order_ID, PD.name, OrdP.quantity, PD.price, Ord.total, OrdP.status FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = 'provider2' AND Ord.order_ID = '6'
-SELECT * FROM tblOrder_Product_Detail 
+
+SELECT * FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = 'provider2'
 SELECT * FROM ( tblOrder Ord JOIN tblOrder_Service_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblServiceDetail PD ON PD.id = OrdP.id WHERE PD.provider_ID = 'homecleaning'
-SELECT Ord.order_ID, Ord.order_Date, Ord.status, Cus.name, Cus.phone, Cus.email FROM tblOrder Ord JOIN tblCustomer Cus ON Ord.customer_ID = Cus.username  WHERE order_ID = 6 AND customer_ID = 'trongtoan' 
 
 
+SELECT se.id, se.staff_ID, se.[name], st.[name], se.price, st.avatar, se.[description], st.[status]
+FROM [tblServiceDetail] se
+JOIN [tblStaff] st ON se.staff_ID = st.staff_ID
+WHERE se.id = 1;
 
 
 

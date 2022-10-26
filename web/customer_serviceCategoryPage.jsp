@@ -210,7 +210,7 @@
                                     <div style="height: 200px;" class="flex-between border-bot pad-y-1">
                                         <div class="full-h">
                                             <div class="img full-h full-w">
-                                                <img src="<%=staff.getAvatar()%>"
+                                                <img src="<%= staff.getAvatar()%>"
                                                      alt="">
                                             </div>
                                         </div>
