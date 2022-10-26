@@ -51,7 +51,7 @@
 
             category_id = (category_id == null) ? "" : category_id;
             category_name = (category_name == null) ? "" : category_name;
-            
+
             UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
         %>
         <div class="container-xxl bg-white p-0">
@@ -226,7 +226,7 @@
                                                 </div>
                                                 <div class="order-price txt-sm bold col l-2">
                                                     <span>
-                                                        $15
+                                                        <%= staff.getPrice()%>
                                                     </span>
                                                 </div>
                                             </div>
@@ -235,8 +235,10 @@
                                                     <div class="full-w">
                                                         <button style="background-color: #0F172A; color: white;"
                                                                 class="btn-lg full-w">
-                                                            <i class="fa-solid fa-bag-shopping"></i>
-                                                            <span style="margin-left: .75rem">Booking</span>
+                                                            <a style="color: white" href="MainController?action=AddServiceToCart&service_ID=<%= staff.getStaff_ID() %>" >
+                                                                <i class="fa-solid fa-bag-shopping"></i>
+                                                                <span style="margin-left: .75rem">Booking</span></a>
+
                                                         </button>
                                                     </div>
                                                 </div>

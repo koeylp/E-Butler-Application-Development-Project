@@ -81,21 +81,21 @@ public class CheckoutController extends HttpServlet {
                     /*count para to check whether the status of staff is 1 or 0
                     if 1 --> success | 0 --> fail*/
                     int count = 0;
-                    for (ServiceDetailDTO service : cartService.getCart().values()) {
-                        if (service.getStatus() == 1) {
-                            count++;
-                        }
-                    }
+//                    for (ServiceDetailDTO service : cartService.getCart().values()) {
+//                        if (service.getStatus() == 1) {
+//                            count++;
+//                        }
+//                    }
 //                    Insert
                     if (count == cartService.getCart().values().size()) {
                         if (cart == null) {
                             orderDao.insertOrder(java.sql.Date.valueOf(java.time.LocalDate.now()), user.getUsername(), 0, Double.parseDouble(total), payment);
                             statement = confirmation.getSuccess();
                         }
-                        for (ServiceDetailDTO service : cartService.getCart().values()) {
-                            int order_ID = orderDao.getAllOrder().size();
-                            orderDao.insertOrderServiceDetail(service.getStaff_ID(), Integer.parseInt(service.getService_ID()), order_ID, service.getPrice(), 0);
-                        }
+//                        for (ServiceDetailDTO service : cartService.getCart().values()) {
+//                            int order_ID = orderDao.getAllOrder().size();
+//                            orderDao.insertOrderServiceDetail(service.getStaff_ID(), Integer.parseInt(service.getService_ID()), order_ID, service.getPrice(), 0);
+//                        }
 
                     }
                 }

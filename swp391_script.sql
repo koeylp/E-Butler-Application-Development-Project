@@ -14,8 +14,6 @@ CREATE TABLE tblUserRole (
 )
 GO
 
-
-
 -----USER-----
 CREATE TABLE tblUser(
 	username nvarchar(30) PRIMARY KEY,
@@ -25,6 +23,7 @@ CREATE TABLE tblUser(
 	[email] [nvarchar] (30) UNIQUE NOT NULL,
 	status [decimal](1)
 )
+select * from tblUser
 
 CREATE TABLE tblCustomer (
 	[username] nvarchar(30) PRIMARY KEY,
@@ -38,7 +37,7 @@ CREATE TABLE tblCustomer (
 	avatar nvarchar(max) ,
 	[status] [decimal](1)
 )
-
+select * from tblCustomer
 GO
 
 CREATE TABLE tblProvider (
@@ -67,11 +66,15 @@ CREATE TABLE tblDistrict (
 )
 GO
 
+select street, district_ID, user_ID, status from tblAddress where user_ID = 'doangiabao'
+
+
 CREATE TABLE tblAddress( 
 	[address_ID] [int] IDENTITY(1,1) PRIMARY KEY , 
 	street nvarchar(max) ,
 	[district_ID] nvarchar(10) REFERENCES tblDistrict([district_ID]) NOT NULL ,  
-	[user_ID] nvarchar(30) REFERENCES tblUser(username) NOT NULL
+	[user_ID] nvarchar(30) REFERENCES tblUser(username) NOT NULL,
+	status int
 )
 
 
@@ -136,7 +139,20 @@ CREATE TABLE tblService (
 	[image] nvarchar(max)
 )
 GO
+select * from tblServiceCategory
+select * from tblService
+select * from tblServiceDetail
+select * from tblStaff
+select * from tblService where category_ID = 'HC'
 
+select distinct cate.category_ID, cate.name, cate.image, service.service_ID from tblServiceCategory cate JOIN tblService service 
+on cate.category_ID = service.category_ID where cate.category_ID = 'HC'
+
+select staff.staff_ID, staff.provider_ID, staff.service_ID, staff.name, staff.id_card, staff.avatar, staff.status, detail.price from tblStaff staff 
+JOIN tblServiceDetail detail ON staff.staff_ID = detail.staff_ID JOIN tblService service ON service.service_ID = detail.service_ID  WHERE staff.service_ID = '1'
+
+select staff.staff_ID, staff.provider_ID, staff.service_ID, staff.name, staff.id_card, staff.avatar, staff.status, detail.price from tblStaff staff 
+JOIN tblServiceDetail detail ON staff.staff_ID = detail.staff_ID WHERE staff.service_ID = '1'
 --STAFF
 CREATE TABLE tblStaff (
 	staff_ID [int] IDENTITY(1,1) PRIMARY KEY ,
@@ -212,6 +228,12 @@ CREATE TABLE tblAdmin (
 	role_ID nvarchar(6) REFERENCES tblAdminRole(role_ID) NOT NULL
 )
 GO
+
+SELECT se.id, se.staff_ID, se.[name], st.[name], se.price, st.avatar, se.[description], st.[status]
+FROM [tblServiceDetail] se
+JOIN [tblStaff] st ON se.staff_ID = st.staff_ID 
+WHERE se.id = 3;
+
 
 ------------------------------------------------------- TRIGGER ---------------------------------------------------------------
 --- bảng customer: đăng ký account -> cập nhật bảng user

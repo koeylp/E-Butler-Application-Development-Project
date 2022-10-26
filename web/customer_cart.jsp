@@ -4,6 +4,7 @@
     Author : thekh
 --%>
 
+<%@page import="com.ebutler.swp.dto.ServiceCartDTO"%>
 <%@page import="com.ebutler.swp.dto.UserDTO"%>
 <%@page import="com.ebutler.swp.dto.ServiceDetailDTO"%>
 <%@page import="com.ebutler.swp.dto.CartServiceDTO"%>
@@ -248,7 +249,6 @@
                                     </div>
                                 </form>
                                 <%
-
                                         }
                                         total += sub_product_total;
                                     }
@@ -269,7 +269,7 @@
                                 <%
                                     double sub_total_service = 0;
                                     if (cartService != null) {
-                                        for (ServiceDetailDTO service : cartService.getCart().values()) {
+                                        for (ServiceCartDTO service : cartService.getCart().values()) {
                                             sub_total_service += service.getPrice();
                                 %>
                                 <!-- Order detail -->
@@ -279,15 +279,15 @@
                                         <div class="order-card m-y-12">
                                             <div class="flex">
                                                 <div class="flex-center order-img">
-                                                    <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
+                                                    <img src="<%= service.getAvatar() %>"
                                                          alt="">
                                                 </div>
                                                 <div style="flex: 1; margin-left: 1rem;" class="flex-col">
                                                     <div class="flex-between">
                                                         <div class="flex-col flex-horizon-center">
-                                                            <span class="txt-lg bold">Staff: name</span>
+                                                            <span class="txt-lg bold">Staff: <%= service.getStaffName() %></span>
                                                             <div class="flex-horizon-center flex-center">
-                                                                <span class="txt-sm"><%= service.getName()%></span>
+                                                                <span class="txt-sm"><%= service.getServiceName()%></span>
                                                                 <span class="m-x-12">|</span>
                                                                 <span class="txt-sm">Service</span>
                                                             </div>

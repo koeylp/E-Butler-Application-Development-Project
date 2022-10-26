@@ -5,7 +5,10 @@
 package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.ServiceDAO;
+import com.ebutler.swp.dao.StaffDAO;
+import com.ebutler.swp.dto.ServiceCategoryDTO;
 import com.ebutler.swp.dto.ServiceDTO;
+import com.ebutler.swp.dto.StaffDTO;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -31,10 +34,12 @@ public class ServicePageController extends HttpServlet {
             String category_ID = request.getParameter("category_ID");
             String category_name = request.getParameter("category_name");
             ServiceDAO dao = new ServiceDAO();
-
+            StaffDAO staffDAO = new StaffDAO();
             List<ServiceDTO> list = dao.getListService(category_ID);
+            List<ServiceCategoryDTO> list2 = dao.getListServiceByServiceID(category_ID);
 
             HttpSession session = request.getSession();
+//            List<StaffDTO> staffList = staffDAO.getListStaffByServiceDetail(serviceID);
             session.setAttribute("CATEGORYID", category_ID);
             session.setAttribute("CUSTOMER_SERVICE_LIST", list);
             

@@ -43,6 +43,7 @@ public class LoginWithGoogleController extends HttpServlet {
                 HttpSession session = request.getSession();  
                 String accessToken = GoogleUtils.getToken(code);
                 GoogleUserDTO googleUser = GoogleUtils.getUserInfo(accessToken);
+                System.out.println(googleUser);
                 
               String username = googleUser.getName();
               String name = googleUser.getEmail();
