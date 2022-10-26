@@ -35,6 +35,7 @@ CREATE TABLE tblCustomer (
 	gender [int],
 	dob date,
 	avatar nvarchar(max) ,
+	point int,
 	[status] [decimal](1)
 )
 --select * from tblCustomer
@@ -231,8 +232,29 @@ CREATE TABLE tblAdmin (
 )
 GO
 
+--- DELIVERY ---
+CREATE TABLE tblShipper (
+	username nvarchar(30) PRIMARY KEY,
+	[password] nvarchar(30),
+	name nvarchar(30),
+	[status] int
+)
 
+CREATE TABLE tblDelivery (
+	id int IDENTITY(1,1) PRIMARY KEY,
+	order_id int REFERENCES tblOrder(order_ID),
+	[address] nvarchar(max),
+	shipper_id nvarchar(30) REFERENCES tblShipper(username),
+	[status] int
+)
 
+CREATE TABLE tblShipperIncomeByMonth (
+	id int IDENTITY(1,1) PRIMARY KEY,
+	month int,
+	year int,
+	shipper_id nvarchar(30) REFERENCES tblShipper(username),
+	total decimal(12)
+)
 
 ------------------------------------------------------- TRIGGER ---------------------------------------------------------------
 --- bảng customer: đăng ký account -> cập nhật bảng user
