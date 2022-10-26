@@ -6,11 +6,14 @@ package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.AddressDAO;
 import com.ebutler.swp.dao.CustomerDAO;
+import com.ebutler.swp.dao.OrderHistoryDAO;
 import com.ebutler.swp.dto.AddressDTO;
 import com.ebutler.swp.dto.CustomerDTO;
+import com.ebutler.swp.dto.ProductOrderHistoryDTO;
 import com.ebutler.swp.dto.UserDTO;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -38,14 +41,18 @@ public class GoToUserProfileController extends HttpServlet {
             UserDTO currentUser = (UserDTO) session.getAttribute("LOGIN_USER");
             CustomerDAO dao = new CustomerDAO();
             CustomerDTO customer = dao.getCurrentCustomer(currentUser.getUsername());
-            session.setAttribute("CURRENT_CUSTOMER", customer);
-            
+//            session.setAttribute("CURRENT_CUSTOMER", customer);
+            OrderHistoryDAO historyDAO = new OrderHistoryDAO();
+            List<ProductOrderHistoryDTO> orderedProductListPending = historyDAO.getListProductOrderHistory(currentUser.getUsername(), 0);
             AddressDAO addressDAO = new AddressDAO();
             ArrayList<AddressDTO> list_address = addressDAO.SelectAddress(currentUser.getUsername());
+            session.setAttribute("CURRENT_CUSTOMER", customer);
+            session.setAttribute("ORDERED_PRODUCT_LIST_PENDING", orderedProductListPending);
+            request.setAttribute("CURRENT_FORM", current_form);
             
             customer.setAddress_list(list_address);
             
-            request.setAttribute("CURRENT_FORM", current_form);
+//            request.setAttribute("CURRENT_FORM", current_form);
             url = SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();

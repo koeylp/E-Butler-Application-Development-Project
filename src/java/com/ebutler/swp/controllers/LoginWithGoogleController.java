@@ -43,7 +43,6 @@ public class LoginWithGoogleController extends HttpServlet {
                 HttpSession session = request.getSession();  
                 String accessToken = GoogleUtils.getToken(code);
                 GoogleUserDTO googleUser = GoogleUtils.getUserInfo(accessToken);
-                System.out.println(googleUser);
                 
               String username = googleUser.getName();
               String name = googleUser.getEmail();
@@ -71,25 +70,7 @@ public class LoginWithGoogleController extends HttpServlet {
                   session.setAttribute("LOGIN_USER", user);
                    url = SUCCESS_ALREADY_CUS;
               }
-                
-               
-               
-                
-                
-//                if (!dao.isExistedEmail(googleUser.getEmail())) {
-//                    request.setAttribute("GOOGLE_USER", googleUser);
-//                    url = SUCCESS;
-//                } else {
-//                    loginUser = dao.getUserByEmail(googleUser.getEmail());
-//                    String role = dao.getUserByEmail(googleUser.getEmail()).getRole_id();
-//                    if (role.equals("CUS")) {
-//                        session.setAttribute("LOGIN_USER", loginUser);
-//                        url = SUCCESS_ALREADY_CUS;
-//                    } else if (role.equals("PRO")) {
-//                        session.setAttribute("LOGIN_USER", loginUser);
-//                        url = SUCCESS_ALREADY_PRO;
-//                    }
-//                }
+                       
                 
             }
         } catch (Exception e) {

@@ -10,6 +10,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.ebutler.swp.dto.UserDTO"%>
 <%@page import="com.ebutler.swp.dto.CustomerDTO"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -379,7 +380,38 @@
                             </div>
                             <!-- Order detail -->
                             <div class="pad-2">
+                                <c:forEach items="${sessionScope.ORDERED_PRODUCT_LIST_PENDING}" var="o">
                                 <div class="order-card m-y-12">
+                                    <div class="flex">
+                                        <div class="flex-center order-img">
+                                            <img src="${o.image}"
+                                                 alt="">
+                                        </div>
+                                        <div style="flex: 1; margin-left: 1rem;" class="flex-col">
+                                            <div class="flex-between">
+                                                <div class="flex-col flex-horizon-center">
+                                                    <span class="txt-lg bold">${o.productName}</span>
+                                                    <div class="flex-horizon-center">
+                                                        <span class="txt-md">Product</span>
+                                                        <span class="m-x-12">|</span>
+                                                        <span class="txt-md">Product Category</span>
+                                                    </div>
+                                                </div>
+                                                <div class="order-price bold">
+                                                    <span>
+                                                        $${o.quantity * o.price}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div style="height: 50%;" class="flex-end flex-col">
+                                                <span class="txt-md bold">Quantity:  ${o.quantity}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </c:forEach>
+                                
+<!--                                <div class="order-card m-y-12">
                                     <div class="flex">
                                         <div class="flex-center order-img">
                                             <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
@@ -462,35 +494,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="order-card m-y-12">
-                                    <div class="flex">
-                                        <div class="flex-center order-img">
-                                            <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
-                                                 alt="">
-                                        </div>
-                                        <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                            <div class="flex-between">
-                                                <div class="flex-col flex-horizon-center">
-                                                    <span class="txt-lg bold">Product name</span>
-                                                    <div class="flex-horizon-center">
-                                                        <span class="txt-md">Product</span>
-                                                        <span class="m-x-12">|</span>
-                                                        <span class="txt-md">Product Category</span>
-                                                    </div>
-                                                </div>
-                                                <div class="order-price bold">
-                                                    <span>
-                                                        $369.000
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div style="height: 50%;" class="flex-end flex-col">
-                                                <span class="txt-md bold">Quantity: 1</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </div>-->
 
                             </div>
                         </div>
