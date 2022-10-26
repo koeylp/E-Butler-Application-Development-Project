@@ -5,6 +5,8 @@
 package com.ebutler.swp.dao;
 
 import com.ebutler.swp.dto.OrderDTO;
+import com.ebutler.swp.dto.OrderDetailDTO;
+import com.ebutler.swp.dto.OrderDetailInfoDTO;
 import com.ebutler.swp.dto.ProductDTO;
 import com.ebutler.swp.dto.ProductDetailDTO;
 import com.ebutler.swp.dto.ProviderDTO;
@@ -63,7 +65,8 @@ public class ProviderDAO {
     private final String FILTER_STAFF_PENDING = "SELECT Staff.staff_ID,S.name , Staff.name, Staff.id_card, Staff.avatar, Staff.status FROM tblStaff Staff JOIN tblService S ON Staff.service_ID = S.service_ID WHERE Staff.provider_ID = ? AND status = 3" ;
     private final String LIST_ORDER_PRODUCT = "SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = ? " ;  
     private final String LIST_ORDER_SERVICE = "SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Service_Detail OrdS ON Ord.order_ID = OrdS.order_ID ) JOIN tblServiceDetail PD ON PD.id = OrdS.service_detail_ID WHERE PD.provider_ID = ? " ;  
-    private final String LIST_ORDERDETAIL = "" ; 
+    private final String LIST_ORDERDETAIL = "SELECT OrdP.id , Ord.order_ID, PD.name, OrdP.quantity, PD.price, Ord.total, OrdP.status FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = ? AND Ord.order_ID = ? " ; 
+    private final String LoadOrderInfor = "SELECT Ord.order_ID, Ord.order_Date, Ord.status, Cus.name, Cus.phone, Cus.email FROM tblOrder Ord JOIN tblCustomer Cus ON Ord.customer_ID = Cus.username  WHERE order_ID = ? AND customer_ID = ? " ; 
     public boolean InsertPro(ProviderDTO provider) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -1077,16 +1080,75 @@ public class ProviderDAO {
         }
         return listOrder ; 
     } 
+    public List<OrderDetailDTO> loadOrderDetail(ProviderDTO provider, int orderID) throws SQLException {
+        List<OrderDetailDTO> listOrder = new ArrayList() ;
+        Connection conn = null ; 
+        PreparedStatement ptm = null ; 
+        ResultSet rs = null ; 
+        try {
+            conn = DBUtils.getConnection() ; 
+            if (conn != null) {
+                ptm = conn.prepareStatement(LIST_ORDERDETAIL) ;  
+                ptm.setString(1, provider.getUsername());
+                ptm.setInt(2, orderID ); 
+                rs = ptm.executeQuery() ; 
+                while (rs.next()) {
+                    listOrder.add(new OrderDetailDTO(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(4), rs.getDouble(5), rs.getDouble(6), rs.getInt(7))) ;
+                }
+            }
+        } catch (Exception e) {
+        }finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listOrder ; 
+    } 
+    public List<OrderDetailInfoDTO> loadOrderInfo(int orderID, String customerID) throws SQLException {
+        List<OrderDetailInfoDTO> listOrder = new ArrayList() ;
+        Connection conn = null ; 
+        PreparedStatement ptm = null ; 
+        ResultSet rs = null ; 
+        try {
+            conn = DBUtils.getConnection() ; 
+            if (conn != null) {
+                ptm = conn.prepareStatement(LoadOrderInfor) ;   
+                ptm.setInt(1, orderID);
+                ptm.setString(2, customerID );  
+                rs = ptm.executeQuery() ; 
+                while (rs.next()) {
+                    listOrder.add(new OrderDetailInfoDTO(rs.getInt(1), rs.getDate(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6)));
+                }
+            }
+        } catch (Exception e) {
+        }finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listOrder ; 
+    } 
     public static void main(String[] args) throws SQLException {
         ProviderDAO dao = new ProviderDAO();
         boolean check = false ; 
         boolean check1 = false ; 
-        List<ProviderStaffDTO> list = new ArrayList();
-        List<ProviderServiceDTO1> list2 = new ArrayList();
+        List<OrderDetailInfoDTO> listOrder = new ArrayList() ;
         ProviderDTO provider = new ProviderDTO();
-        provider = dao.getProvider("homecleaning", "1");
-        list2 = dao.searchService(provider, "a") ; 
-        for (ProviderServiceDTO1 providerServiceDTO1 : list2) {
+        provider = dao.getProvider("provider2", "1");
+        listOrder = dao.loadOrderInfo(1, "Nguyen Trong Toan (K16_HCM)") ; 
+        for (OrderDetailInfoDTO providerServiceDTO1 : listOrder) { 
             System.out.println(providerServiceDTO1.toString());
         }
 //        System.out.println(check);
