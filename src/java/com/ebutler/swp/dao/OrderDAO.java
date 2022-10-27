@@ -24,6 +24,7 @@ public class OrderDAO {
     private static final String INSERT_DETAIL = "INSERT INTO tblOrder_Product_Detail(product_detail_ID, order_ID, quantity, price, [status]) VALUES(?, ?, ?, ?, ?)";
     private static final String GET_ALL_ORDER = "SELECT order_ID, order_Date, customer_ID, status, total FROM tblOrder";
     private static final String INSERT_SERVICE_DETAIL = "INSERT INTO tblOrder_Service_Detail(staff_ID, service_Detail_ID, order_ID, price, [status]) VALUES(?, ?, ?, ?, ?)";
+    private static final String INSERT_DELIVERY = "INSERT INTO tblDelivery(order_id, address, shipper_id, [status]) VALUES(?, ?, ?, ?)";
 
     public static void insertOrder(Date date, String username, int status, double total, String payment, String shipping) throws SQLException {
         Connection conn = null;
@@ -139,9 +140,34 @@ public class OrderDAO {
         }
     }
 
+    public static void insertDelivery(int order_id, String address, String shipper_id) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(INSERT_DELIVERY);
+                ptm.setInt(1, order_id);
+                ptm.setString(2, address);
+                ptm.setString(3, shipper_id);
+                ptm.setInt(4, 0);
+                ptm.executeUpdate();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
     public static void main(String[] args) {
         try {
-            insertOrder(java.sql.Date.valueOf(java.time.LocalDate.now()), "khoi le", 0, 2, "COD", "Grab");
+//            insertOrder(java.sql.Date.valueOf(java.time.LocalDate.now()), "khoi le", 0, 2, "COD", "Grab");
 //            insertOrderDetail("12", 2, 1, 66, 0);
 //            List<OrderDTO> list = getAllOrder();
 //            for (OrderDTO order : list) {
@@ -149,6 +175,7 @@ public class OrderDAO {
 //            }
 
 //            insertOrderServiceDetail(1, 1, 1, 2000, 0);
+            insertDelivery(1, "123 Hollywood Walk of Fame", "be");
         } catch (Exception e) {
         }
 
