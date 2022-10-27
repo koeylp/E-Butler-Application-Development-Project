@@ -173,7 +173,7 @@ public class AddressDAO {
     }
     
     public ArrayList<AddressDTO> SelectAddress(String user_id) throws SQLException {
-        ArrayList<AddressDTO> list = new ArrayList<>();
+        ArrayList<AddressDTO> list = new ArrayList<AddressDTO>();
         
         Connection conn = null;
         PreparedStatement ptm = null;

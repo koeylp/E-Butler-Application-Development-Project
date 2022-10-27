@@ -74,7 +74,7 @@ public class LoginController extends HttpServlet {
                 
                 ArrayList<AddressDTO> list_address = addressDAO.SelectAddress(login_user.getUsername());
 
-                customer.setAddress_list(list_address);
+//                customer.setAddress_list(list_address);
                 session.setAttribute("CURRENT_CUSTOMER", customer);
                 url = CUS_PAGE;
             } else if (userDAO.Login(username, password).getRole_id().equals(PRO_ROLE)) {
