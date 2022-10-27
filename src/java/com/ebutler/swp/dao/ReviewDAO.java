@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class ReviewDAO {
     
-    private final String SELECT_REVIEW = "select username, product_id, comment, rating, status from tblReviewProduct where product_id = ?";
+    private final String SELECT_REVIEW = "select username, product_id, comment, rating, status, id from tblReviewProduct where product_id = ?";
     private final String INSERT_REVIEW = "insert into tblReviewProduct(username, product_id, comment, rating, status) values ( ?, ?, ?, ?, ?)";
     
     public boolean InsertReview(ReviewDTO review) throws SQLException {
@@ -63,7 +63,7 @@ public class ReviewDAO {
                 ptm.setString(1, product_id);
                 rs = ptm.executeQuery();
                 while(rs.next()){
-                    list.add(new ReviewDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5)));
+                    list.add(new ReviewDTO(rs.getInt(6),rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5)));
                 }
             }
         } catch (Exception e) {

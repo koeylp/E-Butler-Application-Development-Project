@@ -6,6 +6,7 @@ package com.ebutler.swp.dao;
 
 import com.ebutler.swp.dto.ProductDTO;
 import com.ebutler.swp.dto.ProductDetailDTO;
+import com.ebutler.swp.dto.ReviewDTO;
 import com.ebutler.swp.utils.DBUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -90,7 +91,15 @@ public class ProductDAO {
             ptm.setString(2, productID);
             rs = ptm.executeQuery();
             while (rs.next()) {
-                list.add(new ProductDetailDTO(rs.getString("id"), rs.getString("provider_ID"), rs.getString("product_ID"), rs.getString("name"), rs.getInt("quantity"), rs.getDouble("price"), rs.getString("image"), rs.getString("description"), rs.getInt("status")));
+                String product_id = rs.getString("id");
+                
+                ReviewDAO reviewDAO = new ReviewDAO();
+                ArrayList<ReviewDTO> review_list = reviewDAO.getReviewByProduct(product_id);
+                
+                ProductDetailDTO product = new ProductDetailDTO(product_id, rs.getString("provider_ID"), rs.getString("product_ID"), rs.getString("name"), rs.getInt("quantity"), rs.getDouble("price"), rs.getString("image"), rs.getString("description"), rs.getInt("status"));
+                
+                product.setReview_list(review_list);
+                list.add(product);
             }
         } catch (Exception e) {
             e.printStackTrace();

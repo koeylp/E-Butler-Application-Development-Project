@@ -20,6 +20,8 @@ public class ProductDetailDTO {
      private String image;
      private String description;
      private int status;
+     
+     private ArrayList<ReviewDTO> review_list = new ArrayList<ReviewDTO>();
 
     public ProductDetailDTO() {
         this.id = "";
@@ -53,6 +55,14 @@ public class ProductDetailDTO {
         this.image = image;
         this.description = description;
         this.status = status;
+    }
+
+    public ArrayList<ReviewDTO> getReview_list() {
+        return review_list;
+    }
+
+    public void setReview_list(ArrayList<ReviewDTO> review_list) {
+        this.review_list = review_list;
     }
 
     public String getId() {

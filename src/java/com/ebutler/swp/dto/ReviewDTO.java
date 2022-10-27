@@ -32,6 +32,17 @@ public class ReviewDTO {
         this.status = 0;
     }
 
+    public ReviewDTO(int id, String username, String product_id, String comment, int rating, int status) {
+        this.id = id;
+        this.username = username;
+        this.product_id = product_id;
+        this.comment = comment;
+        this.rating = rating;
+        this.status = status;
+    }
+    
+    
+
     public int getId() {
         return id;
     }

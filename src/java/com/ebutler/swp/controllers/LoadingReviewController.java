@@ -4,14 +4,18 @@
  */
 package com.ebutler.swp.controllers;
 
+import com.ebutler.swp.dao.ProductDAO;
 import com.ebutler.swp.dao.ReviewDAO;
+import com.ebutler.swp.dto.ProductDetailDTO;
 import com.ebutler.swp.dto.ReviewDTO;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -27,12 +31,14 @@ public class LoadingReviewController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String product_id = request.getParameter("product_id");
+            HttpSession session = request.getSession();
+            ProductDAO dao = new ProductDAO();
+            String category_ID = (String) session.getAttribute("CATEGORYID");
+            String productID = (String) session.getAttribute("PRODUCTID");
             
-            ReviewDAO reviewDAO = new ReviewDAO();
-            ArrayList<ReviewDTO> review_list = reviewDAO.getReviewByProduct(product_id);
+            List<ProductDetailDTO> list = dao.getListProductByPlaceDetail(category_ID, productID);
             
-            request.setAttribute("REVIEW_LIST", review_list);
+            session.setAttribute("PRODUCT_DETAIL_BY_TYPE", list);
             
             url = SUCCESS;
         } catch (Exception e) {

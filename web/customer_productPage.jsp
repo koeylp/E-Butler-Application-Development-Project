@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="com.ebutler.swp.dto.ReviewDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.ebutler.swp.dto.UserDTO"%>
@@ -186,7 +187,7 @@
                                         <i class="fa-solid fa-bag-shopping"></i>
                                         Add to bag
                                     </a>
-                                    <a href="MainController?action=LoadReview&current_form=quickview_product&product_id=<%=product.getId()%>" style="background-color: white; color: black; left: 52%;"
+                                    <a style="background-color: white; color: black; left: 52%;"
                                        class="txt-border link absolute card-extend bot quick-view">
                                         <i class="fa-solid fa-expand"></i>
                                         Quick view
@@ -213,20 +214,21 @@
                                         </div>
                                         <div class="col l-o-1 l-5 flex-center">
                                             <%
-                                                ArrayList<ReviewDTO> review_list = (ArrayList<ReviewDTO>) request.getAttribute("REVIEW_LIST");
-
-                                                review_list = (review_list == null) ? new ArrayList<ReviewDTO>() : review_list;
-
-                                                float average_rating = 0;
+                                                ArrayList<ReviewDTO> review_list = product.getReview_list();
+                                                
+                                                float average_rating = 0.0f;
 
                                                 for (ReviewDTO review : review_list) {
                                                     average_rating += (float)review.getRating() / (review_list.size());
                                                 }
+                                                
+                                                DecimalFormat df = new DecimalFormat("#.##");
+                                                
                                             %>
                                             <div style="color: #F2B737;">
                                                 <i class="fa-solid fa-star"></i>
                                                 <span
-                                                    style="color: var(--text-color); line-height: 100%; margin: auto;"><%=average_rating%></span>
+                                                    style="color: var(--text-color); line-height: 100%; margin: auto;"><%=df.format(average_rating)%></span>
                                             </div>
                                         </div>
                                     </div>
@@ -304,7 +306,7 @@
                                             <div class="txt-sm bold col l-2 flex-center flex-col">
                                                 <div style="color: #F2B737; border: none;" class="order-price">
                                                     <span class="flex-center">
-                                                        <%=average_rating%> <i class="fa-solid fa-star"></i>
+                                                        <%=df.format(average_rating)%> <i class="fa-solid fa-star"></i>
                                                     </span>
                                                 </div>
                                                 <span class="txt-sm m-y-0">Average</span>
@@ -339,13 +341,13 @@
 
                                                         <div class="flex">
                                                             <div class="l-4">
-                                                                <h1><%=average_rating%></h1>
+                                                                <h1><%=df.format(average_rating)%></h1>
                                                                 <h6 style="margin: 0 auto;" class="txt-sm">out of 5</h6>
                                                             </div>
                                                             <div style="justify-content: flex-end" class="l-8 flex-horizon-center flex-col">
-                                                                <div style="color: #F2B737;" class="flex-vertical-center flex-end txt-xl full-h">
+                                                                <div class="flex-vertical-center flex-end txt-xl full-h">
                                                                     <span class="flex-center rating">
-                                                                        <input type="radio" name="rating" id="star1"
+                                                                        <input style="width: 1px;"  type="radio" name="rating" id="star1"
                                                                                value="1" required=""><label for="star1"><i class="fa-solid fa-star"></i></label>
                                                                         <input type="radio" name="rating" id="star2"
                                                                                value="2" required=""><label for="star2"><i class="fa-solid fa-star"></i></label>
@@ -383,16 +385,16 @@
                                                                 <div class="txt-lg bold "><%=review.getUsername()%></div>
                                                                 <div class="flex-vertical-center m-y-0 txt-xs">
                                                                     <span class="flex-center rating">
-                                                                        <input type="radio" name="rating" id="star1"
-                                                                               value="1" <%if (review.getRating() == 5) {%>checked<%}%>><label for=""><i class="fa-solid fa-star"></i></label>
-                                                                        <input type="radio" name="rating" id="star2"
-                                                                               value="2" <%if (review.getRating() == 4) {%>checked<%}%>><label for=""><i class="fa-solid fa-star"></i></label>
-                                                                        <input type="radio" name="rating" id="star3"
+                                                                        <input type="radio" id="<%=review.getId()%>"
+                                                                               value="1" <%if (review.getRating() == 1) {%>checked<%}%>><label for=""><i class="fa-solid fa-star"></i></label>
+                                                                        <input type="radio" id="<%=review.getId()%>"
+                                                                               value="2" <%if (review.getRating() == 2) {%>checked<%}%>><label for=""><i class="fa-solid fa-star"></i></label>
+                                                                        <input type="radio" id="<%=review.getId()%>"
                                                                                value="3" <%if (review.getRating() == 3) {%>checked<%}%>><label for=""><i class="fa-solid fa-star"></i></label>
-                                                                        <input type="radio" name="rating" id="star4"
-                                                                               value="4" <%if (review.getRating() == 2) {%>checked<%}%>><label for=""><i class="fa-solid fa-star"></i></label>
-                                                                        <input type="radio" name="rating" id="star5"
-                                                                               value="5" <%if (review.getRating() == 1) {%>checked<%}%>><label for=""><i class="fa-solid fa-star"></i></label>
+                                                                        <input type="radio" id="<%=review.getId()%>"
+                                                                               value="4" <%if (review.getRating() == 4) {%>checked<%}%>><label for=""><i class="fa-solid fa-star"></i></label>
+                                                                        <input type="radio" id="<%=review.getId()%>"
+                                                                               value="5" <%if (review.getRating() == 5) {%>checked<%}%>><label for=""><i class="fa-solid fa-star"></i></label>
                                                                     </span>
                                                                 </div>
                                                             </div>
