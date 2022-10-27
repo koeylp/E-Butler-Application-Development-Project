@@ -243,13 +243,11 @@
                                         <span class="txt-lg input-icon flex-center">
                                             <i class="fa-solid fa-location-dot"></i>
                                         </span>
-                                        <input class="input txt-sm" type="text" readonly="" value="
-                                               <%
+                                        <input class="input txt-sm" type="text" readonly="" value="<%
                                                    for (AddressDTO address : customer.getAddress_list()) {
                                                        if (address.getStatus() != 1)
                                                            continue;
-                                               %>
-                                               <%=address.getStreet()%>, Thành phố <%=address.getDistrict_name()%>, Tỉnh <%=address.getProvince_name()%>
+                                               %><%=address.getStreet()%>, Thành phố <%=address.getDistrict_name()%>, Tỉnh <%=address.getProvince_name()%>
                                                <%
                                                    }
                                                %>
@@ -411,91 +409,124 @@
                                         </div>
                                     </div>
                                 </c:forEach>
-
-                                <!--                                <div class="order-card m-y-12">
-                                                                    <div class="flex">
-                                                                        <div class="flex-center order-img">
-                                                                            <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
-                                                                                 alt="">
-                                                                        </div>
-                                                                        <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                                                            <div class="flex-between">
-                                                                                <div class="flex-col flex-horizon-center">
-                                                                                    <span class="txt-lg bold">Product name</span>
-                                                                                    <div class="flex-horizon-center">
-                                                                                        <span class="txt-md">Product</span>
-                                                                                        <span class="m-x-12">|</span>
-                                                                                        <span class="txt-md">Product Category</span>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="order-price bold">
-                                                                                    <span>
-                                                                                        $369.000
-                                                                                    </span>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div style="height: 50%;" class="flex-end flex-col">
-                                                                                <span class="txt-md bold">Quantity: 1</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="order-card m-y-12">
-                                                                    <div class="flex">
-                                                                        <div class="flex-center order-img">
-                                                                            <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
-                                                                                 alt="">
-                                                                        </div>
-                                                                        <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                                                            <div class="flex-between">
-                                                                                <div class="flex-col flex-horizon-center">
-                                                                                    <span class="txt-lg bold">Product name</span>
-                                                                                    <div class="flex-horizon-center">
-                                                                                        <span class="txt-md">Product</span>
-                                                                                        <span class="m-x-12">|</span>
-                                                                                        <span class="txt-md">Product Category</span>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="order-price bold">
-                                                                                    <span>
-                                                                                        $369.000
-                                                                                    </span>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div style="height: 50%;" class="flex-end flex-col">
-                                                                                <span class="txt-md bold">Quantity: 1</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="order-card m-y-12">
-                                                                    <div class="flex">
-                                                                        <div class="flex-center order-img">
-                                                                            <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
-                                                                                 alt="">
-                                                                        </div>
-                                                                        <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                                                            <div class="flex-between">
-                                                                                <div class="flex-col flex-horizon-center">
-                                                                                    <span class="txt-lg bold">Product name</span>
-                                                                                    <div class="flex-horizon-center">
-                                                                                        <span class="txt-md">Product</span>
-                                                                                        <span class="m-x-12">|</span>
-                                                                                        <span class="txt-md">Product Category</span>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="order-price bold">
-                                                                                    <span>
-                                                                                        $369.000
-                                                                                    </span>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div style="height: 50%;" class="flex-end flex-col">
-                                                                                <span class="txt-md bold">Quantity: 1</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>-->
+                                
+                                <!-- Service start -->
+                                 <c:forEach items="${sessionScope.ORDERED_SERVICE_LIST_PENDING}" var="o">
+                                <div class="order-card m-y-12">
+                                    <div class="flex">
+                                        <div class="flex-center order-img">
+                                            <img src="${o.image}"
+                                                 alt="">
+                                        </div>
+                                        <div style="flex: 1; margin-left: 1rem;" class="flex-col">
+                                            <div class="flex-between">
+                                                <div class="flex-col flex-horizon-center">
+                                                    <span class="txt-lg bold">${o.service_name}</span>
+                                                    <div class="flex-horizon-center">
+                                                        <span class="txt-md">Service</span>
+                                                        <span class="m-x-12">|</span>
+                                                        <span class="txt-md">Service Category</span>
+                                                    </div>
+                                                </div>
+                                                <div class="order-price bold">
+                                                    <span>
+                                                        $${o.price}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div style="height: 50%;" class="flex-end flex-col">
+                                                <span class="txt-md bold">Staff's name:  ${o.staff_name}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </c:forEach>
+                                <!-- Service end -->
+                                
+<!--                                <div class="order-card m-y-12">
+                                    <div class="flex">
+                                        <div class="flex-center order-img">
+                                            <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
+                                                 alt="">
+                                        </div>
+                                        <div style="flex: 1; margin-left: 1rem;" class="flex-col">
+                                            <div class="flex-between">
+                                                <div class="flex-col flex-horizon-center">
+                                                    <span class="txt-lg bold">Product name</span>
+                                                    <div class="flex-horizon-center">
+                                                        <span class="txt-md">Product</span>
+                                                        <span class="m-x-12">|</span>
+                                                        <span class="txt-md">Product Category</span>
+                                                    </div>
+                                                </div>
+                                                <div class="order-price bold">
+                                                    <span>
+                                                        $369.000
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div style="height: 50%;" class="flex-end flex-col">
+                                                <span class="txt-md bold">Quantity: 1</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="order-card m-y-12">
+                                    <div class="flex">
+                                        <div class="flex-center order-img">
+                                            <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
+                                                 alt="">
+                                        </div>
+                                        <div style="flex: 1; margin-left: 1rem;" class="flex-col">
+                                            <div class="flex-between">
+                                                <div class="flex-col flex-horizon-center">
+                                                    <span class="txt-lg bold">Product name</span>
+                                                    <div class="flex-horizon-center">
+                                                        <span class="txt-md">Product</span>
+                                                        <span class="m-x-12">|</span>
+                                                        <span class="txt-md">Product Category</span>
+                                                    </div>
+                                                </div>
+                                                <div class="order-price bold">
+                                                    <span>
+                                                        $369.000
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div style="height: 50%;" class="flex-end flex-col">
+                                                <span class="txt-md bold">Quantity: 1</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="order-card m-y-12">
+                                    <div class="flex">
+                                        <div class="flex-center order-img">
+                                            <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
+                                                 alt="">
+                                        </div>
+                                        <div style="flex: 1; margin-left: 1rem;" class="flex-col">
+                                            <div class="flex-between">
+                                                <div class="flex-col flex-horizon-center">
+                                                    <span class="txt-lg bold">Product name</span>
+                                                    <div class="flex-horizon-center">
+                                                        <span class="txt-md">Product</span>
+                                                        <span class="m-x-12">|</span>
+                                                        <span class="txt-md">Product Category</span>
+                                                    </div>
+                                                </div>
+                                                <div class="order-price bold">
+                                                    <span>
+                                                        $369.000
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div style="height: 50%;" class="flex-end flex-col">
+                                                <span class="txt-md bold">Quantity: 1</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>-->
 
                             </div>
                         </div>

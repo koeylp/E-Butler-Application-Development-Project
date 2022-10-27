@@ -46,8 +46,6 @@ public class LoadCartDataController extends HttpServlet {
 //                }
                 session.setAttribute("CART", cart);
                 session.setAttribute("CART_SERVICE", cartService);
-                CustomerDTO customer = dao.getCurrentCustomer(currentUser.getUsername());
-                session.setAttribute("CURRENT_CUSTOMER", customer);
                 url = SUCCESS;
             }
         } catch (Exception e) {

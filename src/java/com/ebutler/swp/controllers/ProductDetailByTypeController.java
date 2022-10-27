@@ -35,8 +35,11 @@ public class ProductDetailByTypeController extends HttpServlet {
             String category_ID = (String) session.getAttribute("CATEGORYID");
             ProductDAO dao = new ProductDAO();
             
+            int numberPageProductDetail = dao.getNumberPageProductDetail(category_ID, productID); 
             List<ProductDetailDTO> list = dao.getListProductByPlaceDetail(category_ID, productID);
-            session.setAttribute("PRODUCT_DETAIL_BY_TYPE", list);
+            
+            session.setAttribute("PRODUCT_DETAIL_BY_TYPE", numberPageProductDetail);
+            session.setAttribute("NUMBER_PAGE_PRODUCT_DETAIL", dao);
             url = SUCCESS;
             
         } catch (Exception e) {

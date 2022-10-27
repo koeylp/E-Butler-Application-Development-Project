@@ -34,7 +34,7 @@ public class ProductDAO {
 
     private static final String GET_PRODUCT_BY_ID = "SELECT provider_ID, product_ID, name, quantity, price, image, description, status FROM tblProductDetail WHERE id = ?";
     private static final String UPDATE_QUANTITY = "UPDATE tblProductDetail SET quantity = ? WHERE id = ?";
-    
+
     private static final String SORT_PRODUCT_DETAIL_PRICE_UP = "SELECT detail.id, detail.provider_ID, detail.product_ID, detail.name, detail.quantity, detail.price, detail.image, detail.description, detail.status FROM tblProduct product JOIN tblProductDetail detail on product.product_ID = detail.product_ID JOIN tblProductCategory cate ON cate.category_ID = product.category_ID WHERE cate.category_ID = ? AND product.product_ID = ? ORDER BY detail.price ASC";
     private static final String SORT_PRODUCT_DETAIL_PRICE_DOWN = "SELECT detail.id, detail.provider_ID, detail.product_ID, detail.name, detail.quantity, detail.price, detail.image, detail.description, detail.status FROM tblProduct product JOIN tblProductDetail detail on product.product_ID = detail.product_ID JOIN tblProductCategory cate ON cate.category_ID = product.category_ID WHERE cate.category_ID = ? AND product.product_ID = ? ORDER BY detail.price DESC";
     private static final String SORT_PRODUCT_DETAIL_WORD_UP = "SELECT detail.id, detail.provider_ID, detail.product_ID, detail.name, detail.quantity, detail.price, detail.image, detail.description, detail.status FROM tblProduct product JOIN tblProductDetail detail on product.product_ID = detail.product_ID JOIN tblProductCategory cate ON cate.category_ID = product.category_ID WHERE cate.category_ID = ? AND product.product_ID = ? ORDER BY detail.name ASC";
@@ -42,6 +42,8 @@ public class ProductDAO {
 
     private static final String SORT_PRODUCT_CATEGORY_WORD_UP = "SELECT pro.product_ID, pro.category_ID, pro.name, pro.image from tblProductCategory cate JOIN tblProduct pro on cate.category_ID = pro.category_ID where cate.category_ID = ? ORDER BY pro.name ASC";
     private static final String SORT_PRODUCT_CATEGORY_WORD_DOWN = "SELECT pro.product_ID, pro.category_ID, pro.name, pro.image from tblProductCategory cate JOIN tblProduct pro on cate.category_ID = pro.category_ID where cate.category_ID = ? ORDER BY pro.name DESC";
+
+    private static final String GET_NUMBER_PAGE_PRODUCT_DETAIL = "SELECT COUNT(*) AS [quantity] FROM tblProduct product JOIN tblProductDetail detail on product.product_ID = detail.product_ID JOIN tblProductCategory cate ON cate.category_ID = product.category_ID WHERE cate.category_ID = ? AND product.product_ID = ?";
 
     public static List<ProductDTO> getListProductByPlace(String categoty_ID) throws SQLException {
         Connection conn = null;
@@ -54,9 +56,9 @@ public class ProductDAO {
             ptm.setString(1, categoty_ID);
             rs = ptm.executeQuery();
             while (rs.next()) {
-                
+
                 String product_id = rs.getString("product_ID");
-                
+
                 list.add(new ProductDTO(product_id, rs.getString("category_ID"), rs.getString("name"), rs.getString("image"), getListProductByPlaceDetail(categoty_ID, product_id)));
             }
         } catch (Exception e) {
@@ -151,9 +153,9 @@ public class ProductDAO {
             ptm.setString(2, "%" + search + "%");
             rs = ptm.executeQuery();
             while (rs.next()) {
-                
+
                 String product_id = rs.getString("product_ID");
-                
+
                 list.add(new ProductDTO(product_id, rs.getString("category_ID"), rs.getString("name"), rs.getString("image"), getListProductByPlaceDetail(categoty_ID, product_id)));
             }
         } catch (Exception e) {
@@ -173,7 +175,7 @@ public class ProductDAO {
         return list;
     }
 
-public static ProductDetailDTO getProductByID(String id) throws SQLException {
+    public static ProductDetailDTO getProductByID(String id) throws SQLException {
         ProductDetailDTO product = new ProductDetailDTO();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -212,7 +214,7 @@ public static ProductDetailDTO getProductByID(String id) throws SQLException {
         return product;
     }
 
-public static boolean setQuantiy(String id, int quantity) throws SQLException {
+    public static boolean setQuantiy(String id, int quantity) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -285,9 +287,9 @@ public static boolean setQuantiy(String id, int quantity) throws SQLException {
             ptm.setString(2, categoryID);
             rs = ptm.executeQuery();
             while (rs.next()) {
-                
+
                 String product_id = rs.getString("product_ID");
-                
+
                 list.add(new ProductDTO(product_id, rs.getString("category_ID"), rs.getString("name"), rs.getString("image"), getListProductByPlaceDetail(categoryID, product_id)));
             }
         } catch (Exception e) {
@@ -446,9 +448,9 @@ public static boolean setQuantiy(String id, int quantity) throws SQLException {
             ptm.setString(1, categoryID);
             rs = ptm.executeQuery();
             while (rs.next()) {
-                
+
                 String product_id = rs.getString("product_ID");
-                
+
                 list.add(new ProductDTO(product_id, rs.getString("category_ID"), rs.getString("name"), rs.getString("image"), getListProductByPlaceDetail(categoryID, product_id)));
             }
         } catch (Exception e) {
@@ -478,9 +480,9 @@ public static boolean setQuantiy(String id, int quantity) throws SQLException {
             ptm.setString(1, categoryID);
             rs = ptm.executeQuery();
             while (rs.next()) {
-                
+
                 String product_id = rs.getString("product_ID");
-                
+
                 list.add(new ProductDTO(product_id, rs.getString("category_ID"), rs.getString("name"), rs.getString("image"), getListProductByPlaceDetail(categoryID, product_id)));
             }
         } catch (Exception e) {
@@ -497,5 +499,44 @@ public static boolean setQuantiy(String id, int quantity) throws SQLException {
             }
         }
         return list;
+    }
+
+    public static int getNumberPageProductDetail(String categoryID, String productID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            ptm = conn.prepareStatement(GET_NUMBER_PAGE_PRODUCT_DETAIL);
+            ptm.setString(1, categoryID);
+            ptm.setString(2, productID);
+            rs = ptm.executeQuery();
+            while (rs.next()) {
+                int total = rs.getInt(1);
+                int countPage = 0;
+                countPage = total / 12;
+                if (total % 12 != 0) {
+                    countPage++;
+                }
+                return countPage;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return 0;
+    }
+    public static void main(String[] args) throws SQLException {
+        int count = getNumberPageProductDetail("KC", "1");
+        System.out.println(count);
     }
 }
