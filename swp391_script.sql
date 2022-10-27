@@ -252,6 +252,7 @@ GO
 CREATE TABLE tblDelivery (
 	id int IDENTITY(1,1) PRIMARY KEY,
 	order_id int REFERENCES tblOrder(order_ID),
+	order_date date,
 	[address] nvarchar(max),
 	shipper_id nvarchar(30) REFERENCES tblShipper(username),
 	[status] int
@@ -262,13 +263,6 @@ CREATE TABLE tblShipperIncomeByMonth (
 	id int IDENTITY(1,1) PRIMARY KEY,
 	[month] int,
 	[year] int,
-	shipper_id nvarchar(30) REFERENCES tblShipper(username),
-	total decimal(12)
-)
-GO
-
-CREATE TABLE tblShipperIncomeByYear (
-	[year] int PRIMARY KEY,
 	shipper_id nvarchar(30) REFERENCES tblShipper(username),
 	total decimal(12)
 )
@@ -290,7 +284,6 @@ END;
 GO
 
 --- bảng customer: chỉnh sửa thông tin -> cập nhật bảng user
---drop trigger trig_cus_updateStatus
 CREATE TRIGGER trig_cus_updateStatus ON tblCustomer 
 AFTER UPDATE
 AS
@@ -348,19 +341,22 @@ END;
 GO
 
 --- bảng provider: chỉnh sửa thông tin -> cập nhật bảng user
-CREATE TRIGGER trig_pro_updateStatus ON tblProvider 
+CREATE TRIGGER trig_shipper_updateStatus ON tblShipper 
 AFTER UPDATE
 AS
 BEGIN 
 	
-	DECLARE @username nvarchar(30), @password nvarchar(30), @phone nvarchar (11), @email nvarchar(30), @status decimal(1)
+	DECLARE @username nvarchar(30), @status decimal(1)
 	
-	SELECT @username = username, @password = password, @phone = phone, @email = email, @status = status
+	SELECT @username = username, @status = status
 	FROM inserted
 	
-	UPDATE tblUser SET password = @password, phone = @phone, email = @email,  status = @status WHERE username = @username
+	UPDATE tblUser SET status = @status WHERE username = @username
 END;
 GO
+
+-------- shipper income ---------
+
 
 -------------------------------------------------------- INSERT -----------------------------------------------------------------
 -- bảng role
