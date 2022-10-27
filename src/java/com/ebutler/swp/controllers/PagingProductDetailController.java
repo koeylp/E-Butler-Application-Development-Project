@@ -17,33 +17,41 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Admin
+ * @author Dang Viet
  */
-public class ProductDetailByTypeController extends HttpServlet {
-    
-    private static final String SUCCESS = "customer_productPage.jsp";
-    private static final String ERROR = "errorPage.jsp";
-    
+public class PagingProductDetailController extends HttpServlet {
+
+    String ERROR = "errorPage.jsp";
+    String SUCCESS = "customer_productPage.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            String index = request.getParameter("index");
+            if(index == null){
+                index = "1";
+            }
+            int indexPage = Integer.parseInt(index);
             String productID = request.getParameter("product_ID");
             HttpSession session = request.getSession();
             session.setAttribute("PRODUCTID", productID);
             String category_ID = (String) session.getAttribute("CATEGORYID");
+            
+            
             ProductDAO dao = new ProductDAO();
             
-            int numberPageProductDetail = dao.getNumberPageProductDetail(category_ID, productID); 
-            List<ProductDetailDTO> list = dao.getListProductByPlaceDetail(category_ID, productID);
-            
+            List<ProductDetailDTO> list = dao.getPagingProductDetail(category_ID, productID, indexPage);
             session.setAttribute("PRODUCT_DETAIL_BY_TYPE", list);
+            
+             int numberPageProductDetail = dao.getNumberPageProductDetail(category_ID, productID); 
+//            List<ProductDetailDTO> list1 = dao.getListProductByPlaceDetail(category_ID, productID);
+//            
+//            session.setAttribute("PRODUCT_DETAIL_BY_TYPE", list);
             session.setAttribute("NUMBER_PAGE_PRODUCT_DETAIL", numberPageProductDetail);
             url = SUCCESS;
             
         } catch (Exception e) {
-            log("Error at ProductDetailByTypeController: "+e.getMessage());
         }finally{
             request.getRequestDispatcher(url).forward(request, response);
         }

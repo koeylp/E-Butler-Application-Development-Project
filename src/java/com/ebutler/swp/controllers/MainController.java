@@ -46,6 +46,8 @@ public class MainController extends HttpServlet {
 //    Product Detail
     private final String GO_TO_PRODUCT_DETAIL_BY_TYPE_PAGE = "GoToProductDetailByType";
     private final String PRODUCT_DETAIL_BY_TYPE_CONTROLLER = "ProductDetailByTypeController";
+    
+    private final String PRODUCT_DETAIL_BY_TYPE_PAGING_CONTROLLER = "PagingProductDetailController";
 
 //    Service Detail
     private final String GO_TO_SERVICE_DETAIL_BY_TYPE_PAGE = "GoToServiceDetailByType";
@@ -245,6 +247,10 @@ public class MainController extends HttpServlet {
     private final String UPDATE_ADDRESS = "UpdateAddress";
     private final String UPDATE_ADDRESS_CONTROLLER = "UpdateAddressController";
     
+//    Paging
+    private final String PAGING_PRODUCT_DETAIL = "pagingProductDetail";
+    private final String PAGING_PRODUCT_DETAIL_CONTROLLER = "PagingProductDetailController";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -396,6 +402,8 @@ public class MainController extends HttpServlet {
                 url = SET_ADDRESS_DEFAULT_CONTROLLER;
             } else if (action.equals(UPDATE_ADDRESS)) {
                 url = UPDATE_ADDRESS_CONTROLLER;
+            }else if (action.equals(PAGING_PRODUCT_DETAIL)) {
+                url = PAGING_PRODUCT_DETAIL_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

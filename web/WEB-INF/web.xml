@@ -224,6 +224,10 @@
         <servlet-name>UpdateAddressController</servlet-name>
         <servlet-class>com.ebutler.swp.controllers.UpdateAddressController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PagingProductDetailController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.PagingProductDetailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -447,6 +451,10 @@
     <servlet-mapping>
         <servlet-name>UpdateAddressController</servlet-name>
         <url-pattern>/UpdateAddressController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PagingProductDetailController</servlet-name>
+        <url-pattern>/PagingProductDetailController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

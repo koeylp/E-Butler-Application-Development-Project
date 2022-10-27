@@ -45,12 +45,15 @@
 
     <body>
         <%
-            List<ProductDetailDTO> productList = (List<ProductDetailDTO>) session.getAttribute("PRODUCT_DETAIL_BY_TYPE");
+            
             String product_id = (String) session.getAttribute("PRODUCT_ID");
 
             product_id = (product_id == null) ? "" : product_id;
 
             UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
+        %>
+        <% 
+            List<ProductDetailDTO> productList = (List<ProductDetailDTO>) session.getAttribute("PRODUCT_DETAIL_BY_TYPE"); 
         %>
         <div class="container-xxl bg-white p-0">
             <!-- Spinner Start -->
@@ -285,7 +288,7 @@
                                 <ul class="row pad-1">
                                     <c:forEach begin="1" end="${sessionScope.NUMBER_PAGE_PRODUCT_DETAIL}" var="i">
                                         <li class="bold text-circle mx-1">
-                                            <a href="#">${i}</a>
+                                            <a href="MainController?action=pagingProductDetail&index=${i}">${i}</a>
                                         </li>
                                     </c:forEach>
 <!--                                    <li class="bold text-circle mx-1">1</li>
