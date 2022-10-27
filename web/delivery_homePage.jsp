@@ -13,6 +13,15 @@
         <link href="./plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
         <link href="css/deliveryPage.css" rel="stylesheet"> 
         <link href="css/delivery.css" rel="stylesheet"> 
+        
+        
+        
+        
+        <link rel="stylesheet" href="./vendor/css/core.css" class="template-customizer-core-css" />
+        <link rel="stylesheet" href="./vendor/css/theme-default.css" class="template-customizer-theme-css" />
+        <link rel="stylesheet" href="./css/demo.css" />
+        <link rel="icon" type="image/x-icon" href="./assets/img/favicon/favicon.ico" />
+        <link rel="stylesheet" href="./vendor/fonts/boxicons.css" />
     </head>
 
     <body>
@@ -271,7 +280,7 @@
                                                     <td class="txt-sm">12A12 Nguy?n Trãi ph??ng 7, Thành ph? M? Tho, T?nh Ti?n Giang</td>
                                                     <td class="txt-sm">25-10-2022</td>
                                                     <td class="txt-sm">2706$</td>
-                                                    <td class="txt-sm bold"><span class="safe">Pendding</span></td>
+                                                    <td class="txt-sm bold"><span class="badge bg-label-danger me-1 changeStatus">Cancel</span></td>
                                                     <td class="txt-sm bold"></td>
                                                 </tr>
                                                 <tr>
@@ -279,7 +288,7 @@
                                                     <td class="txt-sm">12A12 Nguy?n Trãi ph??ng 7, Thành ph? M? Tho, T?nh Ti?n Giang</td>
                                                     <td class="txt-sm">25-10-2022</td>
                                                     <td class="txt-sm">2706$</td>
-                                                    <td class="txt-sm bold"><span class="safe">Pendding</span></td>
+                                                    <td class="txt-sm bold"><span class="badge bg-label-success me-1 changeStatus">Done</span>
                                                     <td class="txt-sm bold"></td>
                                                 </tr>
                                                 <tr>
@@ -287,7 +296,7 @@
                                                     <td class="txt-sm">12A12 Nguy?n Trãi ph??ng 7, Thành ph? M? Tho, T?nh Ti?n Giang</td>
                                                     <td class="txt-sm">25-10-2022</td>
                                                     <td class="txt-sm">2706$</td>
-                                                    <td class="txt-sm bold"><span class="safe">Pendding</span></td>
+                                                    <td class="txt-sm bold"><span class="badge bg-label-warning me-1 changeStatus">Pending</span></td>
                                                     <td class="txt-sm bold"></td>
                                                 </tr>
                                                 <tr>
@@ -295,7 +304,11 @@
                                                     <td class="txt-sm">12A12 Nguy?n Trãi ph??ng 7, Thành ph? M? Tho, T?nh Ti?n Giang</td>
                                                     <td class="txt-sm">25-10-2022</td>
                                                     <td class="txt-sm">2706$</td>
-                                                    <td class="txt-sm bold"><span class="safe">Pendding</span></td>
+                                                    <td class="txt-sm bold"><span class="badge bg-label-info me-1 changeStatus">In Progress</span></td>
+                                                         // success - xanh la cay 
+                                                         // warning - vang 
+                                                         // danger - do 
+                                                         // info - xanh bien
                                                     <td class="txt-sm bold"></td>
                                                 </tr>
                                                 <tr>
