@@ -243,13 +243,11 @@
                                         <span class="txt-lg input-icon flex-center">
                                             <i class="fa-solid fa-location-dot"></i>
                                         </span>
-                                        <input class="input txt-sm" type="text" readonly="" value="
-                                               <%
+                                        <input class="input txt-sm" type="text" readonly="" value="<%
                                                    for (AddressDTO address : customer.getAddress_list()) {
                                                        if (address.getStatus() != 1)
                                                            continue;
-                                               %>
-                                               <%=address.getStreet()%>, Thành phố <%=address.getDistrict_name()%>, Tỉnh <%=address.getProvince_name()%>
+                                               %><%=address.getStreet()%>, Thành phố <%=address.getDistrict_name()%>, Tỉnh <%=address.getProvince_name()%>
                                                <%
                                                    }
                                                %>
