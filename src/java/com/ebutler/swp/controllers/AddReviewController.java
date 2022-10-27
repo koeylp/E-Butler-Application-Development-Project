@@ -4,13 +4,12 @@
  */
 package com.ebutler.swp.controllers;
 
-import com.ebutler.swp.dao.ProductDAO;
-import com.ebutler.swp.dto.CartDTO;
-import com.ebutler.swp.dto.ProductDetailDTO;
-import com.ebutler.swp.dto.QuantityStockDTO;
+import com.ebutler.swp.dao.CustomerDAO;
+import com.ebutler.swp.dao.ReviewDAO;
+import com.ebutler.swp.dto.CustomerDTO;
+import com.ebutler.swp.dto.ReviewDTO;
 import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,43 +17,37 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author thekh
+ * @author Admin
  */
-@WebServlet(name = "AddToCartController", urlPatterns = {"/AddToCartController"})
-public class AddToCartController extends HttpServlet {
-
-    private static final String ERROR = "errorPage.jsp";
-    private static final String SUCCESS = "customer_productPage.jsp";
-
+public class AddReviewController extends HttpServlet {
+    
+    private final String ERROR = "errorPage.jsp";
+    private final String SUCCESS = "LoadingReviewController";
+    private final String NOTPASS = "customer_productPage.jsp";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String id = request.getParameter("product_ID");
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
-            ProductDAO dao = new ProductDAO();
+            String comment = request.getParameter("comment");
+            String product_id = request.getParameter("product_id");
+            int rating = Integer.parseInt(request.getParameter("rating"));
+            
             HttpSession session = request.getSession();
-            if (session != null) {
-                CartDTO cart = (CartDTO) session.getAttribute("CART");
-                ProductDetailDTO productDetail = dao.getProductByID(id);
-                QuantityStockDTO quantityStock = (QuantityStockDTO) session.getAttribute("STOCK");
-                if (quantityStock == null) {
-                    quantityStock = new QuantityStockDTO();
-                }
-                quantityStock.add(productDetail);
-                productDetail.setQuantity(quantity);
-                if (cart == null) {
-                    cart = new CartDTO();
-                }
-                cart.add(productDetail);
-                session.setAttribute("STOCK", quantityStock);
-                session.setAttribute("CART", cart);
-                url = SUCCESS;
-            }
-        } catch (Exception e) {
-            log("Error at AddToCartController" + e.toString());
-        } finally {
+            
+            CustomerDTO customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
+            
+            ReviewDAO reviewDAO = new ReviewDAO();
+            ReviewDTO review = new ReviewDTO(customer.getUsername(), product_id, comment, rating, 1);
+            
+            url = reviewDAO.InsertReview(review) ? SUCCESS : NOTPASS;
+            
+        } catch (Exception e) 
+        {
+            log("ERROR at AddReviewController: " + e.toString());
+        }
+        finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

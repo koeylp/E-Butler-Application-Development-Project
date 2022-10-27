@@ -1,3 +1,5 @@
+<%@page import="com.ebutler.swp.dto.ReviewDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.ebutler.swp.dto.UserDTO"%>
 <%@page import="com.ebutler.swp.dto.ProductDetailDTO"%>
 <%@page import="java.util.List"%>
@@ -168,75 +170,99 @@
 
                         <!-- product item -->
 
+                        <%
+                            ArrayList<ProductDetailDTO> product_list = (ArrayList<ProductDetailDTO>) session.getAttribute("PRODUCT_DETAIL_BY_TYPE");
 
-                        <c:forEach items="${sessionScope.PRODUCT_DETAIL_BY_TYPE}" var="o">
-                            <div class="col l-3 s-6 m-y-1">
-                                <div class="block__item flex-between">
-                                    <div style="max-height: 15rem; min-height: 15rem;" class="block__img flex-center relative">
-                                        <img src="${o.image}"
-                                             alt="">
-                                        <a href="MainController?action=AddToCart&product_ID=${o.id}"
-                                           style="background-color: black; color: white; right: 52%;"
-                                           class="txt-border link absolute card-extend bot">
-                                            <i class="fa-solid fa-bag-shopping"></i>
-                                            Add to bag
-                                        </a>
-                                        <a style="background-color: white; color: black; left: 52%;"
-                                           class="txt-border link absolute card-extend bot quick-view">
-                                            <i class="fa-solid fa-expand"></i>
-                                            Quick view
-                                        </a>
+                            for (ProductDetailDTO product : product_list) {
+                        %>
+                        <div class="col l-3 s-6 m-y-1">
+                            <div class="block__item flex-between">
+                                <div style="max-height: 15rem; min-height: 15rem;" class="block__img flex-center relative">
+                                    <img src="<%=product.getImage()%>"
+                                         alt="">
+                                    <a href="MainController?action=AddToCart&quantity=1&product_ID=<%=product.getId()%>"
+                                       style="background-color: black; color: white; right: 52%;"
+                                       class="txt-border link absolute card-extend bot">
+                                        <i class="fa-solid fa-bag-shopping"></i>
+                                        Add to bag
+                                    </a>
+                                    <a href="MainController?action=LoadReview&current_form=quickview_product&product_id=<%=product.getId()%>" style="background-color: white; color: black; left: 52%;"
+                                       class="txt-border link absolute card-extend bot quick-view">
+                                        <i class="fa-solid fa-expand"></i>
+                                        Quick view
+                                    </a>
+                                </div>
+                                <div class="block__text pad-y-1 flex-col flex-between full-h">
+                                    <div class="flex-col">
+                                        <h5 style="text-align: start;" class="m-y-0 product-name"><%=product.getName()%></h5>
+                                        <div class="ellipsis txt-sm m-y-0">
+                                            <p style="text-align: start;">
+                                                <%=product.getDescription()%>
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="block__text pad-y-1 flex-col flex-between full-h">
-                                        <div class="flex-col">
-                                            <h5 style="text-align: start;" class="m-y-0 product-name">${o.name}</h5>
-                                            <div class="ellipsis txt-sm m-y-0">
-                                                <p style="text-align: start;">
-                                                    ${o.description}
+
+                                    <div class="row">
+                                        <div class="col l-6 m-y-0">
+                                            <div style="color: #4ADE80; border: 2px solid #4ADE80; width: fit-content; --rounded: 0.5rem; padding: .2rem;"
+                                                 class="txt-sm rounded bold">
+                                                <p>
+                                                    $ <%=product.getPrice()%>
                                                 </p>
                                             </div>
                                         </div>
+                                        <div class="col l-o-1 l-5 flex-center">
+                                            <%
+                                                ArrayList<ReviewDTO> review_list = (ArrayList<ReviewDTO>) request.getAttribute("REVIEW_LIST");
 
-                                        <div class="row">
-                                            <div class="col l-6 m-y-0">
-                                                <div style="color: #4ADE80; border: 2px solid #4ADE80; width: fit-content; --rounded: 0.5rem; padding: .2rem;"
-                                                     class="txt-sm rounded bold">
-                                                    <p>
-                                                        $ ${o.price}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="col l-o-1 l-5 flex-center">
-                                                <div style="color: #F2B737;">
-                                                    <i class="fa-solid fa-star"></i>
-                                                    <span
-                                                        style="color: var(--text-color); line-height: 100%; margin: auto;">4.1</span>
-                                                </div>
+                                                review_list = (review_list == null) ? new ArrayList<ReviewDTO>() : review_list;
+
+                                                float average_rating = 0;
+
+                                                for (ReviewDTO review : review_list) {
+                                                    average_rating += (float)review.getRating() / (review_list.size());
+                                                }
+                                            %>
+                                            <div style="color: #F2B737;">
+                                                <i class="fa-solid fa-star"></i>
+                                                <span
+                                                    style="color: var(--text-color); line-height: 100%; margin: auto;"><%=average_rating%></span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="overlay fixed top bot left right flex-center">
-                                <div class="popup relative pad-2 row">
-                                    <div style="margin: -1.5rem 1rem; width: fit-content;" class="absolute p-0 right text-md opacity popup-close">
-                                        <i class="fa-solid fa-xmark"></i>
-                                    </div>
+                        <%
+                            String current_form = (String) request.getParameter("current_form");
+                            String product_detail_id = (String) request.getParameter("product_id");
 
-                                    <div style="background-color: #F8F8F8; border-radius: .5rem;"
-                                         class="col l-4 flex-center full-h">
-                                        <div style="height: 95%;" class="flex-col flex-vertical-center flex-around">
-                                            <div style="width: 10rem; height: 10rem" class="img">
-                                                <img src="${o.image}"
-                                                     alt="">
-                                            </div>
+                            current_form = (current_form == null) ? "" : current_form;
+                            product_detail_id = (product_detail_id == null) ? "" : product_detail_id;
+                        %>
+                        <div class="overlay fixed top bot left right flex-center <%if (!current_form.equals("quickview_product") || !(product.getId().equals(product_detail_id))) {%>hide<%}%>">
+                            <div class="popup relative pad-2 row">
+                                <div style="margin: -1.5rem 1rem; width: fit-content;" class="absolute p-0 right text-md opacity popup-close">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </div>
 
-                                            <div class="flex flex-col flex-center full-w">
-                                                <span class="txt-md bold">${o.name}</span>
-                                                <span class="txt-sm">${o.provider_ID}</span>
-                                            </div>
+                                <div style="background-color: #F8F8F8; border-radius: .5rem;"
+                                     class="col l-4 flex-center full-h">
+                                    <div style="height: 95%;" class="flex-col flex-vertical-center flex-around">
+                                        <div style="width: 10rem; height: 10rem" class="img">
+                                            <img src="<%=product.getImage()%>"
+                                                 alt="">
+                                        </div>
 
+                                        <div class="flex flex-col flex-center full-w">
+                                            <span class="txt-md bold"><%=product.getName()%></span>
+                                            <span class="txt-sm"><%=product.getProvider_ID()%></span>
+                                        </div>
+
+                                        <form action="MainController" class="flex-col flex-vertical-center">
+                                            <input type="hidden" name="action" value="AddToCart">
+                                            <input type="hidden" name="product_ID" value="<%=product.getId()%>">
                                             <div style="width: 50%" class="flex-center">
                                                 <button type="button" style="width: 2rem; height: 2rem;"
                                                         class="btn-circle flex-center txt-xs"
@@ -254,172 +280,141 @@
                                                         class=" btn-circle flex-center txt-xs"
                                                         onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                                                     <i class="fas fa-plus"></i>
-                                                    <input type="hidden" name="plus" value="Plus">
                                                 </button>
                                             </div>
 
-                                            <div>
-                                                <button style="padding: .4rem 4rem; border-radius: .5rem;"
+                                            <div class="m-y-0">
+                                                <button type="submit" style="padding: .4rem 4rem; border-radius: .5rem;"
                                                         class="btn-md bold">Buy</button>
                                             </div>
+                                        </form>
 
-                                            <div class="flex-between">
-                                                <div class="txt-sm bold col l-2 flex-center flex-col">
-                                                    <div class="order-price">
-                                                        <span>
-                                                            $ ${o.price}
-                                                        </span>
-                                                    </div>
-                                                    <span class="txt-sm m-y-0">Price</span>
+                                        <div class="flex-between">
+                                            <div class="txt-sm bold col l-2 flex-center flex-col">
+                                                <div class="order-price flex">
+                                                    <span>
+                                                        $<%=product.getPrice()%>
+                                                    </span>
                                                 </div>
+                                                <span class="txt-sm m-y-0">Price</span>
+                                            </div>
 
-                                                <div style="margin: 0; height: 4rem;" class="separate"></div>
+                                            <div style="margin: 0; height: 4rem;" class="separate"></div>
 
-                                                <div class="txt-sm bold col l-2 flex-center flex-col">
-                                                    <div style="color: #F2B737; border: none;" class="order-price">
-                                                        <span class="flex-center">
-                                                            4.1 <i class="fa-solid fa-star"></i>
-                                                        </span>
-                                                    </div>
-                                                    <span class="txt-sm m-y-0">Average</span>
+                                            <div class="txt-sm bold col l-2 flex-center flex-col">
+                                                <div style="color: #F2B737; border: none;" class="order-price">
+                                                    <span class="flex-center">
+                                                        <%=average_rating%> <i class="fa-solid fa-star"></i>
+                                                    </span>
                                                 </div>
+                                                <span class="txt-sm m-y-0">Average</span>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div style="height: 80vh;" class="col l-8 scrollable-y">
-                                        <div class="full-h">
-                                            <div style="background-color: #F8F8F8; border-radius: .5rem;">
-                                                <div class="pad-1 border-bot">
-                                                    <span style="color: #1D1D1F;" class="txt-md bold">Description</span>
-                                                </div>
-
-                                                <div class="pad-1 txt-sm">
-                                                    ${o.description}
-                                                </div>
+                                <div style="height: 80vh;" class="col l-8 scrollable-y">
+                                    <div class="full-h">
+                                        <div style="background-color: #F8F8F8; border-radius: .5rem;">
+                                            <div class="pad-1 border-bot">
+                                                <span style="color: #1D1D1F;" class="txt-md bold">Description</span>
                                             </div>
 
-                                            <div style="background-color: #F8F8F8; border-radius: .5rem;" class="m-y-2">
-                                                <div class="pad-1 border-bot">
-                                                    <span style="color: #1D1D1F;" class="txt-md bold">Ratings and reviews</span>
-                                                </div>
+                                            <div class="pad-1 txt-sm">
+                                                <%=product.getDescription()%>
+                                            </div>
+                                        </div>
 
-                                                <div class="pad-1">
-                                                    <div class="flex flex-col border-bottom">
+                                        <div style="background-color: #F8F8F8; border-radius: .5rem;" class="m-y-2">
+                                            <div class="pad-1 border-bot">
+                                                <span style="color: #1D1D1F;" class="txt-md bold">Ratings and reviews</span>
+                                            </div>
+
+                                            <div class="pad-1">
+                                                <div class="flex flex-col border-bottom">
+                                                    <form action="MainController">
+                                                        <input type="hidden" name="action" value="AddReview">
+                                                        <input type="hidden" name="product_id" value="<%=product.getId()%>">
+                                                        <input type="hidden" name="current_form" value="quickview_product">
+
                                                         <div class="flex">
                                                             <div class="l-4">
-                                                                <h1>4.7</h1>
+                                                                <h1><%=average_rating%></h1>
                                                                 <h6 style="margin: 0 auto;" class="txt-sm">out of 5</h6>
                                                             </div>
                                                             <div style="justify-content: flex-end" class="l-8 flex-horizon-center flex-col">
                                                                 <div style="color: #F2B737;" class="flex-vertical-center flex-end txt-xl full-h">
-                                                                    <span class="flex-center">
-                                                                        <i class="fa-solid fa-star"></i>
-                                                                        <i class="fa-solid fa-star"></i>
-                                                                        <i class="fa-solid fa-star"></i>
-                                                                        <i class="fa-solid fa-star"></i>
-                                                                        <i class="fa-solid fa-star"></i>
+                                                                    <span class="flex-center rating">
+                                                                        <input type="radio" name="rating" id="star1"
+                                                                               value="1" required=""><label for="star1"><i class="fa-solid fa-star"></i></label>
+                                                                        <input type="radio" name="rating" id="star2"
+                                                                               value="2" required=""><label for="star2"><i class="fa-solid fa-star"></i></label>
+                                                                        <input type="radio" name="rating" id="star3"
+                                                                               value="3" required=""><label for="star3"><i class="fa-solid fa-star"></i></label>
+                                                                        <input type="radio" name="rating" id="star4"
+                                                                               value="4" required=""><label for="star4"><i class="fa-solid fa-star"></i></label>
+                                                                        <input type="radio" name="rating" id="star5"
+                                                                               value="5" required=""><label for="star5"><i class="fa-solid fa-star"></i></label>
                                                                     </span>
                                                                 </div>
-                                                                <h4 class="txt-xs flex-end">Tab to rate</h4>
+                                                                <h4 class="txt-xs flex-end">Click me!</h4>
                                                             </div>
                                                         </div>
 
                                                         <div class="full-w m-y-0">
                                                             <span class="txt-sm bold">Comment</span>
-                                                            <textarea name="comment" id="" rows="2" class="full-w pad-0 txt-sm"></textarea>
+                                                            <textarea name="comment" id="" rows="2" value="" class="full-w pad-0 txt-sm"></textarea>
                                                             <div class="full-w flex-end">
                                                                 <button style="padding: .2rem 2rem; border-radius: .5rem;"
                                                                         class="btn-md bold">Submit</button>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </form>
+                                                </div>
 
-                                                    <div>
-                                                        <!-- Comment item -->
-                                                        <div class="border-bot">
-                                                            <div class="flex-col m-y-1">
-                                                                <div class="flex-vertical-center flex-between">
-                                                                    <div class="txt-lg bold ">Name</div>
-                                                                    <div style="color: #F2B737;" class="flex-vertical-center m-y-0 txt-xs">
-                                                                        <span class="flex-center">
-                                                                            <i class="fa-solid fa-star"></i>
-                                                                            <i class="fa-solid fa-star"></i>
-                                                                            <i class="fa-solid fa-star"></i>
-                                                                            <i class="fa-solid fa-star"></i>
-                                                                            <i class="fa-solid fa-star"></i>
-                                                                        </span>
-                                                                    </div>
+                                                <div>
+                                                    <!-- Comment item -->
+                                                    <%
+                                                        for (ReviewDTO review : review_list) {
+                                                    %>
+                                                    <div class="border-bot">
+                                                        <div class="flex-col m-y-1">
+                                                            <div class="flex-vertical-center flex-between">
+                                                                <div class="txt-lg bold "><%=review.getUsername()%></div>
+                                                                <div class="flex-vertical-center m-y-0 txt-xs">
+                                                                    <span class="flex-center rating">
+                                                                        <input type="radio" name="rating" id="star1"
+                                                                               value="1" <%if (review.getRating() == 5) {%>checked<%}%>><label for=""><i class="fa-solid fa-star"></i></label>
+                                                                        <input type="radio" name="rating" id="star2"
+                                                                               value="2" <%if (review.getRating() == 4) {%>checked<%}%>><label for=""><i class="fa-solid fa-star"></i></label>
+                                                                        <input type="radio" name="rating" id="star3"
+                                                                               value="3" <%if (review.getRating() == 3) {%>checked<%}%>><label for=""><i class="fa-solid fa-star"></i></label>
+                                                                        <input type="radio" name="rating" id="star4"
+                                                                               value="4" <%if (review.getRating() == 2) {%>checked<%}%>><label for=""><i class="fa-solid fa-star"></i></label>
+                                                                        <input type="radio" name="rating" id="star5"
+                                                                               value="5" <%if (review.getRating() == 1) {%>checked<%}%>><label for=""><i class="fa-solid fa-star"></i></label>
+                                                                    </span>
                                                                 </div>
-                                                                <div class="m-y-0 txt-sm">Comment</div>
                                                             </div>
+                                                            <div class="m-y-0 txt-sm"><%=review.getComment()%></div>
                                                         </div>
                                                     </div>
+                                                    <%
+                                                        }
+                                                    %>
 
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>       
+                        <%
+                            }
+                        %>
 
-<!--                            <div class="overlay fixed top bot left right flex-center hide">
-                                <div class="popup relative">
-                                    <i style="margin: 1rem 2rem;"
-                                       class="fa-solid fa-xmark absolute right p-2 text-md opacity popup-close"></i>
-                                    <div class="pad-2">
-                                        <div class="row scrollable-y">
-                                            <div class="col l-6 m-6">
-                                                <div style="height: 65vh;" class="img">
-                                                    <img src="${o.image}"
-                                                         alt="">
-                                                </div>
-                                            </div>
-                                            <div class="col l-6 m-6">
-                                                <div style="height: 65vh;" class="content flex-between flex-col">
-                                                    <div>
-                                                        <h2>${o.name}</h2>
-                                                        <div class="flex m-y-0">
-                                                            <p style="color: #4ADE80; border: 2px solid #4ADE80; width: fit-content; --rounded: 0.5rem; padding: .2rem .4rem;"
-                                                               class="txt-md rounded bold">
-                                                                $ ${o.price}
-                                                            </p>
-                                                            <span class="separate flex-vertical-center"></span>
-                                                            <div style="justify-content: flex-start;" class="flex-center">
-                                                                <div style="color: #F2B737;">
-                                                                    <i class="fa-solid fa-star"></i>
-                                                                    <span
-                                                                        style="color: var(--text-color); line-height: 100%; margin: auto;">4.1</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="full-h">
-                                                        <div class="row">
-                                                            <h5 class="m-y-1">Provider: </h5>
-                                                            <h6 class="m-x-2">${o.provider_ID}</h6>
-                                                        </div>
-                                                        <div class="row">
-                                                            <h5 class="m-y-1">Description: </h5>
-                                                            <h6 class="m-x-2">${o.description}</h6>
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex-between">
-                                                        <div class="full-w">
-                                                            <button style="background-color: #0F172A; color: white;"
-                                                                    class="btn-lg full-w">
-                                                                <i class="fa-solid fa-bag-shopping"></i>
-                                                                <span style="margin-left: .75rem">Add to cart</span>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>-->
-                        </c:forEach>
 
 
                     </div>

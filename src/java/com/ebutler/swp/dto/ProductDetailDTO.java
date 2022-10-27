@@ -4,6 +4,8 @@
  */
 package com.ebutler.swp.dto;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Dang Viet
@@ -52,7 +54,6 @@ public class ProductDetailDTO {
         this.description = description;
         this.status = status;
     }
-    
 
     public String getId() {
         return id;

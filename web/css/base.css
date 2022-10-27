@@ -471,8 +471,26 @@ ul {
     padding: .375rem .625rem;
     width: fit-content;
     height: 50%;
-    color: #4ADE80; 
+    color: #4ADE80;
     border: 1px solid #4ADE80;
+}
+
+.rating {
+    transform: rotate(180deg);
+}
+
+.rating label {
+    transform: rotate(-180deg);
+}
+
+.rating input{
+    display: none;
+}
+
+.rating input:checked ~ label,
+.rating input:hover ~ label {
+    cursor: pointer;
+    color: #F2B737;
 }
 /* popup end */
 

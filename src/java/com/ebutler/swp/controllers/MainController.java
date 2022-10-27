@@ -248,6 +248,14 @@ public class MainController extends HttpServlet {
     private final String UPDATE_ADDRESS = "UpdateAddress";
     private final String UPDATE_ADDRESS_CONTROLLER = "UpdateAddressController";
     
+//    Add review
+    private final String ADD_REVIEW = "AddReview";
+    private final String ADD_REVIEW_CONTROLLER = "AddReviewController";
+    
+//    Load review
+    private final String LOAD_REVIEW = "LoadReview";
+    private final String LOAD_REVIEW_CONTROLLER = "LoadingReviewController";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -402,6 +410,10 @@ public class MainController extends HttpServlet {
             }
              else if (action.equals(PROVIDER_DELETE_ORDER)) {
                 url = PROVIDER_DELETE_ORDER_CONTROLLER ; 
+            } else if (action.equals(ADD_REVIEW)) {
+                url = ADD_REVIEW_CONTROLLER;
+            } else if (action.equals(LOAD_REVIEW)) {
+                url = LOAD_REVIEW_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

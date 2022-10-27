@@ -6,6 +6,7 @@ package com.ebutler.swp.dao;
 
 import com.ebutler.swp.dto.CustomerDTO;
 import com.ebutler.swp.dto.ProductCategoryDTO;
+import com.ebutler.swp.dto.ReviewDTO;
 import com.ebutler.swp.utils.DBUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,7 +28,8 @@ public class CustomerDAO {
     private final String UPDATE_CURRENT_CUSTOMER_INFO = "UPDATE tblCustomer SET avatar=?,name=?, email=?,dob= ?, gender=?, phone=?  WHERE username= ?";
     private static final String CHECK_EXIST_ACCOUNT = "select username from tblCustomer where username = ?";
     private static final String CREATE_CUSTOMER = "insert into tblCustomer([username], [password], [role_ID], [phone], [email], [name], gender, dob, avatar, [status]) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+    
+    
     public boolean InsertCus(CustomerDTO customer) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -59,6 +61,7 @@ public class CustomerDAO {
         
         return false;
     }
+    
     public static boolean checkExistAccount(String username) throws SQLException{
         boolean check = true;
         Connection conn = null;
