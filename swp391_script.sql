@@ -19,8 +19,8 @@ CREATE TABLE tblUser(
 	username nvarchar(30) PRIMARY KEY,
 	[password] nvarchar(30) NOT NULL,
 	role_ID nvarchar(10) NOT NULL,
-	[phone] nvarchar(11) UNIQUE NOT NULL,
-	[email] [nvarchar] (30) UNIQUE NOT NULL,
+	[phone] nvarchar(11),
+	[email] [nvarchar] (30),
 	status [decimal](1)
 )
 select * from tblUser
@@ -315,6 +315,35 @@ BEGIN
 	FROM inserted
 	
 	INSERT INTO tblUser (username, password, role_ID, phone, email, status) VALUES (@username, @password, @role_ID, @phone, @email, @status)
+END;
+GO
+
+--- bảng provider: chỉnh sửa thông tin -> cập nhật bảng user
+CREATE TRIGGER trig_pro_updateStatus ON tblProvider 
+AFTER UPDATE
+AS
+BEGIN 
+	
+	DECLARE @username nvarchar(30), @password nvarchar(30), @phone nvarchar (11), @email nvarchar(30), @status decimal(1)
+	
+	SELECT @username = username, @password = password, @phone = phone, @email = email, @status = status
+	FROM inserted
+	
+	UPDATE tblUser SET password = @password, phone = @phone, email = @email,  status = @status WHERE username = @username
+END;
+GO
+
+--- bảng shipper: tạo account -> cập nhật bảng user
+CREATE TRIGGER trig_shipper_insert ON tblShipper
+FOR INSERT
+AS
+BEGIN 
+	DECLARE @username nvarchar(30), @password nvarchar(30), @status decimal(1)
+	
+	SELECT @username = username, @password = password, @status = status
+	FROM inserted
+	
+	INSERT INTO tblUser (username, password, role_ID, status) VALUES (@username, @password, 'SHIP',@status)
 END;
 GO
 
