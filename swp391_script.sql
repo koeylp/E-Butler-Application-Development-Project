@@ -370,7 +370,7 @@ BEGIN
 	
 	SET @price = (select sum(price) from tblOrder_Product_Detail where order_ID = @order_id)
 	
-	IF((select * from tblShipperIncome sibm where MONTH(@order_date) = sibm.month and YEAR(@order_date) = sibm.year) LIKE NULL)
+	IF((select * from tblShipperIncome sibm where MONTH(@order_date) = sibm.month and YEAR(@order_date) = sibm.year and @shipper_id = shipper_id) LIKE NULL)
 	BEGIN
 		INSERT INTO tblShipperIncome(month, year, shipper_id, total) values (MONTH(@order_date), YEAR(@order_date), @shipper_id, @price)
 	END
