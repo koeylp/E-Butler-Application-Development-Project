@@ -252,14 +252,13 @@ GO
 CREATE TABLE tblDelivery (
 	id int IDENTITY(1,1) PRIMARY KEY,
 	order_id int REFERENCES tblOrder(order_ID),
-	order_date date,
 	[address] nvarchar(max),
 	shipper_id nvarchar(30) REFERENCES tblShipper(username),
 	[status] int
 )
 GO
 
-CREATE TABLE tblShipperIncomeByMonth (
+CREATE TABLE tblShipperIncome (
 	id int IDENTITY(1,1) PRIMARY KEY,
 	[month] int,
 	[year] int,
@@ -356,7 +355,31 @@ END;
 GO
 
 -------- shipper income ---------
+CREATE TRIGGER trig_shipper_income ON tblDelivery
+AFTER UPDATE
+AS
+BEGIN
+	IF((SELECT status FROM inserted) <> 2)
+	ROLLBACK TRANSACTION
 
+	DECLARE @order_date date, @order_id int, @price decimal(12), @shipper_id nvarchar(30)
+	
+	SELECT @order_id = order_id, @shipper_id = shipper_id FROM inserted;
+	
+	SELECT @order_date = o.order_date FROM tblOrder o WHERE o.order_ID = @order_id
+	
+	SET @price = (select sum(price) from tblOrder_Product_Detail where order_ID = @order_id)
+	
+	IF((select * from tblShipperIncome sibm where MONTH(@order_date) = sibm.month and YEAR(@order_date) = sibm.year) LIKE NULL)
+	BEGIN
+		INSERT INTO tblShipperIncome(month, year, shipper_id, total) values (MONTH(@order_date), YEAR(@order_date), @shipper_id, @price)
+	END
+	ELSE
+	BEGIN
+		UPDATE tblShipperIncome SET total = total + @price WHERE month = MONTH(@order_date) and year = YEAR(@order_date) and shipper_id = @shipper_id
+	END
+END;
+GO
 
 -------------------------------------------------------- INSERT -----------------------------------------------------------------
 -- bảng role
