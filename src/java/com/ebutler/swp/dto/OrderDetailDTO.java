@@ -36,7 +36,7 @@ public class OrderDetailDTO {
         this.status = status;
     }
 
-    public OrderDetailDTO(int id, int order_ID , String name, int quantity, double price, double total, int status ) {
+    public OrderDetailDTO(int id, int order_ID ,int product_detail_ID , String name, int quantity, double price, double total, int status ) {
         this.id = id;
         this.order_ID = order_ID;
         this.quantity = quantity;
@@ -44,6 +44,7 @@ public class OrderDetailDTO {
         this.status = status;
         this.name = name;
         this.total = total;
+        this.product_detail_ID = product_detail_ID ; 
     }
 
     public String getName() {

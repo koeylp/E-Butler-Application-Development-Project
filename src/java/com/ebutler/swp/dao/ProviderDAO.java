@@ -63,10 +63,18 @@ public class ProviderDAO {
     private final String PROVIDER_ADD_SERVICE = "INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID , name , price , description , status) VALUES (? , ? , null , ? , ? , null , 1 )" ; 
     private final String ADD_STAFF = "INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES (?,?,?,?,null,3)" ;
     private final String FILTER_STAFF_PENDING = "SELECT Staff.staff_ID,S.name , Staff.name, Staff.id_card, Staff.avatar, Staff.status FROM tblStaff Staff JOIN tblService S ON Staff.service_ID = S.service_ID WHERE Staff.provider_ID = ? AND status = 3" ;
-    private final String LIST_ORDER_PRODUCT = "SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = ? " ;  
+    private final String LIST_ORDER_PRODUCT = "SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total , Ord.shipping, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = ? " ;  
     private final String LIST_ORDER_SERVICE = "SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Service_Detail OrdS ON Ord.order_ID = OrdS.order_ID ) JOIN tblServiceDetail PD ON PD.id = OrdS.service_detail_ID WHERE PD.provider_ID = ? " ;  
-    private final String LIST_ORDERDETAIL = "SELECT OrdP.id , Ord.order_ID, PD.name, OrdP.quantity, PD.price, Ord.total, OrdP.status FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = ? AND Ord.order_ID = ? " ; 
+    private final String LIST_ORDERDETAIL = "SELECT OrdP.id , Ord.order_ID, OrdP.product_detail_ID, PD.name, OrdP.quantity, PD.price, Ord.total, OrdP.status FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = ? AND Ord.order_ID = ? " ; 
     private final String LoadOrderInfor = "SELECT Ord.order_ID, Ord.order_Date, Ord.status, Cus.name, Cus.phone, Cus.email FROM tblOrder Ord JOIN tblCustomer Cus ON Ord.customer_ID = Cus.username  WHERE order_ID = ? AND customer_ID = ? " ; 
+    //DELETE ORDER 
+    private final String PROVIDER_DELETE_ORDER = "UPDATE tblOrder SET status = 3 WHERE order_ID = ? " ; 
+    private final String PROVIDER_DELETE_ORDER_DETAIL = "UPDATE tblOrder_Product_Detail SET status = 3 WHERE order_ID = ? " ; 
+    private final String PROVIDER_DELETE_ORDER_SHIPPER = "UPDATE tblDelivery SET status = 3 WHERE order_id = ? " ; 
+    private final String PROVIDER_QUANTITY_PRODUCT = "SELECT quantity FROM tblProductDetail WHERE id = ? " ; 
+    private final String PROVIDER_UPDATE_QUANTITY_PRODUCT = "UPDATE tblProductDetail SET quantity = ? WHERE id = ?  " ;  
+    
+    
     public boolean InsertPro(ProviderDTO provider) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -98,7 +106,65 @@ public class ProviderDAO {
 
         return false;
     }
-
+    
+    public int getProductQuantity(int id) throws SQLException {
+        int quantity = 0 ;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(PROVIDER_QUANTITY_PRODUCT); 
+                ptm.setInt(1, id);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                   quantity = rs.getInt(1) ;
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return quantity;
+    }
+    
+    public boolean updateReturnQuantity(int quantity, int id) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(PROVIDER_UPDATE_QUANTITY_PRODUCT); 
+                ptm.setInt(1, quantity);
+                ptm.setInt(2, id);
+                check = ptm.executeUpdate() > 0 ? true : false; 
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
     public ProviderDTO getProvider(String username, String password) throws SQLException {
         ProviderDTO provider = new ProviderDTO();
         Connection conn = null;
@@ -1034,7 +1100,7 @@ public class ProviderDAO {
                 ptm.setString(1, provider.getUsername());
                 rs = ptm.executeQuery() ; 
                 while (rs.next()) {
-                    listOrder.add(new OrderDTO(rs.getInt(1), rs.getDate(2), rs.getString(3), rs.getInt(4), rs.getDouble(5))) ; 
+                    listOrder.add(new OrderDTO(rs.getInt(1), rs.getDate(2), rs.getString(3), rs.getInt(4),rs.getDouble(5), rs.getString(6), rs.getString(7))) ;  
                 }
             }
         } catch (Exception e) {
@@ -1093,7 +1159,7 @@ public class ProviderDAO {
                 ptm.setInt(2, orderID ); 
                 rs = ptm.executeQuery() ; 
                 while (rs.next()) {
-                    listOrder.add(new OrderDetailDTO(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(4), rs.getDouble(5), rs.getDouble(6), rs.getInt(7))) ;
+                    listOrder.add(new OrderDetailDTO(rs.getInt(1), rs.getInt(2),rs.getInt(3), rs.getString(4), rs.getInt(5), rs.getDouble(6), rs.getDouble(7), rs.getInt(8))) ;
                 }
             }
         } catch (Exception e) {
@@ -1140,6 +1206,84 @@ public class ProviderDAO {
         }
         return listOrder ; 
     } 
+    public boolean deleteOrder(int orderID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(PROVIDER_DELETE_ORDER);
+                ptm.setInt(1, orderID);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    public boolean deleteOrderDetail(int orderID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(PROVIDER_DELETE_ORDER_DETAIL);
+                ptm.setInt(1, orderID);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    public boolean deleteOrderDelivery(int orderID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(PROVIDER_DELETE_ORDER_SHIPPER);
+                ptm.setInt(1, orderID);
+                check = ptm.executeUpdate() > 0 ? true : false; 
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
     public static void main(String[] args) throws SQLException {
         ProviderDAO dao = new ProviderDAO();
         boolean check = false ; 
@@ -1148,9 +1292,13 @@ public class ProviderDAO {
         ProviderDTO provider = new ProviderDTO();
         provider = dao.getProvider("provider2", "1");
         listOrder = dao.loadOrderInfo(1, "Nguyen Trong Toan (K16_HCM)") ; 
-        for (OrderDetailInfoDTO providerServiceDTO1 : listOrder) { 
-            System.out.println(providerServiceDTO1.toString());
-        }
+//        for (OrderDetailInfoDTO providerServiceDTO1 : listOrder) { 
+//            System.out.println(providerServiceDTO1.toString());
+//        }
+            int id = 81 ; 
+            int quantity = dao.getProductQuantity(id) ; 
+            System.out.println(quantity);
+        
 //        System.out.println(check);
     }
 }

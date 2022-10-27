@@ -1827,13 +1827,13 @@ insert into tblShipper(username, password, name, status) values ('shopee', '1', 
 insert into tblShipper(username, password, name, status) values ('be', '1', 'Be', 1)
 
 --- bảng shipper ---
-
 SELECT * FROM tblOrder
 SELECT * FROM tblOrder_Product_Detail 
+SELECT * FROM tblDelivery
+SELECT * FROM tblShipper
 SELECT * FROM tblOrder_Service_Detail
 SELECT * FROM tblProductDetail
 SELECT * FROM tblServiceDetail
-SELECT * FROM tblOrder
 SELECT * FROM tblUser
 SELECT * FROM tblOrder_Product_Detail WHERE order_ID = 1
 SELECT * FROM tblOrder_Service_Detail WHERE order_ID = 1
@@ -1849,10 +1849,19 @@ FROM [tblServiceDetail] se
 JOIN [tblStaff] st ON se.staff_ID = st.staff_ID
 WHERE se.id = 1;
 
+SELECT OrdP.id , Ord.order_ID, PD.name, OrdP.quantity, PD.price, Ord.total, OrdP.status FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = 'provider2' AND Ord.order_ID = '1'
 
 
+SELECT DISTINCT  Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total , Ord.shipping , PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = 'provider2'
 
 
+SELECT OrdP.id , Ord.order_ID, OrdP.product_detail_ID , PD.name, OrdP.quantity, PD.price, Ord.total, OrdP.status FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = 'provider2' AND Ord.order_ID = 1
 
-
-
+UPDATE tblOrder SET status = 0 WHERE order_ID = 5
+UPDATE tblOrder_Product_Detail SET status = 0 WHERE order_ID = 5
+UPDATE tblDelivery SET status = 3 WHERE order_id = 5
+UPDATE tblProductDetail SET quantity = ? WHERE id = ? 
+SELECT quantity FROM tblProductDetail WHERE id = 81
+SELECT * FROM tblProductDetail
+select * from tblUser order by username
+OFFSET 10 ROWS

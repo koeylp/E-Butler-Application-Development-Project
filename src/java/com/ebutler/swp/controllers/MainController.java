@@ -196,6 +196,9 @@ public class MainController extends HttpServlet {
         //2.Load list Order Deatil
     private final String PROVIDER_ORDER_DETAIL = "ProviderOrderDetail" ; 
     private final String PROVIDER_ORDER_DETAIL_CONTROLLER = "Provider_Order_DetailController" ;  
+        //3.Delete Order
+    private final String PROVIDER_DELETE_ORDER = "ProviderDeleteOrder" ;
+    private final String PROVIDER_DELETE_ORDER_CONTROLLER = "Provider_Delete_OrderController" ;
 
     //4.STAFF PROVIDER
         //1.Load List  
@@ -396,6 +399,9 @@ public class MainController extends HttpServlet {
                 url = SET_ADDRESS_DEFAULT_CONTROLLER;
             } else if (action.equals(UPDATE_ADDRESS)) {
                 url = UPDATE_ADDRESS_CONTROLLER;
+            }
+             else if (action.equals(PROVIDER_DELETE_ORDER)) {
+                url = PROVIDER_DELETE_ORDER_CONTROLLER ; 
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

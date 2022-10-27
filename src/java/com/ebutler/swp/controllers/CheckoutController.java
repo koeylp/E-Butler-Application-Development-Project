@@ -77,7 +77,7 @@ public class CheckoutController extends HttpServlet {
                         orderDao.insertDelivery(order_ID, "123 Hollywood Walk of Fame", shipping);
                         for (ProductDetailDTO product : cart.getCart().values()) {
                             
-                            orderDao.insertOrderDetail(product.getId(), order_ID, product.getQuantity(), product.getPrice(), 1);
+                            orderDao.insertOrderDetail(product.getId(), order_ID, product.getQuantity(), product.getPrice(), 0);
                             productDao.setQuantiy(product.getId(), product.getQuantity());
                         }
                         statement = confirmation.getSuccess();
