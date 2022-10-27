@@ -7,7 +7,6 @@ package com.ebutler.swp.controllers;
 import com.ebutler.swp.dao.ProductDAO;
 import com.ebutler.swp.dto.ProductDetailDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -38,8 +37,8 @@ public class ProductDetailByTypeController extends HttpServlet {
             int numberPageProductDetail = dao.getNumberPageProductDetail(category_ID, productID); 
             List<ProductDetailDTO> list = dao.getListProductByPlaceDetail(category_ID, productID);
             
-            session.setAttribute("PRODUCT_DETAIL_BY_TYPE", numberPageProductDetail);
-            session.setAttribute("NUMBER_PAGE_PRODUCT_DETAIL", dao);
+            session.setAttribute("PRODUCT_DETAIL_BY_TYPE", list);
+            session.setAttribute("NUMBER_PAGE_PRODUCT_DETAIL", numberPageProductDetail);
             url = SUCCESS;
             
         } catch (Exception e) {

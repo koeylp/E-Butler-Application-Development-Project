@@ -45,7 +45,7 @@
 
     <body>
         <%
-            List<ProductDetailDTO> productList = (List<ProductDetailDTO>) session.getAttribute("PRODUCT_DETAIL_BY_TYPE");
+            //List<ProductDetailDTO> productList = (List<ProductDetailDTO>) session.getAttribute("PRODUCT_DETAIL_BY_TYPE");
             String product_id = (String) session.getAttribute("PRODUCT_ID");
 
             product_id = (product_id == null) ? "" : product_id;
