@@ -455,7 +455,8 @@
 
                                     <!--Shipping method-->
                                     <%
-                                        if (!cart.getCart().isEmpty()) {
+                                       
+                                        if (cart != null) {
                                     %>
                                     <div class="relative m-y-32">
                                         <div style="border: 1px solid #E5E7EB; border-radius: 1rem;" class="pad-2 flex-between">
