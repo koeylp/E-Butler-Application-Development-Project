@@ -2,6 +2,7 @@
 <%@page import="com.ebutler.swp.dto.ProductDetailDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -166,15 +167,15 @@
                     <div class="row m-y-1">
 
                         <!-- product item -->
-                        <%
-                            for (ProductDetailDTO product : productList) {
-                        %>
+                      
+                        
+                        <c:forEach items="${sessionScope.PRODUCT_DETAIL_BY_TYPE}" var="o">
                         <div class="col l-3 s-6 m-y-1">
                             <div class="block__item flex-between">
                                 <div style="max-height: 15rem; min-height: 15rem;" class="block__img flex-center relative">
-                                    <img src="<%=product.getImage()%>"
+                                    <img src="${o.image}"
                                          alt="">
-                                    <a href="MainController?action=AddToCart&product_ID=<%= product.getId()%>"
+                                    <a href="MainController?action=AddToCart&product_ID=${o.id}"
                                        style="background-color: black; color: white; right: 52%;"
                                        class="txt-border link absolute card-extend bot">
                                         <i class="fa-solid fa-bag-shopping"></i>
@@ -188,10 +189,10 @@
                                 </div>
                                 <div class="block__text pad-y-1 flex-col flex-between full-h">
                                     <div class="flex-col">
-                                        <h5 style="text-align: start;" class="m-y-0 product-name"><%=product.getName()%></h5>
+                                        <h5 style="text-align: start;" class="m-y-0 product-name">${o.name}</h5>
                                         <div class="ellipsis txt-sm m-y-0">
                                             <p style="text-align: start;">
-                                                <%=product.getDescription()%>
+                                                ${o.description}
                                             </p>
                                         </div>
                                     </div>
@@ -201,7 +202,7 @@
                                             <div style="color: #4ADE80; border: 2px solid #4ADE80; width: fit-content; --rounded: 0.5rem; padding: .2rem;"
                                                  class="txt-sm rounded bold">
                                                 <p>
-                                                    $ <%=product.getPrice()%>
+                                                    $ ${o.price}
                                                 </p>
                                             </div>
                                         </div>
@@ -225,18 +226,18 @@
                                     <div class="row scrollable-y">
                                         <div class="col l-6 m-6">
                                             <div style="height: 65vh;" class="img">
-                                                <img src="<%=product.getImage()%>"
+                                                <img src="${o.image}"
                                                      alt="">
                                             </div>
                                         </div>
                                         <div class="col l-6 m-6">
                                             <div style="height: 65vh;" class="content flex-between flex-col">
                                                 <div>
-                                                    <h2><%=product.getName()%></h2>
+                                                    <h2>${o.name}</h2>
                                                     <div class="flex m-y-0">
                                                         <p style="color: #4ADE80; border: 2px solid #4ADE80; width: fit-content; --rounded: 0.5rem; padding: .2rem .4rem;"
                                                            class="txt-md rounded bold">
-                                                            $ <%=product.getPrice()%>
+                                                            $ ${o.price}
                                                         </p>
                                                         <span class="separate flex-vertical-center"></span>
                                                         <div style="justify-content: flex-start;" class="flex-center">
@@ -251,11 +252,11 @@
                                                 <div class="full-h">
                                                     <div class="row">
                                                         <h5 class="m-y-1">Provider: </h5>
-                                                        <h6 class="m-x-2"><%=product.getProvider_ID()%></h6>
+                                                        <h6 class="m-x-2">${o.provider_ID}</h6>
                                                     </div>
                                                     <div class="row">
                                                         <h5 class="m-y-1">Description: </h5>
-                                                        <h6 class="m-x-2"><%=product.getDescription()%></h6>
+                                                        <h6 class="m-x-2">${o.description}</h6>
                                                     </div>
                                                 </div>
                                                 <div class="flex-between">
@@ -273,9 +274,8 @@
                                 </div>
                             </div>
                         </div>
-                        <%
-                            }
-                        %>
+                                                    </c:forEach>
+                       
 
                     </div>
 
@@ -283,10 +283,15 @@
                         <div class="row">
                             <div class="col l-6">
                                 <ul class="row pad-1">
-                                    <li class="bold text-circle mx-1">1</li>
+                                    <c:forEach begin="1" end="${sessionScope.NUMBER_PAGE_PRODUCT_DETAIL}" var="i">
+                                        <li class="bold text-circle mx-1">
+                                            <a href="#">${i}</a>
+                                        </li>
+                                    </c:forEach>
+<!--                                    <li class="bold text-circle mx-1">1</li>
                                     <li class="bold text-circle mx-1">2</li>
                                     <li class="bold text-circle mx-1">3</li>
-                                    <li class="bold text-circle mx-1">4</li>
+                                    <li class="bold text-circle mx-1">4</li>-->
                                 </ul>
                             </div>
                         </div>

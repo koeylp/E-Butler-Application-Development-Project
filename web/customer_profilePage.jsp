@@ -411,6 +411,39 @@
                                 </div>
                                 </c:forEach>
                                 
+                                <!-- Service start -->
+                                 <c:forEach items="${sessionScope.ORDERED_SERVICE_LIST_PENDING}" var="o">
+                                <div class="order-card m-y-12">
+                                    <div class="flex">
+                                        <div class="flex-center order-img">
+                                            <img src="${o.image}"
+                                                 alt="">
+                                        </div>
+                                        <div style="flex: 1; margin-left: 1rem;" class="flex-col">
+                                            <div class="flex-between">
+                                                <div class="flex-col flex-horizon-center">
+                                                    <span class="txt-lg bold">${o.service_name}</span>
+                                                    <div class="flex-horizon-center">
+                                                        <span class="txt-md">Service</span>
+                                                        <span class="m-x-12">|</span>
+                                                        <span class="txt-md">Service Category</span>
+                                                    </div>
+                                                </div>
+                                                <div class="order-price bold">
+                                                    <span>
+                                                        $${o.price}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div style="height: 50%;" class="flex-end flex-col">
+                                                <span class="txt-md bold">Staff's name:  ${o.staff_name}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </c:forEach>
+                                <!-- Service end -->
+                                
 <!--                                <div class="order-card m-y-12">
                                     <div class="flex">
                                         <div class="flex-center order-img">

@@ -23,7 +23,7 @@ CREATE TABLE tblUser(
 	[email] [nvarchar] (30) UNIQUE NOT NULL,
 	status [decimal](1)
 )
---select * from tblUser
+select * from tblUser
 
 CREATE TABLE tblCustomer (
 	[username] nvarchar(30) PRIMARY KEY,
@@ -37,7 +37,7 @@ CREATE TABLE tblCustomer (
 	avatar nvarchar(max) ,
 	[status] [decimal](1)
 )
---select * from tblCustomer
+select * from tblCustomer
 GO
 
 CREATE TABLE tblProvider (
@@ -66,7 +66,7 @@ CREATE TABLE tblDistrict (
 )
 GO
 
---select street, district_ID, user_ID, status from tblAddress where user_ID = 'doangiabao'
+select street, district_ID, user_ID, status from tblAddress where user_ID = 'doangiabao'
 
 
 CREATE TABLE tblAddress( 
@@ -139,20 +139,20 @@ CREATE TABLE tblService (
 	[image] nvarchar(max)
 )
 GO
---select * from tblServiceCategory
---select * from tblService
---select * from tblServiceDetail
---select * from tblStaff
---select * from tblService where category_ID = 'HC'
+select * from tblServiceCategory
+select * from tblService
+select * from tblServiceDetail
+select * from tblStaff
+select * from tblService where category_ID = 'HC'
 
-/*select distinct cate.category_ID, cate.name, cate.image, service.service_ID from tblServiceCategory cate JOIN tblService service 
-on cate.category_ID = service.category_ID where cate.category_ID = 'HC'*/
+select distinct cate.category_ID, cate.name, cate.image, service.service_ID from tblServiceCategory cate JOIN tblService service 
+on cate.category_ID = service.category_ID where cate.category_ID = 'HC'
 
-/*select staff.staff_ID, staff.provider_ID, staff.service_ID, staff.name, staff.id_card, staff.avatar, staff.status, detail.price from tblStaff staff 
+select staff.staff_ID, staff.provider_ID, staff.service_ID, staff.name, staff.id_card, staff.avatar, staff.status, detail.price from tblStaff staff 
 JOIN tblServiceDetail detail ON staff.staff_ID = detail.staff_ID JOIN tblService service ON service.service_ID = detail.service_ID  WHERE staff.service_ID = '1'
 
 select staff.staff_ID, staff.provider_ID, staff.service_ID, staff.name, staff.id_card, staff.avatar, staff.status, detail.price from tblStaff staff 
-JOIN tblServiceDetail detail ON staff.staff_ID = detail.staff_ID WHERE staff.service_ID = '1'*/
+JOIN tblServiceDetail detail ON staff.staff_ID = detail.staff_ID WHERE staff.service_ID = '1'
 --STAFF
 CREATE TABLE tblStaff (
 	staff_ID [int] IDENTITY(1,1) PRIMARY KEY ,
@@ -163,6 +163,7 @@ CREATE TABLE tblStaff (
 	[avatar] nvarchar(max),
 	[status] decimal(1) NOT NULL,
 )
+
 GO
 
 
@@ -228,7 +229,10 @@ CREATE TABLE tblAdmin (
 )
 GO
 
-
+SELECT se.id, se.staff_ID, se.[name], st.[name], se.price, st.avatar, se.[description], st.[status]
+FROM [tblServiceDetail] se
+JOIN [tblStaff] st ON se.staff_ID = st.staff_ID 
+WHERE se.id = 3;
 
 
 ------------------------------------------------------- TRIGGER ---------------------------------------------------------------
@@ -289,8 +293,6 @@ BEGIN
 	UPDATE tblUser SET password = @password, phone = @phone, email = @email,  status = @status WHERE username = @username
 END;
 GO
-
-
 
 -------------------------------------------------------- INSERT -----------------------------------------------------------------
 -- bảng role
@@ -1782,6 +1784,23 @@ INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,descri
 
 INSERT INTO tblUser(username, password, role_ID, phone, email, status) 
 VALUES('hello', '1', 'CUS', '0123456789', 'hello@gmail.com', 1)
+
+
+SELECT customer.username, order1.order_Date, order1.payment, staff.name as [staff_name], service.name as  [service_name] , service.image, orderDetail.price, order1.status FROM tblOrder order1 JOIN tblOrder_Service_Detail orderDetail ON order1.order_ID = orderDetail.order_ID JOIN tblStaff staff on staff.staff_ID = orderDetail.staff_ID JOIN tblCustomer customer ON customer.username = order1.customer_ID JOIN tblService service ON service.service_ID = orderDetail.id where customer.username='Viet Dang' and order1.status = 0;
+
+SELECT customer.username, order1.order_Date, order1.payment, staff.name as [staff_name], service.name as  [service_name] , service.image, orderDetail.price, order1.status
+FROM tblOrder order1 JOIN tblOrder_Service_Detail orderDetail ON order1.order_ID = orderDetail.order_ID 
+JOIN tblStaff staff on staff.staff_ID = orderDetail.staff_ID
+JOIN tblCustomer customer ON customer.username = order1.customer_ID 
+JOIN tblService service ON service.service_ID = orderDetail.id
+where customer.username='Viet Dang' and order1.status = 0;
+
+SELECT *
+FROM tblOrder order1 JOIN tblOrder_Service_Detail orderDetail ON order1.order_ID = orderDetail.order_ID 
+JOIN tblStaff staff on staff.staff_ID = orderDetail.staff_ID
+JOIN tblCustomer customer ON customer.username = order1.customer_ID where customer.username='Viet Dang' and order1.status = 0;
+
+select * from tblService
 
 SELECT * FROM tblOrder
 SELECT * FROM tblOrder_Product_Detail 
