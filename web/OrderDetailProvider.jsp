@@ -140,17 +140,26 @@
                                         <div class="flexStatus">
                                             <li style="list-style:none ; padding-top: 6px ; padding-right: 8px "><i class="bx bx-calendar-event mx-2"></i>Status: </li>
                                             <%
-                                                int status = listDetailInfo.get(0).getStatus();
-                                                if (status == 1) {
-                                            %>
-                                            <span class="badge bg-label-success me-1 changeStatus">In Progress</span>
-                                            <%
-                                            } else {
+                                                            int status = listDetailInfo.get(0).getStatus();
+                                                            if (status == 1) {
+                                                        %>
+                                                        <span class="badge bg-label-info me-1 changeStatus">InProgress</span>
+                                                        <%
+                                                        } else if (status == 2) {
 
-                                            %>
-                                            <span class="badge bg-label-warning me-1 changeStatus">Pending</span>
-                                            <%                           }
-                                            %>
+                                                        %>
+                                                        <span class="badge bg-label-success me-1 changeStatus">Done</span>
+                                                        <% 
+                                                            } else if (status == 0) {
+                                                        %>
+                                                        <span class="badge bg-label-warning me-1 changeStatus">Pending</span>
+                                                        <%
+                                                            } else if (status == 3) {
+                                                        %>
+                                                        <span class="badge bg-label-danger me-1 changeStatus">Cancel</span> 
+                                                        <%
+                                                            }
+                                                        %>
                                         </div>
 
 
