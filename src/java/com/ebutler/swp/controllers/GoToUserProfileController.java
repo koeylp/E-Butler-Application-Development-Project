@@ -7,9 +7,11 @@ package com.ebutler.swp.controllers;
 import com.ebutler.swp.dao.AddressDAO;
 import com.ebutler.swp.dao.CustomerDAO;
 import com.ebutler.swp.dao.OrderHistoryDAO;
+import static com.ebutler.swp.dao.OrderHistoryDAO.getListServideOrderHistory;
 import com.ebutler.swp.dto.AddressDTO;
 import com.ebutler.swp.dto.CustomerDTO;
 import com.ebutler.swp.dto.ProductOrderHistoryDTO;
+import com.ebutler.swp.dto.ServiceOrderedHistoryDTO;
 import com.ebutler.swp.dto.UserDTO;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,10 +46,12 @@ public class GoToUserProfileController extends HttpServlet {
 //            session.setAttribute("CURRENT_CUSTOMER", customer);
             OrderHistoryDAO historyDAO = new OrderHistoryDAO();
             List<ProductOrderHistoryDTO> orderedProductListPending = historyDAO.getListProductOrderHistory(currentUser.getUsername(), 0);
+            List<ServiceOrderedHistoryDTO> orderedServiceListPending = historyDAO.getListServideOrderHistory(currentUser.getUsername(), 0);
             AddressDAO addressDAO = new AddressDAO();
             ArrayList<AddressDTO> list_address = addressDAO.SelectAddress(currentUser.getUsername());
             session.setAttribute("CURRENT_CUSTOMER", customer);
             session.setAttribute("ORDERED_PRODUCT_LIST_PENDING", orderedProductListPending);
+            session.setAttribute("ORDERED_SERVICE_LIST_PENDING", orderedServiceListPending);
             request.setAttribute("CURRENT_FORM", current_form);
             
             customer.setAddress_list(list_address);
