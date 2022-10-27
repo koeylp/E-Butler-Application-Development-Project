@@ -275,38 +275,6 @@
                                                         style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
                                                         class="input txt-sm" type="password">
                                                 </div>
-                                                <div class="flex-around m-y-0">
-                                                    <div class="flex">
-                                                        <input id="radio-1" name="shipping" type="radio" checked class="m-x-0">
-                                                        <div class="flex-center">
-                                                            <label for="radio-1" class="radio-label m-x-0">
-                                                                <div style="width: 2.5rem;" class="img">
-                                                                    <img src="https://static.topcv.vn/company_logos/3hGPe93OfHOUL2QUpNJijMwJ6s0uZ3Gr_1637140440____ea75d9fb6acf791dbeee91c457f6863e.png" alt="">
-                                                                </div>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex">   
-                                                        <input id="radio-2" name="shipping" type="radio" checked class="m-x-0">
-                                                        <div class="flex-center">
-                                                            <label for="radio-2" class="radio-label m-x-0">
-                                                                <div style="width: 2.5rem;" class="img">
-                                                                    <img src="https://cdn.worldvectorlogo.com/logos/grab-2.svg" alt="">
-                                                                </div>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex">   
-                                                        <input id="radio-2" name="shipping" type="radio" checked class="m-x-0">
-                                                        <div class="flex-center">
-                                                            <label for="radio-3" class="radio-label m-x-0">
-                                                                <div style="width: 2.5rem;" class="img">
-                                                                    <img src="https://play-lh.googleusercontent.com/rHa7AFzrNd5vw2ZKr05ANvOsSgaIk_vhKq_G9rcnG3HWjb0zCxr_mK4Ap552m5FdIA" alt="">
-                                                                </div>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                                 <div class="flex-vertical-center">
                                                     <button type="button" class="btn-lg txt-md bold m-y-32">Save and next to shipping</button>
                                                     <button type="button" style="margin-left: 1rem; background-color: #EFEFEF; color: black"
@@ -419,13 +387,13 @@
                                             <div class="order-card m-y-12">
                                                 <div class="flex">
                                                     <div class="flex-center order-img">
-                                                        <img src="<%= service.getAvatar() %>"
+                                                        <img src="<%= service.getAvatar()%>"
                                                              alt="">
                                                     </div>
                                                     <div style="flex: 1; margin-left: 1rem;" class="flex-col">
                                                         <div class="flex-between">
                                                             <div class="flex-col flex-horizon-center">
-                                                                <span class="txt-md bold"><%= service.getServiceName() %></span>
+                                                                <span class="txt-md bold"><%= service.getServiceName()%></span>
                                                             </div>
                                                             <div class="order-price txt-sm bold">
                                                                 <span>
@@ -472,6 +440,60 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <%
+                                        if (!cart.getCart().isEmpty()) {
+                                    %>
+                                    <div class="relative m-y-32">
+                                        <div style="border: 1px solid #E5E7EB; border-radius: 1rem;" class="pad-2 flex-between">
+                                            <div class="flex-between">
+                                                <div class="flex-center txt-md">
+                                                    <i class="fa-solid fa-signs-post"></i>
+                                                </div>
+                                                <div style="margin-left: 2rem;" class="flex-col">
+                                                    <span class="txt-lg">SHIPPING METHOD</span>
+                                                    
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+
+                                    </div>
+                                    <div class="flex-around m-y-0">
+                                        <div class="flex">
+                                            <input id="radio-1" name="shipping" type="radio" value="shopee" class="m-x-0" required>
+                                            <div class="flex-center">
+                                                <label for="radio-1" class="radio-label m-x-0">
+                                                    <div style="width: 2.5rem;" class="img">
+                                                        <img src="https://static.topcv.vn/company_logos/3hGPe93OfHOUL2QUpNJijMwJ6s0uZ3Gr_1637140440____ea75d9fb6acf791dbeee91c457f6863e.png" alt="">
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="flex">   
+                                            <input id="radio-2" name="shipping" type="radio" value="grab" class="m-x-0" required>
+                                            <div class="flex-center">
+                                                <label for="radio-2" class="radio-label m-x-0">
+                                                    <div style="width: 2.5rem;" class="img">
+                                                        <img src="https://cdn.worldvectorlogo.com/logos/grab-2.svg" alt="">
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="flex">   
+                                            <input id="radio-2" name="shipping" type="radio" value="be" class="m-x-0" required>
+                                            <div class="flex-center">
+                                                <label for="radio-3" class="radio-label m-x-0">
+                                                    <div style="width: 2.5rem;" class="img">
+                                                        <img src="https://now.edu.vn/wp-content/uploads/2018/12/Be-logo-now-academy-768x768.png" alt="">
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%
+                                        }
+                                    %>
 
                                     <!-- Payment method start -->
                                     <div class="relative m-y-32">

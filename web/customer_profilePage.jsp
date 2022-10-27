@@ -243,16 +243,17 @@
                                         <span class="txt-lg input-icon flex-center">
                                             <i class="fa-solid fa-location-dot"></i>
                                         </span>
-                                        <%
-                                            for (AddressDTO address : customer.getAddress_list()) {
-                                                if (address.getStatus() != 1)
-                                                    continue;
-                                        %>
-                                        <input class="input txt-sm" type="text" readonly="" value="<%=address.getStreet()%>, Thành phố <%=address.getDistrict_name()%>, Tỉnh <%=address.getProvince_name()%>">
-                                        <%
-                                            }
-                                        %>
-
+                                        <input class="input txt-sm" type="text" readonly="" value="
+                                               <%
+                                                   for (AddressDTO address : customer.getAddress_list()) {
+                                                       if (address.getStatus() != 1)
+                                                           continue;
+                                               %>
+                                               <%=address.getStreet()%>, Thành phố <%=address.getDistrict_name()%>, Tỉnh <%=address.getProvince_name()%>
+                                               <%
+                                                   }
+                                               %>
+                                               ">
                                     </div>
                                 </div>
                                 <div class="flex-horizon-center flex-col relative m-y-12">
@@ -381,34 +382,34 @@
                             <!-- Order detail -->
                             <div class="pad-2">
                                 <c:forEach items="${sessionScope.ORDERED_PRODUCT_LIST_PENDING}" var="o">
-                                <div class="order-card m-y-12">
-                                    <div class="flex">
-                                        <div class="flex-center order-img">
-                                            <img src="${o.image}"
-                                                 alt="">
-                                        </div>
-                                        <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                            <div class="flex-between">
-                                                <div class="flex-col flex-horizon-center">
-                                                    <span class="txt-lg bold">${o.productName}</span>
-                                                    <div class="flex-horizon-center">
-                                                        <span class="txt-md">Product</span>
-                                                        <span class="m-x-12">|</span>
-                                                        <span class="txt-md">Product Category</span>
+                                    <div class="order-card m-y-12">
+                                        <div class="flex">
+                                            <div class="flex-center order-img">
+                                                <img src="${o.image}"
+                                                     alt="">
+                                            </div>
+                                            <div style="flex: 1; margin-left: 1rem;" class="flex-col">
+                                                <div class="flex-between">
+                                                    <div class="flex-col flex-horizon-center">
+                                                        <span class="txt-lg bold">${o.productName}</span>
+                                                        <div class="flex-horizon-center">
+                                                            <span class="txt-md">Product</span>
+                                                            <span class="m-x-12">|</span>
+                                                            <span class="txt-md">Product Category</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="order-price bold">
+                                                        <span>
+                                                            $${o.quantity * o.price}
+                                                        </span>
                                                     </div>
                                                 </div>
-                                                <div class="order-price bold">
-                                                    <span>
-                                                        $${o.quantity * o.price}
-                                                    </span>
+                                                <div style="height: 50%;" class="flex-end flex-col">
+                                                    <span class="txt-md bold">Quantity:  ${o.quantity}</span>
                                                 </div>
-                                            </div>
-                                            <div style="height: 50%;" class="flex-end flex-col">
-                                                <span class="txt-md bold">Quantity:  ${o.quantity}</span>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 </c:forEach>
                                 
                                 <!-- Service start -->

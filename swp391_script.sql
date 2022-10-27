@@ -35,6 +35,7 @@ CREATE TABLE tblCustomer (
 	gender [int],
 	dob date,
 	avatar nvarchar(max) ,
+	point int,
 	[status] [decimal](1)
 )
 select * from tblCustomer
@@ -74,35 +75,40 @@ CREATE TABLE tblAddress(
 	street nvarchar(max) ,
 	[district_ID] nvarchar(10) REFERENCES tblDistrict([district_ID]) NOT NULL ,  
 	[user_ID] nvarchar(30) REFERENCES tblUser(username) NOT NULL,
-	status int
+	[status] int
 )
-
+GO
 
 
 -----PRODUCT-----
 CREATE TABLE tblProductCategory (
 	category_ID nvarchar(10) PRIMARY KEY NOT NULL , 
-	name nvarchar(20) UNIQUE NOT NULL,
+	[name] nvarchar(20) UNIQUE NOT NULL,
 	[image] [nvarchar](max) NOT NULL
 )
+GO
 
 CREATE TABLE tblProduct (
 	product_ID nvarchar(10) PRIMARY KEY NOT NULL , 
 	category_ID nvarchar(10) REFERENCES tblProductCategory(category_ID) NOT NULL,
-	name nvarchar(60) UNIQUE NOT NULL,
+	[name] nvarchar(60) UNIQUE NOT NULL,
 	[image] nvarchar(max) NOT NULL,
 )
+GO
+
 CREATE TABLE tblProductDetail(
 	id [int] IDENTITY(1,1) PRIMARY KEY , 
 	provider_ID nvarchar(30) REFERENCES tblProvider(username) NOT NULL, 
 	product_ID nvarchar(10) REFERENCES tblProduct(product_ID) NOT NULL , 
-	name nvarchar(60) NOT NULL,
+	[name] nvarchar(60) NOT NULL,
 	quantity decimal(2) NOT NULL, 
 	price decimal (9)  NOT NULL,
 	[image] nvarchar(max) ,
 	[description] nvarchar(max) , 
 	[status] decimal(1) NOT NULL 
 )
+GO
+
 -----ORDER-----
 CREATE TABLE tblOrder(
 	order_ID [int] IDENTITY(1,1) PRIMARY KEY , 
@@ -110,7 +116,8 @@ CREATE TABLE tblOrder(
 	customer_ID nvarchar(30) REFERENCES tblCustomer(username) NOT NULL, 
 	[status] decimal(1) NOT NULL  , 
 	total decimal(9) NOT NULL,
-	payment nvarchar(10)
+	payment nvarchar(10),
+	shipping nvarchar(20)
 ) 
 GO
 
@@ -120,7 +127,7 @@ CREATE TABLE tblOrder_Product_Detail (
 	order_ID [int] REFERENCES tblOrder(order_ID) NOT NULL ,
 	quantity decimal(2) NOT NULL , 
 	price decimal(9) NOT NULL , 
-	status decimal(1) NOT NULL
+	[status] decimal(1) NOT NULL
 )
 GO
 
@@ -212,7 +219,7 @@ GO
 -----ADMIN-----
 CREATE TABLE tblAdminMaster (
 	[user_Name] nvarchar(30) PRIMARY KEY NOT NULL , 
-	password nvarchar(30) NOT NULL 
+	[password] nvarchar(30) NOT NULL 
 )
 GO
 
@@ -233,7 +240,39 @@ SELECT se.id, se.staff_ID, se.[name], st.[name], se.price, st.avatar, se.[descri
 FROM [tblServiceDetail] se
 JOIN [tblStaff] st ON se.staff_ID = st.staff_ID 
 WHERE se.id = 3;
+--- DELIVERY ---
+CREATE TABLE tblShipper (
+	username nvarchar(30) PRIMARY KEY,
+	[password] nvarchar(30),
+	[name] nvarchar(30),
+	[status] int
+)
+GO
 
+CREATE TABLE tblDelivery (
+	id int IDENTITY(1,1) PRIMARY KEY,
+	order_id int REFERENCES tblOrder(order_ID),
+	[address] nvarchar(max),
+	shipper_id nvarchar(30) REFERENCES tblShipper(username),
+	[status] int
+)
+GO
+
+CREATE TABLE tblShipperIncomeByMonth (
+	id int IDENTITY(1,1) PRIMARY KEY,
+	[month] int,
+	[year] int,
+	shipper_id nvarchar(30) REFERENCES tblShipper(username),
+	total decimal(12)
+)
+GO
+
+CREATE TABLE tblShipperIncomeByYear (
+	[year] int PRIMARY KEY,
+	shipper_id nvarchar(30) REFERENCES tblShipper(username),
+	total decimal(12)
+)
+GO
 
 ------------------------------------------------------- TRIGGER ---------------------------------------------------------------
 --- bảng customer: đăng ký account -> cập nhật bảng user
@@ -1801,6 +1840,12 @@ JOIN tblStaff staff on staff.staff_ID = orderDetail.staff_ID
 JOIN tblCustomer customer ON customer.username = order1.customer_ID where customer.username='Viet Dang' and order1.status = 0;
 
 select * from tblService
+--- bảng delivery ---
+insert into tblShipper(username, password, name, status) values ('grab', '1', 'Grab', 1)
+insert into tblShipper(username, password, name, status) values ('shopee', '1', 'Shopee Express', 1)
+insert into tblShipper(username, password, name, status) values ('be', '1', 'Be', 1)
+
+--- bảng shipper ---
 
 SELECT * FROM tblOrder
 SELECT * FROM tblOrder_Product_Detail 
@@ -1813,12 +1858,15 @@ SELECT * FROM tblOrder_Product_Detail WHERE order_ID = 1
 SELECT * FROM tblOrder_Service_Detail WHERE order_ID = 1
 SELECT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = 'provider2'
 SELECT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Service_Detail OrdS ON Ord.order_ID = OrdS.order_ID ) JOIN tblServiceDetail PD ON PD.id = OrdS.service_detail_ID WHERE PD.provider_ID = 'homecleaning'
-SELECT OrdP.id , Ord.order_ID, PD.name, OrdP.quantity, PD.price, Ord.total, OrdP.status FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = 'provider2' AND Ord.order_ID = '6'
-SELECT * FROM tblOrder_Product_Detail 
+
+SELECT * FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = 'provider2'
 SELECT * FROM ( tblOrder Ord JOIN tblOrder_Service_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblServiceDetail PD ON PD.id = OrdP.id WHERE PD.provider_ID = 'homecleaning'
-SELECT Ord.order_ID, Ord.order_Date, Ord.status, Cus.name, Cus.phone, Cus.email FROM tblOrder Ord JOIN tblCustomer Cus ON Ord.customer_ID = Cus.username  WHERE order_ID = 6 AND customer_ID = 'trongtoan' 
 
 
+SELECT se.id, se.staff_ID, se.[name], st.[name], se.price, st.avatar, se.[description], st.[status]
+FROM [tblServiceDetail] se
+JOIN [tblStaff] st ON se.staff_ID = st.staff_ID
+WHERE se.id = 1;
 
 
 
