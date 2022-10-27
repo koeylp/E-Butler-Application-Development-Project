@@ -63,8 +63,8 @@
             <%
                 UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
                 CustomerDTO customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
-
                 customer = (customer == null) ? new CustomerDTO() : customer;
+
             %>
             <!-- Navbar Start -->
             <div class="container-fluid nav-bar bg-transparent">
@@ -133,11 +133,13 @@
                 </div>
             </div>
             <!-- Header End -->
+
             <%
                 CartServiceDTO cartService = (CartServiceDTO) session.getAttribute("CART_SERVICE");
                 CartDTO cart = (CartDTO) session.getAttribute("CART");
                 double total = 0;
             %>
+
             <!-- Cart start -->
 
 
@@ -194,8 +196,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Contact info end -->
 
+                                <!-- Contact info end -->
                                 <!-- Shipping Address start-->
                                 <%
                                     AddressDTO address_default = new AddressDTO();
@@ -238,16 +240,14 @@
                                                                 ArrayList<ProvinceDTO> province_list = (ArrayList<ProvinceDTO>) session.getAttribute("PROVINCE_LIST");
                                                                 String province_id = (String) request.getAttribute("PROVINCE_ID");
 
-                                                                ArrayList<AddressDTO> address_list = customer.getAddress_list();
-
+                                                                //ArrayList<AddressDTO> address_list = customer.getAddress_list();
                                                                 province_id = (province_id == null) ? "" : province_id;
                                                             %>
                                                             <select
                                                                 style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
                                                                 class="input txt-sm" type="password" onchange="this.form.submit()" name="province_id">
                                                                 <option>Select Province</option>
-                                                                <%
-                                                                    for (ProvinceDTO province : province_list) {
+                                                                <%                                                                    for (ProvinceDTO province : province_list) {
                                                                 %>
                                                                 <option value="<%=province.getId()%>" <%if (province.getId().equals(province_id)) {%>selected<%}%>><%=province.getName()%></option>
                                                                 <%
@@ -296,6 +296,7 @@
                                     </div>
                                 </div>
                                 <!-- Shipping Address end -->
+
 
                             </div>
 
@@ -452,6 +453,7 @@
                                         </div>
                                     </div>
 
+                                    <!--Shipping method-->
                                     <%
                                         if (!cart.getCart().isEmpty()) {
                                     %>
@@ -505,6 +507,8 @@
                                     <%
                                         }
                                     %>
+
+
 
                                     <!-- Payment method start -->
                                     <div class="relative m-y-32">

@@ -42,7 +42,7 @@
         <%
             ArrayList<RoleDTO> role_list = (ArrayList<RoleDTO>) request.getAttribute("ROLE_LIST");
             GoogleUserDTO googleUser = (GoogleUserDTO) request.getAttribute("GOOGLE_USER");
-            
+
             CustomerDTO customer = (CustomerDTO) request.getAttribute("CUS_INFO");
             CustomerDTO customerError = (CustomerDTO) request.getAttribute("CUS_ERROR");
             ProviderDTO provider = (ProviderDTO) request.getAttribute("PRO_INFO");
@@ -55,7 +55,7 @@
             provider = (provider == null) ? new ProviderDTO() : provider;
             role_id = (role_id == null) ? "" : role_id;
             role_list = (role_list == null) ? new ArrayList<RoleDTO>() : role_list;
-            
+
             if (googleUser == null) {
                 googleUser = new GoogleUserDTO();
                 googleUser.setName(customer.getName());
@@ -119,7 +119,8 @@
                                 </div>
 
                                 <!-- USER ROLE Start -->
-                                <%                                    for (RoleDTO role : role_list) {
+                                <%
+                                    for (RoleDTO role : role_list) {
                                 %>
                                 <div id="<%=role.getId()%>" class="selection-role-item m-12 flex-md-row">
                                     <div class="selection-role-name col-md-3 p-4">
@@ -180,7 +181,7 @@
 
                                             <div class="auth-form__block row">
                                                 <div class="auth-form__group col l-6">
-                                                    <input name="name" value="<%= googleUser.getName() %>" class="auth-form__input border-bottom m-y-0" required="" value="<%=customer.getName()%>" placeholder="Full Name">
+                                                    <input name="name" value="<%= googleUser.getName()%>" class="auth-form__input border-bottom m-y-0" required="" value="<%=customer.getName()%>" placeholder="Full Name">
                                                     <div class="auth-form__aside">
                                                         <%
                                                             if (!customerError.getName().isEmpty()) {
@@ -213,7 +214,7 @@
                                             </div>
 
                                             <div class="auth-form__group">
-                                                <input type="email" name="email" value="<%= googleUser.getEmail() %>" class="auth-form__input border-bottom m-y-0" required="" value="<%=customer.getEmail()%>" placeholder="Email">
+                                                <input type="email" name="email" value="<%= googleUser.getEmail()%>" class="auth-form__input border-bottom m-y-0" required="" value="<%=customer.getEmail()%>" placeholder="Email">
                                                 <div class="auth-form__aside">
                                                     <%
                                                         if (!customerError.getEmail().isEmpty()) {
@@ -379,7 +380,7 @@
                                             </div>
 
                                             <div class="auth-form__group">
-                                                <input type="email" name="email" value="<%= googleUser.getEmail() %>" class="auth-form__input border-bottom m-y-0" required="" value="<%=provider.getEmail()%>" placeholder="Email">
+                                                <input type="email" name="email" value="<%= googleUser.getEmail()%>" class="auth-form__input border-bottom m-y-0" required="" value="<%=provider.getEmail()%>" placeholder="Email">
                                                 <div class="auth-form__aside">
                                                     <%
                                                         if (!providerError.getEmail().isEmpty()) {

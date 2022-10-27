@@ -4,13 +4,13 @@
  */
 package com.ebutler.swp.controllers;
 
-import com.ebutler.swp.dao.AddressDAO;
-import com.ebutler.swp.dto.AddressDTO;
-import com.ebutler.swp.dto.CustomerDTO;
-import com.ebutler.swp.dto.UserDTO;
+import com.ebutler.swp.dao.ProductDAO;
+import com.ebutler.swp.dto.ProductDetailDTO;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,40 +18,32 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Admin
+ * @author thekh
  */
-public class ShowListAddressController extends HttpServlet {
+@WebServlet(name = "searchLive", urlPatterns = {"/searchLive"})
+public class SearchLive extends HttpServlet {
 
-    private final String ERROR = "errorPage.jsp";
-    private final String SUCCESS = "customer_profilePage.jsp";
-    
+    private final static String SUCCESS = "customer_productPage.jsp";
+    private final static String ERROR = "errorPage.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String current_form = request.getParameter("current_form");
-            
             HttpSession session = request.getSession();
-            
-            UserDTO login_user = (UserDTO)session.getAttribute("LOGIN_USER");
-            CustomerDTO login_customer = (CustomerDTO)session.getAttribute("CURRENT_CUSTOMER");
-            
-            AddressDAO addressDAO = new AddressDAO();
-            ArrayList<AddressDTO> list_address = addressDAO.SelectAddress(login_user.getUsername());
-            
-            login_customer.setAddress_list(list_address);
-            
-            session.setAttribute("CURRENT_CUSTOMER", login_customer);
-            request.setAttribute("CURRENT_FORM", current_form);
-            
+            String category_ID = (String) session.getAttribute("CATEGORYID");
+            String product_ID = (String) session.getAttribute("PRODUCTID");
+            String searchProductDetail = request.getParameter("searchProductDetail");
+            ProductDAO dao = new ProductDAO();
+            List<ProductDetailDTO> list = dao.getSearchProductDetailByType(category_ID, product_ID, searchProductDetail);
+            session.setAttribute("PRODUCT_DETAIL_BY_TYPE", list);
             url = SUCCESS;
-        } catch(Exception e) {
-            log("ERROR at ShowListController: " + e.toString());
+        } catch (Exception e) {
+            log("Error at SearchProductDetailByTypeController: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
