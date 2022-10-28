@@ -228,6 +228,18 @@
         <servlet-name>Provider_Delete_OrderController</servlet-name>
         <servlet-class>com.ebutler.swp.controllers.Provider_Delete_OrderController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeliveryHomeController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.DeliveryHomeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Delivery_Order_DetailController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.Delivery_Order_DetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Update_Delivery_StatusController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.Update_Delivery_StatusController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -455,6 +467,18 @@
     <servlet-mapping>
         <servlet-name>Provider_Delete_OrderController</servlet-name>
         <url-pattern>/Provider_Delete_OrderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeliveryHomeController</servlet-name>
+        <url-pattern>/DeliveryHomeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Delivery_Order_DetailController</servlet-name>
+        <url-pattern>/Delivery_Order_DetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Update_Delivery_StatusController</servlet-name>
+        <url-pattern>/Update_Delivery_StatusController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

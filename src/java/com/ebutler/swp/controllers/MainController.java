@@ -248,6 +248,14 @@ public class MainController extends HttpServlet {
     private final String UPDATE_ADDRESS = "UpdateAddress";
     private final String UPDATE_ADDRESS_CONTROLLER = "UpdateAddressController";
     
+    // ------------DELIVERY--------------------
+    //1.LoadlistDetail 
+    private final String DELIVERY_LOAD_DETAIL = "DeliveryOrderDetail" ; 
+    private final String DELIVERY_LOAD_DETAIL_CONTROLLER = "Delivery_Order_DetailController" ; 
+    //2.UpdateDelivery
+    private final String UPDATE_DELIVERY = "Update_Delivery" ; 
+    private final String UPDATE_DELIVERY_CONTROLLER = "Update_Delivery_StatusController" ;  
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -402,6 +410,11 @@ public class MainController extends HttpServlet {
             }
              else if (action.equals(PROVIDER_DELETE_ORDER)) {
                 url = PROVIDER_DELETE_ORDER_CONTROLLER ; 
+            }
+            else if (action.equals(DELIVERY_LOAD_DETAIL)) { 
+                url = DELIVERY_LOAD_DETAIL_CONTROLLER ; 
+            }else if (action.equals(UPDATE_DELIVERY)) { 
+                url = UPDATE_DELIVERY_CONTROLLER ; 
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

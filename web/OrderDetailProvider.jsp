@@ -204,14 +204,14 @@
                                         <%
                                             Double total = 0.0 ;  
                                             for (OrderDetailDTO orderDetail : listDetail) {
-                                                total += orderDetail.getTotal() ;
+                                                total += orderDetail.getPrice() * orderDetail.getQuantity() ;
                                         %>
                                         <tr>
                                             <td><%= orderDetail.getOrder_ID()  %></td>
                                             <td><%= orderDetail.getName()  %></td>
                                             <td><%= orderDetail.getQuantity()  %></td>
                                             <td><%= orderDetail.getPrice()  %></td>
-                                            <td><%= orderDetail.getTotal()  %></td>
+                                            <td><%= orderDetail.getPrice() * orderDetail.getQuantity()  %></td> 
                                         </tr>
                                          <% 
                                             }
