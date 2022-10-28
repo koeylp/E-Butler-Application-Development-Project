@@ -25,6 +25,7 @@ public class ProductDAO {
     private static final String GET_LIST_PRODUCT = "SELECT category_Name, p.product_Provider_ID, p.provider_ID, p.product_ID, p.product_Name, category_Image, p.price, p.quantity, p.image, p.description, p.status FROM tblProductCategory c JOIN tblProduct t  ON c.category_ID = t.category_ID INNER JOIN tblProductDetail p ON p.product_ID = t.product_ID where c.category_ID = ?";
 
     private static final String GET_LIST_PRODUCT_BY_TYPE = "SELECT product.product_ID, product.category_ID ,product.name, product.image FROM tblProductCategory cate JOIN tblProduct product ON cate.category_ID = product.category_ID where cate.category_ID = ?";
+    private static final String TEST = "select * from tblProductDetail ORDER BY id OFFSET ? ROWS";
 
     private static final String GET_LIST_PRODUCT_BY_TYPE_DETAIL = "SELECT detail.id, detail.provider_ID, detail.product_ID, detail.name, detail.quantity, detail.price, detail.image, detail.description, detail.status FROM tblProduct product JOIN tblProductDetail detail on product.product_ID = detail.product_ID JOIN tblProductCategory cate ON cate.category_ID = product.category_ID WHERE cate.category_ID = ? AND product.product_ID = ?";
 
@@ -100,6 +101,41 @@ public class ProductDAO {
                 
                 product.setReview_list(review_list);
                 list.add(product);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return list;
+    }
+    public static List<ProductDetailDTO> getPagingProductDetail(String categoryID, String productID, int num) throws SQLException {
+        String sql = " SELECT detail.id, detail.provider_ID, detail.product_ID, detail.name, detail.quantity, detail.price, detail.image, detail.description, detail.status FROM tblProduct product JOIN tblProductDetail detail on product.product_ID = detail.product_ID JOIN tblProductCategory cate ON cate.category_ID = product.category_ID\n" +
+" WHERE cate.category_ID = ? AND product.product_ID = ? ORDER BY id asc\n" +
+" OFFSET ? ROWS FETCH FIRST 12 ROWS ONLY";
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        List<ProductDetailDTO> list = new ArrayList();
+        try {
+            conn = DBUtils.getConnection();
+            ptm = conn.prepareStatement(sql);
+            ptm.setString(1, categoryID);
+            ptm.setString(2, productID);
+            ptm.setInt(3, (num-1)*12);
+            
+            rs = ptm.executeQuery();
+            while (rs.next()) {
+                list.add(new ProductDetailDTO(rs.getString("id"), rs.getString("provider_ID"), rs.getString("product_ID"), rs.getString("name"), rs.getInt("quantity"), rs.getDouble("price"), rs.getString("image"), rs.getString("description"), rs.getInt("status")));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -545,7 +581,6 @@ public class ProductDAO {
         return 0;
     }
     public static void main(String[] args) throws SQLException {
-        int count = getNumberPageProductDetail("KC", "1");
-        System.out.println(count);
+       
     }
 }

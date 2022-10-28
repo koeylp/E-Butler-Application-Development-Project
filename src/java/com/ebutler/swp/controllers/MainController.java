@@ -46,6 +46,8 @@ public class MainController extends HttpServlet {
 //    Product Detail
     private final String GO_TO_PRODUCT_DETAIL_BY_TYPE_PAGE = "GoToProductDetailByType";
     private final String PRODUCT_DETAIL_BY_TYPE_CONTROLLER = "ProductDetailByTypeController";
+    
+    private final String PRODUCT_DETAIL_BY_TYPE_PAGING_CONTROLLER = "PagingProductDetailController";
 
 //    Service Detail
     private final String GO_TO_SERVICE_DETAIL_BY_TYPE_PAGE = "GoToServiceDetailByType";
@@ -248,6 +250,9 @@ public class MainController extends HttpServlet {
     private final String UPDATE_ADDRESS = "UpdateAddress";
     private final String UPDATE_ADDRESS_CONTROLLER = "UpdateAddressController";
     
+//    Paging
+    private final String PAGING_PRODUCT_DETAIL = "pagingProductDetail";
+    private final String PAGING_PRODUCT_DETAIL_CONTROLLER = "PagingProductDetailController";
 
     // ------------DELIVERY--------------------
     //1.LoadlistDetail 
@@ -417,6 +422,8 @@ public class MainController extends HttpServlet {
                 url = SET_ADDRESS_DEFAULT_CONTROLLER;
             } else if (action.equals(UPDATE_ADDRESS)) {
                 url = UPDATE_ADDRESS_CONTROLLER;
+            }else if (action.equals(PAGING_PRODUCT_DETAIL)) {
+                url = PAGING_PRODUCT_DETAIL_CONTROLLER;
             }
              else if (action.equals(PROVIDER_DELETE_ORDER)) {
                 url = PROVIDER_DELETE_ORDER_CONTROLLER ; 

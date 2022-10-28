@@ -225,8 +225,13 @@
         <servlet-class>com.ebutler.swp.controllers.UpdateAddressController</servlet-class>
     </servlet>
     <servlet>
+       
         <servlet-name>Provider_Delete_OrderController</servlet-name>
         <servlet-class>com.ebutler.swp.controllers.Provider_Delete_OrderController</servlet-class>
+    </servlet>
+    <servlet>
+         <servlet-name>PagingProductDetailController</servlet-name>
+         <servlet-class>com.ebutler.swp.controllers.PagingProductDetailController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeliveryHomeController</servlet-name>
@@ -475,6 +480,10 @@
     <servlet-mapping>
         <servlet-name>Provider_Delete_OrderController</servlet-name>
         <url-pattern>/Provider_Delete_OrderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PagingProductDetailController</servlet-name>
+        <url-pattern>/PagingProductDetailController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeliveryHomeController</servlet-name>
