@@ -20,6 +20,7 @@ public class CustomerDTO {
     private int gender;
     private String dob;
     private String avatar;
+    private int point;
     private int status;
     
     private ArrayList<AddressDTO> address_list = new ArrayList<AddressDTO>();
@@ -34,9 +35,23 @@ public class CustomerDTO {
         this.gender = 1;
         this.dob = "";
         this.avatar = "";
+        this.point = 0;
         this.status = 1;
     }
 
+    public CustomerDTO(String username, String password, String role_id, String phone, String email, String name, int gender, String dob, String avatar, int point,int status) {
+        this.username = username;
+        this.password = password;
+        this.role_id = role_id;
+        this.phone = phone;
+        this.email = email;
+        this.name = name;
+        this.gender = gender;
+        this.dob = dob;
+        this.avatar = avatar;
+        this.point = point;
+        this.status = status;
+    }
     public CustomerDTO(String username, String password, String role_id, String phone, String email, String name, int gender, String dob, String avatar, int status) {
         this.username = username;
         this.password = password;
@@ -136,6 +151,19 @@ public class CustomerDTO {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
+    }
+
+    @Override
+    public String toString() {
+        return "CustomerDTO{" + "username=" + username + ", password=" + password + ", role_id=" + role_id + ", phone=" + phone + ", email=" + email + ", name=" + name + ", gender=" + gender + ", dob=" + dob + ", avatar=" + avatar + ", point=" + point + ", status=" + status + ", address_list=" + address_list + '}';
     }
     
     

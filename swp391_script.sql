@@ -14,6 +14,8 @@ CREATE TABLE tblUserRole (
 )
 GO
 
+
+
 -----USER-----
 CREATE TABLE tblUser(
 	username nvarchar(30) PRIMARY KEY,
@@ -39,6 +41,9 @@ CREATE TABLE tblCustomer (
 	point int,
 	[status] [decimal](1)
 )
+insert into tblCustomer(username, password, role_ID, phone, email, name, gender,dob, avatar, point, status)
+
+select * from tblCustomer
 GO
 
 CREATE TABLE tblProvider (
