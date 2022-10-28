@@ -158,6 +158,17 @@
                             </div>
                         </form>
                     </div>
+                    
+                    <div class="mx-5 mt-3">
+                        <nav aria-label="breadcrumb m-5">
+                            <ol class="breadcrumb breadcrumb-style1">
+                                <li class="breadcrumb-item">
+                                    <a href="LoadingProductAndServiceCategory">Home</a>
+                                </li>
+                                <li class="breadcrumb-item active">Product Category</li>
+                            </ol>
+                        </nav>
+                    </div>
 
                     <div class="row m-y-2">
                         <!-- product item -->

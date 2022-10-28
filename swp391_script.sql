@@ -1606,7 +1606,7 @@ INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, ima
 
 --Bảng loại dịch vụ theo nhóm 
 
-INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('HC', 'Home Cleaning', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg')
+INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('HC', 'Home Cleaning', 'https://www.pngkey.com/png/full/224-2244033_whether-you-need-my-cleaning-services-for-your.png')
 INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('HI', 'Home Improvement', 'https://thumbs.dreamstime.com/z/couple-living-room-avatar-character-vector-illustration-desing-couple-living-room-avatar-character-145224593.jpg')
 INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('PBS', 'Plumbers', 'https://thumbs.dreamstime.com/z/set-flat-bright-vector-elements-items-modern-stylish-bathroom-interior-construction-bath-shampoo-toilet-towels-68381087.jpg')
 INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('IT', 'IT Service', 'https://thumbs.dreamstime.com/z/set-flat-bright-vector-elements-items-modern-stylish-bathroom-interior-construction-bath-shampoo-toilet-towels-68381087.jpg')
@@ -1859,4 +1859,4 @@ insert into tblShipper(username, password, name, status) values ('be', '1', 'Be'
 
 --- bảng shipper ---
 SELECT * FROM tblProductDetail
-SELECT * FROM tblUser
+SELECT * FROM tblOrder_Product_Detail

@@ -128,15 +128,35 @@
                     <div style="margin-top: 64px;" class="flex-horizon-center flex-col m-y-32">
                         <h1 class="txt-xl">Shopping Cart</h1>
                     </div>
+                    <div class="mt-3">
+                        <nav aria-label="breadcrumb m-5">
+                            <ol class="breadcrumb breadcrumb-style1">
+                                <li class="breadcrumb-item">
+                                    <a href="LoadingProductAndServiceCategory">Home</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="MainController?action=GoToProductPageByPlace&category_ID=<%=session.getAttribute("CATEGORYID")%>">Product Category</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="MainController?action=GoToProductDetailByType&product_ID=<%=session.getAttribute("PRODUCTID")%>&category_ID=<%=session.getAttribute("CATEGORYID")%>">Products</a></li>
+                                <li class="breadcrumb-item active">
+                                    Cart
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
                 </div>
+
             </div>
             <!-- Header End -->
+
             <%
                 CartDTO cart = (CartDTO) session.getAttribute("CART");
                 CartServiceDTO cartService = (CartServiceDTO) session.getAttribute(("CART_SERVICE"));
                 QuantityStockDTO quantityStock = (QuantityStockDTO) session.getAttribute("STOCK");
                 double total = 0;
             %>
+
+
             <!-- Cart start -->
             <div class="grid m-y-32">
                 <div class="grid wide">
@@ -279,13 +299,13 @@
                                         <div class="order-card m-y-12">
                                             <div class="flex">
                                                 <div class="flex-center order-img">
-                                                    <img src="<%= service.getAvatar() %>"
+                                                    <img src="<%= service.getAvatar()%>"
                                                          alt="">
                                                 </div>
                                                 <div style="flex: 1; margin-left: 1rem;" class="flex-col">
                                                     <div class="flex-between">
                                                         <div class="flex-col flex-horizon-center">
-                                                            <span class="txt-lg bold">Staff: <%= service.getStaffName() %></span>
+                                                            <span class="txt-lg bold">Staff: <%= service.getStaffName()%></span>
                                                             <div class="flex-horizon-center flex-center">
                                                                 <span class="txt-sm"><%= service.getServiceName()%></span>
                                                                 <span class="m-x-12">|</span>

@@ -48,7 +48,7 @@
 
     <body>
         <%
-            
+
             //List<ProductDetailDTO> productList = (List<ProductDetailDTO>) session.getAttribute("PRODUCT_DETAIL_BY_TYPE");
             String product_id = (String) session.getAttribute("PRODUCT_ID");
 
@@ -56,8 +56,8 @@
 
             UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
         %>
-        <% 
-            List<ProductDetailDTO> productList = (List<ProductDetailDTO>) session.getAttribute("PRODUCT_DETAIL_BY_TYPE"); 
+        <%
+            List<ProductDetailDTO> productList = (List<ProductDetailDTO>) session.getAttribute("PRODUCT_DETAIL_BY_TYPE");
         %>
         <div class="container-xxl bg-white p-0">
             <!-- Spinner Start -->
@@ -171,6 +171,20 @@
                         </form>
                     </div>
 
+                    <div class="mx-5 mt-3">
+                        <nav aria-label="breadcrumb m-5">
+                            <ol class="breadcrumb breadcrumb-style1">
+                                <li class="breadcrumb-item">
+                                    <a href="LoadingProductAndServiceCategory">Home</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="MainController?action=GoToProductPageByPlace&category_ID=<%=session.getAttribute("CATEGORYID")%>">Product Category</a>
+                                </li>
+                                <li class="breadcrumb-item active">Products</li>
+                            </ol>
+                        </nav>
+                    </div>
+
                     <div class="row m-y-1">
 
                         <!-- product item -->
@@ -219,15 +233,15 @@
                                         <div class="col l-o-1 l-5 flex-center">
                                             <%
                                                 ArrayList<ReviewDTO> review_list = product.getReview_list();
-                                                
+
                                                 float average_rating = 0.0f;
 
                                                 for (ReviewDTO review : review_list) {
-                                                    average_rating += (float)review.getRating() / (review_list.size());
+                                                    average_rating += (float) review.getRating() / (review_list.size());
                                                 }
-                                                
+
                                                 DecimalFormat df = new DecimalFormat("#.##");
-                                                
+
                                             %>
                                             <div style="color: #F2B737;">
                                                 <i class="fa-solid fa-star"></i>
@@ -351,16 +365,16 @@
                                                             <div style="justify-content: flex-end" class="l-8 flex-horizon-center flex-col">
                                                                 <div class="flex-vertical-center flex-end txt-xl full-h">
                                                                     <span class="flex-center rating">
-                                                                        <input style="width: 1px;"  type="radio" name="rating" id="star1"
-                                                                               value="1" required=""><label for="star1"><i class="fa-solid fa-star"></i></label>
-                                                                        <input type="radio" name="rating" id="star2"
-                                                                               value="2" required=""><label for="star2"><i class="fa-solid fa-star"></i></label>
-                                                                        <input type="radio" name="rating" id="star3"
-                                                                               value="3" required=""><label for="star3"><i class="fa-solid fa-star"></i></label>
-                                                                        <input type="radio" name="rating" id="star4"
-                                                                               value="4" required=""><label for="star4"><i class="fa-solid fa-star"></i></label>
-                                                                        <input type="radio" name="rating" id="star5"
-                                                                               value="5" required=""><label for="star5"><i class="fa-solid fa-star"></i></label>
+                                                                        <input style="width: 0.02rem;"  type="radio" name="rating" id="star1-<%=product.getId()%>"
+                                                                               value="1" required=""><label for="star1-<%=product.getId()%>"><i class="fa-solid fa-star"></i></label>
+                                                                        <input type="radio" name="rating" id="star2-<%=product.getId()%>"
+                                                                               value="2" required=""><label for="star2-<%=product.getId()%>"><i class="fa-solid fa-star"></i></label>
+                                                                        <input type="radio" name="rating" id="star3-<%=product.getId()%>"
+                                                                               value="3" required=""><label for="star3-<%=product.getId()%>"><i class="fa-solid fa-star"></i></label>
+                                                                        <input type="radio" name="rating" id="star4-<%=product.getId()%>"
+                                                                               value="4" required=""><label for="star4-<%=product.getId()%>"><i class="fa-solid fa-star"></i></label>
+                                                                        <input type="radio" name="rating" id="star5-<%=product.getId()%>"
+                                                                               value="5" required=""><label for="star5-<%=product.getId()%>"><i class="fa-solid fa-star"></i></label>
                                                                     </span>
                                                                 </div>
                                                                 <h4 class="txt-xs flex-end">Click me!</h4>

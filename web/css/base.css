@@ -484,7 +484,7 @@ ul {
 }
 
 .rating input{
-    width: 1px;
+    width: 0.02rem;
 }
 
 .rating input:checked ~ label,
@@ -855,6 +855,12 @@ ul {
 
 .dropdown-item > i {
     margin-right: 1rem;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "\ecb3";
+    font-size: 1.125rem;
+    line-height: 1.4;
 }
 
 /* Animation start*/

@@ -163,6 +163,17 @@
                         </form>
                     </div>
 
+                    <div class="mx-5 mt-3">
+                        <nav aria-label="breadcrumb m-5">
+                            <ol class="breadcrumb breadcrumb-style1">
+                                <li class="breadcrumb-item">
+                                    <a href="LoadingProductAndServiceCategory">Home</a>
+                                </li>
+                                <li class="breadcrumb-item active">Service Category</li>
+                            </ol>
+                        </nav>
+                    </div>
+
                     <div class="row m-y-2">
                         <!-- product item -->
                         <%
@@ -235,7 +246,7 @@
                                                     <div class="full-w">
                                                         <button style="background-color: #0F172A; color: white;"
                                                                 class="btn-lg full-w">
-                                                            <a style="color: white" href="MainController?action=AddServiceToCart&service_ID=<%= staff.getStaff_ID() %>" >
+                                                            <a style="color: white" href="MainController?action=AddServiceToCart&service_ID=<%= staff.getStaff_ID()%>" >
                                                                 <i class="fa-solid fa-bag-shopping"></i>
                                                                 <span style="margin-left: .75rem">Booking</span></a>
 
