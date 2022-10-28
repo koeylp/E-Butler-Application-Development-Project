@@ -484,7 +484,7 @@ ul {
 }
 
 .rating input{
-    width: 0.02rem;
+    width: 0.075rem;
 }
 
 .rating input:checked ~ label,
