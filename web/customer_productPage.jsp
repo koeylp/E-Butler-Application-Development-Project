@@ -311,12 +311,12 @@
 
                             for (ProductDetailDTO product : product_list) {
                         %>
-                        <div id="list" class="col l-3 s-6 m-y-1">
+                        <div id="<%= product.getId() %>" class="col l-3 s-6 m-y-1">
                             <div class="block__item flex-between">
                                 <div style="max-height: 15rem; min-height: 15rem;" class="block__img flex-center relative">
                                     <img src="<%=product.getImage()%>"
                                          alt="">
-                                    <a href="MainController?action=AddToCart&quantity=1&product_ID=<%=product.getId()%>#list"
+                                    <a href="MainController?action=AddToCart&quantity=1&product_ID=<%=product.getId()%>#<%= product.getId() %>"
                                        style="background-color: black; color: white; right: 52%;"
                                        class="txt-border link absolute card-extend bot">
                                         <i class="fa-solid fa-bag-shopping"></i>
