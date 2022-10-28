@@ -15,7 +15,6 @@ CREATE TABLE tblUserRole (
 GO
 
 
-
 -----USER-----
 CREATE TABLE tblUser(
 	username nvarchar(30) PRIMARY KEY,
@@ -41,10 +40,11 @@ CREATE TABLE tblCustomer (
 	point int,
 	[status] [decimal](1)
 )
-insert into tblCustomer(username, password, role_ID, phone, email, name, gender,dob, avatar, point, status)
-
-select * from tblCustomer
 GO
+--insert into tblCustomer(username, password, role_ID, phone, email, name, gender,dob, avatar, point, status)
+
+--select * from tblCustomer
+
 
 CREATE TABLE tblProvider (
 	[username] nvarchar(30) PRIMARY KEY,
@@ -56,6 +56,7 @@ CREATE TABLE tblProvider (
 	[logo] nvarchar(max) ,
 	[status] [decimal](1)
 )
+GO
 
 -----ADDRESS-----
 CREATE TABLE tblProvince_City (
@@ -120,7 +121,7 @@ CREATE TABLE tblOrder(
 	total decimal(9) NOT NULL,
 	payment nvarchar(10),
 	shipping nvarchar(20)
-) 
+)
 GO
 
 CREATE TABLE tblOrder_Product_Detail (
@@ -260,6 +261,8 @@ CREATE TABLE tblReviewProduct (
 	rating int,
 	status int
 )
+GO
+
 ------------------------------------------------------- TRIGGER ---------------------------------------------------------------
 --- bảng customer: đăng ký account -> cập nhật bảng user
 CREATE TRIGGER trig_cus_insert ON tblCustomer 

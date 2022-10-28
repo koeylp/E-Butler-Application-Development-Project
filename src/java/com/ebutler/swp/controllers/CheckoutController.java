@@ -4,11 +4,13 @@
  */
 package com.ebutler.swp.controllers;
 
+import com.ebutler.swp.dao.CustomerDAO;
 import com.ebutler.swp.dao.OrderDAO;
 import com.ebutler.swp.dao.ProductDAO;
 import com.ebutler.swp.dto.CartDTO;
 import com.ebutler.swp.dto.CartServiceDTO;
 import com.ebutler.swp.dto.ConfirmDTO;
+import com.ebutler.swp.dto.CustomerDTO;
 import com.ebutler.swp.dto.OrderDTO;
 import com.ebutler.swp.dto.ProductDetailDTO;
 import com.ebutler.swp.dto.ServiceCartDTO;
@@ -41,6 +43,7 @@ public class CheckoutController extends HttpServlet {
             String shipping = request.getParameter("shipping");
             OrderDTO order = new OrderDTO();
             OrderDAO orderDao = new OrderDAO();
+            CustomerDAO customerDao = new CustomerDAO();
             ProductDAO productDao = new ProductDAO();
             ConfirmDTO confirmation = new ConfirmDTO("Thank you for your order!", "We're sorry! Your order was unsuccessful");
             String statement = confirmation.getFail();
@@ -76,7 +79,7 @@ public class CheckoutController extends HttpServlet {
                         int order_ID = orderDao.getAllOrder().size();
                         orderDao.insertDelivery(order_ID, "123 Hollywood Walk of Fame", shipping);
                         for (ProductDetailDTO product : cart.getCart().values()) {
-                            
+
                             orderDao.insertOrderDetail(product.getId(), order_ID, product.getQuantity(), product.getPrice(), 0);
                             productDao.setQuantiy(product.getId(), product.getQuantity());
                         }
@@ -104,6 +107,10 @@ public class CheckoutController extends HttpServlet {
                         }
 
                     }
+                }
+                if (statement == confirmation.getSuccess()) {
+                    int point = (int) (Double.parseDouble(total)/100);
+                    customerDao.accumulatePoint(user.getUsername(), point);
                 }
             }
             session.setAttribute("CART", null);

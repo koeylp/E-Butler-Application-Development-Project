@@ -79,11 +79,11 @@
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav ms-auto">
                             <a href="LoadingProductAndServiceCategory" class="nav-item nav-link active navigator">Home</a>
-                            <a href="#product" class="nav-item nav-link navigator">Product</a>
+                            <a href="LoadingProductAndServiceCategory#product" class="nav-item nav-link navigator">Product</a>
                             <div class="nav-item dropdown">
-                                <a href="#service" class="nav-link navigator">Service</a>
+                                <a href="LoadingProductAndServiceCategory#service" class="nav-link navigator">Service</a>
                             </div>
-                            <a href="#help" class="nav-item nav-link navigator">Help</a>
+                            <a href="LoadingProductAndServiceCategory#help" class="nav-item nav-link navigator">Help</a>
                             <div class="search absolute hide">
                                 <a><i class="fa-solid fa-magnifying-glass"></i></a>
                                 <input
