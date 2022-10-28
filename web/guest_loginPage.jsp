@@ -31,6 +31,116 @@
         <link href="css/style.css" rel="stylesheet">
         <link rel="stylesheet" href="css/guestPage.css">
         <link rel="stylesheet" href="css/base.css">
+
+        <style>
+            /* toast */
+            #toast {
+                position: fixed;
+                top: 32px;
+                right: 32px;
+                z-index: 999999;
+            }
+
+            .toast {
+                display: flex;
+                align-items: center;
+                background-color: #fff;
+                border-radius: 2px;
+                padding: 20px 0;
+                min-width: 400px;
+                max-width: 450px;
+                border-left: 4px solid;
+                box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
+                transition: all linear 0.3s;
+            }
+
+            .toast--success {
+                border-color: #47d864;
+            }
+
+            .toast--success .toast__icon {
+                color: #47d864;
+            }
+
+            .toast--info {
+                border-color: #2f86eb;
+            }
+
+            .toast--info .toast__icon {
+                color: #2f86eb;
+            }
+
+            .toast--warning {
+                border-color: #ffc021;
+            }
+
+            .toast--warning .toast__icon {
+                color: #ffc021;
+            }
+
+            .toast--error {
+                border-color: #ff623d;
+            }
+
+            .toast--error .toast__icon {
+                color: #ff623d;
+            }
+
+            .toast+.toast {
+                margin-top: 24px;
+            }
+
+            .toast__icon {
+                font-size: 24px;
+            }
+
+            .toast__icon,
+            .toast__close {
+                padding: 0 16px;
+            }
+
+            .toast__body {
+                flex-grow: 1;
+            }
+
+            .toast__title {
+                font-size: 16px;
+                font-weight: 600;
+                color: #333;
+            }
+
+            .toast__msg {
+                font-size: 14px;
+                color: #888;
+                margin-top: 6px;
+                line-height: 1.5;
+            }
+
+            .toast__close {
+                font-size: 20px;
+                color: rgba(0, 0, 0, 0.3);
+                cursor: pointer;
+            }
+
+            /* animation */
+            @keyframes slideInLeft {
+                from {
+                    opacity: 0;
+                    transform: translateX(calc(100% + 32px));
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            @keyframes fadeOut {
+                to {
+                    opacity: 0;
+                }
+            }
+        </style>
     </head>
 
     <body>
@@ -38,6 +148,10 @@
             String login_error = (String) request.getAttribute("LOGIN_ERROR");
 
             login_error = (login_error == null) ? "" : login_error;
+
+            String messageSuccess = (String) request.getAttribute("REGIST_SUCCESS");
+
+            messageSuccess = (messageSuccess == null) ? "" : messageSuccess;
         %>
         <div class="container-xxl bg-white p-0">
             <!-- Spinner Start -->
@@ -94,8 +208,8 @@
                                         </div>
 
                                         <div class="auth-form__social-connection">
-                                      <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/EButler_swp391/MainController?action=LoginWithGoogle&response_type=code
-                                       &client_id=1081251047556-e4afc0d4vf6ud95n2faf0dufevp65fj5.apps.googleusercontent.com&approval_prompt=force" class="btn btn--with-icon--google social-connection__item">
+                                            <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/EButler_swp391/MainController?action=LoginWithGoogle&response_type=code
+                                               &client_id=1081251047556-e4afc0d4vf6ud95n2faf0dufevp65fj5.apps.googleusercontent.com&approval_prompt=force" class="btn btn--with-icon--google social-connection__item">
                                                 <i class="fa-brands fa-google"></i>
                                                 <span class="auth-form__social-connection__title">
                                                     Login with Google
@@ -107,11 +221,11 @@
                                         <input type="text" name="username" class="auth-form__input border-bottom m-y-1 pad-x-0" required="" placeholder="Username">
 
                                         <input type="password" name="password" class="auth-form__input border-bottom m-y-1 pad-x-0" required="" placeholder="Password">
-                                        
-                                         <!-- Recapcha -->
-                                            <div class="g-recaptcha" data-sitekey="6LcR5ZUiAAAAAJEVFWk0F2s2WVeoFhAnRHQDaCGW"></div>
-                                            <div id="error"></div>
-                                            <!-- Recapcha -->
+
+                                        <!-- Recapcha -->
+                                        <div class="g-recaptcha" data-sitekey="6LcR5ZUiAAAAAJEVFWk0F2s2WVeoFhAnRHQDaCGW"></div>
+                                        <div id="error"></div>
+                                        <!-- Recapcha -->
 
                                     </div>
 
@@ -136,7 +250,7 @@
                                     <div class="auth-form__controls m-y-2">
                                         <button type="submit" name="action" value="Login" id="btn-login" class="btn btn-size-s btn-primary px-5 py-2">Login</button>
                                         <input type="hidden" name="isLogin" value="true">
-                                         <input type="hidden" name="action" value="Login">
+                                        <input type="hidden" name="action" value="Login">
                                     </div>
                                 </form>
                             </div>
@@ -157,9 +271,9 @@
                                     <input value="false" name="isLogin" type="hidden">
                                 </form>                     
                             </div>
-                            
+
                             <div class="forgot-password-form-container">
-                                 
+
                                 <img style="width: 160px; height: 160px" src="https://scontent.fsgn16-1.fna.fbcdn.net/v/t1.15752-9/306726020_513456713943336_4656678356879644206_n.png?_nc_cat=111&ccb=1-7&_nc_sid=ae9488&_nc_ohc=uxAtFMpSQXcAX-Wzu8F&_nc_ht=scontent.fsgn16-1.fna&oh=03_AVKUncPUZhez3W-9IlAzLja65ocWn5f4EZlifA9Glk3_-A&oe=635385F9" alt="">
                                 <h1>FORGOT PASSWORD?</h1>
                                 <h5>Don't worry! Enter your email below and we'll email you with instruction on how to reset your password.</h5>
@@ -170,9 +284,9 @@
                         <!-- Forgot password End -->
                     </div>
                 </div>
-                                
-                                         
-        
+
+
+
             </div>
             <!-- Header End -->
 
@@ -250,6 +364,14 @@
             <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
         </div>
 
+        <%
+            if (!messageSuccess.isEmpty()) {
+        %>
+        <div id="toast"></div>
+        <%
+            }
+        %>  
+
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -263,27 +385,67 @@
 
         <!-- javascript -->
         <script src="js/login.js"></script>
-        
+
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
         <script>
-          window.onload = function(){
-              let isValid = false;
-              const form = document.getElementById("form");
-              const error = document.getElementById("error");
-              
-              form.addEventListener("submit", function(e){
-                  e.preventDefault();
-                  const response = grecaptcha.getResponse();
-                  console.log(response);
-                  if(response){
-                      form.submit();
-                  }else{
-                      error.innerHTML = "Please check";
-                  }
-              });
-          }
-      </script>
-      
+            window.onload = function () {
+                let isValid = false;
+                const form = document.getElementById("form");
+                const error = document.getElementById("error");
+
+                form.addEventListener("submit", function (e) {
+                    e.preventDefault();
+                    const response = grecaptcha.getResponse();
+                    console.log(response);
+                    if (response) {
+                        form.submit();
+                    } else {
+                        error.innerHTML = "Please check";
+                    }
+                });
+            }
+        </script>
+        <script language="javascript">
+            const main = document.getElementById("toast");
+            if (main) {
+                const duration = 2000;
+                const toast = document.createElement("div");
+                // Auto remove toast
+                const autoRemoveId = setTimeout(function () {
+                    main.removeChild(toast);
+                }, duration + 1000);
+                // Remove toast when clicked
+                toast.onclick = function (e) {
+                    if (e.target.closest(".toast__close")) {
+                        main.removeChild(toast);
+                        clearTimeout(autoRemoveId);
+                    }
+                };
+
+            <%
+                if (!messageSuccess.isEmpty()) {
+            %>
+                toast.classList.add("toast", `toast--success`);
+                toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
+                toast.innerHTML =
+                        `<div class="toast__icon">
+            <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="toast__body">
+            <h3 class="toast__title">Th?t b?i</h3>
+                <p class="toast__msg"><%=messageSuccess%></p>
+                </div>
+            <div class="toast__close">
+            <i class="fas fa-times"></i>
+            </div>
+            `;
+            <%
+                }
+            %>
+                main.appendChild(toast);
+            }
+        </script>
+
     </body>
 
 </html>

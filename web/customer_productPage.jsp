@@ -44,6 +44,116 @@
         <!-- My Stylesheet -->
         <link rel="stylesheet" href="css/guestPage.css">
         <link rel="stylesheet" href="css/customerPage.css">
+
+        <style>
+            /* toast */
+            #toast {
+                position: fixed;
+                top: 32px;
+                right: 32px;
+                z-index: 999999;
+            }
+
+            .toast {
+                display: flex;
+                align-items: center;
+                background-color: #fff;
+                border-radius: 2px;
+                padding: 20px 0;
+                min-width: 400px;
+                max-width: 450px;
+                border-left: 4px solid;
+                box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
+                transition: all linear 0.3s;
+            }
+
+            .toast--success {
+                border-color: #47d864;
+            }
+
+            .toast--success .toast__icon {
+                color: #47d864;
+            }
+
+            .toast--info {
+                border-color: #2f86eb;
+            }
+
+            .toast--info .toast__icon {
+                color: #2f86eb;
+            }
+
+            .toast--warning {
+                border-color: #ffc021;
+            }
+
+            .toast--warning .toast__icon {
+                color: #ffc021;
+            }
+
+            .toast--error {
+                border-color: #ff623d;
+            }
+
+            .toast--error .toast__icon {
+                color: #ff623d;
+            }
+
+            .toast+.toast {
+                margin-top: 24px;
+            }
+
+            .toast__icon {
+                font-size: 24px;
+            }
+
+            .toast__icon,
+            .toast__close {
+                padding: 0 16px;
+            }
+
+            .toast__body {
+                flex-grow: 1;
+            }
+
+            .toast__title {
+                font-size: 16px;
+                font-weight: 600;
+                color: #333;
+            }
+
+            .toast__msg {
+                font-size: 14px;
+                color: #888;
+                margin-top: 6px;
+                line-height: 1.5;
+            }
+
+            .toast__close {
+                font-size: 20px;
+                color: rgba(0, 0, 0, 0.3);
+                cursor: pointer;
+            }
+
+            /* animation */
+            @keyframes slideInLeft {
+                from {
+                    opacity: 0;
+                    transform: translateX(calc(100% + 32px));
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            @keyframes fadeOut {
+                to {
+                    opacity: 0;
+                }
+            }
+        </style>
     </head>
 
     <body>
@@ -55,7 +165,14 @@
             product_id = (product_id == null) ? "" : product_id;
 
             UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
+
+            String messageSuccess = (String) request.getAttribute("ADD_SUCCESS");
+            String messageError = (String) request.getAttribute("ADD_FAIL");
+
+            messageSuccess = (messageSuccess == null) ? "" : messageSuccess;
+            messageError = (messageError == null) ? "" : messageError;
         %>
+
         <%
             List<ProductDetailDTO> productList = (List<ProductDetailDTO>) session.getAttribute("PRODUCT_DETAIL_BY_TYPE");
         %>
@@ -528,6 +645,14 @@
                 </div>
             </div>
         </div>
+        
+        <%
+            if (!messageSuccess.isEmpty()) {
+        %>
+        <div id="toast"></div>
+        <%
+            }
+        %>   
 
         <!-- Footer End -->
 
@@ -549,6 +674,71 @@
 
     <!-- javascript -->
     <script src="js/customer_productPage.js"></script>
+
+    <script language="javascript">
+            const main = document.getElementById("toast");
+            if (main) {
+                const duration = 2000;
+                const toast = document.createElement("div");
+                // Auto remove toast
+                const autoRemoveId = setTimeout(function () {
+                    main.removeChild(toast);
+                }, duration + 1000);
+                // Remove toast when clicked
+                toast.onclick = function (e) {
+                    if (e.target.closest(".toast__close")) {
+                        main.removeChild(toast);
+                        clearTimeout(autoRemoveId);
+                    }
+                };
+
+            <%
+                if (messageError.isEmpty() && !messageSuccess.isEmpty()) {
+            %>
+                toast.classList.add("toast", `toast--success`, "showing");
+
+                toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
+
+                toast.innerHTML =
+                        `<div class="toast__icon">
+            <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="toast__body">
+            <h3 class="toast__title">Thành công</h3>
+                <p class="toast__msg"><%=messageSuccess%></p>
+                </div>
+            <div class="toast__close">
+            <i class="fas fa-times"></i>
+            </div>
+                    `;
+                
+            <%
+                }
+            %>
+
+            <%
+                if (!messageError.isEmpty() && messageSuccess.isEmpty()) {
+            %>
+                toast.classList.add("toast", `toast--error`);
+                toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
+                toast.innerHTML =
+                        `<div class="toast__icon">
+            <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="toast__body">
+            <h3 class="toast__title">Th?t b?i</h3>
+                <p class="toast__msg"><%=messageError%></p>
+                </div>
+            <div class="toast__close">
+            <i class="fas fa-times"></i>
+            </div>
+            `;
+            <%
+                }
+            %>
+                main.appendChild(toast);
+            }
+    </script>
 
 </body>
 

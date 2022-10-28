@@ -116,11 +116,15 @@ public class RegisterController extends HttpServlet {
                     CustomerDAO cusDAO = new CustomerDAO();
   
 //                    add thông tin customer vào database
-                    if(cusDAO.InsertCus(customer)) url = SUCCESS;
+                    if(cusDAO.InsertCus(customer)) {
+                        request.setAttribute("REGIST_SUCCESS", "Đăng ký thành công");
+                        url = SUCCESS;
+                    }
                     
                 }
                 else {
                     request.setAttribute("CUS_ERROR", customerError);
+                    request.setAttribute("REGIST_FAIL", "Đăng ký thất bại");
                     url = NOT_PASS;
                 }
             }
