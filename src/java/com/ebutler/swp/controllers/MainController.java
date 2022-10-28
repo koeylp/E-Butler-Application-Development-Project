@@ -291,7 +291,8 @@ public class MainController extends HttpServlet {
             } else if (action.equals(GO_TO_PRODUCT_PAGE)) {
                 url = PRODUCT_PAGE_CONTROLLER;
             } else if (action.equals(GO_TO_PRODUCT_DETAIL_BY_TYPE_PAGE)) {
-                url = PRODUCT_DETAIL_BY_TYPE_CONTROLLER;
+//                url = PRODUCT_DETAIL_BY_TYPE_CONTROLLER;
+                   url = PRODUCT_DETAIL_BY_TYPE_PAGING_CONTROLLER;
             } else if (action.equals(GO_TO_USER_PROFILE)) {
                 url = GO_TO_USER_PROFILE_CONTROLLER;
             } else if (action.equals(SEARCH_PRODUCT_DETAIL_BY_TYPE)) {
