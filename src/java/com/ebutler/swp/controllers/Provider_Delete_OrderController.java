@@ -4,13 +4,15 @@
  */
 package com.ebutler.swp.controllers;
 
-import com.ebutler.swp.dao.ProductDAO;
-import com.ebutler.swp.dto.CartDTO;
-import com.ebutler.swp.dto.ProductDetailDTO;
-import com.ebutler.swp.dto.QuantityStockDTO;
+import com.ebutler.swp.dao.ProviderDAO;
+import com.ebutler.swp.dto.OrderDTO;
+import com.ebutler.swp.dto.OrderDetailDTO;
+import com.ebutler.swp.dto.ProviderDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,42 +20,58 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author thekh
+ * @author DELL
  */
-@WebServlet(name = "AddToCartController", urlPatterns = {"/AddToCartController"})
-public class AddToCartController extends HttpServlet {
+public class Provider_Delete_OrderController extends HttpServlet {
 
-    private static final String ERROR = "errorPage.jsp";
-    private static final String SUCCESS = "customer_productPage.jsp";
+    private final String SUCCESS = "OrderProvider.jsp";
+    private final String ERROR = "OrderProvider.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String id = request.getParameter("product_ID");
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
-            ProductDAO dao = new ProductDAO();
+            List<OrderDetailDTO> listOrder = new ArrayList();
+            List<OrderDTO> listOrderUpdate = new ArrayList();
+            
+            ProviderDAO providerDAO = new ProviderDAO();
             HttpSession session = request.getSession();
-            if (session != null) {
-                CartDTO cart = (CartDTO) session.getAttribute("CART");
-                ProductDetailDTO productDetail = dao.getProductByID(id);
-                QuantityStockDTO quantityStock = (QuantityStockDTO) session.getAttribute("STOCK");
-                if (quantityStock == null) {
-                    quantityStock = new QuantityStockDTO();
-                }
-                quantityStock.add(productDetail);
-                productDetail.setQuantity(quantity);
-                if (cart == null) {
-                    cart = new CartDTO();
-                }
-                cart.add(productDetail);
-                session.setAttribute("STOCK", quantityStock);
-                session.setAttribute("CART", cart);
-                url = SUCCESS;
+            ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER");
+            int orderID = Integer.parseInt(request.getParameter("orderID"));
+            listOrder = providerDAO.loadOrderDetail(provider, orderID) ;
+            boolean checkAll = true;
+            boolean checkOrder = providerDAO.deleteOrder(orderID);
+            if (!checkOrder) {
+                checkAll = false;
             }
+            boolean checkOrderDetail = providerDAO.deleteOrderDetail(orderID);
+            if (!checkOrderDetail) {
+                checkAll = false;
+            }
+            boolean checkOrderDetailDelivery = providerDAO.deleteOrderDelivery(orderID);
+            if (!checkOrderDetailDelivery) {
+                checkAll = false;
+            }
+            if (checkAll) {
+                
+                
+                for (int i = 0; i < listOrder.size(); i++) {
+                    int quantity = providerDAO.getProductQuantity(listOrder.get(i).getProduct_detail_ID());
+                    int quantityOrder = listOrder.get(i).getQuantity();
+                    int setQuantity = quantity + quantityOrder;
+                    boolean updateFinal = providerDAO.updateReturnQuantity(setQuantity, listOrder.get(i).getProduct_detail_ID());
+                    if (!updateFinal) {
+                        request.setAttribute("MESSAGE_UPDATE", "Error Update ! Fix it");
+                    }
+                }
+                    url = SUCCESS;
+                    listOrderUpdate = providerDAO.loadListOrder(provider) ; 
+                    session.setAttribute("Providder_ListOrder", listOrderUpdate);  
+            }
+            
+
         } catch (Exception e) {
-            log("Error at AddToCartController" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

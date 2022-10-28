@@ -9,7 +9,6 @@ import com.ebutler.swp.dto.AddressDTO;
 import com.ebutler.swp.dto.CustomerDTO;
 import com.ebutler.swp.dto.UserDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

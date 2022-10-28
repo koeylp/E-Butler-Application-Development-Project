@@ -1,3 +1,4 @@
+<%@page import="com.ebutler.swp.dto.AddressDTO"%>
 <%@page import="com.ebutler.swp.dto.ServiceCartDTO"%>
 <%@page import="com.ebutler.swp.dto.CityDTO"%>
 <%@page import="com.ebutler.swp.dto.ProvinceDTO"%>
@@ -62,8 +63,8 @@
             <%
                 UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
                 CustomerDTO customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
-
                 customer = (customer == null) ? new CustomerDTO() : customer;
+
             %>
             <!-- Navbar Start -->
             <div class="container-fluid nav-bar bg-transparent">
@@ -132,11 +133,13 @@
                 </div>
             </div>
             <!-- Header End -->
+
             <%
                 CartServiceDTO cartService = (CartServiceDTO) session.getAttribute("CART_SERVICE");
                 CartDTO cart = (CartDTO) session.getAttribute("CART");
                 double total = 0;
             %>
+
             <!-- Cart start -->
 
 
@@ -149,7 +152,7 @@
                                 <!-- Contact info start -->
                                 <div class="relative m-y-32">
                                     <div style="border: 1px solid #E5E7EB;" class="pad-2 flex-between">
-                                        <div class="flex-between">
+                                        <div class="flex l-8">
                                             <div class="flex-center">
                                                 <i class="fa-solid fa-user"></i>
                                             </div>
@@ -165,7 +168,7 @@
                                             <button type="button" style="--round: .5rem; background-color: #F9FAFB" class="txt-sm bold rounded-f border-no pad-0 change_info">Change</button>
                                         </div>
                                     </div>
-                                    <div style="width: 100%;border: 1px solid #E5E7EB;" class="info_detail detail">
+                                    <div style="width: 100%;border: 1px solid #E5E7EB;" class="info_detail detail hide">
                                         <div class="pad-2">
                                             <div class="flex-vertical-center m-y-12">
                                                 <h1 class="txt-lg bold">Contact information</h1>
@@ -193,19 +196,29 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Contact info end -->
 
+                                <!-- Contact info end -->
                                 <!-- Shipping Address start-->
+                                <%
+                                    AddressDTO address_default = new AddressDTO();
+
+                                    for (AddressDTO address : customer.getAddress_list()) {
+                                        if (address.getStatus() == 1) {
+                                            address_default = address;
+                                            break;
+                                        }
+                                    }
+                                %>
                                 <div class="relative m-y-32">
                                     <div style="border: 1px solid #E5E7EB;" class="pad-2 flex-between">
-                                        <div class="flex-between">
+                                        <div class="flex l-8">
                                             <div class="flex-center txt-md">
                                                 <i class="fa-solid fa-signs-post"></i>
                                             </div>
                                             <div style="margin-left: 2rem;" class="flex-col">
                                                 <span class="txt-lg">SHIPPING ADDRESS</span>
                                                 <div class="flex-between txt-sm bold">
-                                                    <span>Address</span>
+                                                    <span><%=address_default.getStreet()%>, <%=address_default.getDistrict_name()%>, <%=address_default.getProvince_name()%></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -214,11 +227,11 @@
                                                     class="txt-sm bold rounded-f border-no pad-0 change_address">Change</button>
                                         </div>
                                     </div>
-                                    <div style="width: 100%;border: 1px solid #E5E7EB;" class="address_detail detail">
+                                    <div style="width: 100%;border: 1px solid #E5E7EB;" class="address_detail detail hide">
                                         <div class="pad-2">
                                             <div style="padding: 0;" class="flex-col">
 
-                                                <form action="MainController?action=SelectProvince" method="POST">
+                                                <form action="MainController?action=SelectProvince" method="GET">
                                                     <input type="hidden" name="current_page" value="customer_checkoutPage.jsp">
                                                     <div class="row">
                                                         <div class="flex-horizon-center flex-col m-y-12 col l-6">
@@ -227,15 +240,14 @@
                                                                 ArrayList<ProvinceDTO> province_list = (ArrayList<ProvinceDTO>) session.getAttribute("PROVINCE_LIST");
                                                                 String province_id = (String) request.getAttribute("PROVINCE_ID");
 
+                                                                //ArrayList<AddressDTO> address_list = customer.getAddress_list();
                                                                 province_id = (province_id == null) ? "" : province_id;
-                                                                province_list = (province_list == null) ? new ArrayList<ProvinceDTO>() : province_list;
                                                             %>
                                                             <select
                                                                 style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
                                                                 class="input txt-sm" type="password" onchange="this.form.submit()" name="province_id">
                                                                 <option>Select Province</option>
-                                                                <%
-                                                                    for (ProvinceDTO province : province_list) {
+                                                                <%                                                                    for (ProvinceDTO province : province_list) {
                                                                 %>
                                                                 <option value="<%=province.getId()%>" <%if (province.getId().equals(province_id)) {%>selected<%}%>><%=province.getName()%></option>
                                                                 <%
@@ -263,7 +275,6 @@
                                                                 <%
                                                                     }
                                                                 %>
-
                                                             </select>
                                                         </div>
                                                     </div>
@@ -285,6 +296,7 @@
                                     </div>
                                 </div>
                                 <!-- Shipping Address end -->
+
 
                             </div>
 
@@ -441,8 +453,11 @@
                                         </div>
                                     </div>
 
+                                    <!--Shipping method-->
                                     <%
-                                        if (!cart.getCart().isEmpty()) {
+
+                                        if (cart != null) {
+                                            if (!cart.getCart().isEmpty()) {
                                     %>
                                     <div class="relative m-y-32">
                                         <div style="border: 1px solid #E5E7EB; border-radius: 1rem;" class="pad-2 flex-between">
@@ -452,10 +467,9 @@
                                                 </div>
                                                 <div style="margin-left: 2rem;" class="flex-col">
                                                     <span class="txt-lg">SHIPPING METHOD</span>
-                                                    
+
                                                 </div>
                                             </div>
-                                            
                                         </div>
 
                                     </div>
@@ -492,8 +506,11 @@
                                         </div>
                                     </div>
                                     <%
+                                            }
                                         }
                                     %>
+
+
 
                                     <!-- Payment method start -->
                                     <div class="relative m-y-32">

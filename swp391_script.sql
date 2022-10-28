@@ -28,8 +28,8 @@ CREATE TABLE tblUser(
 	username nvarchar(30) PRIMARY KEY,
 	[password] nvarchar(30) NOT NULL,
 	role_ID nvarchar(10) NOT NULL,
-	[phone] nvarchar(11) UNIQUE NOT NULL,
-	[email] [nvarchar] (30) UNIQUE NOT NULL,
+	[phone] nvarchar(11),
+	[email] [nvarchar] (30),
 	status [decimal](1)
 )
 
@@ -268,7 +268,7 @@ CREATE TABLE tblDelivery (
 )
 GO
 
-CREATE TABLE tblShipperIncomeByMonth (
+CREATE TABLE tblShipperIncome (
 	id int IDENTITY(1,1) PRIMARY KEY,
 	[month] int,
 	[year] int,
@@ -277,13 +277,14 @@ CREATE TABLE tblShipperIncomeByMonth (
 )
 GO
 
-CREATE TABLE tblShipperIncomeByYear (
-	[year] int PRIMARY KEY,
-	shipper_id nvarchar(30) REFERENCES tblShipper(username),
-	total decimal(12)
+CREATE TABLE tblReviewProduct (
+	id int IDENTITY(1,1) PRIMARY KEY,
+	username nvarchar(30) REFERENCES tblCustomer(username),
+	product_id int REFERENCES tblProductDetail(id),
+	comment nvarchar(max),
+	rating int,
+	status int
 )
-GO
-
 ------------------------------------------------------- TRIGGER ---------------------------------------------------------------
 --- bảng customer: đăng ký account -> cập nhật bảng user
 CREATE TRIGGER trig_cus_insert ON tblCustomer 
@@ -300,7 +301,6 @@ END;
 GO
 
 --- bảng customer: chỉnh sửa thông tin -> cập nhật bảng user
---drop trigger trig_cus_updateStatus
 CREATE TRIGGER trig_cus_updateStatus ON tblCustomer 
 AFTER UPDATE
 AS
@@ -340,6 +340,62 @@ BEGIN
 	FROM inserted
 	
 	UPDATE tblUser SET password = @password, phone = @phone, email = @email,  status = @status WHERE username = @username
+END;
+GO
+
+--- bảng shipper: tạo account -> cập nhật bảng user
+CREATE TRIGGER trig_shipper_insert ON tblShipper
+FOR INSERT
+AS
+BEGIN 
+	DECLARE @username nvarchar(30), @password nvarchar(30), @status decimal(1)
+	
+	SELECT @username = username, @password = password, @status = status
+	FROM inserted
+	
+	INSERT INTO tblUser (username, password, role_ID, status) VALUES (@username, @password, 'SHIP',@status)
+END;
+GO
+
+--- bảng provider: chỉnh sửa thông tin -> cập nhật bảng user
+CREATE TRIGGER trig_shipper_updateStatus ON tblShipper 
+AFTER UPDATE
+AS
+BEGIN 
+	
+	DECLARE @username nvarchar(30), @status decimal(1)
+	
+	SELECT @username = username, @status = status
+	FROM inserted
+	
+	UPDATE tblUser SET status = @status WHERE username = @username
+END;
+GO
+
+-------- shipper income ---------
+CREATE TRIGGER trig_shipper_income ON tblDelivery
+AFTER UPDATE
+AS
+BEGIN
+	IF((SELECT status FROM inserted) <> 2)
+	ROLLBACK TRANSACTION
+
+	DECLARE @order_date date, @order_id int, @price decimal(12), @shipper_id nvarchar(30)
+	
+	SELECT @order_id = order_id, @shipper_id = shipper_id FROM inserted;
+	
+	SELECT @order_date = o.order_date FROM tblOrder o WHERE o.order_ID = @order_id
+	
+	SET @price = (select sum(price) from tblOrder_Product_Detail where order_ID = @order_id)
+	
+	IF((select * from tblShipperIncome sibm where MONTH(@order_date) = sibm.month and YEAR(@order_date) = sibm.year and @shipper_id = shipper_id) LIKE NULL)
+	BEGIN
+		INSERT INTO tblShipperIncome(month, year, shipper_id, total) values (MONTH(@order_date), YEAR(@order_date), @shipper_id, @price)
+	END
+	ELSE
+	BEGIN
+		UPDATE tblShipperIncome SET total = total + @price WHERE month = MONTH(@order_date) and year = YEAR(@order_date) and shipper_id = @shipper_id
+	END
 END;
 GO
 
@@ -1860,13 +1916,13 @@ insert into tblShipper(username, password, name, status) values ('shopee', '1', 
 insert into tblShipper(username, password, name, status) values ('be', '1', 'Be', 1)
 
 --- bảng shipper ---
-
 SELECT * FROM tblOrder
 SELECT * FROM tblOrder_Product_Detail 
+SELECT * FROM tblDelivery
+SELECT * FROM tblShipper
 SELECT * FROM tblOrder_Service_Detail
 SELECT * FROM tblProductDetail
 SELECT * FROM tblServiceDetail
-SELECT * FROM tblOrder
 SELECT * FROM tblUser
 SELECT * FROM tblOrder_Product_Detail WHERE order_ID = 1
 SELECT * FROM tblOrder_Service_Detail WHERE order_ID = 1
@@ -1882,13 +1938,19 @@ FROM [tblServiceDetail] se
 JOIN [tblStaff] st ON se.staff_ID = st.staff_ID
 WHERE se.id = 1;
 
-
-Select * from tblUser order by username
-OFFSET 0 ROWS FETCH FIRST 10 ROWS ONLY
-
-ALTER DATABASE SWP391_Project
-SET COMPATIBILITY_LEVEL = { 160 | 150 | 140 | 130 | 120 | 110 | 100 | 90 }
+SELECT OrdP.id , Ord.order_ID, PD.name, OrdP.quantity, PD.price, Ord.total, OrdP.status FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = 'provider2' AND Ord.order_ID = '1'
 
 
+SELECT DISTINCT  Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total , Ord.shipping , PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = 'provider2'
 
 
+SELECT OrdP.id , Ord.order_ID, OrdP.product_detail_ID , PD.name, OrdP.quantity, PD.price, Ord.total, OrdP.status FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = 'provider2' AND Ord.order_ID = 1
+
+UPDATE tblOrder SET status = 0 WHERE order_ID = 5
+UPDATE tblOrder_Product_Detail SET status = 0 WHERE order_ID = 5
+UPDATE tblDelivery SET status = 3 WHERE order_id = 5
+UPDATE tblProductDetail SET quantity = ? WHERE id = ? 
+SELECT quantity FROM tblProductDetail WHERE id = 81
+SELECT * FROM tblProductDetail
+select * from tblUser order by username
+OFFSET 10 ROWS

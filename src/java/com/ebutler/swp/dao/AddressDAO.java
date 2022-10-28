@@ -25,7 +25,7 @@ public class AddressDAO {
     private final String DELETE_ADDRESS = "update tblAddress set status = -1 where user_ID = ? and address_ID = ?";
     private final String SET_ADDRESS_DEFAULT = "update tblAddress set status = 1 where user_ID = ? and address_ID = ?";
     private final String RESET_ADDRESS_DEFAULT = "update tblAddress set status = 0 where status <> -1";
-    private final String SELECT_ADDRESS = "select a.street, a.district_ID, user_ID, status, d.city_name, pc.province_Name, a.address_ID from tblAddress as a JOIN tblDistrict d ON a.district_ID = d.district_ID JOIN tblProvince_City pc ON d.province_ID = pc.province_ID where user_ID = ? and a.status <> -1 order by a.status DESC";
+    private final String SELECT_ADDRESS = "select a.street, a.district_ID, user_ID, status, d.city_name, pc.province_Name, a.address_ID, pc.province_ID from tblAddress as a JOIN tblDistrict d ON a.district_ID = d.district_ID JOIN tblProvince_City pc ON d.province_ID = pc.province_ID where user_ID = ? and a.status <> -1 order by a.status DESC";
     
     public ArrayList<ProvinceDTO> SelectProvince() throws SQLException {
         ArrayList<ProvinceDTO> list = new ArrayList<>();
@@ -173,7 +173,7 @@ public class AddressDAO {
     }
     
     public ArrayList<AddressDTO> SelectAddress(String user_id) throws SQLException {
-        ArrayList<AddressDTO> list = new ArrayList<>();
+        ArrayList<AddressDTO> list = new ArrayList<AddressDTO>();
         
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -190,6 +190,7 @@ public class AddressDAO {
                     address.setDistrict_name(rs.getString(5));
                     address.setProvince_name(rs.getString(6));
                     address.setId(rs.getInt(7));
+                    address.setProvince_id(rs.getString(8));
                     
                     list.add(address);
                 }

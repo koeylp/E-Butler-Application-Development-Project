@@ -5,9 +5,11 @@
 package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.AddressDAO;
+import com.ebutler.swp.dao.CustomerDAO;
 import com.ebutler.swp.dao.ProviderDAO;
 import com.ebutler.swp.dao.UserDAO;
 import com.ebutler.swp.dto.AddressDTO;
+import com.ebutler.swp.dto.CustomerDTO;
 import com.ebutler.swp.dto.ProductDetailDTO;
 import com.ebutler.swp.dto.ProviderDTO;
 import com.ebutler.swp.dto.ProviderServiceDTO1;
@@ -58,14 +60,22 @@ public class LoginController extends HttpServlet {
             session.setAttribute("LOGIN_USER", login_user);
             ProviderDAO providerdao = new ProviderDAO();
             ProviderDTO provider = providerdao.getProvider(username, password);
-            
-            
+
             AddressDAO addressDAO = new AddressDAO();
             ArrayList<ProvinceDTO> province_list = addressDAO.SelectProvince();
-            
-            if(province_list != null) session.setAttribute("PROVINCE_LIST", province_list);
-            
+
+            if (province_list != null) {
+                session.setAttribute("PROVINCE_LIST", province_list);
+            }
+
             if (login_user.getRole_id().equals(CUS_ROLE)) {
+                CustomerDAO dao = new CustomerDAO();
+                CustomerDTO customer = dao.getCurrentCustomer(login_user.getUsername());
+                
+                ArrayList<AddressDTO> list_address = addressDAO.SelectAddress(login_user.getUsername());
+
+                customer.setAddress_list(list_address);
+                session.setAttribute("CURRENT_CUSTOMER", customer);
                 url = CUS_PAGE;
             } else if (userDAO.Login(username, password).getRole_id().equals(PRO_ROLE)) {
                 session.setAttribute("LOGIN_PROVIDER", provider);

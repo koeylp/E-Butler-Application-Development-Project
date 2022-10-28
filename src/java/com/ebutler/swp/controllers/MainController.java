@@ -198,6 +198,9 @@ public class MainController extends HttpServlet {
         //2.Load list Order Deatil
     private final String PROVIDER_ORDER_DETAIL = "ProviderOrderDetail" ; 
     private final String PROVIDER_ORDER_DETAIL_CONTROLLER = "Provider_Order_DetailController" ;  
+        //3.Delete Order
+    private final String PROVIDER_DELETE_ORDER = "ProviderDeleteOrder" ;
+    private final String PROVIDER_DELETE_ORDER_CONTROLLER = "Provider_Delete_OrderController" ;
 
     //4.STAFF PROVIDER
         //1.Load List  
@@ -250,6 +253,13 @@ public class MainController extends HttpServlet {
 //    Paging
     private final String PAGING_PRODUCT_DETAIL = "pagingProductDetail";
     private final String PAGING_PRODUCT_DETAIL_CONTROLLER = "PagingProductDetailController";
+//    Add review
+    private final String ADD_REVIEW = "AddReview";
+    private final String ADD_REVIEW_CONTROLLER = "AddReviewController";
+    
+//    Load review
+    private final String LOAD_REVIEW = "LoadReview";
+    private final String LOAD_REVIEW_CONTROLLER = "LoadingReviewController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -404,6 +414,13 @@ public class MainController extends HttpServlet {
                 url = UPDATE_ADDRESS_CONTROLLER;
             }else if (action.equals(PAGING_PRODUCT_DETAIL)) {
                 url = PAGING_PRODUCT_DETAIL_CONTROLLER;
+            }
+             else if (action.equals(PROVIDER_DELETE_ORDER)) {
+                url = PROVIDER_DELETE_ORDER_CONTROLLER ; 
+            } else if (action.equals(ADD_REVIEW)) {
+                url = ADD_REVIEW_CONTROLLER;
+            } else if (action.equals(LOAD_REVIEW)) {
+                url = LOAD_REVIEW_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

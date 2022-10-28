@@ -176,6 +176,7 @@
                                             <th>Date</th>
                                             <th>Customer ID</th>
                                             <th>Order Total</th>
+                                            <th>Shipping</th>
                                             <th>Status</th>
                                             <th>Actions</th>
                                             <th></th>
@@ -197,9 +198,8 @@
 
                                             <td><%= order.getCustomer_ID()%></td>
                                             <td><%= order.getTotal()%></td>
-
+                                            <td><%= order.getShipping() %></td>
                                             <td>
-                                                <div class="flexStatus">
                                                     <div>
                                                         <%
                                                             int status = order.getStatus();
@@ -210,30 +210,20 @@
                                                         } else if (status == 2) {
 
                                                         %>
-                                                        <span class="badge bg-label-success me-1 changeStatus">InActive</span>
-                                                        <% } else if (status == 0) {
+                                                        <span class="badge bg-label-success me-1 changeStatus">Done</span>
+                                                        <% 
+                                                            } else if (status == 0) {
                                                         %>
                                                         <span class="badge bg-label-warning me-1 changeStatus">Pending</span>
+                                                        <%
+                                                            } else if (status == 3) {
+                                                        %>
+                                                        <span class="badge bg-label-danger me-1 changeStatus">Cancel</span> 
                                                         <%
                                                             }
                                                         %>
                                                     </div>
-                                                    <div>
-                                                        <select class="form-select " name="ProductStatus" aria-label="Default select example">
-                                                            <option selected value="Choose status" >Choose status</option>
-                                                            <option value="1">Active</option>
-                                                            <option value="2">Inactive</option>              
-                                                        </select>
-                                                        <input type="hidden" name="oldStatus" value="<%= order.getStatus()%>" /> 
-                                                    </div>  
-                                                </div>
                                             </td>
-
-                                            <td>
-                                                <div>
-                                                    <button name="action" value="ProviderEditOrder" ><i class="bx bx-edit-alt me-1"></i>Edit</button>
-                                                </div>    
-                                            </td> 
                                             <td>
                                                 <div>
                                                     <input type="hidden" name="orderID" value="<%= order.getOrder_ID()%>" />
@@ -245,6 +235,7 @@
                                             <td>
                                                 <div>
                                                     <button name="action" value="ProviderDeleteOrder" ><i class="bx bx-trash me-1"></i>Delete</button>
+                                                    <input type="hidden" name="orderID" value="<%= order.getOrder_ID()%>" />
                                                 </div> 
                                             </td>
                                         </tr>
@@ -262,6 +253,7 @@
                         <%
                             }
                         %>
+
                     </div>
 
 

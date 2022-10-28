@@ -12,6 +12,7 @@ public class AddressDTO {
     private int id;
     private String district_id;
     private String district_name;
+    private String province_id;
     private String province_name;
     private String street;
     private String user_id;
@@ -37,6 +38,14 @@ public class AddressDTO {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getProvince_id() {
+        return province_id;
+    }
+
+    public void setProvince_id(String province_id) {
+        this.province_id = province_id;
     }
 
     public String getDistrict_name() {

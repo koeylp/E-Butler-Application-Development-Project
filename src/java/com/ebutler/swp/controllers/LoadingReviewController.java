@@ -5,12 +5,13 @@
 package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.ProductDAO;
-import com.ebutler.swp.dto.CartDTO;
+import com.ebutler.swp.dao.ReviewDAO;
 import com.ebutler.swp.dto.ProductDetailDTO;
-import com.ebutler.swp.dto.QuantityStockDTO;
+import com.ebutler.swp.dto.ReviewDTO;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,42 +19,30 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author thekh
+ * @author Admin
  */
-@WebServlet(name = "AddToCartController", urlPatterns = {"/AddToCartController"})
-public class AddToCartController extends HttpServlet {
-
-    private static final String ERROR = "errorPage.jsp";
-    private static final String SUCCESS = "customer_productPage.jsp";
-
+public class LoadingReviewController extends HttpServlet {
+    
+    private final String ERROR = "errorPage.jsp";
+    private final String SUCCESS = "customer_productPage.jsp";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String id = request.getParameter("product_ID");
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
-            ProductDAO dao = new ProductDAO();
             HttpSession session = request.getSession();
-            if (session != null) {
-                CartDTO cart = (CartDTO) session.getAttribute("CART");
-                ProductDetailDTO productDetail = dao.getProductByID(id);
-                QuantityStockDTO quantityStock = (QuantityStockDTO) session.getAttribute("STOCK");
-                if (quantityStock == null) {
-                    quantityStock = new QuantityStockDTO();
-                }
-                quantityStock.add(productDetail);
-                productDetail.setQuantity(quantity);
-                if (cart == null) {
-                    cart = new CartDTO();
-                }
-                cart.add(productDetail);
-                session.setAttribute("STOCK", quantityStock);
-                session.setAttribute("CART", cart);
-                url = SUCCESS;
-            }
+            ProductDAO dao = new ProductDAO();
+            String category_ID = (String) session.getAttribute("CATEGORYID");
+            String productID = (String) session.getAttribute("PRODUCTID");
+            
+            List<ProductDetailDTO> list = dao.getListProductByPlaceDetail(category_ID, productID);
+            
+            session.setAttribute("PRODUCT_DETAIL_BY_TYPE", list);
+            
+            url = SUCCESS;
         } catch (Exception e) {
-            log("Error at AddToCartController" + e.toString());
+            log("ERROR at LoadingReviewController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
