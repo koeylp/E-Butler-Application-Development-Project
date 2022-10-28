@@ -41,7 +41,7 @@ public class Update_Delivery_StatusController extends HttpServlet {
             int order_ID = Integer.parseInt(request.getParameter("Product_Order_id")) ;  
             DeliveryDAO deliveryDAO = new DeliveryDAO() ;
             
-            updateDeliveryStatusForProduct = deliveryDAO.updateProductOrder(2, id) ;
+            updateDeliveryStatusForProduct = deliveryDAO.updateProductOrder(3, id) ;
             checkForUpdateDelivery = deliveryDAO.checkForDelivery(order_ID) ;
             if (updateDeliveryStatusForProduct) {
                 move = true ; 

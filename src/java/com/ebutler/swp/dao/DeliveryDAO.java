@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class DeliveryDAO {
     private final String DELIVERY_LIST = "SELECT De.order_id, De.address, Ord.order_Date,Ord.customer_ID, Cus.name,Ord.total, De.status FROM (tblDelivery De JOIN tblOrder Ord ON De.order_id = Ord.order_ID) JOIN tblCustomer Cus ON Cus.username = Ord.customer_ID WHERE Ord.shipping = ? ";
-    private final String DELIVERY_LIST_DEYAIL = "SELECT OPD.id, De.order_id, PD.name, OPD.quantity, PD.price, De.status FROM ( tblDelivery De JOIN tblOrder_Product_Detail OPD ON De.order_id = OPD.order_ID ) JOIN tblProductDetail PD ON PD.id = OPD.product_detail_ID  WHERE De.order_id = ? AND De.shipper_id = ? ";
+    private final String DELIVERY_LIST_DEYAIL = "SELECT OPD.id, De.order_id, PD.name, OPD.quantity, PD.price, OPD.status FROM ( tblDelivery De JOIN tblOrder_Product_Detail OPD ON De.order_id = OPD.order_ID ) JOIN tblProductDetail PD ON PD.id = OPD.product_detail_ID  WHERE De.order_id = ? AND De.shipper_id = ? ";
     private final String UPDATE_PRODUCT_ORDER = "UPDATE tblOrder_Product_Detail SET status = ? WHERE id = ? " ; 
     private final String UPDATE_DELIVERY = "UPDATE tblDelivery SET status = ? WHERE order_id = ?" ; 
     private final String UPDATE_ORDER = "UPDATE tblOrder SET status = ? WHERE order_ID = ? " ; 
