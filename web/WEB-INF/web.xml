@@ -239,6 +239,14 @@
     <servlet>
         <servlet-name>Update_Delivery_StatusController</servlet-name>
         <servlet-class>com.ebutler.swp.controllers.Update_Delivery_StatusController</servlet-class>
+   </servlet>
+   <servlet>
+        <servlet-name>AddReviewController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.AddReviewController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadingReviewController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.LoadingReviewController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -479,6 +487,14 @@
     <servlet-mapping>
         <servlet-name>Update_Delivery_StatusController</servlet-name>
         <url-pattern>/Update_Delivery_StatusController</url-pattern>
+ </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddReviewController</servlet-name>
+        <url-pattern>/AddReviewController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadingReviewController</servlet-name>
+        <url-pattern>/LoadingReviewController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

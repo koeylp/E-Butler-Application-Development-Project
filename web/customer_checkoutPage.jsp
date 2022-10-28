@@ -455,8 +455,9 @@
 
                                     <!--Shipping method-->
                                     <%
-                                       
+
                                         if (cart != null) {
+                                            if (!cart.getCart().isEmpty()) {
                                     %>
                                     <div class="relative m-y-32">
                                         <div style="border: 1px solid #E5E7EB; border-radius: 1rem;" class="pad-2 flex-between">
@@ -469,7 +470,6 @@
 
                                                 </div>
                                             </div>
-
                                         </div>
 
                                     </div>
@@ -506,6 +506,7 @@
                                         </div>
                                     </div>
                                     <%
+                                            }
                                         }
                                     %>
 

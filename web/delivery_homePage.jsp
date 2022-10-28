@@ -278,6 +278,7 @@
                                                 %>
                                             <form action="MainController" method="Get">
                                                 <tr>
+
                                                     <td class="txt-sm"><%= count%></td>
                                                     <td class="txt-sm"><%= delivery.getAddress()%></td>
                                                     <td class="txt-sm"><%= delivery.getOrder_Date()%></td>

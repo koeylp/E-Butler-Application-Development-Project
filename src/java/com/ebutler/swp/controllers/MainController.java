@@ -248,6 +248,7 @@ public class MainController extends HttpServlet {
     private final String UPDATE_ADDRESS = "UpdateAddress";
     private final String UPDATE_ADDRESS_CONTROLLER = "UpdateAddressController";
     
+
     // ------------DELIVERY--------------------
     //1.LoadlistDetail 
     private final String DELIVERY_LOAD_DETAIL = "DeliveryOrderDetail" ; 
@@ -255,6 +256,15 @@ public class MainController extends HttpServlet {
     //2.UpdateDelivery
     private final String UPDATE_DELIVERY = "Update_Delivery" ; 
     private final String UPDATE_DELIVERY_CONTROLLER = "Update_Delivery_StatusController" ;  
+
+//    Add review
+    private final String ADD_REVIEW = "AddReview";
+    private final String ADD_REVIEW_CONTROLLER = "AddReviewController";
+    
+//    Load review
+    private final String LOAD_REVIEW = "LoadReview";
+    private final String LOAD_REVIEW_CONTROLLER = "LoadingReviewController";
+
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -410,6 +420,10 @@ public class MainController extends HttpServlet {
             }
              else if (action.equals(PROVIDER_DELETE_ORDER)) {
                 url = PROVIDER_DELETE_ORDER_CONTROLLER ; 
+            } else if (action.equals(ADD_REVIEW)) {
+                url = ADD_REVIEW_CONTROLLER;
+            } else if (action.equals(LOAD_REVIEW)) {
+                url = LOAD_REVIEW_CONTROLLER;
             }
             else if (action.equals(DELIVERY_LOAD_DETAIL)) { 
                 url = DELIVERY_LOAD_DETAIL_CONTROLLER ; 

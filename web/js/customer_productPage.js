@@ -5,7 +5,6 @@ var quick_view = document.querySelectorAll('.quick-view')
 
 for(let i = 0; i < popup_close.length; i++) {
     popup_close[i].addEventListener('click', () => overlay[i].classList.add('hide'))
-    overlay[i].addEventListener('click', () => overlay[i].classList.add('hide'))
 }
 
 for(let i = 0; i < quick_view.length; i++) {

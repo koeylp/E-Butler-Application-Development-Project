@@ -245,6 +245,14 @@ CREATE TABLE tblShipperIncome (
 )
 GO
 
+CREATE TABLE tblReviewProduct (
+	id int IDENTITY(1,1) PRIMARY KEY,
+	username nvarchar(30) REFERENCES tblCustomer(username),
+	product_id int REFERENCES tblProductDetail(id),
+	comment nvarchar(max),
+	rating int,
+	status int
+)
 ------------------------------------------------------- TRIGGER ---------------------------------------------------------------
 --- bảng customer: đăng ký account -> cập nhật bảng user
 CREATE TRIGGER trig_cus_insert ON tblCustomer 
