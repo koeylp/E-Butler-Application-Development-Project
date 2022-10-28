@@ -1,3 +1,5 @@
+<%@page import="com.ebutler.swp.dto.OrderDetailInfoDTO"%>
+<%@page import="com.ebutler.swp.dto.OrderDetailDTO"%>
 <%@page import="com.ebutler.swp.dto.DeliveryDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -233,78 +235,155 @@
             <!--**********************************
                 Content body start
             ***********************************-->
-            <%
-                List<DeliveryDTO> listDelivery = new ArrayList();
-                listDelivery = (List<DeliveryDTO>) session.getAttribute("Delivery_List");
-                if (listDelivery != null) {
-
-            %>
-            <div style="margin: 0; width: 100vw;" class="content-body">
-                <!-- <div class="row page-titles mx-0">
-                    <div class="col p-md-0">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                            <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
-                        </ol>
+            <div class="container-xxl">
+                <div class="container-fluid nav-bar bg-white px-0">
+                    <!-- Breadcrumb -->
+                    <div class="mx-5 mt-3">
+                        <nav aria-label="breadcrumb m-5">
+                            <ol class="breadcrumb breadcrumb-style1">
+                                <li class="breadcrumb-item">
+                                    <a href="#">Home</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#">Delivery Home</a>
+                                </li>
+                                <li class="breadcrumb-item active">Delivery Details</li>
+                            </ol>
+                        </nav>
                     </div>
-                </div> -->
-                <!-- row -->
+                    <!-- End Breadcrumb -->
+                    <div class="mt-3 ms-5 d-flex justify-content-start ">
+                        <div>
+                            <h2 style="font-weight:600 ;" class="">Delivery Details</h2>
+                        </div>
+                    </div>
+                    <!-- End Modal Edit -->
 
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">Shipping Order</h4>
-                                    <div class="table-responsive">
-                                        <table class="table table-striped table-bordered zero-configuration">
-                                            <thead>
-                                                <tr>
-                                                    <th class="txt-md bold">OrderID</th>
-                                                    <th class="txt-md bold">Address</th>
-                                                    <th class="txt-md bold">Date</th>
-                                                    <th class="txt-md bold">Customer Name</th>
-                                                    <th class="txt-md bold">Price</th>
-                                                    <th class="txt-md bold">Status</th>
-                                                    <th class="txt-md bold">Action</th>
-                                                </tr>
-                                            </thead>
 
-                                            <tbody>
-                                                <%                                                int count = 1;
-                                                    for (DeliveryDTO delivery : listDelivery) {
-                                                        count++;
+                    <div class="container-fluid d-flex flex-column pb-5">
+
+                        <%
+                            List<OrderDetailDTO> listDetail = new ArrayList();
+                            listDetail = (List<OrderDetailDTO>) session.getAttribute("Delivery_Detail");
+                            List<OrderDetailInfoDTO> listDetailInfo = new ArrayList();
+                            listDetailInfo = (List<OrderDetailInfoDTO>) session.getAttribute("Info_Detail_Delivery");
+
+                        %>
+                        <div class="layout-container-fluid   " style="border-radius:5px ;">
+                            <div class="d-flex justify-content-around mb-3">
+                                <div class="card my-3" style="width:300px ; height: 194px;">
+                                    <div class="card-body">
+                                        <div class="border-bottom">
+                                            <h6>Order Number<span
+                                                    class="badge bg-label-info mx-2 pb-1"><%= listDetailInfo.get(0).getOrderID()%></span> </h6>
+                                        </div>
+
+                                        <div class="pt-3">
+
+
+                                            <li style="list-style:none ; "><i class="bx bx-calendar-event mx-2"></i>Date: <%= listDetailInfo.get(0).getOrder_date()%></li>
+
+                                            <div class="flexStatus">
+                                                <li style="list-style:none ; padding-top: 6px ; padding-right: 8px "><i class="bx bx-calendar-event mx-2"></i>Status: </li>
+                                                    <%
+                                                        int status = listDetailInfo.get(0).getStatus();
+                                                        if (status == 1) {
+                                                    %>
+                                                <span class="badge bg-label-info me-1 changeStatus">InProgress</span>
+                                                <%
+                                                } else if (status == 2) {
 
                                                 %>
-                                            <form action="MainController" method="Get">
-                                                <tr>
+                                                <span class="badge bg-label-success me-1 changeStatus">Done</span> 
+                                                <%                                                } else if (status == 0) {
+                                                %>
+                                                <span class="badge bg-label-warning me-1 changeStatus">Pending</span>
+                                                <%
+                                                } else if (status == 3) {
+                                                %>
+                                                <span class="badge bg-label-danger me-1 changeStatus">Cancel Order</span> 
+                                                <%
+                                                    }
+                                                %>
 
-                                                    <td class="txt-sm"><%= count%></td>
-                                                    <td class="txt-sm"><%= delivery.getAddress()%></td>
-                                                    <td class="txt-sm"><%= delivery.getOrder_Date()%></td>
-                                                    <td class="txt-sm"><%= delivery.getName()%></td>
-                                                    <td class="txt-sm"><%= delivery.getTotal()%></td>
-                                                    <td class="txt-sm bold">
+
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="card my-3" style="width:300px ;height: fit-content;">
+                                    <div class="card-body">
+                                        <div class="border-bottom">
+                                            <h5>Customer</h5>
+                                        </div>
+                                        <div class="py-2">
+                                            <li style="list-style:none ;"><i class="bx bx-user mx-2"></i><%= listDetailInfo.get(0).getName()%></li>
+                                            <li style="list-style:none ;"><i class="bx bx-phone mx-2"></i><%= listDetailInfo.get(0).getPhone()%></li>
+                                            <li style="list-style:none ;"> <i class="bx bx-envelope mx-2"></i><%= listDetailInfo.get(0).getEmail()%></li> 
+                                            <li style="list-style:none ;"><i class="bx bx-map-pin mx-2"></i>Khu Cong Nghe Cao</li>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="border-bottom">
+                                <h6 class="mx-2">Items</h6>
+                            </div>
+                            <div class="layout-container-fluid">
+                                <div class=" table-responsive">
+                                    <table class="table " style="table-layout: fixed">
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Total</th>
+                                        <th>Status</th>
+                                        <th></th>
+                                        <tbody>
+
+                                            <%
+                                                Double total = 0.0;
+                                                for (OrderDetailDTO orderDetail : listDetail) {
+                                                    total += orderDetail.getPrice() * orderDetail.getQuantity();
+                                            %>
+                                        <form action="MainController" >
+                                            <tr>
+                                                <td class="txt-sm"><%= orderDetail.getId()%></td>
+                                                <td class="txt-sm"><%= orderDetail.getName()%></td>
+                                                <td class="txt-sm"><%= orderDetail.getQuantity()%></td>
+                                                <td class="txt-sm"><%= orderDetail.getPrice()%></td>
+                                                <td class="txt-sm"><%= orderDetail.getPrice() * orderDetail.getQuantity()%></td> 
+                                                <td class="txt-md ">
+                                                    <div class="flexStatus">
                                                         <div>
                                                             <%
-                                                                int status = delivery.getStatus();
-                                                                if (status == 1) {
+                                                                int statusBelow = orderDetail.getStatus();
+                                                                if (statusBelow == 1) {
                                                             %>
                                                             <span class="badge bg-label-info me-1 changeStatus">Goods Taken</span>
                                                             <%
-                                                            } else if (status == 2) {
+                                                            } else if (statusBelow == 2) {
 
                                                             %>
                                                             <span class="badge bg-label-info me-1 changeStatus">Shipping</span>
-                                                            <%                                                            } else if (status == 0) {
+                                                            <%                                                                } else if (status == 0) {
                                                             %>
                                                             <span class="badge bg-label-warning me-1 changeStatus">Pending</span>
                                                             <%
-                                                            } else if (status == 3) {
+                                                            } else if (statusBelow == 3) {
                                                             %>
                                                             <span class="badge bg-label-success me-1 changeStatus">Done</span> 
                                                             <%
-                                                            } else if (status == 4) {
+                                                            } else if (statusBelow == 4) {
                                                             %>
 
                                                             <span class="badge bg-label-danger me-1 changeStatus">Cancel Order</span> 
@@ -312,68 +391,84 @@
                                                                 }
                                                             %>
                                                         </div>
-                                                    </td>
-                                                    <td class="txt-sm bold">
                                                         <div>
-                                                            <input type="hidden" name="orderID" value="<%= delivery.getOrderID()%>" />
-                                                            <input type="hidden" name="customerID" value="<%= delivery.getCustomer_ID()%>" /> 
-                                                            <button type="submit" onclick="this.form.submit()" name="action" value="DeliveryOrderDetail" ><i class='bx bx-info-circle'></i>View Detail</button>
-                                                            <a href="MainController?action=DeliveryOrderDetail&orderID=<%=delivery.getOrderID()%>&customerID=<%=delivery.getCustomer_ID()%>" >111</a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                            <select class="form-select " name="DeliveryStatus" aria-label="Default select example">
+                                                                <option selected value="0" >Change status</option>
+                                                                <option value="0">Pending</option>
+                                                                <option value="1">Goods Taken</option>
+                                                                <option value="2">Shipping</option>              
+                                                                <option value="3">Done</option>              
+                                                                <option value="4">Cancel Order</option>              
+                                                            </select>
+                                                            <input type="hidden" name="oldStatus" value="<%= orderDetail.getStatus()%>" /> 
+                                                        </div>  
+                                                    </div>
+                                                </td>
+                                                <td class="txt-md ">
+                                                    <button type="submit" name="action" value="Update_Delivery">Update Status</button>
+                                                    <input type="hidden" name="Product_id" value="<%= orderDetail.getId()%>" /> 
+                                                    <input type="hidden" name="Product_Order_id" value="<%= orderDetail.getOrder_ID()%>" /> 
+                                                </td>
+                                        </form>
+                                        </tr>
+                                        <%
+                                            }
+                                        %>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="txt-sm" style="font-weight: bold;">Total</td>
+                                            <td class="txt-sm" style="font-weight: bold;"><%= total%></td>
+                                        </tr>        
 
-                                            </form>
-                                            <%
-                                                }
-                                            %>
-                                            </tbody>
 
-                                        </table>
-                                    </div>
+
+                                        </tbody>
+                                    </table>
                                 </div>
+
                             </div>
+
                         </div>
+                        <%
+
+                        %>
                     </div>
                 </div>
-                <!-- #/ container -->
-            </div>
-            <%
-                }
-            %>
-            <!--**********************************
-                Content body end
-            ***********************************-->
+                <!--**********************************
+                    Content body end
+                ***********************************-->
 
 
-            <!--**********************************
-                Footer start
-            ***********************************-->
-            <div class="footer">
-                <div class="copyright">
-                    <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
+                <!--**********************************
+                    Footer start
+                ***********************************-->
+                <div class="footer">
+                    <div class="copyright">
+                        <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
+                    </div>
                 </div>
+                <!--**********************************
+                    Footer end
+                ***********************************-->
             </div>
             <!--**********************************
-                Footer end
+                Main wrapper end
             ***********************************-->
-        </div>
-        <!--**********************************
-            Main wrapper end
-        ***********************************-->
 
-        <!--**********************************
-            Scripts
-        ***********************************-->
-        <script src="./plugins/common/common.min.js"></script>
-        <script src="./js/custom.min.js"></script>
-        <script src="./js/settings.js"></script>
-        <script src="./js/gleek.js"></script>
-        <script src="./js/styleSwitcher.js"></script>
+            <!--**********************************
+                Scripts
+            ***********************************-->
+            <script src="./plugins/common/common.min.js"></script>
+            <script src="./js/custom.min.js"></script>
+            <script src="./js/settings.js"></script>
+            <script src="./js/gleek.js"></script>
+            <script src="./js/styleSwitcher.js"></script>
 
-        <script src="./plugins/tables/js/jquery.dataTables.min.js"></script>
-        <script src="./plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
-        <script src="./plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+            <script src="./plugins/tables/js/jquery.dataTables.min.js"></script>
+            <script src="./plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+            <script src="./plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
 
     </body>
 

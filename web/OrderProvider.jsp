@@ -198,7 +198,15 @@
 
                                             <td><%= order.getCustomer_ID()%></td>
                                             <td><%= order.getTotal()%></td>
-                                            <td><%= order.getShipping() %></td>
+                                            <% 
+                                                String shipping = order.getShipping() ;
+                                                if (shipping == null) {
+                                                    shipping = "" ;
+                                                }
+                                            %>
+                                            <td>
+                                            <%= shipping %>
+                                            </td>
                                             <td>
                                                     <div>
                                                         <%

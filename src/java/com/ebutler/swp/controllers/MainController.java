@@ -253,6 +253,15 @@ public class MainController extends HttpServlet {
 //    Paging
     private final String PAGING_PRODUCT_DETAIL = "pagingProductDetail";
     private final String PAGING_PRODUCT_DETAIL_CONTROLLER = "PagingProductDetailController";
+
+    // ------------DELIVERY--------------------
+    //1.LoadlistDetail 
+    private final String DELIVERY_LOAD_DETAIL = "DeliveryOrderDetail" ; 
+    private final String DELIVERY_LOAD_DETAIL_CONTROLLER = "Delivery_Order_DetailController" ; 
+    //2.UpdateDelivery
+    private final String UPDATE_DELIVERY = "Update_Delivery" ; 
+    private final String UPDATE_DELIVERY_CONTROLLER = "Update_Delivery_StatusController" ;  
+
 //    Add review
     private final String ADD_REVIEW = "AddReview";
     private final String ADD_REVIEW_CONTROLLER = "AddReviewController";
@@ -260,6 +269,7 @@ public class MainController extends HttpServlet {
 //    Load review
     private final String LOAD_REVIEW = "LoadReview";
     private final String LOAD_REVIEW_CONTROLLER = "LoadingReviewController";
+
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -421,6 +431,11 @@ public class MainController extends HttpServlet {
                 url = ADD_REVIEW_CONTROLLER;
             } else if (action.equals(LOAD_REVIEW)) {
                 url = LOAD_REVIEW_CONTROLLER;
+            }
+            else if (action.equals(DELIVERY_LOAD_DETAIL)) { 
+                url = DELIVERY_LOAD_DETAIL_CONTROLLER ; 
+            }else if (action.equals(UPDATE_DELIVERY)) { 
+                url = UPDATE_DELIVERY_CONTROLLER ; 
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

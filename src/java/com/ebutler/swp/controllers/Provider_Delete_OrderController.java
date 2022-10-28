@@ -7,7 +7,9 @@ package com.ebutler.swp.controllers;
 import com.ebutler.swp.dao.ProviderDAO;
 import com.ebutler.swp.dto.OrderDTO;
 import com.ebutler.swp.dto.OrderDetailDTO;
+import com.ebutler.swp.dto.ProductDetailDTO;
 import com.ebutler.swp.dto.ProviderDTO;
+import com.ebutler.swp.dto.ProviderServiceDTO1;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -34,19 +36,20 @@ public class Provider_Delete_OrderController extends HttpServlet {
         try {
             List<OrderDetailDTO> listOrder = new ArrayList();
             List<OrderDTO> listOrderUpdate = new ArrayList();
-            
+
             ProviderDAO providerDAO = new ProviderDAO();
             HttpSession session = request.getSession();
             ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER");
             int orderID = Integer.parseInt(request.getParameter("orderID"));
-            listOrder = providerDAO.loadOrderDetail(provider, orderID) ;
+            listOrder = providerDAO.loadOrderDetail(provider, orderID);
             boolean checkAll = true;
             boolean checkOrder = providerDAO.deleteOrder(orderID);
             if (!checkOrder) {
                 checkAll = false;
             }
             boolean checkOrderDetail = providerDAO.deleteOrderDetail(orderID);
-            if (!checkOrderDetail) {
+            boolean checkOrderServiceDetail = providerDAO.deleteOrder_ServiceDetail(orderID);
+            if (!checkOrderDetail || !checkOrderServiceDetail) {
                 checkAll = false;
             }
             boolean checkOrderDetailDelivery = providerDAO.deleteOrderDelivery(orderID);
@@ -54,8 +57,7 @@ public class Provider_Delete_OrderController extends HttpServlet {
                 checkAll = false;
             }
             if (checkAll) {
-                
-                
+
                 for (int i = 0; i < listOrder.size(); i++) {
                     int quantity = providerDAO.getProductQuantity(listOrder.get(i).getProduct_detail_ID());
                     int quantityOrder = listOrder.get(i).getQuantity();
@@ -65,11 +67,16 @@ public class Provider_Delete_OrderController extends HttpServlet {
                         request.setAttribute("MESSAGE_UPDATE", "Error Update ! Fix it");
                     }
                 }
-                    url = SUCCESS;
-                    listOrderUpdate = providerDAO.loadListOrder(provider) ; 
-                    session.setAttribute("Providder_ListOrder", listOrderUpdate);  
+                url = SUCCESS;
+                List<ProductDetailDTO> listProduct = (List<ProductDetailDTO>) session.getAttribute("Provider_ListProduct");
+                List<ProviderServiceDTO1> listService = (List<ProviderServiceDTO1>) session.getAttribute("Providder_ListService");
+                if (!listProduct.isEmpty()) {
+                    listOrderUpdate = providerDAO.loadListOrder(provider);
+                } else if (!listService.isEmpty()) {
+                    listOrderUpdate = providerDAO.loadListOrderService(provider);
+                }
+                session.setAttribute("Providder_ListOrder", listOrderUpdate);
             }
-            
 
         } catch (Exception e) {
         } finally {

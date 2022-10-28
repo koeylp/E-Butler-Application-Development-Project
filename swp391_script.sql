@@ -48,7 +48,6 @@ CREATE TABLE tblCustomer (
 	point int,
 	[status] [decimal](1)
 )
-select * from tblCustomer
 GO
 
 CREATE TABLE tblProvider (
@@ -76,9 +75,6 @@ CREATE TABLE tblDistrict (
 	[province_ID] nvarchar(10) REFERENCES tblProvince_City([province_ID])
 )
 GO
-
-select street, district_ID, user_ID, status from tblAddress where user_ID = 'doangiabao'
-
 
 CREATE TABLE tblAddress( 
 	[address_ID] [int] IDENTITY(1,1) PRIMARY KEY , 
@@ -156,20 +152,7 @@ CREATE TABLE tblService (
 	[image] nvarchar(max)
 )
 GO
-select * from tblServiceCategory
-select * from tblService
-select * from tblServiceDetail
-select * from tblStaff
-select * from tblService where category_ID = 'HC'
 
-select distinct cate.category_ID, cate.name, cate.image, service.service_ID from tblServiceCategory cate JOIN tblService service 
-on cate.category_ID = service.category_ID where cate.category_ID = 'HC'
-
-select staff.staff_ID, staff.provider_ID, staff.service_ID, staff.name, staff.id_card, staff.avatar, staff.status, detail.price from tblStaff staff 
-JOIN tblServiceDetail detail ON staff.staff_ID = detail.staff_ID JOIN tblService service ON service.service_ID = detail.service_ID  WHERE staff.service_ID = '1'
-
-select staff.staff_ID, staff.provider_ID, staff.service_ID, staff.name, staff.id_card, staff.avatar, staff.status, detail.price from tblStaff staff 
-JOIN tblServiceDetail detail ON staff.staff_ID = detail.staff_ID WHERE staff.service_ID = '1'
 --STAFF
 CREATE TABLE tblStaff (
 	staff_ID [int] IDENTITY(1,1) PRIMARY KEY ,
@@ -246,10 +229,6 @@ CREATE TABLE tblAdmin (
 )
 GO
 
-SELECT se.id, se.staff_ID, se.[name], st.[name], se.price, st.avatar, se.[description], st.[status]
-FROM [tblServiceDetail] se
-JOIN [tblStaff] st ON se.staff_ID = st.staff_ID 
-WHERE se.id = 3;
 --- DELIVERY ---
 CREATE TABLE tblShipper (
 	username nvarchar(30) PRIMARY KEY,
@@ -398,6 +377,7 @@ BEGIN
 	END
 END;
 GO
+
 
 -------------------------------------------------------- INSERT -----------------------------------------------------------------
 -- bảng role
@@ -1238,17 +1218,17 @@ INSERT INTO tblProduct(product_ID, category_ID, name , image) VALUES ('18','OSH'
 --Bảng sản phẩm chi tiết theo từng sản phẩm cứng 
 
 
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Dinner Spoon Silver',50,30000, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Cake Fork Silver',50,20000, 'https://img.christofle.com/image/upload/s--2MQbtDgo--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/media/catalog/product/C/a/Cake_20fork_20America_20_20Silver_20plated_00001046000101_F_2_1.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Tea Spoon Gold',50,86000, 'https://www.nicepng.com/png/full/137-1375331_milano-tea-spoon-gold-plated-gold-spoon-png.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Tea Spoon Wooden Gold',50,77000, 'https://cdn.shopify.com/s/files/1/0548/9229/8282/products/SHSPO-4ZSGOL_1_800x.png?v=1656403634' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Tea Spoon Chrome',50,65000, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Dinner Spoon Silver',50,3, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Cake Fork Silver',50,2, 'https://img.christofle.com/image/upload/s--2MQbtDgo--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/media/catalog/product/C/a/Cake_20fork_20America_20_20Silver_20plated_00001046000101_F_2_1.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Tea Spoon Gold',50,8, 'https://www.nicepng.com/png/full/137-1375331_milano-tea-spoon-gold-plated-gold-spoon-png.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Tea Spoon Wooden Gold',50,7, 'https://cdn.shopify.com/s/files/1/0548/9229/8282/products/SHSPO-4ZSGOL_1_800x.png?v=1656403634' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','1','Tea Spoon Chrome',50,6, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','1','Table Knife Gold',50,50000, 'https://img.christofle.com/image/upload/s--1noiI0BK--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/Products/02327012001101_STQ_qvsbbn.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','1',' Dinner Fork Gold',50,30000, 'https://img.christofle.com/image/upload/s--2Wk8N2t9--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/Products/354003_F_pnpdg2.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','1','Table Knife Gold',50,5, 'https://img.christofle.com/image/upload/s--1noiI0BK--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/Products/02327012001101_STQ_qvsbbn.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','1',' Dinner Fork Gold',50,3, 'https://img.christofle.com/image/upload/s--2Wk8N2t9--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/Products/354003_F_pnpdg2.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','1','Table Knife Gold',50,50000, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','1',' Dinner Fork Gold',50,30000, 'https://img.christofle.com/image/upload/s--2Wk8N2t9--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/Products/354003_F_pnpdg2.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','1','Table Knife Gold',50,5, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','1',' Dinner Fork Gold',50,3, 'https://img.christofle.com/image/upload/s--2Wk8N2t9--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/Products/354003_F_pnpdg2.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 
 
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','1','Table Knife Gold',50,5, 'https://img.christofle.com/image/upload/s--1noiI0BK--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/Products/02327012001101_STQ_qvsbbn.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
@@ -1270,6 +1250,18 @@ INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, ima
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','3','Pro-x Deep Cooking Pot',50,120000, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','3','Forever Sauce Pan',50,120000, 'https://cdn11.bigcommerce.com/s-jta5lqjn53/images/stencil/532x532/products/573/1084/6720c__56824.1581430091.png?c=1' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','3','Marburg Grill Pan Black',50,120000, 'https://assets.kogan.com/images/sirjohnsgifts/SJG-1331223855140/1-1907e02c68-107190.png?auto=webp&canvas=340%2C226&fit=bounds&height=226&quality=90&width=340' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','3','Ferric Iron Fry Pan',50,9, 'https://hellokitchen.com.au/wp-content/uploads/2021/09/PC220312-2.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','3','Ferric Cast Iron Kadai Black',50,9, 'https://mrbutlers.com/pub/media/catalog/product/cache/cf2a296d1dbef50483d61587672f6c7d/p/n/pngs-fileartboard-7_1.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','3','Classic Deep Pan',50,6, 'https://vietnamshine.com/wp-content/uploads/2017/11/ih-classic-deep-pan-26cm.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','3','Pietra-e-legno Sauce Pot',50,7, 'https://services.electrolux-medialibrary.com/118ed4c0ee6546f4a7684c7fef8c985aNrZmYkM861d1f/view/WS_PN/PSAAPL170PE00007.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','3','Classic Deep Pan',50,9, 'https://vietnamshine.com/wp-content/uploads/2017/11/ih-classic-deep-pan-26cm.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','3','Gourmet Sauce Pot',50,10, 'https://www.aegnewzealand.co.nz/remote.jpg.ashx?width=3200&urlb64=aHR0cHM6Ly9yZXNvdXJjZS5lbGVjdHJvbHV4LmNvbS5hdS9QdWJsaWMvSW1hZ2UyL3Byb2R1Y3QvMjgzMjUvNTIxMTAvQkUtQUVHSGVyb0Nhcm91c2VsL0FFR0hlcm9DYXJvdXNlbC5wbmc&hmac=iqIYRok8jtw' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','3','Classic Cooking Pot 22cm',50,15, 'https://cdn11.bigcommerce.com/s-1fdhnzvx71/images/stencil/532x532/products/128/407/PSL31320I_2017_10_27_20_11_39_UTC__22917.1581348822.386.513__17625.1588179770.png?c=1' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','3','Classic Cooking Pot 26cm',50,20, 'https://cdn11.bigcommerce.com/s-1fdhnzvx71/images/stencil/532x532/products/127/404/PSL31320I_2017_10_27_20_11_39_UTC__78759.1581349083.386.513__48351.1588179416.png?c=1' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','3','Maximus Cooking Pot ',50,12, 'https://www.dehomebiz.com.my/image/dehomebiz/image/cache/data/all_product_images/product-729/morphy_richards_562010_multi_cooker_photo_10-810x585.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','3','Pro-x Deep Cooking Pot',50,12, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider3','3','Forever Sauce Pan',50,12, 'https://cdn11.bigcommerce.com/s-jta5lqjn53/images/stencil/532x532/products/573/1084/6720c__56824.1581430091.png?c=1' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('provider2','3','Marburg Grill Pan Black',50,12, 'https://assets.kogan.com/images/sirjohnsgifts/SJG-1331223855140/1-1907e02c68-107190.png?auto=webp&canvas=340%2C226&fit=bounds&height=226&quality=90&width=340' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES
 ('provider2','4','Cuckoo 1l Rice Cooker',50,150,
@@ -1894,22 +1886,6 @@ INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,descri
 INSERT INTO tblUser(username, password, role_ID, phone, email, status) 
 VALUES('hello', '1', 'CUS', '0123456789', 'hello@gmail.com', 1)
 
-
-SELECT customer.username, order1.order_Date, order1.payment, staff.name as [staff_name], service.name as  [service_name] , service.image, orderDetail.price, order1.status FROM tblOrder order1 JOIN tblOrder_Service_Detail orderDetail ON order1.order_ID = orderDetail.order_ID JOIN tblStaff staff on staff.staff_ID = orderDetail.staff_ID JOIN tblCustomer customer ON customer.username = order1.customer_ID JOIN tblService service ON service.service_ID = orderDetail.id where customer.username='Viet Dang' and order1.status = 0;
-
-SELECT customer.username, order1.order_Date, order1.payment, staff.name as [staff_name], service.name as  [service_name] , service.image, orderDetail.price, order1.status
-FROM tblOrder order1 JOIN tblOrder_Service_Detail orderDetail ON order1.order_ID = orderDetail.order_ID 
-JOIN tblStaff staff on staff.staff_ID = orderDetail.staff_ID
-JOIN tblCustomer customer ON customer.username = order1.customer_ID 
-JOIN tblService service ON service.service_ID = orderDetail.id
-where customer.username='Viet Dang' and order1.status = 0;
-
-SELECT *
-FROM tblOrder order1 JOIN tblOrder_Service_Detail orderDetail ON order1.order_ID = orderDetail.order_ID 
-JOIN tblStaff staff on staff.staff_ID = orderDetail.staff_ID
-JOIN tblCustomer customer ON customer.username = order1.customer_ID where customer.username='Viet Dang' and order1.status = 0;
-
-select * from tblService
 --- bảng delivery ---
 insert into tblShipper(username, password, name, status) values ('grab', '1', 'Grab', 1)
 insert into tblShipper(username, password, name, status) values ('shopee', '1', 'Shopee Express', 1)
@@ -1918,39 +1894,42 @@ insert into tblShipper(username, password, name, status) values ('be', '1', 'Be'
 --- bảng shipper ---
 SELECT * FROM tblOrder
 SELECT * FROM tblOrder_Product_Detail 
-SELECT * FROM tblDelivery
-SELECT * FROM tblShipper
 SELECT * FROM tblOrder_Service_Detail
-SELECT * FROM tblProductDetail
-SELECT * FROM tblServiceDetail
-SELECT * FROM tblUser
-SELECT * FROM tblOrder_Product_Detail WHERE order_ID = 1
-SELECT * FROM tblOrder_Service_Detail WHERE order_ID = 1
-SELECT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = 'provider2'
-SELECT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Service_Detail OrdS ON Ord.order_ID = OrdS.order_ID ) JOIN tblServiceDetail PD ON PD.id = OrdS.service_detail_ID WHERE PD.provider_ID = 'homecleaning'
+SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total, Ord.shipping, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Service_Detail OrdS ON Ord.order_ID = OrdS.order_ID ) JOIN tblServiceDetail PD ON PD.id = OrdS.service_detail_ID WHERE PD.provider_ID = ?
+SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total , Ord.shipping, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID 
+SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total , Ord.shipping, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = ?
+SELECT OrdP.id , Ord.order_ID, OrdP.product_detail_ID, PD.name, OrdP.quantity, PD.price, OrdP.status FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID 
+SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Service_Detail OrdS ON Ord.order_ID = OrdS.order_ID ) JOIN tblServiceDetail PD ON PD.id = OrdS.service_detail_ID WHERE PD.provider_ID = ? 
+SELECT OrdP.id , Ord.order_ID, OrdP.service_Detail_ID, PD.name, OrdP.staff_ID, PD.price, OrdP.status FROM ( tblOrder Ord JOIN tblOrder_Service_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblServiceDetail PD ON PD.id = OrdP.service_Detail_ID WHERE PD.provider_ID = 'moveronline' AND Ord.order_ID = 2
 
-SELECT * FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = 'provider2'
-SELECT * FROM ( tblOrder Ord JOIN tblOrder_Service_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblServiceDetail PD ON PD.id = OrdP.id WHERE PD.provider_ID = 'homecleaning'
+SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total , Ord.shipping, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID  
+SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total,Ord.shipping , PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Service_Detail OrdS ON Ord.order_ID = OrdS.order_ID ) JOIN tblServiceDetail PD ON PD.id = OrdS.service_detail_ID
+
+UPDATE tblOrder SET status = 3 WHERE order_ID = 1
+UPDATE tblDelivery SET status = 4 WHERE order_id = 1
+
+SELECT OrdP.id , Ord.order_ID, OrdP.product_detail_ID, PD.name, OrdP.quantity, PD.price, OrdP.status FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID
+SELECT OrdP.id , Ord.order_ID, OrdP.service_Detail_ID, PD.name, OrdP.staff_ID, PD.price, OrdP.status FROM ( tblOrder Ord JOIN tblOrder_Service_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblServiceDetail PD ON PD.id = OrdP.service_Detail_ID 
+SELECT * FROM tblUser WHERE role_ID = 'SHIP'
+SELECT * FROM tblDelivery
+
+SELECT De.order_id, De.address, Ord.order_Date,Ord.customer_ID, Cus.name,Ord.total, De.status FROM (tblDelivery De JOIN tblOrder Ord ON De.order_id = Ord.order_ID) JOIN tblCustomer Cus ON Cus.username = Ord.customer_ID WHERE Ord.shipping = 'shopee'
+SELECT De.id, De.order_id, PD.name, OPD.quantity, PD.price, De.status FROM ( tblDelivery De JOIN tblOrder_Product_Detail OPD ON De.order_id = OPD.order_ID ) JOIN tblProductDetail PD ON PD.id = OPD.product_detail_ID  WHERE De.order_id = 1 AND De.shipper_id = 'shopee'
+SELECT OrdP.id , Ord.order_ID, OrdP.product_detail_ID, PD.name, OrdP.quantity, PD.price, Ord.total, Ord.status FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID 
+
+SELECT * FROM ( tblDelivery De JOIN tblOrder_Product_Detail OPD ON De.order_id = OPD.order_ID ) JOIN tblProductDetail PD ON PD.id = OPD.product_detail_ID  WHERE De.order_id = 1
 
 
-SELECT se.id, se.staff_ID, se.[name], st.[name], se.price, st.avatar, se.[description], st.[status]
-FROM [tblServiceDetail] se
-JOIN [tblStaff] st ON se.staff_ID = st.staff_ID
-WHERE se.id = 1;
 
-SELECT OrdP.id , Ord.order_ID, PD.name, OrdP.quantity, PD.price, Ord.total, OrdP.status FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = 'provider2' AND Ord.order_ID = '1'
+SELECT * FROM tblShipper 
 
+SELECT * FROM tblDelivery
+SELECT * FROM tblOrder
+SELECT * FROM tblOrder_Product_Detail
 
-SELECT DISTINCT  Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total , Ord.shipping , PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = 'provider2'
+UPDATE tblDelivery SET status = 4 WHERE order_id = 1
+UPDATE tblOrder SET status = 3 WHERE order_ID = 1 
+UPDATE tblOrder_Product_Detail SET status = 3 WHERE id = 1
+SELECT * FROM tblOrder_Product_Detail WHERE order_ID = 1 AND status = 2
 
-
-SELECT OrdP.id , Ord.order_ID, OrdP.product_detail_ID , PD.name, OrdP.quantity, PD.price, Ord.total, OrdP.status FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = 'provider2' AND Ord.order_ID = 1
-
-UPDATE tblOrder SET status = 0 WHERE order_ID = 5
-UPDATE tblOrder_Product_Detail SET status = 0 WHERE order_ID = 5
-UPDATE tblDelivery SET status = 3 WHERE order_id = 5
-UPDATE tblProductDetail SET quantity = ? WHERE id = ? 
-SELECT quantity FROM tblProductDetail WHERE id = 81
-SELECT * FROM tblProductDetail
-select * from tblUser order by username
-OFFSET 10 ROWS
+SELECT OPD.id, De.order_id, PD.name, OPD.quantity, PD.price, De.status FROM ( tblDelivery De JOIN tblOrder_Product_Detail OPD ON De.order_id = OPD.order_ID ) JOIN tblProductDetail PD ON PD.id = OPD.product_detail_ID  WHERE De.order_id = ? AND De.shipper_id = ?

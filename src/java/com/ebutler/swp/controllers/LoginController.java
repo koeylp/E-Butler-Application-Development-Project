@@ -33,6 +33,8 @@ public class LoginController extends HttpServlet {
     private final String ERROR = "errorPage.jsp";
     private final String CUS_ROLE = "CUS";
     private final String CUS_PAGE = "LoadingProductAndServiceCategory";
+    private final String SHIP_ROLE = "SHIP";
+    private final String SHIP_PAGE = "DeliveryHomeController";
     private final String PRO_ROLE = "PRO";
     private final String PRO_PAGE = "Provider_ProductController";
     private final String NOT_PASS = "guest_loginPage.jsp";
@@ -77,7 +79,10 @@ public class LoginController extends HttpServlet {
                 customer.setAddress_list(list_address);
                 session.setAttribute("CURRENT_CUSTOMER", customer);
                 url = CUS_PAGE;
-            } else if (userDAO.Login(username, password).getRole_id().equals(PRO_ROLE)) {
+            }else if (login_user.getRole_id().equals(SHIP_ROLE)) {
+                url = SHIP_PAGE;
+            }  
+            else if (userDAO.Login(username, password).getRole_id().equals(PRO_ROLE)) {
                 session.setAttribute("LOGIN_PROVIDER", provider);
                 ProviderDAO providerDAO = new ProviderDAO();
                 List<ProductDetailDTO> listProduct = providerDAO.loadListProduct(provider);

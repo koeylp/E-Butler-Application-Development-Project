@@ -11,7 +11,9 @@ package com.ebutler.swp.dto;
 public class OrderDetailDTO {
     private int id;
     private int product_detail_ID;
+    private int service_detail_ID;
     private int order_ID;
+    private int staff_ID;
     private int quantity;
     private double price;
     private int status;
@@ -47,10 +49,39 @@ public class OrderDetailDTO {
         this.product_detail_ID = product_detail_ID ; 
     }
 
+    public OrderDetailDTO(int id,int order_ID, int service_detail_ID ,String name, int staff_ID, double price, int status ) {
+        this.id = id;
+        this.service_detail_ID = service_detail_ID;
+        this.order_ID = order_ID;
+        this.staff_ID = staff_ID;
+        this.price = price;
+        this.status = status;
+        this.name = name;
+    }
+    
+    
     public String getName() {
         return name;
     }
 
+    public int getService_detail_ID() {
+        return service_detail_ID;
+    }
+
+    public void setService_detail_ID(int service_detail_ID) {
+        this.service_detail_ID = service_detail_ID;
+    }
+
+    public int getStaff_ID() {
+        return staff_ID;
+    }
+
+    public void setStaff_ID(int staff_ID) {
+        this.staff_ID = staff_ID;
+    }
+    
+    
+    
     public void setName(String name) {
         this.name = name;
     }
@@ -111,6 +142,11 @@ public class OrderDetailDTO {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderDetailDTO{" + "id=" + id + ", product_detail_ID=" + product_detail_ID + ", service_detail_ID=" + service_detail_ID + ", order_ID=" + order_ID + ", staff_ID=" + staff_ID + ", quantity=" + quantity + ", price=" + price + ", status=" + status + ", name=" + name + ", total=" + total + '}';
     }
     
     

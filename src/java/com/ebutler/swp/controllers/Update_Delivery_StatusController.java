@@ -4,11 +4,9 @@
  */
 package com.ebutler.swp.controllers;
 
-import com.ebutler.swp.dao.ProviderDAO;
-import com.ebutler.swp.dto.OrderDTO;
-import com.ebutler.swp.dto.ProductDetailDTO;
-import com.ebutler.swp.dto.ProviderDTO;
-import com.ebutler.swp.dto.ProviderServiceDTO1;
+import com.ebutler.swp.dao.DeliveryDAO;
+import com.ebutler.swp.dto.OrderDetailDTO;
+import com.ebutler.swp.dto.UserDTO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,35 +20,49 @@ import javax.servlet.http.HttpSession;
  *
  * @author DELL
  */
-public class Provider_OrderController extends HttpServlet {
+public class Update_Delivery_StatusController extends HttpServlet {
 
-    private static final String ERROR = "OrderProvider.jsp" ; 
-    private static final String SUCCESS = "OrderProvider.jsp" ;  
+    private final String SUCCESS = "delivery_detail.jsp" ; 
+    private final String ERROR = "delivery_detail.jsp" ; 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR ; 
         try {
-            ProviderDAO dao = new ProviderDAO(); 
-            HttpSession session = request.getSession(); 
-            ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER") ; 
-            List<OrderDTO> listOrder = new ArrayList();   
-            List<ProductDetailDTO> listProduct = (List<ProductDetailDTO>) session.getAttribute("Provider_ListProduct") ; 
-            List<ProviderServiceDTO1> listService = (List<ProviderServiceDTO1>) session.getAttribute("Providder_ListService") ;   
-             if (!listProduct.isEmpty()) {
-                listOrder = dao.loadListOrder(provider); 
-            } else if (!listService.isEmpty()) { 
-                listOrder = dao.loadListOrderService(provider) ;
-            }
-            if (listOrder != null) {
-                url = SUCCESS ; 
-                 session.setAttribute("Providder_ListOrder", listOrder);
-            }
+            HttpSession session = request.getSession() ;
+            boolean move = false ; 
+            boolean checkForUpdateDelivery = false ;
+            boolean updateDeliveryStatusForProduct = false ;
+            boolean updateDelivery = false ;
+            boolean updateOrder = false ;
+            int statusDelivery = Integer.parseInt(request.getParameter("DeliveryStatus")) ; 
+            UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER") ;
+            int id = Integer.parseInt(request.getParameter("Product_id")) ;  
+            int order_ID = Integer.parseInt(request.getParameter("Product_Order_id")) ;  
+            DeliveryDAO deliveryDAO = new DeliveryDAO() ;
             
+            updateDeliveryStatusForProduct = deliveryDAO.updateProductOrder(2, id) ;
+            checkForUpdateDelivery = deliveryDAO.checkForDelivery(order_ID) ;
+            if (updateDeliveryStatusForProduct) {
+                move = true ; 
+            }
+            if(checkForUpdateDelivery) {
+                updateDelivery = deliveryDAO.updateDelivery(3, order_ID) ;
+                move = true ; 
+            }
+            if(checkForUpdateDelivery) {
+                updateOrder = deliveryDAO.updateOrder(2, order_ID) ;
+                move = true ; 
+            }
+            List<OrderDetailDTO> listOrder = new ArrayList(); 
+            listOrder = deliveryDAO.loadOrderDetail(order_ID, user) ;
+            if (move) {
+                url = SUCCESS ; 
+                session.setAttribute("Delivery_Detail", listOrder);
+            }
         } catch (Exception e) {
-        }
-        finally {
-            request.getRequestDispatcher(url).include(request, response);
+        }finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
