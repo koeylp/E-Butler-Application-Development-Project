@@ -311,12 +311,12 @@
 
                             for (ProductDetailDTO product : product_list) {
                         %>
-                        <div class="col l-3 s-6 m-y-1">
+                        <div id="list" class="col l-3 s-6 m-y-1">
                             <div class="block__item flex-between">
                                 <div style="max-height: 15rem; min-height: 15rem;" class="block__img flex-center relative">
                                     <img src="<%=product.getImage()%>"
                                          alt="">
-                                    <a href="MainController?action=AddToCart&quantity=1&product_ID=<%=product.getId()%>"
+                                    <a href="MainController?action=AddToCart&quantity=1&product_ID=<%=product.getId()%>#list"
                                        style="background-color: black; color: white; right: 52%;"
                                        class="txt-border link absolute card-extend bot">
                                         <i class="fa-solid fa-bag-shopping"></i>
@@ -430,7 +430,7 @@
                                             <div class="txt-sm bold col l-2 flex-center flex-col">
                                                 <div class="order-price flex">
                                                     <span>
-                                                        $<%=product.getPrice()%>
+                                                        $<%= product.getPrice()%>
                                                     </span>
                                                 </div>
                                                 <span class="txt-sm m-y-0">Price</span>
@@ -441,7 +441,7 @@
                                             <div class="txt-sm bold col l-2 flex-center flex-col">
                                                 <div style="color: #F2B737; border: none;" class="order-price">
                                                     <span class="flex-center">
-                                                        <%=df.format(average_rating)%> <i class="fa-solid fa-star"></i>
+                                                        <%= df.format(average_rating)%> <i class="fa-solid fa-star"></i>
                                                     </span>
                                                 </div>
                                                 <span class="txt-sm m-y-0">Average</span>
@@ -458,7 +458,7 @@
                                             </div>
 
                                             <div class="pad-1 txt-sm">
-                                                <%=product.getDescription()%>
+                                                <%= product.getDescription()%>
                                             </div>
                                         </div>
 
