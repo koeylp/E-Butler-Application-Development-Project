@@ -365,7 +365,7 @@
                                                             <div style="justify-content: flex-end" class="l-8 flex-horizon-center flex-col">
                                                                 <div class="flex-vertical-center flex-end txt-xl full-h">
                                                                     <span class="flex-center rating">
-                                                                        <input style="width: 0.02rem;"  type="radio" name="rating" id="star1-<%=product.getId()%>"
+                                                                        <input style="width: 0.075rem;"  type="radio" name="rating" id="star1-<%=product.getId()%>"
                                                                                value="1" required=""><label for="star1-<%=product.getId()%>"><i class="fa-solid fa-star"></i></label>
                                                                         <input type="radio" name="rating" id="star2-<%=product.getId()%>"
                                                                                value="2" required=""><label for="star2-<%=product.getId()%>"><i class="fa-solid fa-star"></i></label>

@@ -391,9 +391,9 @@
                                                     <div class="flex-col flex-horizon-center">
                                                         <span class="txt-lg bold">${o.productName}</span>
                                                         <div class="flex-horizon-center">
-                                                            <span class="txt-md">Product</span>
+                                                            <span class="txt-md">Product Category: ${o.product_category}</span>
                                                             <span class="m-x-12">|</span>
-                                                            <span class="txt-md">Product Category</span>
+                                                            <span class="txt-md">Provider: ${o.provider_name}</span>
                                                         </div>
                                                     </div>
                                                     <div class="order-price bold">
@@ -425,7 +425,7 @@
                                                     <div class="flex-horizon-center">
                                                         <span class="txt-md">Service</span>
                                                         <span class="m-x-12">|</span>
-                                                        <span class="txt-md">Service Category</span>
+                                                        <span class="txt-md">Provider: ${o.provider_name}</span>
                                                     </div>
                                                 </div>
                                                 <div class="order-price bold">

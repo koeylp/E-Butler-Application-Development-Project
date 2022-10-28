@@ -16,6 +16,8 @@ public class ProductOrderHistoryDTO {
     private double price;
     private int quantity;
     private String image;
+    private String provider_name;
+    private String product_category;
     private int status;
 
     public ProductOrderHistoryDTO() {
@@ -26,10 +28,12 @@ public class ProductOrderHistoryDTO {
         this.price = 0;
         this.quantity = 0;
         this.image = "";
+        this.provider_name = "";
+        this.product_category = "";
         this.status = 0;
     }
 
-    public ProductOrderHistoryDTO(String username, String order_Date, String payment, String productName, double price, int quantity, String image, int status) {
+    public ProductOrderHistoryDTO(String username, String order_Date, String payment, String productName, double price, int quantity, String image, String provider_name, String product_category, int status) {
         this.username = username;
         this.order_Date = order_Date;
         this.payment = payment;
@@ -37,6 +41,8 @@ public class ProductOrderHistoryDTO {
         this.price = price;
         this.quantity = quantity;
         this.image = image;
+        this.provider_name = provider_name;
+        this.product_category = product_category;
         this.status = status;
     }
 
@@ -103,6 +109,24 @@ public class ProductOrderHistoryDTO {
     public void setStatus(int status) {
         this.status = status;
     }
+
+    public String getProvider_name() {
+        return provider_name;
+    }
+
+    public void setProvider_name(String provider_name) {
+        this.provider_name = provider_name;
+    }
+
+    public String getProduct_category() {
+        return product_category;
+    }
+
+    public void setProduct_category(String product_category) {
+        this.product_category = product_category;
+    }
+    
+    
 
     @Override
     public String toString() {
