@@ -14,14 +14,7 @@ CREATE TABLE tblUserRole (
 )
 GO
 
-select ROW_NUMBER() from tblProductDetail
-select * from tblUser
- alter DATABASE SWP391_Project SET COMPATIBILITY_LEVEL = 160
 
-
- SELECT detail.id, detail.provider_ID, detail.product_ID, detail.name, detail.quantity, detail.price, detail.image, detail.description, detail.status FROM tblProduct product JOIN tblProductDetail detail on product.product_ID = detail.product_ID JOIN tblProductCategory cate ON cate.category_ID = product.category_ID
- WHERE cate.category_ID = 'KC' AND product.product_ID = '1' ORDER BY id asc
- OFFSET ? ROWS FETCH FIRST 12 ROWS ONLY
 
 -----USER-----
 CREATE TABLE tblUser(
@@ -48,6 +41,9 @@ CREATE TABLE tblCustomer (
 	point int,
 	[status] [decimal](1)
 )
+insert into tblCustomer(username, password, role_ID, phone, email, name, gender,dob, avatar, point, status)
+
+select * from tblCustomer
 GO
 
 CREATE TABLE tblProvider (
