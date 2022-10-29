@@ -54,6 +54,7 @@
             product_info = (product_info == null) ? new ProductDetailDTO() : product_info;
             product_error = (product_error == null) ? new ProductErrorDTO() : product_error;
         %>
+        <h1>hello</h1>
         <div class="container-xxl">
             <div class="container-fluid nav-bar bg-white px-0">
 
