@@ -110,6 +110,8 @@ public class CheckoutController extends HttpServlet {
                 }
                 if (statement == confirmation.getSuccess()) {
                     int point = (int) (Double.parseDouble(total)/100);
+                    if (point < 1) 
+                        point = 1;
                     customerDao.accumulatePoint(user.getUsername(), point);
                 }
             }
