@@ -562,7 +562,7 @@
                                 <ul class="row pad-1">
                                     <c:forEach begin="1" end="${sessionScope.NUMBER_PAGE_PRODUCT_DETAIL}" var="i">
                                         <li class="bold text-circle mx-1">
-                                            <a href="MainController?action=pagingProductDetail&index=${i}">${i}</a>
+                                            <a href="MainController?action=GoToProductDetailByType&index=${i}">${i}</a>
                                         </li>
                                     </c:forEach>
                                     <!--                                    <li class="bold text-circle mx-1">1</li>
