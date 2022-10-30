@@ -172,9 +172,9 @@
                 googleUser.setEmail(customer.getEmail());
             }
 
-            String messageError = (String) request.getAttribute("REGIST_FAIL");
+            String message = (String) request.getAttribute("REGIST_FAIL");
             
-            messageError = (messageError == null) ? "" : messageError;
+            message = (message == null) ? "" : message;
 
             String class_Hide = "hide";
         %>
@@ -645,7 +645,7 @@
         </div>
 
         <%
-            if (!messageError.isEmpty()) {
+            if (!message.isEmpty()) {
         %>
         <div id="toast"></div>
         <%
@@ -684,7 +684,7 @@
                 };
 
             <%
-                if (!messageError.isEmpty()) {
+                if (!message.isEmpty()) {
             %>
                 toast.classList.add("toast", `toast--error`);
                 toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
@@ -694,7 +694,7 @@
             </div>
             <div class="toast__body">
             <h3 class="toast__title">Th?t b?i</h3>
-                <p class="toast__msg"><%=messageError%></p>
+                <p class="toast__msg"><%=message%></p>
                 </div>
             <div class="toast__close">
             <i class="fas fa-times"></i>

@@ -149,9 +149,9 @@
 
             login_error = (login_error == null) ? "" : login_error;
 
-            String messageSuccess = (String) request.getAttribute("REGIST_SUCCESS");
+            String message = (String) request.getAttribute("REGIST_SUCCESS");
 
-            messageSuccess = (messageSuccess == null) ? "" : messageSuccess;
+            message = (message == null) ? "" : message;
         %>
         <div class="container-xxl bg-white p-0">
             <!-- Spinner Start -->
@@ -365,7 +365,7 @@
         </div>
 
         <%
-            if (!messageSuccess.isEmpty()) {
+            if (!message.isEmpty()) {
         %>
         <div id="toast"></div>
         <%
@@ -423,9 +423,9 @@
                 };
 
             <%
-                if (!messageSuccess.isEmpty()) {
+                if (!message.isEmpty()) {
             %>
-                toast.classList.add("toast", `toast--success`);
+                toast.classList.add("toast", `toast--error`);
                 toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
                 toast.innerHTML =
                         `<div class="toast__icon">
@@ -433,7 +433,7 @@
             </div>
             <div class="toast__body">
             <h3 class="toast__title">Th?t b?i</h3>
-                <p class="toast__msg"><%=messageSuccess%></p>
+                <p class="toast__msg"><%=message%></p>
                 </div>
             <div class="toast__close">
             <i class="fas fa-times"></i>
