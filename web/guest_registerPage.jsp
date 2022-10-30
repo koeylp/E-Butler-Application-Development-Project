@@ -686,7 +686,7 @@
             <%
                 if (!message.isEmpty()) {
             %>
-                toast.classList.add("toast", `toast--error`);
+                toast.classList.add("toast", `toast--error`, "showing");
                 toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
                 toast.innerHTML =
                         `<div class="toast__icon">

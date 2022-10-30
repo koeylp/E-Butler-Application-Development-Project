@@ -117,14 +117,14 @@ public class RegisterController extends HttpServlet {
   
 //                    add thông tin customer vào database
                     if(cusDAO.InsertCus(customer)) {
-                        request.setAttribute("REGIST_SUCCESS", "Đăng ký thành công");
+                        request.setAttribute("REGIST_SUCCESS", "Đăng ký tài khoản thành công");
                         url = SUCCESS;
                     }
                     
                 }
                 else {
                     request.setAttribute("CUS_ERROR", customerError);
-                    request.setAttribute("REGIST_FAIL", "Đăng ký thất bại");
+                    request.setAttribute("REGIST_FAIL", "Đăng ký tài khoản thất bại");
                     url = NOT_PASS;
                 }
             }
