@@ -24,7 +24,7 @@ public class OrderDAO {
     private static final String INSERT_DETAIL = "INSERT INTO tblOrder_Product_Detail(product_detail_ID, order_ID, quantity, price, [status]) VALUES(?, ?, ?, ?, ?)";
     private static final String GET_ALL_ORDER = "SELECT order_ID, order_Date, customer_ID, status, total FROM tblOrder";
     private static final String INSERT_SERVICE_DETAIL = "INSERT INTO tblOrder_Service_Detail(staff_ID, service_Detail_ID, order_ID, price, [status]) VALUES(?, ?, ?, ?, ?)";
-    private static final String INSERT_DELIVERY = "INSERT INTO tblDelivery(order_id, address, shipper_id, [status]) VALUES(?, ?, ?, ?)";
+    private static final String INSERT_DELIVERY = "INSERT INTO tblDelivery(order_id, address, shipper_id,username_Shipper ,[status]) VALUES(?, ?, ?,?, ?)";
 
     public static void insertOrder(Date date, String username, int status, double total, String payment, String shipping) throws SQLException {
         Connection conn = null;
@@ -150,7 +150,8 @@ public class OrderDAO {
                 ptm.setInt(1, order_id);
                 ptm.setString(2, address);
                 ptm.setString(3, shipper_id);
-                ptm.setInt(4, 0);
+                ptm.setString(4, null);
+                ptm.setInt(5, 0);
                 ptm.executeUpdate();
             }
         } catch (Exception e) {

@@ -26,47 +26,52 @@ import javax.servlet.http.HttpSession;
  */
 public class Provider_Order_DetailController extends HttpServlet {
 
-    private final String SUCCESS = "OrderDetailProvider.jsp" ; 
-    private final String ERROR = "OrderProvider.jsp" ; 
+    private final String SUCCESS = "OrderDetailProvider.jsp";
+    private final String ERROR = "OrderProvider.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR ; 
+        String url = ERROR;
         try {
-            List<OrderDetailDTO> listOrderDetail = new ArrayList() ; 
-            List<OrderDetailInfoDTO> listDetailInfo = new ArrayList() ; 
-            List<ProductDetailDTO> listProductDetail = new ArrayList() ; 
-            List<ProviderServiceDTO1> listServiceDetail = new ArrayList() ; 
-            int orderID = Integer.parseInt(request.getParameter("orderID")) ;
-            String customerID = request.getParameter("customerID") ; 
             HttpSession session = request.getSession() ; 
-            ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER") ; 
-            ProviderDAO providerDAO = new ProviderDAO() ; 
-            listProductDetail = providerDAO.loadListProduct(provider) ; 
-            listServiceDetail = providerDAO.loadListService(provider) ; 
-            listDetailInfo = providerDAO.loadOrderInfo(orderID, customerID) ; 
+            List<OrderDetailDTO> listOrderDetail = new ArrayList();
+            List<OrderDetailInfoDTO> listDetailInfo = new ArrayList();
+            List<ProductDetailDTO> listProductDetail = new ArrayList();
+            List<ProviderServiceDTO1> listServiceDetail = new ArrayList();
+            int orderID = Integer.parseInt(request.getParameter("orderID"));
+            String customerID = (String) session.getAttribute("customerID");
+            if (customerID == null) {
+                 customerID = request.getParameter("customerID");
+            }
+            ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER");
+            ProviderDAO providerDAO = new ProviderDAO();
+            listProductDetail = providerDAO.loadListProduct(provider);
+            listServiceDetail = providerDAO.loadListService(provider);
+
+            listDetailInfo = providerDAO.loadOrderInfo(orderID, customerID);
             if (listProductDetail.isEmpty() && !listServiceDetail.isEmpty()) {
-                listOrderDetail = providerDAO.loadOrderServiceDetail(provider, orderID) ;
-            }else if (listServiceDetail.isEmpty() && !listProductDetail.isEmpty()) {
-                listOrderDetail = providerDAO.loadOrderDetail(provider, orderID) ; 
+                listOrderDetail = providerDAO.loadOrderServiceDetail(provider, orderID);
+            } else if (listServiceDetail.isEmpty() && !listProductDetail.isEmpty()) {
+                listOrderDetail = providerDAO.loadOrderDetail(provider, orderID);
             } else if (!listProductDetail.isEmpty() && !listServiceDetail.isEmpty()) {
-                List<OrderDetailDTO> listOrderDetail1 = new ArrayList() ; 
-                listOrderDetail1 = providerDAO.loadOrderServiceDetail(provider, orderID) ;
-                List<OrderDetailDTO> listOrderDetail2 = new ArrayList() ; 
-                listOrderDetail2 = providerDAO.loadOrderDetail(provider, orderID) ; 
-                listOrderDetail.add((OrderDetailDTO) listOrderDetail1) ; 
-                listOrderDetail.add((OrderDetailDTO) listOrderDetail2) ;
+                List<OrderDetailDTO> listOrderDetail1 = new ArrayList();
+                listOrderDetail1 = providerDAO.loadOrderServiceDetail(provider, orderID);
+                List<OrderDetailDTO> listOrderDetail2 = new ArrayList();
+                listOrderDetail2 = providerDAO.loadOrderDetail(provider, orderID);
+                listOrderDetail.add((OrderDetailDTO) listOrderDetail1);
+                listOrderDetail.add((OrderDetailDTO) listOrderDetail2);
             }
             if (listOrderDetail != null) {
-                url = SUCCESS ; 
+                url = SUCCESS;
                 session.setAttribute("Order_Detail", listOrderDetail);
-                session.setAttribute("Info_Detail", listDetailInfo); 
+                session.setAttribute("Info_Detail", listDetailInfo);
+                session.setAttribute("customerID", customerID);
             }
         } catch (Exception e) {
-        }
-        finally {
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
-        } 
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
