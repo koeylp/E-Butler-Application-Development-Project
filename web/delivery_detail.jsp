@@ -286,25 +286,26 @@
                                             <div class="flexStatus">
                                                 <li style="list-style:none ; padding-top: 6px ; padding-right: 8px "><i class="bx bx-calendar-event mx-2"></i>Status: </li>
                                                     <%
-                                                        int status = listDetailInfo.get(0).getStatus();
-                                                        if (status == 1) {
-                                                    %>
-                                                <span class="badge bg-label-info me-1 changeStatus">InProgress</span>
-                                                <%
-                                                } else if (status == 2) {
+                                                    int status = listDetailInfo.get(0).getStatus(); 
+                                                    if (status == 0) {
+                                                %>
+                                            <span class="badge bg-label-warning me-1 changeStatus">Pending</span>
+                                            <%
+                                            } else if (status == 1) {
 
-                                                %>
-                                                <span class="badge bg-label-success me-1 changeStatus">Done</span> 
-                                                <%                                                } else if (status == 0) {
-                                                %>
-                                                <span class="badge bg-label-warning me-1 changeStatus">Pending</span>
-                                                <%
-                                                } else if (status == 3) {
-                                                %>
-                                                <span class="badge bg-label-danger me-1 changeStatus">Cancel Order</span> 
-                                                <%
-                                                    }
-                                                %>
+                                            %>
+                                            <span class="badge bg-label-info me-1 changeStatus">InProgress</span>
+                                            <%                                                        
+                                                } else if (status == 2) {
+                                            %>
+                                            <span class="badge bg-label-success me-1 changeStatus">Done</span>
+                                            <%
+                                            } else if (status == 3) {
+                                            %>
+                                            <span class="badge bg-label-danger me-1 changeStatus">Cancel</span> 
+                                            <%
+                                                }
+                                            %>
 
 
                                             </div>
@@ -375,7 +376,8 @@
 
                                                             %>
                                                             <span class="badge bg-label-info me-1 changeStatus">Shipping</span>
-                                                            <%                                                                } else if (status == 0) {
+                                                            <%                                                                
+                                                                } else if (statusBelow == 0) { 
                                                             %>
                                                             <span class="badge bg-label-warning me-1 changeStatus">Pending</span>
                                                             <%
@@ -407,7 +409,8 @@
                                                 <td class="txt-md ">
                                                     <button type="submit" name="action" value="Update_Delivery">Update Status</button>
                                                     <input type="hidden" name="Product_id" value="<%= orderDetail.getId()%>" /> 
-                                                    <input type="hidden" name="Product_Order_id" value="<%= orderDetail.getOrder_ID()%>" /> 
+                                                    <input type="hidden" name="orderID" value="<%= orderDetail.getOrder_ID()%>" /> 
+                                                    
                                                 </td>
                                         </form>
                                         </tr>

@@ -26,33 +26,46 @@ import javax.servlet.http.HttpSession;
  */
 public class Delivery_Order_DetailController extends HttpServlet {
 
-    private final String SUCCESS = "delivery_detail.jsp" ; 
-    private final String ERROR = "delivery_homePage.jsp" ; 
+    private final String SUCCESS = "delivery_detail.jsp";
+    private final String ERROR = "delivery_homePage.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR  ;
+        String url = ERROR;
         try {
-            HttpSession session = request.getSession() ;
-            ProviderDAO providerDAO = new ProviderDAO() ;
-            DeliveryDAO deliveryDAO = new DeliveryDAO() ;
-            List<OrderDetailInfoDTO> listDetailInfo = new ArrayList() ; 
-            List<OrderDetailDTO> listOrder = new ArrayList(); 
-            int orderID = Integer.parseInt( request.getParameter("orderID") ); 
-            String customerID = request.getParameter("customerID") ; 
-            UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER") ; 
-            listDetailInfo = providerDAO.loadOrderInfo(orderID, customerID) ; 
-            listOrder = deliveryDAO.loadOrderDetail(orderID, user) ;
-            if (listOrder != null) {
-                url = SUCCESS ; 
-                session.setAttribute("Delivery_Detail", listOrder);
-                session.setAttribute("Info_Detail_Delivery", listDetailInfo); 
+            HttpSession session = request.getSession();
+            ProviderDAO providerDAO = new ProviderDAO();
+            DeliveryDAO deliveryDAO = new DeliveryDAO();
+            List<OrderDetailInfoDTO> listDetailInfo = new ArrayList();
+            List<OrderDetailDTO> listOrder = new ArrayList();
+            UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
+            int orderID = Integer.parseInt(request.getParameter("orderID"));
+            String customerID = (String) session.getAttribute("customerID");
+            String checkDelivery = deliveryDAO.assignDeliveryChecking(orderID);
+            if (user.getUsername().equals(checkDelivery)) {
+                if (customerID == null) {
+                    customerID = request.getParameter("customerID");
+                }
+
+                listDetailInfo = providerDAO.loadOrderInfo(orderID, customerID);
+                String userDetail = (String) session.getAttribute("ShippingDetail");
+                listOrder = deliveryDAO.loadOrderDetail(orderID, userDetail);
+                if (listOrder != null) {
+                    url = SUCCESS;
+                    session.setAttribute("Delivery_Detail", listOrder);
+                    session.setAttribute("Info_Detail_Delivery", listDetailInfo);
+                    session.setAttribute("customerID", customerID);
+                }
+            } else {
+                session.setAttribute("ERROR_ASSIGN", "This Order Has Been Assigned!!"); 
             }
+
         } catch (Exception e) {
-        }finally {
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
-               
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
 public class DeliveryHomeController extends HttpServlet {
 
     private final String SUCCESS = "delivery_homePage.jsp" ; 
-    private final String ERROR = "login.jsp" ; 
+    private final String ERROR = "delivery_homePage.jsp" ; 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -34,10 +34,14 @@ public class DeliveryHomeController extends HttpServlet {
             List<DeliveryDTO> listDelivery = new ArrayList() ; 
             DeliveryDAO deliveryDAO = new DeliveryDAO() ; 
             UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER") ; 
-            listDelivery = deliveryDAO.loadListDelivery(user) ;
+            String shippingDetail = deliveryDAO.findShippingDetail(user.getUsername()) ;
+            listDelivery = deliveryDAO.loadListDelivery(shippingDetail) ;
+            
             if (!listDelivery.isEmpty()) {
                 url = SUCCESS ;
                 session.setAttribute("Delivery_List", listDelivery);  
+                session.setAttribute("ShippingDetail", shippingDetail);
+                session.setAttribute("ERROR_ASSIGN", "");
             }
             
         } catch (Exception e) {

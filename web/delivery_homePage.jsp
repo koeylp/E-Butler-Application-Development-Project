@@ -110,7 +110,7 @@
                                                 <a href="javascript:void()">
                                                     <img class="float-left mr-3 avatar-img" src="images/avatar/3.jpg" alt="">
                                                     <div class="notification-content">
-                                                        <div class="notification-heading">Barak Obama</div>
+                                                        <div class="notification-heading">Bao Ngu</div>
                                                         <div class="notification-timestamp">08 Hours ago</div>
                                                         <div class="notification-text">Hi Teddy, Just wanted to let you ...</div>
                                                     </div>
@@ -201,6 +201,7 @@
                                     <span class="activity active"></span>
                                     <img src="images/user/1.png" height="40" width="40" alt="">
                                 </div>
+                                <form action="MainController" method="Post">
                                 <div class="drop-down dropdown-profile   dropdown-menu">
                                     <div class="dropdown-content-body">
                                         <ul>
@@ -215,10 +216,11 @@
                                             <li>
                                                 <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
                                             </li>
-                                            <li><a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                            <li> <button class="dropdown-item"  name="action" value="LogoutProvider" ><i class="bx bx-log-out m-2"></i>Logout</button></li>
                                         </ul>
                                     </div>
                                 </div>
+                                    </form>
                             </li>
                         </ul>
                     </div>
@@ -249,7 +251,7 @@
                     </div>
                 </div> -->
                 <!-- row -->
-
+                
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
@@ -265,11 +267,12 @@
                                                     <th class="txt-md bold">Date</th>
                                                     <th class="txt-md bold">Customer Name</th>
                                                     <th class="txt-md bold">Price</th>
+                                                    <th class="txt-md bold">Shipper</th>
                                                     <th class="txt-md bold">Status</th>
                                                     <th class="txt-md bold">Action</th>
                                                 </tr>
                                             </thead>
-
+                                            <h4 style="color: red" >${sessionScope.ERROR_ASSIGN}</h4>
                                             <tbody>
                                                 <%                                                int count = 1;
                                                     for (DeliveryDTO delivery : listDelivery) {
@@ -278,12 +281,21 @@
                                                 %>
                                             <form action="MainController" method="Get">
                                                 <tr>
-
-                                                    <td class="txt-sm"><%= count%></td>
+                                                    
+                                                    <td class="txt-sm"><%= delivery.getOrderID() %></td>
                                                     <td class="txt-sm"><%= delivery.getAddress()%></td>
                                                     <td class="txt-sm"><%= delivery.getOrder_Date()%></td>
                                                     <td class="txt-sm"><%= delivery.getName()%></td>
                                                     <td class="txt-sm"><%= delivery.getTotal()%></td>
+                                                    <%
+                                                        String usernameShipper = delivery.getUsername_Shipper() ; 
+                                                        if (usernameShipper == null) {
+                                                            usernameShipper = "Assign Now" ;
+                                                        }
+                                                    %>
+                                                    <td class="txt-sm">
+                                                     <a href="MainController?action=AssignDelivery&orderID=<%=delivery.getOrderID()%>" ><%= usernameShipper %></a>
+                                                     </td>
                                                     <td class="txt-sm bold">
                                                         <div>
                                                             <%
@@ -296,7 +308,8 @@
 
                                                             %>
                                                             <span class="badge bg-label-info me-1 changeStatus">Shipping</span>
-                                                            <%                                                            } else if (status == 0) {
+                                                            <%                                                            
+                                                                } else if (status == 0) {
                                                             %>
                                                             <span class="badge bg-label-warning me-1 changeStatus">Pending</span>
                                                             <%
@@ -317,8 +330,8 @@
                                                         <div>
                                                             <input type="hidden" name="orderID" value="<%= delivery.getOrderID()%>" />
                                                             <input type="hidden" name="customerID" value="<%= delivery.getCustomer_ID()%>" /> 
-                                                            <button type="submit" onclick="this.form.submit()" name="action" value="DeliveryOrderDetail" ><i class='bx bx-info-circle'></i>View Detail</button>
-                                                            <a href="MainController?action=DeliveryOrderDetail&orderID=<%=delivery.getOrderID()%>&customerID=<%=delivery.getCustomer_ID()%>" >111</a>
+                                                            
+                                                            <a href="MainController?action=DeliveryOrderDetail&orderID=<%=delivery.getOrderID()%>&customerID=<%=delivery.getCustomer_ID()%>" >View Detail</a>
                                                         </div>
                                                     </td>
                                                 </tr>

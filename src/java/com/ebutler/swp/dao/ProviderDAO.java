@@ -70,12 +70,12 @@ public class ProviderDAO {
     private final String LoadOrderInfor = "SELECT Ord.order_ID, Ord.order_Date, Ord.status, Cus.name, Cus.phone, Cus.email FROM tblOrder Ord JOIN tblCustomer Cus ON Ord.customer_ID = Cus.username  WHERE order_ID = ? AND customer_ID = ? ";
     //DELETE ORDER 
     private final String PROVIDER_DELETE_ORDER = "UPDATE tblOrder SET status = 3 WHERE order_ID = ? ";
-    private final String PROVIDER_DELETE_ORDER_DETAIL = "UPDATE tblOrder_Product_Detail SET status = 3 WHERE order_ID = ? ";
+    private final String PROVIDER_DELETE_ORDER_DETAIL = "UPDATE tblOrder_Product_Detail SET status = 4 WHERE order_ID = ? ";
     private final String PROVIDER_DELETE_ORDER_SHIPPER = "UPDATE tblDelivery SET status = 4 WHERE order_id = ? ";
     private final String PROVIDER_QUANTITY_PRODUCT = "SELECT quantity FROM tblProductDetail WHERE id = ? ";
     private final String PROVIDER_UPDATE_QUANTITY_PRODUCT = "UPDATE tblProductDetail SET quantity = ? WHERE id = ?  ";
 
-    private final String PROVIDER_DELETE_SERVICE_ORDER_DETAIL = "UPDATE tblOrder_Service_Detail SET status = 3 WHERE order_ID = ? ";
+    private final String PROVIDER_DELETE_SERVICE_ORDER_DETAIL = "UPDATE tblOrder_Service_Detail SET status = 4 WHERE order_ID = ? ";
 
     public boolean InsertPro(ProviderDTO provider) throws SQLException {
         Connection conn = null;
@@ -1367,12 +1367,12 @@ public class ProviderDAO {
         boolean check = false;
         boolean check1 = false;
         ProviderDTO provider = new ProviderDTO();
-        provider = dao.getProvider("moveronline", "1");
+        provider = dao.getProvider("provider2", "1");
 //        for (OrderDetailInfoDTO providerServiceDTO1 : listOrder) { 
 //            System.out.println(providerServiceDTO1.toString());
 //        }
         List<OrderDTO> listOrder = new ArrayList();
-        listOrder = dao.loadListOrderService(provider);
+        listOrder = dao.loadListOrder(provider);
         for (OrderDTO orderDTO : listOrder) {
             System.out.println(orderDTO.toString());
         }

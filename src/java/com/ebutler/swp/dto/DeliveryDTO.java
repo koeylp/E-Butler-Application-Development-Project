@@ -17,9 +17,10 @@ public class DeliveryDTO {
     private String name ;  
     private double total ;  
     private int status ; 
+    private String username_Shipper ; 
     private String customer_ID ; 
 
-    public DeliveryDTO(int orderID, String address, Date order_Date, String customer_ID , String name, double total, int status) {
+    public DeliveryDTO(int orderID, String address,String username_Shipper , Date order_Date, String customer_ID , String name, double total, int status) {
         this.orderID = orderID;
         this.address = address;
         this.order_Date = order_Date;
@@ -27,6 +28,7 @@ public class DeliveryDTO {
         this.total = total;
         this.status = status;
         this.customer_ID = customer_ID ;
+        this.username_Shipper = username_Shipper ;
     }
 
     public int getOrderID() {
@@ -84,7 +86,16 @@ public class DeliveryDTO {
     public void setCustomer_ID(String customer_ID) {
         this.customer_ID = customer_ID;
     }
+
+    public String getUsername_Shipper() {
+        return username_Shipper;
+    }
+
+    public void setUsername_Shipper(String username_Shipper) {
+        this.username_Shipper = username_Shipper;
+    }
        
+    
     
     @Override
     public String toString() {

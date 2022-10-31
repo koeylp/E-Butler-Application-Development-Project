@@ -46,7 +46,7 @@ public class MainController extends HttpServlet {
 //    Product Detail
     private final String GO_TO_PRODUCT_DETAIL_BY_TYPE_PAGE = "GoToProductDetailByType";
     private final String PRODUCT_DETAIL_BY_TYPE_CONTROLLER = "ProductDetailByTypeController";
-
+    
     private final String PRODUCT_DETAIL_BY_TYPE_PAGING_CONTROLLER = "PagingProductDetailController";
 
 //    Service Detail
@@ -138,91 +138,91 @@ public class MainController extends HttpServlet {
     private final String PROVIDER_UPDATE_PROFILE = "UpdateProfileProvider";
     private final String PROVIDER_UPDATE_PROFILE_CONTROLLER = "Update_Profile_ProviderController";
     //1.PRODUCT PROVIDER
-    //1.Load List
+        //1.Load List
     private final String PROVIDER_PRODUCT = "ProviderProduct";
     private final String PROVIDER_PRODUCT_CONTROLLER = "Provider_ProductController";
     private final String PRODUCT_CATEGORY_CHOOSE = "ChooseFromCategory_Product";
     private final String PRODUCT_CATEGORY_CHOOSE_CONTROLLER = "Provider_ProductController";
-    //2.Search        
+        //2.Search        
     private final String SEARCH_PROVIDER_PRODUCT = "SearchProviderProduct";
     private final String SEARCH_PPROVIDER_PRODUCT_CONTROLLER = "Search_Provider_ProductController";
 
-    //3.Filter List
+        //3.Filter List
     private final String FILTER_PRODUCT_NAME = "Pro_sortByName";
     private final String FILTER_PRODUCT_PRICE_UP = "Pro_sortByPriceUp";
     private final String FILTER_PRODUCT_PRICE_DOWN = "Pro_sortByPriceDown";
     private final String FILTER_PRODUCT_CONTROLLER = "Provider_Filter_ProductController";
-    //4.Edit Product
+        //4.Edit Product
     private final String PROVIDER_EDIT_PRODUCT = "ProviderEditProduct";
     private final String PROVIDER_EDIT_PRODUCT_CONTROLLER = "Provider_Edit_ProductController";
-    //5.Delete Product
+        //5.Delete Product
     private final String PROVIDER_DELETE_PRODUCT = "ProviderDeleteProduct";
     private final String PROVIDER_DELETE_PRODUCT_CONTROLLER = "Provider_Delete_ProductController";
-    //6.Logout
+        //6.Logout
     private final String LOGOUT_PROVIDER = "LogoutProvider";
     private final String LOGOUT_PROVIDER_CONTROLLER = "LogoutController";
-    //7.Add Product
+        //7.Add Product
     private final String PROVIDER_ADD_PRODUCT = "AddNewProduct";
     private final String PROVIDER_ADD_PRODUCT_CONTROLLER = "Add_NewProduct_Controller";
-    //CHANGE PASSWORD
+        //CHANGE PASSWORD
     private final String CHANGEPASSWORD_PROVIDER = "ChangePasswordProvider";
     private final String CHANGEPASSWORD_PROVIDER_CONTROLLER = "Provider_ChangePasswordController";
 
     //2.SERVICE PROVIDER
-    //1.Load List    
+        //1.Load List    
     private final String PROVIDER_SERVICE = "ProviderService";
     private final String PROVIDER_SERVICE_CONTROLLER = "Provider_ServiceController";
     private final String SERVICE_CATEGORY_CHOOSE = "ChooseFromCategory_Service";
     private final String SERVICE_CATEGORY_CHOOSE_CONTROLLER = "Provider_ServiceController";
-    //2.Search
+        //2.Search
     private final String SEARCH_PROVIDER_SERVICE = "SearchProviderService";
     private final String SEARCH_PPROVIDER_SERVICE_CONTROLLER = "Search_Provider_ServiceController";
-    //3.Filter List
+        //3.Filter List
     private final String FILTER_SERVICE_NAME = "Ser_sortByName";
     private final String FILTER_SERVICE_PRICE_UP = "Ser_sortByPriceUp";
     private final String FILTER_SERVICE_PRICE_DOWN = "Ser_sortByPriceDown";
     private final String FILTER_SERVICE_CONTROLLER = "Provider_Filter_ServiceController";
-    //4.Edit Service 
+        //4.Edit Service 
     private final String PROVIDER_EDIT_SERVICE = "ProviderEditService";
     private final String PROVIDER_EDIT_SERVICE_CONTROLLER = "Provider_Edit_ServiceController";
-    //5.Delete Service
+        //5.Delete Service
     private final String PROVIDER_SERVICE_PRODUCT = "ProviderDeleteService";
     private final String PROVIDER_DELETE_SERVICE_CONTROLLER = "Provider_Delete_ServiceController";
-    //7.Add Service
+        //7.Add Service
     private final String PROVIDER_ADD_SERVICE = "AddNewService";
     private final String PROVIDER_ADD_SERVICE_CONTROLLER = "Add_NewService_Controller";
     //3.ORDER PROVIDER
-    //1.Load List  
+        //1.Load List  
     private final String PROVIDER_ORDER = "ProviderOrder";
     private final String PROVIDER_ORDER_CONTROLLER = "Provider_OrderController";
-    //2.Load list Order Deatil
-    private final String PROVIDER_ORDER_DETAIL = "ProviderOrderDetail";
-    private final String PROVIDER_ORDER_DETAIL_CONTROLLER = "Provider_Order_DetailController";
-    //3.Delete Order
-    private final String PROVIDER_DELETE_ORDER = "ProviderDeleteOrder";
-    private final String PROVIDER_DELETE_ORDER_CONTROLLER = "Provider_Delete_OrderController";
+        //2.Load list Order Deatil
+    private final String PROVIDER_ORDER_DETAIL = "ProviderOrderDetail" ; 
+    private final String PROVIDER_ORDER_DETAIL_CONTROLLER = "Provider_Order_DetailController" ;  
+        //3.Delete Order
+    private final String PROVIDER_DELETE_ORDER = "ProviderDeleteOrder" ;
+    private final String PROVIDER_DELETE_ORDER_CONTROLLER = "Provider_Delete_OrderController" ;
 
     //4.STAFF PROVIDER
-    //1.Load List  
+        //1.Load List  
     private final String PROVIDER_STAFF = "ProviderStaff";
     private final String PROVIDER_STAFF_CONTROLLER = "Provider_StaffController";
     private final String STAFF_CATEGORY_CHOOSE = "ChooseFromCategory_Staff";
     private final String STAFF_CATEGORY_CHOOSE_CONTROLLER = "Provider_StaffController";
-    //2.Search
+        //2.Search
     private final String SEARCH_PROVIDER_STAFF = "SearchProviderStaff";
     private final String SEARCH_PPROVIDER_STAFF_CONTROLLER = "Search_Provider_StaffController";
-    //3.Filter List
+        //3.Filter List
     private final String FILTER_STAFF_NAME = "Staff_sortByName";
     private final String FILTER_STAFF_CONTROLLER = "Provider_Filter_StaffController";
     private final String FILTER_STAFF_PENDING = "Staff_sortByPedding";
     private final String FILTER_STAFF_PENDING_CONTROLLER = "Provider_Filter_StaffController";
-    //4.Edit Service 
+        //4.Edit Service 
     private final String PROVIDER_EDIT_STAFF = "ProviderStaffEdit";
     private final String PROVIDER_EDIT_STAFF_CONTROLLER = "Provider_Edit_StaffController";
-    //5.Delete Service
+        //5.Delete Service
     private final String PROVIDER_DELETE_STAFF = "ProviderDeleteStaff";
     private final String PROVIDER_DELETE_STAFF_CONTROLLER = "Provider_Delete_StaffController";
-    //6.Add Staff
+        //6.Add Staff
     private final String PROVIDER_ADD_STAFF = "AddNewStaff";
     private final String PROVIDER_ADD_STAFF_CONTROLLER = "Add_NewStaff_Controller";
 
@@ -233,47 +233,49 @@ public class MainController extends HttpServlet {
 //    Add address
     private final String ADD_ADDRESS = "AddAddress";
     private final String ADD_ADDRESS_CONTROLLER = "AddAddressController";
-
+    
 //    Show address
     private final String SHOW_LIST_ADDRESS = "ShowListAddress";
     private final String SHOW_LIST_ADDRESS_CONTROLLER = "ShowListAddressController";
-
+    
 //    Delete address
     private final String DELETE_ADDRESS = "DeleteAddress";
     private final String DELETE_ADDRESS_CONTROLLER = "DeleteAddressController";
-
+    
 //    Set address default
     private final String SET_ADDRESS_DEFAULT = "SetAddressDefault";
     private final String SET_ADDRESS_DEFAULT_CONTROLLER = "SetAddressDefaultController";
-
+    
 //    Update address
     private final String UPDATE_ADDRESS = "UpdateAddress";
     private final String UPDATE_ADDRESS_CONTROLLER = "UpdateAddressController";
-
+    
 //    Paging
     private final String PAGING_PRODUCT_DETAIL = "pagingProductDetail";
     private final String PAGING_PRODUCT_DETAIL_CONTROLLER = "PagingProductDetailController";
 
     // ------------DELIVERY--------------------
     //1.LoadlistDetail 
-    private final String DELIVERY_LOAD_DETAIL = "DeliveryOrderDetail";
-    private final String DELIVERY_LOAD_DETAIL_CONTROLLER = "Delivery_Order_DetailController";
+    private final String DELIVERY_LOAD_DETAIL = "DeliveryOrderDetail" ; 
+    private final String DELIVERY_LOAD_DETAIL_CONTROLLER = "Delivery_Order_DetailController" ; 
     //2.UpdateDelivery
-    private final String UPDATE_DELIVERY = "Update_Delivery";
-    private final String UPDATE_DELIVERY_CONTROLLER = "Update_Delivery_StatusController";
+    private final String UPDATE_DELIVERY = "Update_Delivery" ; 
+    private final String UPDATE_DELIVERY_CONTROLLER = "Update_Delivery_StatusController" ;  
+    //3.Assign Delivery 
+    private final String ASSIGN_NOW ="AssignDelivery" ; 
+    private final String ASSIGN_NOW_CONTROLLER ="Assign_DeliveryController" ; 
+    // ------------DELIVERY--------------------
 
 //    Add review
     private final String ADD_REVIEW = "AddReview";
     private final String ADD_REVIEW_CONTROLLER = "AddReviewController";
-
+    
 //    Load review
     private final String LOAD_REVIEW = "LoadReview";
     private final String LOAD_REVIEW_CONTROLLER = "LoadingReviewController";
+    
 
-//    Upload Photo
-    private final String UPLOAD_PHOTO = "UploadPhoto";
-    private final String UPLOAD_PHOTO_CONTROLLER = "UploadPhotoController";
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -295,7 +297,7 @@ public class MainController extends HttpServlet {
                 url = PRODUCT_PAGE_CONTROLLER;
             } else if (action.equals(GO_TO_PRODUCT_DETAIL_BY_TYPE_PAGE)) {
 //                url = PRODUCT_DETAIL_BY_TYPE_CONTROLLER;
-                url = PRODUCT_DETAIL_BY_TYPE_PAGING_CONTROLLER;
+                   url = PRODUCT_DETAIL_BY_TYPE_PAGING_CONTROLLER;
             } else if (action.equals(GO_TO_USER_PROFILE)) {
                 url = GO_TO_USER_PROFILE_CONTROLLER;
             } else if (action.equals(SEARCH_PRODUCT_DETAIL_BY_TYPE)) {
@@ -409,10 +411,10 @@ public class MainController extends HttpServlet {
                 url = SORT_SERVICE_DETAIL_WORD_DOWN_CONTROLLER;
             } else if (action.equals(SORT_SERVICE_DETAIL_WORD_UP)) {
                 url = SORT_SERVICE_DETAIL_WORD_UP_CONTROLLER;
-            } else if (action.equals(PROVIDER_ORDER)) {
+            }else if (action.equals(PROVIDER_ORDER)) {
                 url = PROVIDER_ORDER_CONTROLLER;
-            } else if (action.equals(PROVIDER_ORDER_DETAIL)) {
-                url = PROVIDER_ORDER_DETAIL_CONTROLLER;
+            }else if (action.equals(PROVIDER_ORDER_DETAIL)) {
+                url = PROVIDER_ORDER_DETAIL_CONTROLLER; 
 
             } else if (action.equals(SELECT_PROVICE)) {
                 url = SELECT_PROVICE_CONTROLLER;
@@ -420,26 +422,28 @@ public class MainController extends HttpServlet {
                 url = ADD_ADDRESS_CONTROLLER;
             } else if (action.equals(SHOW_LIST_ADDRESS)) {
                 url = SHOW_LIST_ADDRESS_CONTROLLER;
-            } else if (action.equals(DELETE_ADDRESS)) {
+            } else if(action.equals(DELETE_ADDRESS)) {
                 url = DELETE_ADDRESS_CONTROLLER;
             } else if (action.equals(SET_ADDRESS_DEFAULT)) {
                 url = SET_ADDRESS_DEFAULT_CONTROLLER;
             } else if (action.equals(UPDATE_ADDRESS)) {
                 url = UPDATE_ADDRESS_CONTROLLER;
-            } else if (action.equals(PAGING_PRODUCT_DETAIL)) {
+            }else if (action.equals(PAGING_PRODUCT_DETAIL)) {
                 url = PAGING_PRODUCT_DETAIL_CONTROLLER;
-            } else if (action.equals(PROVIDER_DELETE_ORDER)) {
-                url = PROVIDER_DELETE_ORDER_CONTROLLER;
+            }
+             else if (action.equals(PROVIDER_DELETE_ORDER)) {
+                url = PROVIDER_DELETE_ORDER_CONTROLLER ; 
             } else if (action.equals(ADD_REVIEW)) {
                 url = ADD_REVIEW_CONTROLLER;
             } else if (action.equals(LOAD_REVIEW)) {
                 url = LOAD_REVIEW_CONTROLLER;
-            } else if (action.equals(DELIVERY_LOAD_DETAIL)) {
-                url = DELIVERY_LOAD_DETAIL_CONTROLLER;
-            } else if (action.equals(UPDATE_DELIVERY)) {
-                url = UPDATE_DELIVERY_CONTROLLER;
-            } else if (action.equals(UPLOAD_PHOTO)) {
-                url = UPLOAD_PHOTO_CONTROLLER;
+            }
+            else if (action.equals(DELIVERY_LOAD_DETAIL)) { 
+                url = DELIVERY_LOAD_DETAIL_CONTROLLER ; 
+            }else if (action.equals(UPDATE_DELIVERY)) { 
+                url = UPDATE_DELIVERY_CONTROLLER ; 
+            }else if (action.equals(ASSIGN_NOW)) { 
+                url = ASSIGN_NOW_CONTROLLER ; 
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
