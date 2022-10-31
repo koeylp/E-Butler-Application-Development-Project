@@ -234,6 +234,7 @@ CREATE TABLE tblShipperCategory (
 	[status] int
 )
 GO
+
 CREATE TABLE tblShipper (
 	username nvarchar(30) PRIMARY KEY,
 	[password] nvarchar(30),
@@ -360,6 +361,32 @@ END;
 GO
 
 -------- shipper income ---------
+DROP TRIGGER trig_shipper_income
+CREATE TRIGGER trig_shipper_income ON tblDelivery
+AFTER UPDATE
+AS
+BEGIN
+	IF (select COUNT(*) from inserted where status = 2) = 0
+	RETURN
+
+	DECLARE @order_date date, @order_id int, @price decimal(12), @shipper_id nvarchar(30)
+	
+	SELECT @order_id = order_id, @shipper_id = 'shopee1' FROM inserted;
+	
+	SELECT @order_date = o.order_date FROM tblOrder o WHERE o.order_ID = @order_id
+	
+	SET @price = (select sum(price) from tblOrder_Product_Detail where order_ID = @order_id)
+	
+	IF (select COUNT(*) from tblShipperIncome sibm where MONTH(@order_date) = sibm.month and YEAR(@order_date) = sibm.year and @shipper_id = 'shopee1') = 0
+	BEGIN
+		INSERT INTO tblShipperIncome(month, year, shipper_id, total) values (MONTH(@order_date), YEAR(@order_date), 'shopee1' ,@price)
+	END
+	ELSE
+	BEGIN
+		UPDATE tblShipperIncome SET total = total + @price WHERE month = MONTH(@order_date) and year = YEAR(@order_date) and shipper_id = 'shopee1'
+	END
+END;
+GO
 
 
 -------------------------------------------------------- INSERT -----------------------------------------------------------------
@@ -1879,6 +1906,8 @@ SELECT * FROM tblShipper
 SELECT * FROM tblUser
 INSERT INTO tblDelivery VALUES ('1', 'aaaa','shopee',null , 1)
 
+select * from tblUser
+
 INSERT INTO tblShipper(username, password, name, nameCategory, status) VALUES ('grap1','1','Nguyen Van A','grab',1)
 INSERT INTO tblShipper(username, password, name, nameCategory, status) VALUES ('grap2','1','Nguyen Anh Tuan','grab',1)
 INSERT INTO tblShipper(username, password, name, nameCategory, status) VALUES ('grap3','1','Nguyen Thi Hong','grab',1)
@@ -1908,9 +1937,9 @@ SELECT * FROM tblDelivery
 SELECT * FROM tblReviewProduct
 SELECT * FROM tblOrder_Product_Detail WHERE order_ID = 2 AND status = 3
 SELECT * FROM tblOrder_Product_Detail WHERE order_ID = 2
+select * from tblDelivery
 
-
-SELECT * FROM tblUser
+SELECT * FROM tblShipper
 DELETE tblOrder
 SELECT * FROM tblShipper
 SELECT * FROM tblShipperCategory
