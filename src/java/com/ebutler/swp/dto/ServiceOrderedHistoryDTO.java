@@ -16,6 +16,7 @@ public class ServiceOrderedHistoryDTO {
     private String service_name;
     private String image;
     private double price;
+    private String provider_name;
     private int status;
 
     public ServiceOrderedHistoryDTO() {
@@ -26,10 +27,11 @@ public class ServiceOrderedHistoryDTO {
         this.service_name = "";
         this.image = "";
         this.price = 0;
+        this.provider_name = "";
         this.status = 0;
     }
 
-    public ServiceOrderedHistoryDTO(String username, String order_Date, String payment, String staff_name, String service_name, String image, double price, int status) {
+    public ServiceOrderedHistoryDTO(String username, String order_Date, String payment, String staff_name, String service_name, String image, double price, String provider_name,int status) {
         this.username = username;
         this.order_Date = order_Date;
         this.payment = payment;
@@ -37,6 +39,7 @@ public class ServiceOrderedHistoryDTO {
         this.service_name = service_name;
         this.image = image;
         this.price = price;
+        this.provider_name = provider_name;
         this.status = status;
     }
 
@@ -102,6 +105,14 @@ public class ServiceOrderedHistoryDTO {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getProvider_name() {
+        return provider_name;
+    }
+
+    public void setProvider_name(String provider_name) {
+        this.provider_name = provider_name;
     }
 
     @Override

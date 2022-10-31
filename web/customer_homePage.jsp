@@ -144,98 +144,10 @@
             </div>
             <!-- Slider End -->
 
-            <!-- Provider Start -->
-            <div class="gird m-y-1">
-                <div class="grid wide">
-                    <div class="m-y-1">
-                        <h1 class="head-txt bold text-center my-24">Provider</h1>
-                        <h2 class="text text-center">Good choices are waiting for you</h2>
-                    </div>
-                </div>
 
-                <div class="row m-y-1">
-                    <div class="col l-12">
-                        <div style="overflow-x: scroll;" class="grid wide scrollable-x ">
-                            <div class="row m-y-1 slider">
-                                <div class="col l-3 m-7 s-12">
-                                    <div style="--border-color: black; --round: .5rem;" class="clickable border-bot border-top border-left border-right rounded-f">
-                                        <div style="height: 52px;" class="row">
-                                            <div class="col l-o-1 l-4">
-                                                <div style="height: 52px;" class="img">
-                                                    <img src="https://brandlogos.net/wp-content/uploads/2021/11/fpt-logo-512x512.png"
-                                                         alt="">
-                                                </div>
-                                            </div>
-                                            <div class="col l-4 clickable">
-                                                <div class="flex-center flex-vertical-center full-h">
-                                                    <span class="txt-xl clickable">FPT</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col l-3 m-7 s-12">
-                                    <div style="--border-color: black; --round: .5rem;" class="clickable border-bot border-top border-left border-right rounded-f">
-                                        <div style="height: 52px;" class="row">
-                                            <div class="col l-o-1 l-4">
-                                                <div style="height: 52px;" class="img">
-                                                    <img src="https://brandlogos.net/wp-content/uploads/2021/10/shopee-logo-1.png"
-                                                         alt="">
-                                                </div>
-                                            </div>
-                                            <div class="col l-4">
-                                                <div class="flex-center flex-vertical-center full-h">
-                                                    <p class="txt-xl clickable">Shopee</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col l-3 m-7 s-12">
-                                    <div style="--border-color: black; --round: .5rem;" class="clickable border-bot border-top border-left border-right rounded-f">
-                                        <div style="height: 52px;" class="row">
-                                            <div class="col l-o-1 l-4">
-                                                <div style="height: 52px;" class="img">
-                                                    <img src="https://www.citypng.com/public/uploads/small/11662642367ycnsyavuq3s3gva1zqyh19y28qukiwysv0aotm8xsk6ahkzs7xxn4nfts3328yr7ur8nmyg8kopfxxmzjurc31kek9mf35i0pnzh.png"
-                                                         alt="">
-                                                </div>
-                                            </div>
-                                            <div class="col l-4">
-                                                <div class="flex-center flex-vertical-center full-h">
-                                                    <p class="txt-xl clickable">Lazada</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div id="product" class="col l-3 m-7 s-12">
-                                    <div style="--border-color: black; --round: .5rem;" class="clickable border-bot border-top border-left border-right rounded-f">
-                                        <div style="height: 52px;" class="row">
-                                            <div class="col l-o-1 l-4">
-                                                <div style="height: 52px;" class="img">
-                                                    <img src="https://brandlogos.net/wp-content/uploads/2022/03/tiki-logo-brandlogos.net_.png"
-                                                         alt="">
-                                                </div>
-                                            </div>
-                                            <div class="col l-4">
-                                                <div class="flex-center flex-vertical-center full-h clickable">
-                                                    <p class="txt-xl clickable">Tiki</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Provider End -->
-            
             <!-- Product List Start -->
-            <div  class="grid m-y-1">
+            
+            <div id="product"  class="grid m-y-1">
                 <div class="grid wide">
                     <div class="m-y-1">
                         <h1 class="head-txt bold text-center my-24">Product</h1>
@@ -257,7 +169,8 @@
 
                             <div class="row slider-card slider-product m-y-1">
                                 <!-- Edit start -->
-                                <%                                        for (ProductCategoryDTO category : productCategorylist) {
+                                <%
+                                    for (ProductCategoryDTO category : productCategorylist) {
                                 %>
                                 <div class="col l-5 m-7 s-12 card-item">
                                     <form action="MainController">
@@ -311,17 +224,17 @@
                     </div>
                     <div class="slider__img--2">
                         <img src="https://cf.shopee.vn/file/95734f87b93157e5c85bc332f69ea39f_xxhdpi" style="width:100%">             
-                       
+
                     </div>
-                 <div id="service" ></div>   
+                    <div id="service" ></div>   
                 </div >
-                
+
                 <br>
             </div>
             <!-- Slider End -->
 
             <!-- Service List Start -->
-            <div   class="grid m-y-1">
+            <div id="service"  class="grid m-y-1">
                 <div class="grid wide">
                     <div class="m-y-1">
                         <h1 class="head-txt bold text-center my-24">Service</h1>
@@ -344,7 +257,8 @@
                             <div class="row slider-card slider-service m-y-1">
 
                                 <!-- Edit start-->
-                                <%                                        for (ServiceCategoryDTO category : serviceCategoryList) {
+                                <%
+                                    for (ServiceCategoryDTO category : serviceCategoryList) {
                                 %>
                                 <div class="col l-5 m-7 s-12 card-item">
                                     <form action="MainController">

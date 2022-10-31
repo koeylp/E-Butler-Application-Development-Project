@@ -116,12 +116,12 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav ms-auto">
-                            <a href="#" class="nav-item nav-link navigator">Home</a>
-                            <a href="#product" class="nav-item nav-link navigator">Product</a>
+                            <a href="LoadingProductAndServiceCategory" class="nav-item nav-link navigator">Home</a>
+                            <a href="LoadingProductAndServiceCategory#product" class="nav-item nav-link navigator">Product</a>
                             <div class="nav-item dropdown">
-                                <a href="#service" class="nav-link navigator">Service</a>
+                                <a href="LoadingProductAndServiceCategory#service" class="nav-link navigator">Service</a>
                             </div>
-                            <a href="#help" class="nav-item nav-link navigator">Help</a>
+                            <a href="LoadingProductAndServiceCategory#help" class="nav-item nav-link navigator">Help</a>
                             <div class="search absolute hide">
                                 <a><i class="fa-solid fa-magnifying-glass"></i></a>
                                 <input
@@ -391,9 +391,9 @@
                                                     <div class="flex-col flex-horizon-center">
                                                         <span class="txt-lg bold">${o.productName}</span>
                                                         <div class="flex-horizon-center">
-                                                            <span class="txt-md">Product</span>
+                                                            <span class="txt-md">Product Category: ${o.product_category}</span>
                                                             <span class="m-x-12">|</span>
-                                                            <span class="txt-md">Product Category</span>
+                                                            <span class="txt-md">Provider: ${o.provider_name}</span>
                                                         </div>
                                                     </div>
                                                     <div class="order-price bold">
@@ -425,7 +425,7 @@
                                                     <div class="flex-horizon-center">
                                                         <span class="txt-md">Service</span>
                                                         <span class="m-x-12">|</span>
-                                                        <span class="txt-md">Service Category</span>
+                                                        <span class="txt-md">Provider: ${o.provider_name}</span>
                                                     </div>
                                                 </div>
                                                 <div class="order-price bold">

@@ -50,6 +50,7 @@ public class AddToCartController extends HttpServlet {
                 cart.add(productDetail);
                 session.setAttribute("STOCK", quantityStock);
                 session.setAttribute("CART", cart);
+                request.setAttribute("ADD_SUCCESS", "Đã thêm " + quantity + " sản phẩm thành công");
                 url = SUCCESS;
             }
         } catch (Exception e) {
