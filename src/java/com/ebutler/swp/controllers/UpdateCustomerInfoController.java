@@ -8,7 +8,6 @@ import com.ebutler.swp.dao.CustomerDAO;
 import com.ebutler.swp.dto.CustomerDTO;
 import com.ebutler.swp.dto.UserDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
@@ -46,7 +45,10 @@ public class UpdateCustomerInfoController extends HttpServlet {
             String password = currentUser.getPassword();
             String roleid = currentUser.getRole_id();
             int status = currentUser.getStatus();
-
+            if (avatar == null || avatar == "") {
+                avatar = (String) session.getAttribute("PHOTO_PATH");
+            }
+               
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDateTime now = LocalDateTime.now();
             String currentDate = dtf.format(now);

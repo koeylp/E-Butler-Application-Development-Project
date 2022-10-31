@@ -6,7 +6,6 @@ package com.ebutler.swp.dao;
 
 import com.ebutler.swp.dto.CustomerDTO;
 import com.ebutler.swp.dto.ProductCategoryDTO;
-import com.ebutler.swp.dto.ReviewDTO;
 import com.ebutler.swp.utils.DBUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,17 +20,18 @@ import java.util.List;
  */
 public class CustomerDAO {
 
-    private final String INSERT = "INSERT INTO tblCustomer (username, password, role_ID, phone, email, name, gender, dob, avatar, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String INSERT = "INSERT INTO tblCustomer (username, password, role_ID, phone, email, name, gender, dob, avatar, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String GET_PRODUCT_CATEGORY_LIST = "SELECT category_ID, name, image FROM tblProductCategory";
     private static final String GET_USER_PROFILE_INFO = "select username, password, role_ID, phone, email, name, gender, dob, avatar, point, status from tblCustomer where username = ?";
-    private final String GET_CURRENT_PSW = "SELECT password from tblCustomer WHERE username = ?";
-    private final String UPDATE_CURRENT_PSW = "UPDATE tblCustomer SET password=? WHERE username=?";
-    private final String UPDATE_CURRENT_CUSTOMER_INFO = "UPDATE tblCustomer SET avatar=?,name=?, email=?,dob= ?, gender=?, phone=?  WHERE username= ?";
+    private static final String GET_CURRENT_PSW = "SELECT password from tblCustomer WHERE username = ?";
+    private static final String UPDATE_CURRENT_PSW = "UPDATE tblCustomer SET password=? WHERE username=?";
+    private static final String UPDATE_CURRENT_CUSTOMER_INFO = "UPDATE tblCustomer SET avatar=?,name=?, email=?,dob= ?, gender=?, phone=?  WHERE username= ?";
     private static final String CHECK_EXIST_ACCOUNT = "select username from tblCustomer where username = ?";
     private static final String CREATE_CUSTOMER = "insert into tblCustomer([username], [password], [role_ID], [phone], [email], [name], gender, dob, avatar, point,[status]) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String ACCUMULATE_POINT = "UPDATE tblCustomer SET point = ? WHERE username = ?";
     private static final String GET_POINT = "SELECT point FROM tblCustomer WHERE username = ?";
-    
+    private static final String UPLOAD_PHOTO = "UPDATE tblCustomer SET avatar = ? WHERE username = ?";
+
     public boolean InsertCus(CustomerDTO customer) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -295,7 +295,7 @@ public class CustomerDAO {
 
         return currentPsw;
     }
-    
+
     public static int getPoint(String username) throws SQLException {
         int point = 0;
         Connection conn = null;
@@ -328,7 +328,6 @@ public class CustomerDAO {
 
         return point;
     }
-    
 
     public static boolean accumulatePoint(String username, int point) throws SQLException {
         boolean check = false;
@@ -362,8 +361,40 @@ public class CustomerDAO {
         return check;
     }
 
+    public static boolean uploadPhoto(String username, String path) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UPLOAD_PHOTO);
+                ptm.setString(1, path);
+                ptm.setString(2, username);
+                check = ptm.executeUpdate() > 0;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+        }
+
+        return check;
+    }
+
     public static void main(String[] arg) throws SQLException {
-        accumulatePoint("Khoi Le", 10);
+//        accumulatePoint("Khoi Le", 10);
+        uploadPhoto("Khoi Le", "1.png");
     }
 
 }
