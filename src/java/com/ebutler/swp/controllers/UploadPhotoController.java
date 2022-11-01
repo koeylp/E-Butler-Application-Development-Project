@@ -9,6 +9,7 @@ import com.ebutler.swp.dto.CustomerDTO;
 import com.ebutler.swp.dto.UserDTO;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -22,9 +23,7 @@ import javax.servlet.http.Part;
  *
  * @author thekh
  */
-@MultipartConfig(fileSizeThreshold = 1024 * 1024,
-        maxFileSize = 1024 * 1024 * 5,
-        maxRequestSize = 1024 * 1024 * 5 * 5)
+@MultipartConfig
 @WebServlet(name = "UploadPhotoController", urlPatterns = {"/UploadPhotoController"})
 public class UploadPhotoController extends HttpServlet {
 
@@ -43,8 +42,6 @@ public class UploadPhotoController extends HttpServlet {
 
                 CustomerDAO cusDao = new CustomerDAO();
 
-                
-
                 String uploadPath = getServletContext().getRealPath("") + File.separator + "img" + File.separator + "avatars";
                 File uploadDir = new File(uploadPath);
 
@@ -56,16 +53,16 @@ public class UploadPhotoController extends HttpServlet {
                     uploadDir.mkdir();
                 }
 
-                for (Part part : request.getParts()) {
-                    String fileName = part.getSubmittedFileName();
-                    part.write(newPath + File.separator + fileName);
-                }
                 Part part = request.getPart("file");
                 String fileName = part.getSubmittedFileName();
+                part.write(newPath + File.separator + fileName);
+
+//                String fileName = part.getSubmittedFileName();
                 if (cusDao.uploadPhoto(user.getUsername(), fileName)) {
                     CustomerDTO customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
                     customer.setAvatar(fileName);
-                    session.setAttribute("CURRENT_CUSTOMER", customer);
+                
+                    TimeUnit.SECONDS.sleep(2);
                     url = SUCCESS;
                 }
 

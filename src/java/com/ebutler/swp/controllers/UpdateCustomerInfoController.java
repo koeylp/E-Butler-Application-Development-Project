@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
 public class UpdateCustomerInfoController extends HttpServlet {
 
     private final String ERROR = "errorPage.jsp";
-    private final String SUCCESS = "customer_profilePage.jsp";
+    private final String SUCCESS = "MainController?action=GoToUserProfile&current_form=account";
     private final String SEND_ERROR = "customer_profilePage.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
