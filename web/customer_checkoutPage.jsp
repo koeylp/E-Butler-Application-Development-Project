@@ -310,8 +310,8 @@
                             <!-- Shipping Address end -->
                             <form action="MainController" method="POST" class="checkout">
                                 <input type="hidden" name="action" value="Checkout">
-                                <input type="hidden" name="total" value="<%= total%>"/>
                                 <input type="hidden" name="address" value="<%=shipping_address%>">
+                                <input id="total" type="hidden" name="total"/>
                                 <!--Shipping method-->
                                 <%
                                     if (cart != null) {
@@ -563,7 +563,7 @@
                                     </div>
                                 </div>
 
-                                <button onclick="document.querySelector('.checkout').submit()" style="width: 100%;" class="btn-lg m-y-12 txt-md">
+                                <button onclick="document.querySelector('#total').value=<%=total%>; document.querySelector('.checkout').submit();" style="width: 100%;" class="btn-lg m-y-12 txt-md">
                                     Confirm order
                                 </button>
                             </div>
