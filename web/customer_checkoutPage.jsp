@@ -215,9 +215,9 @@
                                     </div>
                                 </div>
                                 <!-- Contact info end -->
-                                
-                                <!-- Shipping Address start-->
 
+                                <!-- Shipping Address start-->
+                                
                                 <!-- Shipping Address end -->
 
 

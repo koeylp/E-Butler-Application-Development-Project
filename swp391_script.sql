@@ -1653,9 +1653,9 @@ INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, ima
 --Bảng loại dịch vụ theo nhóm 
 
 INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('HC', 'Home Cleaning', 'https://www.pngkey.com/png/full/224-2244033_whether-you-need-my-cleaning-services-for-your.png')
-INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('HI', 'Home Improvement', 'https://thumbs.dreamstime.com/z/couple-living-room-avatar-character-vector-illustration-desing-couple-living-room-avatar-character-145224593.jpg')
-INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('PBS', 'Plumbers', 'https://thumbs.dreamstime.com/z/set-flat-bright-vector-elements-items-modern-stylish-bathroom-interior-construction-bath-shampoo-toilet-towels-68381087.jpg')
-INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('IT', 'IT Service', 'https://thumbs.dreamstime.com/z/set-flat-bright-vector-elements-items-modern-stylish-bathroom-interior-construction-bath-shampoo-toilet-towels-68381087.jpg')
+INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('HI', 'Home Improvement', 'https://rothfield.com.au/wp-content/uploads/2021/06/Rothfield_3PL_Hero-Banner-.png')
+INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('PBS', 'Plumbers', 'https://static.wixstatic.com/media/403b64_dc829afea69b46108304d88808cfe46e~mv2.png/v1/fill/w_416,h_350,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Yelm-Plumbing-and-Pumps-Sewer-Line-Repai.png')
+INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('IT', 'IT Service', 'https://www.pngplay.com/wp-content/uploads/13/Software-IT-Services-Transparent-Background.png')
 
 --Bảng loại dịch vụ 
 
