@@ -1,3 +1,4 @@
+<%@page import="com.ebutler.swp.dto.ShipperCompanyDTO"%>
 <%@page import="com.ebutler.swp.dto.AddressDTO"%>
 <%@page import="com.ebutler.swp.dto.ServiceCartDTO"%>
 <%@page import="com.ebutler.swp.dto.CityDTO"%>
@@ -331,36 +332,26 @@
                                     <div style="width: 100%;border: 1px solid #E5E7EB;" class="">
                                         <div class="pad-2">
                                             <div class="flex-around">
+                                                <%
+                                                    ArrayList<ShipperCompanyDTO> company_list = (ArrayList<ShipperCompanyDTO>) request.getAttribute("SHIPPER_COMPANY_LIST");
+
+                                                    company_list = (company_list == null) ? new ArrayList<ShipperCompanyDTO>() : company_list;
+
+                                                    for (ShipperCompanyDTO company : company_list) {
+                                                %>
                                                 <div class="flex">
-                                                    <input checked="" id="radio-1" name="shipping" type="radio" value="shopee" class="m-x-0" required>
+                                                    <input checked="" id="radio-<%=company.getId()%>" name="shipping" type="radio" value="<%=company.getName()%>" class="m-x-0" required>
                                                     <div class="flex-center">
-                                                        <label for="radio-1" class="radio-label m-x-0">
+                                                        <label for="radio-<%=company.getId()%>" class="radio-label m-x-0">
                                                             <div style="width: 2.5rem;" class="img">
-                                                                <img src="https://static.topcv.vn/company_logos/3hGPe93OfHOUL2QUpNJijMwJ6s0uZ3Gr_1637140440____ea75d9fb6acf791dbeee91c457f6863e.png" alt="">
+                                                                <img src="<%=company.getLogo()%>" alt="">
                                                             </div>
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <div class="flex">   
-                                                    <input id="radio-2" name="shipping" type="radio" value="grab" class="m-x-0" required>
-                                                    <div class="flex-center">
-                                                        <label for="radio-2" class="radio-label m-x-0">
-                                                            <div style="width: 2.5rem;" class="img">
-                                                                <img src="https://cdn.worldvectorlogo.com/logos/grab-2.svg" alt="">
-                                                            </div>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="flex">   
-                                                    <input id="radio-2" name="shipping" type="radio" value="be" class="m-x-0" required>
-                                                    <div class="flex-center">
-                                                        <label for="radio-3" class="radio-label m-x-0">
-                                                            <div style="width: 2.5rem;" class="img">
-                                                                <img src="https://now.edu.vn/wp-content/uploads/2018/12/Be-logo-now-academy-768x768.png" alt="">
-                                                            </div>
-                                                        </label>
-                                                    </div>
-                                                </div>
+                                                <%
+                                                    }
+                                                %>
                                             </div>
                                         </div>
                                     </div>

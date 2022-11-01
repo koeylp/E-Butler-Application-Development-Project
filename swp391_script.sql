@@ -227,6 +227,11 @@ CREATE TABLE tblAdmin (
 GO
 
 --- DELIVERY --
+CREATE TABLE tblShipperCompany (
+	id int IDENTITY(1, 1) PRIMARY KEY,
+	name nvarchar(30) UNIQUE,
+	logo nvarchar(max),
+)
 
 CREATE TABLE tblShipperCategory (
 	username nvarchar(30) PRIMARY KEY,
@@ -1925,6 +1930,12 @@ INSERT INTO tblShipper(username, password, name, nameCategory, status) VALUES ('
 INSERT INTO tblShipper(username, password, name, nameCategory, status) VALUES ('shoppe3','1','Nguyen Thi Hong','grab',1)
 INSERT INTO tblShipper(username, password, name, nameCategory, status) VALUES ('shoppe4','1','Nguyen Manh Quang','grab',1)
 INSERT INTO tblShipper(username, password, name, nameCategory, status) VALUES ('shoppe5','1','Le Ba Hau','grab',1)
+
+---- bảng shipper company -----
+insert into tblShipperCompany (name, logo) values ('shopee', 'https://static.topcv.vn/company_logos/3hGPe93OfHOUL2QUpNJijMwJ6s0uZ3Gr_1637140440____ea75d9fb6acf791dbeee91c457f6863e.png')
+insert into tblShipperCompany (name, logo) values ('grab', 'https://cdn.worldvectorlogo.com/logos/grab-2.svg')
+insert into tblShipperCompany (name, logo) values ('bee', 'https://now.edu.vn/wp-content/uploads/2018/12/Be-logo-now-academy-768x768.png')
+
 
 UPDATE tblDelivery SET username_Shipper = 'shoppe1' WHERE order_id = '1'
 
