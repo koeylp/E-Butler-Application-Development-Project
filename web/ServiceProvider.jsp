@@ -306,10 +306,9 @@
                             </form>
                         </div>
 
-                        <div class="">
-                            <a href="#AddProduct" class="btn btn-primary">+
-                                Add
-                                Service</a>
+                        <div class="add-item">
+                            <a class="btn btn-primary">+
+                                Add Service</a>
                         </div>
 
                     </div>
@@ -413,17 +412,24 @@
                     <%
                         }
                     %>
+                    
+                    <%
+                        String cur_form = request.getParameter("cur_form");
+                        
+                        cur_form = (cur_form == null) ? "" : cur_form;
+                    %>
 
-                    <div id="AddProduct" class="Cont"> 
-                        <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div style="z-index: 999999;" class="add-modal overlay fixed top left right bot <%if(!cur_form.equals("add-modal")) {%>hide<%}%>"> 
+                        <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" >Add Service</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <button type="button" class="btn-close close-modal"></button>
                                 </div>
 
                                 <div class="modal-body">
                                     <form action="MainController" method="POST" id="form3"> 
+                                        <input type="hidden" name="cur_form" value="add-modal"/>
                                         <div class="row">
                                             <div class="col mb-3">
                                                 <label for="category" class="form-label ">Category</label> 
@@ -650,6 +656,8 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    
+    <script src="./js/provider.js"></script>
 </body>
 
 </html>
