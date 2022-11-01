@@ -59,9 +59,11 @@ public class Add_NewService_Controller extends HttpServlet {
             if (isValidated) {
                 check = providerDAO.providerAddService(provider, serviceID, name.trim(), price);
                 if (check) {
+                    request.setAttribute("SUCCESS_MESS", "Thêm dịch vụ thành công");
                     url = SUCCESS;
                 }
             } else {
+                request.setAttribute("ERROR_MESS", "Thêm dịch vụ thất bại");
                 url = ERROR;
                 request.setAttribute("SERVICE_ERROR", serviceError);
             }

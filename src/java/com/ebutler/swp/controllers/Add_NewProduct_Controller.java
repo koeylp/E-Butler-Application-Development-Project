@@ -63,9 +63,11 @@ public class Add_NewProduct_Controller extends HttpServlet {
                 check = providerDAO.providerAddProduct(provider, productID, nameProduct.trim(), quantityProduct, price);
 
                 if (check) {
+                    request.setAttribute("SUCCESS_MESS", "Thêm sản phẩm thành công");
                     url = SUCCESS;
                 }
             }else {
+                request.setAttribute("ERROR_MESS", "Thêm sản phẩm thất bại");
                 url = ERROR;
                 request.setAttribute("PRODUCT_ERROR", productError);
             }

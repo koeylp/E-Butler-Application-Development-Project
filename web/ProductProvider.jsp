@@ -40,10 +40,11 @@
         <link
             href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
             rel="stylesheet" />
-        
-         <!-- CSS -->
-         <link rel="stylesheet" href="./css/base.css" />
-         <link rel="stylesheet" href="./css/guestPage.css" />
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="./css/base.css" />
+        <link rel="stylesheet" href="./css/guestPage.css" />
+        <link rel="stylesheet" href="./css/my_toast.css" />
     </head>
 
     <body>
@@ -342,17 +343,17 @@
                                         <td>
                                             <input class="form-control me-2 titleName" type="text" name="ProductName" value="<%= product.getName()%>" />
                                         </td>
-                                        <td><input class="form-control me-2 priceData" type="text" name="ProductID" value="<%= product.getId() %>" readonly="" /></td>
+                                        <td><input class="form-control me-2 priceData" type="text" name="ProductID" value="<%= product.getId()%>" readonly="" /></td>
                                         <td>
                                             <img class="img-product"
-                                                 src=<%= product.getImage() %> 
+                                                 src=<%= product.getImage()%> 
                                                  alt="">
                                         </td>
                                         <td>
                                             <div class="flexStatus">
                                                 <input class="form-control me-2 priceData" type="text" name="ProductPrice" value="<%= product.getPrice()%>" />$
                                             </div>
-                                            
+
                                         </td>
                                         <td>
                                             <input class="form-control me-2 priceData" type="text" name="ProductQuantity" value="<%= product.getQuantity()%>" />
@@ -393,7 +394,7 @@
                                         <td>
                                             <div>
                                                 <button name="action" value="ProviderDeleteProduct" ><i class="bx bx-trash me-1"></i>Delete</button>
-                                                <input type="hidden" name="Provider_ProductID" value="<%= product.getId() %>" />
+                                                <input type="hidden" name="Provider_ProductID" value="<%= product.getId()%>" />
 
                                             </div>
                                         </td>
@@ -413,14 +414,14 @@
                         }
                     %>
                 </div>
-                
+
                 <%
                     String cur_form = request.getParameter("cur_form");
-                        
+
                     cur_form = (cur_form == null) ? "" : cur_form;
                 %>
-                
-                <div style="z-index: 999999;" class="add-modal overlay fixed top left right bot <%if(!cur_form.equals("add-modal")) {%>hide<%}%>"> 
+
+                <div style="z-index: 999999;" class="add-modal overlay fixed top left right bot <%if (!cur_form.equals("add-modal")) {%>hide<%}%>"> 
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -542,20 +543,20 @@
                             <div class="col mb-3">
                                 <label for="Description" class="form-label">Description</label>
                                 <textarea name="DescriptionProduct" type="text" name="Description" value="<%=product_info.getDescription()%>" class="form-control" placeholder="Description"></textarea>
-                                </div>
+                            </div>
 
 
-                            </div>
-                            <input type="hidden" name="action" value="AddNewProduct" />
-                            </form>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" onclick="submitForms()"  class="btn btn-primary">Save changes</button> 
-                            </div>
                         </div>
-
+                        <input type="hidden" name="action" value="AddNewProduct" />
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" onclick="submitForms()"  class="btn btn-primary">Save changes</button> 
+                        </div>
                     </div>
+
                 </div>
+            </div>
 
         </div>
         <!-- Footer Start -->
@@ -620,7 +621,21 @@
     </div>
 
 
+    <%
+        String messageSuccess = (String) request.getAttribute("SUCCESS_MESS");
+        String messageError = (String) request.getAttribute("ERROR_MESS");
 
+        messageSuccess = (messageSuccess == null) ? "" : messageSuccess;
+        messageError = (messageError == null) ? "" : messageError;
+
+        if (!messageSuccess.isEmpty() || !messageError.isEmpty()) {
+    %>
+    <div id="my-toast">
+
+    </div>
+    <%
+        }
+    %>   
 
 
 
@@ -648,8 +663,73 @@
 
     Page JS 
     <script src="./js/dashboards-analytics.js"></script>
-    
+
     <script src="./js/provider.js"></script>
+    
+    <script language="javascript">
+                                    const main = document.getElementById("my-toast");
+                                    if (main) {
+                                        const duration = 2000;
+                                        const toast = document.createElement("div");
+                                        // Auto remove toast
+                                        const autoRemoveId = setTimeout(function () {
+                                            main.removeChild(toast);
+                                        }, duration + 1000);
+                                        // Remove toast when clicked
+                                        toast.onclick = function (e) {
+                                            if (e.target.closest(".my-toast__close")) {
+                                                main.removeChild(toast);
+                                                clearTimeout(autoRemoveId);
+                                            }
+                                        };
+
+        <%
+            if (messageError.isEmpty() && !messageSuccess.isEmpty()) {
+        %>
+                                        toast.classList.add("my-toast", `my-toast--success`, "showing");
+
+                                        toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
+
+                                        toast.innerHTML =
+                                                `<div class="my-toast__icon">
+            <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="my-toast__body">
+            <h3 class="my-toast__title">Thành công</h3>
+                <p class="my-toast__msg"><%=messageSuccess%></p>
+                </div>
+            <div class="my-toast__close">
+            <i class="fas fa-times"></i>
+            </div>
+                    `;
+
+        <%
+            }
+        %>
+
+        <%
+            if (!messageError.isEmpty() && messageSuccess.isEmpty()) {
+        %>
+                                        toast.classList.add("my-toast", `my-toast--error`, "showing");
+                                        toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
+                                        toast.innerHTML =
+                                                `<div class="my-toast__icon">
+            <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="my-toast__body">
+            <h3 class="my-toast__title">Thất bại</h3>
+                <p class="my-toast__msg"><%=messageError%></p>
+                </div>
+            <div class="my-toast__close">
+            <i class="fas fa-times"></i>
+            </div>
+            `;
+        <%
+            }
+        %>
+                                        main.appendChild(toast);
+                                    }
+    </script>
 
     <!-- Place this tag in your head or just before your close body tag. 
     <script async defer src="https://buttons.github.io/buttons.js"></script>
