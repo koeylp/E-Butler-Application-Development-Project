@@ -7,7 +7,6 @@ package com.ebutler.swp.controllers;
 import com.ebutler.swp.dao.AddressDAO;
 import com.ebutler.swp.dao.CustomerDAO;
 import com.ebutler.swp.dao.OrderHistoryDAO;
-import static com.ebutler.swp.dao.OrderHistoryDAO.getListServideOrderHistory;
 import com.ebutler.swp.dto.AddressDTO;
 import com.ebutler.swp.dto.CustomerDTO;
 import com.ebutler.swp.dto.ProductOrderHistoryDTO;

@@ -220,6 +220,7 @@
                                         <i class="fa-solid fa-envelope"></i>
                                     </span>
                                     <input class="input txt-sm" type="email" name="email" value="<%= customer.getEmail()%>"placeholder="<%= customer.getEmail()%>">
+                                    <input type="hidden" name="avatar" value="<%= customer.getAvatar() %>"/>
                                 </div>
                             </div>
                             <div class="flex-horizon-center flex-col relative m-y-12">
