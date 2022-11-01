@@ -325,6 +325,9 @@
                                             </div>
                                             <div style="margin-left: 2rem;" class="flex-col">
                                                 <span class="txt-lg">SHIPPING METHOD</span>
+                                                <div class="flex-between txt-sm bold">
+                                                    <span>Shipping info</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
