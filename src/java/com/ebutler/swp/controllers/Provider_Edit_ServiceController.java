@@ -46,9 +46,12 @@ public class Provider_Edit_ServiceController extends HttpServlet {
             ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER") ;
             check = providerDAO.editService(newServiceName, newServicePrice, newServiceStatus, oldServiceName, oldServicePrice) ;
             if (check) {
+                request.setAttribute("SUCCESS_MESS", "Cập nhật dịch vụ thành công");
                 url = SUCCESS ; 
                 listService = providerDAO.loadListService(provider) ; 
                 session.setAttribute("Providder_ListService", listService); 
+            } else {
+                request.setAttribute("ERROR_MESS", "Cập nhật dịch vụ thất bại");
             }
            
         } catch (Exception e) {

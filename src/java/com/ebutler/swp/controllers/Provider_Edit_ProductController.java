@@ -46,9 +46,12 @@ public class Provider_Edit_ProductController extends HttpServlet {
             ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER") ; 
             check = providerDAO.editProduct(provider, productName, ProductPrice, Productquantity,productStatus ,productID ) ;
             if (check) {
+                request.setAttribute("SUCCESS_MESS", "Cập nhật sản phẩm thành công");
                 url = SUCCESS ; 
                 listProduct = providerDAO.loadListProduct(provider) ; 
                 session.setAttribute("Provider_ListProduct", listProduct);
+            } else {
+                request.setAttribute("ERROR_MESS", "Cập nhật sản phẩm thất bại");
             }
            
         } catch (Exception e) {
