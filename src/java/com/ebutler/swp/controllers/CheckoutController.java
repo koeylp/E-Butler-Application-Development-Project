@@ -41,6 +41,8 @@ public class CheckoutController extends HttpServlet {
             String total = request.getParameter("total");
             String payment = request.getParameter("payment");
             String shipping = request.getParameter("shipping");
+            String address = request.getParameter("address");
+            
             OrderDTO order = new OrderDTO();
             OrderDAO orderDao = new OrderDAO();
             CustomerDAO customerDao = new CustomerDAO();
@@ -77,7 +79,7 @@ public class CheckoutController extends HttpServlet {
                     if (count == cart.getCart().values().size()) {
                         orderDao.insertOrder(java.sql.Date.valueOf(java.time.LocalDate.now()), user.getUsername(), 0, Double.parseDouble(total), payment, shipping);
                         int order_ID = orderDao.getAllOrder().size();
-                        orderDao.insertDelivery(order_ID, "123 Hollywood Walk of Fame", shipping);
+                        orderDao.insertDelivery(order_ID, address, shipping);
                         for (ProductDetailDTO product : cart.getCart().values()) {
 
                             orderDao.insertOrderDetail(product.getId(), order_ID, product.getQuantity(), product.getPrice(), 0);

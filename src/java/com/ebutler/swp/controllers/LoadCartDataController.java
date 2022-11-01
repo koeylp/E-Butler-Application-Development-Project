@@ -39,8 +39,6 @@ public class LoadCartDataController extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             if (session != null) {
-                UserDTO currentUser = (UserDTO) session.getAttribute("LOGIN_USER");
-                CustomerDAO dao = new CustomerDAO();
                 AddressDAO addressDao = new AddressDAO();
                 CartDTO cart = (CartDTO) session.getAttribute("CART");
                 CartServiceDTO cartService = (CartServiceDTO) session.getAttribute("CART_SERVICE");
@@ -49,8 +47,6 @@ public class LoadCartDataController extends HttpServlet {
 
                 session.setAttribute("CART", cart);
                 session.setAttribute("CART_SERVICE", cartService);
-                CustomerDTO customer = dao.getCurrentCustomer(currentUser.getUsername());
-                session.setAttribute("CURRENT_CUSTOMER", customer);
                 session.setAttribute("PROVINCE_LIST", province_list);
 //                session.setAttribute("CITY_LIST", city_list);
 

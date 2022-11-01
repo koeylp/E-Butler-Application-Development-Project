@@ -162,76 +162,163 @@
 
 
             <div class="grid m-y-32">
-                <form action="MainController" method="POST">
-                    <div class="grid wide">
-                        <div style="padding: 20px 0; border-top: 1px solid #E5E7EB; border-bottom: 1px solid #E5E7EB;"
-                             class="row">
-                            <div class="col l-5">
-                                <!-- Contact info start -->
-                                <div class="relative m-y-32">
-                                    <div style="border: 1px solid #E5E7EB;" class="pad-2 flex-between">
-                                        <div class="flex l-8">
-                                            <div class="flex-center">
-                                                <i class="fa-solid fa-user"></i>
-                                            </div>
-                                            <div style="margin-left: 2rem;" class="flex-col">
-                                                <span class="txt-lg">CONTACT INFO</span>
-                                                <div class="flex-between txt-sm bold">
-                                                    <span><%= customer.getName()%></span>
-                                                    <span style="margin-left: 1rem;"> <%= customer.getPhone()%></span>
-                                                </div>
-                                            </div>
-                                        </div>
+                <div class="grid wide">
+                    <div style="padding: 20px 0; border-top: 1px solid #E5E7EB; border-bottom: 1px solid #E5E7EB;"
+                         class="row">
+                        <div class="col l-5">
+                            <!-- Contact info start -->
+                            <div class="relative m-y-32">
+                                <div style="border: 1px solid #E5E7EB;" class="pad-2 flex-between">
+                                    <div class="flex l-8">
                                         <div class="flex-center">
-                                            <button type="button" style="--round: .5rem; background-color: #F9FAFB" class="txt-sm bold rounded-f border-no pad-0 change_info">Change</button>
+                                            <i class="fa-solid fa-user"></i>
+                                        </div>
+                                        <div style="margin-left: 2rem;" class="flex-col">
+                                            <span class="txt-lg">CONTACT INFO</span>
+                                            <div class="flex-between txt-sm bold">
+                                                <span><%= customer.getName()%></span>
+                                                <span style="margin-left: 1rem;"> <%= customer.getPhone()%></span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div style="width: 100%;border: 1px solid #E5E7EB;" class="info_detail detail hide">
-                                        <div class="pad-2">
-                                            <div class="flex-vertical-center m-y-12">
-                                                <h1 class="txt-lg bold">Contact information</h1>
-                                            </div>
+                                    <div class="flex-center">
+                                        <button type="button" style="--round: .5rem; background-color: #F9FAFB" class="txt-sm bold rounded-f border-no pad-0 change_info">Change</button>
+                                    </div>
+                                </div>
+                                <div style="width: 100%;border: 1px solid #E5E7EB;" class="info_detail detail hide">
+                                    <div class="pad-2">
+                                        <div class="flex-vertical-center m-y-12">
+                                            <h1 class="txt-lg bold">Contact information</h1>
+                                        </div>
 
-                                            <div style="padding: 0;" class="flex-col">
-                                                <div class="flex-horizon-center flex-col m-y-12">
-                                                    <span class="txt-md m-y-12">Your phone number</span>
-                                                    <input
-                                                        style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
-                                                        class="input txt-sm" type="password">
-                                                </div>
-                                                <div class="flex-horizon-center flex-col m-y-12">
-                                                    <span class="txt-md m-y-12">Email address</span>
-                                                    <input
-                                                        style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
-                                                        class="input txt-sm" type="password">
-                                                </div>
-                                                <div class="flex-vertical-center">
-                                                    <button type="button" class="btn-lg txt-md bold m-y-32">Save and next to shipping</button>
-                                                    <button type="button" style="margin-left: 1rem; background-color: #EFEFEF; color: black"
-                                                            class="btn-lg txt-md bold m-y-32 border-no box-shadow-no close_info">Cancel</button>
-                                                </div>
+                                        <div style="padding: 0;" class="flex-col">
+                                            <div class="flex-horizon-center flex-col m-y-12">
+                                                <span class="txt-md m-y-12">Your phone number</span>
+                                                <input
+                                                    style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
+                                                    class="input txt-sm" type="password">
+                                            </div>
+                                            <div class="flex-horizon-center flex-col m-y-12">
+                                                <span class="txt-md m-y-12">Email address</span>
+                                                <input
+                                                    style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
+                                                    class="input txt-sm" type="password">
+                                            </div>
+                                            <div class="flex-vertical-center">
+                                                <button type="button" class="btn-lg txt-md bold m-y-32">Save and next to shipping</button>
+                                                <button type="button" style="margin-left: 1rem; background-color: #EFEFEF; color: black"
+                                                        class="btn-lg txt-md bold m-y-32 border-no box-shadow-no close_info">Cancel</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Contact info end -->
+                            </div>
+                            <!-- Contact info end -->
 
-                                <!-- Shipping Address start-->
+                            <!-- Shipping Address start-->
+                            <%
+                                AddressDTO address_default = customer.getAddressDefault();
                                 
-                                <!-- Shipping Address end -->
+                                String shipping_address = address_default.getStreet() + ", " + address_default.getDistrict_name() + ", " + address_default.getProvince_name();
+                            %>
+                            <div class="relative m-y-32">
+                                <div style="border: 1px solid #E5E7EB;" class="pad-2 flex-between">
+                                    <div class="flex l-8">
+                                        <div class="flex-center txt-md">
+                                            <i class="fa-solid fa-signs-post"></i>
+                                        </div>
+                                        <div style="margin-left: 2rem;" class="flex-col">
+                                            <span class="txt-lg">SHIPPING ADDRESS</span>
+                                            <div class="flex-between txt-sm bold">
+                                                <span><%=address_default.getStreet()%>, <%=address_default.getDistrict_name()%>, <%=address_default.getProvince_name()%></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-center">
+                                        <button type="button" style="--round: .5rem; background-color: #F9FAFB"
+                                                class="txt-sm bold rounded-f border-no pad-0 change_address">Change</button>
+                                    </div>
+                                </div>
+                                <div style="width: 100%;border: 1px solid #E5E7EB;" class="address_detail detail hide">
+                                    <div class="pad-2">
+                                        <div style="padding: 0;" class="flex-col">
 
+                                            <form action="MainController?action=SelectProvince" method="GET">
+                                                <input type="hidden" name="current_page" value="customer_checkoutPage.jsp">
+                                                <div class="row">
+                                                    <div class="flex-horizon-center flex-col m-y-12 col l-6">
+                                                        <span class="txt-md m-y-12">Province</span>
+                                                        <%
+                                                            ArrayList<ProvinceDTO> province_list = (ArrayList<ProvinceDTO>) session.getAttribute("PROVINCE_LIST");
+                                                            String province_id = (String) request.getAttribute("PROVINCE_ID");
 
-                            </div>
+                                                            province_id = (province_id == null) ? "" : province_id;
+                                                        %>
+                                                        <select
+                                                            style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
+                                                            class="input txt-sm" type="password" onchange="this.form.submit()" name="province_id">
+                                                            <option>Select Province</option>
+                                                            <%                                                                    for (ProvinceDTO province : province_list) {
+                                                            %>
+                                                            <option value="<%=province.getId()%>" <%if (province.getId().equals(province_id)) {%>selected<%}%>><%=province.getName()%></option>
+                                                            <%
+                                                                }
+                                                            %>
 
+                                                        </select>
+                                                    </div>
+                                                    <div class="flex-horizon-center flex-col m-y-12 col l-6">
+                                                        <span class="txt-md m-y-12">City</span>
 
-                            <div class="col l-1 m-y-32">
-                                <div style="height: 100%;" class="flex-center">
-                                    <div style="width: 1px; background-color: #E5E7EB; height: 100%;">
+                                                        <%
+                                                            ArrayList<CityDTO> city_list = (ArrayList<CityDTO>) request.getAttribute("CITY_LIST");
+
+                                                            city_list = (city_list == null) ? new ArrayList<CityDTO>() : city_list;
+                                                        %>
+                                                        <select
+                                                            style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
+                                                            class="input txt-sm" type="password" name="city_id">
+                                                            <option>Select City</option>
+                                                            <%
+                                                                for (CityDTO city : city_list) {
+                                                            %>
+                                                            <option value="<%=city.getId()%>"><%=city.getName()%></option>
+                                                            <%
+                                                                }
+                                                            %>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                            <div class="flex-horizon-center flex-col m-y-12">
+                                                <span class="txt-md m-y-12">Address</span>
+                                                <input
+                                                    style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
+                                                    class="input txt-sm" type="text">
+                                            </div>
+                                            <div class="flex-vertical-center">
+                                                <button type="button" class="btn-lg txt-md bold m-y-32">Save and next to shipping</button>
+                                                <button type="button" style="margin-left: 1rem; background-color: #EFEFEF; color: black"
+                                                        class="btn-lg txt-md bold m-y-32 border-no box-shadow-no close_address">Cancel</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- Shipping Address end -->
+                        </div>
 
-                            <div class="col l-6 m-y-32">
+
+                        <div class="col l-1 m-y-32">
+                            <div style="height: 100%;" class="flex-center">
+                                <div style="width: 1px; background-color: #E5E7EB; height: 100%;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col l-6 m-y-32">
+                            <form action="MainController" method="POST">
                                 <div class="flex-col sticky">
                                     <div class="flex-between txt-lg bold">
                                         <span>Order Summary</span>
@@ -470,7 +557,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex">   
-                                                    <input id="radio-2" name="payment" type="radio" value="COD"  class="m-x-0" required >
+                                                    <input checked id="radio-2" name="payment" type="radio" value="COD"  class="m-x-0" required >
                                                     <div class="flex-center">
                                                         <label for="radio-2" class="radio-label m-x-0">
                                                             <div style="width: 5rem;" class="img">
@@ -484,14 +571,16 @@
                                         <!-- Payment method end -->
                                     </div>
                                     <input type="hidden" name="total" value="<%= total%>"/>
+                                    <input typ="hidden" name="address" value="<%=shipping_address%>">
                                     <button type="submit" style="width: 100%;" name="action" value="Checkout" class="btn-lg m-y-12 txt-md">
                                         Confirm order
                                     </button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
-                </form>
+                </div>
+
             </div>
 
             <!-- Cart end -->

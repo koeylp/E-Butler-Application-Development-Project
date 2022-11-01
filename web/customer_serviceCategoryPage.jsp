@@ -79,9 +79,9 @@
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav ms-auto">
                             <a href="LoadingProductAndServiceCategory" class="nav-item nav-link navigator">Home</a>
-                            <a href="LoadingProductAndServiceCategory#product" class="nav-item nav-link navigator active">Product</a>
+                            <a href="LoadingProductAndServiceCategory#product" class="nav-item nav-link navigator">Product</a>
                             <div class="nav-item dropdown">
-                                <a href="LoadingProductAndServiceCategory#service" class="nav-link navigator">Service</a>
+                                <a href="LoadingProductAndServiceCategory#service" class="nav-link navigator active">Service</a>
                             </div>
                             <a href="LoadingProductAndServiceCategory#help" class="nav-item nav-link navigator">Help</a>
                             <div class="search absolute hide">
