@@ -1,3 +1,4 @@
+<%@page import="com.ebutler.swp.dto.CustomerDTO"%>
 <%@page import="com.ebutler.swp.dto.UserDTO"%>
 <%@page import="com.ebutler.swp.dto.ProductDTO"%>
 <%@page import="java.util.List"%>
@@ -11,6 +12,7 @@
         <meta content="" name="keywords">
         <meta content="" name="description">
         <link rel="stylesheet" href="./vendor/fonts/boxicons.css" />
+        <link rel="icon" type="image/x-icon" href="img/logo.png">
 
         <!-- Icon FontAwesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
@@ -24,7 +26,7 @@
         <!-- Icon Font Stylesheet -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-       
+
 
         <!-- Libraries Stylesheet -->
         <link href="lib/animate/animate.min.css" rel="stylesheet">
@@ -41,15 +43,16 @@
         <!-- My Stylesheet -->
         <link rel="stylesheet" href="css/guestPage.css">
         <link rel="stylesheet" href="css/customerPage.css">
-        
-        
-        
+
+
+
     </head>
 
     <body>
         <%
             List<ProductDTO> productList = (List<ProductDTO>) session.getAttribute("CUSTOMER_PRODUCT_LIST");
-
+            CustomerDTO customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
+            customer = (customer == null) ? new CustomerDTO() : customer;
             String category_id = (String) session.getAttribute("CATEGORYID");
 
             category_id = (category_id == null) ? "" : category_id;
@@ -95,7 +98,16 @@
                             <div class="nav-item dropdown">
                                 <div class="nav-link">
                                     <div style="width: 1.5rem;" class="img rounded-f">
+                                        <%   if (customer.getAvatar() == "") {
+                                        %>
                                         <img src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg" alt="">
+                                        <%
+                                        } else {
+                                        %>
+                                        <img src="img/avatars/<%= customer.getAvatar()%>" alt="">
+                                        <%
+                                            }
+                                        %>
                                     </div>
                                 </div>
                                 <div class="dropdown-menu rounded-0 flex-col">
@@ -163,7 +175,7 @@
                             </div>
                         </form>
                     </div>
-                    
+
                     <div class="mx-5 mt-3">
                         <nav aria-label="breadcrumb m-5">
                             <ol class="breadcrumb breadcrumb-style1">

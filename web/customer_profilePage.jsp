@@ -132,7 +132,16 @@
                             <div class="nav-item dropdown">
                                 <div class="nav-link">
                                     <div style="width: 1.5rem;" class="img rounded-f">
+                                        <%   if (customer.getAvatar() == "") {
+                                        %>
                                         <img src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg" alt="">
+                                        <%
+                                        } else {
+                                        %>
+                                        <img src="img/avatars/<%= customer.getAvatar()%>" alt="">
+                                        <%
+                                            }
+                                        %>
                                     </div>
                                 </div>
                                 <div class="dropdown-menu rounded-0 flex-col">
@@ -192,9 +201,17 @@
                     <div class="col l-3">
                         <!--<form action="MainController">-->
                         <div class="image m-y-12">
-                            <img id="output" src="img/avatars/<%= customer.getAvatar() %>"
-                                 alt=""/>
-                           
+                            <%   if (customer.getAvatar() == "") {
+                            %>
+                            <img src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg" alt="">
+                            <%
+                            } else {
+                            %>
+                            <img src="img/avatars/<%= customer.getAvatar()%>" alt="">
+                            <%
+                                }
+                            %>
+
                         </div>
                         <form method="POST" action="UploadPhotoController" enctype="multipart/form-data" >
                             <input type="file" name="file"/>
@@ -206,8 +223,8 @@
 
                         <form action="MainController">
                             <div class="flex-horizon-center flex-col m-y-12">
-                                <%= updateSuccess %>
-                                <%= emptyInfo %>
+                                <%= updateSuccess%>
+                                <%= emptyInfo%>
                                 <span class="txt-lg bold m-y-12">Full name</span>
                                 <input name="name" value="<%= customer.getName()%>"style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
                                        class="input txt-sm" type="text" placeholder="<%= customer.getName()%>">
@@ -220,7 +237,7 @@
                                         <i class="fa-solid fa-envelope"></i>
                                     </span>
                                     <input class="input txt-sm" type="email" name="email" value="<%= customer.getEmail()%>"placeholder="<%= customer.getEmail()%>">
-                                    <input type="hidden" name="avatar" value="<%= customer.getAvatar() %>"/>
+                                    <input type="hidden" name="avatar" value="<%= customer.getAvatar()%>"/>
                                 </div>
                             </div>
                             <div class="flex-horizon-center flex-col relative m-y-12">

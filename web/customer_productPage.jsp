@@ -1,3 +1,4 @@
+<%@page import="com.ebutler.swp.dto.CustomerDTO"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="com.ebutler.swp.dto.ReviewDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -161,7 +162,8 @@
 
             //List<ProductDetailDTO> productList = (List<ProductDetailDTO>) session.getAttribute("PRODUCT_DETAIL_BY_TYPE");
             String product_id = (String) session.getAttribute("PRODUCT_ID");
-
+            CustomerDTO customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
+            customer = (customer == null) ? new CustomerDTO() : customer;
             product_id = (product_id == null) ? "" : product_id;
 
             UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
@@ -216,7 +218,16 @@
                             <div class="nav-item dropdown">
                                 <div class="nav-link">
                                     <div style="width: 1.5rem;" class="img rounded-f">
+                                        <%   if (customer.getAvatar() == "") {
+                                        %>
                                         <img src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg" alt="">
+                                        <%
+                                        } else {
+                                        %>
+                                        <img src="img/avatars/<%= customer.getAvatar()%>" alt="">
+                                        <%
+                                            }
+                                        %>
                                     </div>
                                 </div>
                                 <div class="dropdown-menu rounded-0 flex-col">

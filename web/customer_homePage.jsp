@@ -1,3 +1,4 @@
+<%@page import="com.ebutler.swp.dto.CustomerDTO"%>
 <%@page import="com.ebutler.swp.dto.UserDTO"%>
 <%@page import="com.ebutler.swp.dto.ServiceCategoryDTO"%>
 <%@page import="com.ebutler.swp.dto.ProductCategoryDTO"%>
@@ -12,6 +13,7 @@
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
+        <link rel="icon" type="image/png" href="img/how_it_works.png">
 
         <!-- Icon FontAwesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
@@ -47,7 +49,8 @@
         <%
             List<ProductCategoryDTO> productCategorylist = (List<ProductCategoryDTO>) session.getAttribute("PRODUCT_CATEGORY_BY_PLACE_LIST");
             List<ServiceCategoryDTO> serviceCategoryList = (List<ServiceCategoryDTO>) session.getAttribute("SERVICE_CATEGORY_BY_PLACE_LIST");
-
+            CustomerDTO customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
+            customer = (customer == null) ? new CustomerDTO() : customer;
             UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
         %>
         <div class="container-xxl bg-white p-0">
@@ -90,7 +93,16 @@
                             <div class="nav-item dropdown">
                                 <div class="nav-link">
                                     <div style="width: 1.5rem;" class="img rounded-f">
+                                        <%   if (customer.getAvatar() == "") {
+                                        %>
                                         <img src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg" alt="">
+                                        <%
+                                        } else {
+                                        %>
+                                        <img src="img/avatars/<%= customer.getAvatar()%>" alt="">
+                                        <%
+                                            }
+                                        %>
                                     </div>
                                 </div>
                                 <div class="dropdown-menu rounded-0 flex-col">
@@ -146,7 +158,7 @@
 
 
             <!-- Product List Start -->
-            
+
             <div id="product"  class="grid m-y-1">
                 <div class="grid wide">
                     <div class="m-y-1">
