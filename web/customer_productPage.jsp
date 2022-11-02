@@ -1,3 +1,4 @@
+<%@page import="com.ebutler.swp.dto.CustomerDTO"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="com.ebutler.swp.dto.ReviewDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -44,116 +45,8 @@
         <!-- My Stylesheet -->
         <link rel="stylesheet" href="css/guestPage.css">
         <link rel="stylesheet" href="css/customerPage.css">
-
-        <style>
-            /* toast */
-            #toast {
-                position: fixed;
-                top: 32px;
-                right: 32px;
-                z-index: 999999;
-            }
-
-            .toast {
-                display: flex;
-                align-items: center;
-                background-color: #fff;
-                border-radius: 2px;
-                padding: 20px 0;
-                min-width: 400px;
-                max-width: 450px;
-                border-left: 4px solid;
-                box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
-                transition: all linear 0.3s;
-            }
-
-            .toast--success {
-                border-color: #47d864;
-            }
-
-            .toast--success .toast__icon {
-                color: #47d864;
-            }
-
-            .toast--info {
-                border-color: #2f86eb;
-            }
-
-            .toast--info .toast__icon {
-                color: #2f86eb;
-            }
-
-            .toast--warning {
-                border-color: #ffc021;
-            }
-
-            .toast--warning .toast__icon {
-                color: #ffc021;
-            }
-
-            .toast--error {
-                border-color: #ff623d;
-            }
-
-            .toast--error .toast__icon {
-                color: #ff623d;
-            }
-
-            .toast+.toast {
-                margin-top: 24px;
-            }
-
-            .toast__icon {
-                font-size: 24px;
-            }
-
-            .toast__icon,
-            .toast__close {
-                padding: 0 16px;
-            }
-
-            .toast__body {
-                flex-grow: 1;
-            }
-
-            .toast__title {
-                font-size: 16px;
-                font-weight: 600;
-                color: #333;
-            }
-
-            .toast__msg {
-                font-size: 14px;
-                color: #888;
-                margin-top: 6px;
-                line-height: 1.5;
-            }
-
-            .toast__close {
-                font-size: 20px;
-                color: rgba(0, 0, 0, 0.3);
-                cursor: pointer;
-            }
-
-            /* animation */
-            @keyframes slideInLeft {
-                from {
-                    opacity: 0;
-                    transform: translateX(calc(100% + 32px));
-                }
-
-                to {
-                    opacity: 1;
-                    transform: translateX(0);
-                }
-            }
-
-            @keyframes fadeOut {
-                to {
-                    opacity: 0;
-                }
-            }
-        </style>
+        <link rel="stylesheet" href="css/toast.css">
+        
     </head>
 
     <body>
@@ -161,7 +54,8 @@
 
             //List<ProductDetailDTO> productList = (List<ProductDetailDTO>) session.getAttribute("PRODUCT_DETAIL_BY_TYPE");
             String product_id = (String) session.getAttribute("PRODUCT_ID");
-
+            CustomerDTO customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
+            customer = (customer == null) ? new CustomerDTO() : customer;
             product_id = (product_id == null) ? "" : product_id;
 
             UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
@@ -216,7 +110,16 @@
                             <div class="nav-item dropdown">
                                 <div class="nav-link">
                                     <div style="width: 1.5rem;" class="img rounded-f">
+                                        <%   if (customer.getAvatar() == "") {
+                                        %>
                                         <img src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg" alt="">
+                                        <%
+                                        } else {
+                                        %>
+                                        <img src="img/avatars/<%= customer.getAvatar()%>" alt="">
+                                        <%
+                                            }
+                                        %>
                                     </div>
                                 </div>
                                 <div class="dropdown-menu rounded-0 flex-col">
@@ -320,7 +223,7 @@
                                        style="background-color: black; color: white; right: 52%;"
                                        class="txt-border link absolute card-extend bot">
                                         <i class="fa-solid fa-bag-shopping"></i>
-                                        Add to bag
+                                        Add to cart
                                     </a>
                                     <a style="background-color: white; color: black; left: 52%;"
                                        class="txt-border link absolute card-extend bot quick-view">

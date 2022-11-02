@@ -11,7 +11,6 @@ import com.ebutler.swp.dto.ProductDetailDTO;
 import com.ebutler.swp.dto.ProviderDTO;
 import com.ebutler.swp.dto.ProviderServiceDTO1;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -26,7 +25,7 @@ import javax.servlet.http.HttpSession;
  */
 public class Provider_Delete_OrderController extends HttpServlet {
 
-    private final String SUCCESS = "OrderProvider.jsp";
+    private final String SUCCESS = "Provider_OrderController"; 
     private final String ERROR = "OrderProvider.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -36,7 +35,7 @@ public class Provider_Delete_OrderController extends HttpServlet {
         try {
             List<OrderDetailDTO> listOrder = new ArrayList();
             List<OrderDTO> listOrderUpdate = new ArrayList();
-
+            
             ProviderDAO providerDAO = new ProviderDAO();
             HttpSession session = request.getSession();
             ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER");
@@ -67,15 +66,8 @@ public class Provider_Delete_OrderController extends HttpServlet {
                         request.setAttribute("MESSAGE_UPDATE", "Error Update ! Fix it");
                     }
                 }
+               
                 url = SUCCESS;
-                List<ProductDetailDTO> listProduct = (List<ProductDetailDTO>) session.getAttribute("Provider_ListProduct");
-                List<ProviderServiceDTO1> listService = (List<ProviderServiceDTO1>) session.getAttribute("Providder_ListService");
-                if (!listProduct.isEmpty()) {
-                    listOrderUpdate = providerDAO.loadListOrder(provider);
-                } else if (!listService.isEmpty()) {
-                    listOrderUpdate = providerDAO.loadListOrderService(provider);
-                }
-                session.setAttribute("Providder_ListOrder", listOrderUpdate);
             }
 
         } catch (Exception e) {

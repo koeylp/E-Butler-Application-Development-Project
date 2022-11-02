@@ -4,13 +4,10 @@
  */
 package com.ebutler.swp.controllers;
 
-import com.ebutler.swp.dao.ProviderDAO;
-import com.ebutler.swp.dto.ProductDetailDTO;
-import com.ebutler.swp.dto.ProviderDTO;
+import com.ebutler.swp.dao.DeliveryDAO;
+import com.ebutler.swp.dto.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,42 +18,35 @@ import javax.servlet.http.HttpSession;
  *
  * @author DELL
  */
-public class Provider_Edit_ProductController extends HttpServlet {
+public class Assign_DeliveryController extends HttpServlet {
 
-    private static final String SUCCESS = "ProductProvider.jsp" ; 
-    private static final String ERROR = "ProductProvider.jsp" ; 
+    private final String SUCCESS = "DeliveryHomeController";
+    private final String ERROR = "delivery_homePage.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR ; 
+        String url = ERROR;
         try {
-            List<ProductDetailDTO> listProduct = new ArrayList() ; 
-            boolean check = false ; 
-            String productName = request.getParameter("ProductName") ;
-            String ProductPrice = request.getParameter("ProductPrice") ;  
-            String Productquantity = request.getParameter("ProductQuantity") ; 
-            String productStatus = request.getParameter("ProductStatus") ;
-            String oldProductStatus = request.getParameter("oldStatus") ;
-            if (productStatus.equals("Choose status")) { 
-                productStatus = oldProductStatus ; 
+            HttpSession session = request.getSession();
+            DeliveryDAO deliveryDAO = new DeliveryDAO();
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            int orderID = Integer.parseInt( request.getParameter("orderID")); 
+            String checkDelivery = deliveryDAO.assignDeliveryChecking(orderID);
+            if (checkDelivery == null) {
+                boolean check = deliveryDAO.assignDelivery(loginUser.getUsername(), orderID);
+                if (check) {
+                    url = SUCCESS;
+
+                }
+            }else if (!checkDelivery.isEmpty()) {
+                url = ERROR ; 
+                session.setAttribute("ERROR_ASSIGN", "This Order Has Been Assigned!!");
             }
-            String productID = request.getParameter("ProductID") ;  
-            HttpSession session = request.getSession() ; 
-            ProviderDAO providerDAO = new ProviderDAO() ; 
-            ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER") ; 
-            check = providerDAO.editProduct(provider, productName, ProductPrice, Productquantity,productStatus ,productID ) ;
-            if (check) {
-                request.setAttribute("SUCCESS_MESS", "Cập nhật sản phẩm thành công");
-                url = SUCCESS ; 
-                listProduct = providerDAO.loadListProduct(provider) ; 
-                session.setAttribute("Provider_ListProduct", listProduct);
-            } else {
-                request.setAttribute("ERROR_MESS", "Cập nhật sản phẩm thất bại");
-            }
-           
+
         } catch (Exception e) {
-        }finally {
-            request.getRequestDispatcher(url).include(request, response);
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

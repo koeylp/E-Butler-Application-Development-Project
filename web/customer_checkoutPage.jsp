@@ -1,3 +1,4 @@
+<%@page import="com.ebutler.swp.dto.ShipperCompanyDTO"%>
 <%@page import="com.ebutler.swp.dto.AddressDTO"%>
 <%@page import="com.ebutler.swp.dto.ServiceCartDTO"%>
 <%@page import="com.ebutler.swp.dto.CityDTO"%>
@@ -96,7 +97,17 @@
                             <div class="nav-item dropdown">
                                 <div class="nav-link">
                                     <div style="width: 1.5rem;" class="img rounded-f">
+                                        <%   if (customer.getAvatar().isEmpty()) {
+                                        %>
                                         <img src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg" alt="">
+                                        <%
+                                        } else {
+                                        %>
+                                        <img src="img/avatars/<%= customer.getAvatar()%>" alt="">
+                                        <%
+                                            }
+                                        %>
+
                                     </div>
                                 </div>
                                 <div class="dropdown-menu rounded-0 flex-col">
@@ -162,301 +173,224 @@
 
 
             <div class="grid m-y-32">
-                <form action="MainController" method="POST">
-                    <div class="grid wide">
-                        <div style="padding: 20px 0; border-top: 1px solid #E5E7EB; border-bottom: 1px solid #E5E7EB;"
-                             class="row">
-                            <div class="col l-5">
-                                <!-- Contact info start -->
+                <div class="grid wide">
+                    <div style="padding: 20px 0; border-top: 1px solid #E5E7EB; border-bottom: 1px solid #E5E7EB;"
+                         class="row">
+                        <div class="col l-5">
+                            <!-- Contact info start -->
+                            <div class="relative m-y-32">
+                                <div style="border: 1px solid #E5E7EB;" class="pad-2 flex-between">
+                                    <div class="flex l-8">
+                                        <div class="flex-center">
+                                            <i class="fa-solid fa-user"></i>
+                                        </div>
+                                        <div style="margin-left: 2rem;" class="flex-col">
+                                            <span class="txt-lg">CONTACT INFO</span>
+                                            <div class="flex-between txt-sm bold">
+                                                <span><%= customer.getName()%></span>
+                                                <span style="margin-left: 1rem;"> <%= customer.getPhone()%></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-center">
+                                        <button type="button" style="--round: .5rem; background-color: #F9FAFB" class="txt-sm bold rounded-f border-no pad-0 change_info">Change</button>
+                                    </div>
+                                </div>
+                                <div style="width: 100%;border: 1px solid #E5E7EB;" class="info_detail detail hide">
+                                    <div class="pad-2">
+                                        <div class="flex-vertical-center m-y-12">
+                                            <h1 class="txt-lg bold">Contact information</h1>
+                                        </div>
+
+                                        <div style="padding: 0;" class="flex-col">
+                                            <div class="flex-horizon-center flex-col m-y-12">
+                                                <span class="txt-md m-y-12">Your phone number</span>
+                                                <input
+                                                    style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
+                                                    class="input txt-sm" type="password">
+                                            </div>
+                                            <div class="flex-horizon-center flex-col m-y-12">
+                                                <span class="txt-md m-y-12">Email address</span>
+                                                <input
+                                                    style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
+                                                    class="input txt-sm" type="password">
+                                            </div>
+                                            <div class="flex-vertical-center">
+                                                <button type="button" class="btn-lg txt-md bold m-y-32">Save and next to shipping</button>
+                                                <button type="button" style="margin-left: 1rem; background-color: #EFEFEF; color: black"
+                                                        class="btn-lg txt-md bold m-y-32 border-no box-shadow-no close_info">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Contact info end -->
+
+                            <!-- Shipping Address start-->
+                            <%
+                                AddressDTO address_default = customer.getAddressDefault();
+
+                                String shipping_address = address_default.getStreet() + ", " + address_default.getDistrict_name() + ", " + address_default.getProvince_name();
+                            %>
+                            <div class="relative m-y-32">
+                                <div style="border: 1px solid #E5E7EB;" class="pad-2 flex-between">
+                                    <div class="flex l-8">
+                                        <div class="flex-center txt-md">
+                                            <i class="fa-solid fa-signs-post"></i>
+                                        </div>
+                                        <div style="margin-left: 2rem;" class="flex-col">
+                                            <span class="txt-lg">SHIPPING ADDRESS</span>
+                                            <div class="flex-between txt-sm bold">
+                                                <span><%=address_default.getStreet()%>, <%=address_default.getDistrict_name()%>, <%=address_default.getProvince_name()%></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-center">
+                                        <button type="button" style="--round: .5rem; background-color: #F9FAFB"
+                                                class="txt-sm bold rounded-f border-no pad-0 change_address">Change</button>
+                                    </div>
+                                </div>
+                                <div style="width: 100%;border: 1px solid #E5E7EB;" class="address_detail detail hide">
+                                    <div class="pad-2">
+                                        <div style="padding: 0;" class="flex-col">
+
+                                            <form action="MainController?action=SelectProvince" method="GET">
+                                                <input type="hidden" name="current_page" value="customer_checkoutPage.jsp">
+                                                <div class="row">
+                                                    <div class="flex-horizon-center flex-col m-y-12 col l-6">
+                                                        <span class="txt-md m-y-12">Province</span>
+                                                        <%
+                                                            ArrayList<ProvinceDTO> province_list = (ArrayList<ProvinceDTO>) session.getAttribute("PROVINCE_LIST");
+                                                            String province_id = (String) request.getAttribute("PROVINCE_ID");
+
+                                                            province_id = (province_id == null) ? "" : province_id;
+                                                        %>
+                                                        <select
+                                                            style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
+                                                            class="input txt-sm" type="password" onchange="this.form.submit()" name="province_id">
+                                                            <option>Select Province</option>
+                                                            <%                                                                    for (ProvinceDTO province : province_list) {
+                                                            %>
+                                                            <option value="<%=province.getId()%>" <%if (province.getId().equals(province_id)) {%>selected<%}%>><%=province.getName()%></option>
+                                                            <%
+                                                                }
+                                                            %>
+
+                                                        </select>
+                                                    </div>
+                                                    <div class="flex-horizon-center flex-col m-y-12 col l-6">
+                                                        <span class="txt-md m-y-12">City</span>
+
+                                                        <%
+                                                            ArrayList<CityDTO> city_list = (ArrayList<CityDTO>) request.getAttribute("CITY_LIST");
+
+                                                            city_list = (city_list == null) ? new ArrayList<CityDTO>() : city_list;
+                                                        %>
+                                                        <select
+                                                            style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
+                                                            class="input txt-sm" type="password" name="city_id">
+                                                            <option>Select City</option>
+                                                            <%
+                                                                for (CityDTO city : city_list) {
+                                                            %>
+                                                            <option value="<%=city.getId()%>"><%=city.getName()%></option>
+                                                            <%
+                                                                }
+                                                            %>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                            <div class="flex-horizon-center flex-col m-y-12">
+                                                <span class="txt-md m-y-12">Address</span>
+                                                <input
+                                                    style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
+                                                    class="input txt-sm" type="text">
+                                            </div>
+                                            <div class="flex-vertical-center">
+                                                <button type="button" class="btn-lg txt-md bold m-y-32">Save and next to shipping</button>
+                                                <button type="button" style="margin-left: 1rem; background-color: #EFEFEF; color: black"
+                                                        class="btn-lg txt-md bold m-y-32 border-no box-shadow-no close_address">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Shipping Address end -->
+                            <form action="MainController" method="POST" class="checkout">
+                                <input type="hidden" name="action" value="Checkout">
+                                <input type="hidden" name="address" value="<%=shipping_address%>">
+                                <input id="total" type="hidden" name="total"/>
+                                <!--Shipping method-->
+                                <%
+                                    if (cart != null) {
+                                        if (!cart.getCart().isEmpty()) {
+                                %>
                                 <div class="relative m-y-32">
                                     <div style="border: 1px solid #E5E7EB;" class="pad-2 flex-between">
-                                        <div class="flex l-8">
-                                            <div class="flex-center">
-                                                <i class="fa-solid fa-user"></i>
+                                        <div class="flex-between">
+                                            <div class="flex-center txt-md">
+                                                <i class="fa-solid fa-truck-fast"></i>
                                             </div>
                                             <div style="margin-left: 2rem;" class="flex-col">
-                                                <span class="txt-lg">CONTACT INFO</span>
+                                                <span class="txt-lg">SHIPPING METHOD</span>
                                                 <div class="flex-between txt-sm bold">
-                                                    <span><%= customer.getName()%></span>
-                                                    <span style="margin-left: 1rem;"> <%= customer.getPhone()%></span>
+                                                    <span>Shipping info</span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="flex-center">
-                                            <button type="button" style="--round: .5rem; background-color: #F9FAFB" class="txt-sm bold rounded-f border-no pad-0 change_info">Change</button>
-                                        </div>
                                     </div>
-                                    <div style="width: 100%;border: 1px solid #E5E7EB;" class="info_detail detail hide">
+
+                                    <div style="width: 100%;border: 1px solid #E5E7EB;" class="">
                                         <div class="pad-2">
-                                            <div class="flex-vertical-center m-y-12">
-                                                <h1 class="txt-lg bold">Contact information</h1>
-                                            </div>
+                                            <div class="flex-around">
+                                                <%
+                                                    ArrayList<ShipperCompanyDTO> company_list = (ArrayList<ShipperCompanyDTO>) request.getAttribute("SHIPPER_COMPANY_LIST");
 
-                                            <div style="padding: 0;" class="flex-col">
-                                                <div class="flex-horizon-center flex-col m-y-12">
-                                                    <span class="txt-md m-y-12">Your phone number</span>
-                                                    <input
-                                                        style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
-                                                        class="input txt-sm" type="password">
+                                                    company_list = (company_list == null) ? new ArrayList<ShipperCompanyDTO>() : company_list;
+
+                                                    for (ShipperCompanyDTO company : company_list) {
+                                                %>
+                                                <div class="flex">
+                                                    <input checked="" id="radio-<%=company.getId()%>" name="shipping" type="radio" value="<%=company.getName()%>" class="m-x-0" required>
+                                                    <div class="flex-center">
+                                                        <label for="radio-<%=company.getId()%>" class="radio-label m-x-0">
+                                                            <div style="width: 2.5rem;" class="img">
+                                                                <img src="<%=company.getLogo()%>" alt="">
+                                                            </div>
+                                                        </label>
+                                                    </div>
                                                 </div>
-                                                <div class="flex-horizon-center flex-col m-y-12">
-                                                    <span class="txt-md m-y-12">Email address</span>
-                                                    <input
-                                                        style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
-                                                        class="input txt-sm" type="password">
-                                                </div>
-                                                <div class="flex-vertical-center">
-                                                    <button type="button" class="btn-lg txt-md bold m-y-32">Save and next to shipping</button>
-                                                    <button type="button" style="margin-left: 1rem; background-color: #EFEFEF; color: black"
-                                                            class="btn-lg txt-md bold m-y-32 border-no box-shadow-no close_info">Cancel</button>
-                                                </div>
+                                                <%
+                                                    }
+                                                %>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Contact info end -->
-                                
-                                <!-- Shipping Address start-->
-
-                                <!-- Shipping Address end -->
-
-
-                            </div>
-
-
-                            <div class="col l-1 m-y-32">
-                                <div style="height: 100%;" class="flex-center">
-                                    <div style="width: 1px; background-color: #E5E7EB; height: 100%;">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col l-6 m-y-32">
-                                <div class="flex-col sticky">
-                                    <div class="flex-between txt-lg bold">
-                                        <span>Order Summary</span>
-                                    </div>
-                                    <!-- Order head product-->
-                                    <div style="background-color: #F9FAFB;" class="pad-1 m-y-12">
-                                        <div class="flex-between flex-verticle-center">
-                                            <span class="txt-lg bold">Product</span>
-
-                                        </div>
-                                    </div>
-                                    <div style="max-height: 320px;" class="product scrollable-y">
-                                        <!-- Order detail -->
-                                        <%
-                                            double sub_product_total = 0;
-                                            if (cart != null) {
-                                                for (ProductDetailDTO product : cart.getCart().values()) {
-                                                    sub_product_total += product.getPrice() * product.getQuantity();
-                                        %>
-                                        <div class="pad-y-12">
-                                            <div class="order-card m-y-12">
-                                                <div class="flex">
-                                                    <div style="margin-left: 10px" class="flex-center order-img">
-                                                        <img src="<%= product.getImage()%>"
-                                                             alt="">
-                                                    </div>
-                                                    <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                                        <div class="flex-between">
-                                                            <div class="flex-col flex-horizon-center">
-                                                                <span class="txt-md bold"><%= product.getName()%></span>
-                                                            </div>
-
-                                                            <div class="order-price txt-sm bold">
-                                                                <span>
-                                                                    $<%= product.getPrice() * product.getQuantity()%>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <div style="height: 50%;" class="flex-end flex-col">
-                                                            <div class="flex-between">
-                                                                <div style="height: 50%;" class="flex-center col-5">
-                                                                    <!--                                                                <button class="btn-circle flex-center txt-xs"
-                                                                                                                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                                                                                                       <i class="fas fa-minus"></i>
-                                                                                                                                    </button>-->
-
-                                                                    <div class="">
-                                                                        <input
-                                                                            style="text-align: center; outline: none; font-weight: bold; border: none;"
-                                                                            min="1" value="<%= product.getQuantity()%>" name="quantity" type="number"
-                                                                            class="form-control" readonly="" />
-                                                                    </div>
-
-                                                                    <!--                                                                <button class=" btn-circle flex-center txt-xs"
-                                                                 </button>-->
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <%
-                                                }
-                                                total += sub_product_total;
-                                            }
-                                        %>
-
-
-                                    </div>
-                                    <!-- Order head service -->
-                                    <div style="background-color: #F9FAFB;" class="pad-1 m-y-12">
-                                        <div class="flex-between flex-verticle-center">
-                                            <span class="txt-lg bold">Service</span>
-
-                                        </div>
-                                    </div>
-
-                                    <div style="max-height: 320px;" class="product scrollable-y">
-                                        <!-- Order detail -->
-                                        <%
-                                            double sub_total_service = 0;
-                                            if (cartService != null) {
-                                                for (ServiceCartDTO service : cartService.getCart().values()) {
-                                                    sub_total_service += service.getPrice();
-                                        %>
-                                        <div class="pad-y-12">
-                                            <div class="order-card m-y-12">
-                                                <div class="flex">
-                                                    <div class="flex-center order-img">
-                                                        <img src="<%= service.getAvatar()%>"
-                                                             alt="">
-                                                    </div>
-                                                    <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                                        <div class="flex-between">
-                                                            <div class="flex-col flex-horizon-center">
-                                                                <span class="txt-md bold"><%= service.getServiceName()%></span>
-                                                            </div>
-                                                            <div class="order-price txt-sm bold">
-                                                                <span>
-                                                                    $<%= service.getPrice()%>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <%
-                                                }
-                                                total += sub_total_service;
-                                            }
-                                        %>
-                                    </div>
-
-                                    <div class="m-y-32">
-                                        <div class="flex-col">
-                                            <div class="flex-between txt-md bold">
-                                                <span>Discount code</span>
-                                            </div>
-                                            <div class="flex-between m-y-12">
-                                                <input style="border-radius: .5rem; flex: 1; margin-right: 1rem" type="text"
-                                                       class="txt-sm p-2">
-                                                <button style="color: white" class="btn-md txt-sm bold">Apply</button>
-                                            </div>
-                                            <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB"
-                                                 class="flex-between txt-sm">
-                                                <span>Order product total</span>
-                                                <span class="bold">$<%= sub_product_total%></span>
-                                            </div>
-                                            <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB"
-                                                 class="flex-between txt-sm">
-                                                <span>Order service total</span>
-                                                <span class="bold">$<%= sub_total_service%></span>
-                                            </div>
-
-                                            <div style="padding: 1rem 0;" class="flex-between txt-lg bold">
-                                                <span>Order total</span>
-                                                <span class="bold">$<%= total%></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--Shipping method-->
-                                    <%
-
-                                        if (cart != null) {
-                                            if (!cart.getCart().isEmpty()) {
-                                    %>
-                                    <div class="relative m-y-32">
-                                        <div style="border: 1px solid #E5E7EB; border-radius: 1rem;" class="pad-2 flex-between">
-                                            <div class="flex-between">
-                                                <div class="flex-center txt-md">
-                                                    <i class="fa-solid fa-signs-post"></i>
-                                                </div>
-                                                <div style="margin-left: 2rem;" class="flex-col">
-                                                    <span class="txt-lg">SHIPPING METHOD</span>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="flex-around m-y-0">
-                                        <div class="flex">
-                                            <input id="radio-1" name="shipping" type="radio" value="shopee" class="m-x-0" required>
-                                            <div class="flex-center">
-                                                <label for="radio-1" class="radio-label m-x-0">
-                                                    <div style="width: 2.5rem;" class="img">
-                                                        <img src="https://static.topcv.vn/company_logos/3hGPe93OfHOUL2QUpNJijMwJ6s0uZ3Gr_1637140440____ea75d9fb6acf791dbeee91c457f6863e.png" alt="">
-                                                    </div>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="flex">   
-                                            <input id="radio-2" name="shipping" type="radio" value="grab" class="m-x-0" required>
-                                            <div class="flex-center">
-                                                <label for="radio-2" class="radio-label m-x-0">
-                                                    <div style="width: 2.5rem;" class="img">
-                                                        <img src="https://cdn.worldvectorlogo.com/logos/grab-2.svg" alt="">
-                                                    </div>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="flex">   
-                                            <input id="radio-2" name="shipping" type="radio" value="be" class="m-x-0" required>
-                                            <div class="flex-center">
-                                                <label for="radio-3" class="radio-label m-x-0">
-                                                    <div style="width: 2.5rem;" class="img">
-                                                        <img src="https://now.edu.vn/wp-content/uploads/2018/12/Be-logo-now-academy-768x768.png" alt="">
-                                                    </div>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <%
-                                            }
+                                <%
                                         }
-                                    %>
+                                    }
+                                %>
 
-
-
-                                    <!-- Payment method start -->
-                                    <div class="relative m-y-32">
-                                        <div style="border: 1px solid #E5E7EB; border-radius: 1rem;" class="pad-2 flex-between">
-                                            <div class="flex-between">
-                                                <div class="flex-center txt-md">
-                                                    <i class="fa-solid fa-signs-post"></i>
-                                                </div>
-                                                <div style="margin-left: 2rem;" class="flex-col">
-                                                    <span class="txt-lg">PAYMENT METHOD</span>
-                                                    <div class="flex-between txt-sm bold">
-                                                        <span>Payment info</span>
-                                                    </div>
-                                                </div>
+                                <!-- Payment method start -->
+                                <div class="relative m-y-32">
+                                    <div style="border: 1px solid #E5E7EB;" class="pad-2 flex-between">
+                                        <div class="flex-between">
+                                            <div class="flex-center txt-md">
+                                                <i class="fa-solid fa-money-bill"></i>
                                             </div>
-                                            <div class="flex-center">
-                                                <button style="--round: .5rem"
-                                                        class="txt-sm bold rounded-f border-no pad-0">Change</button>
+                                            <div style="margin-left: 2rem;" class="flex-col">
+                                                <span class="txt-lg">PAYMENT METHOD</span>
+                                                <div class="flex-between txt-sm bold">
+                                                    <span>Payment info</span>
+                                                </div>
                                             </div>
                                         </div>
-
                                     </div>
-                                    <div style="width: 100%;border: 1px solid #E5E7EB; border-radius: 1rem;" class="bot">
+
+                                    <div style="width: 100%;border: 1px solid #E5E7EB;" class="">
                                         <div class="pad-2">
                                             <div class="flex-around">
                                                 <div class="flex">
@@ -470,7 +404,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex">   
-                                                    <input id="radio-2" name="payment" type="radio" value="COD"  class="m-x-0" required >
+                                                    <input checked id="radio-2" name="payment" type="radio" value="COD"  class="m-x-0" required >
                                                     <div class="flex-center">
                                                         <label for="radio-2" class="radio-label m-x-0">
                                                             <div style="width: 5rem;" class="img">
@@ -483,15 +417,171 @@
                                         </div>
                                         <!-- Payment method end -->
                                     </div>
-                                    <input type="hidden" name="total" value="<%= total%>"/>
-                                    <button type="submit" style="width: 100%;" name="action" value="Checkout" class="btn-lg m-y-12 txt-md">
-                                        Confirm order
-                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col l-1 m-y-32">
+                            <div style="height: 100%;" class="flex-center">
+                                <div style="width: 1px; background-color: #E5E7EB; height: 100%;">
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col l-6 m-y-32">
+                            <div class="flex-col sticky">
+                                <div class="flex-between txt-lg bold">
+                                    <span>Order Summary</span>
+                                </div>
+                                <!-- Order head product-->
+                                <div style="background-color: #F9FAFB;" class="pad-1 m-y-12">
+                                    <div class="flex-between flex-verticle-center">
+                                        <span class="txt-lg bold">Product</span>
+
+                                    </div>
+                                </div>
+                                <div style="max-height: 320px;" class="product scrollable-y">
+                                    <!-- Order detail -->
+                                    <%
+                                        double sub_product_total = 0;
+                                        if (cart != null) {
+                                            for (ProductDetailDTO product : cart.getCart().values()) {
+                                                sub_product_total += product.getPrice() * product.getQuantity();
+                                    %>
+                                    <div class="pad-y-12">
+                                        <div class="order-card m-y-12">
+                                            <div class="flex">
+                                                <div style="margin-left: 10px" class="flex-center order-img">
+                                                    <img src="<%= product.getImage()%>"
+                                                         alt="">
+                                                </div>
+                                                <div style="flex: 1; margin-left: 1rem;" class="flex-col">
+                                                    <div class="flex-between">
+                                                        <div class="flex-col flex-horizon-center">
+                                                            <span class="txt-md bold"><%= product.getName()%></span>
+                                                        </div>
+
+                                                        <div class="order-price txt-sm bold">
+                                                            <span>
+                                                                $<%= product.getPrice() * product.getQuantity()%>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div style="height: 50%;" class="flex-end flex-col">
+                                                        <div class="flex-between">
+                                                            <div style="height: 50%;" class="flex-center col-5">
+                                                                <!--                                                                <button class="btn-circle flex-center txt-xs"
+                                                                                                                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                                                                                                   <i class="fas fa-minus"></i>
+                                                                                                                                </button>-->
+
+                                                                <div class="">
+                                                                    <input
+                                                                        style="text-align: center; outline: none; font-weight: bold; border: none;"
+                                                                        min="1" value="<%= product.getQuantity()%>" name="quantity" type="number"
+                                                                        class="form-control" readonly="" />
+                                                                </div>
+
+                                                                <!--                                                                <button class=" btn-circle flex-center txt-xs"
+                                                             </button>-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%
+                                            }
+                                            total += sub_product_total;
+                                        }
+                                    %>
+
+
+                                </div>
+                                <!-- Order head service -->
+                                <div style="background-color: #F9FAFB;" class="pad-1 m-y-12">
+                                    <div class="flex-between flex-verticle-center">
+                                        <span class="txt-lg bold">Service</span>
+
+                                    </div>
+                                </div>
+
+                                <div style="max-height: 320px;" class="product scrollable-y">
+                                    <!-- Order detail -->
+                                    <%
+                                        double sub_total_service = 0;
+                                        if (cartService != null) {
+                                            for (ServiceCartDTO service : cartService.getCart().values()) {
+                                                sub_total_service += service.getPrice();
+                                    %>
+                                    <div class="pad-y-12">
+                                        <div class="order-card m-y-12">
+                                            <div class="flex">
+                                                <div class="flex-center order-img">
+                                                    <img src="<%= service.getAvatar()%>"
+                                                         alt="">
+                                                </div>
+                                                <div style="flex: 1; margin-left: 1rem;" class="flex-col">
+                                                    <div class="flex-between">
+                                                        <div class="flex-col flex-horizon-center">
+                                                            <span class="txt-md bold"><%= service.getServiceName()%></span>
+                                                        </div>
+                                                        <div class="order-price txt-sm bold">
+                                                            <span>
+                                                                $<%= service.getPrice()%>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%
+                                            }
+                                            total += sub_total_service;
+                                        }
+                                    %>
+                                </div>
+
+                                <div class="m-y-32">
+                                    <div class="flex-col">
+                                        <div class="flex-between txt-md bold">
+                                            <span>Discount code</span>
+                                        </div>
+                                        <div class="flex-between m-y-12">
+                                            <input style="border-radius: .5rem; flex: 1; margin-right: 1rem" type="text"
+                                                   class="txt-sm p-2">
+                                            <button style="color: white" class="btn-md txt-sm bold">Apply</button>
+                                        </div>
+                                        <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB"
+                                             class="flex-between txt-sm">
+                                            <span>Order product total</span>
+                                            <span class="bold">$<%= sub_product_total%></span>
+                                        </div>
+                                        <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB"
+                                             class="flex-between txt-sm">
+                                            <span>Order service total</span>
+                                            <span class="bold">$<%= sub_total_service%></span>
+                                        </div>
+
+                                        <div style="padding: 1rem 0;" class="flex-between txt-lg bold">
+                                            <span>Order total</span>
+                                            <span class="bold">$<%= total%></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button onclick="document.querySelector('#total').value=<%=total%>; document.querySelector('.checkout').submit();" style="width: 100%;" class="btn-lg m-y-12 txt-md">
+                                    Confirm order
+                                </button>
+                            </div>
+
+                        </div>
                     </div>
-                </form>
+                </div>
+
             </div>
 
             <!-- Cart end -->

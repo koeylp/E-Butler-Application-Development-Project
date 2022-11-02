@@ -261,6 +261,10 @@ public class MainController extends HttpServlet {
     //2.UpdateDelivery
     private final String UPDATE_DELIVERY = "Update_Delivery" ; 
     private final String UPDATE_DELIVERY_CONTROLLER = "Update_Delivery_StatusController" ;  
+    //3.Assign Delivery 
+    private final String ASSIGN_NOW ="AssignDelivery" ; 
+    private final String ASSIGN_NOW_CONTROLLER ="Assign_DeliveryController" ; 
+    // ------------DELIVERY--------------------
 
 //    Add review
     private final String ADD_REVIEW = "AddReview";
@@ -269,6 +273,7 @@ public class MainController extends HttpServlet {
 //    Load review
     private final String LOAD_REVIEW = "LoadReview";
     private final String LOAD_REVIEW_CONTROLLER = "LoadingReviewController";
+    
 
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -291,8 +296,8 @@ public class MainController extends HttpServlet {
             } else if (action.equals(GO_TO_PRODUCT_PAGE)) {
                 url = PRODUCT_PAGE_CONTROLLER;
             } else if (action.equals(GO_TO_PRODUCT_DETAIL_BY_TYPE_PAGE)) {
-//                url = PRODUCT_DETAIL_BY_TYPE_CONTROLLER;
-                   url = PRODUCT_DETAIL_BY_TYPE_PAGING_CONTROLLER;
+                url = PRODUCT_DETAIL_BY_TYPE_CONTROLLER;
+//                   url = PRODUCT_DETAIL_BY_TYPE_PAGING_CONTROLLER;
             } else if (action.equals(GO_TO_USER_PROFILE)) {
                 url = GO_TO_USER_PROFILE_CONTROLLER;
             } else if (action.equals(SEARCH_PRODUCT_DETAIL_BY_TYPE)) {
@@ -437,6 +442,8 @@ public class MainController extends HttpServlet {
                 url = DELIVERY_LOAD_DETAIL_CONTROLLER ; 
             }else if (action.equals(UPDATE_DELIVERY)) { 
                 url = UPDATE_DELIVERY_CONTROLLER ; 
+            }else if (action.equals(ASSIGN_NOW)) { 
+                url = ASSIGN_NOW_CONTROLLER ; 
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

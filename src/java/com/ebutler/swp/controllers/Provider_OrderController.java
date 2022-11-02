@@ -44,7 +44,7 @@ public class Provider_OrderController extends HttpServlet {
             }
             if (listOrder != null) {
                 url = SUCCESS ; 
-                 session.setAttribute("Providder_ListOrder", listOrder);
+                 session.setAttribute("Provider_ListOrder", listOrder);
             }
             
         } catch (Exception e) {

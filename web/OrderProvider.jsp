@@ -159,7 +159,7 @@
                         </div>
                         <%
                             List<OrderDTO> orderList = new ArrayList();
-                            orderList = (List<OrderDTO>) session.getAttribute("Providder_ListOrder");
+                            orderList = (List<OrderDTO>) session.getAttribute("Provider_ListOrder");
                             if (orderList.isEmpty()) {
                         %>    
                         <h3 style="text-align: center; color: black ; font-size: 25px ; padding-top: 25px ;">Your Company Don't Serve This Service</h3>
@@ -211,18 +211,18 @@
                                                     <div>
                                                         <%
                                                             int status = order.getStatus();
-                                                            if (status == 1) {
-                                                        %>
-                                                        <span class="badge bg-label-info me-1 changeStatus">InProgress</span>
-                                                        <%
-                                                        } else if (status == 2) {
-
-                                                        %>
-                                                        <span class="badge bg-label-success me-1 changeStatus">Done</span>
-                                                        <% 
-                                                            } else if (status == 0) {
+                                                            if (status == 0) {
                                                         %>
                                                         <span class="badge bg-label-warning me-1 changeStatus">Pending</span>
+                                                        <%
+                                                        } else if (status == 1) {
+
+                                                        %>
+                                                        <span class="badge bg-label-info me-1 changeStatus">InProgress</span>
+                                                        <% 
+                                                            } else if (status == 2) {
+                                                        %>
+                                                        <span class="badge bg-label-success me-1 changeStatus">Done</span>
                                                         <%
                                                             } else if (status == 3) {
                                                         %>

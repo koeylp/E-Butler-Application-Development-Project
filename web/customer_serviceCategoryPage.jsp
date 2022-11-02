@@ -1,3 +1,4 @@
+<%@page import="com.ebutler.swp.dto.CustomerDTO"%>
 <%@page import="com.ebutler.swp.dto.StaffDTO"%>
 <%@page import="com.ebutler.swp.dto.ServiceDTO"%>
 <%@page import="com.ebutler.swp.dto.UserDTO"%>
@@ -45,7 +46,8 @@
     <body>
         <%
             List<ServiceDTO> serviceList = (List<ServiceDTO>) session.getAttribute("CUSTOMER_SERVICE_LIST");
-
+            CustomerDTO customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
+            customer = (customer == null) ? new CustomerDTO() : customer;
             String category_id = (String) session.getAttribute("CATEGORYID");
             String category_name = (String) request.getAttribute("CATEGORY_NAME");
 
@@ -79,9 +81,9 @@
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav ms-auto">
                             <a href="LoadingProductAndServiceCategory" class="nav-item nav-link navigator">Home</a>
-                            <a href="LoadingProductAndServiceCategory#product" class="nav-item nav-link navigator active">Product</a>
+                            <a href="LoadingProductAndServiceCategory#product" class="nav-item nav-link navigator">Product</a>
                             <div class="nav-item dropdown">
-                                <a href="LoadingProductAndServiceCategory#service" class="nav-link navigator">Service</a>
+                                <a href="LoadingProductAndServiceCategory#service" class="nav-link navigator active">Service</a>
                             </div>
                             <a href="LoadingProductAndServiceCategory#help" class="nav-item nav-link navigator">Help</a>
                             <div class="search absolute hide">
@@ -94,7 +96,16 @@
                             <div class="nav-item dropdown">
                                 <div class="nav-link">
                                     <div style="width: 1.5rem;" class="img rounded-f">
+                                        <%   if (customer.getAvatar().isEmpty()) {
+                                        %>
                                         <img src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg" alt="">
+                                        <%
+                                        } else {
+                                        %>
+                                        <img src="img/avatars/<%= customer.getAvatar()%>" alt="">
+                                        <%
+                                            }
+                                        %>
                                     </div>
                                 </div>
                                 <div class="dropdown-menu rounded-0 flex-col">
@@ -208,57 +219,85 @@
                         </div>
 
                         <div class="overlay fixed top bot left right flex-center hide">
-                            <div class="popup relative">
-                                <div style="margin: 1rem 2rem;" class="absolute right p-2 text-md opacity popup-close">
+                            <div class="popup relative pad-2 row">
+                                <div style="margin: -1.5rem 1rem; width: fit-content;"
+                                     class="absolute p-0 right text-md opacity popup-close">
                                     <i class="fa-solid fa-xmark"></i>
                                 </div>
-                                <div style="margin: auto 0;" class="pad-2 scrollable-y full-h">
-                                    <!-- Staff start -->
 
-                                    <%
-                                        for (StaffDTO staff : service.getStaff_list()) {
-                                    %>
-                                    <div style="height: 200px;" class="flex-between border-bot pad-y-1">
-                                        <div class="full-h">
-                                            <div class="img full-h full-w">
-                                                <img src="<%= staff.getAvatar()%>"
-                                                     alt="">
-                                            </div>
+                                <div style="background-color: #F8F8F8; border-radius: .5rem;"
+                                     class="col l-4 flex-center full-h">
+                                    <div style="height: 95%;" class="flex-col flex-vertical-center flex-around">
+                                        <div style="width: 10rem; height: 10rem" class="img">
+                                            <img src="<%=service.getImage()%>"
+                                                 alt="">
                                         </div>
-                                        <div style="flex: 1;" class="flex-col flex-between pad-x-1">
-                                            <div class="flex-vertical-center">
-                                                <span class="txt-sm"><%=category_name%></span>
-                                                <span class="m-x-0">|</span>
-                                                <span class="txt-sm"><%=service.getName()%></span>
-                                            </div>
-                                            <div class="flex-between">
-                                                <div>
-                                                    <span class="txt-lg bold"><%=staff.getName()%></span>
-                                                </div>
-                                                <div class="order-price txt-sm bold col l-2">
-                                                    <span>
-                                                        <%= staff.getPrice()%>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="content flex-between flex-col ">
-                                                <div class="flex-between">
-                                                    <div class="full-w">
-                                                        <button style="background-color: #0F172A; color: white;"
-                                                                class="btn-lg full-w">
-                                                            <a style="color: white" href="MainController?action=AddServiceToCart&service_ID=<%= staff.getStaff_ID()%>" >
-                                                                <i class="fa-solid fa-bag-shopping"></i>
-                                                                <span style="margin-left: .75rem">Booking</span></a>
 
-                                                        </button>
-                                                    </div>
-                                                </div>
+                                        <div class="flex flex-col flex-center full-w">
+                                            <span class="txt-md bold"><%= service.getName()%></span>
+                                            <span class="txt-sm">provider Name</span>
+                                        </div>
+
+                                        <div style="background-color: #F8F8F8; border-radius: .5rem; border: 1px solid #0F172A;"
+                                             class="full-w">
+                                            <div class="pad-0 txt-sm">
+                                                Get ready all the time. Helping you with the best service
                                             </div>
                                         </div>
                                     </div>
-                                    <%
-                                        }
-                                    %>
+                                </div>
+
+                                <div style="height: 80vh;" class="col l-8 scrollable-y">
+                                    <div class="full-h">
+                                        <div style="margin-bottom: 0.5rem;" class="pad-x-1">
+                                            <span style="color: #1D1D1F;" class="txt-md bold">Staff List</span>
+                                        </div>
+
+                                        <div class="row">
+                                            <%
+                                                for (StaffDTO staff : service.getStaff_list()) {
+                                            %>
+                                            <div style="margin-bottom: 1rem;" class="col l-4 relative">
+                                                <div style="background-color: #F8F8F8; border-radius: .5rem; height: 13rem;"
+                                                     class="pad-y-0 flex-col flex-between flex-vertical-center">
+
+                                                    <div class="flex-col flex-vertical-center">
+                                                        <div style="width: 5rem; height: 5rem;" class="img">
+                                                            <img src="<%=staff.getAvatar()%>"
+                                                                 alt="">
+                                                        </div>
+                                                    </div>
+
+                                                    <div style="justify-content: flex-start;" class="full-w m-y-0 pad-x-0">
+                                                        <span class="txt-sm bold ellipsis full-w">
+                                                            <%=staff.getName()%>
+                                                        </span>
+                                                    </div>
+
+                                                    <div class="flex-between full-w pad-x-0">
+                                                        <div class="txt-xs bold full-h flex-center">
+                                                            <span
+                                                                style="color: #4ADE80; border: 1px solid #4ADE80; padding: 0.125rem 0.375rem;">
+                                                                $<%=staff.getPrice()%>
+                                                            </span>
+                                                        </div>
+                                                        <div class="flex">
+                                                            <a href="MainController?action=AddServiceToCart&service_ID=<%= staff.getStaff_ID()%>">
+                                                                <button style="background-color: #0F172A; color: white"
+                                                                        class="txt-xs bold">
+                                                                    Book
+                                                                </button>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <%
+                                                }
+                                            %>
+
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

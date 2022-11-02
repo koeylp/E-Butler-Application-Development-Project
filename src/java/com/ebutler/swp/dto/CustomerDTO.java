@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @author Admin
  */
 public class CustomerDTO {
+
     private String username;
     private String password;
     private String role_id;
@@ -22,7 +23,7 @@ public class CustomerDTO {
     private String avatar;
     private int point;
     private int status;
-    
+
     private ArrayList<AddressDTO> address_list = new ArrayList<AddressDTO>();
 
     public CustomerDTO() {
@@ -39,7 +40,7 @@ public class CustomerDTO {
         this.status = 1;
     }
 
-    public CustomerDTO(String username, String password, String role_id, String phone, String email, String name, int gender, String dob, String avatar, int point,int status) {
+    public CustomerDTO(String username, String password, String role_id, String phone, String email, String name, int gender, String dob, String avatar, int point, int status) {
         this.username = username;
         this.password = password;
         this.role_id = role_id;
@@ -52,6 +53,7 @@ public class CustomerDTO {
         this.point = point;
         this.status = status;
     }
+
     public CustomerDTO(String username, String password, String role_id, String phone, String email, String name, int gender, String dob, String avatar, int status) {
         this.username = username;
         this.password = password;
@@ -161,10 +163,22 @@ public class CustomerDTO {
         this.point = point;
     }
 
+    public AddressDTO getAddressDefault() {
+        AddressDTO address_default = new AddressDTO(); 
+
+        for (AddressDTO address : this.getAddress_list()) {
+            if (address.getStatus() == 1) {
+                address_default = address;
+                break;
+            }
+        }
+        
+        return address_default;
+    }
+
     @Override
     public String toString() {
         return "CustomerDTO{" + "username=" + username + ", password=" + password + ", role_id=" + role_id + ", phone=" + phone + ", email=" + email + ", name=" + name + ", gender=" + gender + ", dob=" + dob + ", avatar=" + avatar + ", point=" + point + ", status=" + status + ", address_list=" + address_list + '}';
     }
-    
-    
+
 }

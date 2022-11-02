@@ -6,12 +6,14 @@ package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.AddressDAO;
 import com.ebutler.swp.dao.CustomerDAO;
+import com.ebutler.swp.dao.ShipperCompanyDAO;
 import com.ebutler.swp.dto.AddressDTO;
 import com.ebutler.swp.dto.CartDTO;
 import com.ebutler.swp.dto.CartServiceDTO;
 import com.ebutler.swp.dto.CityDTO;
 import com.ebutler.swp.dto.CustomerDTO;
 import com.ebutler.swp.dto.ProvinceDTO;
+import com.ebutler.swp.dto.ShipperCompanyDTO;
 import com.ebutler.swp.dto.UserDTO;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,20 +41,18 @@ public class LoadCartDataController extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             if (session != null) {
-                UserDTO currentUser = (UserDTO) session.getAttribute("LOGIN_USER");
-                CustomerDAO dao = new CustomerDAO();
                 AddressDAO addressDao = new AddressDAO();
                 CartDTO cart = (CartDTO) session.getAttribute("CART");
                 CartServiceDTO cartService = (CartServiceDTO) session.getAttribute("CART_SERVICE");
                 ArrayList<ProvinceDTO> province_list = addressDao.SelectProvince();
-//              ArrayList<CityDTO> city_list = addressDao.SelectCity(SUCCESS);
+                
+                ShipperCompanyDAO companyDAO = new ShipperCompanyDAO();
+                ArrayList<ShipperCompanyDTO> company_list = companyDAO.SelectShipperCompany();
 
                 session.setAttribute("CART", cart);
                 session.setAttribute("CART_SERVICE", cartService);
-                CustomerDTO customer = dao.getCurrentCustomer(currentUser.getUsername());
-                session.setAttribute("CURRENT_CUSTOMER", customer);
                 session.setAttribute("PROVINCE_LIST", province_list);
-//                session.setAttribute("CITY_LIST", city_list);
+                request.setAttribute("SHIPPER_COMPANY_LIST", company_list);
 
                 url = SUCCESS;
             }

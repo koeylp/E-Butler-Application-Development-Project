@@ -21,7 +21,7 @@ CREATE TABLE tblUser(
 	[password] nvarchar(30) NOT NULL,
 	role_ID nvarchar(10) NOT NULL,
 	[phone] nvarchar(11),
-	[email] [nvarchar] (30),
+	[email] [nvarchar](30),
 	status [decimal](1)
 )
 
@@ -31,7 +31,7 @@ CREATE TABLE tblCustomer (
 	[username] nvarchar(30) PRIMARY KEY,
 	[password] [nvarchar](30) NOT NULL,
 	[role_ID] [nvarchar](10) REFERENCES tblUserRole(role_ID) NOT NULL,
-	[phone] nvarchar(11) UNIQUE NOT NULL, 
+	[phone] nvarchar(11) NOT NULL, 
 	[email] [nvarchar](30) UNIQUE NOT NULL,
 	[name] nvarchar(30) NOT NULL, 
 	gender [int],
@@ -226,11 +226,26 @@ CREATE TABLE tblAdmin (
 )
 GO
 
---- DELIVERY ---
+--- DELIVERY --
+CREATE TABLE tblShipperCompany (
+	id int IDENTITY(1, 1) PRIMARY KEY,
+	name nvarchar(30) UNIQUE NOT NULL,
+	password nvarchar(30) NOT NULL,
+	logo nvarchar(max),
+)
+
+CREATE TABLE tblShipperCategory (
+	username nvarchar(30) PRIMARY KEY,
+	name nvarchar(30),
+	[status] int
+)
+GO
+
 CREATE TABLE tblShipper (
 	username nvarchar(30) PRIMARY KEY,
 	[password] nvarchar(30),
 	[name] nvarchar(30),
+	nameCategory nvarchar(30) REFERENCES tblShipperCategory(username) ,
 	[status] int
 )
 GO
@@ -239,7 +254,8 @@ CREATE TABLE tblDelivery (
 	id int IDENTITY(1,1) PRIMARY KEY,
 	order_id int REFERENCES tblOrder(order_ID),
 	[address] nvarchar(max),
-	shipper_id nvarchar(30) REFERENCES tblShipper(username),
+	shipper_id nvarchar(30) REFERENCES tblShipperCategory(username), 
+	username_Shipper nvarchar(30) REFERENCES tblShipper(username)  ,
 	[status] int
 )
 GO
@@ -351,6 +367,32 @@ END;
 GO
 
 -------- shipper income ---------
+--DROP TRIGGER trig_shipper_income
+CREATE TRIGGER trig_shipper_income ON tblDelivery
+AFTER UPDATE
+AS
+BEGIN
+	IF (select COUNT(*) from inserted where status = 2) = 0
+	RETURN
+
+	DECLARE @order_date date, @order_id int, @price decimal(12), @shipper_id nvarchar(30)
+	
+	SELECT @order_id = order_id, @shipper_id = 'shopee1' FROM inserted;
+	
+	SELECT @order_date = o.order_date FROM tblOrder o WHERE o.order_ID = @order_id
+	
+	SET @price = (select sum(price) from tblOrder_Product_Detail where order_ID = @order_id)
+	
+	IF (select COUNT(*) from tblShipperIncome sibm where MONTH(@order_date) = sibm.month and YEAR(@order_date) = sibm.year and @shipper_id = 'shopee1') = 0
+	BEGIN
+		INSERT INTO tblShipperIncome(month, year, shipper_id, total) values (MONTH(@order_date), YEAR(@order_date), 'shopee1' ,@price)
+	END
+	ELSE
+	BEGIN
+		UPDATE tblShipperIncome SET total = total + @price WHERE month = MONTH(@order_date) and year = YEAR(@order_date) and shipper_id = 'shopee1'
+	END
+END;
+GO
 
 
 -------------------------------------------------------- INSERT -----------------------------------------------------------------
@@ -1204,13 +1246,15 @@ INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, ima
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','1','Table Knife Gold',50,5, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','1',' Dinner Fork Gold',50,3, 'https://img.christofle.com/image/upload/s--2Wk8N2t9--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/Products/354003_F_pnpdg2.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 
-
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','1','Table Knife Gold',50,5, 'https://img.christofle.com/image/upload/s--1noiI0BK--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/Products/02327012001101_STQ_qvsbbn.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','1',' Dinner Fork Gold',50,3, 'https://img.christofle.com/image/upload/s--2Wk8N2t9--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/Products/354003_F_pnpdg2.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
-
---ADDED FOR TESTING
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','1','Table Knife Gold',50,5, 'https://img.christofle.com/image/upload/s--1noiI0BK--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/Products/02327012001101_STQ_qvsbbn.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
-INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','1',' Dinner Fork Gold',50,3, 'https://img.christofle.com/image/upload/s--2Wk8N2t9--/c_limit,dpr_2.0,f_auto,h_500,q_auto,w_500/Products/354003_F_pnpdg2.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','2','Speckle Rice Bowl White',50,4, 'http://cdn.shopify.com/s/files/1/2270/8601/products/ace6984-hr_vrij_01_grande.png?v=1632137970' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','2','Speckle Rice Bowl Blue',50,3, 'https://assets.kogan.com/images/butlerco/BTR-505m/1-f198e87c17-505m-removebg-preview.png?auto=webp&canvas=340%2C226&fit=bounds&height=226&quality=90&width=340' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','2','Platinum Rim Salad Bowl Ivory',50,8, 'https://cdn.shopify.com/s/files/1/0253/0590/7299/products/312895010059_Plumes_or_Coupe_salade_Individual_salad_bowl_1024x1024@2x.png?v=1622543521' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','2','Botanical Salad Bowl Green',50,7, 'https://chairish-prod.freetls.fastly.net/image/product/master/f7dab701-5b6b-44f9-9abc-70f743e60edf/1990s-mikasa-queens-garden-ivy-leaf-pattern-salad-serving-set-5-pieces-1865' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('homefurniture','2','Regale Soup Bowl Black & Gold',50,6, 'https://sslimages.shoppersstop.com/sys-master/images/h75/hd2/8899184197662/9633369_9999.png_2000Wx3000H' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','2','Polka Soup Bowl',50,5, 'https://cdn.shopify.com/s/files/1/1317/9515/products/IMG_20150929_210249_edit_1024x1024@2x.png?v=1536599901' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','2','Nurina Cereal Bowl Dcream',50,7, 'https://www.seekpng.com/png/detail/990-9900037_800-x-596-8-cereal-bowl-with-cereal.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','2','Wooden Bowl',50,5, 'https://lofory.com/wp-content/uploads/2021/11/Natural-Wooden-Salad-Bowl-6.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
+INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','2','Ceramic Bowl',50,12, 'https://static.vecteezy.com/system/resources/previews/009/664/965/non_2x/empty-porcelain-ceramic-bowl-on-transparent-background-file-free-png.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 ---------------
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','3','Ferric Iron Fry Pan',50,9, 'https://hellokitchen.com.au/wp-content/uploads/2021/09/PC220312-2.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
 INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES ('minhchau','3','Ferric Cast Iron Kadai Black',50,9, 'https://mrbutlers.com/pub/media/catalog/product/cache/cf2a296d1dbef50483d61587672f6c7d/p/n/pngs-fileartboard-7_1.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' ,1 )
@@ -1615,9 +1659,9 @@ INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, ima
 --Bảng loại dịch vụ theo nhóm 
 
 INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('HC', 'Home Cleaning', 'https://www.pngkey.com/png/full/224-2244033_whether-you-need-my-cleaning-services-for-your.png')
-INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('HI', 'Home Improvement', 'https://thumbs.dreamstime.com/z/couple-living-room-avatar-character-vector-illustration-desing-couple-living-room-avatar-character-145224593.jpg')
-INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('PBS', 'Plumbers', 'https://thumbs.dreamstime.com/z/set-flat-bright-vector-elements-items-modern-stylish-bathroom-interior-construction-bath-shampoo-toilet-towels-68381087.jpg')
-INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('IT', 'IT Service', 'https://thumbs.dreamstime.com/z/set-flat-bright-vector-elements-items-modern-stylish-bathroom-interior-construction-bath-shampoo-toilet-towels-68381087.jpg')
+INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('HI', 'Home Improvement', 'https://rothfield.com.au/wp-content/uploads/2021/06/Rothfield_3PL_Hero-Banner-.png')
+INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('PBS', 'Plumbers', 'https://static.wixstatic.com/media/403b64_dc829afea69b46108304d88808cfe46e~mv2.png/v1/fill/w_416,h_350,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Yelm-Plumbing-and-Pumps-Sewer-Line-Repai.png')
+INSERT INTO tblServiceCategory(category_ID, name, image) VALUES ('IT', 'IT Service', 'https://www.pngplay.com/wp-content/uploads/13/Software-IT-Services-Transparent-Background.png')
 
 --Bảng loại dịch vụ 
 
@@ -1861,10 +1905,75 @@ INSERT INTO tblUser(username, password, role_ID, phone, email, status)
 VALUES('hello', '1', 'CUS', '0123456789', 'hello@gmail.com', 1)
 
 --- bảng delivery ---
-insert into tblShipper(username, password, name, status) values ('grab', '1', 'Grab', 1)
-insert into tblShipper(username, password, name, status) values ('shopee', '1', 'Shopee Express', 1)
-insert into tblShipper(username, password, name, status) values ('be', '1', 'Be', 1)
+insert into tblShipperCategory(username , name, status) values ('grab', 'Grab', 1)
+insert into tblShipperCategory(username , name, status) values ('shopee', 'Shopee Express', 1)
+insert into tblShipperCategory(username, name, status) values ('be', 'Be', 1)
+SELECT * FROM tblShipper
+SELECT * FROM tblUser
+INSERT INTO tblDelivery VALUES ('1', 'aaaa','shopee',null , 1)
 
+select * from tblUser
+
+INSERT INTO tblShipper(username, password, name, nameCategory, status) VALUES ('grap1','1','Nguyen Van A','grab',1)
+INSERT INTO tblShipper(username, password, name, nameCategory, status) VALUES ('grap2','1','Nguyen Anh Tuan','grab',1)
+INSERT INTO tblShipper(username, password, name, nameCategory, status) VALUES ('grap3','1','Nguyen Thi Hong','grab',1)
+INSERT INTO tblShipper(username, password, name, nameCategory, status) VALUES ('grap4','1','Nguyen Manh Quang','grab',1)
+INSERT INTO tblShipper(username, password, name, nameCategory, status) VALUES ('grap5','1','Le Ba Hau','grab',1)
+
+INSERT INTO tblShipper(username, password, name, nameCategory, status) VALUES ('shopee1','1','Nguyen Van Hoa','shopee',1)
+INSERT INTO tblShipper(username, password, name, nameCategory, status) VALUES ('shopee2','1','Nguyen Anh Tuan Hiep','shopee',1)
+INSERT INTO tblShipper(username, password, name, nameCategory, status) VALUES ('shopee3','1','Nguyen Thi Cam','shopee',1)
+INSERT INTO tblShipper(username, password, name, nameCategory, status) VALUES ('shopee4','1','Nguyen Manh Quang Anh','shopee',1)
+INSERT INTO tblShipper(username, password, name, nameCategory, status) VALUES ('shopee5','1','Le Ba Hung','shopee',1)
+
+INSERT INTO tblShipper(username, password, name, nameCategory, status) VALUES ('shoppe1','1','Nguyen Van A','grab',1)
+INSERT INTO tblShipper(username, password, name, nameCategory, status) VALUES ('shoppe2','1','Nguyen Anh Tuan','grab',1)
+INSERT INTO tblShipper(username, password, name, nameCategory, status) VALUES ('shoppe3','1','Nguyen Thi Hong','grab',1)
+INSERT INTO tblShipper(username, password, name, nameCategory, status) VALUES ('shoppe4','1','Nguyen Manh Quang','grab',1)
+INSERT INTO tblShipper(username, password, name, nameCategory, status) VALUES ('shoppe5','1','Le Ba Hau','grab',1)
+
+---- bảng shipper company -----
+insert into tblShipperCompany (name, password, logo) values ('shopee', '1', 'https://static.topcv.vn/company_logos/3hGPe93OfHOUL2QUpNJijMwJ6s0uZ3Gr_1637140440____ea75d9fb6acf791dbeee91c457f6863e.png')
+insert into tblShipperCompany (name, password, logo) values ('grab', '1', 'https://cdn.worldvectorlogo.com/logos/grab-2.svg')
+insert into tblShipperCompany (name, password, logo) values ('bee', '1', 'https://now.edu.vn/wp-content/uploads/2018/12/Be-logo-now-academy-768x768.png')
+
+UPDATE tblDelivery SET username_Shipper = 'shoppe1' WHERE order_id = '1'
+
+SELECT * FROM tblShipper
 --- bảng shipper ---
 SELECT * FROM tblProductDetail
 SELECT * FROM tblOrder_Product_Detail
+SELECT * FROM tblOrder
+SELECT * FROM tblDelivery
+SELECT * FROM tblReviewProduct
+SELECT * FROM tblOrder_Product_Detail WHERE order_ID = 2 AND status = 3
+SELECT * FROM tblOrder_Product_Detail WHERE order_ID = 2
+select * from tblDelivery
+
+SELECT * FROM tblShipper
+DELETE tblOrder
+SELECT * FROM tblShipper
+SELECT * FROM tblShipperCategory
+SELECT * FROM tblShipperIncome
+DELETE tblOrder_Product_Detail 
+DELETE tblDelivery
+SELECT * FROM tblDelivery
+--SELECT De.order_id, De.address,De.username_Shipper ,Ord.order_Date,Ord.customer_ID, Cus.name,Ord.total, De.status FROM (tblDelivery De JOIN tblOrder Ord ON De.order_id = Ord.order_ID) JOIN tblCustomer Cus ON Cus.username = Ord.customer_ID WHERE Ord.shipping = ? 
+
+
+SELECT * from tblUser WHERE username LIKE 'shoppe1' AND password LIKE '1' AND status = 1
+--SELECT De.order_id, De.address,De.username_Shipper ,Ord.order_Date,Ord.customer_ID, Cus.name,Ord.total, De.status FROM (tblDelivery De JOIN tblOrder Ord ON De.order_id = Ord.order_ID) JOIN tblCustomer Cus ON Cus.username = Ord.customer_ID WHERE Ord.shipping = ?
+
+SELECT De.order_id, De.address,De.username_Shipper ,Ord.order_Date,Ord.customer_ID, Cus.name,Ord.total, De.status FROM (tblDelivery De JOIN tblOrder Ord ON De.order_id = Ord.order_ID) JOIN tblCustomer Cus ON Cus.username = Ord.customer_ID WHERE Ord.shipping = 'shopee1'
+SELECT nameCategory FROM tblShipper WHERE username = 'shopee1'
+
+SELECT OPD.id, De.order_id, PD.name, OPD.quantity, PD.price, OPD.status FROM ( tblDelivery De JOIN tblOrder_Product_Detail OPD ON De.order_id = OPD.order_ID ) JOIN tblProductDetail PD ON PD.id = OPD.product_detail_ID  WHERE De.order_id = '1' AND De.shipper_id =  'shopee'
+
+
+--SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total , Ord.shipping, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = ?
+
+SELECT detail.id, detail.provider_ID, detail.product_ID, detail.name, detail.quantity, detail.price, detail.image, detail.description, detail.status FROM tblProduct product JOIN tblProductDetail detail on product.product_ID = detail.product_ID JOIN tblProductCategory cate ON cate.category_ID = product.category_ID 
+WHERE cate.category_ID = 'KC' AND product.product_ID = 3 ORDER BY id asc OFFSET 12 ROWS FETCH FIRST 12 ROWS ONLY
+
+--UPDATE tblDelivery SET username_Shipper = ? WHERE order_id = ?
+SELECT username_Shipper FROM tblDelivery WHERE order_id = '1'

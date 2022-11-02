@@ -69,20 +69,17 @@ public class LoginController extends HttpServlet {
             if (province_list != null) {
                 session.setAttribute("PROVINCE_LIST", province_list);
             }
-
             if (login_user.getRole_id().equals(CUS_ROLE)) {
                 CustomerDAO dao = new CustomerDAO();
                 CustomerDTO customer = dao.getCurrentCustomer(login_user.getUsername());
-                
-                ArrayList<AddressDTO> list_address = addressDAO.SelectAddress(login_user.getUsername());
 
+                ArrayList<AddressDTO> list_address = addressDAO.SelectAddress(login_user.getUsername());
                 customer.setAddress_list(list_address);
                 session.setAttribute("CURRENT_CUSTOMER", customer);
                 url = CUS_PAGE;
-            }else if (login_user.getRole_id().equals(SHIP_ROLE)) {
+            } else if (login_user.getRole_id().equals(SHIP_ROLE)) {
                 url = SHIP_PAGE;
-            }  
-            else if (userDAO.Login(username, password).getRole_id().equals(PRO_ROLE)) {
+            } else if (userDAO.Login(username, password).getRole_id().equals(PRO_ROLE)) {
                 session.setAttribute("LOGIN_PROVIDER", provider);
                 ProviderDAO providerDAO = new ProviderDAO();
                 List<ProductDetailDTO> listProduct = providerDAO.loadListProduct(provider);

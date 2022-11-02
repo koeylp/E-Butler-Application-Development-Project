@@ -45,6 +45,7 @@
         <!-- CSS -->
         <link rel="stylesheet" href="./css/base.css" />
         <link rel="stylesheet" href="./css/guestPage.css" />
+        <link rel="stylesheet" href="./css/my_toast.css" />
     </head>
 
     <body>
@@ -56,6 +57,7 @@
             service_error = (service_error == null) ? new ServiceErrorDTO() : service_error;
         %>
         <div class="container-xxl">
+
             <div class="container-fluid nav-bar bg-white px-0">
 
                 <form action="MainController" method="post">
@@ -306,10 +308,9 @@
                             </form>
                         </div>
 
-                        <div class="">
-                            <a href="#AddProduct" class="btn btn-primary">+
-                                Add
-                                Service</a>
+                        <div class="add-item">
+                            <a class="btn btn-primary">+
+                                Add Service</a>
                         </div>
 
                     </div>
@@ -353,7 +354,7 @@
                                         </td>
                                         <td>
                                             <img class="img-product"
-                                                 src=<%= service.getImage() %> alt="">
+                                                 src=<%= service.getImage()%> alt="">
                                         </td>
                                         <td> <input class="form-control me-2 priceData" type="text" name="ServicePrice" value="<%= service.getPrice()%>" />
                                             <input type="hidden" name="oldServicePrice" value="<%= service.getPrice()%> " />
@@ -414,16 +415,23 @@
                         }
                     %>
 
-                    <div id="AddProduct" class="Cont"> 
-                        <div class="modal-dialog modal-dialog-centered" role="document">
+                    <%
+                        String cur_form = request.getParameter("cur_form");
+
+                        cur_form = (cur_form == null) ? "" : cur_form;
+                    %>
+
+                    <div style="z-index: 999999;" class="add-modal overlay fixed top left right bot <%if (!cur_form.equals("add-modal")) {%>hide<%}%>"> 
+                        <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" >Add Service</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <button type="button" class="btn-close close-modal"></button>
                                 </div>
 
                                 <div class="modal-body">
                                     <form action="MainController" method="POST" id="form3"> 
+                                        <input type="hidden" name="cur_form" value="add-modal"/>
                                         <div class="row">
                                             <div class="col mb-3">
                                                 <label for="category" class="form-label ">Category</label> 
@@ -552,7 +560,7 @@
 
         </div>
         <!-- Footer Start -->
-        <div class="container-fluid bg-dark text-white-50 footer pt-5  wow fadeIn" data-wow-delay="0.1s">
+        <div class="container-fluid bg-dark text-white-50 footer pt-5  wow fadeIn relative" data-wow-delay="0.1s">
             <div class="container py-5">
                 <div class="row g-5">
                     <div class="col-lg-3 col-md-6">
@@ -616,12 +624,23 @@
                 </div>
             </div>
         </div>
-
     </div>
 
+    <%
+        String messageSuccess = (String) request.getAttribute("SUCCESS_MESS");
+        String messageError = (String) request.getAttribute("ERROR_MESS");
 
+        messageSuccess = (messageSuccess == null) ? "" : messageSuccess;
+        messageError = (messageError == null) ? "" : messageError;
 
+        if (!messageSuccess.isEmpty() || !messageError.isEmpty()) {
+    %>
+    <div id="my-toast">
 
+    </div>
+    <%
+        }
+    %>   
 
 
 
@@ -650,6 +669,73 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    <script src="./js/provider.js"></script>
+
+    <script language="javascript">
+                                    const main = document.getElementById("my-toast");
+                                    if (main) {
+                                        const duration = 2000;
+                                        const toast = document.createElement("div");
+                                        // Auto remove toast
+                                        const autoRemoveId = setTimeout(function () {
+                                            main.removeChild(toast);
+                                        }, duration + 1000);
+                                        // Remove toast when clicked
+                                        toast.onclick = function (e) {
+                                            if (e.target.closest(".my-toast__close")) {
+                                                main.removeChild(toast);
+                                                clearTimeout(autoRemoveId);
+                                            }
+                                        };
+
+        <%
+            if (messageError.isEmpty() && !messageSuccess.isEmpty()) {
+        %>
+                                        toast.classList.add("my-toast", `my-toast--success`, "showing");
+
+                                        toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
+
+                                        toast.innerHTML =
+                                                `<div class="my-toast__icon">
+            <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="my-toast__body">
+            <h3 class="my-toast__title">Thành công</h3>
+                <p class="my-toast__msg"><%=messageSuccess%></p>
+                </div>
+            <div class="my-toast__close">
+            <i class="fas fa-times"></i>
+            </div>
+                    `;
+
+        <%
+            }
+        %>
+
+        <%
+            if (!messageError.isEmpty() && messageSuccess.isEmpty()) {
+        %>
+                                        toast.classList.add("my-toast", `my-toast--error`, "showing");
+                                        toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
+                                        toast.innerHTML =
+                                                `<div class="my-toast__icon">
+            <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="my-toast__body">
+            <h3 class="my-toast__title">Thất bại</h3>
+                <p class="my-toast__msg"><%=messageError%></p>
+                </div>
+            <div class="my-toast__close">
+            <i class="fas fa-times"></i>
+            </div>
+            `;
+        <%
+            }
+        %>
+                                        main.appendChild(toast);
+                                    }
+    </script>
 </body>
 
 </html>

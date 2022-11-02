@@ -4,68 +4,74 @@
  */
 package com.ebutler.swp.controllers;
 
-import com.ebutler.swp.dao.DeliveryDAO;
-import com.ebutler.swp.dao.ProviderDAO;
-import com.ebutler.swp.dao.UserDAO;
-import com.ebutler.swp.dto.OrderDetailDTO;
-import com.ebutler.swp.dto.OrderDetailInfoDTO;
+import com.ebutler.swp.dao.CustomerDAO;
+import com.ebutler.swp.dto.CustomerDTO;
 import com.ebutler.swp.dto.UserDTO;
+import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.TimeUnit;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 /**
  *
- * @author DELL
+ * @author thekh
  */
-public class Delivery_Order_DetailController extends HttpServlet {
+@MultipartConfig
+@WebServlet(name = "UploadPhotoController", urlPatterns = {"/UploadPhotoController"})
+public class UploadPhotoController extends HttpServlet {
 
-    private final String SUCCESS = "delivery_detail.jsp";
-    private final String ERROR = "delivery_homePage.jsp";
+    private final static String ERROR = "errorPage.jsp";
+    private final static String SUCCESS = "MainController?action=GoToUserProfile&current_form=account";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+
             HttpSession session = request.getSession();
-            ProviderDAO providerDAO = new ProviderDAO();
-            DeliveryDAO deliveryDAO = new DeliveryDAO();
-            List<OrderDetailInfoDTO> listDetailInfo = new ArrayList();
-            List<OrderDetailDTO> listOrder = new ArrayList();
-            UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
-            int orderID = Integer.parseInt(request.getParameter("orderID"));
-            String customerID = (String) session.getAttribute("customerID");
-            String checkDelivery = deliveryDAO.assignDeliveryChecking(orderID);
-            if (user.getUsername().equals(checkDelivery)) {
-                if (customerID == null) {
-                    customerID = request.getParameter("customerID");
+            if (session != null) {
+                UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
+
+                CustomerDAO cusDao = new CustomerDAO();
+
+                String uploadPath = getServletContext().getRealPath("") + File.separator + "img" + File.separator + "avatars";
+                File uploadDir = new File(uploadPath);
+
+                String newPath = "";
+                if (uploadPath.contains(File.separator + "build")) {
+                    newPath = uploadPath.replace(File.separator + "build", "");
+                }
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdir();
                 }
 
-                listDetailInfo = providerDAO.loadOrderInfo(orderID, customerID);
-                String userDetail = (String) session.getAttribute("ShippingDetail");
-                listOrder = deliveryDAO.loadOrderDetail(orderID, userDetail);
-                if (listOrder != null) {
+                Part part = request.getPart("file");
+                String fileName = part.getSubmittedFileName();
+                part.write(newPath + File.separator + fileName);
+
+//                String fileName = part.getSubmittedFileName();
+                if (cusDao.uploadPhoto(user.getUsername(), fileName)) {
+                    CustomerDTO customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
+                    customer.setAvatar(fileName);
+                
+                    TimeUnit.SECONDS.sleep(2);
                     url = SUCCESS;
-                    session.setAttribute("Delivery_Detail", listOrder);
-                    session.setAttribute("Info_Detail_Delivery", listDetailInfo);
-                    session.setAttribute("customerID", customerID);
                 }
-            } else {
-                session.setAttribute("ERROR_ASSIGN", "This Order Has Been Assigned!!"); 
-            }
 
+            }
         } catch (Exception e) {
+            log("Error at UploadPhotoController: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
