@@ -227,28 +227,18 @@ CREATE TABLE tblAdmin (
 GO
 
 --- DELIVERY --
-CREATE TABLE tblShipperCompany (
-	id int IDENTITY(1, 1) PRIMARY KEY,
-	name nvarchar(30) UNIQUE NOT NULL,
-	password nvarchar(30) NOT NULL,
-	logo nvarchar(max),
-)
-
-CREATE TABLE tblShipperCategory (
-	username nvarchar(30) PRIMARY KEY,
-	name nvarchar(30),
-	[status] int
-)
-GO
-
 CREATE TABLE tblShipper (
 	username nvarchar(30) PRIMARY KEY,
 	[password] nvarchar(30),
 	[name] nvarchar(30),
-	nameCategory nvarchar(30) REFERENCES tblShipperCategory(username) ,
 	[status] int
 )
 GO
+
+CREATE TABLE tblShipperWallet (
+	[shipper_id] nvarchar(30) PRIMARY KEY,
+	total int
+)
 
 CREATE TABLE tblDelivery (
 	id int IDENTITY(1,1) PRIMARY KEY,
@@ -1933,10 +1923,6 @@ INSERT INTO tblShipper(username, password, name, nameCategory, status) VALUES ('
 INSERT INTO tblShipper(username, password, name, nameCategory, status) VALUES ('shoppe5','1','Le Ba Hau','grab',1)
 
 ---- bảng shipper company -----
-insert into tblShipperCompany (name, password, logo) values ('shopee', '1', 'https://static.topcv.vn/company_logos/3hGPe93OfHOUL2QUpNJijMwJ6s0uZ3Gr_1637140440____ea75d9fb6acf791dbeee91c457f6863e.png')
-insert into tblShipperCompany (name, password, logo) values ('grab', '1', 'https://cdn.worldvectorlogo.com/logos/grab-2.svg')
-insert into tblShipperCompany (name, password, logo) values ('bee', '1', 'https://now.edu.vn/wp-content/uploads/2018/12/Be-logo-now-academy-768x768.png')
-
 UPDATE tblDelivery SET username_Shipper = 'shoppe1' WHERE order_id = '1'
 
 SELECT * FROM tblShipper
