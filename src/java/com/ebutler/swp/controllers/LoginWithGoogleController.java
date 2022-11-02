@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "LoginWithGoogleController", urlPatterns = {"/LoginWithGoogleController"})
 public class LoginWithGoogleController extends HttpServlet {
 
-    private static final String ERROR = "errorPage.jsp";
+    private static final String ERROR = "LoadingProductAndServiceCategory";
     private static final String SUCCESS = "LoadingProductAndServiceCategory";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -40,7 +40,7 @@ public class LoginWithGoogleController extends HttpServlet {
             CustomerDTO customer = new CustomerDTO();
             if (!code.isEmpty()) {
                 HttpSession session = request.getSession();
-                String accessToken = GoogleUtils.getToken(code);
+                String accessToken = GoogleUtils.getToken(code); // BUG here
                 GoogleUserDTO googleUser = GoogleUtils.getUserInfo(accessToken);
 
                 String username = googleUser.getName();
@@ -72,8 +72,8 @@ public class LoginWithGoogleController extends HttpServlet {
                     session.setAttribute("CURRENT_CUSTOMER", customer);
                     url = SUCCESS;
                 }
-
             }
+
         } catch (Exception e) {
             log("Error at LoginGoogleController: " + e.toString());
         } finally {
