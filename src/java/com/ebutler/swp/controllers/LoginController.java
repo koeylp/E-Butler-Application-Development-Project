@@ -60,8 +60,6 @@ public class LoginController extends HttpServlet {
 
             HttpSession session = request.getSession();
             session.setAttribute("LOGIN_USER", login_user);
-            ProviderDAO providerdao = new ProviderDAO();
-            ProviderDTO provider = providerdao.getProvider(username, password);
 
             AddressDAO addressDAO = new AddressDAO();
             ArrayList<ProvinceDTO> province_list = addressDAO.SelectProvince();
@@ -80,6 +78,8 @@ public class LoginController extends HttpServlet {
             } else if (login_user.getRole_id().equals(SHIP_ROLE)) {
                 url = SHIP_PAGE;
             } else if (userDAO.Login(username, password).getRole_id().equals(PRO_ROLE)) {
+                ProviderDAO providerdao = new ProviderDAO();
+                ProviderDTO provider = providerdao.getProvider(username, password);
                 session.setAttribute("LOGIN_PROVIDER", provider);
                 ProviderDAO providerDAO = new ProviderDAO();
                 List<ProductDetailDTO> listProduct = providerDAO.loadListProduct(provider);

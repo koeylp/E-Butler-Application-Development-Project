@@ -28,7 +28,7 @@ public class ProviderDAO {
 
     private final String INSERT = "INSERT tblProvider (username, password, role_ID, phone, email, name, logo, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     private final String LIST_PRODUCT = "SELECT id , name , image , price , quantity , description , status  FROM tblProductDetail WHERE provider_ID = ? ";
-    private final String GET_PROVIDER_INFO = "SELECT username, password , role_ID , phone, email , name , logo , status FROM tblProvider WHERE username = ? AND password = ?";
+    private static final String GET_PROVIDER_INFO = "SELECT username, password , role_ID , phone, email , name , logo , status FROM tblProvider WHERE username = ? AND password = ?";
     private final String LIST_SERVICE = "SELECT DISTINCT SD.name , SC.name ,S.image ,S.name , SD.price , SD.status   FROM ( tblServiceDetail SD JOIN tblService S ON SD.service_ID = S.service_ID ) JOIN tblServiceCategory SC "
             + "ON SC.category_ID = S.category_ID WHERE SD.provider_ID = ?";
     private final String SEARCH_PRODUCT = "SELECT id , name , image , price , quantity , description , status  FROM tblProductDetail WHERE provider_ID = ? AND name like ? ";
@@ -167,7 +167,7 @@ public class ProviderDAO {
         return check;
     }
 
-    public ProviderDTO getProvider(String username, String password) throws SQLException {
+    public static ProviderDTO getProvider(String username, String password) throws SQLException {
         ProviderDTO provider = new ProviderDTO();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -1363,20 +1363,20 @@ public class ProviderDAO {
     }
 
     public static void main(String[] args) throws SQLException {
-        ProviderDAO dao = new ProviderDAO();
-        boolean check = false;
-        boolean check1 = false;
-        ProviderDTO provider = new ProviderDTO();
-        provider = dao.getProvider("provider2", "1");
+//        ProviderDAO dao = new ProviderDAO();
+//        boolean check = false;
+//        boolean check1 = false;
+//        ProviderDTO provider = new ProviderDTO();
+//        provider = dao.getProvider("provider2", "1");
 //        for (OrderDetailInfoDTO providerServiceDTO1 : listOrder) { 
 //            System.out.println(providerServiceDTO1.toString());
 //        }
-        List<OrderDTO> listOrder = new ArrayList();
-        listOrder = dao.loadListOrder(provider);
-        for (OrderDTO orderDTO : listOrder) {
-            System.out.println(orderDTO.toString());
-        }
-
+//        List<OrderDTO> listOrder = new ArrayList();
+//        listOrder = dao.loadListOrder(provider);
+//        for (OrderDTO orderDTO : listOrder) {
+//            System.out.println(orderDTO.toString());
+//        }
 //        System.out.println(check);
+        System.out.println(getProvider("provider1", "1").getUsername());
     }
 }
