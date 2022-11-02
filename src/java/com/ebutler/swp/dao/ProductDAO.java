@@ -581,6 +581,10 @@ public class ProductDAO {
         return 0;
     }
     public static void main(String[] args) throws SQLException {
+       List<ProductDetailDTO> list = getPagingProductDetail("KC", "3", 1);
        
+        for (ProductDetailDTO x : list) {
+            System.out.println(x);
+        }
     }
 }
