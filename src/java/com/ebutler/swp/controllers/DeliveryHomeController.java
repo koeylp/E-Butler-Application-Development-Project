@@ -8,7 +8,6 @@ import com.ebutler.swp.dao.DeliveryDAO;
 import com.ebutler.swp.dto.DeliveryDTO;
 import com.ebutler.swp.dto.UserDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;

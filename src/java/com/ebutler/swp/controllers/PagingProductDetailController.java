@@ -51,6 +51,9 @@ public class PagingProductDetailController extends HttpServlet {
             session.setAttribute("PRODUCT_DETAIL_BY_TYPE", list);
 
             int numberPageProductDetail = dao.getNumberPageProductDetail(category_ID, productID);
+            if(numberPageProductDetail == 1){
+                numberPageProductDetail = 0;
+            }
 //            List<ProductDetailDTO> list1 = dao.getListProductByPlaceDetail(category_ID, productID);
 //            
 //            session.setAttribute("PRODUCT_DETAIL_BY_TYPE", list);

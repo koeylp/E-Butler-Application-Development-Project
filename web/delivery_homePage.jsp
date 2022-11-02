@@ -197,30 +197,30 @@
                                 </div>
                             </li>
                             <li class="icons dropdown">
-                                <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
+                                <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                                     <span class="activity active"></span>
                                     <img src="images/user/1.png" height="40" width="40" alt="">
                                 </div>
                                 <form action="MainController" method="Post">
-                                <div class="drop-down dropdown-profile   dropdown-menu">
-                                    <div class="dropdown-content-body">
-                                        <ul>
-                                            <li>
-                                                <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
-                                            </li>
-                                            <li>
-                                                <a href="email-inbox.html"><i class="icon-envelope-open"></i> <span>Inbox</span> <div class="badge gradient-3 badge-pill badge-primary">3</div></a>
-                                            </li>
+                                    <div class="drop-down dropdown-profile   dropdown-menu">
+                                        <div class="dropdown-content-body">
+                                            <ul>
+                                                <li>
+                                                    <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="email-inbox.html"><i class="icon-envelope-open"></i> <span>Inbox</span> <div class="badge gradient-3 badge-pill badge-primary">3</div></a>
+                                                </li>
 
-                                            <hr class="my-2">
-                                            <li>
-                                                <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
-                                            </li>
-                                            <li> <button class="dropdown-item"  name="action" value="LogoutProvider" ><i class="bx bx-log-out m-2"></i>Logout</button></li>
-                                        </ul>
+                                                <hr class="my-2">
+                                                <li>
+                                                    <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
+                                                </li>
+                                                <li> <button class="dropdown-item"  name="action" value="LogoutProvider" ><i class="bx bx-log-out m-2"></i>Logout</button></li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                                    </form>
+                                </form>
                             </li>
                         </ul>
                     </div>
@@ -251,7 +251,7 @@
                     </div>
                 </div> -->
                 <!-- row -->
-                
+
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
@@ -274,28 +274,28 @@
                                             </thead>
                                             <h4 style="color: red" >${sessionScope.ERROR_ASSIGN}</h4>
                                             <tbody>
-                                                <%                                                int count = 1;
+                                                <%                                                    int count = 1;
                                                     for (DeliveryDTO delivery : listDelivery) {
                                                         count++;
 
                                                 %>
                                             <form action="MainController" method="Get">
                                                 <tr>
-                                                    
-                                                    <td class="txt-sm"><%= delivery.getOrderID() %></td>
+
+                                                    <td class="txt-sm"><%= delivery.getOrderID()%></td>
                                                     <td class="txt-sm"><%= delivery.getAddress()%></td>
                                                     <td class="txt-sm"><%= delivery.getOrder_Date()%></td>
                                                     <td class="txt-sm"><%= delivery.getName()%></td>
                                                     <td class="txt-sm"><%= delivery.getTotal()%></td>
                                                     <%
-                                                        String usernameShipper = delivery.getUsername_Shipper() ; 
+                                                        String usernameShipper = delivery.getUsername_Shipper();
                                                         if (usernameShipper == null) {
-                                                            usernameShipper = "Assign Now" ;
+                                                            usernameShipper = "Assign Now";
                                                         }
                                                     %>
                                                     <td class="txt-sm">
-                                                     <a href="MainController?action=AssignDelivery&orderID=<%=delivery.getOrderID()%>" ><%= usernameShipper %></a>
-                                                     </td>
+                                                        <a href="MainController?action=AssignDelivery&orderID=<%=delivery.getOrderID()%>" ><%= usernameShipper%></a>
+                                                    </td>
                                                     <td class="txt-sm bold">
                                                         <div>
                                                             <%
@@ -308,8 +308,7 @@
 
                                                             %>
                                                             <span class="badge bg-label-info me-1 changeStatus">Shipping</span>
-                                                            <%                                                            
-                                                                } else if (status == 0) {
+                                                            <%                                                            } else if (status == 0) {
                                                             %>
                                                             <span class="badge bg-label-warning me-1 changeStatus">Pending</span>
                                                             <%
@@ -330,7 +329,7 @@
                                                         <div>
                                                             <input type="hidden" name="orderID" value="<%= delivery.getOrderID()%>" />
                                                             <input type="hidden" name="customerID" value="<%= delivery.getCustomer_ID()%>" /> 
-                                                            
+
                                                             <a href="MainController?action=DeliveryOrderDetail&orderID=<%=delivery.getOrderID()%>&customerID=<%=delivery.getCustomer_ID()%>" >View Detail</a>
                                                         </div>
                                                     </td>
