@@ -132,7 +132,7 @@
                             <div class="nav-item dropdown">
                                 <div class="nav-link">
                                     <div style="width: 1.5rem;" class="img rounded-f">
-                                        <%   if (customer.getAvatar() == "") {
+                                        <%   if (customer.getAvatar().isEmpty()) {
                                         %>
                                         <img src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg" alt="">
                                         <%
@@ -201,7 +201,7 @@
                     <div class="col l-3">
                         <!--<form action="MainController">-->
                         <div class="image m-y-12">
-                            <%   if (customer.getAvatar() == "") {
+                            <%   if (customer.getAvatar().isEmpty()) {
                             %>
                             <img src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg" alt="">
                             <%
@@ -223,7 +223,7 @@
 
                         <form action="MainController">
                             <div class="flex-horizon-center flex-col m-y-12">
-                                <%= updateSuccess%>
+                                <%= updateSuccess %>
                                 <%= emptyInfo%>
                                 <span class="txt-lg bold m-y-12">Full name</span>
                                 <input name="name" value="<%= customer.getName()%>"style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"

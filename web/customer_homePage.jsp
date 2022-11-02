@@ -52,6 +52,7 @@
             CustomerDTO customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
             customer = (customer == null) ? new CustomerDTO() : customer;
             UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
+            login_user = (login_user == null ) ? new UserDTO() : login_user;
         %>
         <div class="container-xxl bg-white p-0">
             <!-- Spinner Start -->
@@ -93,7 +94,7 @@
                             <div class="nav-item dropdown">
                                 <div class="nav-link">
                                     <div style="width: 1.5rem;" class="img rounded-f">
-                                        <%   if (customer.getAvatar() == "") {
+                                        <%   if (customer.getAvatar().isEmpty()) {
                                         %>
                                         <img src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg" alt="">
                                         <%
@@ -109,7 +110,7 @@
                                     <div class="border-bot">
                                         <div style="justify-content: flex-start; cursor: pointer;" class="dropdown-item pad-0">
                                             <i class="fa-solid fa-user"></i>
-                                            <a href="MainController?action=GoToUserProfile&current_form=account"><%=login_user.getUsername()%></a>
+                                            <a href="MainController?action=GoToUserProfile&current_form=account"><%= login_user.getUsername() %></a>
                                         </div>
                                         <div style="cursor: pointer;" class="dropdown-item pad-0">
                                             <i class="fa-solid fa-lock"></i>

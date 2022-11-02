@@ -26,9 +26,7 @@ import javax.servlet.http.HttpSession;
 public class LoginWithGoogleController extends HttpServlet {
 
     private static final String ERROR = "errorPage.jsp";
-    private static final String SUCCESS = "RegisterController";
-    private static final String SUCCESS_ALREADY_CUS = "LoadingProductAndServiceCategory";
-    private static final String SUCCESS_ALREADY_PRO = "Provider_ProductController";
+    private static final String SUCCESS = "LoadingProductAndServiceCategory";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -39,39 +37,42 @@ public class LoginWithGoogleController extends HttpServlet {
             UserDAO userDAO = new UserDAO();
             CustomerDAO customerDAO = new CustomerDAO();
             UserDTO loginUser = new UserDTO();
+            CustomerDTO customer = new CustomerDTO();
             if (!code.isEmpty()) {
-                HttpSession session = request.getSession();  
+                HttpSession session = request.getSession();
                 String accessToken = GoogleUtils.getToken(code);
                 GoogleUserDTO googleUser = GoogleUtils.getUserInfo(accessToken);
-                
-              String username = googleUser.getName();
-              String name = googleUser.getEmail();
-              String email = googleUser.getEmail();
-              String password = "123";  
-              String roleID = "CUS";
-              String phone = "";
-              int gender = 1;
-              String dob = "";
-              String avatar = "";
-              int status = 1;
-              
-              CustomerDTO customer = new CustomerDTO(username, password, roleID, phone, email, name, gender, dob, avatar, status);
-              boolean checkDuplicate = customerDAO.checkExistAccount(username);
-              
-              if(checkDuplicate){
-                  boolean createAccount = customerDAO.createCustomer(customer);
-                  if(createAccount){
-                      session.setAttribute("LOGIN_USER", customer);
-                       url = SUCCESS_ALREADY_CUS;
-                        return;
-                  }
-              }else{
-                  UserDTO user = userDAO.Login(username, password);
-                  session.setAttribute("LOGIN_USER", user);
-                   url = SUCCESS_ALREADY_CUS;
-              }
-                       
-                
+
+                String username = googleUser.getName();
+                boolean checkDuplicate = customerDAO.checkExistAccount(username);
+
+                if (checkDuplicate) {
+                    String name = googleUser.getName();
+                    String email = googleUser.getEmail();
+                    String password = "123";
+                    String roleID = "CUS";
+                    String phone = "";
+                    int gender = 1;
+                    String dob = "";
+                    String avatar = "";
+                    int status = 1;
+                    customer = new CustomerDTO(username, password, roleID, phone, email, name, gender, dob, avatar, status);
+                    loginUser = new UserDTO(username, password, roleID, phone, email, status);
+                    boolean createAccount = customerDAO.createCustomer(customer);
+                    if (createAccount) {
+                        session.setAttribute("LOGIN_USER", loginUser);
+                        session.setAttribute("CURRENT_CUSTOMER", customer);
+                        url = SUCCESS;
+                    }
+                } else {
+                    String password = "123";
+                    UserDTO user = userDAO.Login(username, password);
+                    customer = customerDAO.getCurrentCustomer(username);
+                    session.setAttribute("LOGIN_USER", user);
+                    session.setAttribute("CURRENT_CUSTOMER", customer);
+                    url = SUCCESS;
+                }
+
             }
         } catch (Exception e) {
             log("Error at LoginGoogleController: " + e.toString());
