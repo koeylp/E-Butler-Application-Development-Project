@@ -37,14 +37,6 @@
         <link rel="stylesheet" href="./vendor/fonts/boxicons.css" />
 
 
-        <link rel="stylesheet" href="css/grid.css">
-        <link rel="stylesheet" href="css/base.css">
-
-
-        <link rel="stylesheet" href="css/guestPage.css">
-        <link rel="stylesheet" href="css/customerPage.css">
-        <link rel="stylesheet" href="css/delivery.css">
-
         <style>
             table {
                 font-family: arial, sans-serif;
