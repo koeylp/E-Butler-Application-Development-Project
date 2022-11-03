@@ -32,7 +32,7 @@ public class AuthorizePaymentController extends HttpServlet {
         try {
             String total = request.getParameter("total");
             String payment = request.getParameter("payment");
-            String shipping = request.getParameter("shiping");
+            String cardShipper = request.getParameter("card");
             HttpSession session = request.getSession();
             if (session != null) {
                 OrderPayPalDetail order = new OrderPayPalDetail(String.valueOf(total), "0", String.valueOf(total));
@@ -42,7 +42,8 @@ public class AuthorizePaymentController extends HttpServlet {
                 response.sendRedirect(approvalLink);
                 session.setAttribute("TOTAL", total);
                 session.setAttribute("PAYMENT", payment);
-                session.setAttribute("SHIPPING", shipping);
+                session.setAttribute("CARD_SHIPPER", cardShipper);
+
             }
 
         } catch (PayPalRESTException e) {

@@ -34,16 +34,26 @@ public class DeleteCartController extends HttpServlet {
             HttpSession session = request.getSession();
             CartDTO cart = (CartDTO) session.getAttribute("CART");
             CartServiceDTO cartService = (CartServiceDTO) session.getAttribute("CART_SERVICE");
+
             if (cart != null) {
                 cart.remove(id);
-                url = SUCCESS;
                 session.setAttribute("CART", cart);
+                url = SUCCESS;
             }
             if (cartService != null) {
                 cartService.remove(service_ID);
+                session.setAttribute("CART_SERVICE", cartService);
                 url = SUCCESS;
+            }
+            if (cartService.getCart().values().isEmpty()) {
+                cartService = null;
                 session.setAttribute("CART_SERVICE", cartService);
             }
+            if (cart.getCart().values().isEmpty()) {
+                cart = null;
+                session.setAttribute("CART", cart);
+            }
+
         } catch (Exception e) {
             log("Error at DeleteCartController: " + e.toString());
         } finally {

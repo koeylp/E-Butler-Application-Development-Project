@@ -1,8 +1,4 @@
-<%-- 
-    Document   : customer_profilePage
-    Created on : Oct 10, 2022, 9:04:35 AM
-    Author     : Dang Viet
---%>
+
 
 <%@page import="com.ebutler.swp.dto.AddressDTO"%>
 <%@page import="com.ebutler.swp.dto.CityDTO"%>
@@ -224,7 +220,7 @@
                         <form action="MainController">
                             <div class="flex-horizon-center flex-col m-y-12">
                                 <%= updateSuccess %>
-                                <%= emptyInfo%>
+                                <%= emptyInfo %>
                                 <span class="txt-lg bold m-y-12">Full name</span>
                                 <input name="name" value="<%= customer.getName()%>"style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
                                        class="input txt-sm" type="text" placeholder="<%= customer.getName()%>">
@@ -254,7 +250,7 @@
                                 </div>
                             </div>
                             <div class="flex-horizon-center flex-col relative m-y-12">
-                                <span class="txt-lg bold m-y-12">Address</span>
+                                <span class="txt-lg bold m-y-12">Default Address</span>
 
                                 <div class="flex-horizon-center">
                                     <span class="txt-lg input-icon flex-center">
@@ -283,7 +279,7 @@
                                 </div>
                             </div>
                             <div class="flex-horizon-center flex-col relative m-y-12">
-                                <%= phoneWrongFormat%>
+                                <%= phoneWrongFormat %>
                                 <span class="txt-lg bold m-y-12">Phone number</span>
                                 <div class="flex-horizon-center">
                                     <span class="txt-lg input-icon flex-center">
@@ -690,7 +686,7 @@
 
                                             <form action="MainController">
                                                 <input type="hidden" name="action" value="AddAddress">
-                                                <input type="hidden" name="city_id" value="<%=request.getParameter("city_id")%>">
+                                                <input type="hidden" name="city_id" value="<%= request.getParameter("city_id")%>">
                                                 <input type="hidden" name="current_form" value="address">
                                                 <div class="flex-horizon-center flex-col m-y-1">
                                                     <span class="txt-md m-y-12">Address</span>

@@ -19,27 +19,27 @@ import javax.servlet.http.HttpSession;
  * @author Admin
  */
 public class ProductPageController extends HttpServlet {
-    
+
     private static final String SUCCESS = "customer_productCategoryPage.jsp";
     private static final String ERROR = "errorPage.jsp";
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
             String category_ID = request.getParameter("category_ID");
-            
+
             ProductDAO dao = new ProductDAO();
             List<ProductDTO> list = dao.getListProductByPlace(category_ID);
             HttpSession session = request.getSession();
-            
+
             session.setAttribute("CATEGORYID", category_ID);
             session.setAttribute("CUSTOMER_PRODUCT_LIST", list);
             url = SUCCESS;
         } catch (Exception e) {
-            log("Error at ProductPageController: "+e.getMessage());
-        }finally{
+            log("Error at ProductPageController: " + e.getMessage());
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
