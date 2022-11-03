@@ -610,7 +610,7 @@
             <i class="fas fa-check-circle"></i>
             </div>
             <div class="toast__body">
-            <h3 class="toast__title">Thành công</h3>
+            <h3 class="toast__title">SUCCESS</h3>
                 <p class="toast__msg"><%=messageSuccess%></p>
                 </div>
             <div class="toast__close">
@@ -632,7 +632,7 @@
             <i class="fas fa-check-circle"></i>
             </div>
             <div class="toast__body">
-            <h3 class="toast__title">Th?t b?i</h3>
+            <h3 class="toast__title">ERROR</h3>
                 <p class="toast__msg"><%=messageError%></p>
                 </div>
             <div class="toast__close">

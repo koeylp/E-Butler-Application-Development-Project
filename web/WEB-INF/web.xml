@@ -256,6 +256,10 @@
         <servlet-name>Assign_DeliveryController</servlet-name>
         <servlet-class>com.ebutler.swp.controllers.Assign_DeliveryController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateShippingAddressController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.CreateShippingAddressController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -511,6 +515,10 @@
     <servlet-mapping>
         <servlet-name>Assign_DeliveryController</servlet-name>
         <url-pattern>/Assign_DeliveryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateShippingAddressController</servlet-name>
+        <url-pattern>/CreateShippingAddressController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>60</session-timeout>

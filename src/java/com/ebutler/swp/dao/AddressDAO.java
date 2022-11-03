@@ -29,7 +29,7 @@ public class AddressDAO {
     private final String SELECT_ADDRESS = "select a.street, a.district_ID, user_ID, status, d.city_name, pc.province_Name, a.address_ID, pc.province_ID from tblAddress as a JOIN tblDistrict d ON a.district_ID = d.district_ID JOIN tblProvince_City pc ON d.province_ID = pc.province_ID where user_ID = ? and a.status <> -1 order by a.status DESC";
 
     private final String SELECT_PROVINCE_ID = "select [province_Name] from tblProvince_City where [province_ID] = ?";
-    private final String SELECT_CITY_ID = "select [city_name] from tblProvince_City where [district_ID] = ?";
+    private final String SELECT_CITY_ID = "select [city_name] from  tblDistrict where [district_ID] = ?";
     
     public String SelectProvinceById(String provinceID) throws SQLException {
         String name = "";
