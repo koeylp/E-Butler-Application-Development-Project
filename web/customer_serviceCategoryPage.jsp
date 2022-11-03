@@ -3,6 +3,7 @@
 <%@page import="com.ebutler.swp.dto.ServiceDTO"%>
 <%@page import="com.ebutler.swp.dto.UserDTO"%>
 <%@page import="java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,6 +43,9 @@
         <link rel="stylesheet" href="css/guestPage.css">
         <link rel="stylesheet" href="css/customerPage.css">
     </head>
+     <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'CUS'}">
+        <c:redirect url="guest_loginPage.jsp"></c:redirect>
+    </c:if>
 
     <body>
         <%

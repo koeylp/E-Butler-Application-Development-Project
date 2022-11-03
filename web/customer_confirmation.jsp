@@ -6,6 +6,7 @@
 
 <%@page import="com.ebutler.swp.dto.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -56,6 +57,9 @@
 
         <title>E-Butler</title>
     </head>
+     <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'CUS'}">
+        <c:redirect url="guest_loginPage.jsp"></c:redirect>
+    </c:if>
 
     <body>
          <div class="container-xxl bg-white p-0">
