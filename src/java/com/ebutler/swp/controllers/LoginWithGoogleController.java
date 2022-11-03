@@ -4,13 +4,16 @@
  */
 package com.ebutler.swp.controllers;
 
+import com.ebutler.swp.dao.AddressDAO;
 import com.ebutler.swp.dao.CustomerDAO;
 import com.ebutler.swp.dao.UserDAO;
 import com.ebutler.swp.dto.CustomerDTO;
 import com.ebutler.swp.dto.GoogleUserDTO;
+import com.ebutler.swp.dto.ProvinceDTO;
 import com.ebutler.swp.dto.UserDTO;
 import com.ebutler.swp.utils.GoogleUtils;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,6 +43,12 @@ public class LoginWithGoogleController extends HttpServlet {
             CustomerDTO customer = new CustomerDTO();
             if (!code.isEmpty()) {
                 HttpSession session = request.getSession();
+                AddressDAO addressDAO = new AddressDAO();
+                ArrayList<ProvinceDTO> province_list = addressDAO.SelectProvince();
+                if (province_list != null) {
+                    session.setAttribute("PROVINCE_LIST", province_list);
+                }
+                
                 String accessToken = GoogleUtils.getToken(code); // BUG here
                 GoogleUserDTO googleUser = GoogleUtils.getUserInfo(accessToken);
 
@@ -72,6 +81,7 @@ public class LoginWithGoogleController extends HttpServlet {
                     session.setAttribute("CURRENT_CUSTOMER", customer);
                     url = SUCCESS;
                 }
+
             }
 
         } catch (Exception e) {

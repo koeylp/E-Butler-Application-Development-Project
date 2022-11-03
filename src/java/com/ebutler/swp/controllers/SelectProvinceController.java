@@ -6,12 +6,14 @@ package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.AddressDAO;
 import com.ebutler.swp.dto.CityDTO;
+import com.ebutler.swp.dto.ProvinceDTO;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -20,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 public class SelectProvinceController extends HttpServlet {
 
     private final String ERROR = "errorPage.jsp";
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -28,26 +30,27 @@ public class SelectProvinceController extends HttpServlet {
         try {
             String province_id = request.getParameter("province_id");
             String city_id = request.getParameter("city_id");
-            
+
             String current_page = request.getParameter("current_page");
             String current_form = request.getParameter("current_form");
-            
+
             String action_type = request.getParameter("action_type");
-            
+
             AddressDAO addressDAO = new AddressDAO();
             ArrayList<CityDTO> city_list = addressDAO.SelectCity(province_id);
-            
+
             request.setAttribute("CITY_LIST", city_list);
             request.setAttribute("PROVINCE_ID", province_id);
             request.setAttribute("CITY_ID", city_id);
             request.setAttribute("CURRENT_FORM", current_form);
-            
+
             request.setAttribute("ACTION_TYPE", action_type);
             
+
             url = current_page;
-        }catch(Exception e) {
+        } catch (Exception e) {
             log("ERROR at SelectProvinceController: " + e.toString());
-        }finally {
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
