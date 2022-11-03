@@ -16,7 +16,7 @@
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
-
+        <link rel="icon" type="image/png" href="img/logo-bulldog.png">
         <!-- Icon FontAwesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
 
@@ -46,9 +46,9 @@
         <link rel="stylesheet" href="css/guestPage.css">
         <link rel="stylesheet" href="css/customerPage.css">
         <link rel="stylesheet" href="css/toast.css">
-        
+
     </head>
-     <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'CUS'}">
+    <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'CUS'}">
         <c:redirect url="guest_loginPage.jsp"></c:redirect>
     </c:if>
 
@@ -217,12 +217,12 @@
 
                             for (ProductDetailDTO product : product_list) {
                         %>
-                        <div id="<%= product.getId() %>" class="col l-3 s-6 m-y-1">
+                        <div id="<%= product.getId()%>" class="col l-3 s-6 m-y-1">
                             <div class="block__item flex-between">
                                 <div style="max-height: 15rem; min-height: 15rem;" class="block__img flex-center relative">
                                     <img src="<%= product.getImage()%>"
                                          alt="">
-                                    <a href="MainController?action=AddToCart&quantity=1&product_ID=<%= product.getId()%>#<%= product.getId() %>"
+                                    <a href="MainController?action=AddToCart&quantity=1&product_ID=<%= product.getId()%>#<%= product.getId()%>"
                                        style="background-color: black; color: white; right: 52%;"
                                        class="txt-border link absolute card-extend bot">
                                         <i class="fa-solid fa-bag-shopping"></i>
@@ -284,7 +284,7 @@
                             current_form = (current_form == null) ? "" : current_form;
                             product_detail_id = (product_detail_id == null) ? "" : product_detail_id;
                         %>
-                       
+
                         <div id="quickview" class="overlay fixed top bot left right flex-center <%if (!current_form.equals("quickview_product") || !(product.getId().equals(product_detail_id))) {%>hide<%}%>">
                             <div class="popup relative pad-2 row">
                                 <div style="margin: -1.5rem 1rem; width: fit-content;" class="absolute p-0 right text-md opacity popup-close">
@@ -295,7 +295,7 @@
                                      class="col l-4 flex-center full-h">
                                     <div style="height: 95%;" class="flex-col flex-vertical-center flex-around">
                                         <div style="width: 10rem; height: 10rem" class="img">
-                                            <img src="<%= product.getImage() %>"
+                                            <img src="<%= product.getImage()%>"
                                                  alt="">
                                         </div>
 
@@ -307,7 +307,7 @@
                                         <form action="MainController" class="flex-col flex-vertical-center">
                                             <input type="hidden" name="action" value="AddToCart">
                                             <input type="hidden" name="product_ID" value="<%= product.getId()%>">
-                                            
+
                                             <div style="width: 50%" class="flex-center">
                                                 <button type="button" style="width: 2rem; height: 2rem;"
                                                         class="btn-circle flex-center txt-xs"
@@ -554,7 +554,7 @@
                 </div>
             </div>
         </div>
-        
+
         <%
             if (!messageSuccess.isEmpty()) {
         %>
@@ -585,68 +585,68 @@
     <script src="js/customer_productPage.js"></script>
 
     <script language="javascript">
-            const main = document.getElementById("toast");
-            if (main) {
-                const duration = 2000;
-                const toast = document.createElement("div");
-                // Auto remove toast
-                const autoRemoveId = setTimeout(function () {
-                    main.removeChild(toast);
-                }, duration + 1000);
-                // Remove toast when clicked
-                toast.onclick = function (e) {
-                    if (e.target.closest(".toast__close")) {
-                        main.removeChild(toast);
-                        clearTimeout(autoRemoveId);
-                    }
-                };
+                                                            const main = document.getElementById("toast");
+                                                            if (main) {
+                                                                const duration = 2000;
+                                                                const toast = document.createElement("div");
+                                                                // Auto remove toast
+                                                                const autoRemoveId = setTimeout(function () {
+                                                                    main.removeChild(toast);
+                                                                }, duration + 1000);
+                                                                // Remove toast when clicked
+                                                                toast.onclick = function (e) {
+                                                                    if (e.target.closest(".toast__close")) {
+                                                                        main.removeChild(toast);
+                                                                        clearTimeout(autoRemoveId);
+                                                                    }
+                                                                };
 
-            <%
+        <%
                 if (messageError.isEmpty() && !messageSuccess.isEmpty()) {
-            %>
-                toast.classList.add("toast", `toast--success`, "showing");
+        %>
+                                                                toast.classList.add("toast", `toast--success`, "showing");
 
-                toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
+                                                                toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
 
-                toast.innerHTML =
-                        `<div class="toast__icon">
+                                                                toast.innerHTML =
+                                                                        `<div class="toast__icon">
             <i class="fas fa-check-circle"></i>
             </div>
             <div class="toast__body">
-            <h3 class="toast__title">Thành công</h3>
+            <h3 class="toast__title">SUCCESS</h3>
                 <p class="toast__msg"><%=messageSuccess%></p>
                 </div>
             <div class="toast__close">
             <i class="fas fa-times"></i>
             </div>
                     `;
-                
-            <%
-                }
-            %>
 
-            <%
+        <%
+                }
+        %>
+
+        <%
                 if (!messageError.isEmpty() && messageSuccess.isEmpty()) {
-            %>
-                toast.classList.add("toast", `toast--error`);
-                toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
-                toast.innerHTML =
-                        `<div class="toast__icon">
+        %>
+                                                                toast.classList.add("toast", `toast--error`);
+                                                                toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
+                                                                toast.innerHTML =
+                                                                        `<div class="toast__icon">
             <i class="fas fa-check-circle"></i>
             </div>
             <div class="toast__body">
-            <h3 class="toast__title">Th?t b?i</h3>
+            <h3 class="toast__title">ERROR</h3>
                 <p class="toast__msg"><%=messageError%></p>
                 </div>
             <div class="toast__close">
             <i class="fas fa-times"></i>
             </div>
             `;
-            <%
+        <%
                 }
-            %>
-                main.appendChild(toast);
-            }
+        %>
+                                                                main.appendChild(toast);
+                                                            }
     </script>
 
 </body>

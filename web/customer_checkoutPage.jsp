@@ -21,7 +21,7 @@
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
-
+        <link rel="icon" type="image/png" href="img/logo-bulldog.png">
         <!-- Icon FontAwesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
 
@@ -51,7 +51,7 @@
         <link rel="stylesheet" href="css/customer_profilePage.css">
         <link rel="stylesheet" href="css/customerPage.css">
     </head>
-     <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'CUS'}">
+    <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'CUS'}">
         <c:redirect url="guest_loginPage.jsp"></c:redirect>
     </c:if>
 
@@ -238,7 +238,7 @@
                                 new_address = (new_address == null) ? new AddressDTO() : new_address;
                                 address_default = (address_default == null) ? new AddressDTO() : address_default;
 
-                                String shipping_address = (new_address.getId() != 0) ? new_address.toString() : address_default.toString();
+                                String shipping_address = (new_address.toString().isEmpty()) ? address_default.toString() : new_address.toString();
                             %>
                             <div class="relative m-y-32">
                                 <div style="border: 1px solid #E5E7EB;" class="pad-2 flex-between">
@@ -282,7 +282,7 @@
                                                         %>
                                                         <select
                                                             style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
-                                                            class="input txt-sm" type="text" onchange="this.form.submit()" name="province_id">
+                                                            class="input txt-sm province-input" type="text" onchange="this.form.submit()" name="province_id">
                                                             <option>Select Province</option>
                                                             <%                                                                    for (ProvinceDTO province : province_list) {
                                                             %>
@@ -303,7 +303,7 @@
                                                         %>
                                                         <select
                                                             style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
-                                                            class="input txt-sm" type="text" name="city_id" onchange="this.form.submit()">
+                                                            class="input txt-sm city-input" type="text" name="city_id">
                                                             <option>Select City</option>
                                                             <%
                                                                 for (CityDTO city : city_list) {
@@ -318,16 +318,24 @@
                                             </form>
 
                                             <form action="MainController">
-                                                <input type="hidden" name="new_address" value=""/>
+                                                <input type="hidden" name="action" value="CreateShippingAddress">
+                                                <input type="hidden" name="province_id" value="" class="province-id">
+                                                <input type="hidden" name="city_id" value="" class="city-id">
                                                 <div class="flex-horizon-center flex-col m-y-12">
                                                     <span class="txt-md m-y-12">Address</span>
                                                     <input
                                                         style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
-                                                        class="input txt-sm" type="text">
+                                                        class="input txt-sm" type="text" name="address">
                                                 </div>
                                                 <div class="flex-vertical-center">
-                                                    <button type="button" class="btn-lg txt-md bold m-y-32">Save and next to shipping</button>
-                                                    <button type="submit" style="margin-left: 1rem; background-color: #EFEFEF; color: black"
+                                                    <button 
+                                                        onClick="
+                                                                document.querySelector('.province-id').value = document.querySelector('.province-input').value;
+                                                                document.querySelector('.city-id').value = document.querySelector('.city-input').value;
+                                                        " 
+                                                        class="btn-lg txt-md bold m-y-32">Save and next to shipping
+                                                    </button>
+                                                    <button type="button" style="margin-left: 1rem; background-color: #EFEFEF; color: black"
                                                             class="btn-lg txt-md bold m-y-32 border-no box-shadow-no close_address">Cancel</button>
                                                 </div>
                                             </form>

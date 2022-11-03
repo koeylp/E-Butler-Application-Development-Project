@@ -5,51 +5,50 @@
 package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.AddressDAO;
-import com.ebutler.swp.dto.CityDTO;
-import com.ebutler.swp.dto.ProvinceDTO;
+import com.ebutler.swp.dto.AddressDTO;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Admin
  */
-public class SelectProvinceController extends HttpServlet {
+public class CreateShippingAddressController extends HttpServlet {
 
     private final String ERROR = "errorPage.jsp";
-
+    private final String SUCCESS = "customer_checkoutPage.jsp";
+            
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
+        
         try {
             String province_id = request.getParameter("province_id");
             String city_id = request.getParameter("city_id");
-
-            String current_page = request.getParameter("current_page");
-            String current_form = request.getParameter("current_form");
-
-            String action_type = request.getParameter("action_type");
-
-            AddressDAO addressDAO = new AddressDAO();
-            ArrayList<CityDTO> city_list = addressDAO.SelectCity(province_id);
-
-            request.setAttribute("CITY_LIST", city_list);
-            request.setAttribute("PROVINCE_ID", province_id);
-            request.setAttribute("CITY_ID", city_id);
-            request.setAttribute("CURRENT_FORM", current_form);
-
-            request.setAttribute("ACTION_TYPE", action_type);
+            String street = request.getParameter("address");
             
-
-            url = current_page;
-        } catch (Exception e) {
-            log("ERROR at SelectProvinceController: " + e.toString());
+            AddressDAO addressDAO = new AddressDAO();
+            AddressDTO new_address = new AddressDTO();
+            
+            String province_name = addressDAO.SelectProvinceById(province_id);
+            String city_name = addressDAO.SelectCityById(city_id);
+            
+            new_address.setStreet(street);
+            new_address.setProvince_name(province_name);
+            new_address.setDistrict_name(addressDAO.SelectCityById(city_id));
+            
+            String address_ha = new_address.toString();
+            
+            request.setAttribute("NEW_ADDRESS", new_address);
+            url = SUCCESS;
+        }
+        catch (Exception e) {
+            log("ERROR at CreateShippingAddressController");
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

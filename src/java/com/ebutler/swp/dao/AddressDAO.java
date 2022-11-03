@@ -20,16 +20,16 @@ import java.util.ArrayList;
  */
 public class AddressDAO {
 
-    private final String SELECT_PROVINCE = "select province_ID, province_Name from tblProvince_City";
-    private final String SELECT_CITY = "select district_ID, city_name, province_ID from tblDistrict where province_ID = ?";
-    private final String INSERT_ADDRESS = "insert into tblAddress(street, district_ID, user_ID, status) values (?, ?, ?, ?)";
-    private final String DELETE_ADDRESS = "update tblAddress set status = -1 where user_ID = ? and address_ID = ?";
-    private final String SET_ADDRESS_DEFAULT = "update tblAddress set status = 1 where user_ID = ? and address_ID = ?";
-    private final String RESET_ADDRESS_DEFAULT = "update tblAddress set status = 0 where status <> -1";
-    private final String SELECT_ADDRESS = "select a.street, a.district_ID, user_ID, status, d.city_name, pc.province_Name, a.address_ID, pc.province_ID from tblAddress as a JOIN tblDistrict d ON a.district_ID = d.district_ID JOIN tblProvince_City pc ON d.province_ID = pc.province_ID where user_ID = ? and a.status <> -1 order by a.status DESC";
+    private final String SELECT_PROVINCE = "SELECT province_ID, province_Name FROM tblProvince_City";
+    private final String SELECT_CITY = "SELECT district_ID, city_name, province_ID FROM tblDistrict WHERE province_ID = ?";
+    private final String INSERT_ADDRESS = "INSERT INTO tblAddress(street, district_ID, user_ID, status) VALUES (?, ?, ?, ?)";
+    private final String DELETE_ADDRESS = "UPDATE tblAddress SET status = -1 WHERE user_ID = ? and address_ID = ?";
+    private final String SET_ADDRESS_DEFAULT = "UPDATE tblAddress SET status = 1 WHERE user_ID = ? and address_ID = ?";
+    private final String RESET_ADDRESS_DEFAULT = "UPDATE tblAddress SET status = 0 WHERE status <> -1";
+    private final String SELECT_ADDRESS = "SELECT a.street, a.district_ID, user_ID, status, d.city_name, pc.province_Name, a.address_ID, pc.province_ID FROM tblAddress as a JOIN tblDistrict d ON a.district_ID = d.district_ID JOIN tblProvince_City pc ON d.province_ID = pc.province_ID WHERE user_ID = ? and a.status <> -1 ORDER BY a.status DESC";
 
-    private final String SELECT_PROVINCE_ID = "select [province_Name] from tblProvince_City where [province_ID] = ?";
-    private final String SELECT_CITY_ID = "select [city_name] from tblProvince_City where [district_ID] = ?";
+    private final String SELECT_PROVINCE_ID = "SELECT [province_Name] FROM tblProvince_City WHERE [province_ID] = ?";
+    private final String SELECT_CITY_ID = "SELECT [city_name] FROM  tblDistrict WHERE [district_ID] = ?";
     
     public String SelectProvinceById(String provinceID) throws SQLException {
         String name = "";

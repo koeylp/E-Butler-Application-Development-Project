@@ -274,6 +274,10 @@ public class MainController extends HttpServlet {
     private final String LOAD_REVIEW = "LoadReview";
     private final String LOAD_REVIEW_CONTROLLER = "LoadingReviewController";
     
+//    Create shippingn address
+    private final String CREATE_SHIPPING_ADDRESS = "CreateShippingAddress";
+    private final String CREATE_SHIPPING_ADDRESS_CONTROLLER = "CreateShippingAddressController";
+    
 
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -444,6 +448,8 @@ public class MainController extends HttpServlet {
                 url = UPDATE_DELIVERY_CONTROLLER ; 
             }else if (action.equals(ASSIGN_NOW)) { 
                 url = ASSIGN_NOW_CONTROLLER ; 
+            } else if (action.equals(CREATE_SHIPPING_ADDRESS)) {
+                url = CREATE_SHIPPING_ADDRESS_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
