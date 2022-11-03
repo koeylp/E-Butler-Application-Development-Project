@@ -4,6 +4,10 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.List"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,6 +67,9 @@
             }
         </style>
     </head>
+     <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'SHIP'}">
+        <c:redirect url="guest_loginPage.jsp"></c:redirect>
+    </c:if>
 
     <body>
 
@@ -374,14 +381,14 @@
 
                         <div class="m-y-1"> 
                             <i class="fa-solid fa-wallet"></i>
-                            <span>Ví PayPal</span>
+                            <span>Vï¿½ PayPal</span>
                         </div>
 
                         <div class="row">
                             <div class="col l-4">
                                 <table>
                                     <tr>
-                                        <th>Giá</th>
+                                        <th>Giï¿½</th>
                                     </tr>
                                     <tr>
                                         <td for="price-1" class="pad-0 flex"><input type="radio" name="price" value="10" id="price-1"><label

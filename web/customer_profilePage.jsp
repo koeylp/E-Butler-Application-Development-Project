@@ -51,6 +51,9 @@
         <link rel="stylesheet" href="css/customer_profilePage.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
+     <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'CUS'}">
+        <c:redirect url="guest_loginPage.jsp"></c:redirect>
+    </c:if>
 
     <body>
         <%

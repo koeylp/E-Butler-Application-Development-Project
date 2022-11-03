@@ -11,6 +11,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,6 +47,9 @@
         <link rel="stylesheet" href="./css/guestPage.css" />
         <link rel="stylesheet" href="./css/my_toast.css" />
     </head>
+     <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'PRO'}">
+        <c:redirect url="guest_loginPage.jsp"></c:redirect>
+    </c:if>
 
     <body>
         <%
