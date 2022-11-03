@@ -89,12 +89,9 @@ public class LoginController extends HttpServlet {
                 List<ProviderServiceDTO1> listService = providerDAO.loadListService(provider);
                 if (listProduct.isEmpty() && listService != null) {
                     url = PRO_PAGE_SERVICE;
-                } else if (listProduct != null && listService.isEmpty()) {
-                    url = PRO_PAGE_PRODUCT;
-                } else {
+                } else if (listService.isEmpty() && listProduct != null) { 
                     url = PRO_PAGE_PRODUCT;
                 }
-
             } else {
                 request.setAttribute("LOGIN_ERROR", "Incorect username or password");
             }
