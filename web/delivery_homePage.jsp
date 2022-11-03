@@ -20,6 +20,8 @@
         <link href="css/deliveryPage.css" rel="stylesheet"> 
         <link href="css/delivery.css" rel="stylesheet"> 
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
 
 
 
@@ -28,6 +30,38 @@
         <link rel="stylesheet" href="./css/demo.css" />
         <link rel="icon" type="image/x-icon" href="./assets/img/favicon/favicon.ico" />
         <link rel="stylesheet" href="./vendor/fonts/boxicons.css" />
+
+
+        <link rel="stylesheet" href="css/grid.css">
+        <link rel="stylesheet" href="css/base.css">
+
+
+        <link rel="stylesheet" href="css/guestPage.css">
+        <link rel="stylesheet" href="css/customerPage.css">
+        <link rel="stylesheet" href="css/delivery.css">
+
+        <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th {
+                text-align: center;
+            }
+
+            td{
+                border-top: 1px solid #dddddd;
+                border-bottom: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+
+            td label:hover {
+                cursor: pointer;
+            }
+        </style>
     </head>
 
     <body>
@@ -77,61 +111,11 @@
                     </div>
                     <div class="header-right">
                         <ul class="clearfix">
-                            <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
-                                    <i class="mdi mdi-email-outline"></i>
-                                    <span class="badge gradient-1 badge-pill badge-primary">3</span>
+                            <li class="icons dropdown">
+                                <a class="quick-view">
+                                    <span>$120.000</span>
+                                    <i class="fa-solid fa-wallet"></i>
                                 </a>
-                                <div class="drop-down animated fadeIn dropdown-menu">
-                                    <div class="dropdown-content-heading d-flex justify-content-between">
-                                        <span class="">3 New Messages</span>  
-
-                                    </div>
-                                    <div class="dropdown-content-body">
-                                        <ul>
-                                            <li class="notification-unread">
-                                                <a href="javascript:void()">
-                                                    <img class="float-left mr-3 avatar-img" src="images/avatar/1.jpg" alt="">
-                                                    <div class="notification-content">
-                                                        <div class="notification-heading">Saiful Islam</div>
-                                                        <div class="notification-timestamp">08 Hours ago</div>
-                                                        <div class="notification-text">Hi Teddy, Just wanted to let you ...</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="notification-unread">
-                                                <a href="javascript:void()">
-                                                    <img class="float-left mr-3 avatar-img" src="images/avatar/2.jpg" alt="">
-                                                    <div class="notification-content">
-                                                        <div class="notification-heading">Adam Smith</div>
-                                                        <div class="notification-timestamp">08 Hours ago</div>
-                                                        <div class="notification-text">Can you do me a favour?</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void()">
-                                                    <img class="float-left mr-3 avatar-img" src="images/avatar/3.jpg" alt="">
-                                                    <div class="notification-content">
-                                                        <div class="notification-heading">Bao Ngu</div>
-                                                        <div class="notification-timestamp">08 Hours ago</div>
-                                                        <div class="notification-text">Hi Teddy, Just wanted to let you ...</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void()">
-                                                    <img class="float-left mr-3 avatar-img" src="images/avatar/4.jpg" alt="">
-                                                    <div class="notification-content">
-                                                        <div class="notification-heading">Hilari Clinton</div>
-                                                        <div class="notification-timestamp">08 Hours ago</div>
-                                                        <div class="notification-text">Hello</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        </ul>
-
-                                    </div>
-                                </div>
                             </li>
                             <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
                                     <i class="mdi mdi-bell-outline"></i>
@@ -244,16 +228,6 @@
 
             %>
             <div style="margin: 0; width: 100vw;" class="content-body">
-                <!-- <div class="row page-titles mx-0">
-                    <div class="col p-md-0">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                            <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
-                        </ol>
-                    </div>
-                </div> -->
-                <!-- row -->
-
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
@@ -361,6 +335,79 @@
 
 
             <!--**********************************
+                           Wallet start
+            ***********************************-->
+            <div class="overlay fixed top bot left right flex-center hide">
+                <div class="popup relative pad-2 grid">
+                    <div style="margin: -1.5rem 1rem; width: fit-content;"
+                         class="absolute p-0 right text-md opacity popup-close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+
+                    <div style="margin: 0 -4px;" class="row">
+                        <div style="max-height: 7rem; padding: 0 4px;" class="col l-2 payment-container">
+                            <div style="background-color: #F8F8F8;" class="full-w full-h flex-center pad-0 payment-method">
+                                <input type="radio" id="payment-1" name="payment" class="payment-input">
+                                <label for="payment-1">
+                                    <div class="img">
+                                        <img style="object-fit: contain;"
+                                             src="https://cdn.pixabay.com/photo/2015/05/26/09/37/paypal-784404__480.png"
+                                             alt="" />
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div style="max-height: 7rem; padding: 0 4px;" class="col l-2 payment-container">
+                            <div style="background-color: #F8F8F8;" class="full-w full-h flex-center pad-0 payment-method">
+                                <input type="radio" id="payment-2" name="payment" class="payment-input">
+                                <label for="payment-2">
+                                    <div class="img">
+                                        <img style="object-fit: contain;"
+                                             src="https://cdn.pixabay.com/photo/2015/05/26/09/37/paypal-784404__480.png"
+                                             alt="" />
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="m-y-1"> 
+                        <i class="fa-solid fa-wallet"></i>
+                        <span>Ví PayPal</span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col l-4">
+                            <table>
+                                <tr>
+                                    <th>Giá</th>
+                                </tr>
+                                <tr>
+                                    <td for="price-1" class="pad-0 flex"><input type="radio" name="price" id="price-1"><label
+                                            for="price-1" class="m-x-0" style="flex: 1">10 $</label></td>
+                                </tr>
+                                <tr>
+                                    <td for="price-2" class="pad-0 flex"><input type="radio" name="price" id="price-2"><label
+                                            for="price-2" class="m-x-0" style="flex: 1">10</label></td>
+                                </tr>
+
+                            </table>
+                        </div>
+
+                        <div class="col l-8">
+                            <div class="flex-center">
+                                <button>Process to payment</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--**********************************
+                           Wallet end
+            ***********************************-->
+
+            <!--**********************************
                 Footer start
             ***********************************-->
             <div class="footer">
@@ -384,6 +431,7 @@
         <script src="./js/settings.js"></script>
         <script src="./js/gleek.js"></script>
         <script src="./js/styleSwitcher.js"></script>
+        <script src="./js/customer_productPage.js"></script>
 
         <script src="./plugins/tables/js/jquery.dataTables.min.js"></script>
         <script src="./plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
