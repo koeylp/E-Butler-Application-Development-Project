@@ -165,7 +165,7 @@
             <!-- Slider End -->
 
             <!-- Product List Start -->
-            <div style="max-height: var(--list-h);" class="grid wide border-bot border-top">
+            <div id="content" style="max-height: var(--list-h);" class="grid wide border-bot border-top">
                 <div class="grid">
                     <div class="row m-y-2">
                         <form style="padding: 0;" class="col l-10 s-8" action="MainController?action=SearchProductDetailByType" method="POST">
@@ -220,9 +220,9 @@
                         <div id="<%= product.getId() %>" class="col l-3 s-6 m-y-1">
                             <div class="block__item flex-between">
                                 <div style="max-height: 15rem; min-height: 15rem;" class="block__img flex-center relative">
-                                    <img src="<%=product.getImage()%>"
+                                    <img src="<%= product.getImage()%>"
                                          alt="">
-                                    <a href="MainController?action=AddToCart&quantity=1&product_ID=<%=product.getId()%>#<%= product.getId() %>"
+                                    <a href="MainController?action=AddToCart&quantity=1&product_ID=<%= product.getId()%>#<%= product.getId() %>"
                                        style="background-color: black; color: white; right: 52%;"
                                        class="txt-border link absolute card-extend bot">
                                         <i class="fa-solid fa-bag-shopping"></i>
@@ -236,10 +236,10 @@
                                 </div>
                                 <div class="block__text pad-y-1 flex-col flex-between full-h">
                                     <div class="flex-col">
-                                        <h5 style="text-align: start;" class="m-y-0 product-name"><%=product.getName()%></h5>
+                                        <h5 style="text-align: start;" class="m-y-0 product-name"><%= product.getName()%></h5>
                                         <div class="ellipsis txt-sm m-y-0">
                                             <p style="text-align: start;">
-                                                <%=product.getDescription()%>
+                                                <%= product.getDescription()%>
                                             </p>
                                         </div>
                                     </div>
@@ -249,7 +249,7 @@
                                             <div style="color: #4ADE80; border: 2px solid #4ADE80; width: fit-content; --rounded: 0.5rem; padding: .2rem;"
                                                  class="txt-sm rounded bold">
                                                 <p>
-                                                    $ <%=product.getPrice()%>
+                                                    $ <%= product.getPrice()%>
                                                 </p>
                                             </div>
                                         </div>
@@ -284,7 +284,8 @@
                             current_form = (current_form == null) ? "" : current_form;
                             product_detail_id = (product_detail_id == null) ? "" : product_detail_id;
                         %>
-                        <div class="overlay fixed top bot left right flex-center <%if (!current_form.equals("quickview_product") || !(product.getId().equals(product_detail_id))) {%>hide<%}%>">
+                       
+                        <div id="quickview" class="overlay fixed top bot left right flex-center <%if (!current_form.equals("quickview_product") || !(product.getId().equals(product_detail_id))) {%>hide<%}%>">
                             <div class="popup relative pad-2 row">
                                 <div style="margin: -1.5rem 1rem; width: fit-content;" class="absolute p-0 right text-md opacity popup-close">
                                     <i class="fa-solid fa-xmark"></i>
@@ -294,18 +295,19 @@
                                      class="col l-4 flex-center full-h">
                                     <div style="height: 95%;" class="flex-col flex-vertical-center flex-around">
                                         <div style="width: 10rem; height: 10rem" class="img">
-                                            <img src="<%=product.getImage()%>"
+                                            <img src="<%= product.getImage() %>"
                                                  alt="">
                                         </div>
 
                                         <div class="flex flex-col flex-center full-w">
-                                            <span class="txt-md bold"><%=product.getName()%></span>
-                                            <span class="txt-sm"><%=product.getProvider_ID()%></span>
+                                            <span class="txt-md bold"><%= product.getName()%></span>
+                                            <span class="txt-sm"><%= product.getProvider_ID()%></span>
                                         </div>
 
                                         <form action="MainController" class="flex-col flex-vertical-center">
                                             <input type="hidden" name="action" value="AddToCart">
-                                            <input type="hidden" name="product_ID" value="<%=product.getId()%>">
+                                            <input type="hidden" name="product_ID" value="<%= product.getId()%>">
+                                            
                                             <div style="width: 50%" class="flex-center">
                                                 <button type="button" style="width: 2rem; height: 2rem;"
                                                         class="btn-circle flex-center txt-xs"
@@ -327,6 +329,7 @@
                                             </div>
 
                                             <div class="m-y-0">
+                                                <input type="hidden" name="quickview" value="true" />
                                                 <button type="submit" style="padding: .4rem 4rem; border-radius: .5rem;"
                                                         class="btn-md bold">Buy</button>
                                             </div>

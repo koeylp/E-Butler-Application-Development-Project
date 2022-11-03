@@ -4,13 +4,11 @@
  */
 package com.ebutler.swp.controllers;
 
-import com.ebutler.swp.dao.DeliveryDAO;
-import com.ebutler.swp.dto.DeliveryDTO;
-import com.ebutler.swp.dto.UserDTO;
+import com.ebutler.swp.dao.ShipperDAO;
+import com.ebutler.swp.dto.ShipperDTO;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,33 +16,35 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author DELL
+ * @author thekh
  */
-public class DeliveryHomeController extends HttpServlet {
+@WebServlet(name = "TopUpController", urlPatterns = {"/TopUpController"})
+public class TopUpController extends HttpServlet {
 
-    private final String SUCCESS = "delivery_homePage.jsp" ; 
-    private final String ERROR = "delivery_homePage.jsp" ; 
+    private static final String ERROR = "errorPage.jsp";
+    private static final String SUCCESS = "delivery_homePage.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR ; 
+        String url = ERROR;
         try {
-            HttpSession session = request.getSession() ;
-            List<DeliveryDTO> listDelivery = new ArrayList() ; 
-            DeliveryDAO deliveryDAO = new DeliveryDAO() ; 
-            UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER") ; 
-            String shippingDetail = deliveryDAO.findShippingDetail(user.getUsername()) ;
-            listDelivery = deliveryDAO.loadListDelivery(shippingDetail) ;
-            
-            if (!listDelivery.isEmpty()) {
-                url = SUCCESS ;
-                session.setAttribute("Delivery_List", listDelivery);  
-                session.setAttribute("ShippingDetail", shippingDetail);
-                session.setAttribute("ERROR_ASSIGN", "");
+            HttpSession session = request.getSession();
+            if (session != null) {
+                String cardPrice = (String) session.getAttribute("CARD_PRICE");
+                ShipperDTO shipper = (ShipperDTO) session.getAttribute("CURRENT_SHIPPER");
+                ShipperDAO shipperDao = new ShipperDAO();
+                double wallet = Double.parseDouble(cardPrice);
+                if (wallet > 0) {
+                    String n = shipper.getUsername();
+                    shipperDao.updateWallet(shipper.getUsername(), wallet);
+                    
+                    url = SUCCESS;
+                }
             }
-            
         } catch (Exception e) {
-        }finally {
+            log("Error at TopUpController: " + e.getMessage());
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

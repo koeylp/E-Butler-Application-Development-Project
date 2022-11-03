@@ -232,9 +232,13 @@
 
                             <!-- Shipping Address start-->
                             <%
-                                AddressDTO address_default = customer.getAddressDefault();
+                                AddressDTO address_default = (AddressDTO) customer.getAddressDefault();
+                                AddressDTO new_address = (AddressDTO) request.getAttribute("NEW_ADDRESS");
 
-                                String shipping_address = address_default.getStreet() + ", " + address_default.getDistrict_name() + ", " + address_default.getProvince_name();
+                                new_address = (new_address == null) ? new AddressDTO() : new_address;
+                                address_default = (address_default == null) ? new AddressDTO() : address_default;
+
+                                String shipping_address = (new_address.getId() != 0) ? new_address.toString() : address_default.toString();
                             %>
                             <div class="relative m-y-32">
                                 <div style="border: 1px solid #E5E7EB;" class="pad-2 flex-between">
@@ -245,7 +249,7 @@
                                         <div style="margin-left: 2rem;" class="flex-col">
                                             <span class="txt-lg">SHIPPING ADDRESS</span>
                                             <div class="flex-between txt-sm bold">
-                                                <span><%=address_default.getStreet()%>, <%=address_default.getDistrict_name()%>, <%=address_default.getProvince_name()%></span>
+                                                <span><%=shipping_address%></span>
                                             </div>
                                         </div>
                                     </div>
@@ -254,11 +258,18 @@
                                                 class="txt-sm bold rounded-f border-no pad-0 change_address">Change</button>
                                     </div>
                                 </div>
-                                <div style="width: 100%;border: 1px solid #E5E7EB;" class="address_detail detail hide">
+
+                                <%
+                                    String cur_form = request.getParameter("cur_form");
+
+                                    cur_form = (cur_form == null) ? "" : cur_form;
+                                %>
+                                <div style="width: 100%;border: 1px solid #E5E7EB;" class="address_detail detail <%if (!cur_form.equals("select_address")) {%>hide<%}%>">
                                     <div class="pad-2">
                                         <div style="padding: 0;" class="flex-col">
-
-                                            <form action="MainController?action=SelectProvince" method="GET">
+                                            <form action="MainController" method="GET">
+                                                <input type="hidden" name="action" value="SelectProvince">
+                                                <input type="hidden" name="cur_form" value="select_address">
                                                 <input type="hidden" name="current_page" value="customer_checkoutPage.jsp">
                                                 <div class="row">
                                                     <div class="flex-horizon-center flex-col m-y-12 col l-6">
@@ -271,7 +282,7 @@
                                                         %>
                                                         <select
                                                             style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
-                                                            class="input txt-sm" type="password" onchange="this.form.submit()" name="province_id">
+                                                            class="input txt-sm" type="text" onchange="this.form.submit()" name="province_id">
                                                             <option>Select Province</option>
                                                             <%                                                                    for (ProvinceDTO province : province_list) {
                                                             %>
@@ -292,7 +303,7 @@
                                                         %>
                                                         <select
                                                             style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
-                                                            class="input txt-sm" type="password" name="city_id">
+                                                            class="input txt-sm" type="text" name="city_id" onchange="this.form.submit()">
                                                             <option>Select City</option>
                                                             <%
                                                                 for (CityDTO city : city_list) {
@@ -306,17 +317,20 @@
                                                 </div>
                                             </form>
 
-                                            <div class="flex-horizon-center flex-col m-y-12">
-                                                <span class="txt-md m-y-12">Address</span>
-                                                <input
-                                                    style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
-                                                    class="input txt-sm" type="text">
-                                            </div>
-                                            <div class="flex-vertical-center">
-                                                <button type="button" class="btn-lg txt-md bold m-y-32">Save and next to shipping</button>
-                                                <button type="button" style="margin-left: 1rem; background-color: #EFEFEF; color: black"
-                                                        class="btn-lg txt-md bold m-y-32 border-no box-shadow-no close_address">Cancel</button>
-                                            </div>
+                                            <form action="MainController">
+                                                <input type="hidden" name="new_address" value=""/>
+                                                <div class="flex-horizon-center flex-col m-y-12">
+                                                    <span class="txt-md m-y-12">Address</span>
+                                                    <input
+                                                        style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
+                                                        class="input txt-sm" type="text">
+                                                </div>
+                                                <div class="flex-vertical-center">
+                                                    <button type="button" class="btn-lg txt-md bold m-y-32">Save and next to shipping</button>
+                                                    <button type="submit" style="margin-left: 1rem; background-color: #EFEFEF; color: black"
+                                                            class="btn-lg txt-md bold m-y-32 border-no box-shadow-no close_address">Cancel</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -326,57 +340,6 @@
                                 <input type="hidden" name="action" value="Checkout">
                                 <input type="hidden" name="address" value="<%=shipping_address%>">
                                 <input id="total" type="hidden" name="total"/>
-                                <!--Shipping method-->
-                                <%
-                                    if (cart != null) {
-                                        if (!cart.getCart().isEmpty()) {
-                                %>
-                                <div class="relative m-y-32">
-                                    <div style="border: 1px solid #E5E7EB;" class="pad-2 flex-between">
-                                        <div class="flex-between">
-                                            <div class="flex-center txt-md">
-                                                <i class="fa-solid fa-truck-fast"></i>
-                                            </div>
-                                            <div style="margin-left: 2rem;" class="flex-col">
-                                                <span class="txt-lg">SHIPPING METHOD</span>
-                                                <div class="flex-between txt-sm bold">
-                                                    <span>Shipping info</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div style="width: 100%;border: 1px solid #E5E7EB;" class="">
-                                        <div class="pad-2">
-                                            <div class="flex-around">
-                                                <%
-                                                    ArrayList<ShipperCompanyDTO> company_list = (ArrayList<ShipperCompanyDTO>) request.getAttribute("SHIPPER_COMPANY_LIST");
-
-                                                    company_list = (company_list == null) ? new ArrayList<ShipperCompanyDTO>() : company_list;
-
-                                                    for (ShipperCompanyDTO company : company_list) {
-                                                %>
-                                                <div class="flex">
-                                                    <input checked="" id="radio-<%=company.getId()%>" name="shipping" type="radio" value="<%=company.getName()%>" class="m-x-0" required>
-                                                    <div class="flex-center">
-                                                        <label for="radio-<%=company.getId()%>" class="radio-label m-x-0">
-                                                            <div style="width: 2.5rem;" class="img">
-                                                                <img src="<%=company.getLogo()%>" alt="">
-                                                            </div>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <%
-                                                    }
-                                                %>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <%
-                                        }
-                                    }
-                                %>
 
                                 <!-- Payment method start -->
                                 <div class="relative m-y-32">
@@ -577,7 +540,8 @@
                                     </div>
                                 </div>
 
-                                <button onclick="document.querySelector('#total').value=<%=total%>; document.querySelector('.checkout').submit();" style="width: 100%;" class="btn-lg m-y-12 txt-md">
+                                <button onclick="document.querySelector('#total').value =<%=total%>;
+                                        document.querySelector('.checkout').submit();" style="width: 100%;" class="btn-lg m-y-12 txt-md">
                                     Confirm order
                                 </button>
                             </div>

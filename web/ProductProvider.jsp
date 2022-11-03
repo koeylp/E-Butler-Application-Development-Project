@@ -59,7 +59,10 @@
             product_info = (product_info == null) ? new ProductDetailDTO() : product_info;
             product_error = (product_error == null) ? new ProductErrorDTO() : product_error;
         %>
+<<<<<<< Updated upstream
         
+=======
+>>>>>>> Stashed changes
         <div class="container-xxl">
             <div class="container-fluid nav-bar bg-white px-0">
 

@@ -1,8 +1,13 @@
+
 <%@page import="com.ebutler.swp.dto.DeliveryDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.List"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,6 +24,8 @@
         <link href="css/deliveryPage.css" rel="stylesheet"> 
         <link href="css/delivery.css" rel="stylesheet"> 
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
 
 
 
@@ -27,6 +34,38 @@
         <link rel="stylesheet" href="./css/demo.css" />
         <link rel="icon" type="image/x-icon" href="./assets/img/favicon/favicon.ico" />
         <link rel="stylesheet" href="./vendor/fonts/boxicons.css" />
+
+
+        <link rel="stylesheet" href="css/grid.css">
+        <link rel="stylesheet" href="css/base.css">
+
+
+        <link rel="stylesheet" href="css/guestPage.css">
+        <link rel="stylesheet" href="css/customerPage.css">
+        <link rel="stylesheet" href="css/delivery.css">
+
+        <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th {
+                text-align: center;
+            }
+
+            td{
+                border-top: 1px solid #dddddd;
+                border-bottom: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+
+            td label:hover {
+                cursor: pointer;
+            }
+        </style>
     </head>
      <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'SHIP'}">
         <c:redirect url="guest_loginPage.jsp"></c:redirect>
@@ -79,61 +118,11 @@
                     </div>
                     <div class="header-right">
                         <ul class="clearfix">
-                            <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
-                                    <i class="mdi mdi-email-outline"></i>
-                                    <span class="badge gradient-1 badge-pill badge-primary">3</span>
+                            <li class="icons dropdown">
+                                <a class="quick-view">
+                                    <span>$120.000</span>
+                                    <i class="fa-solid fa-wallet"></i>
                                 </a>
-                                <div class="drop-down animated fadeIn dropdown-menu">
-                                    <div class="dropdown-content-heading d-flex justify-content-between">
-                                        <span class="">3 New Messages</span>  
-
-                                    </div>
-                                    <div class="dropdown-content-body">
-                                        <ul>
-                                            <li class="notification-unread">
-                                                <a href="javascript:void()">
-                                                    <img class="float-left mr-3 avatar-img" src="images/avatar/1.jpg" alt="">
-                                                    <div class="notification-content">
-                                                        <div class="notification-heading">Saiful Islam</div>
-                                                        <div class="notification-timestamp">08 Hours ago</div>
-                                                        <div class="notification-text">Hi Teddy, Just wanted to let you ...</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="notification-unread">
-                                                <a href="javascript:void()">
-                                                    <img class="float-left mr-3 avatar-img" src="images/avatar/2.jpg" alt="">
-                                                    <div class="notification-content">
-                                                        <div class="notification-heading">Adam Smith</div>
-                                                        <div class="notification-timestamp">08 Hours ago</div>
-                                                        <div class="notification-text">Can you do me a favour?</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void()">
-                                                    <img class="float-left mr-3 avatar-img" src="images/avatar/3.jpg" alt="">
-                                                    <div class="notification-content">
-                                                        <div class="notification-heading">Bao Ngu</div>
-                                                        <div class="notification-timestamp">08 Hours ago</div>
-                                                        <div class="notification-text">Hi Teddy, Just wanted to let you ...</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void()">
-                                                    <img class="float-left mr-3 avatar-img" src="images/avatar/4.jpg" alt="">
-                                                    <div class="notification-content">
-                                                        <div class="notification-heading">Hilari Clinton</div>
-                                                        <div class="notification-timestamp">08 Hours ago</div>
-                                                        <div class="notification-text">Hello</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        </ul>
-
-                                    </div>
-                                </div>
                             </li>
                             <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
                                     <i class="mdi mdi-bell-outline"></i>
@@ -201,30 +190,30 @@
                                 </div>
                             </li>
                             <li class="icons dropdown">
-                                <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
+                                <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                                     <span class="activity active"></span>
                                     <img src="images/user/1.png" height="40" width="40" alt="">
                                 </div>
                                 <form action="MainController" method="Post">
-                                <div class="drop-down dropdown-profile   dropdown-menu">
-                                    <div class="dropdown-content-body">
-                                        <ul>
-                                            <li>
-                                                <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
-                                            </li>
-                                            <li>
-                                                <a href="email-inbox.html"><i class="icon-envelope-open"></i> <span>Inbox</span> <div class="badge gradient-3 badge-pill badge-primary">3</div></a>
-                                            </li>
+                                    <div class="drop-down dropdown-profile   dropdown-menu">
+                                        <div class="dropdown-content-body">
+                                            <ul>
+                                                <li>
+                                                    <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="email-inbox.html"><i class="icon-envelope-open"></i> <span>Inbox</span> <div class="badge gradient-3 badge-pill badge-primary">3</div></a>
+                                                </li>
 
-                                            <hr class="my-2">
-                                            <li>
-                                                <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
-                                            </li>
-                                            <li> <button class="dropdown-item"  name="action" value="LogoutProvider" ><i class="bx bx-log-out m-2"></i>Logout</button></li>
-                                        </ul>
+                                                <hr class="my-2">
+                                                <li>
+                                                    <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
+                                                </li>
+                                                <li> <button class="dropdown-item"  name="action" value="LogoutProvider" ><i class="bx bx-log-out m-2"></i>Logout</button></li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                                    </form>
+                                </form>
                             </li>
                         </ul>
                     </div>
@@ -246,16 +235,6 @@
 
             %>
             <div style="margin: 0; width: 100vw;" class="content-body">
-                <!-- <div class="row page-titles mx-0">
-                    <div class="col p-md-0">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                            <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
-                        </ol>
-                    </div>
-                </div> -->
-                <!-- row -->
-                
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
@@ -278,28 +257,28 @@
                                             </thead>
                                             <h4 style="color: red" >${sessionScope.ERROR_ASSIGN}</h4>
                                             <tbody>
-                                                <%                                                int count = 1;
+                                                <%                                                    int count = 1;
                                                     for (DeliveryDTO delivery : listDelivery) {
                                                         count++;
 
                                                 %>
                                             <form action="MainController" method="Get">
                                                 <tr>
-                                                    
-                                                    <td class="txt-sm"><%= delivery.getOrderID() %></td>
+
+                                                    <td class="txt-sm"><%= delivery.getOrderID()%></td>
                                                     <td class="txt-sm"><%= delivery.getAddress()%></td>
                                                     <td class="txt-sm"><%= delivery.getOrder_Date()%></td>
                                                     <td class="txt-sm"><%= delivery.getName()%></td>
                                                     <td class="txt-sm"><%= delivery.getTotal()%></td>
                                                     <%
-                                                        String usernameShipper = delivery.getUsername_Shipper() ; 
+                                                        String usernameShipper = delivery.getUsername_Shipper();
                                                         if (usernameShipper == null) {
-                                                            usernameShipper = "Assign Now" ;
+                                                            usernameShipper = "Assign Now";
                                                         }
                                                     %>
                                                     <td class="txt-sm">
-                                                     <a href="MainController?action=AssignDelivery&orderID=<%=delivery.getOrderID()%>" ><%= usernameShipper %></a>
-                                                     </td>
+                                                        <a href="MainController?action=AssignDelivery&orderID=<%=delivery.getOrderID()%>" ><%= usernameShipper%></a>
+                                                    </td>
                                                     <td class="txt-sm bold">
                                                         <div>
                                                             <%
@@ -312,8 +291,7 @@
 
                                                             %>
                                                             <span class="badge bg-label-info me-1 changeStatus">Shipping</span>
-                                                            <%                                                            
-                                                                } else if (status == 0) {
+                                                            <%                                                            } else if (status == 0) {
                                                             %>
                                                             <span class="badge bg-label-warning me-1 changeStatus">Pending</span>
                                                             <%
@@ -334,7 +312,7 @@
                                                         <div>
                                                             <input type="hidden" name="orderID" value="<%= delivery.getOrderID()%>" />
                                                             <input type="hidden" name="customerID" value="<%= delivery.getCustomer_ID()%>" /> 
-                                                            
+
                                                             <a href="MainController?action=DeliveryOrderDetail&orderID=<%=delivery.getOrderID()%>&customerID=<%=delivery.getCustomer_ID()%>" >View Detail</a>
                                                         </div>
                                                     </td>
@@ -364,6 +342,83 @@
 
 
             <!--**********************************
+                           Wallet start
+            ***********************************-->
+            <div id="wallet" class="overlay fixed top bot left right flex-center hide">
+                <div class="popup relative pad-2 grid">
+                    <div style="margin: -1.5rem 1rem; width: fit-content;"
+                         class="absolute p-0 right text-md opacity popup-close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+
+                    <div style="margin: 0 -4px;" class="row">
+                        <div style="max-height: 7rem; padding: 0 4px;" class="col l-2 payment-container">
+                            <div style="background-color: #F8F8F8;" class="full-w full-h flex-center pad-0 payment-method">
+                                <!--<input type="radio" id="payment-1" name="payment" class="payment-input">-->
+                                <label for="payment-1">
+                                    <div class="img">
+                                        <img style="object-fit: contain;"
+                                             src="https://cdn.pixabay.com/photo/2015/05/26/09/37/paypal-784404__480.png"
+                                             alt="" />
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <!--                        <div style="max-height: 7rem; padding: 0 4px;" class="col l-2 payment-container">
+                                                    <div style="background-color: #F8F8F8;" class="full-w full-h flex-center pad-0 payment-method">
+                                                        <input type="radio" id="payment-2" name="payment" class="payment-input">
+                                                        <label for="payment-2">
+                                                            <div class="img">
+                                                                <img style="object-fit: contain;"
+                                                                     src="https://cdn.pixabay.com/photo/2015/05/26/09/37/paypal-784404__480.png"
+                                                                     alt="" />
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                </div>-->
+                    </div>
+                    <form action="MainController" method="POST">
+
+                        <div class="m-y-1"> 
+                            <i class="fa-solid fa-wallet"></i>
+                            <span>V� PayPal</span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col l-4">
+                                <table>
+                                    <tr>
+                                        <th>Gi�</th>
+                                    </tr>
+                                    <tr>
+                                        <td for="price-1" class="pad-0 flex"><input type="radio" name="price" value="10" id="price-1"><label
+                                                for="price-1" class="m-x-0" style="flex: 1">10 $</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td for="price-2" class="pad-0 flex"><input type="radio" name="price" value="100" id="price-2"><label
+                                                for="price-2" class="m-x-0" style="flex: 1">100 $</label></td>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                            <div class="col l-8">
+                                <div class="flex-center">
+                                    <input type="hidden" name="payment" value="PayPal" />
+                                    <input type="hidden" name="card" value="true" />
+                                    <button type="submit" name="action" value="Checkout">Proceed to payment</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!--**********************************
+                           Wallet end
+            ***********************************-->
+
+            <!--**********************************
                 Footer start
             ***********************************-->
             <div class="footer">
@@ -387,6 +442,7 @@
         <script src="./js/settings.js"></script>
         <script src="./js/gleek.js"></script>
         <script src="./js/styleSwitcher.js"></script>
+        <script src="./js/customer_productPage.js"></script>
 
         <script src="./plugins/tables/js/jquery.dataTables.min.js"></script>
         <script src="./plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>

@@ -153,7 +153,7 @@
             <!-- Slider End -->
 
             <!-- Product List Start -->
-            <div style="max-height: var(--list-h);" class="grid wide border-bot border-top">
+            <div id="content" style="max-height: var(--list-h);" class="grid wide border-bot border-top">
                 <div class="grid">
                     <div class="row m-y-2">
                         <form style="padding: 0;" class="col l-10 s-8" action="MainController?action=SearchProductCategory" method="POST">
@@ -197,7 +197,7 @@
                             for (ProductDTO product : productList) {
                         %> 
                         <div class="col l-4 s-6 m-y-1 category_card">
-                            <a href="MainController?action=GoToProductDetailByType&product_ID=<%=product.getProduct_ID()%>&category_ID=<%=product.getCategory_ID()%>">
+                            <a href="MainController?action=GoToProductDetailByType&product_ID=<%=product.getProduct_ID()%>&category_ID=<%=product.getCategory_ID()%>#content">
                                 <div style="height: 20rem; border-radius: 1.5rem; box-shadow: 2px 8px 40px rgb(0 0 0 / 8%); background-color: white; " class="relative pad-1 ">
 
                                     <div class="absolute bot right">
@@ -207,16 +207,16 @@
                                     <div class="flex-col flex-between full-h">
                                         <div class="flex-between">
                                             <div style="height: 7rem; width: 7rem; background-color: #eaf2fc;" class="img rounded-f pad-1">
-                                                <img src="<%=product.getImage()%>"
+                                                <img src="<%= product.getImage()%>"
                                                      alt="">
                                             </div>
                                             <div class="flex-center">
-                                                <span class="txt-sm bold"><%=product.getDetail_list().size()%> products</span>
+                                                <span class="txt-sm bold"><%= product.getDetail_list().size()%> products</span>
                                             </div>
                                         </div>
                                         <div class="flex-horizon-center flex-col">
-                                            <span style="color: black" class="txt-xs">Manufacturar</span>
-                                            <span class="txt-lg bold"><%=product.getName()%></span>
+                                            <span style="color: black" class="txt-xs">Manufacture</span>
+                                            <span class="txt-lg bold"><%= product.getName()%></span>
                                         </div>
                                         <div class="flex-horizon-center flex-col category_detail">
                                             <a class="txt-sm">See Collection <i class="fa-solid fa-arrow-right m-x-0"></i></a>

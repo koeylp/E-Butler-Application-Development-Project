@@ -14,6 +14,7 @@ import com.ebutler.swp.dto.ProductDetailDTO;
 import com.ebutler.swp.dto.ProviderDTO;
 import com.ebutler.swp.dto.ProviderServiceDTO1;
 import com.ebutler.swp.dto.ProvinceDTO;
+import com.ebutler.swp.dto.ShipperDTO;
 import com.ebutler.swp.dto.UserDTO;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -60,8 +61,6 @@ public class LoginController extends HttpServlet {
 
             HttpSession session = request.getSession();
             session.setAttribute("LOGIN_USER", login_user);
-            ProviderDAO providerdao = new ProviderDAO();
-            ProviderDTO provider = providerdao.getProvider(username, password);
 
             AddressDAO addressDAO = new AddressDAO();
             ArrayList<ProvinceDTO> province_list = addressDAO.SelectProvince();
@@ -78,20 +77,21 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("CURRENT_CUSTOMER", customer);
                 url = CUS_PAGE;
             } else if (login_user.getRole_id().equals(SHIP_ROLE)) {
+                ShipperDTO shipper = new ShipperDTO(username, password, "", 0, 0);
+                session.setAttribute("CURRENT_SHIPPER", shipper);
                 url = SHIP_PAGE;
             } else if (userDAO.Login(username, password).getRole_id().equals(PRO_ROLE)) {
+                ProviderDAO providerdao = new ProviderDAO();
+                ProviderDTO provider = providerdao.getProvider(username, password);
                 session.setAttribute("LOGIN_PROVIDER", provider);
                 ProviderDAO providerDAO = new ProviderDAO();
                 List<ProductDetailDTO> listProduct = providerDAO.loadListProduct(provider);
                 List<ProviderServiceDTO1> listService = providerDAO.loadListService(provider);
                 if (listProduct.isEmpty() && listService != null) {
                     url = PRO_PAGE_SERVICE;
-                } else if (listProduct != null && listService.isEmpty()) {
-                    url = PRO_PAGE_PRODUCT;
-                } else {
+                } else if (listService.isEmpty() && listProduct != null) { 
                     url = PRO_PAGE_PRODUCT;
                 }
-
             } else {
                 request.setAttribute("LOGIN_ERROR", "Incorect username or password");
             }

@@ -45,7 +45,7 @@ public class Provider_ProductController extends HttpServlet {
                 session.setAttribute("Provider_ListProductCategory", listCategory);
                 session.setAttribute("Provider_ListProductCategoryChoose", listCategoryChoose);
                 url = SUCCESS;
-            } else if (listProduct.size() == 0) { 
+            } else if (listProduct.isEmpty()) { 
                 session.setAttribute("MESSAGE_PRODUCT", "Your Company Don't Serve This Service");
             }
         } catch (Exception e) {

@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -23,25 +24,32 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "ExecutePaymentController", urlPatterns = {"/ExecutePaymentController"})
 public class ExecutePaymentController extends HttpServlet {
 
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String paymentId = request.getParameter("paymentId");
         String payerId = request.getParameter("PayerID");
- 
+
         try {
             PaymentServiceDTO paymentServices = new PaymentServiceDTO();
             Payment payment = paymentServices.executePayment(paymentId, payerId);
-            
+
             PayerInfo payerInfo = payment.getPayer().getPayerInfo();
             Transaction transaction = payment.getTransactions().get(0);
-             
+
             request.setAttribute("payer", payerInfo);
-            request.setAttribute("transaction", transaction);          
- 
-            request.getRequestDispatcher("CheckoutController").forward(request, response);
-             
+            request.setAttribute("transaction", transaction);
+
+            HttpSession session = request.getSession();
+            if (session != null) {
+                String cardShipper = (String) session.getAttribute("CARD_SHIPPER");
+                if (cardShipper.equals("true")) {
+                    request.getRequestDispatcher("TopUpController").forward(request, response);
+                } else {
+                    request.getRequestDispatcher("CheckoutController").forward(request, response);
+                }
+            }
+
         } catch (PayPalRESTException e) {
             request.setAttribute("errorMessage", e.getMessage());
             e.printStackTrace();

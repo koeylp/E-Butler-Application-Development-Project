@@ -20,13 +20,23 @@ import java.util.List;
  */
 public class OrderDAO {
 
-    private static final String INSERT = "INSERT INTO tblOrder(order_Date, customer_ID, status, total, payment, shipping) VALUES(?, ?, ?, ?, ?, ?)";
-    private static final String INSERT_DETAIL = "INSERT INTO tblOrder_Product_Detail(product_detail_ID, order_ID, quantity, price, [status]) VALUES(?, ?, ?, ?, ?)";
-    private static final String GET_ALL_ORDER = "SELECT order_ID, order_Date, customer_ID, status, total FROM tblOrder";
-    private static final String INSERT_SERVICE_DETAIL = "INSERT INTO tblOrder_Service_Detail(staff_ID, service_Detail_ID, order_ID, price, [status]) VALUES(?, ?, ?, ?, ?)";
-    private static final String INSERT_DELIVERY = "INSERT INTO tblDelivery(order_id, address, shipper_id,username_Shipper ,[status]) VALUES(?, ?, ?,?, ?)";
+    private static final String INSERT = "\n"
+            + "INSERT INTO tblOrder(order_Date, customer_ID, status, total, payment)\n"
+            + "VALUES(?, ?, ?, ?, ?)";
+    private static final String INSERT_DETAIL = "\n"
+            + "INSERT INTO tblOrder_Product_Detail(product_detail_ID, order_ID, quantity, price, [status])\n"
+            + "VALUES(?, ?, ?, ?, ?)";
+    private static final String GET_ALL_ORDER = "\n"
+            + "SELECT order_ID, order_Date, customer_ID, status, total\n"
+            + "FROM tblOrder";
+    private static final String INSERT_SERVICE_DETAIL = "\n"
+            + "INSERT INTO tblOrder_Service_Detail(staff_ID, service_Detail_ID, order_ID, price, [status])\n"
+            + "VALUES(?, ?, ?, ?, ?)";
+    private static final String INSERT_DELIVERY = "\n"
+            + "INSERT INTO tblDelivery(order_id, address, shipper_id,username_Shipper ,[status])\n"
+            + "VALUES(?, ?, ?,?, ?)";
 
-    public static void insertOrder(Date date, String username, int status, double total, String payment, String shipping) throws SQLException {
+    public static void insertOrder(Date date, String username, int status, double total, String payment) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
@@ -38,7 +48,6 @@ public class OrderDAO {
                 ptm.setInt(3, status);
                 ptm.setDouble(4, total);
                 ptm.setString(5, payment);
-                ptm.setString(6, shipping);
                 ptm.executeUpdate();
             }
         } catch (Exception e) {

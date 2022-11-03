@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class AddressDAO {
 
-    private static final String SELECT_PROVINCE = "select province_ID, province_Name from tblProvince_City";
+    private final String SELECT_PROVINCE = "select province_ID, province_Name from tblProvince_City";
     private final String SELECT_CITY = "select district_ID, city_name, province_ID from tblDistrict where province_ID = ?";
     private final String INSERT_ADDRESS = "insert into tblAddress(street, district_ID, user_ID, status) values (?, ?, ?, ?)";
     private final String DELETE_ADDRESS = "update tblAddress set status = -1 where user_ID = ? and address_ID = ?";
@@ -28,7 +28,76 @@ public class AddressDAO {
     private final String RESET_ADDRESS_DEFAULT = "update tblAddress set status = 0 where status <> -1";
     private final String SELECT_ADDRESS = "select a.street, a.district_ID, user_ID, status, d.city_name, pc.province_Name, a.address_ID, pc.province_ID from tblAddress as a JOIN tblDistrict d ON a.district_ID = d.district_ID JOIN tblProvince_City pc ON d.province_ID = pc.province_ID where user_ID = ? and a.status <> -1 order by a.status DESC";
 
-    public static ArrayList<ProvinceDTO> SelectProvince() throws SQLException {
+    private final String SELECT_PROVINCE_ID = "select [province_Name] from tblProvince_City where [province_ID] = ?";
+    private final String SELECT_CITY_ID = "select [city_name] from tblProvince_City where [district_ID] = ?";
+    
+    public String SelectProvinceById(String provinceID) throws SQLException {
+        String name = "";
+
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SELECT_PROVINCE_ID);
+                ptm.setString(1, provinceID);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    name = rs.getString(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return name;
+    }
+    
+    public String SelectCityById(String CityID) throws SQLException {
+        String name = "";
+
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SELECT_CITY_ID);
+                ptm.setString(1, CityID);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    name = rs.getString(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return name;
+    }
+    
+    public ArrayList<ProvinceDTO> SelectProvince() throws SQLException {
         ArrayList<ProvinceDTO> list = new ArrayList<>();
 
         Connection conn = null;
@@ -210,9 +279,5 @@ public class AddressDAO {
             }
         }
         return list;
-    }
-    
-    public static void main(String[] args) throws SQLException {
-        System.out.println(SelectProvince());
     }
 }
