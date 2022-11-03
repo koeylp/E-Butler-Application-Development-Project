@@ -27,6 +27,8 @@ public class AddressDTO {
 
     public AddressDTO() {
         this.district_id = "";
+        this.district_name = "";
+        this.province_name = "";
         this.street = "";
         this.user_id = "";
         this.status = 0;
@@ -94,6 +96,13 @@ public class AddressDTO {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        if(this.getStreet().isEmpty() || this.getDistrict_name().isEmpty() || this.getProvince_name().isEmpty()) return "";
+        
+        return (this.getStreet() + ", " + this.getDistrict_name() + ", " + this.getProvince_name());
     }
     
     

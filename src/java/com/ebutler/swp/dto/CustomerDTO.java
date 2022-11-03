@@ -24,7 +24,7 @@ public class CustomerDTO {
     private int point;
     private int status;
 
-    private ArrayList<AddressDTO> address_list = new ArrayList<AddressDTO>();
+    private ArrayList<AddressDTO> address_list = null;
 
     public CustomerDTO() {
         this.username = "";
@@ -164,7 +164,7 @@ public class CustomerDTO {
     }
 
     public AddressDTO getAddressDefault() {
-        AddressDTO address_default = new AddressDTO(); 
+        AddressDTO address_default = null; 
 
         for (AddressDTO address : this.getAddress_list()) {
             if (address.getStatus() == 1) {

@@ -646,7 +646,7 @@
                                                         %>
                                                         <select
                                                             style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
-                                                            class="input txt-sm" type="password" onchange="this.form.submit()" name="province_id">
+                                                            class="input txt-sm" type="text" onchange="this.form.submit()" name="province_id">
                                                             <option>Select Province</option>
                                                             <%
                                                                 for (ProvinceDTO province : province_list) {
@@ -672,7 +672,7 @@
                                                         %>
                                                         <select
                                                             style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
-                                                            class="input txt-sm" type="password" name="city_id" onchange="this.form.submit()">
+                                                            class="input txt-sm" type="text" name="city_id" onchange="this.form.submit()">
                                                             <option>Select City</option>
                                                             <%
                                                                 for (CityDTO city : city_list) {

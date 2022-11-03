@@ -14,7 +14,6 @@ CREATE TABLE tblUserRole (
 )
 GO
 
-
 -----USER-----
 CREATE TABLE tblUser(
 	username nvarchar(30) PRIMARY KEY,
@@ -244,7 +243,6 @@ CREATE TABLE tblDelivery (
 	id int IDENTITY(1,1) PRIMARY KEY,
 	order_id int REFERENCES tblOrder(order_ID),
 	[address] nvarchar(max),
-	shipper_id nvarchar(30) REFERENCES tblShipperCategory(username), 
 	username_Shipper nvarchar(30) REFERENCES tblShipper(username)  ,
 	[status] int
 )
