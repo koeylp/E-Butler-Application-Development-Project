@@ -47,6 +47,9 @@ public class UpdateCustomerInfoController extends HttpServlet {
             int status = currentUser.getStatus();
             if (avatar == null || avatar == "") {
                 avatar = (String) session.getAttribute("PHOTO_PATH");
+                if (avatar == null) {
+                    avatar = "";
+                }
             }
                
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -88,6 +91,7 @@ public class UpdateCustomerInfoController extends HttpServlet {
                     boolean check = dao.updateCurrentCustomerInfo(avatar, name, email, dob, gender, phone, username);
                     if (check) {
                         request.setAttribute("UPDATE_SUCESSFULLY", "All your information has been updated!");
+                        session.setAttribute("CURRENT_CUSTOMER", customer);
                         url = SUCCESS;
                     }
                 }

@@ -17,8 +17,7 @@
         <meta content="" name="description">
 
         <!-- Favicon -->
-        <link href="" rel="icon">
-
+        <link rel="icon" type="image/png" href="img/logo-bulldog.png">
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,12 +56,12 @@
 
         <title>E-Butler</title>
     </head>
-     <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'CUS'}">
+    <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'CUS'}">
         <c:redirect url="guest_loginPage.jsp"></c:redirect>
     </c:if>
 
     <body>
-         <div class="container-xxl bg-white p-0">
+        <div class="container-xxl bg-white p-0">
             <!-- Spinner Start -->
             <div id="spinner"
                  class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -94,13 +93,13 @@
                                 <a href="LoadingProductAndServiceCategory#service" class="nav-link navigator">Service</a>
                             </div>
                             <a href="LoadingProductAndServiceCategory#help" class="nav-item nav-link navigator">Help</a>
-<!--                            <div class="search absolute hide">
-                                <a><i class="fa-solid fa-magnifying-glass"></i></a>
-                                <input
-                                    style="flex: 1; background-color: transparent; border: none; outline: none; margin: 0 20px;"
-                                    type="text" placeholder="Type and press enter">
-                                <a class="search-close opacity"><i class="fa-solid fa-xmark"></i></a>
-                            </div>-->
+                            <!--                            <div class="search absolute hide">
+                                                            <a><i class="fa-solid fa-magnifying-glass"></i></a>
+                                                            <input
+                                                                style="flex: 1; background-color: transparent; border: none; outline: none; margin: 0 20px;"
+                                                                type="text" placeholder="Type and press enter">
+                                                            <a class="search-close opacity"><i class="fa-solid fa-xmark"></i></a>
+                                                        </div>-->
                             <div class="nav-item dropdown">
                                 <div class="nav-link">
                                     <div style="width: 1.5rem;" class="img rounded-f">
@@ -131,22 +130,22 @@
                 </nav>
             </div>
             <!-- Navbar End -->
-        <%
-            String statement = (String) session.getAttribute("STATEMENT");
-        %>
-        <!-- Shop Cart Section Begin -->
-        <div style="width:92%; margin-left: 48px; padding: 50px" class="rounded mt-5 bg-white ">
-            <div style="text-align: center;">
-                <h1><%= statement%></h1>
-            </div>      
-        </div>
+            <%
+                String statement = (String) session.getAttribute("STATEMENT");
+            %>
+            <!-- Shop Cart Section Begin -->
+            <div style="width:92%; margin-left: 48px; padding: 50px" class="rounded mt-5 bg-white ">
+                <div style="text-align: center;">
+                    <h1><%= statement%></h1>
+                </div>      
+            </div>
 
 
-        <!-- Shop Cart Section End -->
+            <!-- Shop Cart Section End -->
 
 
 
-        <!-- Footer Start -->
+            <!-- Footer Start -->
             <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5  wow fadeIn" data-wow-delay="0.1s">
                 <div class="container py-5">
                     <div class="row g-5">
@@ -233,6 +232,6 @@
     <!-- javascript -->
 
 
-    </body>
+</body>
 
 </html>

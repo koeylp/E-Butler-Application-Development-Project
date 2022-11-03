@@ -14,7 +14,7 @@
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
-        <link rel="icon" type="image/png" href="img/logo.png">
+        <link rel="icon" type="image/png" href="img/logo-bulldog.png">
 
         <!-- Icon FontAwesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />

@@ -17,7 +17,7 @@
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
-
+        <link rel="icon" type="image/png" href="img/logo-bulldog.png">
         <!-- Icon FontAwesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
 
@@ -51,7 +51,7 @@
         <link rel="stylesheet" href="css/customer_profilePage.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
-     <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'CUS'}">
+    <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'CUS'}">
         <c:redirect url="guest_loginPage.jsp"></c:redirect>
     </c:if>
 
@@ -222,8 +222,8 @@
 
                         <form action="MainController">
                             <div class="flex-horizon-center flex-col m-y-12">
-                                <%= updateSuccess %>
-                                <%= emptyInfo %>
+                                <%= updateSuccess%>
+                                <%= emptyInfo%>
                                 <span class="txt-lg bold m-y-12">Full name</span>
                                 <input name="name" value="<%= customer.getName()%>"style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
                                        class="input txt-sm" type="text" placeholder="<%= customer.getName()%>">
@@ -282,7 +282,7 @@
                                 </div>
                             </div>
                             <div class="flex-horizon-center flex-col relative m-y-12">
-                                <%= phoneWrongFormat %>
+                                <%= phoneWrongFormat%>
                                 <span class="txt-lg bold m-y-12">Phone number</span>
                                 <div class="flex-horizon-center">
                                     <span class="txt-lg input-icon flex-center">

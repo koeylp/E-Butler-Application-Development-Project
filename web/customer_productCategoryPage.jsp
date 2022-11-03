@@ -13,8 +13,7 @@
         <meta content="" name="keywords">
         <meta content="" name="description">
         <link rel="stylesheet" href="./vendor/fonts/boxicons.css" />
-        <link rel="icon" type="image/x-icon" href="img/logo.png">
-
+        <link rel="icon" type="image/png" href="img/logo-bulldog.png">
         <!-- Icon FontAwesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
 
@@ -48,7 +47,7 @@
 
 
     </head>
-     <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'CUS'}">
+    <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'CUS'}">
         <c:redirect url="guest_loginPage.jsp"></c:redirect>
     </c:if>
 
