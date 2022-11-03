@@ -189,7 +189,6 @@
                                     double sub_product_total = 0;
                                     if (cart != null) {
                                         for (ProductDetailDTO product : cart.getCart().values()) {
-
                                             sub_product_total += product.getPrice() * product.getQuantity();
                                 %>
                                 <form action="MainController" method="POST">
@@ -391,15 +390,23 @@
                                     <span>Order service total</span>
                                     <span class="bold"> $<%=  sub_total_service%></span>
                                 </div>
-                                <!--                                <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB" class="flex-between txt-sm">
-                                                                    <span>Tax estimate</span>
-                                                                    <span class="bold">$4</span>
-                                                                </div>-->
+
                                 <div style="padding: 1rem 0;" class="flex-between txt-lg bold">
                                     <span>Order total</span>
                                     <span class="bold">$<%= total%></span>
                                 </div>
+                                <%
+                                    if (cart == null && cartService == null) {
+                                %>
+
+                                <%
+                                } else {
+                                %>
                                 <button type="button" style="width: 100%;" class="btn-lg m-y-12 txt-md"><a style="color:white" href="MainController?action=LoadCartData">Proceed to checkout</a></button>
+                                <%
+                                    }
+                                %>
+                                
                             </div>
                         </div>
                     </div>

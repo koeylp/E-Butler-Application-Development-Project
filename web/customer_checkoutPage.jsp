@@ -336,57 +336,6 @@
                                 <input type="hidden" name="action" value="Checkout">
                                 <input type="hidden" name="address" value="<%=shipping_address%>">
                                 <input id="total" type="hidden" name="total"/>
-                                <!--Shipping method-->
-                                <%
-                                    if (cart != null) {
-                                        if (!cart.getCart().isEmpty()) {
-                                %>
-                                <div class="relative m-y-32">
-                                    <div style="border: 1px solid #E5E7EB;" class="pad-2 flex-between">
-                                        <div class="flex-between">
-                                            <div class="flex-center txt-md">
-                                                <i class="fa-solid fa-truck-fast"></i>
-                                            </div>
-                                            <div style="margin-left: 2rem;" class="flex-col">
-                                                <span class="txt-lg">SHIPPING METHOD</span>
-                                                <div class="flex-between txt-sm bold">
-                                                    <span>Shipping info</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div style="width: 100%;border: 1px solid #E5E7EB;" class="">
-                                        <div class="pad-2">
-                                            <div class="flex-around">
-                                                <%
-                                                    ArrayList<ShipperCompanyDTO> company_list = (ArrayList<ShipperCompanyDTO>) request.getAttribute("SHIPPER_COMPANY_LIST");
-
-                                                    company_list = (company_list == null) ? new ArrayList<ShipperCompanyDTO>() : company_list;
-
-                                                    for (ShipperCompanyDTO company : company_list) {
-                                                %>
-                                                <div class="flex">
-                                                    <input checked="" id="radio-<%=company.getId()%>" name="shipping" type="radio" value="<%=company.getName()%>" class="m-x-0" required>
-                                                    <div class="flex-center">
-                                                        <label for="radio-<%=company.getId()%>" class="radio-label m-x-0">
-                                                            <div style="width: 2.5rem;" class="img">
-                                                                <img src="<%=company.getLogo()%>" alt="">
-                                                            </div>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <%
-                                                    }
-                                                %>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <%
-                                        }
-                                    }
-                                %>
 
                                 <!-- Payment method start -->
                                 <div class="relative m-y-32">

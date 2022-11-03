@@ -1,7 +1,9 @@
+
 <%@page import="com.ebutler.swp.dto.DeliveryDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.List"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -335,7 +337,7 @@
             <!--**********************************
                            Wallet start
             ***********************************-->
-            <div class="overlay fixed top bot left right flex-center hide">
+            <div id="wallet" class="overlay fixed top bot left right flex-center hide">
                 <div class="popup relative pad-2 grid">
                     <div style="margin: -1.5rem 1rem; width: fit-content;"
                          class="absolute p-0 right text-md opacity popup-close">
@@ -345,7 +347,7 @@
                     <div style="margin: 0 -4px;" class="row">
                         <div style="max-height: 7rem; padding: 0 4px;" class="col l-2 payment-container">
                             <div style="background-color: #F8F8F8;" class="full-w full-h flex-center pad-0 payment-method">
-                                <input type="radio" id="payment-1" name="payment" class="payment-input">
+                                <!--<input type="radio" id="payment-1" name="payment" class="payment-input">-->
                                 <label for="payment-1">
                                     <div class="img">
                                         <img style="object-fit: contain;"
@@ -355,49 +357,53 @@
                                 </label>
                             </div>
                         </div>
-                        <div style="max-height: 7rem; padding: 0 4px;" class="col l-2 payment-container">
-                            <div style="background-color: #F8F8F8;" class="full-w full-h flex-center pad-0 payment-method">
-                                <input type="radio" id="payment-2" name="payment" class="payment-input">
-                                <label for="payment-2">
-                                    <div class="img">
-                                        <img style="object-fit: contain;"
-                                             src="https://cdn.pixabay.com/photo/2015/05/26/09/37/paypal-784404__480.png"
-                                             alt="" />
-                                    </div>
-                                </label>
+                        <!--                        <div style="max-height: 7rem; padding: 0 4px;" class="col l-2 payment-container">
+                                                    <div style="background-color: #F8F8F8;" class="full-w full-h flex-center pad-0 payment-method">
+                                                        <input type="radio" id="payment-2" name="payment" class="payment-input">
+                                                        <label for="payment-2">
+                                                            <div class="img">
+                                                                <img style="object-fit: contain;"
+                                                                     src="https://cdn.pixabay.com/photo/2015/05/26/09/37/paypal-784404__480.png"
+                                                                     alt="" />
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                </div>-->
+                    </div>
+                    <form action="MainController" method="POST">
+
+                        <div class="m-y-1"> 
+                            <i class="fa-solid fa-wallet"></i>
+                            <span>Ví PayPal</span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col l-4">
+                                <table>
+                                    <tr>
+                                        <th>Giá</th>
+                                    </tr>
+                                    <tr>
+                                        <td for="price-1" class="pad-0 flex"><input type="radio" name="price" value="10" id="price-1"><label
+                                                for="price-1" class="m-x-0" style="flex: 1">10 $</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td for="price-2" class="pad-0 flex"><input type="radio" name="price" value="100" id="price-2"><label
+                                                for="price-2" class="m-x-0" style="flex: 1">100 $</label></td>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                            <div class="col l-8">
+                                <div class="flex-center">
+                                    <input type="hidden" name="payment" value="PayPal" />
+                                    <input type="hidden" name="card" value="true" />
+                                    <button type="submit" name="action" value="Checkout">Proceed to payment</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="m-y-1"> 
-                        <i class="fa-solid fa-wallet"></i>
-                        <span>Ví PayPal</span>
-                    </div>
-
-                    <div class="row">
-                        <div class="col l-4">
-                            <table>
-                                <tr>
-                                    <th>Giá</th>
-                                </tr>
-                                <tr>
-                                    <td for="price-1" class="pad-0 flex"><input type="radio" name="price" id="price-1"><label
-                                            for="price-1" class="m-x-0" style="flex: 1">10 $</label></td>
-                                </tr>
-                                <tr>
-                                    <td for="price-2" class="pad-0 flex"><input type="radio" name="price" id="price-2"><label
-                                            for="price-2" class="m-x-0" style="flex: 1">10</label></td>
-                                </tr>
-
-                            </table>
-                        </div>
-
-                        <div class="col l-8">
-                            <div class="flex-center">
-                                <button>Process to payment</button>
-                            </div>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
 

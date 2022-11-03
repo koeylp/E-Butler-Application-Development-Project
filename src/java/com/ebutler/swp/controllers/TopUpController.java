@@ -4,11 +4,11 @@
  */
 package com.ebutler.swp.controllers;
 
-import com.ebutler.swp.dao.ProductDAO;
-import com.ebutler.swp.dto.ProductDTO;
+import com.ebutler.swp.dao.ShipperDAO;
+import com.ebutler.swp.dto.ShipperDTO;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,29 +16,34 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Admin
+ * @author thekh
  */
-public class ProductPageController extends HttpServlet {
+@WebServlet(name = "TopUpController", urlPatterns = {"/TopUpController"})
+public class TopUpController extends HttpServlet {
 
-    private static final String SUCCESS = "customer_productCategoryPage.jsp";
     private static final String ERROR = "errorPage.jsp";
+    private static final String SUCCESS = "delivery_homePage.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String category_ID = request.getParameter("category_ID");
-
-            ProductDAO dao = new ProductDAO();
-            List<ProductDTO> list = dao.getListProductByPlace(category_ID);
             HttpSession session = request.getSession();
-
-            session.setAttribute("CATEGORYID", category_ID);
-            session.setAttribute("CUSTOMER_PRODUCT_LIST", list);
-            url = SUCCESS;
+            if (session != null) {
+                String cardPrice = (String) session.getAttribute("CARD_PRICE");
+                ShipperDTO shipper = (ShipperDTO) session.getAttribute("CURRENT_SHIPPER");
+                ShipperDAO shipperDao = new ShipperDAO();
+                double wallet = Double.parseDouble(cardPrice);
+                if (wallet > 0) {
+                    String n = shipper.getUsername();
+                    shipperDao.updateWallet(shipper.getUsername(), wallet);
+                    
+                    url = SUCCESS;
+                }
+            }
         } catch (Exception e) {
-            log("Error at ProductPageController: " + e.getMessage());
+            log("Error at TopUpController: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

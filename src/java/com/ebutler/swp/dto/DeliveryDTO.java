@@ -11,24 +11,25 @@ import java.sql.Date;
  * @author DELL
  */
 public class DeliveryDTO {
-    private int orderID ; 
-    private String address ;  
-    private Date order_Date ;  
-    private String name ;  
-    private double total ;  
-    private int status ; 
-    private String username_Shipper ; 
-    private String customer_ID ; 
 
-    public DeliveryDTO(int orderID, String address,String username_Shipper , Date order_Date, String customer_ID , String name, double total, int status) {
+    private int orderID;
+    private String address;
+    private Date order_Date;
+    private String name;
+    private double total;
+    private int status;
+    private String username_Shipper;
+    private String customer_ID;
+
+    public DeliveryDTO(int orderID, String address, String username_Shipper, Date order_Date, String customer_ID, String name, double total, int status) {
         this.orderID = orderID;
         this.address = address;
         this.order_Date = order_Date;
         this.name = name;
         this.total = total;
         this.status = status;
-        this.customer_ID = customer_ID ;
-        this.username_Shipper = username_Shipper ;
+        this.customer_ID = customer_ID;
+        this.username_Shipper = username_Shipper;
     }
 
     public int getOrderID() {
@@ -94,13 +95,10 @@ public class DeliveryDTO {
     public void setUsername_Shipper(String username_Shipper) {
         this.username_Shipper = username_Shipper;
     }
-       
-    
-    
-    @Override
-    public String toString() {
-        return "DeliveryDTO{" + "orderID=" + orderID + ", address=" + address + ", order_Date=" + order_Date + ", name=" + name + ", total=" + total + ", status=" + status + '}';
-    }
-    
-    
+
+//    @Override
+//    public String toString() {
+//        return "DeliveryDTO{" + "orderID=" + orderID + ", address=" + address + ", order_Date=" + order_Date + ", name=" + name + ", total=" + total + ", status=" + status + '}';
+//    }
+
 }

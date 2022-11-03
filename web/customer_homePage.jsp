@@ -13,7 +13,7 @@
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
-        <link rel="icon" type="image/png" href="img/how_it_works.png">
+        <link rel="icon" type="image/png" href="img/logo.png">
 
         <!-- Icon FontAwesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
@@ -135,14 +135,15 @@
             <div class="grid">
                 <div class="relative">
                     <div class="slider__img">
+                        <img src="https://stonebali.com/wp-content/uploads/2020/02/banner_cleaning_02.jpg" style="width:100%">
+                    </div>
+                    <div class="slider__img">
                         <img src="https://cf.shopee.vn/file/5b5de1582d99cbbe75a8f9a5c4dae1c2_xxhdpi" style="width:100%">
                     </div>
                     <div class="slider__img">
                         <img src="https://cf.shopee.vn/file/29a513618bd587d238c3134143f93d96_xxhdpi" style="width:100%">
                     </div>
-                    <div class="slider__img">
-                        <img src="https://cf.shopee.vn/file/1889d97f151eb9902f649437876b6e7f_xxhdpi" style="width:100%">
-                    </div>
+                    
 
                     <a class="prev left" onclick="plusSlides(-1)">&#10094;</a>
                     <a class="next right" onclick="plusSlides(1)">&#10095;</a>
@@ -198,7 +199,7 @@
                                                         </div>
 
                                                         <div>
-                                                            <button class="my-btn txt-lg bold" name="action" value="GoToProductPageByPlace">Show me all</button>
+                                                            <button class="my-btn txt-lg bold" name="action" value="GoToProductPageByPlace">Show All</button>
                                                             <input type="hidden" name="category_ID" value="<%=category.getCategory_ID()%>"/>
                                                         </div>
                                                     </div>
