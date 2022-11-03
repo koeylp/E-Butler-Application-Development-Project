@@ -25,8 +25,8 @@ public class AddToCartController extends HttpServlet {
 
     private static final String ERROR = "errorPage.jsp";
     private static final String SUCCESS = "customer_productPage.jsp";
-    private static final String SUCCESS_QUICKVIEW = "customer_productPage.jsp#quickview";
-    
+    private static final String SUCCESS_QUICKVIEW = "customer_cart.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -35,6 +35,9 @@ public class AddToCartController extends HttpServlet {
             String id = request.getParameter("product_ID");
             int quantity = Integer.parseInt(request.getParameter("quantity"));
             String quickview = request.getParameter("quickview");
+            if (quickview == null) {
+                quickview = "false";
+            }
             ProductDAO dao = new ProductDAO();
             HttpSession session = request.getSession();
             if (session != null) {
@@ -53,7 +56,12 @@ public class AddToCartController extends HttpServlet {
                 session.setAttribute("STOCK", quantityStock);
                 session.setAttribute("CART", cart);
                 request.setAttribute("ADD_SUCCESS", "Added " + quantity + " " + cart.getCart().get(id).getName() + " Successfully!");
-                url = SUCCESS;
+
+                if (quickview.equals("true")) {
+                    url = SUCCESS_QUICKVIEW;
+                } else {
+                    url = SUCCESS;
+                }
             }
         } catch (Exception e) {
             log("Error at AddToCartController" + e.toString());

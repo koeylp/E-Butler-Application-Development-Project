@@ -4,11 +4,8 @@
  */
 package com.ebutler.swp.controllers;
 
-import com.ebutler.swp.dto.PaymentServiceDTO;
-import com.paypal.api.payments.PayerInfo;
-import com.paypal.api.payments.Payment;
-import com.paypal.api.payments.Transaction;
-import com.paypal.base.rest.PayPalRESTException;
+import com.ebutler.swp.dao.ShipperDAO;
+import com.ebutler.swp.dto.ShipperDTO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,39 +18,34 @@ import javax.servlet.http.HttpSession;
  *
  * @author thekh
  */
-@WebServlet(name = "ExecutePaymentController", urlPatterns = {"/ExecutePaymentController"})
-public class ExecutePaymentController extends HttpServlet {
+@WebServlet(name = "TopUpController", urlPatterns = {"/TopUpController"})
+public class TopUpController extends HttpServlet {
+
+    private static final String ERROR = "errorPage.jsp";
+    private static final String SUCCESS = "delivery_homePage.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String paymentId = request.getParameter("paymentId");
-        String payerId = request.getParameter("PayerID");
-
+        String url = ERROR;
         try {
-            PaymentServiceDTO paymentServices = new PaymentServiceDTO();
-            Payment payment = paymentServices.executePayment(paymentId, payerId);
-
-            PayerInfo payerInfo = payment.getPayer().getPayerInfo();
-            Transaction transaction = payment.getTransactions().get(0);
-
-            request.setAttribute("payer", payerInfo);
-            request.setAttribute("transaction", transaction);
-
             HttpSession session = request.getSession();
             if (session != null) {
-                String cardShipper = (String) session.getAttribute("CARD_SHIPPER");
-                if (cardShipper.equals("true")) {
-                    request.getRequestDispatcher("TopUpController").forward(request, response);
-                } else {
-                    request.getRequestDispatcher("CheckoutController").forward(request, response);
+                String cardPrice = (String) session.getAttribute("CARD_PRICE");
+                ShipperDTO shipper = (ShipperDTO) session.getAttribute("CURRENT_SHIPPER");
+                ShipperDAO shipperDao = new ShipperDAO();
+                double wallet = Double.parseDouble(cardPrice);
+                if (wallet > 0) {
+                    String n = shipper.getUsername();
+                    shipperDao.updateWallet(shipper.getUsername(), wallet);
+                    
+                    url = SUCCESS;
                 }
             }
-
-        } catch (PayPalRESTException e) {
-            request.setAttribute("errorMessage", e.getMessage());
-            e.printStackTrace();
-            request.getRequestDispatcher("error.jsp").forward(request, response);
+        } catch (Exception e) {
+            log("Error at TopUpController: " + e.getMessage());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

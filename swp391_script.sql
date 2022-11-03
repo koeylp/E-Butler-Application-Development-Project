@@ -14,7 +14,6 @@ CREATE TABLE tblUserRole (
 )
 GO
 
-
 -----USER-----
 CREATE TABLE tblUser(
 	username nvarchar(30) PRIMARY KEY,
@@ -24,7 +23,7 @@ CREATE TABLE tblUser(
 	[email] [nvarchar](30),
 	[status] [decimal](1)
 )
-
+GO
 
 
 CREATE TABLE tblCustomer (
@@ -226,22 +225,23 @@ CREATE TABLE tblShipper (
 	username nvarchar(30) PRIMARY KEY,
 	[password] nvarchar(30),
 	[name] nvarchar(30),
-	[status] int
+	[status] int,
+	wallet decimal(12)
 )
 GO
 
-CREATE TABLE tblShipperWallet (
+/*CREATE TABLE tblShipperWallet (
 	[shipper_id] nvarchar(30) PRIMARY KEY,
 	total int
 )
-GO
+GO*/
 
 CREATE TABLE tblDelivery (
 	id int IDENTITY(1,1) PRIMARY KEY,
 	order_id int REFERENCES tblOrder(order_ID),
 	[address] nvarchar(max),
 	shipper_id nvarchar(30) REFERENCES tblShipper(username), 
-	username_Shipper nvarchar(30) REFERENCES tblShipper(username)  ,
+	username_Shipper nvarchar(30) REFERENCES tblShipper(username),
 	[status] int
 )
 GO
@@ -1900,23 +1900,23 @@ SELECT * FROM tblUser*/
 
 
 
-INSERT INTO tblShipper(username, password, name, status) VALUES ('grap1','1','Nguyen Van A', 1)
-INSERT INTO tblShipper(username, password, name, status) VALUES ('grap2','1','Nguyen Anh Tuan', 1)
-INSERT INTO tblShipper(username, password, name, status) VALUES ('grap3','1','Nguyen Thi Hong', 1)
-INSERT INTO tblShipper(username, password, name, status) VALUES ('grap4','1','Nguyen Manh Quang', 1)
-INSERT INTO tblShipper(username, password, name, status) VALUES ('grap5','1','Le Ba Hau', 1)
+INSERT INTO tblShipper(username, password, name, status, wallet) VALUES ('grap1','1','Nguyen Van A', 1, 0)
+INSERT INTO tblShipper(username, password, name, status, wallet) VALUES ('grap2','1','Nguyen Anh Tuan', 1, 0)
+INSERT INTO tblShipper(username, password, name, status, wallet) VALUES ('grap3','1','Nguyen Thi Hong', 1, 0)
+INSERT INTO tblShipper(username, password, name, status, wallet) VALUES ('grap4','1','Nguyen Manh Quang', 1, 0)
+INSERT INTO tblShipper(username, password, name, status, wallet) VALUES ('grap5','1','Le Ba Hau', 1, 0)
 
-INSERT INTO tblShipper(username, password, name, status) VALUES ('shopee1','1','Nguyen Van Hoa', 1)
-INSERT INTO tblShipper(username, password, name, status) VALUES ('shopee2','1','Nguyen Anh Tuan Hiep', 1)
-INSERT INTO tblShipper(username, password, name, status) VALUES ('shopee3','1','Nguyen Thi Cam', 1)
-INSERT INTO tblShipper(username, password, name, status) VALUES ('shopee4','1','Nguyen Manh Quang Anh', 1)
-INSERT INTO tblShipper(username, password, name, status) VALUES ('shopee5','1','Le Ba Hung', 1)
+INSERT INTO tblShipper(username, password, name, status, wallet) VALUES ('shopee1','1','Nguyen Van Hoa', 1, 0)
+INSERT INTO tblShipper(username, password, name, status, wallet) VALUES ('shopee2','1','Nguyen Anh Tuan Hiep', 1, 0)
+INSERT INTO tblShipper(username, password, name, status, wallet) VALUES ('shopee3','1','Nguyen Thi Cam', 1, 0)
+INSERT INTO tblShipper(username, password, name, status, wallet) VALUES ('shopee4','1','Nguyen Manh Quang Anh', 1, 0)
+INSERT INTO tblShipper(username, password, name, status, wallet) VALUES ('shopee5','1','Le Ba Hung', 1, 0)
 
-INSERT INTO tblShipper(username, password, name, status) VALUES ('shoppe1','1','Nguyen Van A', 1)
-INSERT INTO tblShipper(username, password, name, status) VALUES ('shoppe2','1','Nguyen Anh Tuan', 1)
-INSERT INTO tblShipper(username, password, name, status) VALUES ('shoppe3','1','Nguyen Thi Hong', 1)
-INSERT INTO tblShipper(username, password, name, status) VALUES ('shoppe4','1','Nguyen Manh Quang', 1)
-INSERT INTO tblShipper(username, password, name, status) VALUES ('shoppe5','1','Le Ba Hau', 1)
+INSERT INTO tblShipper(username, password, name, status, wallet) VALUES ('shoppe1','1','Nguyen Van A', 1, 0)
+INSERT INTO tblShipper(username, password, name, status, wallet) VALUES ('shoppe2','1','Nguyen Anh Tuan', 1, 0)
+INSERT INTO tblShipper(username, password, name, status, wallet) VALUES ('shoppe3','1','Nguyen Thi Hong', 1, 0)
+INSERT INTO tblShipper(username, password, name, status, wallet) VALUES ('shoppe4','1','Nguyen Manh Quang', 1, 0)
+INSERT INTO tblShipper(username, password, name, status, wallet) VALUES ('shoppe5','1','Le Ba Hau', 1, 0)
 
 ---- bảng shipper company -----
 --UPDATE tblDelivery SET username_Shipper = 'shoppe1' WHERE order_id = '1'

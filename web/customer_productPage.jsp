@@ -281,6 +281,7 @@
                             current_form = (current_form == null) ? "" : current_form;
                             product_detail_id = (product_detail_id == null) ? "" : product_detail_id;
                         %>
+                       
                         <div id="quickview" class="overlay fixed top bot left right flex-center <%if (!current_form.equals("quickview_product") || !(product.getId().equals(product_detail_id))) {%>hide<%}%>">
                             <div class="popup relative pad-2 row">
                                 <div style="margin: -1.5rem 1rem; width: fit-content;" class="absolute p-0 right text-md opacity popup-close">
@@ -325,7 +326,7 @@
                                             </div>
 
                                             <div class="m-y-0">
-                                                <input type="hidden" name="quickview" value="quickview" />
+                                                <input type="hidden" name="quickview" value="true" />
                                                 <button type="submit" style="padding: .4rem 4rem; border-radius: .5rem;"
                                                         class="btn-md bold">Buy</button>
                                             </div>

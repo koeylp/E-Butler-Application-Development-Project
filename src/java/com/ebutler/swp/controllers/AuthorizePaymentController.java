@@ -33,9 +33,20 @@ public class AuthorizePaymentController extends HttpServlet {
             String total = request.getParameter("total");
             String payment = request.getParameter("payment");
             String cardShipper = request.getParameter("card");
+            if (cardShipper == null) {
+                cardShipper = "false";
+            }
+            String cardPrice = request.getParameter("price");
+
             HttpSession session = request.getSession();
             if (session != null) {
-                OrderPayPalDetail order = new OrderPayPalDetail(String.valueOf(total), "0", String.valueOf(total));
+                OrderPayPalDetail order = null;
+                if (cardShipper.equals("true")) {
+                    order = new OrderPayPalDetail(String.valueOf(cardPrice), "0", String.valueOf(cardPrice));
+                } else {
+                    order = new OrderPayPalDetail(String.valueOf(total), "0", String.valueOf(total));
+                }
+
                 PaymentServiceDTO paymentServices = new PaymentServiceDTO();
                 String approvalLink = paymentServices.authorizePayment(order);
 
@@ -43,6 +54,7 @@ public class AuthorizePaymentController extends HttpServlet {
                 session.setAttribute("TOTAL", total);
                 session.setAttribute("PAYMENT", payment);
                 session.setAttribute("CARD_SHIPPER", cardShipper);
+                session.setAttribute("CARD_PRICE", cardPrice);
 
             }
 
