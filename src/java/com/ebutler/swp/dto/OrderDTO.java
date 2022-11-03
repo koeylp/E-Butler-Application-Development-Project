@@ -35,14 +35,13 @@ public class OrderDTO {
         this.total = total;
     }
 
-    public OrderDTO(int order_ID, Date order_date, String customer_ID, int status, double total, String shipping , String providerID) {
+    public OrderDTO(int order_ID, Date order_date, String customer_ID, int status, double total , String providerID) {
         this.order_ID = order_ID;
         this.order_date = order_date;
         this.customer_ID = customer_ID;
         this.status = status;
         this.total = total;
         this.providerID = providerID;
-        this.shipping = shipping;
     }
 
     public String getProviderID() {

@@ -179,7 +179,6 @@
                                             <th>Date</th>
                                             <th>Customer ID</th>
                                             <th>Order Total</th>
-                                            <th>Shipping</th>
                                             <th>Status</th>
                                             <th>Actions</th>
                                             <th></th>
@@ -201,14 +200,7 @@
 
                                             <td><%= order.getCustomer_ID()%></td>
                                             <td><%= order.getTotal()%></td>
-                                            <% 
-                                                String shipping = order.getShipping() ;
-                                                if (shipping == null) {
-                                                    shipping = "" ;
-                                                }
-                                            %>
-                                            <td>
-                                            <%= shipping %>
+                                            
                                             </td>
                                             <td>
                                                     <div>

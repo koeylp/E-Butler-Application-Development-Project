@@ -4,6 +4,7 @@
  */
 package com.ebutler.swp.dao;
 
+import com.ebutler.swp.dto.ShipperDTO;
 import com.ebutler.swp.dto.UserDTO;
 import com.ebutler.swp.utils.DBUtils;
 import java.sql.Connection;
@@ -27,6 +28,8 @@ public class UserDAO {
     private final String SEARCH_US_EMAIL = "SELECT username from tblUser WHERE email LIKE ?";
     private final String GET_ROLE_BY_EMAIL = "SELECT role_ID from tblUser WHERE email LIKE ?";
     private final String GET_USER_BY_EMAIL = "SELECT username, password, role_ID, phone, status from tblUser WHERE email LIKE ?";
+    private final String GET_SHIPPER = "SELECT * FROM tblShipper WHERE username= ? AND password = ? "; 
+    private final String UPDATE_SHIPPER_WALLET = "UPDATE tblShipper SET wallet = ? WHERE username = ? ";  
 
     public boolean isExisted(String username) throws SQLException {
         Connection conn = null;
@@ -208,4 +211,61 @@ public class UserDAO {
         return user;
     }
     
+    public ShipperDTO getShipper(String username, String password) throws SQLException {
+        ShipperDTO newShipper = new ShipperDTO() ; 
+        Connection conn = null ; 
+        PreparedStatement ptm = null ; 
+        ResultSet rs = null ; 
+        try {
+            conn = DBUtils.getConnection() ; 
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_SHIPPER) ; 
+                ptm.setString(1, username);
+                ptm.setString(2, password);
+                rs = ptm.executeQuery() ; 
+                if(rs.next()) {
+                    newShipper = new ShipperDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDouble(5)) ; 
+                }
+            }
+        } catch (Exception e) {
+        }finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return newShipper ; 
+    }
+    public boolean updateShipperWallet(double wallet ,String username) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        boolean check = false  ;
+
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UPDATE_SHIPPER_WALLET);
+                ptm.setDouble(1, wallet);
+                ptm.setString(2, username);
+                check = ptm.executeUpdate() > 0 ? true : false;
+                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+        }
+
+        return check;
+    }
 }

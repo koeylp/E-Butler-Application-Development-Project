@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
 public class TopUpController extends HttpServlet {
 
     private static final String ERROR = "errorPage.jsp";
-    private static final String SUCCESS = "delivery_homePage.jsp";
+    private static final String SUCCESS = "DeliveryHomeController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

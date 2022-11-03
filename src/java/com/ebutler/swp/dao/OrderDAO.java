@@ -33,8 +33,8 @@ public class OrderDAO {
             + "INSERT INTO tblOrder_Service_Detail(staff_ID, service_Detail_ID, order_ID, price, [status])\n"
             + "VALUES(?, ?, ?, ?, ?)";
     private static final String INSERT_DELIVERY = "\n"
-            + "INSERT INTO tblDelivery(order_id, address, shipper_id,username_Shipper ,[status])\n"
-            + "VALUES(?, ?, ?,?, ?)";
+            + "INSERT INTO tblDelivery(order_id, address,username_Shipper ,[status])\n"
+            + "VALUES(?, ?, ?, ?)";
 
     public static void insertOrder(Date date, String username, int status, double total, String payment) throws SQLException {
         Connection conn = null;
@@ -149,7 +149,7 @@ public class OrderDAO {
         }
     }
 
-    public static void insertDelivery(int order_id, String address, String shipper_id) throws SQLException {
+    public static void insertDelivery(int order_id, String address) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
@@ -158,9 +158,8 @@ public class OrderDAO {
                 ptm = conn.prepareStatement(INSERT_DELIVERY);
                 ptm.setInt(1, order_id);
                 ptm.setString(2, address);
-                ptm.setString(3, shipper_id);
-                ptm.setString(4, null);
-                ptm.setInt(5, 0);
+                ptm.setString(3, null);
+                ptm.setInt(4, 0);
                 ptm.executeUpdate();
             }
         } catch (Exception e) {
@@ -185,7 +184,7 @@ public class OrderDAO {
 //            }
 
 //            insertOrderServiceDetail(1, 1, 1, 2000, 0);
-            insertDelivery(1, "123 Hollywood Walk of Fame", "be");
+           // insertDelivery(1, "123 Hollywood Walk of Fame", "be");
         } catch (Exception e) {
         }
 

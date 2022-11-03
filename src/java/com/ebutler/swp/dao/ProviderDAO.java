@@ -63,8 +63,8 @@ public class ProviderDAO {
     private final String PROVIDER_ADD_SERVICE = "INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID , name , price , description , status) VALUES (? , ? , null , ? , ? , null , 1 )";
     private final String ADD_STAFF = "INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES (?,?,?,?,null,3)";
     private final String FILTER_STAFF_PENDING = "SELECT Staff.staff_ID,S.name , Staff.name, Staff.id_card, Staff.avatar, Staff.status FROM tblStaff Staff JOIN tblService S ON Staff.service_ID = S.service_ID WHERE Staff.provider_ID = ? AND status = 3";
-    private final String LIST_ORDER_PRODUCT = "SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total , Ord.shipping, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = ? ";
-    private final String LIST_ORDER_SERVICE = "SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total,Ord.shipping , PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Service_Detail OrdS ON Ord.order_ID = OrdS.order_ID ) JOIN tblServiceDetail PD ON PD.id = OrdS.service_detail_ID WHERE PD.provider_ID = ? ";
+    private final String LIST_ORDER_PRODUCT = "SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total , PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = ? ";
+    private final String LIST_ORDER_SERVICE = "SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Service_Detail OrdS ON Ord.order_ID = OrdS.order_ID ) JOIN tblServiceDetail PD ON PD.id = OrdS.service_detail_ID WHERE PD.provider_ID = ? ";
     private final String LIST_ORDERDETAIL = "SELECT OrdP.id , Ord.order_ID, OrdP.product_detail_ID, PD.name, OrdP.quantity, PD.price, Ord.total, OrdP.status FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = ? AND Ord.order_ID = ? ";
     private final String LIST_ORDER_SERVICE_DETAIL = "SELECT OrdP.id , Ord.order_ID, OrdP.service_Detail_ID, PD.name, OrdP.staff_ID, PD.price, OrdP.status FROM ( tblOrder Ord JOIN tblOrder_Service_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblServiceDetail PD ON PD.id = OrdP.service_Detail_ID WHERE PD.provider_ID = ? AND Ord.order_ID = ? ";
     private final String LoadOrderInfor = "SELECT Ord.order_ID, Ord.order_Date, Ord.status, Cus.name, Cus.phone, Cus.email FROM tblOrder Ord JOIN tblCustomer Cus ON Ord.customer_ID = Cus.username  WHERE order_ID = ? AND customer_ID = ? ";
@@ -1113,7 +1113,7 @@ public class ProviderDAO {
                 ptm.setString(1, provider.getUsername());
                 rs = ptm.executeQuery();
                 while (rs.next()) {
-                    listOrder.add(new OrderDTO(rs.getInt(1), rs.getDate(2), rs.getString(3), rs.getInt(4), rs.getDouble(5), rs.getString(6), rs.getString(7)));
+                    listOrder.add(new OrderDTO(rs.getInt(1), rs.getDate(2), rs.getString(3), rs.getInt(4), rs.getDouble(5), rs.getString(6)));
                 }
             }
         } catch (Exception e) {
@@ -1143,7 +1143,7 @@ public class ProviderDAO {
                 ptm.setString(1, provider.getUsername());
                 rs = ptm.executeQuery();
                 while (rs.next()) {
-                    listOrder.add(new OrderDTO(rs.getInt(1), rs.getDate(2), rs.getString(3), rs.getInt(4), rs.getDouble(5), null, rs.getString(7)));
+                    listOrder.add(new OrderDTO(rs.getInt(1), rs.getDate(2), rs.getString(3), rs.getInt(4), rs.getDouble(5),rs.getString(6)));
                 }
             }
         } catch (Exception e) {

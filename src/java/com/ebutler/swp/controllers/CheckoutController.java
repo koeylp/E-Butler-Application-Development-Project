@@ -75,7 +75,7 @@ public class CheckoutController extends HttpServlet {
                     if (count == cart.getCart().values().size()) {
                         orderDao.insertOrder(java.sql.Date.valueOf(java.time.LocalDate.now()), user.getUsername(), 0, Double.parseDouble(total), payment);
                         int order_ID = orderDao.getAllOrder().size();
-//                        orderDao.insertDelivery(order_ID, address); fix lai cho nay nha Toan
+                        orderDao.insertDelivery(order_ID, address); 
                         for (ProductDetailDTO product : cart.getCart().values()) {
 
                             orderDao.insertOrderDetail(product.getId(), order_ID, product.getQuantity(), product.getPrice(), 0);

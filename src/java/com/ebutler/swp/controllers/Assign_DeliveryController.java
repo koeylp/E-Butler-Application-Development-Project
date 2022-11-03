@@ -5,9 +5,14 @@
 package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.DeliveryDAO;
+import com.ebutler.swp.dao.UserDAO;
+import com.ebutler.swp.dto.DeliveryDTO;
+import com.ebutler.swp.dto.ShipperDTO;
 import com.ebutler.swp.dto.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,17 +36,38 @@ public class Assign_DeliveryController extends HttpServlet {
             HttpSession session = request.getSession();
             DeliveryDAO deliveryDAO = new DeliveryDAO();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            int orderID = Integer.parseInt( request.getParameter("orderID")); 
-            String checkDelivery = deliveryDAO.assignDeliveryChecking(orderID);
-            if (checkDelivery == null) {
-                boolean check = deliveryDAO.assignDelivery(loginUser.getUsername(), orderID);
-                if (check) {
-                    url = SUCCESS;
-
+            int orderID = Integer.parseInt(request.getParameter("orderID"));
+            ShipperDTO shipper = (ShipperDTO) session.getAttribute("CURRENT_SHIPPER");
+            List<DeliveryDTO> listDelivery = (List<DeliveryDTO>) session.getAttribute("Delivery_List");
+            UserDAO userDAO = new UserDAO() ;
+            boolean assignNow = false;
+            for (int i = 0; i < listDelivery.size(); i++) {
+                double total = listDelivery.get(i).getTotal();
+                double totalCheck = total / 3;
+                if (totalCheck < shipper.getWallet()) {
+                    
+                    double newWallet = shipper.getWallet() - totalCheck ; 
+                    boolean checkUpdate = userDAO.updateShipperWallet(newWallet, shipper.getUsername()) ; 
+                    if (checkUpdate) {
+                        assignNow = true;
+                    }
                 }
-            }else if (!checkDelivery.isEmpty()) {
-                url = ERROR ; 
-                session.setAttribute("ERROR_ASSIGN", "This Order Has Been Assigned!!");
+            }
+            if (assignNow) {
+                String checkDelivery = deliveryDAO.assignDeliveryChecking(orderID);
+                if (checkDelivery == null) {
+                    boolean check = deliveryDAO.assignDelivery(loginUser.getUsername(), orderID);
+                    if (check) {
+                        url = SUCCESS;
+
+                    }
+                } else if (!checkDelivery.isEmpty()) {
+                    url = ERROR;
+                    session.setAttribute("ERROR_ASSIGN", "This Order Has Been Assigned!!");
+                }
+            } else {
+                 url = ERROR;
+                    session.setAttribute("ERROR_ASSIGN", "You Dont Have Enough Money To Assign"); 
             }
 
         } catch (Exception e) {

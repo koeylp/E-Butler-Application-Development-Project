@@ -240,7 +240,6 @@ CREATE TABLE tblDelivery (
 	id int IDENTITY(1,1) PRIMARY KEY,
 	order_id int REFERENCES tblOrder(order_ID),
 	[address] nvarchar(max),
-	shipper_id nvarchar(30) REFERENCES tblShipper(username), 
 	username_Shipper nvarchar(30) REFERENCES tblShipper(username),
 	[status] int
 )
@@ -1959,3 +1958,8 @@ WHERE cate.category_ID = 'KC' AND product.product_ID = 3 ORDER BY id asc OFFSET 
 
 --UPDATE tblDelivery SET username_Shipper = ? WHERE order_id = ?
 --SELECT username_Shipper FROM tblDelivery WHERE order_id = '1'
+SELECT * FROM tblUser
+SELECT * FROM tblDelivery
+SELECT * FROM tblOrder
+SELECT * FROM tblOrder_Product_Detail
+

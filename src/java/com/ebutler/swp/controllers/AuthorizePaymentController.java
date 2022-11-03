@@ -4,13 +4,18 @@
  */
 package com.ebutler.swp.controllers;
 
+import com.ebutler.swp.dao.UserDAO;
 import com.ebutler.swp.dto.OrderPayPalDetail;
 import com.ebutler.swp.dto.PaymentServiceDTO;
+import com.ebutler.swp.dto.ShipperDTO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 
 import com.paypal.base.rest.PayPalRESTException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,9 +29,10 @@ import javax.servlet.http.HttpSession;
 public class AuthorizePaymentController extends HttpServlet {
 
     private static final String ERROR = "errorPage.jsp";
+    
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
@@ -55,12 +61,14 @@ public class AuthorizePaymentController extends HttpServlet {
                 session.setAttribute("PAYMENT", payment);
                 session.setAttribute("CARD_SHIPPER", cardShipper);
                 session.setAttribute("CARD_PRICE", cardPrice);
+                
+                
 
             }
 
         } catch (PayPalRESTException e) {
             log("Error at AuthorizePaymentController: " + e.getMessage());
-            request.getRequestDispatcher(url).forward(request, response);
+            
         }
     }
 
@@ -76,7 +84,11 @@ public class AuthorizePaymentController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(AuthorizePaymentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -90,7 +102,11 @@ public class AuthorizePaymentController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(AuthorizePaymentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
