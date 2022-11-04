@@ -22,6 +22,41 @@ public class ReviewDAO {
     
     private final String SELECT_REVIEW = "select username, product_id, comment, rating, status, id from tblReviewProduct where product_id = ?";
     private final String INSERT_REVIEW = "insert into tblReviewProduct(username, product_id, comment, rating, status) values ( ?, ?, ?, ?, ?)";
+    private final String PURCHASED = "select COUNT(*) from tblOrder_Product_Detail opd JOIN tblOrder o ON opd.order_ID = o.order_ID where o.customer_ID = ? and opd.product_detail_ID = ?";
+    
+    public boolean HasPurchased(String username, String product_id) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if(conn != null){
+                ptm = conn.prepareStatement(PURCHASED);
+                ptm.setString(1, username);
+                ptm.setString(2, product_id);
+                rs = ptm.executeQuery();
+                if(rs.next()) {
+                    int count = rs.getInt(1);
+                    return count > 0 ? true : false;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+            
+            if(rs != null) {
+                rs.close();
+            }
+        }
+        return false;
+    }
+    
     
     public boolean InsertReview(ReviewDTO review) throws SQLException {
         Connection conn = null;
