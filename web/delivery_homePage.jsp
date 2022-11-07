@@ -35,7 +35,10 @@
         <link rel="stylesheet" href="./css/demo.css" />
         <link rel="icon" type="image/x-icon" href="./assets/img/favicon/favicon.ico" />
         <link rel="stylesheet" href="./vendor/fonts/boxicons.css" />
-
+        <link rel="stylesheet" href="./css/base.css" />
+        <link rel="stylesheet" href="./css/delivery.css" />
+        <link rel="stylesheet" href="./css/deliveryPage.css" />
+        <link rel="stylesheet" href="./css/guestPage.css" />
 
         <style>
             table {
@@ -59,8 +62,9 @@
                 cursor: pointer;
             }
         </style>
+
     </head>
-     <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'SHIP'}">
+    <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'SHIP'}">
         <c:redirect url="guest_loginPage.jsp"></c:redirect>
     </c:if>
 
@@ -85,8 +89,8 @@
             Main wrapper start
         ***********************************-->
         <%
-            ShipperDTO shipper = (ShipperDTO) session.getAttribute("CURRENT_SHIPPER") ;
-        
+            ShipperDTO shipper = (ShipperDTO) session.getAttribute("CURRENT_SHIPPER");
+
         %>
         <div id="main-wrapper">
             <!--**********************************
@@ -117,8 +121,8 @@
                         <ul class="clearfix">
                             <li class="icons dropdown">
                                 <a class="quick-view flex">
-                                   
-                                    <span><%= shipper.getWallet() %></span>
+
+                                    <span><%= shipper.getWallet()%></span>
                                     <i class="fa-solid fa-wallet"></i>
                                 </a>
                             </li>
@@ -197,7 +201,7 @@
                                         <div class="dropdown-content-body">
                                             <ul>
                                                 <li>
-                                                    <a ><i class="icon-user"></i> <span><%= shipper.getName() %></span></a>
+                                                    <a ><i class="icon-user"></i> <span><%= shipper.getName()%></span></a>
                                                 </li>
                                                 <li>
                                                     <a ><i class="icon-envelope-open"></i> <span>Inbox</span></a>

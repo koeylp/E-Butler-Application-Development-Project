@@ -7,7 +7,6 @@ package com.ebutler.swp.controllers;
 import com.ebutler.swp.dao.AddressDAO;
 import com.ebutler.swp.dto.UserDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

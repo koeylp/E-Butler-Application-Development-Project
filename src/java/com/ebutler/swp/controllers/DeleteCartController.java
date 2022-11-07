@@ -37,21 +37,19 @@ public class DeleteCartController extends HttpServlet {
 
             if (cart != null) {
                 cart.remove(id);
+                if (cart.getCart().values().isEmpty()) {
+                    cart = null;
+                }
                 session.setAttribute("CART", cart);
                 url = SUCCESS;
             }
             if (cartService != null) {
-                cartService.remove(service_ID);
+                cartService.remove(service_ID);  
+                if (cartService.getCart().values().isEmpty()) {
+                    cartService = null;
+                }
                 session.setAttribute("CART_SERVICE", cartService);
                 url = SUCCESS;
-            }
-            if (cartService.getCart().values().isEmpty()) {
-                cartService = null;
-                session.setAttribute("CART_SERVICE", cartService);
-            }
-            if (cart.getCart().values().isEmpty()) {
-                cart = null;
-                session.setAttribute("CART", cart);
             }
 
         } catch (Exception e) {
