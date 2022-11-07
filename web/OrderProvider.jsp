@@ -179,7 +179,10 @@
                                             <th>Date</th>
                                             <th>Customer ID</th>
                                             <th>Order Total</th>
+<<<<<<< HEAD
                                            
+=======
+>>>>>>> 9714d63d47d7e2ab5020bd65c99b30642bf41c96
                                             <th>Status</th>
                                             <th>Actions</th>
                                             <th></th>

@@ -23,7 +23,7 @@ public class AddReviewController extends HttpServlet {
     
     private final String ERROR = "errorPage.jsp";
     private final String SUCCESS = "LoadingReviewController";
-    private final String NOTPASS = "customer_productPage.jsp";
+    private final String NOT_PASS = "customer_productPage.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -39,9 +39,16 @@ public class AddReviewController extends HttpServlet {
             CustomerDTO customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
             
             ReviewDAO reviewDAO = new ReviewDAO();
+            
+            if(!reviewDAO.HasPurchased(customer.getUsername(), product_id)) {
+                request.setAttribute("REVIEW_ERROR", "Bạn cần mua sản phẩm để dược hỗ trợ tính năng này!");
+                url = NOT_PASS;
+                return;
+            }
+            
             ReviewDTO review = new ReviewDTO(customer.getUsername(), product_id, comment, rating, 1);
             
-            url = reviewDAO.InsertReview(review) ? SUCCESS : NOTPASS;
+            url = reviewDAO.InsertReview(review) ? SUCCESS : NOT_PASS;
             
         } catch (Exception e) 
         {

@@ -407,12 +407,28 @@
                                                             </div>
                                                         </div>
 
+                                                        <%
+                                                            String reviewError = (String)request.getAttribute("REVIEW_ERROR");
+                                                            
+                                                            reviewError = (reviewError == null) ? "" : reviewError;
+                                                        %>
+
                                                         <div class="full-w m-y-0">
                                                             <span class="txt-sm bold">Comment</span>
                                                             <textarea name="comment" id="" rows="2" value="" class="full-w pad-0 txt-sm"></textarea>
                                                             <div class="full-w flex-end">
                                                                 <button style="padding: .2rem 2rem; border-radius: .5rem;"
                                                                         class="btn-md bold">Submit</button>
+                                                                <%
+                                                                    if (!reviewError.isEmpty()) {
+                                                                %>
+                                                                <span class="auth-form__notify">
+                                                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                                                    <p><%=reviewError%></p>
+                                                                </span> 
+                                                                <%
+                                                                    }
+                                                                %>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -602,7 +618,7 @@
                                                                 };
 
         <%
-                if (messageError.isEmpty() && !messageSuccess.isEmpty()) {
+            if (messageError.isEmpty() && !messageSuccess.isEmpty()) {
         %>
                                                                 toast.classList.add("toast", `toast--success`, "showing");
 
@@ -622,11 +638,11 @@
                     `;
 
         <%
-                }
+            }
         %>
 
         <%
-                if (!messageError.isEmpty() && messageSuccess.isEmpty()) {
+            if (!messageError.isEmpty() && messageSuccess.isEmpty()) {
         %>
                                                                 toast.classList.add("toast", `toast--error`);
                                                                 toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
@@ -643,7 +659,7 @@
             </div>
             `;
         <%
-                }
+            }
         %>
                                                                 main.appendChild(toast);
                                                             }

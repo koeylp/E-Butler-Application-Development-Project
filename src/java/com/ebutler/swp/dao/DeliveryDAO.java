@@ -6,7 +6,6 @@ package com.ebutler.swp.dao;
 
 import com.ebutler.swp.dto.DeliveryDTO;
 import com.ebutler.swp.dto.OrderDetailDTO;
-import com.ebutler.swp.dto.UserDTO;
 import com.ebutler.swp.utils.DBUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,8 +19,8 @@ import java.util.List;
  * @author DELL
  */
 public class DeliveryDAO {
-    private final String DELIVERY_LIST = "SELECT De.order_id, De.address,De.username_Shipper ,Ord.order_Date,Ord.customer_ID, Cus.name,Ord.total, De.status FROM (tblDelivery De JOIN tblOrder Ord ON De.order_id = Ord.order_ID) JOIN tblCustomer Cus ON Cus.username = Ord.customer_ID WHERE Ord.shipping = ? ";
-    private final String DELIVERY_LIST_DEYAIL = "SELECT OPD.id, De.order_id, PD.name, OPD.quantity, PD.price, OPD.status FROM ( tblDelivery De JOIN tblOrder_Product_Detail OPD ON De.order_id = OPD.order_ID ) JOIN tblProductDetail PD ON PD.id = OPD.product_detail_ID  WHERE De.order_id = ? AND De.shipper_id = ? ";
+    private final String DELIVERY_LIST = "SELECT De.order_id, De.address,De.username_Shipper ,Ord.order_Date,Ord.customer_ID, Cus.name,Ord.total, De.status FROM (tblDelivery De JOIN tblOrder Ord ON De.order_id = Ord.order_ID) JOIN tblCustomer Cus ON Cus.username = Ord.customer_ID  ";
+    private final String DELIVERY_LIST_DEYAIL = "SELECT OPD.id, De.order_id, PD.name, OPD.quantity, PD.price, OPD.status FROM ( tblDelivery De JOIN tblOrder_Product_Detail OPD ON De.order_id = OPD.order_ID ) JOIN tblProductDetail PD ON PD.id = OPD.product_detail_ID  WHERE De.order_id = ? ";
     private final String UPDATE_PRODUCT_ORDER = "UPDATE tblOrder_Product_Detail SET status = ? WHERE id = ? " ; 
     private final String UPDATE_DELIVERY = "UPDATE tblDelivery SET status = ? WHERE order_id = ?" ; 
     private final String UPDATE_ORDER = "UPDATE tblOrder SET status = ? WHERE order_ID = ? " ; 
@@ -44,8 +43,6 @@ public class DeliveryDAO {
             conn = DBUtils.getConnection() ; 
             if(conn != null) {
                 ptm = conn.prepareStatement(DELIVERY_LIST) ;
-                ptm.setString(1, user); 
-                
                 rs = ptm.executeQuery() ; 
                 while (rs.next()) {
                      
@@ -66,7 +63,7 @@ public class DeliveryDAO {
         }
         return listDelivery ;
     }
-    public List<OrderDetailDTO> loadOrderDetail( int orderID ,String user) throws SQLException {
+    public List<OrderDetailDTO> loadOrderDetail( int orderID ) throws SQLException {
         List<OrderDetailDTO> listOrder = new ArrayList();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -75,7 +72,6 @@ public class DeliveryDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(DELIVERY_LIST_DEYAIL); 
-                ptm.setString(2, user);
                 ptm.setInt(1, orderID);
                 rs = ptm.executeQuery();
                 while (rs.next()) {

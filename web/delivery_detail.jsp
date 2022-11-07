@@ -246,10 +246,10 @@
                         <nav aria-label="breadcrumb m-5">
                             <ol class="breadcrumb breadcrumb-style1">
                                 <li class="breadcrumb-item">
-                                    <a href="#">Home</a>
+                                    <a href="DeliveryHomeController">Home</a>
                                 </li>
                                 <li class="breadcrumb-item">
-                                    <a href="#">Delivery Home</a>
+                                    <a href="DeliveryHomeController">Delivery Home</a>
                                 </li>
                                 <li class="breadcrumb-item active">Delivery Details</li>
                             </ol>

@@ -42,7 +42,6 @@ public class OrderDTO {
         this.status = status;
         this.total = total;
         this.providerID = providerID;
-     
     }
 
     public String getProviderID() {

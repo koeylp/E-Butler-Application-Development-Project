@@ -5,7 +5,9 @@
 package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.DeliveryDAO;
+import com.ebutler.swp.dao.UserDAO;
 import com.ebutler.swp.dto.DeliveryDTO;
+import com.ebutler.swp.dto.ShipperDTO;
 import com.ebutler.swp.dto.UserDTO;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,9 +40,14 @@ public class DeliveryHomeController extends HttpServlet {
             
             if (!listDelivery.isEmpty()) {
                 url = SUCCESS ;
+                ShipperDTO shipper = (ShipperDTO) session.getAttribute("CURRENT_SHIPPER") ; 
+                UserDAO userDAO = new UserDAO();
+                ShipperDTO updateshipper = userDAO.getShipper(shipper.getUsername() , shipper.getPassword()) ;
+                session.setAttribute("CURRENT_SHIPPER", updateshipper); 
                 session.setAttribute("Delivery_List", listDelivery);  
                 session.setAttribute("ShippingDetail", shippingDetail);
                 session.setAttribute("ERROR_ASSIGN", "");
+                
             }
             
         } catch (Exception e) {

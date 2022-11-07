@@ -50,7 +50,7 @@ public class Delivery_Order_DetailController extends HttpServlet {
 
                 listDetailInfo = providerDAO.loadOrderInfo(orderID, customerID);
                 String userDetail = (String) session.getAttribute("ShippingDetail");
-                listOrder = deliveryDAO.loadOrderDetail(orderID, userDetail);
+                listOrder = deliveryDAO.loadOrderDetail(orderID);
                 if (listOrder != null) {
                     url = SUCCESS;
                     session.setAttribute("Delivery_Detail", listOrder);

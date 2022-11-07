@@ -1,4 +1,5 @@
 
+<%@page import="com.ebutler.swp.dto.ShipperDTO"%>
 <%@page import="com.ebutler.swp.dto.DeliveryDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -35,14 +36,6 @@
         <link rel="icon" type="image/x-icon" href="./assets/img/favicon/favicon.ico" />
         <link rel="stylesheet" href="./vendor/fonts/boxicons.css" />
 
-
-        <link rel="stylesheet" href="css/grid.css">
-        <link rel="stylesheet" href="css/base.css">
-
-
-        <link rel="stylesheet" href="css/guestPage.css">
-        <link rel="stylesheet" href="css/customerPage.css">
-        <link rel="stylesheet" href="css/delivery.css">
 
         <style>
             table {
@@ -91,6 +84,10 @@
         <!--**********************************
             Main wrapper start
         ***********************************-->
+        <%
+            ShipperDTO shipper = (ShipperDTO) session.getAttribute("CURRENT_SHIPPER") ;
+        
+        %>
         <div id="main-wrapper">
             <!--**********************************
                 Header start
@@ -119,8 +116,9 @@
                     <div class="header-right">
                         <ul class="clearfix">
                             <li class="icons dropdown">
-                                <a class="quick-view">
-                                    <span>$120.000</span>
+                                <a class="quick-view flex">
+                                   
+                                    <span><%= shipper.getWallet() %></span>
                                     <i class="fa-solid fa-wallet"></i>
                                 </a>
                             </li>
@@ -199,17 +197,19 @@
                                         <div class="dropdown-content-body">
                                             <ul>
                                                 <li>
-                                                    <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
+                                                    <a ><i class="icon-user"></i> <span><%= shipper.getName() %></span></a>
                                                 </li>
                                                 <li>
-                                                    <a href="email-inbox.html"><i class="icon-envelope-open"></i> <span>Inbox</span> <div class="badge gradient-3 badge-pill badge-primary">3</div></a>
+                                                    <a ><i class="icon-envelope-open"></i> <span>Inbox</span></a>
                                                 </li>
 
                                                 <hr class="my-2">
                                                 <li>
                                                     <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
                                                 </li>
-                                                <li> <button class="dropdown-item"  name="action" value="LogoutProvider" ><i class="bx bx-log-out m-2"></i>Logout</button></li>
+                                                <li> 
+                                                    <button class="dropdown-item"  name="action" value="LogoutProvider" ><i class="bx bx-log-out m-2"></i>Logout</button>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>

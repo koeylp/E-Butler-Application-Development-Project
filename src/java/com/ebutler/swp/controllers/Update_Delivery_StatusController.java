@@ -6,8 +6,11 @@ package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.DeliveryDAO;
 import com.ebutler.swp.dao.ProviderDAO;
+import com.ebutler.swp.dao.UserDAO;
+import com.ebutler.swp.dto.DeliveryDTO;
 import com.ebutler.swp.dto.OrderDetailDTO;
 import com.ebutler.swp.dto.OrderDetailInfoDTO;
+import com.ebutler.swp.dto.ShipperDTO;
 import com.ebutler.swp.dto.UserDTO;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,138 +27,145 @@ import javax.servlet.http.HttpSession;
  */
 public class Update_Delivery_StatusController extends HttpServlet {
 
-    private final String SUCCESS = "Delivery_Order_DetailController" ;  
-    private final String ERROR = "delivery_detail.jsp" ; 
+    private final String SUCCESS = "Delivery_Order_DetailController";
+    private final String ERROR = "delivery_detail.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR ; 
+        String url = ERROR;
         try {
-            HttpSession session = request.getSession() ;
-            ProviderDAO providerDAO = new ProviderDAO() ;
-            List<OrderDetailInfoDTO> listDetailInfo = new ArrayList() ; 
-            List<OrderDetailDTO> listCheck = new ArrayList() ; 
-            List<OrderDetailDTO> listCheckDefault = new ArrayList() ; 
-            List<OrderDetailDTO> listCheckCancel = new ArrayList() ; 
-            boolean move = false ; 
-            boolean checkForUpdateDelivery = false ;
-            boolean checkForUpdateDeliveryCancel = false ;
-            boolean updateDeliveryStatusForProduct = false ;
-            boolean updateDelivery = false ;
-            boolean updateOrder = false ;
-            int statusDelivery = Integer.parseInt(request.getParameter("DeliveryStatus")) ; 
-            UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER") ;
-            int id = Integer.parseInt(request.getParameter("Product_id")) ;  
-            int order_ID = Integer.parseInt(request.getParameter("orderID")) ;   
-            DeliveryDAO deliveryDAO = new DeliveryDAO() ;
-            
-            updateDeliveryStatusForProduct = deliveryDAO.updateProductOrder(statusDelivery, id) ;
-            if(updateDeliveryStatusForProduct) {
-                int status = 1 ; 
-                switch (statusDelivery) {
-                    case 0:
-                        status = 0 ;
-                        updateOrder = deliveryDAO.updateOrder(status, order_ID) ;
-                        break;
-                    case 1:
-                        status = 1 ;
-                        updateOrder = deliveryDAO.updateOrder(status, order_ID) ;
-                        break;
-                    case 2:
-                        status = 1 ;
-                        updateOrder = deliveryDAO.updateOrder(status, order_ID) ;
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        
-                        break;
-                    default:
-                        break;
-                }
-                
-                move = true ; 
-            }
-            
-            listCheck = deliveryDAO.checkForDelivery(order_ID) ;
-            listCheckDefault = deliveryDAO.checkForDeliveryDefault(order_ID) ;
-            listCheckCancel = deliveryDAO.checkForDeliveryCancel(order_ID) ;
-            checkForUpdateDelivery = (listCheck.size() == listCheckDefault.size()) ; 
-            checkForUpdateDeliveryCancel = (listCheckCancel.size() == listCheckDefault.size()) ;  
+            HttpSession session = request.getSession();
+            ProviderDAO providerDAO = new ProviderDAO();
+            List<OrderDetailInfoDTO> listDetailInfo = new ArrayList();
+            List<OrderDetailDTO> listCheck = new ArrayList();
+            List<OrderDetailDTO> listCheckDefault = new ArrayList();
+            List<OrderDetailDTO> listCheckCancel = new ArrayList();
+            boolean move = false;
+            boolean checkForUpdateDelivery = false;
+            boolean checkForUpdateDeliveryCancel = false;
+            boolean updateDeliveryStatusForProduct = false;
+            boolean updateDelivery = false;
+            boolean updateOrder = false;
+            int statusDelivery = Integer.parseInt(request.getParameter("DeliveryStatus"));
+            UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
+            int id = Integer.parseInt(request.getParameter("Product_id"));
+            int order_ID = Integer.parseInt(request.getParameter("orderID"));
+            DeliveryDAO deliveryDAO = new DeliveryDAO();
+
+            updateDeliveryStatusForProduct = deliveryDAO.updateProductOrder(statusDelivery, id);
             if (updateDeliveryStatusForProduct) {
-                move = true ; 
-            }
-            if(checkForUpdateDelivery) {
-                updateDelivery = deliveryDAO.updateDelivery(statusDelivery, order_ID) ;
-                move = true ; 
-            }
-            if(checkForUpdateDelivery) {
-                int status = 1 ; 
+                int status = 1;
                 switch (statusDelivery) {
                     case 0:
-                        status = 0 ;
+                        status = 0;
+                        updateOrder = deliveryDAO.updateOrder(status, order_ID);
                         break;
                     case 1:
-                        status = 1 ;
+                        status = 1;
+                        updateOrder = deliveryDAO.updateOrder(status, order_ID);
                         break;
                     case 2:
-                        status = 1 ;
+                        status = 1;
+                        updateOrder = deliveryDAO.updateOrder(status, order_ID);
                         break;
                     case 3:
-                        status = 2 ;
                         break;
                     case 4:
-                        status = 3 ;
+
                         break;
                     default:
                         break;
                 }
-                updateOrder = deliveryDAO.updateOrder(status, order_ID) ;
-                move = true ; 
+
+                move = true;
             }
-            
-            
-            
-            
-            
-            if(checkForUpdateDeliveryCancel) {
-                int status = 1 ; 
+
+            listCheck = deliveryDAO.checkForDelivery(order_ID);
+            listCheckDefault = deliveryDAO.checkForDeliveryDefault(order_ID);
+            listCheckCancel = deliveryDAO.checkForDeliveryCancel(order_ID);
+            checkForUpdateDelivery = (listCheck.size() == listCheckDefault.size());
+            checkForUpdateDeliveryCancel = (listCheckCancel.size() == listCheckDefault.size());
+            if (updateDeliveryStatusForProduct) {
+                move = true;
+            }
+            if (checkForUpdateDelivery) {
+                updateDelivery = deliveryDAO.updateDelivery(statusDelivery, order_ID);
+                move = true;
+            }
+            if (checkForUpdateDelivery) {
+                int status = 1;
                 switch (statusDelivery) {
                     case 0:
-                        status = 0 ;
+                        status = 0;
                         break;
                     case 1:
-                        status = 1 ;
+                        status = 1;
                         break;
                     case 2:
-                        status = 1 ;
+                        status = 1;
                         break;
                     case 3:
-                        status = 2 ;
+                        status = 2;
                         break;
                     case 4:
-                        status = 3 ;
+                        status = 3;
                         break;
                     default:
                         break;
                 }
-                updateOrder = deliveryDAO.updateOrder(status, order_ID) ;
-                move = true ; 
+                updateOrder = deliveryDAO.updateOrder(status, order_ID);
+                move = true;
             }
-            if(checkForUpdateDeliveryCancel) {
-                updateDelivery = deliveryDAO.updateDelivery(statusDelivery, order_ID) ;
-                move = true ; 
+
+            if (checkForUpdateDeliveryCancel) {
+                int status = 1;
+                switch (statusDelivery) {
+                    case 0:
+                        status = 0;
+                        break;
+                    case 1:
+                        status = 1;
+                        break;
+                    case 2:
+                        status = 1;
+                        break;
+                    case 3:
+                        status = 2;
+                        break;
+                    case 4:
+                        status = 3;
+                        break;
+                    default:
+                        break;
+                }
+                updateOrder = deliveryDAO.updateOrder(status, order_ID);
+                move = true;
             }
-            List<OrderDetailDTO> listOrder = new ArrayList(); 
-            String userDetail = (String) session.getAttribute("ShippingDetail") ;
-            listOrder = deliveryDAO.loadOrderDetail(order_ID, userDetail) ; 
+            if (checkForUpdateDeliveryCancel) {
+                updateDelivery = deliveryDAO.updateDelivery(statusDelivery, order_ID);
+                move = true;
+            }
+            List<OrderDetailDTO> listOrder = new ArrayList();
+            String userDetail = (String) session.getAttribute("ShippingDetail");
+            listOrder = deliveryDAO.loadOrderDetail(order_ID);
             //listDetailInfo = providerDAO.loadOrderInfo(order_ID, customerID) ;
             if (move) {
-                url = SUCCESS ; 
-                session.setAttribute("Delivery_Detail", listOrder); 
+                url = SUCCESS;
+                session.setAttribute("Delivery_Detail", listOrder);
+                ShipperDTO shipper = (ShipperDTO) session.getAttribute("CURRENT_SHIPPER");
+                List<DeliveryDTO> listDelivery = (List<DeliveryDTO>) session.getAttribute("Delivery_List");
+                UserDAO userDAO = new UserDAO();
+                for (int i = 0; i < listDelivery.size(); i++) {
+                    double total = listDelivery.get(i).getTotal();
+                    double totalCheck = total / 3;
+                    double newWallet = shipper.getWallet() + totalCheck + 3;
+                    userDAO.updateShipperWallet(newWallet, shipper.getUsername());
+
+                }
             }
         } catch (Exception e) {
-        }finally {
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
