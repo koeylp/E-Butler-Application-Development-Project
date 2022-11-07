@@ -392,15 +392,15 @@
                                                                 <div class="flex-vertical-center flex-end txt-xl full-h">
                                                                     <span class="flex-center rating">
                                                                         <input style="width: 0.075rem;"  type="radio" name="rating" id="star1-<%=product.getId()%>"
-                                                                               value="1" required=""><label for="star1-<%=product.getId()%>"><i class="fa-solid fa-star"></i></label>
+                                                                               value="5" required=""><label for="star1-<%=product.getId()%>"><i class="fa-solid fa-star"></i></label>
                                                                         <input type="radio" name="rating" id="star2-<%=product.getId()%>"
-                                                                               value="2" required=""><label for="star2-<%=product.getId()%>"><i class="fa-solid fa-star"></i></label>
+                                                                               value="4" required=""><label for="star2-<%=product.getId()%>"><i class="fa-solid fa-star"></i></label>
                                                                         <input type="radio" name="rating" id="star3-<%=product.getId()%>"
                                                                                value="3" required=""><label for="star3-<%=product.getId()%>"><i class="fa-solid fa-star"></i></label>
                                                                         <input type="radio" name="rating" id="star4-<%=product.getId()%>"
-                                                                               value="4" required=""><label for="star4-<%=product.getId()%>"><i class="fa-solid fa-star"></i></label>
+                                                                               value="2" required=""><label for="star4-<%=product.getId()%>"><i class="fa-solid fa-star"></i></label>
                                                                         <input type="radio" name="rating" id="star5-<%=product.getId()%>"
-                                                                               value="5" required=""><label for="star5-<%=product.getId()%>"><i class="fa-solid fa-star"></i></label>
+                                                                               value="1" required=""><label for="star5-<%=product.getId()%>"><i class="fa-solid fa-star"></i></label>
                                                                     </span>
                                                                 </div>
                                                                 <h4 class="txt-xs flex-end">Click me!</h4>
@@ -430,15 +430,15 @@
                                                                 <div class="flex-vertical-center m-y-0 txt-xs">
                                                                     <span class="flex-center rating">
                                                                         <input type="radio" id="<%=review.getId()%>"
-                                                                               value="1" <%if (review.getRating() == 1) {%>checked<%}%>><label for=""><i class="fa-solid fa-star"></i></label>
+                                                                               value="1" <%if (review.getRating() == 5) {%>checked<%}%>><label for=""><i class="fa-solid fa-star"></i></label>
                                                                         <input type="radio" id="<%=review.getId()%>"
-                                                                               value="2" <%if (review.getRating() == 2) {%>checked<%}%>><label for=""><i class="fa-solid fa-star"></i></label>
+                                                                               value="2" <%if (review.getRating() == 4) {%>checked<%}%>><label for=""><i class="fa-solid fa-star"></i></label>
                                                                         <input type="radio" id="<%=review.getId()%>"
                                                                                value="3" <%if (review.getRating() == 3) {%>checked<%}%>><label for=""><i class="fa-solid fa-star"></i></label>
                                                                         <input type="radio" id="<%=review.getId()%>"
-                                                                               value="4" <%if (review.getRating() == 4) {%>checked<%}%>><label for=""><i class="fa-solid fa-star"></i></label>
+                                                                               value="4" <%if (review.getRating() == 2) {%>checked<%}%>><label for=""><i class="fa-solid fa-star"></i></label>
                                                                         <input type="radio" id="<%=review.getId()%>"
-                                                                               value="5" <%if (review.getRating() == 5) {%>checked<%}%>><label for=""><i class="fa-solid fa-star"></i></label>
+                                                                               value="5" <%if (review.getRating() == 1) {%>checked<%}%>><label for=""><i class="fa-solid fa-star"></i></label>
                                                                     </span>
                                                                 </div>
                                                             </div>

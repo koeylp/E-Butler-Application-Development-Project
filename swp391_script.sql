@@ -230,12 +230,6 @@ CREATE TABLE tblShipper (
 )
 GO
 
-/*CREATE TABLE tblShipperWallet (
-	[shipper_id] nvarchar(30) PRIMARY KEY,
-	total int
-)
-GO*/
-
 CREATE TABLE tblDelivery (
 	id int IDENTITY(1,1) PRIMARY KEY,
 	order_id int REFERENCES tblOrder(order_ID),
