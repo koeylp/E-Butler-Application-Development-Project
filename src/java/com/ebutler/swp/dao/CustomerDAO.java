@@ -136,7 +136,7 @@ public class CustomerDAO {
                 ptm.setInt(7, customer.getGender());
                 ptm.setString(8, customer.getDob());
                 ptm.setString(9, customer.getAvatar());
-                ptm.setInt(10, customer.getPoint());
+                ptm.setDouble(10, customer.getPoint());
                 ptm.setInt(11, customer.getStatus());
                 result = ptm.executeUpdate() > 0;
             }
@@ -317,8 +317,8 @@ public class CustomerDAO {
         return currentPsw;
     }
 
-    public static int getPoint(String username) throws SQLException {
-        int point = 0;
+    public static double getPoint(String username) throws SQLException {
+        double point = 0;
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -329,7 +329,7 @@ public class CustomerDAO {
                 ptm.setString(1, username);
                 rs = ptm.executeQuery();
                 if (rs.next()) {
-                    point = rs.getInt("point");
+                    point = rs.getDouble("point");
                 }
             }
 
@@ -350,7 +350,7 @@ public class CustomerDAO {
         return point;
     }
 
-    public static boolean accumulatePoint(String username, int point) throws SQLException {
+    public static boolean accumulatePoint(String username, double point) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -359,7 +359,7 @@ public class CustomerDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(ACCUMULATE_POINT);
-                ptm.setInt(1, getPoint(username) + point);
+                ptm.setDouble(1, getPoint(username) + point);
                 ptm.setString(2, username);
                 check = ptm.executeUpdate() > 0;
 

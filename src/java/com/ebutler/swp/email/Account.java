@@ -1,0 +1,14 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.ebutler.swp.email;
+
+/**
+ *
+ * @author Dang Viet
+ */
+public class Account {
+     public static final String EMAIL = "vietdhse161321@fpt.edu.vn";
+    public static final String PASSWORD = "hoangvietdang123";
+}

@@ -2036,13 +2036,14 @@ INSERT INTO tblService(service_ID, category_ID, name , image) VALUES ('33','YC',
 INSERT INTO tblService(service_ID, category_ID, name , image) VALUES ('34','YC','Car Battery','https://i.pinimg.com/564x/9c/2b/42/9c2b425b1cb70553ae41614b2ebcd14e.jpg')
 
 --bảng nhân viên
+
 INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('yourcar','28','Nguyen Thien An','550422641234','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
 INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('yourcar','28','Trang Quoc Thien','559242001235','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
 INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('yourcar','28','Nguyen Trang Luc','550422001422','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
 INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('yourcar','28','Nguyen Quoc Nhat Minh','550429121235','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
 INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('yourcar','28','Nguyen The Nhat Tan','556413001234','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
 INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('yourcar','28','Tran Minh Tinh','550496101235','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('yourcar','28','Tran Trang Tuan Tu','556413001422','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('yourcar','28','Tran Trang Tuan Tu','556413091422','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
 INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('yourcar','28','Trang Quoc Dat Anh','550434921235','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
 
 INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('yourcar','29','Nguyen Thien Hoa','690422641234','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
@@ -2076,7 +2077,7 @@ INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES (
 
 INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Nguyen The Viet','550422001234','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
 INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Tran Nhat Minh','550422001235','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
-INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Tran Nguyen Dat Phu','550422001422','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
+INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Tran Nguyen Dat Phu','550422971422','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
 INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Trang Quoc Dat','550422121235','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
 INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Nguyen The Phong','554122001234','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
 INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES ('homecleaning','1','Nguyen Hoang Thai Quy','594122111294','https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=',1)
@@ -2276,6 +2277,43 @@ INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,descri
 INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','27','99','Home CCTV',5,'Get ready all the time. Helping you with the best service',1)
 INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','27','100','Home CCTV',5,'Get ready all the time. Helping you with the best service',1)
 
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','28','101','Car Wash',30,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','28','102','Car Wash',30,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','28','103','Car Wash',30,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','28','104','Car Wash',30,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','28','105','Car Wash',30,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','28','106','Car Wash',30,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','28','107','Car Wash',30,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','28','108','Car Wash',30,'Get ready all the time. Helping you with the best service',1)
+
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','29','109','Wash And Sterilization ',40,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','29','110','Wash And Sterilization ',40,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','29','111','Wash And Sterilization ',40,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','29','112','Wash And Sterilization ',40,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','29','113','Wash And Sterilization ',40,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','29','114','Wash And Sterilization ',40,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','29','115','Wash And Sterilization ',40,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','29','116','Wash And Sterilization ',40,'Get ready all the time. Helping you with the best service',1)
+
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','30','117','RoadSide Assistance',40,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','30','118','RoadSide Assistance',40,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','30','119','RoadSide Assistance',40,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','30','120','RoadSide Assistance',40,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','31','121','Car Maintenance',40,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','31','122','Car Maintenance',40,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','31','123','Car Maintenance',40,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','31','124','Car Maintenance',40,'Get ready all the time. Helping you with the best service',1)
+
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','32','125','RoadSide Assistance',40,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','33','126','RoadSide Assistance',40,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','34','127','RoadSide Assistance',40,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','32','128','RoadSide Assistance',40,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','33','129','Car Maintenance',40,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','34','130','Car Maintenance',40,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','33','131','Car Maintenance',40,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','32','132','Car Maintenance',40,'Get ready all the time. Helping you with the best service',1)
+INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('yourcar','34','133','Car Maintenance',40,'Get ready all the time. Helping you with the best service',1)
+
 --- bảng delivery ---
 /*insert into tblShipperCategory(username , name, status) values ('grab', 'Grab', 1)
 insert into tblShipperCategory(username , name, status) values ('shopee', 'Shopee Express', 1)
@@ -2346,3 +2384,4 @@ WHERE cate.category_ID = 'KC' AND product.product_ID = 3 ORDER BY id asc OFFSET 
 --UPDATE tblDelivery SET username_Shipper = ? WHERE order_id = ?
 --SELECT username_Shipper FROM tblDelivery WHERE order_id = '1'
 SELECT * FROM tblProductDetail WHERE provider_ID = 'chotot'
+SELECT * FROM tblServiceDetail

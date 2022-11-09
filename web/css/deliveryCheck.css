@@ -41,6 +41,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this t
     width: 50vw;
     background-color: white;
     padding: 2rem;
+    position: relative;
 }
 
 .popup-close {
@@ -159,6 +160,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this t
 }
 
 .hide {
-    display: block;
+    display: none;
+}
+
+.wallet:hover {
+    cursor: pointer;
 }
 
