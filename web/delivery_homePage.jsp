@@ -211,9 +211,8 @@
                                                 <li>
                                                     <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
                                                 </li>
-                                                <li> 
-                                                    <button class="dropdown-item"  name="action" value="LogoutProvider" ><i class="bx bx-log-out m-2"></i>Logout</button>
-                                                </li>
+                                               
+                                                <li><a href="MainController?action=LogoutProvider"><i class="icon-key"></i> <span>Logout</span></a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -385,14 +384,14 @@
 
                         <div class="m-y-1"> 
                             <i class="fa-solid fa-wallet"></i>
-                            <span>V� PayPal</span>
+                            <span>View PayPal</span>
                         </div>
 
                         <div class="row">
                             <div class="col l-4">
                                 <table>
                                     <tr>
-                                        <th>Gi�</th>
+                                        <th>Value</th>
                                     </tr>
                                     <tr>
                                         <td for="price-1" class="pad-0 flex"><input type="radio" name="price" value="10" id="price-1"><label
