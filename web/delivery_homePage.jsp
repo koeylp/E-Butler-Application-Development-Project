@@ -30,9 +30,11 @@
         <link rel="icon" type="image/x-icon" href="./assets/img/favicon/favicon.ico" />
         <link rel="stylesheet" href="./vendor/fonts/boxicons.css" />
         
-        <link rel="stylesheet" href="./css/delivery.css" />
+        
         <link rel="stylesheet" href="./css/deliveryPage.css" />
         <link rel="stylesheet" href="./css/grid.css" />
+        <link rel="stylesheet" href="./css/delivery.css" />
+        <link rel="stylesheet" href="./css/deliveryCheck.css" />
 
     </head>
     <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'SHIP'}">
@@ -91,7 +93,7 @@
                     <div class="header-right">
                         <ul class="clearfix">
                             <li class="icons dropdown">
-                                <a class="quick-view flex">
+                                <a class="quick-view flex wallet">
                                     <span><%= shipper.getWallet()%></span>
                                     <i class="fa-solid fa-wallet"></i>
                                 </a>
@@ -352,14 +354,14 @@
                         <div class="col l-4 m-y-1">
                             <div style="text-align: center;" class="full-w border-b txt-md">
                                 <div class="bold">
-                                    <span>Gi�</span>
+                                    <span>Price</span>
                                 </div>
                             </div>
 
                             <form id="payment-form" class="payment-table">
                                 <input type="hidden" name="payment" value="PayPal" />
                                 <input type="hidden" name="card" value="true" />
-                                <input name="action" value="Checkout"/>
+                                <input type="hidden" name="action" value="Checkout"/>
                                 <div class="full-w payment-option border-b">
                                     <input type="radio" name="price" id="payment-price-1" value="10" checked />
                                     <label class="payment-item" for="payment-price-1">
@@ -493,12 +495,13 @@
         <script src="./js/settings.js"></script>
         <script src="./js/gleek.js"></script>
         <script src="./js/styleSwitcher.js"></script>
+        <script src="./js/delivery.js"></script>
 
         <script src="./plugins/tables/js/jquery.dataTables.min.js"></script>
         <script src="./plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
         <script src="./plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
 
-        </<script src="./js/delivery.js"></script>
+        
 
     </body>
 

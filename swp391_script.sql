@@ -25,7 +25,6 @@ CREATE TABLE tblUser(
 )
 GO
 
-
 CREATE TABLE tblCustomer (
 	[username] nvarchar(30) PRIMARY KEY,
 	[password] [nvarchar](30) NOT NULL,
@@ -36,7 +35,7 @@ CREATE TABLE tblCustomer (
 	gender [int],
 	dob date,
 	avatar nvarchar(max),
-	point int,
+	point [decimal](9),
 	[status] [decimal](1)
 )
 GO
@@ -1948,11 +1947,12 @@ WHERE cate.category_ID = 'KC' AND product.product_ID = 3 ORDER BY id asc OFFSET 
 
 --UPDATE tblDelivery SET username_Shipper = ? WHERE order_id = ?
 --SELECT username_Shipper FROM tblDelivery WHERE order_id = '1'
-SELECT * FROM tblUser
+/*SELECT * FROM tblUser
 SELECT * FROM tblDelivery
 SELECT * FROM tblOrder
 SELECT * FROM tblOrder_Product_Detail
 SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total ,  PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = ?
+
 SELECT De.order_id, De.address,De.username_Shipper ,Ord.order_Date,Ord.customer_ID, Cus.name,Ord.total, De.status FROM (tblDelivery De JOIN tblOrder Ord ON De.order_id = Ord.order_ID) JOIN tblCustomer Cus ON Cus.username = Ord.customer_ID  
 
 select * from tblOrder
@@ -1964,3 +1964,4 @@ select customer.username, order1.order_Date, order1.payment, prodDetail.name,pro
     JOIN tblProvider [provider] ON [provider].username =  prodDetail.provider_ID JOIN tblProduct product ON product.product_ID = prodDetail.product_ID where customer.username = 'vietdang123' AND detail.status = 2
 
 	select * from tblUser
+

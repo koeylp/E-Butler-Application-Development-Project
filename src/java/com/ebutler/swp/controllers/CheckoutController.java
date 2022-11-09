@@ -10,6 +10,7 @@ import com.ebutler.swp.dao.ProductDAO;
 import com.ebutler.swp.dto.CartDTO;
 import com.ebutler.swp.dto.CartServiceDTO;
 import com.ebutler.swp.dto.ConfirmDTO;
+import com.ebutler.swp.dto.CustomerDTO;
 import com.ebutler.swp.dto.OrderDTO;
 import com.ebutler.swp.dto.ProductDetailDTO;
 import com.ebutler.swp.dto.ServiceCartDTO;
@@ -40,9 +41,10 @@ public class CheckoutController extends HttpServlet {
         String url = ERROR;
         try {
             String total = request.getParameter("total");
+            String total2 = request.getParameter("total2");
             String payment = request.getParameter("payment");
             String address = request.getParameter("address");
-            
+
             OrderDTO order = new OrderDTO();
             OrderDAO orderDao = new OrderDAO();
             CustomerDAO customerDao = new CustomerDAO();
@@ -60,7 +62,8 @@ public class CheckoutController extends HttpServlet {
                 if (payment == null) {
                     payment = (String) session.getAttribute("PAYMENT");
                 }
-                
+
+                CustomerDTO customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
                 UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
                 CartDTO cart = (CartDTO) session.getAttribute("CART");
                 CartServiceDTO cartService = (CartServiceDTO) session.getAttribute("CART_SERVICE");
@@ -80,7 +83,7 @@ public class CheckoutController extends HttpServlet {
                     if (count == cart.getCart().values().size()) {
                         orderDao.insertOrder(java.sql.Date.valueOf(java.time.LocalDate.now()), user.getUsername(), 0, Double.parseDouble(total), payment);
                         int order_ID = orderDao.getAllOrder().size();
-                        orderDao.insertDelivery(order_ID, address); 
+                        orderDao.insertDelivery(order_ID, address);
                         for (ProductDetailDTO product : cart.getCart().values()) {
 
                             orderDao.insertOrderDetail(product.getId(), order_ID, product.getQuantity(), product.getPrice(), 0);
@@ -112,11 +115,17 @@ public class CheckoutController extends HttpServlet {
                     }
                 }
                 if (statement == confirmation.getSuccess()) {
-                    int point = (int) (Double.parseDouble(total)/100);
-                    if (point < 1) 
+                    double point = (Double.parseDouble(total) / 100);
+                    if (Double.parseDouble(total) < Double.parseDouble(total2)) {
+                        customerDao.accumulatePoint(user.getUsername(), -customerDao.getPoint(user.getUsername()));
+                    }
+                    if (point < 1) {
                         point = 1;
+                    }
                     customerDao.accumulatePoint(user.getUsername(), point);
+                    customer.setPoint(customerDao.getPoint(user.getUsername()));
                 }
+                session.setAttribute("CURRENT_CUSTOMER", customer);
             }
             session.setAttribute("CART", null);
             session.setAttribute("CART_SERVICE", null);
