@@ -15,6 +15,8 @@ import com.ebutler.swp.dto.OrderDTO;
 import com.ebutler.swp.dto.ProductDetailDTO;
 import com.ebutler.swp.dto.ServiceCartDTO;
 import com.ebutler.swp.dto.UserDTO;
+import com.ebutler.swp.email.Account;
+import com.ebutler.swp.email.Email;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -50,6 +52,9 @@ public class CheckoutController extends HttpServlet {
             ConfirmDTO confirmation = new ConfirmDTO("Thank you for your order!", "We're sorry! Your order was unsuccessful");
             String statement = confirmation.getFail();
             HttpSession session = request.getSession();
+            
+            UserDTO login_user = (UserDTO)session.getAttribute("LOGIN_USER");
+            
             if (session != null) {
                 if (total == null) {
                     total = (String) session.getAttribute("TOTAL");
@@ -125,6 +130,27 @@ public class CheckoutController extends HttpServlet {
             session.setAttribute("CART", null);
             session.setAttribute("CART_SERVICE", null);
             session.setAttribute("STATEMENT", statement);
+            
+            String subject = "Your order has been processing.";
+            String message = "<!DOCTYPE html>\n"
+                + "<html lang=\"en\">\n"
+                + "\n"
+                + "<head>\n"
+                + "</head>\n"
+                + "\n"
+                + "<body>\n"
+                + "    <h3 style=\"color: blue;\">Your order has been processing.</h3>\n"
+                + "    <div>Username :"+login_user.getUsername()+"</div>\n"
+                + "    <div>Phone : "+login_user.getPhone()+"</div>\n"
+                + "    <div>address :"+ address +"</div>\n" 
+                + "    <div>Your total bill:"+ total +"</div>\n"
+                + "    <h3 style=\"color: blue;\">Thank you very much!</h3>\n"
+                + "\n"
+                + "</body>\n"
+                + "\n"
+                + "</html>";
+           
+        Email.send("vietdanghoang1705@gmail.com", subject, message, Account.EMAIL, Account.PASSWORD);
 
             url = SUCCESS;
         } catch (Exception e) {
