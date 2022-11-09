@@ -22,46 +22,17 @@
         <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
         <!-- Custom Stylesheet -->
         <link href="./plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
-        <link href="css/deliveryPage.css" rel="stylesheet"> 
-        <link href="css/delivery.css" rel="stylesheet"> 
-
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
-
-
-
 
         <link rel="stylesheet" href="./vendor/css/core.css" class="template-customizer-core-css" />
         <link rel="stylesheet" href="./vendor/css/theme-default.css" class="template-customizer-theme-css" />
         <link rel="stylesheet" href="./css/demo.css" />
         <link rel="icon" type="image/x-icon" href="./assets/img/favicon/favicon.ico" />
         <link rel="stylesheet" href="./vendor/fonts/boxicons.css" />
-        <link rel="stylesheet" href="./css/base.css" />
+        
         <link rel="stylesheet" href="./css/delivery.css" />
         <link rel="stylesheet" href="./css/deliveryPage.css" />
-        <link rel="stylesheet" href="./css/guestPage.css" />
-
-        <style>
-            table {
-                font-family: arial, sans-serif;
-                border-collapse: collapse;
-                width: 100%;
-            }
-
-            th {
-                text-align: center;
-            }
-
-            td{
-                border-top: 1px solid #dddddd;
-                border-bottom: 1px solid #dddddd;
-                text-align: left;
-                padding: 8px;
-            }
-
-            td label:hover {
-                cursor: pointer;
-            }
-        </style>
+        <link rel="stylesheet" href="./css/grid.css" />
 
     </head>
     <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'SHIP'}">
@@ -121,7 +92,6 @@
                         <ul class="clearfix">
                             <li class="icons dropdown">
                                 <a class="quick-view flex">
-
                                     <span><%= shipper.getWallet()%></span>
                                     <i class="fa-solid fa-wallet"></i>
                                 </a>
@@ -347,73 +317,151 @@
             <!--**********************************
                            Wallet start
             ***********************************-->
-            <div id="wallet" class="overlay fixed top bot left right flex-center hide">
-                <div class="popup relative pad-2 grid">
-                    <div style="margin: -1.5rem 1rem; width: fit-content;"
-                         class="absolute p-0 right text-md opacity popup-close">
+            <div id="wallet" class="overlay hide">
+                <div class="popup">
+                    <div class="popup-close">
                         <i class="fa-solid fa-xmark"></i>
                     </div>
 
-                    <div style="margin: 0 -4px;" class="row">
-                        <div style="max-height: 7rem; padding: 0 4px;" class="col l-2 payment-container">
-                            <div style="background-color: #F8F8F8;" class="full-w full-h flex-center pad-0 payment-method">
-                                <!--<input type="radio" id="payment-1" name="payment" class="payment-input">-->
-                                <label for="payment-1">
-                                    <div class="img">
-                                        <img style="object-fit: contain;"
-                                             src="https://cdn.pixabay.com/photo/2015/05/26/09/37/paypal-784404__480.png"
-                                             alt="" />
-                                    </div>
-                                </label>
-                            </div>
+                    <div class="row">
+                        <div style="padding: 0 2px;" class="col l-3 payment-method-container">
+                            <input value="Paypal" type="radio" name="payment-method" id="payment-method-1" checked />
+                            <label for="payment-method-1" class="payment-method">
+                                <img src="https://cdn.pixabay.com/photo/2015/05/26/09/37/paypal-784404__480.png" />
+                            </label>
                         </div>
-                        <!--                        <div style="max-height: 7rem; padding: 0 4px;" class="col l-2 payment-container">
-                                                    <div style="background-color: #F8F8F8;" class="full-w full-h flex-center pad-0 payment-method">
-                                                        <input type="radio" id="payment-2" name="payment" class="payment-input">
-                                                        <label for="payment-2">
-                                                            <div class="img">
-                                                                <img style="object-fit: contain;"
-                                                                     src="https://cdn.pixabay.com/photo/2015/05/26/09/37/paypal-784404__480.png"
-                                                                     alt="" />
-                                                            </div>
-                                                        </label>
-                                                    </div>
-                                                </div>-->
+
+                        <div style="padding: 0 2px;" class="col l-3 payment-method-container">
+                            <input value="Shopee Pay" type="radio" name="payment-method" id="payment-method-2" />
+                            <label for="payment-method-2" class="payment-method">
+                                <img src="https://seeklogo.com/images/S/shopee-pay-logo-2217CDC100-seeklogo.com.png" />
+                            </label>
+                        </div>
                     </div>
-                    <form action="MainController" method="POST">
 
-                        <div class="m-y-1"> 
+                    <div class="row">
+                        <div class="m-y-0">
                             <i class="fa-solid fa-wallet"></i>
-                            <span>View PayPal</span>
+
+                            <span class="payment-wallet">Paypal</span>
                         </div>
+                    </div>
 
-                        <div class="row">
-                            <div class="col l-4">
-                                <table>
-                                    <tr>
-                                        <th>Value</th>
-                                    </tr>
-                                    <tr>
-                                        <td for="price-1" class="pad-0 flex"><input type="radio" name="price" value="10" id="price-1"><label
-                                                for="price-1" class="m-x-0" style="flex: 1">10 $</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td for="price-2" class="pad-0 flex"><input type="radio" name="price" value="100" id="price-2"><label
-                                                for="price-2" class="m-x-0" style="flex: 1">100 $</label></td>
-                                    </tr>
 
-                                </table>
-                            </div>
-
-                            <div class="col l-8">
-                                <div class="flex-center">
-                                    <input type="hidden" name="payment" value="PayPal" />
-                                    <input type="hidden" name="card" value="true" />
-                                    <button type="submit" name="action" value="Checkout">Proceed to payment</button>
+                    <div class="row">
+                        <div class="col l-4 m-y-1">
+                            <div style="text-align: center;" class="full-w border-b txt-md">
+                                <div class="bold">
+                                    <span>Gi�</span>
                                 </div>
                             </div>
+
+                            <form id="payment-form" class="payment-table">
+                                <input type="hidden" name="payment" value="PayPal" />
+                                <input type="hidden" name="card" value="true" />
+                                <input name="action" value="Checkout"/>
+                                <div class="full-w payment-option border-b">
+                                    <input type="radio" name="price" id="payment-price-1" value="10" checked />
+                                    <label class="payment-item" for="payment-price-1">
+                                        <div class="payment-item-option">
+                                            <span class="bold">Wallet: </span>
+                                            <span>10$</span>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <div class="full-w payment-option border-b">
+                                    <input type="radio" name="price" id="payment-price-3" value="50" />
+                                    <label class="payment-item" for="payment-price-3">
+                                        <div style="padding: -.25rem;" class="payment-item-option">
+                                            <span class="bold">Wallet: </span>
+                                            <span>50$</span>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <div class="full-w payment-option border-b">
+                                    <input type="radio" name="price" id="payment-price-4" value="100" />
+                                    <label class="payment-item" for="payment-price-4">
+                                        <div style="padding: -.25rem;" class="payment-item-option">
+                                            <span class="bold">Wallet: </span>
+                                            <span>100$</span>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <div class="full-w payment-option border-b">
+                                    <input type="radio" name="price" id="payment-price-6" value="500" />
+                                    <label class="payment-item" for="payment-price-6">
+                                        <div style="padding: -.25rem;" class="payment-item-option">
+                                            <span class="bold">Wallet: </span>
+                                            <span>500$</span>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <div class="full-w payment-option border-b">
+                                    <input type="radio" name="price" id="payment-price-7" value="1000" />
+                                    <label class="payment-item" for="payment-price-7">
+                                        <div style="padding: -.25rem;" class="payment-item-option">
+                                            <span class="bold">Wallet: </span>
+                                            <span>1000$</span>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <div class="full-w payment-option border-b">
+                                    <input type="radio" name="price" id="payment-price-8" value="2000" />
+                                    <label class="payment-item" for="payment-price-8">
+                                        <div style="padding: -.25rem;" class="payment-item-option">
+                                            <span class="bold">Wallet: </span>
+                                            <span>2000$</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </form>
                         </div>
-                    </form>
+
+                        <div style="display: flex; justify-content: center; align-items: center;" class="col l-1">
+                            <div class="separate">
+                            </div>
+                        </div>
+
+                        <div class="col l-7 m-y-1 payment-detail-container">
+                            <div class="full-w border-b txt-md">
+                                <div class="bold">
+                                    <span>Transaction detail</span>
+                                </div>
+                            </div>
+
+                            <div class="payment-table">
+                                <div class="full-w payment-detail border-b">
+                                    <div class="payment-item-detail">
+                                        <span>Price: </span>
+                                        <span>
+                                            <span class="payment-item-detail-price">10</span><span>$</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="full-w payment-detail border-b">
+                                    <div class="payment-item-detail">
+                                        <span>Payment method: </span>
+                                        <span class="payment-item-method">Paypal</span>
+                                    </div>
+                                </div>
+                                <div class="full-w payment-detail border-b">
+                                    <div class="payment-item-detail">
+                                        <span>Username: </span>
+                                        <span>shopee1</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="m-y-1">
+                                <button onClick="document.querySelector('#payment-form').submit();" class="payment-btn">Process payment</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -445,11 +493,12 @@
         <script src="./js/settings.js"></script>
         <script src="./js/gleek.js"></script>
         <script src="./js/styleSwitcher.js"></script>
-        <script src="./js/customer_productPage.js"></script>
 
         <script src="./plugins/tables/js/jquery.dataTables.min.js"></script>
         <script src="./plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
         <script src="./plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+
+        </<script src="./js/delivery.js"></script>
 
     </body>
 
