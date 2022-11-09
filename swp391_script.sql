@@ -1954,3 +1954,13 @@ SELECT * FROM tblOrder
 SELECT * FROM tblOrder_Product_Detail
 SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total ,  PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = ?
 SELECT De.order_id, De.address,De.username_Shipper ,Ord.order_Date,Ord.customer_ID, Cus.name,Ord.total, De.status FROM (tblDelivery De JOIN tblOrder Ord ON De.order_id = Ord.order_ID) JOIN tblCustomer Cus ON Cus.username = Ord.customer_ID  
+
+select * from tblOrder
+SELECT * FROM tblOrder_Product_Detail
+UPdate tblOrder_Product_Detail SET status = 2 where product_detail_ID = 124;
+
+select customer.username, order1.order_Date, order1.payment, prodDetail.name,prodDetail.price,  detail.quantity , prodDetail.image, [provider].name AS [provider_name], product.name AS [product_category], detail.status
+    from tblCustomer customer JOIN tblOrder order1 ON customer.username = order1.customer_ID JOIN tblOrder_Product_Detail detail ON detail.order_ID = order1.order_ID JOIN tblProductDetail prodDetail ON prodDetail.id = detail.product_detail_ID
+    JOIN tblProvider [provider] ON [provider].username =  prodDetail.provider_ID JOIN tblProduct product ON product.product_ID = prodDetail.product_ID where customer.username = 'vietdang123' AND detail.status = 2
+
+	select * from tblUser
