@@ -429,7 +429,7 @@
                         <div class="col l-7 m-y-1 payment-detail-container">
                             <div class="full-w border-b txt-md">
                                 <div class="bold">
-                                    <span>Chi ti?t giao d?ch</span>
+                                    <span>Transaction detail</span>
                                 </div>
                             </div>
 
