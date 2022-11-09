@@ -21,7 +21,7 @@ public class CustomerDTO {
     private int gender;
     private String dob;
     private String avatar;
-    private int point;
+    private double point;
     private int status;
 
     private ArrayList<AddressDTO> address_list = null;
@@ -40,7 +40,7 @@ public class CustomerDTO {
         this.status = 1;
     }
 
-    public CustomerDTO(String username, String password, String role_id, String phone, String email, String name, int gender, String dob, String avatar, int point, int status) {
+    public CustomerDTO(String username, String password, String role_id, String phone, String email, String name, int gender, String dob, String avatar, double point, int status) {
         this.username = username;
         this.password = password;
         this.role_id = role_id;
@@ -155,11 +155,11 @@ public class CustomerDTO {
         this.status = status;
     }
 
-    public int getPoint() {
+    public double getPoint() {
         return point;
     }
 
-    public void setPoint(int point) {
+    public void setPoint(double point) {
         this.point = point;
     }
 

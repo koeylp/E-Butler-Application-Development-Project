@@ -69,7 +69,6 @@
                 UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
                 CustomerDTO customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
                 customer = (customer == null) ? new CustomerDTO() : customer;
-
             %>
             <!-- Navbar Start -->
             <div class="container-fluid nav-bar bg-transparent">
@@ -171,6 +170,7 @@
                 CartServiceDTO cartService = (CartServiceDTO) session.getAttribute("CART_SERVICE");
                 CartDTO cart = (CartDTO) session.getAttribute("CART");
                 double total = 0;
+                double total2 = 0;
             %>
 
             <!-- Cart start -->
@@ -356,13 +356,27 @@
                                     </div>
                                 </div>
                             </div>
+                            <%
+                                if (cart != null) {
+                                    for (ProductDetailDTO product : cart.getCart().values()) {
+                                        total2 += product.getPrice() * product.getQuantity();
+                                    }
+                                }
+                                if (cartService != null) {
+                                    for (ServiceCartDTO service : cartService.getCart().values()) {
+                                        total2 += service.getPrice();
+                                    }
+                                }
+                            %>                            
+
                             <!-- Shipping Address end -->
                             <form action="MainController" method="POST" class="checkout">
                                 <input type="hidden" name="action" value="Checkout">
                                 <input type="hidden" name="address" value="<%= shipping_address%>">
                                 <input id="total" type="hidden" name="total"/>
+                                <input type="hidden" name="total2" value="<%= total2 %>"
 
-                                <!-- Payment method start -->
+                                       <!-- Payment method start -->
                                 <div class="relative m-y-32">
                                     <div style="border: 1px solid #E5E7EB;" class="pad-2 flex-between">
                                         <div class="flex-between">
@@ -536,8 +550,8 @@
                                             <span>Your Point</span>
                                         </div>
                                         <div class="flex-between m-y-12" style="padding: 1rem 0;border-bottom: 1px solid #E5E7EB; border-top:1px solid #E5E7EB">
-                                            <label for="point"><span style="color:#273a89; font-size: 20px"><%= customer.getPoint()%></span>  EB-Coin  </label>
-                                            <input id="point" type="checkbox" name="point" value="<%= customer.getPoint()%>" class="txt-sm p-2">
+                                            <label for="point"><span style="color:#273a89; font-size: 20px"><%= customer.getPoint() %></span>  EB-Coin  </label>
+                                            <input id="point" type="checkbox" name="point" value="<%= customer.getPoint() %>" class="txt-sm p-2">
 
                                         </div>
                                         <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB"
@@ -559,7 +573,7 @@
                                     </div>
                                 </div>
 
-                                <button <%if(shipping_address.isEmpty()) {%>disabled style="background-color: #f1f0ed; border: none; color: #ccc"<%}%> onclick="document.querySelector('#total').value = document.getElementById('total-input').innerText;
+                                <button <%if (shipping_address.isEmpty()) {%>disabled style="background-color: #f1f0ed; border: none; color: #ccc"<%}%> onclick="document.querySelector('#total').value = document.getElementById('total-input').innerText;
                                         document.querySelector('.checkout').submit();" class="btn-lg m-y-12 txt-md full-w bold">
                                     Confirm order
                                 </button>

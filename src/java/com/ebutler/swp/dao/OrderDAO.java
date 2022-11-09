@@ -33,7 +33,7 @@ public class OrderDAO {
             + "INSERT INTO tblOrder_Service_Detail(staff_ID, service_Detail_ID, order_ID, price, [status])\n"
             + "VALUES(?, ?, ?, ?, ?)";
     private static final String INSERT_DELIVERY = "\n"
-            + "INSERT INTO tblDelivery(order_id, address,username_Shipper ,[status])\n"
+            + "INSERT INTO tblDelivery(order_id, address, username_Shipper ,[status])\n"
             + "VALUES(?, ?, ?, ?)";
 
     public static void insertOrder(Date date, String username, int status, double total, String payment) throws SQLException {
