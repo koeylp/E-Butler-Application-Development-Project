@@ -37,7 +37,10 @@ public class AddAddressController extends HttpServlet {
             UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
 
             AddressDAO addressDAO = new AddressDAO();
-            AddressDTO address = new AddressDTO(city_id, street, login_user.getUsername(), 0);
+
+            int status = (addressDAO.CountAddress(login_user.getUsername()) > 0) ? 0 : 1;
+        
+            AddressDTO address = new AddressDTO(city_id, street, login_user.getUsername(), status);
 
             if (addressDAO.InserAddress(address)) {
                 url = SUCCESS;

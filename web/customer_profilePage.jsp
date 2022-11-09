@@ -759,9 +759,6 @@
                                                                 </select>
                                                             </div>
 
-
-
-
                                                             <div class="flex-horizon-center flex-col m-y-12 col l-6">
                                                                 <span class="txt-md m-y-12">City</span>
 
@@ -779,7 +776,6 @@
                                                                     <%
                                                                         }
                                                                     %>
-
                                                                 </select>
                                                             </div>
                                                         </div>
