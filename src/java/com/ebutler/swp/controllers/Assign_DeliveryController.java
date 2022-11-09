@@ -41,9 +41,16 @@ public class Assign_DeliveryController extends HttpServlet {
             List<DeliveryDTO> listDelivery = (List<DeliveryDTO>) session.getAttribute("Delivery_List");
             UserDAO userDAO = new UserDAO() ;
             boolean assignNow = false;
+            String checkDeliveryFirst = deliveryDAO.assignDeliveryChecking(orderID);
+            if (checkDeliveryFirst != null) {
+                session.setAttribute("ERROR_ASSIGN", "This Order Has Been Assigned!!");
+            } else {
+                
+            
             for (int i = 0; i < listDelivery.size(); i++) {
                 double total = listDelivery.get(i).getTotal();
-                double totalCheck = total / 3;
+                double totalCheck = total / 2;
+                if(listDelivery.get(i).getOrderID() == orderID) {
                 if (totalCheck < shipper.getWallet()) {
                     
                     double newWallet = shipper.getWallet() - totalCheck ; 
@@ -51,6 +58,7 @@ public class Assign_DeliveryController extends HttpServlet {
                     if (checkUpdate) {
                         assignNow = true;
                     }
+                }
                 }
             }
             if (assignNow) {
@@ -68,6 +76,7 @@ public class Assign_DeliveryController extends HttpServlet {
             } else {
                  url = ERROR;
                     session.setAttribute("ERROR_ASSIGN", "You Dont Have Enough Money To Assign"); 
+            }
             }
 
         } catch (Exception e) {

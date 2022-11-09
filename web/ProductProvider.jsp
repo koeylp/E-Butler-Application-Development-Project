@@ -59,10 +59,6 @@
             product_info = (product_info == null) ? new ProductDetailDTO() : product_info;
             product_error = (product_error == null) ? new ProductErrorDTO() : product_error;
         %>
-<<<<<<< Updated upstream
-        
-=======
->>>>>>> Stashed changes
         <div class="container-xxl">
             <div class="container-fluid nav-bar bg-white px-0">
 
@@ -358,7 +354,7 @@
                                         </td>
                                         <td>
                                             <div class="flexStatus">
-                                                <input class="form-control me-2 priceData" type="text" name="ProductPrice" value="<%= product.getPrice()%>" />$
+                                                <input class="form-control me-2 priceData" type="text" name="ProductPrice" value="<%= product.getPrice()%>" />
                                             </div>
 
                                         </td>
@@ -660,15 +656,15 @@
     <script src="./vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
     <script src="./vendor/js/menu.js"></script>
-    endbuild 
 
-    Vendors JS 
+
+  
     <script src="./vendor/libs/apex-charts/apexcharts.js"></script>
 
-    Main JS 
+    
     <script src="./js/providerMain.js"></script>
 
-    Page JS 
+ 
     <script src="./js/dashboards-analytics.js"></script>
 
     <script src="./js/provider.js"></script>

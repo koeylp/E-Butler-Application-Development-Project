@@ -123,47 +123,11 @@
 
                 <div class="mt-3 ms-5 d-flex justify-content-start ">
                     <div class="container-fluid d-flex flex-column pb-5">
-                        <div class="bg-white container-fluid d-flex justify-content-between border-bottom  "
-                             style="border-radius:5px ;">
-
-                            <div class="me-5 mb-3 d-flex">
-                                <%
-                                    String search = (String) request.getAttribute("search");
-                                    if (search == null) {
-                                        search = "";
-                                    }
-                                %>
-                                <form class="d-flex" action="MainController" method="post">
-                                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="SearchProviderProduct" value="<%= search%>" >
-                                    <button class="btn btn-primary" name="action" value="SearchProviderProduct" type="submit">Search</button>
-                                </form>
-
-                                <form action="MainController" method="post">
-                                    <div class="btn-group ms-2">
-                                        <button type="button" class="btn btn-primary btn-icon rounded-pill dropdown-toggle hide-arrow"
-                                                data-bs-toggle="dropdown">
-                                            <i class="bx bx-sort"></i>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><button type="submit" name="action" value="Pro_sortByName" class="dropdown-item" ><i class="bx bx-sort-a-z m-1"></i>Sort by
-                                                    name</button>
-                                            </li>
-                                            <li><button type="submit" name="action" value="Pro_sortByPriceUp" class="dropdown-item" ><i class="bx bx-sort-down m-1"></i>Sort by price
-                                                    up</button>
-                                            </li>
-                                            <li><button type="submit" name="action" value="Pro_sortByPriceDown" class="dropdown-item" ><i class="bx bx-sort-up m-1"></i>Sort by price
-                                                    down</button>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                        
                         <%
                             List<OrderDTO> orderList = new ArrayList();
                             orderList = (List<OrderDTO>) session.getAttribute("Provider_ListOrder");
-                            if (orderList.isEmpty()) {
+                            if (orderList == null) {
                         %>    
                         <h3 style="text-align: center; color: black ; font-size: 25px ; padding-top: 25px ;">Your Company Don't Serve This Service</h3>
                         <%

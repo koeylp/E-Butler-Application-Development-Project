@@ -157,12 +157,13 @@ public class Update_Delivery_StatusController extends HttpServlet {
                 List<DeliveryDTO> listDelivery = (List<DeliveryDTO>) session.getAttribute("Delivery_List");
                 UserDAO userDAO = new UserDAO();
                 for (int i = 0; i < listDelivery.size(); i++) {
-                    double total = listDelivery.get(i).getTotal();
-                    double totalCheck = total / 3;
-                    double newWallet = shipper.getWallet() + totalCheck + 3;
-                    userDAO.updateShipperWallet(newWallet, shipper.getUsername());
-
+                    if(listDelivery.get(i).getOrderID() == order_ID) {
+                        double newWallet = (listDelivery.get(i).getTotal() / 3) + shipper.getWallet() + 3 ;
+                        userDAO.updateShipperWallet(newWallet, shipper.getUsername()) ; 
+                        
+                    }
                 }
+                
             }
         } catch (Exception e) {
         } finally {
