@@ -54,7 +54,7 @@
                         <a class="navbar-brand d-flex align-items-center text-center">
                             <div class="icon p-2 me-2">
                                 <img class="img-fluid"
-                                     src="https://scontent.fsgn2-4.fna.fbcdn.net/v/t1.15752-9/307058616_802160467603859_5558839303148788245_n.png?stp=dst-png_p1080x2048&_nc_cat=109&ccb=1-7&_nc_sid=ae9488&_nc_ohc=vGhbAQumiiwAX8TbYC2&tn=nHI45FEgylR7fWDG&_nc_ht=scontent.fsgn2-4.fna&oh=03_AVJuwn5Dqs20uZj9NKDP_eqwggpHhYGN5cC90Kw1btakKQ&oe=6363B3B1"
+                                     src="img/logo.png"
                                      alt="Icon" style="width: 30px; height: 30px;">
                             </div>
                             <h1 class="m-0 " style="color:#273A89 ;">E-Butler</h1>
@@ -217,14 +217,18 @@
                                         <%
                                             Double total = 0.0;
                                             for (OrderDetailDTO orderDetail : listDetail) {
-                                                total += orderDetail.getPrice() * orderDetail.getQuantity();
+                                                int quantity = orderDetail.getQuantity() ; 
+                                                if (quantity == 0) {
+                                                quantity = 1 ; 
+                                            }
+                                                total += orderDetail.getPrice() * quantity;
                                         %>
                                         <tr>
                                             <td><%= orderDetail.getOrder_ID()%></td>
                                             <td><%= orderDetail.getName()%></td>
-                                            <td><%= orderDetail.getQuantity()%></td>
+                                            <td><%= quantity %></td>
                                             <td><%= orderDetail.getPrice()%></td>
-                                            <td><%= orderDetail.getPrice() * orderDetail.getQuantity()%></td> 
+                                            <td><%= orderDetail.getPrice() * quantity %></td> 
                                             <td class="txt-md ">
 
                                                 <div>

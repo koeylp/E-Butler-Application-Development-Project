@@ -520,13 +520,13 @@
 
                                 <div class="m-y-32">
                                     <div class="flex-col">
-                                        <div class="flex-between txt-md bold">
-                                            <span>Discount code</span>
+                                        <div class="flex-between txt-md bold" style="border-top:1px solid #E5E7EB">
+                                            <span>Your Point</span>
                                         </div>
-                                        <div class="flex-between m-y-12">
-                                            <input style="border-radius: .5rem; flex: 1; margin-right: 1rem" type="text"
-                                                   class="txt-sm p-2">
-                                            <button style="color: white" class="btn-md txt-sm bold">Apply</button>
+                                        <div class="flex-between m-y-12" style="padding: 1rem 0;border-bottom: 1px solid #E5E7EB; border-top:1px solid #E5E7EB">
+                                            <label for="point"><span style="color:#273a89; font-size: 20px"><%= customer.getPoint()%></span>  EB-Coin  </label>
+                                            <input id="point" type="checkbox" name="point" value="<%= customer.getPoint()%>" class="txt-sm p-2">
+
                                         </div>
                                         <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB"
                                              class="flex-between txt-sm">
@@ -541,12 +541,13 @@
 
                                         <div style="padding: 1rem 0;" class="flex-between txt-lg bold">
                                             <span>Order total</span>
-                                            <span class="bold">$<%= total%></span>
+                                            <span>$<span id="total-input" class="bold"><%= total%></span></span>
+                                            <input type="hidden" name="total1"  id="total1" value="<%= total%>"/>
                                         </div>
                                     </div>
                                 </div>
 
-                                <button onclick="document.querySelector('#total').value =<%=total%>;
+                                <button onclick="document.querySelector('#total').value = document.getElementById('total-input').innerText;
                                         document.querySelector('.checkout').submit();" style="width: 100%;" class="btn-lg m-y-12 txt-md">
                                     Confirm order
                                 </button>
@@ -643,6 +644,13 @@
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/waypoints/waypoints.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script>
+                                    $("#point").click(function () {
+                                        var total = document.getElementById('total1').value;
+                                        var point = document.getElementById('point').value;
+                                        document.getElementById('total-input').innerText = ($(this).is(':checked')) ? total - point : total;
+                                    });
+    </script>
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>

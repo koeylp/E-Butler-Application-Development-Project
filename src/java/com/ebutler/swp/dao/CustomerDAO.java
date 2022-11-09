@@ -449,7 +449,7 @@ public class CustomerDAO {
     public static void main(String[] arg) throws SQLException {
 //        accumulatePoint("Khoi Le", 10);
 //        uploadPhoto("Khoi Le", "1.png");
-        System.out.println(getAvatar("Khoi Le"));
+        System.out.println(getPoint("Khoi Le"));
     }
 
 }
