@@ -242,15 +242,27 @@
                             %>
                             <div class="relative m-y-32">
                                 <div style="border: 1px solid #E5E7EB;" class="pad-2 flex-between">
-                                    <div class="flex l-8">
+                                    <div class="flex l-9">
                                         <div class="flex-center txt-md">
                                             <i class="fa-solid fa-signs-post"></i>
                                         </div>
                                         <div style="margin-left: 2rem;" class="flex-col">
                                             <span class="txt-lg">SHIPPING ADDRESS</span>
                                             <div class="flex-between txt-sm bold">
-                                                <span><%= shipping_address%></span>
+                                                <span><%=shipping_address%></span>
                                             </div>
+
+                                            <%
+                                                if (shipping_address.isEmpty()) {
+                                            %>
+                                            <span style="color: red" class="auth-form__notify txt-xs bold">
+                                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                                <span>You have not provided a shipping address</span>
+                                            </span> 
+                                            <%
+                                                }
+                                            %>
+
                                         </div>
                                     </div>
                                     <div class="flex-center">
@@ -547,8 +559,8 @@
                                     </div>
                                 </div>
 
-                                <button onclick="document.querySelector('#total').value = document.getElementById('total-input').innerText;
-                                        document.querySelector('.checkout').submit();" style="width: 100%;" class="btn-lg m-y-12 txt-md">
+                                <button <%if(shipping_address.isEmpty()) {%>disabled style="background-color: #f1f0ed; border: none; color: #ccc"<%}%> onclick="document.querySelector('#total').value = document.getElementById('total-input').innerText;
+                                        document.querySelector('.checkout').submit();" class="btn-lg m-y-12 txt-md full-w bold">
                                     Confirm order
                                 </button>
                             </div>
