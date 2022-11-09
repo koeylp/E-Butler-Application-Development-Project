@@ -233,13 +233,13 @@
                                      class="col l-4 flex-center full-h">
                                     <div style="height: 95%;" class="flex-col flex-vertical-center flex-around">
                                         <div style="width: 10rem; height: 10rem" class="img">
-                                            <img src="<%=service.getImage()%>"
+                                            <img src="<%= service.getImage()%>"
                                                  alt="">
                                         </div>
 
                                         <div class="flex flex-col flex-center full-w">
                                             <span class="txt-md bold"><%= service.getName()%></span>
-                                            <span class="txt-sm">provider Name</span>
+                                            <span class="txt-sm">Home Cleaning</span>
                                         </div>
 
                                         <div style="background-color: #F8F8F8; border-radius: .5rem; border: 1px solid #0F172A;"
@@ -267,14 +267,14 @@
 
                                                     <div class="flex-col flex-vertical-center">
                                                         <div style="width: 5rem; height: 5rem;" class="img">
-                                                            <img src="<%=staff.getAvatar()%>"
+                                                            <img src="<%= staff.getAvatar()%>"
                                                                  alt="">
                                                         </div>
                                                     </div>
 
                                                     <div style="justify-content: flex-start;" class="full-w m-y-0 pad-x-0">
                                                         <span class="txt-sm bold ellipsis full-w">
-                                                            <%=staff.getName()%>
+                                                            <%= staff.getName()%>
                                                         </span>
                                                     </div>
 

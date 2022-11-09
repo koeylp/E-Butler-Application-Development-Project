@@ -27,9 +27,44 @@ public class AddressDAO {
     private final String SET_ADDRESS_DEFAULT = "UPDATE tblAddress SET status = 1 WHERE user_ID = ? and address_ID = ?";
     private final String RESET_ADDRESS_DEFAULT = "UPDATE tblAddress SET status = 0 WHERE status <> -1";
     private final String SELECT_ADDRESS = "SELECT a.street, a.district_ID, user_ID, status, d.city_name, pc.province_Name, a.address_ID, pc.province_ID FROM tblAddress as a JOIN tblDistrict d ON a.district_ID = d.district_ID JOIN tblProvince_City pc ON d.province_ID = pc.province_ID WHERE user_ID = ? and a.status <> -1 ORDER BY a.status DESC";
-
+    
+    private final String COUNT_ADDRESS = "select COUNT(*) from tblAddress where user_ID = ? and status = 1" ;
+    
     private final String SELECT_PROVINCE_ID = "SELECT [province_Name] FROM tblProvince_City WHERE [province_ID] = ?";
     private final String SELECT_CITY_ID = "SELECT [city_name] FROM  tblDistrict WHERE [district_ID] = ?";
+    
+    public int CountAddress(String username) throws SQLException {
+        int count = 0;
+
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(COUNT_ADDRESS);
+                ptm.setString(1, username);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    count = rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return count;
+    }
     
     public String SelectProvinceById(String provinceID) throws SQLException {
         String name = "";

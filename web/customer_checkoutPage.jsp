@@ -88,7 +88,7 @@
                             <a href="LoadingProductAndServiceCategory" class="nav-item nav-link active navigator">Home</a>
                             <a href="LoadingProductAndServiceCategory#product" class="nav-item nav-link navigator">Product</a>
                             <div class="nav-item dropdown">
-                                <a href="LoadingProductAndServiceCategoryt#service" class="nav-link navigator">Service</a>
+                                <a href="LoadingProductAndServiceCategory#service" class="nav-link navigator">Service</a>
                             </div>
                             <a href="LoadingProductAndServiceCategory#help" class="nav-item nav-link navigator">Help</a>
                             <div class="search absolute hide">
@@ -242,7 +242,7 @@
                             %>
                             <div class="relative m-y-32">
                                 <div style="border: 1px solid #E5E7EB;" class="pad-2 flex-between">
-                                    <div class="flex l-8">
+                                    <div class="flex l-9">
                                         <div class="flex-center txt-md">
                                             <i class="fa-solid fa-signs-post"></i>
                                         </div>
@@ -251,6 +251,18 @@
                                             <div class="flex-between txt-sm bold">
                                                 <span><%=shipping_address%></span>
                                             </div>
+
+                                            <%
+                                                if (shipping_address.isEmpty()) {
+                                            %>
+                                            <span style="color: red" class="auth-form__notify txt-xs bold">
+                                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                                <span>You have not provided a shipping address</span>
+                                            </span> 
+                                            <%
+                                                }
+                                            %>
+
                                         </div>
                                     </div>
                                     <div class="flex-center">
@@ -284,9 +296,10 @@
                                                             style="border-bottom-left-radius: 1rem; border-top-left-radius: 1rem;"
                                                             class="input txt-sm province-input" type="text" onchange="this.form.submit()" name="province_id">
                                                             <option>Select Province</option>
-                                                            <%                                                                    for (ProvinceDTO province : province_list) {
+                                                            <%
+                                                                for (ProvinceDTO province : province_list) {
                                                             %>
-                                                            <option value="<%=province.getId()%>" <%if (province.getId().equals(province_id)) {%>selected<%}%>><%=province.getName()%></option>
+                                                            <option value="<%=province.getId()%>" <%if (province.getId().equals(province_id)) {%>selected<%}%>><%= province.getName()%></option>
                                                             <%
                                                                 }
                                                             %>
@@ -346,7 +359,7 @@
                             <!-- Shipping Address end -->
                             <form action="MainController" method="POST" class="checkout">
                                 <input type="hidden" name="action" value="Checkout">
-                                <input type="hidden" name="address" value="<%=shipping_address%>">
+                                <input type="hidden" name="address" value="<%= shipping_address%>">
                                 <input id="total" type="hidden" name="total"/>
 
                                 <!-- Payment method start -->
@@ -444,21 +457,13 @@
                                                     </div>
                                                     <div style="height: 50%;" class="flex-end flex-col">
                                                         <div class="flex-between">
-                                                            <div style="height: 50%;" class="flex-center col-5">
-                                                                <!--                                                                <button class="btn-circle flex-center txt-xs"
-                                                                                                                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                                                                                                   <i class="fas fa-minus"></i>
-                                                                                                                                </button>-->
-
+                                                            <div style="height: 50%;" class="flex-center col-5">                                                               
                                                                 <div class="">
                                                                     <input
                                                                         style="text-align: center; outline: none; font-weight: bold; border: none;"
                                                                         min="1" value="<%= product.getQuantity()%>" name="quantity" type="number"
                                                                         class="form-control" readonly="" />
                                                                 </div>
-
-                                                                <!--                                                                <button class=" btn-circle flex-center txt-xs"
-                                                             </button>-->
                                                             </div>
                                                         </div>
                                                     </div>
@@ -502,13 +507,18 @@
                                                         <div class="flex-col flex-horizon-center">
                                                             <span class="txt-md bold"><%= service.getServiceName()%></span>
                                                         </div>
+
                                                         <div class="order-price txt-sm bold">
                                                             <span>
                                                                 $<%= service.getPrice()%>
                                                             </span>
                                                         </div>
+
                                                     </div>
 
+                                                    <div class="flex-col flex-horizon-center">
+                                                        <span class="txt-md bold">Staff: <%= service.getStaffName()%></span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -522,13 +532,13 @@
 
                                 <div class="m-y-32">
                                     <div class="flex-col">
-                                        <div class="flex-between txt-md bold">
-                                            <span>Discount code</span>
+                                        <div class="flex-between txt-md bold" style="border-top:1px solid #E5E7EB">
+                                            <span>Your Point</span>
                                         </div>
-                                        <div class="flex-between m-y-12">
-                                            <input style="border-radius: .5rem; flex: 1; margin-right: 1rem" type="text"
-                                                   class="txt-sm p-2">
-                                            <button style="color: white" class="btn-md txt-sm bold">Apply</button>
+                                        <div class="flex-between m-y-12" style="padding: 1rem 0;border-bottom: 1px solid #E5E7EB; border-top:1px solid #E5E7EB">
+                                            <label for="point"><span style="color:#273a89; font-size: 20px"><%= customer.getPoint()%></span>  EB-Coin  </label>
+                                            <input id="point" type="checkbox" name="point" value="<%= customer.getPoint()%>" class="txt-sm p-2">
+
                                         </div>
                                         <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB"
                                              class="flex-between txt-sm">
@@ -543,13 +553,14 @@
 
                                         <div style="padding: 1rem 0;" class="flex-between txt-lg bold">
                                             <span>Order total</span>
-                                            <span class="bold">$<%= total%></span>
+                                            <span>$<span id="total-input" class="bold"><%= total%></span></span>
+                                            <input type="hidden" name="total1"  id="total1" value="<%= total%>"/>
                                         </div>
                                     </div>
                                 </div>
 
-                                <button onclick="document.querySelector('#total').value =<%=total%>;
-                                        document.querySelector('.checkout').submit();" style="width: 100%;" class="btn-lg m-y-12 txt-md">
+                                <button <%if(shipping_address.isEmpty()) {%>disabled style="background-color: #f1f0ed; border: none; color: #ccc"<%}%> onclick="document.querySelector('#total').value = document.getElementById('total-input').innerText;
+                                        document.querySelector('.checkout').submit();" class="btn-lg m-y-12 txt-md full-w bold">
                                     Confirm order
                                 </button>
                             </div>
@@ -645,6 +656,13 @@
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/waypoints/waypoints.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script>
+                                    $("#point").click(function () {
+                                        var total = document.getElementById('total1').value;
+                                        var point = document.getElementById('point').value;
+                                        document.getElementById('total-input').innerText = ($(this).is(':checked')) ? total - point : total;
+                                    });
+    </script>
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>

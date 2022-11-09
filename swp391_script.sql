@@ -230,12 +230,6 @@ CREATE TABLE tblShipper (
 )
 GO
 
-/*CREATE TABLE tblShipperWallet (
-	[shipper_id] nvarchar(30) PRIMARY KEY,
-	total int
-)
-GO*/
-
 CREATE TABLE tblDelivery (
 	id int IDENTITY(1,1) PRIMARY KEY,
 	order_id int REFERENCES tblOrder(order_ID),
@@ -1884,10 +1878,6 @@ INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,descri
 INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','27','98','Home CCTV',5,'Get ready all the time. Helping you with the best service',1)
 INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','27','99','Home CCTV',5,'Get ready all the time. Helping you with the best service',1)
 INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID,name,price,description,status) VALUES ('fptcompany','27','100','Home CCTV',5,'Get ready all the time. Helping you with the best service',1)
-
-
-INSERT INTO tblUser(username, password, role_ID, phone, email, status) 
-VALUES('hello', '1', 'CUS', '0123456789', 'hello@gmail.com', 1)
 
 --- bảng delivery ---
 /*insert into tblShipperCategory(username , name, status) values ('grab', 'Grab', 1)

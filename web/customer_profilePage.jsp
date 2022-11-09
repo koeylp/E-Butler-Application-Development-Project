@@ -322,6 +322,7 @@
                             </div>
                             <!-- Order detail -->
                             <div class="pad-2">
+                                
                                 <div class="order-card m-y-12">
                                     <div class="flex">
                                         <div class="flex-center order-img">
@@ -331,44 +332,16 @@
                                         <div style="flex: 1; margin-left: 1rem;" class="flex-col">
                                             <div class="flex-between">
                                                 <div class="flex-col flex-horizon-center">
-                                                    <span class="txt-lg bold">Product name</span>
+                                                    <span class="txt-lg bold">Pick Hoodie</span>
                                                     <div class="flex-horizon-center">
-                                                        <span class="txt-md">Product</span>
+                                                        <span class="txt-md">Shop</span>
                                                         <span class="m-x-12">|</span>
-                                                        <span class="txt-md">Product Category</span>
+                                                        <span class="txt-md">LULUSHOP</span>
                                                     </div>
                                                 </div>
                                                 <div class="order-price bold">
                                                     <span>
-                                                        $369.000
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div style="height: 50%;" class="flex-end flex-col">
-                                                <span class="txt-md bold">Quantity: 1</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="order-card m-y-12">
-                                    <div class="flex">
-                                        <div class="flex-center order-img">
-                                            <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
-                                                 alt="">
-                                        </div>
-                                        <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                            <div class="flex-between">
-                                                <div class="flex-col flex-horizon-center">
-                                                    <span class="txt-lg bold">Product name</span>
-                                                    <div class="flex-horizon-center">
-                                                        <span class="txt-md">Product</span>
-                                                        <span class="m-x-12">|</span>
-                                                        <span class="txt-md">Product Category</span>
-                                                    </div>
-                                                </div>
-                                                <div class="order-price bold">
-                                                    <span>
-                                                        $369.000
+                                                        $39
                                                     </span>
                                                 </div>
                                             </div>
@@ -786,9 +759,6 @@
                                                                 </select>
                                                             </div>
 
-
-
-
                                                             <div class="flex-horizon-center flex-col m-y-12 col l-6">
                                                                 <span class="txt-md m-y-12">City</span>
 
@@ -806,7 +776,6 @@
                                                                     <%
                                                                         }
                                                                     %>
-
                                                                 </select>
                                                             </div>
                                                         </div>

@@ -693,7 +693,7 @@
             <i class="fas fa-check-circle"></i>
             </div>
             <div class="toast__body">
-            <h3 class="toast__title">Th?t b?i</h3>
+            <h3 class="toast__title">Error</h3>
                 <p class="toast__msg"><%=message%></p>
                 </div>
             <div class="toast__close">

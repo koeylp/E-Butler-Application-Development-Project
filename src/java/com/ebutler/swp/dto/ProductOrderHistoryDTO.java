@@ -9,7 +9,8 @@ package com.ebutler.swp.dto;
  * @author Dang Viet
  */
 public class ProductOrderHistoryDTO {
-     private String username;
+
+    private String username;
     private String order_Date;
     private String payment;
     private String productName;
@@ -125,13 +126,10 @@ public class ProductOrderHistoryDTO {
     public void setProduct_category(String product_category) {
         this.product_category = product_category;
     }
-    
-    
 
     @Override
     public String toString() {
         return "ProductOrderHistoryDTO{" + "username=" + username + ", order_Date=" + order_Date + ", payment=" + payment + ", productName=" + productName + ", price=" + price + ", quantity=" + quantity + ", image=" + image + ", status=" + status + '}';
     }
-    
-    
+
 }

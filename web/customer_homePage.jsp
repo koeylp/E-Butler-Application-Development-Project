@@ -139,13 +139,13 @@
             <div class="grid">
                 <div class="relative">
                     <div class="slider__img">
-                        <img src="https://stonebali.com/wp-content/uploads/2020/02/banner_cleaning_02.jpg" style="width:100%">
+                        <img src="img/32175.jpg" style="width:100%">
                     </div>
                     <div class="slider__img">
-                        <img src="https://cf.shopee.vn/file/5b5de1582d99cbbe75a8f9a5c4dae1c2_xxhdpi" style="width:100%">
+                        <img src="https://img.freepik.com/free-vector/template-banner-online-store-with-shopping-cart-with-purchases-boxes-delivery-from-supermarket-vector-illustration_548887-104.jpg?w=2000" style="width:100%">
                     </div>
                     <div class="slider__img">
-                        <img src="https://cf.shopee.vn/file/29a513618bd587d238c3134143f93d96_xxhdpi" style="width:100%">
+                        <img src="img/7510561.jpg" style="width:100%">
                     </div>
                     
 
@@ -235,7 +235,7 @@
                 <div class="relative">
 
                     <div class="slider__img--2">
-                        <img src="https://cf.shopee.vn/file/e15a61be0bcca9731fdaabdd03360612_xxhdpi" style="width:100%">
+                        <img src="img/29296.jpg" style="width:100%">
                     </div>
                     <div class="slider__img--2">
                         <img src="https://cf.shopee.vn/file/e7133b9860bc43cd37e2141c1fb9437a_xxhdpi" style="width:100%">
@@ -291,7 +291,7 @@
                                                         </div>
 
                                                         <div>
-                                                            <button class="my-btn txt-lg bold" name="action" value="GoToServicePageByPlace">Show me all</button>
+                                                            <button class="my-btn txt-lg bold" name="action" value="GoToServicePageByPlace">Show all</button>
                                                             <input type="hidden" name="category_ID" value="<%=category.getCategory_ID()%>"/>
                                                             <input type="hidden" name="category_name" value="<%=category.getName()%>"/>
                                                         </div>
