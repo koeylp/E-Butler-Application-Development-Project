@@ -3194,7 +3194,7 @@ VALUES
 	('fptcompany', '27', '98', 'Home CCTV', 5, 'Get ready all the time. Helping you with the best service', 1)
 INSERT INTO tblServiceDetail
 	(provider_ID, service_ID, staff_ID,name,price,description,status)
-VALUES
+VALUES 
 	('fptcompany', '27', '99', 'Home CCTV', 5, 'Get ready all the time. Helping you with the best service', 1)
 INSERT INTO tblServiceDetail
 	(provider_ID, service_ID, staff_ID,name,price,description,status)
