@@ -97,7 +97,7 @@
                             </img>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-start">
                                 <li><a data-bs-target="#basicModal1" data-bs-toggle="modal" class="dropdown-item" href="javascript:void(0);"><i class="bx bx-user m-2"></i>My Profile</a></li>
-                                <li><a class="dropdown-item" href="changePassword"><i class="bx bx-lock m-2"></i>Change Password</a>
+                                <li><a class="dropdown-item" href="changePassword.jsp"><i class="bx bx-lock m-2"></i>Change Password</a>
                                 </li>
                                 <!-- <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li> -->
                                 <li>

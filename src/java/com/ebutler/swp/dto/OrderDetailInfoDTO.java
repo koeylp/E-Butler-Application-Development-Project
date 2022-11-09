@@ -75,6 +75,7 @@ public class OrderDetailInfoDTO {
         this.email = email;
     }
 
+    
     @Override
     public String toString() {
         return "OrderDetailInfoDTO{" + "orderID=" + orderID + ", order_date=" + order_date + ", status=" + status + ", name=" + name + ", phone=" + phone + ", email=" + email + '}';

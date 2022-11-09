@@ -37,9 +37,14 @@ public class Provider_OrderController extends HttpServlet {
             List<OrderDTO> listOrder = new ArrayList();   
             List<ProductDetailDTO> listProduct = (List<ProductDetailDTO>) session.getAttribute("Provider_ListProduct") ; 
             List<ProviderServiceDTO1> listService = (List<ProviderServiceDTO1>) session.getAttribute("Providder_ListService") ;   
-             if (!listProduct.isEmpty()) {
+            int check = 0 ; 
+            if (!listProduct.isEmpty()) {
+                check = 1 ; 
+            } 
+             if (check == 1) {
                 listOrder = dao.loadListOrder(provider); 
-            } else if (!listService.isEmpty()) { 
+            } 
+             else{
                 listOrder = dao.loadListOrderService(provider) ;
             }
             if (listOrder != null) {

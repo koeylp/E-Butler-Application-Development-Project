@@ -112,7 +112,7 @@
                                 <a href="#">Home</a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="#">Orders</a>
+                                <a href="MainController?action=ProviderOrder">Orders</a>
                             </li>
                             <li class="breadcrumb-item active">Orders Details</li>
                         </ol>
@@ -190,7 +190,7 @@
                                         <li style="list-style:none ;"><i class="bx bx-user mx-2"></i><%= listDetailInfo.get(0).getName()%></li>
                                         <li style="list-style:none ;"><i class="bx bx-phone mx-2"></i><%= listDetailInfo.get(0).getPhone()%></li>
                                         <li style="list-style:none ;"> <i class="bx bx-envelope mx-2"></i><%= listDetailInfo.get(0).getEmail()%></li> 
-                                        <li style="list-style:none ;"><i class="bx bx-map-pin mx-2"></i>Khu Cong Nghe Cao</li>
+                                        <li style="list-style:none ;"><i class="bx bx-map-pin mx-2"></i>Khu Công Nghệ Cao </li>
                                     </div>
 
 

@@ -59,7 +59,6 @@
             product_info = (product_info == null) ? new ProductDetailDTO() : product_info;
             product_error = (product_error == null) ? new ProductErrorDTO() : product_error;
         %>
-
         <div class="container-xxl">
             <div class="container-fluid nav-bar bg-white px-0">
 
@@ -658,9 +657,11 @@
 
     <script src="./vendor/js/menu.js"></script>
 
+
     <script src="./vendor/libs/apex-charts/apexcharts.js"></script>
 
   
+
     <script src="./js/providerMain.js"></script>
 
  
