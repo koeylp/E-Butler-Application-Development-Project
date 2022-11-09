@@ -30,9 +30,11 @@
         <link rel="icon" type="image/x-icon" href="./assets/img/favicon/favicon.ico" />
         <link rel="stylesheet" href="./vendor/fonts/boxicons.css" />
         
-        <link rel="stylesheet" href="./css/delivery.css" />
+        
         <link rel="stylesheet" href="./css/deliveryPage.css" />
         <link rel="stylesheet" href="./css/grid.css" />
+        <link rel="stylesheet" href="./css/delivery.css" />
+        <link rel="stylesheet" href="./css/deliveryCheck.css" />
 
     </head>
     <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'SHIP'}">
