@@ -408,27 +408,27 @@
                                                         </div>
 
                                                         <%
-                                                            String reviewError = (String)request.getAttribute("REVIEW_ERROR");
-                                                            
+                                                            String reviewError = (String) request.getAttribute("REVIEW_ERROR");
+
                                                             reviewError = (reviewError == null) ? "" : reviewError;
                                                         %>
 
                                                         <div class="full-w m-y-0">
                                                             <span class="txt-sm bold">Comment</span>
                                                             <textarea name="comment" id="" rows="2" value="" class="full-w pad-0 txt-sm"></textarea>
-                                                            <div class="full-w flex-end">
+                                                            <%
+                                                                if (!reviewError.isEmpty()) {
+                                                            %>
+                                                            <span class="auth-form__notify txt-xs bold">
+                                                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                                                <p><%=reviewError%></p>
+                                                            </span> 
+                                                            <%
+                                                                }
+                                                            %>
+                                                            <div class="flex-end full-w">
                                                                 <button style="padding: .2rem 2rem; border-radius: .5rem;"
                                                                         class="btn-md bold">Submit</button>
-                                                                <%
-                                                                    if (!reviewError.isEmpty()) {
-                                                                %>
-                                                                <span class="auth-form__notify">
-                                                                    <i class="fa-solid fa-triangle-exclamation"></i>
-                                                                    <p><%=reviewError%></p>
-                                                                </span> 
-                                                                <%
-                                                                    }
-                                                                %>
                                                             </div>
                                                         </div>
                                                     </form>
