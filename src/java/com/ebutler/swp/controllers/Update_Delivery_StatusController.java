@@ -56,18 +56,25 @@ public class Update_Delivery_StatusController extends HttpServlet {
             updateDeliveryStatusForProduct = deliveryDAO.updateProductOrder(statusDelivery, id);
             if (updateDeliveryStatusForProduct) {
                 int status = 1;
+                int statusOrder = 1 ;
                 switch (statusDelivery) {
                     case 0:
-                        status = 0;
-                        updateOrder = deliveryDAO.updateOrder(status, order_ID);
+                        statusOrder = 0;
+                        status = 0 ; 
+                        updateOrder = deliveryDAO.updateOrder(statusOrder, order_ID);
+                        updateOrder = deliveryDAO.updateDelivery(status, order_ID);
                         break;
                     case 1:
-                        status = 1;
-                        updateOrder = deliveryDAO.updateOrder(status, order_ID);
+                        statusOrder = 1;
+                        status = 1 ;
+                        updateOrder = deliveryDAO.updateOrder(statusOrder, order_ID);
+                        updateOrder = deliveryDAO.updateDelivery(status, order_ID);
                         break;
                     case 2:
-                        status = 1;
-                        updateOrder = deliveryDAO.updateOrder(status, order_ID);
+                        statusOrder = 1;
+                        status = 2 ;
+                        updateOrder = deliveryDAO.updateOrder(statusOrder, order_ID);
+                        updateOrder = deliveryDAO.updateDelivery(status, order_ID);
                         break;
                     case 3:
                         break;

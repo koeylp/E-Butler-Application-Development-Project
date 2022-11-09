@@ -18,6 +18,10 @@
     --list-h: 2000px;
 }
 
+.full-w {
+   width: 100%;
+}
+
 /* Margin start */
 .m-y-0 {
     margin: .5rem 0;
@@ -163,9 +167,5 @@
     color: var(--primary-color);
     font-weight: 700;
 }
-.flexStatus {
-    display: flex ;
-}
-.changeStatus {
-    margin-top: 8px ; 
-}
+
+
