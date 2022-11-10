@@ -1,4 +1,5 @@
 
+<%@page import="com.ebutler.swp.dao.ShipperDAO"%>
 <%@page import="com.ebutler.swp.dto.ShipperDTO"%>
 <%@page import="com.ebutler.swp.dto.DeliveryDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -29,13 +30,13 @@
         <link rel="stylesheet" href="./css/demo.css" />
         <link rel="icon" type="image/x-icon" href="./assets/img/favicon/favicon.ico" />
         <link rel="stylesheet" href="./vendor/fonts/boxicons.css" />
-        
-        
+
+
         <link rel="stylesheet" href="./css/deliveryPage.css" />
         <link rel="stylesheet" href="./css/grid.css" />
         <link rel="stylesheet" href="./css/delivery.css" />
         <link rel="stylesheet" href="./css/deliveryCheck.css" />
-
+        <link rel="stylesheet" href="./css/dashboard.css" />
     </head>
     <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'SHIP'}">
         <c:redirect url="guest_loginPage.jsp"></c:redirect>
@@ -183,7 +184,7 @@
                                                 <li>
                                                     <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
                                                 </li>
-                                               
+
                                                 <li><a href="MainController?action=LogoutProvider"><i class="icon-key"></i> <span>Logout</span></a></li>
                                             </ul>
                                         </div>
@@ -206,6 +207,20 @@
             <%
                 List<DeliveryDTO> listDelivery = new ArrayList();
                 listDelivery = (List<DeliveryDTO>) session.getAttribute("Delivery_List");
+                int count_assigned_delivery = 0;
+                int count_done_delivery = 0;
+
+                for (DeliveryDTO delivery : listDelivery) {
+                    if (delivery.getUsername_Shipper() == null) {
+                        continue;
+                    }
+                    count_assigned_delivery++;
+
+                    if (delivery.getStatus() == 3) {
+                        count_done_delivery++;
+                    }
+                }
+
                 if (listDelivery != null) {
 
             %>
@@ -213,6 +228,154 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
+                            <main class="m-y-1">
+                                <h1>Dashboard</h1>
+
+                                <div class="date">
+                                    <input value="<%=(java.time.LocalDate.now())%>" type="date">
+                                </div>
+
+                                <div class="insights">
+                                    <div class="sales">
+                                        <span><i class="fa-solid fa-truck"></i></span>
+                                        <div class="middle">
+                                            <div class="left">
+                                                <h3>Order <p style="color: #7380ec; display: inline-block; font-weight: 700;">in process</p></h3>
+                                                <h1><%=count_assigned_delivery%></h1>
+                                            </div>
+                                            <div class="progress">
+                                                <svg>
+                                                <circle style="stroke-dasharray: 226.08; stroke-dashoffset: <%=36 * 2 * 3.14 * (1.0f * (listDelivery.size() - count_assigned_delivery) / listDelivery.size())%>" cx="38" cy="38" r="36"></circle>
+                                                </svg>
+                                                <div class="number">
+                                                    <p><%=(count_assigned_delivery * 100) / listDelivery.size()%>%</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <small class="text-muted">Last 24 Hours</small>
+                                    </div>
+
+                                    <div class="expense">
+                                        <span><i class="fa-solid fa-truck"></i></span>
+                                        <div class="middle">
+                                            <div class="left">
+                                                <h3>Order <p style="color: #ff7782; display: inline-block; font-weight: 700;">done</p></h3>
+                                                <h1><%=count_done_delivery%></h1>
+                                            </div>
+                                            <div class="progress">
+                                                <svg>
+                                                <circle style="stroke-dasharray: 226.08; stroke-dashoffset: <%=36 * 2 * 3.14 * (1.0f * (listDelivery.size() - count_done_delivery) / listDelivery.size())%>" cx="38" cy="38" , r="36"></circle>
+                                                </svg>
+                                                <div class="number">
+                                                    <p><%=(count_done_delivery * 100) / listDelivery.size()%>%</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <small class="text-muted">Last 24 Hours</small>
+                                    </div>
+
+                                    <%
+                                        ShipperDAO shipperDAO = new ShipperDAO();
+                                        shipper.setIncome(shipperDAO.getIncome(shipper.getUsername()));
+                                    %>
+
+                                    <div class="income">
+                                        <span><i class="fa-solid fa-money-bill"></i></i></span>
+                                        <div class="middle">
+                                            <div class="left">
+                                                <h3>Total <p style="color: #12bc83; display: inline-block; font-weight: 700;">income</p></h3>
+                                                <h1>$<%=shipper.getIncome()%></h1>
+                                            </div>
+                                            <div class="progress">
+                                                <svg>
+                                                <circle style="stroke-dasharray: 226.08; stroke-dashoffset: 0" cx="38" cy="38" , r="36"></circle>
+                                                </svg>
+                                                <div class="number">
+                                                    <p>100%</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <small class="text-muted">Last 24 Hours</small>
+                                    </div>
+
+                                    <div class="notification-wrapper">
+                                        <h1 class="notify-heading">Recent update</h1>
+                                        <div class="notification">
+                                            <div class="notification__item">
+                                                <div class="avatar-wrapper">
+                                                    <div class="avatar">
+                                                        <img src="https://i.stack.imgur.com/l60Hf.png" alt="avatar">
+                                                    </div>
+                                                </div>
+                                                <div class="content-wrapper">
+                                                    <div class="content">
+                                                        <span><span class="bold">username </span>received his order
+                                                            successfully
+                                                            on this address</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="notification__item">
+                                                <div class="avatar-wrapper">
+                                                    <div class="avatar">
+                                                        <img src="https://i.stack.imgur.com/l60Hf.png" alt="avatar">
+                                                    </div>
+                                                </div>
+                                                <div class="content-wrapper">
+                                                    <div class="content">
+                                                        <span><span class="bold">username </span>received his order
+                                                            successfully
+                                                            on this address</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="notification__item">
+                                                <div class="avatar-wrapper">
+                                                    <div class="avatar">
+                                                        <img src="https://i.stack.imgur.com/l60Hf.png" alt="avatar">
+                                                    </div>
+                                                </div>
+                                                <div class="content-wrapper">
+                                                    <div class="content">
+                                                        <span><span class="bold">username </span>received his order
+                                                            successfully
+                                                            on this address</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="notification__item">
+                                                <div class="avatar-wrapper">
+                                                    <div class="avatar">
+                                                        <img src="https://i.stack.imgur.com/l60Hf.png" alt="avatar">
+                                                    </div>
+                                                </div>
+                                                <div class="content-wrapper">
+                                                    <div class="content">
+                                                        <span><span class="bold">username </span>received his order
+                                                            successfully
+                                                            on this address</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="notification__item">
+                                                <div class="avatar-wrapper">
+                                                    <div class="avatar">
+                                                        <img src="https://i.stack.imgur.com/l60Hf.png" alt="avatar">
+                                                    </div>
+                                                </div>
+                                                <div class="content-wrapper">
+                                                    <div class="content">
+                                                        <span><span class="bold">username </span>received his order
+                                                            successfully
+                                                            on this address</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </main>
+
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">Shipping Order</h4>
@@ -454,7 +617,7 @@
                                 <div class="full-w payment-detail border-b">
                                     <div class="payment-item-detail">
                                         <span>Username: </span>
-                                        <span>shopee1</span>
+                                        <span><%=shipper.getUsername()%></span>
                                     </div>
                                 </div>
                             </div>
@@ -501,7 +664,7 @@
         <script src="./plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
         <script src="./plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
 
-        
+
 
     </body>
 

@@ -256,7 +256,7 @@ CREATE TABLE tblDelivery
 (
 	id int IDENTITY(1,1) PRIMARY KEY,
 	order_id int REFERENCES tblOrder(order_ID),
-	[address] nvarchar(max),
+	address nvarchar(max),
 	username_Shipper nvarchar(30) REFERENCES tblShipper(username),
 	[status] int
 )
@@ -387,12 +387,12 @@ AS
 BEGIN
 	IF (select COUNT(*)
 	from inserted
-	where status = 2) = 0
+	where status = 3) = 0
 	RETURN
 
 	DECLARE @order_date date, @order_id int, @price decimal(12), @shipper_id nvarchar(30)
 
-	SELECT @order_id = order_id, @shipper_id = 'shopee1'
+	SELECT @order_id = order_id, @shipper_id = username_Shipper
 	FROM inserted;
 
 	SELECT @order_date = o.order_date
@@ -405,16 +405,16 @@ BEGIN
 
 	IF (select COUNT(*)
 	from tblShipperIncome sibm
-	where MONTH(@order_date) = sibm.month and YEAR(@order_date) = sibm.year and @shipper_id = 'shopee1') = 0
+	where MONTH(@order_date) = sibm.month and YEAR(@order_date) = sibm.year and @shipper_id = sibm.shipper_id) = 0
 	BEGIN
 		INSERT INTO tblShipperIncome
 			(month, year, shipper_id, total)
 		values
-			(MONTH(@order_date), YEAR(@order_date), 'shopee1' , @price)
+			(MONTH(@order_date), YEAR(@order_date), @shipper_id , @price)
 	END
 	ELSE
 	BEGIN
-		UPDATE tblShipperIncome SET total = total + @price WHERE month = MONTH(@order_date) and year = YEAR(@order_date) and shipper_id = 'shopee1'
+		UPDATE tblShipperIncome SET total = total + @price WHERE month = MONTH(@order_date) and year = YEAR(@order_date) and shipper_id = @shipper_id
 	END
 END;
 GO
