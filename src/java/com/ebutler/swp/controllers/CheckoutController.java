@@ -150,7 +150,7 @@ public class CheckoutController extends HttpServlet {
                 + "\n"
                 + "</html>";
            
-        Email.send("vietdanghoang1705@gmail.com", subject, message, Account.EMAIL, Account.PASSWORD);
+        Email.send("nguyentrongtoan9a1nbk@gmail.com", subject, message, Account.EMAIL, Account.PASSWORD);
 
             url = SUCCESS;
         } catch (Exception e) {

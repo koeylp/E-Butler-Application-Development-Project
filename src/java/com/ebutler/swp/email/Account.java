@@ -9,6 +9,6 @@ package com.ebutler.swp.email;
  * @author Dang Viet
  */
 public class Account {
-     public static final String EMAIL = "vietdhse161321@fpt.edu.vn";
-    public static final String PASSWORD = "hoangvietdang123";
+     public static final String EMAIL = "toanntse161325@fpt.edu.vn";
+    public static final String PASSWORD = "nguyentrongtoan";
 }
