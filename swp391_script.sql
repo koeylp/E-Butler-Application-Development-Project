@@ -381,7 +381,6 @@ GO
 
 -------- shipper income ---------
 --DROP TRIGGER trig_shipper_income
-
 CREATE TRIGGER trig_shipper_income ON tblDelivery
 AFTER UPDATE
 AS
@@ -3378,7 +3377,3 @@ SELECT * FROM tblOrder
 SELECT * FROM tblOrder_Product_Detail
 SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total ,  PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = ?
 SELECT De.order_id, De.address,De.username_Shipper ,Ord.order_Date,Ord.customer_ID, Cus.name,Ord.total, De.status FROM (tblDelivery De JOIN tblOrder Ord ON De.order_id = Ord.order_ID) JOIN tblCustomer Cus ON Cus.username = Ord.customer_ID */
-
-select * from tblShipper
-select * from tblDelivery
-select * from tblShipperIncome
