@@ -48,11 +48,12 @@
         <link rel="stylesheet" href="./css/guestPage.css" />
         <link rel="stylesheet" href="./css/my_toast.css" />
     </head>
-     <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'PRO'}">
+    <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'PRO'}">
         <c:redirect url="guest_loginPage.jsp"></c:redirect>
     </c:if>
     <body>
         <%
+            ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER");
             ServiceDetailDTO service_info = (ServiceDetailDTO) request.getAttribute("SERVICE_INFO");
             ServiceErrorDTO service_error = (ServiceErrorDTO) request.getAttribute("SERVICE_ERROR");
 
@@ -102,7 +103,7 @@
                         <div class="btn-group me-3">
 
                             <img class="avatar avatar-md rounded-circle "
-                                 src="https://i.bloganchoi.com/bloganchoi.com/wp-content/uploads/2021/07/avatar-doi-ban-than-2021-21-696x696.jpeg?fit=700%2C20000&quality=95&ssl=1"
+                                 src="img/<%= provider.getLogo()%>"
                                  id="dropdownMenuButton" data-bs-toggle="dropdown" data-bs-display="static">
 
                             </img>
@@ -144,11 +145,7 @@
                         <h2 style="font-weight:600 ;" class="">Service List</h2>
                     </div>
 
-                    <!-- Modal -->
-                    <%
-                        ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER");
-
-                    %>
+                    <!-- Modal -->                 
                     <div class="modal js-modal-create " id="basicModal1" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
@@ -162,15 +159,14 @@
                                     <div class="card-body">
                                         <div class="d-flex align-items-start align-items-sm-center gap-4">
                                             <img style="border-radius: 20%;"
-                                                 src="https://i.bloganchoi.com/bloganchoi.com/wp-content/uploads/2021/07/avatar-doi-ban-than-2021-21-696x696.jpeg?fit=700%2C20000&quality=95&ssl=1"
+                                                 src="img/<%= provider.getLogo()%>"
                                                  alt="user-avatar" class="d-block rounded w-50 avatar avatar-xl h-50" id="uploadedAvatar">
                                             <div class="button-wrapper">
-                                                <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
-                                                    <span class="d-none d-sm-block">Upload new photo</span>
-                                                    <i class="bx bx-upload d-block d-sm-none"></i>
-                                                    <input type="file" id="upload" class="account-file-input" hidden=""
-                                                           accept="image/png, image/jpeg">
-                                                </label>
+                                                <form method="POST" action="UploadPhotoController" enctype="multipart/form-data" >
+                                                    <input type="file" name="file"/>
+                                                    <input type="hidden" name="role" value="provider"/>
+                                                    <input type="submit" name="action" value="Upload Photo"/>
+                                                </form>
 
                                                 <p style="font-size:10px ;" class="text-muted mb-0">Allowed JPG or PNG.</p>
                                             </div>

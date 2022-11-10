@@ -145,7 +145,7 @@
                         <img src="https://img.freepik.com/free-vector/template-banner-online-store-with-shopping-cart-with-purchases-boxes-delivery-from-supermarket-vector-illustration_548887-104.jpg?w=2000" style="width:100%">
                     </div>
                     <div class="slider__img">
-                        <img src="img/7510561.jpg" style="width:100%">
+                        <img src="https://262781-1079102-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/slider1/ro-site-banner-3.jpeg" style="width:100%">
                     </div>
                     
 

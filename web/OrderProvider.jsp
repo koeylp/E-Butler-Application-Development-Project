@@ -4,6 +4,7 @@
     Author     : DELL
 --%>
 
+<%@page import="com.ebutler.swp.dto.ProviderDTO"%>
 <%@page import="com.ebutler.swp.dto.OrderDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -47,8 +48,11 @@
         <c:redirect url="guest_loginPage.jsp"></c:redirect>
     </c:if>
     <body>
-
+        <%
+            ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER");
+        %>
         <div class="container-xxl">
+
             <div class="container-fluid nav-bar bg-white px-0">
 
                 <form action="MainController" method="post">
@@ -80,19 +84,24 @@
                             </div>   
                         </div>
 
+
+
+
+
                         <!-- On hover dropdown button -->
 
                         <!-- <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a> -->
                         <div class="btn-group me-3">
 
                             <img class="avatar avatar-md rounded-circle "
-                                 src="https://i.bloganchoi.com/bloganchoi.com/wp-content/uploads/2021/07/avatar-doi-ban-than-2021-21-696x696.jpeg?fit=700%2C20000&quality=95&ssl=1"
+                                 src="img/<%= provider.getLogo()%>"
                                  id="dropdownMenuButton" data-bs-toggle="dropdown" data-bs-display="static">
 
                             </img>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-start">
                                 <li><a data-bs-target="#basicModal1" data-bs-toggle="modal" class="dropdown-item" href="javascript:void(0);"><i class="bx bx-user m-2"></i>My Profile</a></li>
-                                <li><a class="dropdown-item" href="changePassword.jsp"><i class="bx bx-lock m-2"></i>Change Password</a>
+                                <li><a class="dropdown-item" href="changePassword.jsp"><i class="bx bx-lock m-2">
+                                        </i>Change Password</a>
                                 </li>
                                 <!-- <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li> -->
                                 <li>
@@ -105,7 +114,7 @@
                         </div>
 
                     </nav>
-                </form>  
+                </form> 
 
                 <div class="mx-5 mt-3">
                     <nav aria-label="breadcrumb m-5">
@@ -122,8 +131,90 @@
                 </div>
 
                 <div class="mt-3 ms-5 d-flex justify-content-start ">
+
+                    <div>
+                        <h2 style="font-weight:600 ;" class="">Service List</h2>
+                    </div>
+
+                    <!-- Modal -->                 
+                    <div class="modal js-modal-create " id="basicModal1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="nav-header">Profile Details</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body pt-1">
+
+                                    <!-- Account -->
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-start align-items-sm-center gap-4">
+                                            <img style="border-radius: 20%;"
+                                                 src="img/<%= provider.getLogo()%>"
+                                                 alt="user-avatar" class="d-block rounded w-50 avatar avatar-xl h-50" id="uploadedAvatar">
+                                            <div class="button-wrapper">
+                                                <form method="POST" action="UploadPhotoController" enctype="multipart/form-data" >
+                                                    <input type="file" name="file"/>
+                                                    <input type="hidden" name="role" value="provider"/>
+                                                    <input type="submit" name="action" value="Upload Photo"/>
+                                                </form>
+
+                                                <p style="font-size:10px ;" class="text-muted mb-0">Allowed JPG or PNG.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="my-0">
+                                    <div class="card-body">
+                                        <form action="MainController" method="POST" >
+                                            <div class="row">
+                                                <div class="mb-3 col-md-6">
+                                                    <label for="firstName" class="form-label">UserName: </label>
+                                                    <input class="form-control" type="text" name="firstName" value="<%= provider.getUsername()%>" readonly="" > 
+                                                </div>
+                                                <div class="mb-3 col-md-6">
+                                                    <label for="lastName" class="form-label">Provider Full Name: </label>
+                                                    <input class="form-control" type="text" name="lastName" value="" placeholder="<%= provider.getName()%>" >
+                                                </div>
+                                                <div class="mb-3 col-md-6">
+                                                    <label for="email" class="form-label">E-mail</label>
+                                                    <input class="form-control" type="text" name="email" value="" placeholder="<%= provider.getEmail()%>"> 
+                                                </div>
+                                                <div class="mb-3 col-md-6">
+                                                    <label class="form-label" for="phoneNumber">Phone Number</label>
+                                                    <div class="input-group input-group-merge">
+                                                        <span class="input-group-text">VN (+84)</span>
+                                                        <input type="text"  name="phoneNumber" class="form-control"
+                                                               placeholder="<%= provider.getPhone()%> ">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 col-md-12">
+                                                    <label for="address" class="form-label">Address</label>
+                                                    <input type="text" class="form-control" id="address" name="address" placeholder="Address">
+                                                </div>
+
+                                            </div>
+                                            <div class="mt-2">
+                                                <button name="action" value="UpdateProfileProvider" type="submit" class="btn btn-primary me-2">Save changes</button>
+                                                <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- /Account -->
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="mt-3 ms-5 d-flex justify-content-start ">
                     <div class="container-fluid d-flex flex-column pb-5">
-                        
+
                         <%
                             List<OrderDTO> orderList = new ArrayList();
                             orderList = (List<OrderDTO>) session.getAttribute("Provider_ListOrder");
@@ -165,32 +256,31 @@
 
                                             <td><%= order.getCustomer_ID()%></td>
                                             <td><%= order.getTotal()%></td>
-                                            
+
                                             </td>
                                             <td>
-                                                    <div>
-                                                        <%
-                                                            int status = order.getStatus();
-                                                            if (status == 0) {
-                                                        %>
-                                                        <span class="badge bg-label-warning me-1 changeStatus">Pending</span>
-                                                        <%
-                                                        } else if (status == 1) {
+                                                <div>
+                                                    <%
+                                                        int status = order.getStatus();
+                                                        if (status == 0) {
+                                                    %>
+                                                    <span class="badge bg-label-warning me-1 changeStatus">Pending</span>
+                                                    <%
+                                                    } else if (status == 1) {
 
-                                                        %>
-                                                        <span class="badge bg-label-info me-1 changeStatus">InProgress</span>
-                                                        <% 
-                                                            } else if (status == 2) {
-                                                        %>
-                                                        <span class="badge bg-label-success me-1 changeStatus">Done</span>
-                                                        <%
-                                                            } else if (status == 3) {
-                                                        %>
-                                                        <span class="badge bg-label-danger me-1 changeStatus">Cancel</span> 
-                                                        <%
-                                                            }
-                                                        %>
-                                                    </div>
+                                                    %>
+                                                    <span class="badge bg-label-info me-1 changeStatus">In Progress</span>
+                                                    <%                                                        } else if (status == 2) {
+                                                    %>
+                                                    <span class="badge bg-label-success me-1 changeStatus">Done</span>
+                                                    <%
+                                                    } else if (status == 3) {
+                                                    %>
+                                                    <span class="badge bg-label-danger me-1 changeStatus">Cancel</span> 
+                                                    <%
+                                                        }
+                                                    %>
+                                                </div>
                                             </td>
                                             <td>
                                                 <div>

@@ -45,10 +45,13 @@
         <link rel="stylesheet" href="./css/base.css" />
         <link rel="stylesheet" href="./css/guestPage.css" />
     </head>
-     <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'PRO'}">
+    <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'PRO'}">
         <c:redirect url="guest_loginPage.jsp"></c:redirect>
     </c:if>
     <body>
+        <%
+            ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER");
+        %>
         <div class="container-xxl">
             <div class="container-fluid nav-bar bg-white px-0">
 
@@ -91,7 +94,7 @@
                         <div class="btn-group me-3">
 
                             <img class="avatar avatar-md rounded-circle "
-                                 src="https://i.bloganchoi.com/bloganchoi.com/wp-content/uploads/2021/07/avatar-doi-ban-than-2021-21-696x696.jpeg?fit=700%2C20000&quality=95&ssl=1"
+                                 src="img/<%= provider.getLogo()%>"
                                  id="dropdownMenuButton" data-bs-toggle="dropdown" data-bs-display="static">
 
                             </img>
@@ -130,10 +133,7 @@
                     </div>
                 </div>
                 <!-- MODAL PROFILE -->
-                <%
-                      ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER") ;  
-                      
-                    %>
+
                 <div class="modal js-modal-create " id="basicModal1" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
@@ -147,15 +147,14 @@
                                 <div class="card-body">
                                     <div class="d-flex align-items-start align-items-sm-center gap-4">
                                         <img style="border-radius: 20%;"
-                                             src="https://i.bloganchoi.com/bloganchoi.com/wp-content/uploads/2021/07/avatar-doi-ban-than-2021-21-696x696.jpeg?fit=700%2C20000&quality=95&ssl=1"
+                                             src="img/<%= provider.getLogo()%>"
                                              alt="user-avatar" class="d-block rounded w-50 avatar avatar-xl h-50" id="uploadedAvatar">
                                         <div class="button-wrapper">
-                                            <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
-                                                <span class="d-none d-sm-block">Upload new photo</span>
-                                                <i class="bx bx-upload d-block d-sm-none"></i>
-                                                <input type="file" id="upload" class="account-file-input" hidden=""
-                                                       accept="image/png, image/jpeg">
-                                            </label>
+                                            <form method="POST" action="UploadPhotoController" enctype="multipart/form-data" >
+                                                <input type="file" name="file"/>
+                                                <input type="hidden" name="role" value="provider"/>
+                                                <input type="submit" name="action" value="Upload Photo"/>
+                                            </form>
 
                                             <p style="font-size:10px ;" class="text-muted mb-0">Allowed JPG or PNG.</p>
                                         </div>
@@ -164,38 +163,38 @@
                                 <hr class="my-0">
                                 <div class="card-body">
                                     <form action="MainController" id="formAccountSettings" method="POST" onsubmit="return false">
-                                            <div class="row">
-                                                <div class="mb-3 col-md-6">
-                                                    <label for="firstName" class="form-label">UserName: </label>
-                                                     <input class="form-control" type="text" id="firstName" name="firstName" value="<%= provider.getUsername() %>" readonly="" > 
+                                        <div class="row">
+                                            <div class="mb-3 col-md-6">
+                                                <label for="firstName" class="form-label">UserName: </label>
+                                                <input class="form-control" type="text" id="firstName" name="firstName" value="<%= provider.getUsername()%>" readonly="" > 
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="lastName" class="form-label">Provider Full Name: </label>
+                                                <input class="form-control" type="text" name="lastName" id="lastName" value="" placeholder="<%= provider.getName()%>" >
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="email" class="form-label">E-mail</label>
+                                                <input class="form-control" type="text" id="email" name="email" value="" placeholder="<%= provider.getEmail()%>"> 
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label class="form-label" for="phoneNumber">Phone Number</label>
+                                                <div class="input-group input-group-merge">
+                                                    <span class="input-group-text">VN (+84)</span>
+                                                    <input type="text" id="phoneNumber" name="phoneNumber" class="form-control"
+                                                           placeholder="<%= provider.getPhone()%> ">
                                                 </div>
-                                                <div class="mb-3 col-md-6">
-                                                    <label for="lastName" class="form-label">Provider Full Name: </label>
-                                                    <input class="form-control" type="text" name="lastName" id="lastName" value="" placeholder="<%= provider.getName() %>" >
-                                                </div>
-                                                <div class="mb-3 col-md-6">
-                                                    <label for="email" class="form-label">E-mail</label>
-                                                    <input class="form-control" type="text" id="email" name="email" value="" placeholder="<%= provider.getEmail() %>"> 
-                                                </div>
-                                                <div class="mb-3 col-md-6">
-                                                    <label class="form-label" for="phoneNumber">Phone Number</label>
-                                                    <div class="input-group input-group-merge">
-                                                        <span class="input-group-text">VN (+84)</span>
-                                                        <input type="text" id="phoneNumber" name="phoneNumber" class="form-control"
-                                                               placeholder="<%= provider.getPhone() %> ">
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3 col-md-12">
-                                                    <label for="address" class="form-label">Address</label>
-                                                    <input type="text" class="form-control" id="address" name="address" placeholder="Address">
-                                                </div>
+                                            </div>
+                                            <div class="mb-3 col-md-12">
+                                                <label for="address" class="form-label">Address</label>
+                                                <input type="text" class="form-control" id="address" name="address" placeholder="Address">
+                                            </div>
 
-                                            </div>
-                                            <div class="mt-2">
-                                                <button name="action" value="UpdateProfileProvider" type="submit" class="btn btn-primary me-2">Save changes</button>
-                                                <button type="reset" class="btn btn-outline-secondary">Cancel</button>
-                                            </div>
-                                        </form>
+                                        </div>
+                                        <div class="mt-2">
+                                            <button name="action" value="UpdateProfileProvider" type="submit" class="btn btn-primary me-2">Save changes</button>
+                                            <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                                        </div>
+                                    </form>
                                 </div>
                                 <!-- /Account -->
 
@@ -205,9 +204,7 @@
                         </div>
                     </div>
                 </div>
-                <!--END MODAL PROFILE -->
-                <!-- MODAL CREATE -->
-                
+
                 <!--END MODAL PROFILE -->
                 <!-- MODAL EDIT -->
                 <div class="modal js-modal-confirm" id="modalToggle" aria-hidden="true">
@@ -293,8 +290,7 @@
 
                         <div class="add-item">
                             <a class="btn btn-primary">+
-                                Add
-                                Staff</a>
+                                Add Staff</a>
                         </div>
 
                     </div>
@@ -327,13 +323,26 @@
                                     %>
                                 <form action="MainController" method="post" >
                                     <tr>
-                                        <td> <input class="form-control me-2 shortID" type="text" name="StaffID" value="<%= staff.getStaffID() %>" readonly="" /></td>
-                                        <td><input class="form-control me-2 shortTitle" type="text" name="StaffServiceName" value="<%= staff.getServiceName() %>" readonly="" /></td>
-                                        <td><input class="form-control me-2 " type="text" name="StaffName" value="<%= staff.getStaff_Name() %>" /></td>
-                                        <td><input class="form-control me-2 shortTitle" type="text" name="StaffIDCard" value="<%= staff.getStaff_IDCard() %>" /></td>
+                                        <td> <input class="form-control me-2 shortID" type="text" name="StaffID" value="<%= staff.getStaffID()%>" readonly="" /></td>
+                                        <td><input class="form-control me-2 shortTitle" type="text" name="StaffServiceName" value="<%= staff.getServiceName()%>" readonly="" /></td>
+                                        <td><input class="form-control me-2 " type="text" name="StaffName" value="<%= staff.getStaff_Name()%>" /></td>
+                                        <td><input class="form-control me-2 shortTitle" type="text" name="StaffIDCard" value="<%= staff.getStaff_IDCard()%>" /></td>
+                                            <%
+                                                if (staff.getImage().contains("https")) {
+                                            %>
+                                        <td>
+                                            <img class="avatar avatar-lg rounded"
+                                                 src="<%= staff.getImage()%>"
+                                                 alt=""/></td>
+                                            <%
+                                            } else {
+                                            %>
                                         <td><img class="avatar avatar-lg rounded"
-                                                 src=<%= staff.getImage() %>
-                                                 alt="" srcset=""></td>
+                                                 src="img/<%= staff.getImage()%>"
+                                                 alt=""/></td>
+                                            <%
+                                                }
+                                            %>
                                         <td>
                                             <div class="flexStatus">
                                                 <div>
@@ -347,20 +356,20 @@
 
                                                     %>
                                                     <span class="badge bg-label-danger me-1 changeStatus">InActive</span>
-                                                    <%                           
-                                                        } else if (status == 3) {
+                                                    <%                                                    } else if (status == 3) {
                                                     %>
                                                     <span class="badge bg-label-warning me-1 changeStatus">Pending</span>
-                                                    <% 
+                                                    <%
                                                         }
+
                                                     %>
                                                 </div>
                                                 <div>
                                                     <select class="form-select " name="StaffStatus" aria-label="Default select example">
                                                         <option selected>Choose status</option>
                                                         <option value="1">In Work</option>
-                                                        <option value="2">Inactive</option>              
-                                                        <option value="3">Pendding</option>              
+                                                        <option value="2">In Active</option>              
+                                                        <option value="3">Pending</option>              
                                                     </select>
                                                     <input type="hidden" name="oldStatus" value="<%= staff.getStatus()%>" />  
                                                 </div>  
@@ -369,19 +378,18 @@
 
                                         <td>
                                             <div>
-<!--                                                 <a data-bs-target="#modalToggle" data-bs-toggle="modal" href="javascript:void(0);"><i
-                                                        class="bx bx-edit-alt me-1"></i>Edit</a>-->
-                                                        <button name="action" value="ProviderStaffEdit" ><i 
+                                                <!--                                                 <a data-bs-target="#modalToggle" data-bs-toggle="modal" href="javascript:void(0);"><i
+                                                                                                        class="bx bx-edit-alt me-1"></i>Edit</a>-->
+                                                <button name="action" value="ProviderStaffEdit" ><i 
                                                         class="bx bx-edit-alt me-1"></i>Edit</button>
-                                                       
+
                                             </div> 
                                         </td>     
                                         <td>
                                             <div>
                                                 <button name="action" value="ProviderDeleteStaff" href="javascript:void(0);"><i class="bx bx-trash me-1"></i>Delete</button> 
-                                                <input type="hidden" name="Provider_StaffID" value="<%= staff.getStaffID() %>" />
+                                                <input type="hidden" name="Provider_StaffID" value="<%= staff.getStaffID()%>" />
                                             </div>
-
                                         </td>
                                     </tr>
                                 </form>
@@ -393,17 +401,15 @@
                         </div>
 
                     </div>
-                    <%
-                        }
+                    <%                        }
                     %>
-                    
+
                     <%
                         String cur_form = request.getParameter("cur_form");
-                        
                         cur_form = (cur_form == null) ? "" : cur_form;
                     %>
-                    
-                    <div style="z-index: 999999;" class="add-modal overlay fixed top left right bot <%if(!cur_form.equals("add-modal")) {%>hide<%}%>"> 
+
+                    <div style="z-index: 999999;" class="add-modal overlay fixed top left right bot <%if (!cur_form.equals("add-modal")) {%>hide<%}%>"> 
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -420,7 +426,7 @@
                                                 <%
                                                     List<ProviderServiceDTO1> listCategory = (List<ProviderServiceDTO1>) session.getAttribute("Providder_ListServiceCategory");
                                                     String categoryName = (String) request.getAttribute("choose");
-                                                    
+
                                                     if (categoryName == null) {
                                                         categoryName = "";
                                                     }
@@ -452,51 +458,44 @@
                                     </form>    
 
                                     <div class="col mb-3">
-                                        <form action="MainController" method="POST" id="form4" >   
+                                        <form action="Add_NewStaff_Controller" method="POST" id="form4" enctype="multipart/form-data">   
                                             <label for="nameBasic" class="form-label type">Service Type</label>
                                             <%
                                                 List<ProviderServiceDTO1> listCategoryChoose = (List<ProviderServiceDTO1>) session.getAttribute("Providder_ListServiceCategoryChoose");
-                                                
+
                                             %>
                                             <select class="form-select type " name="IDService" >  
-                                                <%
-                                                  
-                                                    for (int i = 0; i < listCategoryChoose.size(); i++) {
-                                                            
-                                                        
+                                                <%                                                    for (int i = 0; i < listCategoryChoose.size(); i++) {
                                                 %>  
-                                                <option value="<%= listCategoryChoose.get(i).getServiceID() %> "><%= listCategoryChoose.get(i).getServiceName()%>
-                                                   
+                                                <option value="<%= listCategoryChoose.get(i).getServiceID()%> "><%= listCategoryChoose.get(i).getServiceName()%>
+
                                                 </option>  
-                                                 <%
-                                                        
-                                                 %> 
-                                                <%
-                                                    }
+
+                                                <%                                                    }
                                                 %>
 
                                             </select>
-                                              
+
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                   <div class="col mb-3">
+                                    <div class="col mb-3">
                                         <label for="nameBasic"  class="form-label">Provider Owner Staff</label>
-                                        <input type="text" class="form-control" value="<%= provider.getName() %>" readonly=""> 
+                                        <input type="text" class="form-control" value="<%= provider.getName()%>" readonly=""> 
                                     </div>
                                 </div>
-                                    <div class="row">
-                                   <div class="col mb-3">
+                                <div class="row">
+                                    <div class="col mb-3">
                                         <label for="nameBasic"  class="form-label">Staff Name</label>
                                         <input type="text" name="staffName" class="form-control" placeholder="Enter Staff Name" > 
                                     </div>
                                 </div>
                                 <div class="col mb-3">
-                                    <label for="Description" class="form-label">Avatar</label>
-                                    <input name="imageStaff" type="file" name="staffImage" class="form-control" placeholder="Description">
+                                    <label for="img" class="form-label">Avatar</label>
+                                    <input type="file" name="img" class="form-control" >
                                 </div>
-                               
+
                                 <div class="col mb-3">
                                     <label for="Description" class="form-label">ID Card</label>
                                     <input type="text" name="idCard" class="form-control" placeholder="Enter ID Card">
@@ -515,76 +514,75 @@
 
                     </div>
                 </div>
-                </div>
             </div>
-            <!-- Footer Start -->
-            <div class="container-fluid bg-dark text-white-50 footer pt-5  wow fadeIn" data-wow-delay="0.1s">
-                <div class="container py-5">
-                    <div class="row g-5">
-                        <div class="col-lg-3 col-md-6">
-                            <h5 class="text-white mb-4">Get In Touch</h5>
-                            <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố
-                                Thủ Đức, Thành phố Hồ Chí Minh</p>
-                            <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                            <p class="mb-2"><i class="fa fa-envelope me-3"></i>SE1111@e-butler.com</p>
-                            <div class="d-flex pt-2">
-                                <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
-                                <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-white-50 footer pt-5  wow fadeIn" data-wow-delay="0.1s">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">Get In Touch</h5>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố
+                            Thủ Đức, Thành phố Hồ Chí Minh</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>SE1111@e-butler.com</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">Quick Links</h5>
+                        <a class="btn btn-link text-white-50" href="">About Us</a>
+                        <a class="btn btn-link text-white-50" href="">Contact Us</a>
+                        <a class="btn btn-link text-white-50" href="">Our Services</a>
+                        <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
+                        <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">Photo Gallery</h5>
+                        <div class="row g-2 pt-2">
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1"
+                                     src="https://cf.shopee.vn/file/d4bbea4570b93bfd5fc652ca82a262a8" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1"
+                                     src="https://cf.shopee.vn/file/a0a9062ebe19b45c1ae0506f16af5c16" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1"
+                                     src="https://cf.shopee.vn/file/38fd98e55806c3b2e4535c4e4a6c4c08" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1"
+                                     src="https://cf.shopee.vn/file/2c46b83d84111ddc32cfd3b5995d9281" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1"
+                                     src="https://cf.shopee.vn/file/77bf96a871418fbc21cc63dd39fb5f15" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1"
+                                     src="https://cf.shopee.vn/file/3900aefbf52b1c180ba66e5ec91190e5" alt="">
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6">
-                            <h5 class="text-white mb-4">Quick Links</h5>
-                            <a class="btn btn-link text-white-50" href="">About Us</a>
-                            <a class="btn btn-link text-white-50" href="">Contact Us</a>
-                            <a class="btn btn-link text-white-50" href="">Our Services</a>
-                            <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
-                            <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <h5 class="text-white mb-4">Photo Gallery</h5>
-                            <div class="row g-2 pt-2">
-                                <div class="col-4">
-                                    <img class="img-fluid rounded bg-light p-1"
-                                         src="https://cf.shopee.vn/file/d4bbea4570b93bfd5fc652ca82a262a8" alt="">
-                                </div>
-                                <div class="col-4">
-                                    <img class="img-fluid rounded bg-light p-1"
-                                         src="https://cf.shopee.vn/file/a0a9062ebe19b45c1ae0506f16af5c16" alt="">
-                                </div>
-                                <div class="col-4">
-                                    <img class="img-fluid rounded bg-light p-1"
-                                         src="https://cf.shopee.vn/file/38fd98e55806c3b2e4535c4e4a6c4c08" alt="">
-                                </div>
-                                <div class="col-4">
-                                    <img class="img-fluid rounded bg-light p-1"
-                                         src="https://cf.shopee.vn/file/2c46b83d84111ddc32cfd3b5995d9281" alt="">
-                                </div>
-                                <div class="col-4">
-                                    <img class="img-fluid rounded bg-light p-1"
-                                         src="https://cf.shopee.vn/file/77bf96a871418fbc21cc63dd39fb5f15" alt="">
-                                </div>
-                                <div class="col-4">
-                                    <img class="img-fluid rounded bg-light p-1"
-                                         src="https://cf.shopee.vn/file/3900aefbf52b1c180ba66e5ec91190e5" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <h5 class="text-white mb-4">Newsletter</h5>
-                            <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-                            <div class="position-relative mx-auto" style="max-width: 400px;">
-                                <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                                <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-                            </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">Newsletter</h5>
+                        <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                        <div class="position-relative mx-auto" style="max-width: 400px;">
+                            <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
 
+    </div>
 
 
 
@@ -594,30 +592,31 @@
 
 
 
-        <!-- Footer End -->
-        <!-- Core JS -->
-        <!-- build:js assets/vendor/js/core.js -->
-        <script src="./vendor/libs/jquery/jquery.js"></script>
-        <script src="./vendor/libs/popper/popper.js"></script>
-        <script src="./vendor/js/bootstrap.js"></script>
-        <script src="./vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-        <script src="./vendor/js/menu.js"></script>
-        <!-- endbuild -->
+    <!-- Footer End -->
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <script src="./vendor/libs/jquery/jquery.js"></script>
+    <script src="./vendor/libs/popper/popper.js"></script>
+    <script src="./vendor/js/bootstrap.js"></script>
+    <script src="./vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-        <!-- Vendors JS -->
-        <script src="./vendor/libs/apex-charts/apexcharts.js"></script>
+    <script src="./vendor/js/menu.js"></script>
+    <!-- endbuild -->
 
-        <!-- Main JS -->
-        <script src="./js/providerMain.js"></script>
+    <!-- Vendors JS -->
+    <script src="./vendor/libs/apex-charts/apexcharts.js"></script>
 
-        <!-- Page JS -->
-        <script src="./js/dashboards-analytics.js"></script>
+    <!-- Main JS -->
+    <script src="./js/providerMain.js"></script>
 
-        <!-- Place this tag in your head or just before your close body tag. -->
-        <script async defer src="https://buttons.github.io/buttons.js"></script>
-        
-        <script src="./js/provider.js"></script>
-    </body>
+    <!-- Page JS -->
+    <script src="./js/dashboards-analytics.js"></script>
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    <script src="./js/provider.js"></script>
+</body>
 
 </html>

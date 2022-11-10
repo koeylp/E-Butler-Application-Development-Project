@@ -5,7 +5,12 @@
 package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.CustomerDAO;
+import com.ebutler.swp.dao.ProductDAO;
+import com.ebutler.swp.dao.ProviderDAO;
+import com.ebutler.swp.dao.ServiceDAO;
+import com.ebutler.swp.dao.StaffDAO;
 import com.ebutler.swp.dto.CustomerDTO;
+import com.ebutler.swp.dto.ProviderDTO;
 import com.ebutler.swp.dto.UserDTO;
 import java.io.File;
 import java.io.IOException;
@@ -29,20 +34,29 @@ public class UploadPhotoController extends HttpServlet {
 
     private final static String ERROR = "errorPage.jsp";
     private final static String SUCCESS = "MainController?action=GoToUserProfile&current_form=account";
+    private final static String SUCCESS_PROVIDER = "Provider_ProductController";
+    private final static String SUCCESS_STAFF = "Provider_ProductController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-
+            String role = request.getParameter("role");
+            if (role == null) {
+                role = "customer";
+            }
             HttpSession session = request.getSession();
             if (session != null) {
                 UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
 
                 CustomerDAO cusDao = new CustomerDAO();
+                ProviderDAO providerDao = new ProviderDAO();
+                ProductDAO productDao = new ProductDAO();
+                ServiceDAO serviceDao = new ServiceDAO();
+                StaffDAO staffDao = new StaffDAO();
 
-                String uploadPath = getServletContext().getRealPath("") + File.separator + "img" + File.separator + "avatars";
+                String uploadPath = getServletContext().getRealPath("") + File.separator + "img";
                 File uploadDir = new File(uploadPath);
 
                 String newPath = "";
@@ -57,13 +71,30 @@ public class UploadPhotoController extends HttpServlet {
                 String fileName = part.getSubmittedFileName();
                 part.write(newPath + File.separator + fileName);
 
-//                String fileName = part.getSubmittedFileName();
-                if (cusDao.uploadPhoto(user.getUsername(), fileName)) {
-                    CustomerDTO customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
-                    customer.setAvatar(fileName);
-                
-                    TimeUnit.SECONDS.sleep(2);
-                    url = SUCCESS;
+                if (role.equals("customer")) {
+                    if (cusDao.uploadPhoto(user.getUsername(), fileName)) {
+                        CustomerDTO customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
+                        customer.setAvatar(fileName);
+
+                        TimeUnit.SECONDS.sleep(2);
+                        url = SUCCESS;
+                    }
+                } else if (role.equals("provider")) {
+                    if (providerDao.uploadPhoto(user.getUsername(), fileName)) {
+                        ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER");
+                        provider.setLogo(fileName);
+
+                        TimeUnit.SECONDS.sleep(2);
+                        url = SUCCESS_PROVIDER;
+                    }
+                } else if (role.equals("staff")) {
+                    if (providerDao.uploadPhoto(user.getUsername(), fileName)) {
+                        ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER");
+                        provider.setLogo(fileName);
+
+                        TimeUnit.SECONDS.sleep(2);
+                        url = SUCCESS_STAFF;
+                    }
                 }
 
             }

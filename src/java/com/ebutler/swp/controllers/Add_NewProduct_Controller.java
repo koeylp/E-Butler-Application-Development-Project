@@ -9,17 +9,21 @@ import com.ebutler.swp.dto.ProductDetailDTO;
 import com.ebutler.swp.dto.ProductErrorDTO;
 import com.ebutler.swp.dto.ProviderDTO;
 import com.ebutler.swp.utils.ValiUtils;
+import java.io.File;
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author DELL
  */
+@MultipartConfig
 public class Add_NewProduct_Controller extends HttpServlet {
 
     private static final String SUCCESS = "Provider_ProductController";
@@ -37,6 +41,7 @@ public class Add_NewProduct_Controller extends HttpServlet {
             String nameProduct = request.getParameter("NameProduct");
             String quantityProduct = request.getParameter("QuantityProduct") + "";
             String price = Double.parseDouble(request.getParameter("PriceProduct")) + "";
+            String description = request.getParameter("description");
             HttpSession session = request.getSession();
             ProviderDAO providerDAO = new ProviderDAO();
             ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER");
@@ -56,17 +61,33 @@ public class Add_NewProduct_Controller extends HttpServlet {
                 isValidated = false;
             }
             
-            ProductDetailDTO product = new ProductDetailDTO(productID, nameProduct, "", Double.parseDouble(price), Integer.parseInt(quantityProduct), "", 0);
-            request.setAttribute("PRODUCT_INFO", product);
             
+            String uploadPath = getServletContext().getRealPath("") + File.separator + "img";
+            File uploadDir = new File(uploadPath);
+
+            String newPath = "";
+            if (uploadPath.contains(File.separator + "build")) {
+                newPath = uploadPath.replace(File.separator + "build", "");
+            }
+            if (!uploadDir.exists()) {
+                uploadDir.mkdir();
+            }
+            Part part = request.getPart("img");
+            String fileName = part.getSubmittedFileName();
+
+            part.write(newPath + File.separator + fileName);
+
+            ProductDetailDTO product = new ProductDetailDTO(productID, nameProduct, fileName, Double.parseDouble(price), Integer.parseInt(quantityProduct), description, 0);
+            request.setAttribute("PRODUCT_INFO", product);
+
             if (isValidated) {
-                check = providerDAO.providerAddProduct(provider, productID, nameProduct.trim(), quantityProduct, price);
+                check = providerDAO.providerAddProduct(provider, productID, nameProduct.trim(), quantityProduct, price, fileName, description);
 
                 if (check) {
                     request.setAttribute("SUCCESS_MESS", "Thêm sản phẩm thành công");
                     url = SUCCESS;
                 }
-            }else {
+            } else {
                 request.setAttribute("ERROR_MESS", "Thêm sản phẩm thất bại");
                 url = ERROR;
                 request.setAttribute("PRODUCT_ERROR", productError);

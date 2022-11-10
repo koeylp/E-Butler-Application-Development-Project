@@ -26,7 +26,8 @@ import java.util.List;
  */
 public class ProviderDAO {
 
-    private final String INSERT = "INSERT tblProvider (username, password, role_ID, phone, email, name, logo, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String INSERT = "INSERT tblProvider (username, password, role_ID, phone, email, name, logo, status)\n"
+            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     private final String LIST_PRODUCT = "SELECT id , name , image , price , quantity , description , status  FROM tblProductDetail WHERE provider_ID = ? ";
     private static final String GET_PROVIDER_INFO = "SELECT username, password , role_ID , phone, email , name , logo , status FROM tblProvider WHERE username = ? AND password = ?";
     private final String LIST_SERVICE = "SELECT DISTINCT SD.name , SC.name ,S.image ,S.name , SD.price , SD.status   FROM ( tblServiceDetail SD JOIN tblService S ON SD.service_ID = S.service_ID ) JOIN tblServiceCategory SC "
@@ -57,11 +58,11 @@ public class ProviderDAO {
     private final String EDIT_STAFF = "UPDATE tblStaff SET name = ? , id_card = ? , status = ? WHERE staff_ID = ? AND provider_ID = ?  ";
     private final String EDIT_PROVIDER_PROFILE = "UPDATE tblProvider SET phone = ? , email = ? , name = ? WHERE username = ?   ";
     private final String EDIT_PROVIDER_PROFILE_TOO = "UPDATE tblUser SET phone = ? , email = ? WHERE username = ?  ";
-    private final String PROVIDER_ADD_PRODUCT = "INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES (?,?,?,?,?, 'https://thumbs.dreamstime.com/z/chopsticks-vector-illustration-eastern-traditional-cuisine-91586868.jpg' , null ,1 )";
+    private final String PROVIDER_ADD_PRODUCT = "INSERT INTO tblProductDetail(provider_ID, product_ID, name, quantity, price, image, description, status) VALUES (?, ?, ?, ?, ?, ? ,? ,1 )";
     private final String LIST_SERVICE_CATEGORY = "SELECT * FROM tblServiceCategory";
     private final String LIST_SERVICE_CATEGORY_CHOOSE = "SELECT * FROM tblService Ser JOIN tblServiceCategory SC ON SC.category_ID = Ser.category_ID WHERE SC.name = ? ";
     private final String PROVIDER_ADD_SERVICE = "INSERT INTO tblServiceDetail(provider_ID, service_ID, staff_ID , name , price , description , status) VALUES (? , ? , null , ? , ? , null , 1 )";
-    private final String ADD_STAFF = "INSERT INTO tblStaff(provider_ID,service_ID,name,id_card,avatar,status) VALUES (?,?,?,?,null,3)";
+    private final String ADD_STAFF = "INSERT INTO tblStaff(provider_ID, service_ID, name, id_card, avatar, status) VALUES (?, ?, ?, ?, ?, 3)";
     private final String FILTER_STAFF_PENDING = "SELECT Staff.staff_ID,S.name , Staff.name, Staff.id_card, Staff.avatar, Staff.status FROM tblStaff Staff JOIN tblService S ON Staff.service_ID = S.service_ID WHERE Staff.provider_ID = ? AND status = 3";
     private final String LIST_ORDER_PRODUCT = "SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total , PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = ? ";
     private final String LIST_ORDER_SERVICE = "SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Service_Detail OrdS ON Ord.order_ID = OrdS.order_ID ) JOIN tblServiceDetail PD ON PD.id = OrdS.service_detail_ID WHERE PD.provider_ID = ? ";
@@ -76,6 +77,38 @@ public class ProviderDAO {
     private final String PROVIDER_UPDATE_QUANTITY_PRODUCT = "UPDATE tblProductDetail SET quantity = ? WHERE id = ?  ";
 
     private final String PROVIDER_DELETE_SERVICE_ORDER_DETAIL = "UPDATE tblOrder_Service_Detail SET status = 4 WHERE order_ID = ? ";
+    private static final String UPLOAD_PHOTO = "UPDATE tblProvider SET logo = ? WHERE username = ?  ";
+
+    public static boolean uploadPhoto(String username, String path) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UPLOAD_PHOTO);
+                ptm.setString(1, path);
+                ptm.setString(2, username);
+                check = ptm.executeUpdate() > 0;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+        }
+
+        return check;
+    }
 
     public boolean InsertPro(ProviderDTO provider) throws SQLException {
         Connection conn = null;
@@ -963,7 +996,8 @@ public class ProviderDAO {
         return check;
     }
 
-    public boolean providerAddProduct(ProviderDTO provider, String productID, String productName, String quantity, String price) throws SQLException {
+//provider_ID, product_ID, name, quantity, price, image, description, status
+    public boolean providerAddProduct(ProviderDTO provider, String productID, String productName, String quantity, String price, String img, String description) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -976,6 +1010,8 @@ public class ProviderDAO {
                 ptm.setString(3, productName);
                 ptm.setString(4, quantity);
                 ptm.setString(5, price);
+                ptm.setString(6, img);
+                ptm.setString(7, description);
                 check = ptm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
@@ -1057,6 +1093,7 @@ public class ProviderDAO {
                 ptm.setString(2, service_ID);
                 ptm.setString(3, name);
                 ptm.setString(4, id_card);
+                ptm.setString(5, avatar);
                 check = ptm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
@@ -1143,7 +1180,7 @@ public class ProviderDAO {
                 ptm.setString(1, provider.getUsername());
                 rs = ptm.executeQuery();
                 while (rs.next()) {
-                    listOrder.add(new OrderDTO(rs.getInt(1), rs.getDate(2), rs.getString(3), rs.getInt(4), rs.getDouble(5),rs.getString(6)));
+                    listOrder.add(new OrderDTO(rs.getInt(1), rs.getDate(2), rs.getString(3), rs.getInt(4), rs.getDouble(5), rs.getString(6)));
                 }
             }
         } catch (Exception e) {

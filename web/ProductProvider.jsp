@@ -47,12 +47,13 @@
         <link rel="stylesheet" href="./css/guestPage.css" />
         <link rel="stylesheet" href="./css/my_toast.css" />
     </head>
-     <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'PRO'}">
+    <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'PRO'}">
         <c:redirect url="guest_loginPage.jsp"></c:redirect>
     </c:if>
 
     <body>
         <%
+            ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER");
             ProductDetailDTO product_info = (ProductDetailDTO) request.getAttribute("PRODUCT_INFO");
             ProductErrorDTO product_error = (ProductErrorDTO) request.getAttribute("PRODUCT_ERROR");
 
@@ -96,11 +97,11 @@
                         <!-- <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a> -->
                         <div class="btn-group me-3">
 
-                            <img class="avatar avatar-md rounded-circle "
-                                 src="https://i.bloganchoi.com/bloganchoi.com/wp-content/uploads/2021/07/avatar-doi-ban-than-2021-21-696x696.jpeg?fit=700%2C20000&quality=95&ssl=1"
-                                 id="dropdownMenuButton" data-bs-toggle="dropdown" data-bs-display="static">
 
-                            </img>
+                            <img class="avatar avatar-md rounded-circle "
+                                 src="img/<%= provider.getLogo()%>"
+                                 id="dropdownMenuButton" data-bs-toggle="dropdown" data-bs-display="static"/>
+
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-start">
                                 <li><a data-bs-target="#basicModal1" data-bs-toggle="modal" class="dropdown-item" href="javascript:void(0);"><i class="bx bx-user m-2"></i>My Profile</a></li>
                                 <li><a class="dropdown-item" href="changePassword.jsp"><i class="bx bx-lock m-2"></i>Change Password</a>
@@ -139,10 +140,7 @@
                     </div>
 
                     <!-- Modal -->
-                    <%
-                        ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER");
 
-                    %>
                     <div class="modal js-modal-create " id="basicModal1" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
@@ -156,14 +154,14 @@
                                     <div class="card-body">
                                         <div class="d-flex align-items-start align-items-sm-center gap-4">
                                             <img  style="border-radius: 20%;"
-                                                  src="https://i.bloganchoi.com/bloganchoi.com/wp-content/uploads/2021/07/avatar-doi-ban-than-2021-21-696x696.jpeg?fit=700%2C20000&quality=95&ssl=1"
+                                                  src="img/<%= provider.getLogo()%>"
                                                   alt="user-avatar" class="d-block rounded w-50 avatar avatar-xl h-50" id="uploadedAvatar">
                                             <div class="button-wrapper">
-                                                <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
-                                                    <span class="d-none d-sm-block">Upload new photo</span>
-                                                    <i class="bx bx-upload d-block d-sm-none"></i>
-                                                    <input type="file" id="upload" class="account-file-input" hidden="" accept="image/png, image/jpeg">
-                                                </label>
+                                                <form method="POST" action="UploadPhotoController" enctype="multipart/form-data" >
+                                                    <input type="file" name="file"/>
+                                                    <input type="hidden" name="role" value="provider"/>
+                                                    <input type="submit" name="action" value="Upload Photo"/>
+                                                </form>
 
                                                 <p style="font-size:10px ;" class="text-muted mb-0">Allowed JPG or PNG.</p>
                                             </div>
@@ -312,6 +310,7 @@
                     </div>
                     <%
                         List<ProductDetailDTO> productList = new ArrayList();
+
                         productList = (List<ProductDetailDTO>) session.getAttribute("Provider_ListProduct");
                         if (productList.isEmpty()) {
                     %>    
@@ -347,11 +346,28 @@
                                             <input class="form-control me-2 titleName" type="text" name="ProductName" value="<%= product.getName()%>" />
                                         </td>
                                         <td><input class="form-control me-2 priceData" type="text" name="ProductID" value="<%= product.getId()%>" readonly="" /></td>
+                                            <%
+                                                if (product.getImage().contains("https")) {
+                                            %>
                                         <td>
                                             <img class="img-product"
                                                  src=<%= product.getImage()%> 
                                                  alt="">
                                         </td>
+                                        <%
+                                        } else {
+                                        %>
+                                        <td>
+                                            <img class="img-product"
+                                                 src="img/<%= product.getImage()%>"
+                                                 alt="">
+                                        </td>
+                                        <%
+                                            }
+                                        %>
+
+
+
                                         <td>
                                             <div class="flexStatus">
                                                 <input class="form-control me-2 priceData" type="text" name="ProductPrice" value="<%= product.getPrice()%>" />
@@ -433,7 +449,7 @@
                             </div>
 
                             <div class="modal-body">
-                                <form action="MainController" method="post" id="form1"> 
+                                <form action="MainController" method="post" id="form1" > 
                                     <input type="hidden" name="cur_form" value="add-modal"/>
                                     <div class="row">
                                         <div class="col mb-3">
@@ -472,7 +488,7 @@
                                 </form>    
 
                                 <div class="col mb-3">
-                                    <form action="MainController" method="post" id="form2" >   
+                                    <form action="Add_NewProduct_Controller" method="post" id="form2" enctype="multipart/form-data">   
                                         <label for="nameBasic" class="form-label">Product Type</label>
                                         <%
                                             List<ProductDTO> listCategoryChoose = (List<ProductDTO>) session.getAttribute("Provider_ListProductCategoryChoose");
@@ -538,15 +554,16 @@
                                         }
                                     %>
                                 </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Image</label>
+                                    <input type="file" name="img"  value="<%=product_info.getImage()%> class="form-control">
+                                </div>
+                                <div class="col mb-3">
+                                    <label for="Description" class="form-label">Description</label>
+                                    <textarea type="text" name="description" value="<%=product_info.getDescription()%>" class="form-control" placeholder="Description"></textarea>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label">Image</label>
-                                <input name="ImageProduct" type="file" value="<%=product_info.getImage()%>" class="form-control">
-                            </div>
-                            <div class="col mb-3">
-                                <label for="Description" class="form-label">Description</label>
-                                <textarea name="DescriptionProduct" type="text" name="Description" value="<%=product_info.getDescription()%>" class="form-control" placeholder="Description"></textarea>
-                            </div>
+
 
 
                         </div>
@@ -660,41 +677,41 @@
 
     <script src="./vendor/libs/apex-charts/apexcharts.js"></script>
 
-  
+
 
     <script src="./js/providerMain.js"></script>
 
- 
+
     <script src="./js/dashboards-analytics.js"></script>
 
     <script src="./js/provider.js"></script>
-    
+
     <script language="javascript">
-                                    const main = document.getElementById("my-toast");
-                                    if (main) {
-                                        const duration = 2000;
-                                        const toast = document.createElement("div");
-                                        // Auto remove toast
-                                        const autoRemoveId = setTimeout(function () {
+                                const main = document.getElementById("my-toast");
+                                if (main) {
+                                    const duration = 2000;
+                                    const toast = document.createElement("div");
+                                    // Auto remove toast
+                                    const autoRemoveId = setTimeout(function () {
+                                        main.removeChild(toast);
+                                    }, duration + 1000);
+                                    // Remove toast when clicked
+                                    toast.onclick = function (e) {
+                                        if (e.target.closest(".my-toast__close")) {
                                             main.removeChild(toast);
-                                        }, duration + 1000);
-                                        // Remove toast when clicked
-                                        toast.onclick = function (e) {
-                                            if (e.target.closest(".my-toast__close")) {
-                                                main.removeChild(toast);
-                                                clearTimeout(autoRemoveId);
-                                            }
-                                        };
+                                            clearTimeout(autoRemoveId);
+                                        }
+                                    };
 
         <%
             if (messageError.isEmpty() && !messageSuccess.isEmpty()) {
         %>
-                                        toast.classList.add("my-toast", `my-toast--success`, "showing");
+                                    toast.classList.add("my-toast", `my-toast--success`, "showing");
 
-                                        toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
+                                    toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
 
-                                        toast.innerHTML =
-                                                `<div class="my-toast__icon">
+                                    toast.innerHTML =
+                                            `<div class="my-toast__icon">
             <i class="fas fa-check-circle"></i>
             </div>
             <div class="my-toast__body">
@@ -713,10 +730,10 @@
         <%
             if (!messageError.isEmpty() && messageSuccess.isEmpty()) {
         %>
-                                        toast.classList.add("my-toast", `my-toast--error`, "showing");
-                                        toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
-                                        toast.innerHTML =
-                                                `<div class="my-toast__icon">
+                                    toast.classList.add("my-toast", `my-toast--error`, "showing");
+                                    toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
+                                    toast.innerHTML =
+                                            `<div class="my-toast__icon">
             <i class="fas fa-check-circle"></i>
             </div>
             <div class="my-toast__body">
@@ -730,8 +747,8 @@
         <%
             }
         %>
-                                        main.appendChild(toast);
-                                    }
+                                    main.appendChild(toast);
+                                }
     </script>
 
     <!-- Place this tag in your head or just before your close body tag. 

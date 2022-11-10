@@ -6,18 +6,21 @@ package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.ProviderDAO;
 import com.ebutler.swp.dto.ProviderDTO;
+import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author DELL
  */
+@MultipartConfig
 public class Add_NewStaff_Controller extends HttpServlet {
 
     private static final String SUCCESS = "Provider_StaffController" ; 
@@ -30,13 +33,28 @@ public class Add_NewStaff_Controller extends HttpServlet {
         try {
             boolean check = false ;
             String nameStaff = request.getParameter("staffName") ;  
-            String idService = request.getParameter("IDService") ;   
-            String staffAvatar = null ; 
+            String idService = request.getParameter("IDService") ;    
             String staffIDCard = request.getParameter("idCard") ; 
             HttpSession session = request.getSession() ; 
             ProviderDAO providerDAO = new ProviderDAO() ;
             ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER") ; 
-            check = providerDAO.providerAddStaff(provider, idService, nameStaff, staffIDCard, staffAvatar) ; 
+            
+            String uploadPath = getServletContext().getRealPath("") + File.separator + "img";
+            File uploadDir = new File(uploadPath);
+
+            String newPath = "";
+            if (uploadPath.contains(File.separator + "build")) {
+                newPath = uploadPath.replace(File.separator + "build", "");
+            }
+            if (!uploadDir.exists()) {
+                uploadDir.mkdir();
+            }
+            Part part = request.getPart("img");
+            String fileName = part.getSubmittedFileName();
+
+            part.write(newPath + File.separator + fileName);
+            
+            check = providerDAO.providerAddStaff(provider, idService, nameStaff, staffIDCard, fileName) ; 
             if (check) {
                 url = SUCCESS ; 
                 

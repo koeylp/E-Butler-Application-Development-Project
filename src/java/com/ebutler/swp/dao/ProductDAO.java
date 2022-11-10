@@ -25,7 +25,7 @@ public class ProductDAO {
     private static final String GET_LIST_PRODUCT = "SELECT category_Name, p.product_Provider_ID, p.provider_ID, p.product_ID, p.product_Name, category_Image, p.price, p.quantity, p.image, p.description, p.status FROM tblProductCategory c JOIN tblProduct t  ON c.category_ID = t.category_ID INNER JOIN tblProductDetail p ON p.product_ID = t.product_ID where c.category_ID = ?";
 
     private static final String GET_LIST_PRODUCT_BY_TYPE = "SELECT product.product_ID, product.category_ID ,product.name, product.image FROM tblProductCategory cate JOIN tblProduct product ON cate.category_ID = product.category_ID where cate.category_ID = ?";
-    private static final String TEST = "select * from tblProductDetail ORDER BY id OFFSET ? ROWS";
+    private static final String TEST = "SELECT * from tblProductDetail ORDER BY id OFFSET ? ROWS";
 
     private static final String GET_LIST_PRODUCT_BY_TYPE_DETAIL = "SELECT detail.id, detail.provider_ID, detail.product_ID, detail.name, detail.quantity, detail.price, detail.image, detail.description, detail.status FROM tblProduct product JOIN tblProductDetail detail on product.product_ID = detail.product_ID JOIN tblProductCategory cate ON cate.category_ID = product.category_ID WHERE cate.category_ID = ? AND product.product_ID = ?";
 
@@ -47,6 +47,39 @@ public class ProductDAO {
 
     private static final String GET_NUMBER_PAGE_PRODUCT_DETAIL = "SELECT COUNT(*) AS [quantity] FROM tblProduct product JOIN tblProductDetail detail on product.product_ID = detail.product_ID JOIN tblProductCategory cate ON cate.category_ID = product.category_ID WHERE cate.category_ID = ? AND product.product_ID = ?";
 
+    private static final String UPLOAD_PHOTO = "UPDATE tblProductDetail SET image = ? WHERE id = ?  ";
+    
+    public static boolean uploadPhoto(String id, String path) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UPLOAD_PHOTO);
+                ptm.setString(1, path);
+                ptm.setString(2, id);
+                check = ptm.executeUpdate() > 0;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+        }
+
+        return check;
+    }
+    
     public static List<ProductDTO> getListProductByPlace(String categoty_ID) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;

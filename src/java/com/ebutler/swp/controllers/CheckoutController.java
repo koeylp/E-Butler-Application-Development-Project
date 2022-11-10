@@ -119,9 +119,9 @@ public class CheckoutController extends HttpServlet {
                     if (Double.parseDouble(total) < Double.parseDouble(total2)) {
                         customerDao.accumulatePoint(user.getUsername(), -customerDao.getPoint(user.getUsername()));
                     }
-                    if (point < 1) {
-                        point = 1;
-                    }
+//                    if (point < 1) {
+//                        point = 1;
+//                    }
                     customerDao.accumulatePoint(user.getUsername(), point);
                     customer.setPoint(customerDao.getPoint(user.getUsername()));
                 }

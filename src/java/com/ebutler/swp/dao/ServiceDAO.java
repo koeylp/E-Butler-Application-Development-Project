@@ -82,6 +82,39 @@ public class ServiceDAO {
             + "FROM [tblServiceDetail] se\n"
             + "JOIN [tblStaff] st ON se.staff_ID = st.staff_ID\n"
             + "WHERE se.id = ?";
+    
+    private static final String UPLOAD_PHOTO = "UPDATE tblService SET image = ? WHERE service_ID = ?  ";
+    
+    public static boolean uploadPhoto(String service_ID, String path) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UPLOAD_PHOTO);
+                ptm.setString(1, path);
+                ptm.setString(2, service_ID);
+                check = ptm.executeUpdate() > 0;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+        }
+
+        return check;
+    }
 
     public static List<ServiceCategoryDTO> getListServiceCategory() throws SQLException {
         Connection conn = null;

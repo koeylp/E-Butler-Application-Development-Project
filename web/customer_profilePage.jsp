@@ -263,7 +263,7 @@
                                         for (AddressDTO address : customer.getAddress_list()) {
                                             if (address.getStatus() != 1)
                                                 continue;
-                                           %><%=address.getStreet()%>, Thành phố <%=address.getDistrict_name()%>, Tỉnh <%=address.getProvince_name()%>
+                                           %><%= address.getStreet()%>, Thành phố <%=address.getDistrict_name()%>, Tỉnh <%=address.getProvince_name()%>
                                            <%
                                                }
                                            %>
@@ -322,39 +322,39 @@
                             </div>
                             <!-- Order detail -->
                             <div class="pad-2">
-                                
+
                                 <c:forEach items="${sessionScope.ORDERED_PRODUCT_LIST_DELIVERED}" var="o">
-                                <div class="order-card m-y-12">
-                                    <div class="flex">
-                                        <div class="flex-center order-img">
-                                            <img src="${o.image}"
-                                                 alt="">
-                                        </div>
-                                        <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                            <div class="flex-between">
-                                                <div class="flex-col flex-horizon-center">
-                                                    <span class="txt-lg bold">${o.productName}</span>
-                                                    <div class="flex-horizon-center">
-                                                        <span class="txt-md">Shop</span>
-                                                        <span class="m-x-12">|</span>
-                                                        <span class="txt-md">Provider: ${o.provider_name}</span>
+                                    <div class="order-card m-y-12">
+                                        <div class="flex">
+                                            <div class="flex-center order-img">
+                                                <img src="${o.image}"
+                                                     alt="">
+                                            </div>
+                                            <div style="flex: 1; margin-left: 1rem;" class="flex-col">
+                                                <div class="flex-between">
+                                                    <div class="flex-col flex-horizon-center">
+                                                        <span class="txt-lg bold">${o.productName}</span>
+                                                        <div class="flex-horizon-center">
+                                                            <span class="txt-md">Shop</span>
+                                                            <span class="m-x-12">|</span>
+                                                            <span class="txt-md">Provider: ${o.provider_name}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="order-price bold">
+                                                        <span>
+                                                            $${o.quantity * o.price}
+                                                        </span>
                                                     </div>
                                                 </div>
-                                                <div class="order-price bold">
-                                                    <span>
-                                                        $${o.quantity * o.price}
-                                                    </span>
+                                                <div style="height: 50%;" class="flex-end flex-col">
+                                                    <span class="txt-md bold">Quantity:  ${o.quantity}</span>
                                                 </div>
-                                            </div>
-                                            <div style="height: 50%;" class="flex-end flex-col">
-                                                <span class="txt-md bold">Quantity:  ${o.quantity}</span>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 </c:forEach>
-                                
-                                 <c:forEach items="${sessionScope.ORDERED_SERVICE_LIST_DELIVERED}" var="o">
+
+                                <c:forEach items="${sessionScope.ORDERED_SERVICE_LIST_DELIVERED}" var="o">
                                     <div class="order-card m-y-12">
                                         <div class="flex">
                                             <div class="flex-center order-img">
