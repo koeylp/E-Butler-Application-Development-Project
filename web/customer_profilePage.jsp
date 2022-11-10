@@ -130,7 +130,7 @@
                             </div>
                             <div class="nav-item dropdown">
                                 <div class="nav-link">
-                                    <div style="width: 1.5rem;" class="img rounded-f">
+                                    <div style="width: 1.5rem; height: 1.5rem;" class="img rounded-f">
                                         <%   if (customer.getAvatar().isEmpty()) {
                                         %>
                                         <img src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg" alt="">
@@ -199,14 +199,14 @@
                 <div class="row m-y-32">
                     <div class="col l-3">
                         <!--<form action="MainController">-->
-                        <div class="image m-y-12">
+                        <div style="width: 200px; height: 200px;" class="image m-y-12">
                             <%   if (customer.getAvatar().isEmpty()) {
                             %>
-                            <img src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg" alt="">
+                            <img style="height: 100%; object-fit: cover;" src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg" alt="">
                             <%
                             } else {
                             %>
-                            <img src="img/avatars/<%= customer.getAvatar()%>" alt="">
+                            <img style="height: 100%; object-fit: cover;" src="img/avatars/<%= customer.getAvatar()%>" alt="">
                             <%
                                 }
                             %>
