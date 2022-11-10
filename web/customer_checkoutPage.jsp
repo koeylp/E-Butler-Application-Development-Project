@@ -67,6 +67,7 @@
             <!-- Spinner End -->
             <%
                 UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
+                login_user = (login_user == null) ? new UserDTO() : login_user;
                 CustomerDTO customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
                 customer = (customer == null) ? new CustomerDTO() : customer;
             %>
@@ -110,7 +111,6 @@
                                         <%
                                             }
                                         %>
-
                                     </div>
                                 </div>
                                 <div class="dropdown-menu rounded-0 flex-col">

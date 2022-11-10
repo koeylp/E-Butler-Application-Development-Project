@@ -23,22 +23,22 @@ import javax.servlet.http.Part;
 @MultipartConfig
 public class Add_NewStaff_Controller extends HttpServlet {
 
-    private static final String SUCCESS = "Provider_StaffController" ; 
-    private static final String ERROR = "Provider_StaffController" ; 
-    
+    private static final String SUCCESS = "Provider_StaffController";
+    private static final String ERROR = "Provider_StaffController";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR ; 
+        String url = ERROR;
         try {
-            boolean check = false ;
-            String nameStaff = request.getParameter("staffName") ;  
-            String idService = request.getParameter("IDService") ;    
-            String staffIDCard = request.getParameter("idCard") ; 
-            HttpSession session = request.getSession() ; 
-            ProviderDAO providerDAO = new ProviderDAO() ;
-            ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER") ; 
-            
+            boolean check = false;
+            String nameStaff = request.getParameter("staffName");
+            String idService = request.getParameter("IDService");
+            String staffIDCard = request.getParameter("idCard");
+            HttpSession session = request.getSession();
+            ProviderDAO providerDAO = new ProviderDAO();
+            ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER");
+
             String uploadPath = getServletContext().getRealPath("") + File.separator + "img";
             File uploadDir = new File(uploadPath);
 
@@ -53,14 +53,14 @@ public class Add_NewStaff_Controller extends HttpServlet {
             String fileName = part.getSubmittedFileName();
 
             part.write(newPath + File.separator + fileName);
-            
-            check = providerDAO.providerAddStaff(provider, idService, nameStaff, staffIDCard, fileName) ; 
+
+            check = providerDAO.providerAddStaff(provider, idService, nameStaff, staffIDCard, fileName);
             if (check) {
-                url = SUCCESS ; 
-                
+                url = SUCCESS;
+
             }
         } catch (Exception e) {
-        }finally {
+        } finally {
             request.getRequestDispatcher(url).include(request, response);
         }
     }

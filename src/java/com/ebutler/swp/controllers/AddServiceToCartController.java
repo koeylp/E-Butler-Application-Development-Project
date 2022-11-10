@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
 public class AddServiceToCartController extends HttpServlet {
 
     private static final String ERROR = "errorPage.jsp";
-    private static final String SUCCESS = "customer_cart.jsp";
+    private static final String SUCCESS = "customer_serviceCategoryPage.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -87,16 +87,7 @@ public class UploadPhotoController extends HttpServlet {
                         TimeUnit.SECONDS.sleep(2);
                         url = SUCCESS_PROVIDER;
                     }
-                } else if (role.equals("staff")) {
-                    if (providerDao.uploadPhoto(user.getUsername(), fileName)) {
-                        ProviderDTO provider = (ProviderDTO) session.getAttribute("LOGIN_PROVIDER");
-                        provider.setLogo(fileName);
-
-                        TimeUnit.SECONDS.sleep(2);
-                        url = SUCCESS_STAFF;
-                    }
                 }
-
             }
         } catch (Exception e) {
             log("Error at UploadPhotoController: " + e.getMessage());
