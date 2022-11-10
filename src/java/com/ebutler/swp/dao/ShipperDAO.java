@@ -21,6 +21,40 @@ public class ShipperDAO {
     private static final String GET_WALLET = "SELECT wallet\n"
             + "FROM tblShipper\n"
             + "WHERE username = ?";
+    private final String GET_INCOME = "select SUM(total) from tblShipperIncome where shipper_id = ?";
+    
+    public double getIncome(String username) throws SQLException {
+        double income = 0;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_INCOME);
+                ptm.setString(1, username);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    income = rs.getDouble(1);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+        }
+
+        return income;
+    }
     
     public static double getWallet(String username) throws SQLException {
         double wallet = 0;

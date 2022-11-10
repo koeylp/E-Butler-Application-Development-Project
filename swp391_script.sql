@@ -381,18 +381,19 @@ GO
 
 -------- shipper income ---------
 --DROP TRIGGER trig_shipper_income
+
 CREATE TRIGGER trig_shipper_income ON tblDelivery
 AFTER UPDATE
 AS
 BEGIN
 	IF (select COUNT(*)
 	from inserted
-	where status = 2) = 0
+	where status = 3) = 0
 	RETURN
 
 	DECLARE @order_date date, @order_id int, @price decimal(12), @shipper_id nvarchar(30)
 
-	SELECT @order_id = order_id, @shipper_id = 'shopee1'
+	SELECT @order_id = order_id, @shipper_id = username_Shipper
 	FROM inserted;
 
 	SELECT @order_date = o.order_date
@@ -405,16 +406,16 @@ BEGIN
 
 	IF (select COUNT(*)
 	from tblShipperIncome sibm
-	where MONTH(@order_date) = sibm.month and YEAR(@order_date) = sibm.year and @shipper_id = 'shopee1') = 0
+	where MONTH(@order_date) = sibm.month and YEAR(@order_date) = sibm.year and @shipper_id = sibm.shipper_id) = 0
 	BEGIN
 		INSERT INTO tblShipperIncome
 			(month, year, shipper_id, total)
 		values
-			(MONTH(@order_date), YEAR(@order_date), 'shopee1' , @price)
+			(MONTH(@order_date), YEAR(@order_date), @shipper_id , @price)
 	END
 	ELSE
 	BEGIN
-		UPDATE tblShipperIncome SET total = total + @price WHERE month = MONTH(@order_date) and year = YEAR(@order_date) and shipper_id = 'shopee1'
+		UPDATE tblShipperIncome SET total = total + @price WHERE month = MONTH(@order_date) and year = YEAR(@order_date) and shipper_id = @shipper_id
 	END
 END;
 GO
@@ -3378,3 +3379,6 @@ SELECT * FROM tblOrder_Product_Detail
 SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total ,  PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = ?
 SELECT De.order_id, De.address,De.username_Shipper ,Ord.order_Date,Ord.customer_ID, Cus.name,Ord.total, De.status FROM (tblDelivery De JOIN tblOrder Ord ON De.order_id = Ord.order_ID) JOIN tblCustomer Cus ON Cus.username = Ord.customer_ID */
 
+select * from tblShipper
+select * from tblDelivery
+select * from tblShipperIncome

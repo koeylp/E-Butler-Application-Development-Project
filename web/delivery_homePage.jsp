@@ -1,4 +1,5 @@
 
+<%@page import="com.ebutler.swp.dao.ShipperDAO"%>
 <%@page import="com.ebutler.swp.dto.ShipperDTO"%>
 <%@page import="com.ebutler.swp.dto.DeliveryDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -208,14 +209,18 @@
                 listDelivery = (List<DeliveryDTO>) session.getAttribute("Delivery_List");
                 int count_assigned_delivery = 0;
                 int count_done_delivery = 0;
-                
+
                 for (DeliveryDTO delivery : listDelivery) {
-                    if(delivery.getUsername_Shipper() == null) continue;
+                    if (delivery.getUsername_Shipper() == null) {
+                        continue;
+                    }
                     count_assigned_delivery++;
-                    
-                    if(delivery.getStatus() == 3) count_done_delivery++;
+
+                    if (delivery.getStatus() == 3) {
+                        count_done_delivery++;
+                    }
                 }
-                
+
                 if (listDelivery != null) {
 
             %>
@@ -225,7 +230,7 @@
                         <div class="col-12">
                             <main class="m-y-1">
                                 <h1>Dashboard</h1>
-                                
+
                                 <div class="date">
                                     <input value="<%=(java.time.LocalDate.now())%>" type="date">
                                 </div>
@@ -240,10 +245,10 @@
                                             </div>
                                             <div class="progress">
                                                 <svg>
-                                                <circle style="stroke-dasharray: 226.08; stroke-dashoffset: <%=36*2*3.14*(1.0f*(listDelivery.size()-count_assigned_delivery)/listDelivery.size())%>" cx="38" cy="38" r="36"></circle>
+                                                <circle style="stroke-dasharray: 226.08; stroke-dashoffset: <%=36 * 2 * 3.14 * (1.0f * (listDelivery.size() - count_assigned_delivery) / listDelivery.size())%>" cx="38" cy="38" r="36"></circle>
                                                 </svg>
                                                 <div class="number">
-                                                    <p><%=(count_assigned_delivery*100)/listDelivery.size()%>%</p>
+                                                    <p><%=(count_assigned_delivery * 100) / listDelivery.size()%>%</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -259,29 +264,34 @@
                                             </div>
                                             <div class="progress">
                                                 <svg>
-                                                <circle style="stroke-dasharray: 226.08; stroke-dashoffset: <%=36*2*3.14*(1.0f*(listDelivery.size()-count_done_delivery)/listDelivery.size())%>" cx="38" cy="38" , r="36"></circle>
+                                                <circle style="stroke-dasharray: 226.08; stroke-dashoffset: <%=36 * 2 * 3.14 * (1.0f * (listDelivery.size() - count_done_delivery) / listDelivery.size())%>" cx="38" cy="38" , r="36"></circle>
                                                 </svg>
                                                 <div class="number">
-                                                    <p><%=(count_done_delivery*100)/listDelivery.size()%>%</p>
+                                                    <p><%=(count_done_delivery * 100) / listDelivery.size()%>%</p>
                                                 </div>
                                             </div>
                                         </div>
                                         <small class="text-muted">Last 24 Hours</small>
                                     </div>
 
+                                    <%
+                                        ShipperDAO shipperDAO = new ShipperDAO();
+                                        shipper.setIncome(shipperDAO.getIncome(shipper.getUsername()));
+                                    %>
+
                                     <div class="income">
                                         <span><i class="fa-solid fa-money-bill"></i></i></span>
                                         <div class="middle">
                                             <div class="left">
                                                 <h3>Total <p style="color: #12bc83; display: inline-block; font-weight: 700;">income</p></h3>
-                                                <h1>$25,024</h1>
+                                                <h1>$<%=shipper.getIncome()%></h1>
                                             </div>
                                             <div class="progress">
                                                 <svg>
-                                                <circle cx="38" cy="38" , r="36"></circle>
+                                                <circle style="stroke-dasharray: 226.08; stroke-dashoffset: 0" cx="38" cy="38" , r="36"></circle>
                                                 </svg>
                                                 <div class="number">
-                                                    <p>81%</p>
+                                                    <p>100%</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -365,7 +375,7 @@
                                     </div>
                                 </div>
                             </main>
-                            
+
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">Shipping Order</h4>
@@ -607,7 +617,7 @@
                                 <div class="full-w payment-detail border-b">
                                     <div class="payment-item-detail">
                                         <span>Username: </span>
-                                        <span>shopee1</span>
+                                        <span><%=shipper.getUsername()%></span>
                                     </div>
                                 </div>
                             </div>

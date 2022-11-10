@@ -14,6 +14,8 @@ public class ShipperDTO {
     private String name;
     private int status;
     private double wallet;
+    
+    private double income;
 
     public ShipperDTO() {
         this.username = "";
@@ -21,6 +23,7 @@ public class ShipperDTO {
         this.name = "";
         this.status = 0;
         this.wallet = 0;
+        this.income = 0;
     }
 
     public ShipperDTO(String username, String password, String name, int status, double wallet) {
@@ -29,6 +32,15 @@ public class ShipperDTO {
         this.name = name;
         this.status = status;
         this.wallet = wallet;
+        this.income = 0;
+    }
+
+    public double getIncome() {
+        return income;
+    }
+
+    public void setIncome(double income) {
+        this.income = income;
     }
 
     public String getUsername() {
