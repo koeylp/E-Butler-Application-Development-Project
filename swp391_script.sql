@@ -427,13 +427,16 @@ END;
 GO
 -------------------- tblDeliveryNOtification -----------------
 CREATE TRIGGER trig_delivery_notify ON tblDelivery
-AFTER INSERT, UPDATE
+AFTER UPDATE, INSERT
 AS
 BEGIN
-	IF (select COUNT(*)
-	from inserted
-	where status = 3 or status = 0) = 0
-	RETURN
+	DECLARE @insert int, @update int
+	
+	select @update = COUNT(*) from inserted where status = 3
+	
+	select @insert = COUNT(*) from inserted where status = 0 and username_Shipper IS NULL
+	
+	IF (@insert = 0 and @update = 0) RETURN
 
 	DECLARE @time datetime, @username nvarchar(30), @message nvarchar(max), @status int
 
@@ -454,8 +457,6 @@ BEGIN
 	INSERT INTO tblDeliveryNotification(time, username, message) VALUES (@time, @username, @message)
 END;
 GO
-
-
 -------------------------------------------------------- INSERT -----------------------------------------------------------------
 -- bảng role
 

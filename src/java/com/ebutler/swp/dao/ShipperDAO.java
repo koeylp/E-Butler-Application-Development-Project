@@ -25,7 +25,7 @@ public class ShipperDAO {
             + "WHERE username = ?";
     private final String GET_INCOME = "select SUM(total) from tblShipperIncome where shipper_id = ?";
     
-    private final String GET_NOTIFYCATION = "select * from tblDeliveryNotification order by id DESC";
+    private final String GET_NOTIFYCATION = "select de.id, de.time, de.username, de.message, c.avatar from tblDeliveryNotification de JOIN tblCustomer c ON de.username = c.username order by id DESC";
     
     public ArrayList<NotificationDTO> getDeliveryNotify() throws SQLException {
         ArrayList<NotificationDTO> list = new ArrayList<>();
@@ -38,7 +38,7 @@ public class ShipperDAO {
                 ptm = conn.prepareStatement(GET_NOTIFYCATION);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
-                    list.add(new NotificationDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+                    list.add(new NotificationDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
                 }
             }
 

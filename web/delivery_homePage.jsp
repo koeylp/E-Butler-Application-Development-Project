@@ -1,4 +1,5 @@
-
+<%@page import="java.sql.Date"%>
+<%@page import="java.sql.Timestamp"%>
 <%@page import="com.ebutler.swp.dto.NotificationDTO"%>
 <%@page import="com.ebutler.swp.dao.ShipperDAO"%>
 <%@page import="com.ebutler.swp.dto.ShipperDTO"%>
@@ -313,13 +314,26 @@
                                             <div class="notification__item">
                                                 <div class="avatar-wrapper">
                                                     <div class="avatar">
-                                                        <img src="https://i.stack.imgur.com/l60Hf.png" alt="avatar">
+                                                        <%
+                                                            String avatar = noti.getAvatar().isEmpty() ? "https://i.stack.imgur.com/l60Hf.png" : noti.getAvatar();
+                                                        %>
+                                                        <img src="img/avatars/<%=avatar%>" alt="avatar">
                                                     </div>
                                                 </div>
                                                 <div class="content-wrapper">
                                                     <div class="content">
                                                         <span><span class="bold"><%=noti.getUsername()%> </span><%=noti.getMessage()%></span>
                                                     </div>
+                                                    <%
+                                                        Timestamp now = Timestamp.valueOf(java.time.LocalDateTime.now());
+                                                        long test = (now.getTime() - Timestamp.valueOf(noti.getTime()).getTime())/1000;
+                                                        
+                                                        String message = "";
+                                                        
+                                                        message = (test > 3600) ? ((int)test/3600 + " hours ago.") : (test > 60) ? ((int)test/60 + " minutes ago.") : (test + " seconds ago.");
+                                                       
+                                                    %>
+                                                    <small style="margin: 0 0 0 8px;"><%=message%></small>
                                                 </div>
                                             </div>
                                             <%

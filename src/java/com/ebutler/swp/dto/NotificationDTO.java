@@ -13,19 +13,30 @@ public class NotificationDTO {
     private String time;
     private String username;
     private String message;
+    private String avatar;
     
     public NotificationDTO() {
         this.id = 0;
         this.time = "";
         this.username = "";
         this.message = "";
+        this.avatar = "";
     }
 
-    public NotificationDTO(int id, String time, String username, String message) {
+    public NotificationDTO(int id, String time, String username, String message, String avatar) {
         this.id = id;
         this.time = time;
         this.username = username;
         this.message = message;
+        this.avatar = avatar;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public int getId() {
