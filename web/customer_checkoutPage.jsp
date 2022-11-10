@@ -372,7 +372,7 @@
                             <!-- Shipping Address end -->
                             <form action="MainController" method="POST" class="checkout">
                                 <input type="hidden" name="action" value="Checkout">
-                                <input type="hidden" name="address" value="<%= shipping_address%>">
+                                <input type="hidden" name="address" value="<%=shipping_address%>">
                                 <input id="total" type="hidden" name="total"/>
                                 <input type="hidden" name="total2" value="<%= total2 %>"
 
