@@ -1,4 +1,5 @@
 
+<%@page import="com.ebutler.swp.dto.NotificationDTO"%>
 <%@page import="com.ebutler.swp.dao.ShipperDAO"%>
 <%@page import="com.ebutler.swp.dto.ShipperDTO"%>
 <%@page import="com.ebutler.swp.dto.DeliveryDTO"%>
@@ -298,9 +299,17 @@
                                         <small class="text-muted">Last 24 Hours</small>
                                     </div>
 
+                                    <%
+                                        ArrayList<NotificationDTO> noti_list = new ArrayList<>();
+                                        noti_list = shipperDAO.getDeliveryNotify();
+                                    %>
+
                                     <div class="notification-wrapper">
                                         <h1 class="notify-heading">Recent update</h1>
                                         <div class="notification">
+                                            <%
+                                                for (NotificationDTO noti : noti_list) {
+                                            %>
                                             <div class="notification__item">
                                                 <div class="avatar-wrapper">
                                                     <div class="avatar">
@@ -309,68 +318,13 @@
                                                 </div>
                                                 <div class="content-wrapper">
                                                     <div class="content">
-                                                        <span><span class="bold">username </span>received his order
-                                                            successfully
-                                                            on this address</span>
+                                                        <span><span class="bold"><%=noti.getUsername()%> </span><%=noti.getMessage()%></span>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="notification__item">
-                                                <div class="avatar-wrapper">
-                                                    <div class="avatar">
-                                                        <img src="https://i.stack.imgur.com/l60Hf.png" alt="avatar">
-                                                    </div>
-                                                </div>
-                                                <div class="content-wrapper">
-                                                    <div class="content">
-                                                        <span><span class="bold">username </span>received his order
-                                                            successfully
-                                                            on this address</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="notification__item">
-                                                <div class="avatar-wrapper">
-                                                    <div class="avatar">
-                                                        <img src="https://i.stack.imgur.com/l60Hf.png" alt="avatar">
-                                                    </div>
-                                                </div>
-                                                <div class="content-wrapper">
-                                                    <div class="content">
-                                                        <span><span class="bold">username </span>received his order
-                                                            successfully
-                                                            on this address</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="notification__item">
-                                                <div class="avatar-wrapper">
-                                                    <div class="avatar">
-                                                        <img src="https://i.stack.imgur.com/l60Hf.png" alt="avatar">
-                                                    </div>
-                                                </div>
-                                                <div class="content-wrapper">
-                                                    <div class="content">
-                                                        <span><span class="bold">username </span>received his order
-                                                            successfully
-                                                            on this address</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="notification__item">
-                                                <div class="avatar-wrapper">
-                                                    <div class="avatar">
-                                                        <img src="https://i.stack.imgur.com/l60Hf.png" alt="avatar">
-                                                    </div>
-                                                </div>
-                                                <div class="content-wrapper">
-                                                    <div class="content">
-                                                        <span><span class="bold">username </span>received his order
-                                                            successfully
-                                                            on this address</span>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <%
+                                                }
+                                            %>
                                         </div>
                                     </div>
                                 </div>

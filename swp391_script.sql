@@ -241,6 +241,13 @@ CREATE TABLE tblAdmin
 )
 GO
 
+CREATE TABLE tblDeliveryNotification (
+	id int IDENTITY(1, 1) PRIMARY KEY,
+	time datetime,
+	username nvarchar(30),
+	message nvarchar(max)
+)
+
 --- DELIVERY --
 CREATE TABLE tblShipper
 (
@@ -401,7 +408,7 @@ BEGIN
 
 	SET @price = (select sum(price)
 	from tblOrder_Product_Detail
-	where order_ID = @order_id)
+	where order_ID = @order_id) + 3 
 
 	IF (select COUNT(*)
 	from tblShipperIncome sibm
@@ -416,6 +423,35 @@ BEGIN
 	BEGIN
 		UPDATE tblShipperIncome SET total = total + @price WHERE month = MONTH(@order_date) and year = YEAR(@order_date) and shipper_id = @shipper_id
 	END
+END;
+GO
+-------------------- tblDeliveryNOtification -----------------
+CREATE TRIGGER trig_delivery_notify ON tblDelivery
+AFTER INSERT, UPDATE
+AS
+BEGIN
+	IF (select COUNT(*)
+	from inserted
+	where status = 3 or status = 0) = 0
+	RETURN
+
+	DECLARE @time datetime, @username nvarchar(30), @message nvarchar(max), @status int
+
+	SELECT @username = o.customer_ID, @status = i.status
+	FROM inserted i JOIN tblOrder o ON i.order_id = o.order_ID;
+	
+	SET @time = CURRENT_TIMESTAMP
+	
+	IF (@status = 3)
+	BEGIN
+		SET @message = 'has received order on assigned address'
+	END
+	ELSE IF(@status = 0)
+	BEGIN
+		SET @message = 'has created new order on assigned address'
+	END
+	
+	INSERT INTO tblDeliveryNotification(time, username, message) VALUES (@time, @username, @message)
 END;
 GO
 

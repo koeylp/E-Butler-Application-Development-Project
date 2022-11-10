@@ -4,11 +4,13 @@
  */
 package com.ebutler.swp.dao;
 
+import com.ebutler.swp.dto.NotificationDTO;
 import com.ebutler.swp.utils.DBUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -22,6 +24,40 @@ public class ShipperDAO {
             + "FROM tblShipper\n"
             + "WHERE username = ?";
     private final String GET_INCOME = "select SUM(total) from tblShipperIncome where shipper_id = ?";
+    
+    private final String GET_NOTIFYCATION = "select * from tblDeliveryNotification order by id DESC";
+    
+    public ArrayList<NotificationDTO> getDeliveryNotify() throws SQLException {
+        ArrayList<NotificationDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_NOTIFYCATION);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    list.add(new NotificationDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+        }
+
+        return list;
+    }
     
     public double getIncome(String username) throws SQLException {
         double income = 0;
