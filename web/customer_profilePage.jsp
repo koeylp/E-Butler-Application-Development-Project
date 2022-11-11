@@ -137,7 +137,7 @@
                                         <%
                                         } else {
                                         %>
-                                        <img src="img/avatars/<%= customer.getAvatar()%>" alt="">
+                                        <img src="img/<%= customer.getAvatar()%>" alt="">
                                         <%
                                             }
                                         %>
@@ -206,7 +206,7 @@
                             <%
                             } else {
                             %>
-                            <img style="height: 100%; object-fit: cover;" src="img/avatars/<%= customer.getAvatar()%>" alt="">
+                            <img style="height: 100%; object-fit: cover;" src="img/<%= customer.getAvatar()%>" alt="">
                             <%
                                 }
                             %>

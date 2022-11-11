@@ -24,34 +24,35 @@ import javax.servlet.http.HttpSession;
  */
 public class DeliveryHomeController extends HttpServlet {
 
-    private final String SUCCESS = "delivery_homePage.jsp" ; 
-    private final String ERROR = "delivery_homePage.jsp" ; 
+    private final String SUCCESS = "delivery_homePage.jsp";
+    private final String ERROR = "delivery_homePage.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR ; 
+        String url = ERROR;
         try {
-            HttpSession session = request.getSession() ;
-            List<DeliveryDTO> listDelivery = new ArrayList() ; 
-            DeliveryDAO deliveryDAO = new DeliveryDAO() ; 
-            UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER") ; 
-            String shippingDetail = deliveryDAO.findShippingDetail(user.getUsername()) ;
-            listDelivery = deliveryDAO.loadListDelivery(shippingDetail) ;
-            
+            HttpSession session = request.getSession();
+            List<DeliveryDTO> listDelivery = new ArrayList();
+            DeliveryDAO deliveryDAO = new DeliveryDAO();
+            UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
+            String shippingDetail = deliveryDAO.findShippingDetail(user.getUsername());
+            listDelivery = deliveryDAO.loadListDelivery(shippingDetail);
+
             if (!listDelivery.isEmpty()) {
-                url = SUCCESS ;
-                ShipperDTO shipper = (ShipperDTO) session.getAttribute("CURRENT_SHIPPER") ; 
+                url = SUCCESS;
+                ShipperDTO shipper = (ShipperDTO) session.getAttribute("CURRENT_SHIPPER");
                 UserDAO userDAO = new UserDAO();
-                ShipperDTO updateshipper = userDAO.getShipper(shipper.getUsername() , shipper.getPassword()) ;
-                session.setAttribute("CURRENT_SHIPPER", updateshipper); 
-                session.setAttribute("Delivery_List", listDelivery);  
+                ShipperDTO updateshipper = userDAO.getShipper(shipper.getUsername(), shipper.getPassword());
+                session.setAttribute("CURRENT_SHIPPER", updateshipper);
+                session.setAttribute("Delivery_List", listDelivery);
                 session.setAttribute("ShippingDetail", shippingDetail);
                 session.setAttribute("ERROR_ASSIGN", "");
-                
+
             }
-            
+
         } catch (Exception e) {
-        }finally {
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

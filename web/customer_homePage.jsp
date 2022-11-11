@@ -104,7 +104,7 @@
                                         <%
                                         } else {
                                         %>
-                                        <img src="img/avatars/<%= customer.getAvatar()%>" alt="">
+                                        <img src="img/<%= customer.getAvatar()%>" alt="">
                                         <%
                                             }
                                         %>

@@ -212,18 +212,17 @@
                 int count_assigned_delivery = 0;
                 int count_done_delivery = 0;
 
-                for (DeliveryDTO delivery : listDelivery) {
-                    if (delivery.getUsername_Shipper() == null) {
-                        continue;
-                    }
-                    count_assigned_delivery++;
-
-                    if (delivery.getStatus() == 3) {
-                        count_done_delivery++;
-                    }
-                }
-
                 if (listDelivery != null) {
+                    for (DeliveryDTO delivery : listDelivery) {
+                        if (delivery.getUsername_Shipper() == null) {
+                            continue;
+                        }
+                        count_assigned_delivery++;
+
+                        if (delivery.getStatus() == 3) {
+                            count_done_delivery++;
+                        }
+                    }
 
             %>
             <div style="margin: 0; width: 100vw;" class="content-body">
@@ -326,12 +325,12 @@
                                                     </div>
                                                     <%
                                                         Timestamp now = Timestamp.valueOf(java.time.LocalDateTime.now());
-                                                        long test = (now.getTime() - Timestamp.valueOf(noti.getTime()).getTime())/1000;
-                                                        
+                                                        long test = (now.getTime() - Timestamp.valueOf(noti.getTime()).getTime()) / 1000;
+
                                                         String message = "";
-                                                        
-                                                        message = (test > 3600) ? ((int)test/3600 + " hours ago.") : (test > 60) ? ((int)test/60 + " minutes ago.") : (test + " seconds ago.");
-                                                       
+
+                                                        message = (test > 3600) ? ((int) test / 3600 + " hours ago.") : (test > 60) ? ((int) test / 60 + " minutes ago.") : (test + " seconds ago.");
+
                                                     %>
                                                     <small style="margin: 0 0 0 8px;"><%=message%></small>
                                                 </div>

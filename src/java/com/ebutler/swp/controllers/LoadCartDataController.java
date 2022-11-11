@@ -8,7 +8,9 @@ import com.ebutler.swp.dao.AddressDAO;
 import com.ebutler.swp.dao.ShipperCompanyDAO;
 import com.ebutler.swp.dto.CartDTO;
 import com.ebutler.swp.dto.CartServiceDTO;
+import com.ebutler.swp.dto.CustomerDTO;
 import com.ebutler.swp.dto.ProvinceDTO;
+import com.ebutler.swp.dto.UserDTO;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -40,13 +42,15 @@ public class LoadCartDataController extends HttpServlet {
                 CartServiceDTO cartService = (CartServiceDTO) session.getAttribute("CART_SERVICE");
                 ArrayList<ProvinceDTO> province_list = addressDao.SelectProvince();
                 
+                UserDTO currentUser = (UserDTO) session.getAttribute("LOGIN_USER");
+                CustomerDTO customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
+                String phone = customer.getPhone();
                 ShipperCompanyDAO companyDAO = new ShipperCompanyDAO();
 
 
                 session.setAttribute("CART", cart);
                 session.setAttribute("CART_SERVICE", cartService);
                 session.setAttribute("PROVINCE_LIST", province_list);
-
 
                 url = SUCCESS;
             }
