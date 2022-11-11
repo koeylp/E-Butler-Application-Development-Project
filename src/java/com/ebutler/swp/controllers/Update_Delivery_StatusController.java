@@ -165,7 +165,7 @@ public class Update_Delivery_StatusController extends HttpServlet {
                 UserDAO userDAO = new UserDAO();
                 for (int i = 0; i < listDelivery.size(); i++) {
                     if(listDelivery.get(i).getOrderID() == order_ID) {
-                        double newWallet = (listDelivery.get(i).getTotal() / 3) + shipper.getWallet() + 3 ;
+                        double newWallet = (listDelivery.get(i).getTotal() / 2) + shipper.getWallet() + 3 ;
                         userDAO.updateShipperWallet(newWallet, shipper.getUsername()) ; 
                         
                     }
