@@ -143,9 +143,44 @@
                 String statement = (String) session.getAttribute("STATEMENT");
             %>
             <!-- Shop Cart Section Begin -->
-            <div style="width:92%; margin-left: 48px; padding: 50px" class="rounded mt-5 bg-white ">
-                <div style="text-align: center;">
-                    <h1><%= statement%></h1>
+            <div style="padding: 60px;" class="rounded mt-5 bg-white flex-center">
+                <div style="width: 50vw; height: 65vh; background-color: white; box-shadow: 0 0 30px rgb(0 0 0 / 8%);" class="flex-center flex-col">
+                    <%
+                        if (statement != null) {
+                    %>
+                    <div style="width: 10rem; height: 10rem; border-radius: 0;" class="image">
+                        <img src="https://cdn-icons-png.flaticon.com/512/5651/5651387.png" alt="image"/>
+                    </div>
+                    <div class="flex-center flex-col m-y-2">
+                        <h3>Your order is complete!</h3>
+                        <h5 class="txt-sm m-y-0">You will be receiving a confirmation email with order details</h5>
+                    </div>
+                    <div>
+                        <a href="LoadingProductAndServiceCategory" class="bold txt-lg" style="text-decoration: none; background-color: var(--primary-color); color: white; padding: 12px 20px;">
+                            <i class="fa-solid fa-store"></i>
+                            <span class="m-x-0">Continue purchasing</span>
+                        </a>
+                    </div>
+                    <%
+                    } else {
+                    %>
+                    <div style="width: 10rem; height: 10rem; border-radius: 0;" class="image">
+                        <img src="https://cdn3d.iconscout.com/3d/premium/thumb/oops-6128318-5042014.png" alt="image"/>
+                    </div>
+                    <div class="flex-center flex-col m-y-2">
+                        <h3>Something's wrong with your order!</h3>
+                        <h5 class="txt-sm m-y-0">We apologize for this interruption, we will try to fix the problem as soon as possible</h5>
+                    </div>
+                    <div>
+                        <a href="LoadingProductAndServiceCategory" class="bold txt-lg" style="text-decoration: none; background-color: var(--primary-color); color: white; padding: 12px 20px;">
+                            <i class="fa-solid fa-store"></i>
+                            <span class="m-x-0">Continue purchasing</span>
+                        </a>
+                    </div>
+                    <%
+                        }
+                    %>
+
                 </div>      
             </div>
 
