@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>setCharacterEncodingFilter</filter-name>
+        <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <async-supported>true</async-supported>
+    </filter>
     <servlet>
         <servlet-name>MainController</servlet-name>
         <servlet-class>com.ebutler.swp.controllers.MainController</servlet-class>
@@ -260,6 +269,10 @@
         <servlet-name>CreateShippingAddressController</servlet-name>
         <servlet-class>com.ebutler.swp.controllers.CreateShippingAddressController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CancelOrderController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.CancelOrderController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -519,6 +532,14 @@
     <servlet-mapping>
         <servlet-name>CreateShippingAddressController</servlet-name>
         <url-pattern>/CreateShippingAddressController</url-pattern>
+    </servlet-mapping>
+    <filter-mapping>
+        <filter-name>setCharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelOrderController</servlet-name>
+        <url-pattern>/CancelOrderController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>60</session-timeout>

@@ -9,6 +9,7 @@ package com.ebutler.swp.dto;
  * @author Dang Viet
  */
 public class ServiceOrderedHistoryDTO {
+    private int order_id;
     private String username;
     private String order_Date;
     private String payment;
@@ -31,7 +32,8 @@ public class ServiceOrderedHistoryDTO {
         this.status = 0;
     }
 
-    public ServiceOrderedHistoryDTO(String username, String order_Date, String payment, String staff_name, String service_name, String image, double price, String provider_name,int status) {
+    public ServiceOrderedHistoryDTO(int order_id,String username, String order_Date, String payment, String staff_name, String service_name, String image, double price, String provider_name,int status) {
+        this.order_id = order_id;
         this.username = username;
         this.order_Date = order_Date;
         this.payment = payment;
@@ -41,6 +43,14 @@ public class ServiceOrderedHistoryDTO {
         this.price = price;
         this.provider_name = provider_name;
         this.status = status;
+    }
+
+    public int getOrder_id() {
+        return order_id;
+    }
+
+    public void setOrder_id(int order_id) {
+        this.order_id = order_id;
     }
 
     public String getUsername() {

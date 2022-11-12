@@ -41,6 +41,7 @@ public class CheckoutController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            request.setCharacterEncoding("UTF-8"); 
             String total = request.getParameter("total");
             String total2 = request.getParameter("total2");
             String payment = request.getParameter("payment");
@@ -154,7 +155,7 @@ public class CheckoutController extends HttpServlet {
                 + "\n"
                 + "</html>";
            
-        Email.send("nguyentrongtoan9a1nbk@gmail.com", subject, message, Account.EMAIL, Account.PASSWORD);
+        Email.send(login_user.getEmail(), subject, message, Account.EMAIL, Account.PASSWORD); 
 
             url = SUCCESS;
         } catch (Exception e) {
