@@ -285,6 +285,9 @@
                                                                 $<%=staff.getPrice()%>
                                                             </span>
                                                         </div>
+                                                        <%
+                                                            if (staff.getStatus() == 1) {
+                                                        %>
                                                         <div class="flex">
                                                             <a href="MainController?action=AddServiceToCart&service_ID=<%= staff.getStaff_ID()%>">
                                                                 <button style="background-color: #0F172A; color: white"
@@ -293,6 +296,16 @@
                                                                 </button>
                                                             </a>
                                                         </div>
+                                                        <%
+                                                        } else {
+                                                        %>
+                                                        <span style="color: #F68B52" class="label txt-xs danger">
+                                                            Busy
+                                                        </span>
+                                                        <%
+                                                            }
+                                                        %>
+
                                                     </div>
                                                 </div>
                                             </div>

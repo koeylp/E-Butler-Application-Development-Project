@@ -80,7 +80,7 @@ public class AddressDAO {
                 ptm.setString(1, provinceID);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
-                    name = rs.getString(1);
+                    name = rs.getNString(1);
                 }
             }
         } catch (Exception e) {
@@ -204,9 +204,9 @@ public class AddressDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(INSERT_ADDRESS);
-                ptm.setString(1, address.getStreet());
-                ptm.setString(2, address.getDistrict_id());
-                ptm.setString(3, address.getUser_id());
+                ptm.setNString(1, address.getStreet());
+                ptm.setNString(2, address.getDistrict_id());
+                ptm.setNString(3, address.getUser_id());
                 ptm.setInt(4, address.getStatus());
                 return (ptm.executeUpdate() > 0) ? true : false;
             }

@@ -10,6 +10,7 @@ package com.ebutler.swp.dto;
  */
 public class ServiceCartDTO {
     private int id;
+    private String providerName;
     private String serviceName;
     private String staffName;
     private double price;
@@ -19,6 +20,7 @@ public class ServiceCartDTO {
 
     public ServiceCartDTO() {
         this.id = 0;
+        this.providerName = "";
         this.serviceName = "";
         this.staffName = "";
         this.price = 0;
@@ -27,8 +29,9 @@ public class ServiceCartDTO {
         this.status = 0;
     }
 
-    public ServiceCartDTO(int id, String serviceName, String staffName, double price, String avatar, String description, int status) {
+    public ServiceCartDTO(int id, String providerName, String serviceName, String staffName, double price, String avatar, String description, int status) {
         this.id = id;
+        this.providerName = providerName;
         this.serviceName = serviceName;
         this.staffName = staffName;
         this.price = price;
@@ -37,14 +40,20 @@ public class ServiceCartDTO {
         this.status = status;
     }
 
-    
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getProviderName() {
+        return providerName;
+    }
+
+    public void setProviderName(String providerName) {
+        this.providerName = providerName;
     }
 
     public String getServiceName() {
@@ -71,6 +80,14 @@ public class ServiceCartDTO {
         this.price = price;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -87,13 +104,6 @@ public class ServiceCartDTO {
         this.status = status;
     }
 
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
     
     
 }

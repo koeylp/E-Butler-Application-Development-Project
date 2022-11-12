@@ -178,7 +178,7 @@
                             <!-- Product cart start -->
                             <div class="flex-col grid m-y-32 block-border">
                                 <!-- Order head -->
-                                <div style="background-color: #F9FAFB;" class="flex-between pad-2">
+                                <div style="background-color: #F0F8FF;" class="flex-between pad-2">
                                     <div class="flex-col flex-horizon-center">
                                         <span class="txt-lg bold">Product</span>
 
@@ -289,12 +289,11 @@
 
                             <!-- Service cart start-->
 
-                            <div class="flex-col grid m-y-32 block-border">
+                            <div class="flex-col grid m-y-12 block-border">
                                 <!-- Order head -->
-                                <div style="background-color: #F9FAFB;" class="flex-between pad-2">
+                                <div style="background-color: #F0F8FF;" class="flex-between pad-2">
                                     <div class="flex-col flex-horizon-center">
                                         <span class="txt-lg bold">Service</span>
-
                                     </div>
                                 </div>
                                 <%
@@ -305,8 +304,12 @@
                                 %>
                                 <!-- Order detail -->
                                 <form action="MainController" method="POST">
-                                    <div class="pad-2">
-
+                                    <div style="border-bottom: 1px solid #E5E7EB" class="pad-1">
+                                        <div style="border-bottom: 1px solid #E5E7EB" class="flex-between pad-1">
+                                            <div class="flex-col flex-horizon-center">
+                                                <span class="txt-md bold"><%= service.getProviderName()%></span>
+                                            </div>
+                                        </div>
                                         <div class="order-card m-y-12">
                                             <div class="flex">
                                                 <div class="flex-center order-img">
@@ -316,12 +319,15 @@
                                                 <div style="flex: 1; margin-left: 1rem;" class="flex-col">
                                                     <div class="flex-between">
                                                         <div class="flex-col flex-horizon-center">
-                                                            <span class="txt-lg bold">Staff: <%= service.getStaffName()%></span>
+
+                                                            <span class="txt-md bold"><%= service.getStaffName()%></span>
+
                                                             <div class="flex-horizon-center flex-center">
-                                                                <span class="txt-sm"><%= service.getServiceName()%></span>
-                                                                <span class="m-x-12">|</span>
                                                                 <span class="txt-sm">Service</span>
+                                                                <span class="m-x-12">:</span>
+                                                                <span class="txt-sm"><%= service.getServiceName()%></span>
                                                             </div>
+                                                            
                                                         </div>
                                                         <div class="order-price bold txt-sm">
                                                             <span>
@@ -329,26 +335,25 @@
                                                             </span>
                                                         </div>
                                                     </div>
-                                                    <div style="height: 50%;" class="flex-end flex-col">
+                                                    <div style="height: 50%; " class="flex-end flex-col">
                                                         <div class="flex-between">
                                                             <%
-                                                                if (service.getStatus() == 0) {
+                                                                if (service.getStatus() == -1) {
                                                             %>
                                                             <span class="label txt-xs danger">
                                                                 <i class="fa-solid fa-ban"></i>
-                                                                Suspension
+                                                                In Working
                                                             </span>
                                                             <%
                                                             } else {
                                                             %>
-                                                            <span class="label txt-xs safe">
+                                                            <span style="color: #30BF4E" class="label txt-xs safe">
                                                                 <i class="fa-solid fa-check"></i>
                                                                 Available
                                                             </span>
                                                             <%
                                                                 }
                                                             %>
-
                                                             <button type="button" style="color: var(--primary-color); border: none; outline: none; background-color: transparent;" class="bold txt-md">
                                                                 <a href="MainController?action=DeleteCart&service_ID=<%= service.getId()%>"><span><i class="fa-solid fa-trash"></i></span></a>
                                                             </button>

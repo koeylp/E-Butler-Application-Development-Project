@@ -78,10 +78,12 @@ public class ServiceDAO {
             + "FROM tblServiceDetail\n"
             + "WHERE id = ?";
 
-    private static final String GET_SERVICE_INFO = "SELECT se.id, se.staff_ID, se.[name], st.[name] as staff_name, se.price, st.avatar, se.[description], st.[status]\n"
+    private static final String GET_SERVICE_INFO = "SELECT se.id, pr.[name] as provider_name, se.staff_ID, se.[name], st.[name] as staff_name, se.price, st.avatar, se.[description], st.[status]\n"
             + "FROM [tblServiceDetail] se\n"
             + "JOIN [tblStaff] st ON se.staff_ID = st.staff_ID\n"
+            + "JOIN [tblProvider] pr ON se.provider_ID = pr.username\n"
             + "WHERE se.id = ?";
+   
     
     private static final String UPLOAD_PHOTO = "UPDATE tblService SET image = ? WHERE service_ID = ?  ";
     
@@ -547,7 +549,7 @@ public class ServiceDAO {
         return serviceDetail;
     }
 
-//    se.id, se.staff_ID, se.[name], st.[name], se.price, se.avatar, se.[description], st.[status]
+//    se.id, pr.name, se.staff_ID, se.[name], st.[name], se.price, se.avatar, se.[description], st.[status]
     public static ServiceCartDTO getServiceInfoByID(String id) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -559,14 +561,14 @@ public class ServiceDAO {
             ptm.setString(1, id);
             rs = ptm.executeQuery();
             while (rs.next()) {
-//                String staff_id = rs.getString("se.staff_ID");
+                String provider_name = rs.getString("provider_name");
                 String service_name = rs.getString("name");
                 String staff_name = rs.getString("staff_name");
                 double price = rs.getDouble("price");
                 String avatar = rs.getString("avatar");
                 String description = rs.getString("description");
                 int status = rs.getInt("status");
-                serviceDetail = new ServiceCartDTO(Integer.parseInt(id), service_name, staff_name, price, avatar, description, status);
+                serviceDetail = new ServiceCartDTO(Integer.parseInt(id), provider_name, service_name, staff_name, price, avatar, description, status);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -591,8 +593,8 @@ public class ServiceDAO {
 //        for (ServiceDetailDTO x : list) {
 //            System.out.println(x);
 //        }
-//        System.out.println(getServiceInfoByID("3").getStaffName());
-        System.out.println(StaffDAO.getListStaffByServiceDetail("2"));
+        System.out.println(getServiceInfoByID("3").getProviderName());
+//        System.out.println(StaffDAO.getListStaffByServiceDetail("2"));
 
     }
 }

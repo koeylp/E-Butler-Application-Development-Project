@@ -7,6 +7,7 @@ package com.ebutler.swp.controllers;
 import com.ebutler.swp.dao.CustomerDAO;
 import com.ebutler.swp.dao.OrderDAO;
 import com.ebutler.swp.dao.ProductDAO;
+import com.ebutler.swp.dao.StaffDAO;
 import com.ebutler.swp.dto.CartDTO;
 import com.ebutler.swp.dto.CartServiceDTO;
 import com.ebutler.swp.dto.ConfirmDTO;
@@ -49,6 +50,8 @@ public class CheckoutController extends HttpServlet {
             OrderDAO orderDao = new OrderDAO();
             CustomerDAO customerDao = new CustomerDAO();
             ProductDAO productDao = new ProductDAO();
+            StaffDAO staffDao = new StaffDAO();
+            
             ConfirmDTO confirmation = new ConfirmDTO("Thank you for your order!", "We're sorry! Your order was unsuccessful");
             String statement = confirmation.getFail();
             HttpSession session = request.getSession();
@@ -110,6 +113,7 @@ public class CheckoutController extends HttpServlet {
                         for (ServiceCartDTO service : cartService.getCart().values()) {
                             int order_ID = orderDao.getAllOrder().size();
                             orderDao.insertOrderServiceDetail(service.getId(), service.getId(), order_ID, service.getPrice(), 0);
+                            staffDao.updateStatus(-1, service.getId());
                         }
 
                     }

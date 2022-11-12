@@ -229,7 +229,8 @@
                                 </div>
                             </div>
                             <!-- Contact info end -->
-
+                            <!--if(this.getStreet().isEmpty() || this.getDistrict_name().isEmpty() || this.getProvince_name().isEmpty()) return "";
+                                    return (this.getStreet() + ", " + this.getDistrict_name() + ", " + this.getProvince_name());-->
                             <!-- Shipping Address start-->
                             <%
                                 AddressDTO address_default = (AddressDTO) customer.getAddressDefault();
@@ -239,6 +240,8 @@
                                 address_default = (address_default == null) ? new AddressDTO() : address_default;
 
                                 String shipping_address = (new_address.toString().isEmpty()) ? address_default.toString() : new_address.toString();
+                                
+
                             %>
                             <div class="relative m-y-32">
                                 <div style="border: 1px solid #E5E7EB;" class="pad-2 flex-between">
@@ -344,6 +347,7 @@
                                                     <button 
                                                         onClick="
                                                                 document.querySelector('.province-id').value = document.querySelector('.province-input').value;
+
                                                                 document.querySelector('.city-id').value = document.querySelector('.city-input').value;
                                                         " 
                                                         class="btn-lg txt-md bold m-y-32">Save and next to shipping
@@ -550,8 +554,8 @@
                                             <span>Your Point</span>
                                         </div>
                                         <div class="flex-between m-y-12" style="padding: 1rem 0;border-bottom: 1px solid #E5E7EB; border-top:1px solid #E5E7EB">
-                                            <label for="point"><span style="color:#273a89; font-size: 20px"><%= customer.getPoint() %></span>  EB-Coin  </label>
-                                            <input id="point" type="checkbox" name="point" value="<%= customer.getPoint() %>" class="txt-sm p-2">
+                                            <label for="point"><span style="color:#273a89; font-size: 20px"><%= customer.getPoint()%></span>  EB-Coin  </label>
+                                            <input id="point" type="checkbox" name="point" value="<%= customer.getPoint()%>" class="txt-sm p-2">
 
                                         </div>
                                         <div style="padding: 1rem 0; border-bottom: 1px solid #E5E7EB"

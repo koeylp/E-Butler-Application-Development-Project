@@ -184,7 +184,7 @@ public class OrderDAO {
 //            }
 
 //            insertOrderServiceDetail(1, 1, 1, 2000, 0);
-           // insertDelivery(1, "123 Hollywood Walk of Fame", "be");
+            insertDelivery(3, "Điện Biên Phủ");
         } catch (Exception e) {
         }
 

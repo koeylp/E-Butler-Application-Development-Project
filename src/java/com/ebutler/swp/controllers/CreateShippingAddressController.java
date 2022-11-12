@@ -42,7 +42,7 @@ public class CreateShippingAddressController extends HttpServlet {
             new_address.setProvince_name(province_name);
             new_address.setDistrict_name(addressDAO.SelectCityById(city_id));
             
-            String address_ha = new_address.toString();
+//            String address_ha = new_address.toString();
             
             request.setAttribute("NEW_ADDRESS", new_address);
             url = SUCCESS;

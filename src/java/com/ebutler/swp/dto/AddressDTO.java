@@ -101,7 +101,7 @@ public class AddressDTO {
     @Override
     public String toString() {
         if(this.getStreet().isEmpty() || this.getDistrict_name().isEmpty() || this.getProvince_name().isEmpty()) return "";
-        
+ 
         return (this.getStreet() + ", " + this.getDistrict_name() + ", " + this.getProvince_name());
     }
     
