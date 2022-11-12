@@ -49,6 +49,31 @@ public class ProductDAO {
 
     private static final String UPLOAD_PHOTO = "UPDATE tblProductDetail SET image = ? WHERE id = ?  ";
     
+    private final String CANCEL_PRODUCT = "UPDATE tblOrder_Product_Detail set status = 4 where product_detail_ID = ? and order_ID = ? and status = 0";
+    
+    public boolean cancelOrder(int product_id, int order_ID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(CANCEL_PRODUCT); 
+                ptm.setInt(1, product_id);
+                ptm.setInt(2, order_ID);
+                return ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
+    }
+    
     public static boolean uploadPhoto(String id, String path) throws SQLException {
         boolean check = false;
         Connection conn = null;
