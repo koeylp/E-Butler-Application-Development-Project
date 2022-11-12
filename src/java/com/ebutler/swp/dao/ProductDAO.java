@@ -48,7 +48,32 @@ public class ProductDAO {
     private static final String GET_NUMBER_PAGE_PRODUCT_DETAIL = "SELECT COUNT(*) AS [quantity] FROM tblProduct product JOIN tblProductDetail detail on product.product_ID = detail.product_ID JOIN tblProductCategory cate ON cate.category_ID = product.category_ID WHERE cate.category_ID = ? AND product.product_ID = ?";
 
     private static final String UPLOAD_PHOTO = "UPDATE tblProductDetail SET image = ? WHERE id = ?  ";
-
+    
+    private final String CANCEL_PRODUCT = "UPDATE tblOrder_Product_Detail set status = 4 where product_detail_ID = ? and order_ID = ? and status = 0";
+    
+    public boolean cancelOrder(int product_id, int order_ID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(CANCEL_PRODUCT); 
+                ptm.setInt(1, product_id);
+                ptm.setInt(2, order_ID);
+                return ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
+    }
+    
     public static boolean uploadPhoto(String id, String path) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -79,7 +104,7 @@ public class ProductDAO {
 
         return check;
     }
-
+    
     public static List<ProductDTO> getListProductByPlace(String categoty_ID) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -126,12 +151,12 @@ public class ProductDAO {
             rs = ptm.executeQuery();
             while (rs.next()) {
                 String product_id = rs.getString("id");
-
+                
                 ReviewDAO reviewDAO = new ReviewDAO();
                 ArrayList<ReviewDTO> review_list = reviewDAO.getReviewByProduct(product_id);
-
+                
                 ProductDetailDTO product = new ProductDetailDTO(product_id, rs.getString("provider_ID"), rs.getString("product_ID"), rs.getString("name"), rs.getInt("quantity"), rs.getDouble("price"), rs.getString("image"), rs.getString("description"), rs.getInt("status"));
-
+                
                 product.setReview_list(review_list);
                 list.add(product);
             }
@@ -151,11 +176,10 @@ public class ProductDAO {
 
         return list;
     }
-
     public static List<ProductDetailDTO> getPagingProductDetail(String categoryID, String productID, int num) throws SQLException {
-        String sql = " SELECT detail.id, detail.provider_ID, detail.product_ID, detail.name, detail.quantity, detail.price, detail.image, detail.description, detail.status FROM tblProduct product JOIN tblProductDetail detail on product.product_ID = detail.product_ID JOIN tblProductCategory cate ON cate.category_ID = product.category_ID\n"
-                + " WHERE cate.category_ID = ? AND product.product_ID = ? ORDER BY id asc\n"
-                + " OFFSET ? ROWS FETCH FIRST 12 ROWS ONLY";
+        String sql = " SELECT detail.id, detail.provider_ID, detail.product_ID, detail.name, detail.quantity, detail.price, detail.image, detail.description, detail.status FROM tblProduct product JOIN tblProductDetail detail on product.product_ID = detail.product_ID JOIN tblProductCategory cate ON cate.category_ID = product.category_ID\n" +
+" WHERE cate.category_ID = ? AND product.product_ID = ? ORDER BY id asc\n" +
+" OFFSET ? ROWS FETCH FIRST 12 ROWS ONLY";
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -165,8 +189,8 @@ public class ProductDAO {
             ptm = conn.prepareStatement(sql);
             ptm.setString(1, categoryID);
             ptm.setString(2, productID);
-            ptm.setInt(3, (num - 1) * 12);
-
+            ptm.setInt(3, (num-1)*12);
+            
             rs = ptm.executeQuery();
             while (rs.next()) {
                 list.add(new ProductDetailDTO(rs.getString("id"), rs.getString("provider_ID"), rs.getString("product_ID"), rs.getString("name"), rs.getInt("quantity"), rs.getDouble("price"), rs.getString("image"), rs.getString("description"), rs.getInt("status")));
@@ -614,10 +638,9 @@ public class ProductDAO {
         }
         return 0;
     }
-
     public static void main(String[] args) throws SQLException {
-        List<ProductDetailDTO> list = getPagingProductDetail("KC", "3", 1);
-
+       List<ProductDetailDTO> list = getPagingProductDetail("KC", "3", 1);
+       
         for (ProductDetailDTO x : list) {
             System.out.println(x);
         }

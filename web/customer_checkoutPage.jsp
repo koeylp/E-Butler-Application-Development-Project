@@ -12,6 +12,7 @@
 <%@page import="com.ebutler.swp.dto.CartServiceDTO"%>
 <%@page import="com.ebutler.swp.dto.UserDTO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -240,7 +241,7 @@
                                 address_default = (address_default == null) ? new AddressDTO() : address_default;
 
                                 String shipping_address = (new_address.toString().isEmpty()) ? address_default.toString() : new_address.toString();
-
+                                
 
                             %>
                             <div class="relative m-y-32">
@@ -378,9 +379,9 @@
                                 <input type="hidden" name="action" value="Checkout">
                                 <input type="hidden" name="address" value="<%=shipping_address%>">
                                 <input id="total" type="hidden" name="total"/>
-                                <input type="hidden" name="total2" value="<%= total2%>"/>
+                                <input type="hidden" name="total2" value="<%= total2 %>"
 
-                                <!-- Payment method start -->
+                                       <!-- Payment method start -->
                                 <div class="relative m-y-32">
                                     <div style="border: 1px solid #E5E7EB;" class="pad-2 flex-between">
                                         <div class="flex-between">
@@ -498,7 +499,7 @@
 
                                 </div>
                                 <!-- Order head service -->
-                                <div style="background-color: #F0F8FF;" class="pad-1 m-y-12">
+                                <div style="background-color: #F9FAFB;" class="pad-1 m-y-12">
                                     <div class="flex-between flex-verticle-center">
                                         <span class="txt-lg bold">Service</span>
 
@@ -513,12 +514,7 @@
                                             for (ServiceCartDTO service : cartService.getCart().values()) {
                                                 sub_total_service += service.getPrice();
                                     %>
-                                    <div style="border-bottom: 1px solid #E5E7EB" class="pad-1">
-                                        <div style="border-bottom: 1px solid #E5E7EB" class="flex-between pad-1">
-                                            <div class="flex-col flex-horizon-center">
-                                                <span class="txt-md bold"><%= service.getProviderName()%></span>
-                                            </div>
-                                        </div>
+                                    <div class="pad-y-12">
                                         <div class="order-card m-y-12">
                                             <div class="flex">
                                                 <div class="flex-center order-img">
@@ -528,50 +524,24 @@
                                                 <div style="flex: 1; margin-left: 1rem;" class="flex-col">
                                                     <div class="flex-between">
                                                         <div class="flex-col flex-horizon-center">
-
-                                                            <span class="txt-md bold"><%= service.getStaffName()%></span>
-
-                                                            <div class="flex-horizon-center flex-center">
-                                                                <span class="txt-sm">Service</span>
-                                                                <span class="m-x-12">:</span>
-                                                                <span class="txt-sm"><%= service.getServiceName()%></span>
-                                                            </div>
-
+                                                            <span class="txt-md bold"><%= service.getServiceName()%></span>
                                                         </div>
-                                                        <div class="order-price bold txt-sm">
+
+                                                        <div class="order-price txt-sm bold">
                                                             <span>
                                                                 $<%= service.getPrice()%>
                                                             </span>
                                                         </div>
+
                                                     </div>
-                                                    <div style="height: 50%; " class="flex-end flex-col">
-                                                        <div class="flex-between">
-                                                            <%
-                                                                if (service.getStatus() == -1) {
-                                                            %>
-                                                            <span class="label txt-xs danger">
-                                                                <i class="fa-solid fa-ban"></i>
-                                                                In Working
-                                                            </span>
-                                                            <%
-                                                            } else {
-                                                            %>
-                                                            <span style="color: #30BF4E" class="label txt-xs safe">
-                                                                <i class="fa-solid fa-check"></i>
-                                                                Available
-                                                            </span>
-                                                            <%
-                                                                }
-                                                            %>
-                                                            
-                                                        </div>
+
+                                                    <div class="flex-col flex-horizon-center">
+                                                        <span class="txt-md bold">Staff: <%= service.getStaffName()%></span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
-
                                     <%
                                             }
                                             total += sub_total_service;
@@ -630,8 +600,8 @@
                     <div class="row g-5">
                         <div class="col-lg-3 col-md-6">
                             <h5 class="text-white mb-4">Get In Touch</h5>
-                            <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>LÙ E2a-7, ???ng D1, ?. D1, Long Th?nh
-                                M?, Th‡nh Ph? Th? ??c, Th‡nh ph? H? ChÌ Minh</p>
+                            <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>L√¥ E2a-7, ???ng D1, ?. D1, Long Th?nh
+                                M?, Th√†nh Ph? Th? ??c, Th√†nh ph? H? Ch√≠ Minh</p>
                             <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
                             <p class="mb-2"><i class="fa fa-envelope me-3"></i>SE1111@e-butler.com</p>
                             <div class="d-flex pt-2">
