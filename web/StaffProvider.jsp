@@ -355,10 +355,18 @@
                                                     } else if (status == 2) {
 
                                                     %>
-                                                    <span class="badge bg-label-danger me-1 changeStatus">InActive</span>
+                                                    <span class="badge bg-label-danger me-1 changeStatus">In Active</span>
+
                                                     <%                                                    } else if (status == 3) {
                                                     %>
                                                     <span class="badge bg-label-warning me-1 changeStatus">Pending</span>
+
+                                                    <%
+                                                    } else if (status == -1) {
+                                                    %>
+                                                    <span style="color: #F68B52" class="label txt-xs danger">
+                                                        Busy
+                                                    </span>
                                                     <%
                                                         }
 
@@ -369,7 +377,8 @@
                                                         <option selected>Choose status</option>
                                                         <option value="1">In Work</option>
                                                         <option value="2">In Active</option>              
-                                                        <option value="3">Pending</option>              
+                                                        <option value="3">Pending</option>
+                                                        <option value="-1">Busy</option>
                                                     </select>
                                                     <input type="hidden" name="oldStatus" value="<%= staff.getStatus()%>" />  
                                                 </div>  
