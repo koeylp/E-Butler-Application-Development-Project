@@ -1,9 +1,12 @@
 function Validator(options) {
+    console.log("validation")
+
     const formElement = document.querySelector(options.form)
 
     var selectorRules = {}
 
-    if (!formElement) return
+    if (!formElement)
+        return
 
     function validate(inputElement, rule) {
         var messageElement = inputElement.parentElement.querySelector(options.errorSelector)
@@ -11,16 +14,16 @@ function Validator(options) {
 
         var rules = selectorRules[rule.selector];
 
-        for(var i = 0; i < rules.length; i++) {
+        for (var i = 0; i < rules.length; i++) {
             errorMessage = rules[i](inputElement.value)
-            if (errorMessage) break;
+            if (errorMessage)
+                break;
         }
 
         if (errorMessage) {
             messageElement.innerText = errorMessage
             inputElement.classList.add('invalid')
-        }
-        else {
+        } else {
             messageElement.innerText = ''
             inputElement.classList.remove('invalid')
         }
@@ -36,31 +39,30 @@ function Validator(options) {
         options.rules.forEach(rule => {
             var inputElement = formElement.querySelector(rule.selector)
             var isValid = validate(inputElement, rule)
-            
-            if(!isValid) {
+
+            if (!isValid) {
                 isFormValid = false
             }
         })
 
-        if(isFormValid) {
+        if (isFormValid) {
             if (typeof options.onSubmit === 'function') {
 
                 var enableInputs = formElement.querySelectorAll('[name]:not([disabled])');
 
-                var formValues = Array.from(enableInputs).reduce( (values, input) => {
+                var formValues = Array.from(enableInputs).reduce((values, input) => {
                     values[input.name] = input.value
                     return values
                 }, {})
 
                 options.onSubmit(formValues)
-            }
-            else {
+            } else {
                 formElement.submit()
             }
         }
     }
 
-    options.rules.forEach( rule => {
+    options.rules.forEach(rule => {
         var inputElement = formElement.querySelector(rule.selector)
 
         if (Array.isArray(selectorRules[rule.selector])) {
@@ -69,7 +71,8 @@ function Validator(options) {
             selectorRules[rule.selector] = [rule.test]
         }
 
-        if (!inputElement) return
+        if (!inputElement)
+            return
 
         inputElement.onblur = () => {
             validate(inputElement, rule)
@@ -90,6 +93,16 @@ Validator.isRequired = (selector, message) => {
         selector: selector,
         test: function (value) {
             return value.trim() ? undefined : message || "this space could not be empty"
+        }
+    }
+}
+
+Validator.isName = (selector, message) => {
+    return {
+        selector: selector,
+        test: function (value) {
+            const regex = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/
+            return regex.test(value) ? undefined : message || 'invalid name'
         }
     }
 }
@@ -124,11 +137,11 @@ Validator.isPhone = (selector, message) => {
     }
 }
 
-Validator.isMatch = (selector, compareValue) => {
+Validator.isMatch = (selector, getCompareValue) => {
     return {
         selector: selector,
         test: function (value) {
-            return value === compareValue ? undefined : 'password do not match'
+            return value === getCompareValue() ? undefined : 'password do not match'
         }
     }
 }
