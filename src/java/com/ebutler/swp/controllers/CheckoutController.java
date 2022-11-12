@@ -41,6 +41,7 @@ public class CheckoutController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            request.setCharacterEncoding("UTF-8"); 
             String total = request.getParameter("total");
             String total2 = request.getParameter("total2");
             String payment = request.getParameter("payment");

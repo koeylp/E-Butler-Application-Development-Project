@@ -12,6 +12,7 @@
 <%@page import="com.ebutler.swp.dto.CartServiceDTO"%>
 <%@page import="com.ebutler.swp.dto.UserDTO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -599,8 +600,8 @@
                     <div class="row g-5">
                         <div class="col-lg-3 col-md-6">
                             <h5 class="text-white mb-4">Get In Touch</h5>
-                            <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>LÙ E2a-7, ???ng D1, ?. D1, Long Th?nh
-                                M?, Th‡nh Ph? Th? ??c, Th‡nh ph? H? ChÌ Minh</p>
+                            <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>L√¥ E2a-7, ???ng D1, ?. D1, Long Th?nh
+                                M?, Th√†nh Ph? Th? ??c, Th√†nh ph? H? Ch√≠ Minh</p>
                             <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
                             <p class="mb-2"><i class="fa fa-envelope me-3"></i>SE1111@e-butler.com</p>
                             <div class="d-flex pt-2">
