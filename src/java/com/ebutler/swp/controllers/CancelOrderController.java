@@ -4,12 +4,15 @@
  */
 package com.ebutler.swp.controllers;
 
+import com.ebutler.swp.dao.CustomerDAO;
 import com.ebutler.swp.dao.ProductDAO;
+import com.ebutler.swp.dto.CustomerDTO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -28,9 +31,22 @@ public class CancelOrderController extends HttpServlet {
             int product_id = Integer.parseInt(request.getParameter("product_id"));
             int order_id = Integer.parseInt(request.getParameter("order_id"));
             
+            HttpSession session = request.getSession();
+            CustomerDAO customerDAO = new CustomerDAO();
+            
+            CustomerDTO login_customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
+            
             ProductDAO productDAO = new ProductDAO();
             
-            productDAO.cancelOrder(product_id, order_id);
+            if(productDAO.cancelOrder(product_id, order_id)) {
+                request.setAttribute("MESSAGE_SUCCESS", "Cancel order product successfully!");
+                
+                login_customer.setPoint(login_customer.getPoint() + productDAO.getTotalProduct(product_id, order_id));
+                customerDAO.updateWallet(login_customer);
+                session.setAttribute("CURRENT_CUSTOMER", login_customer);
+            } else {
+                request.setAttribute("MESSAGE_FAIL", "Cancel order product fail!");
+            };
             
             url = SUCCESS;
         } catch (Exception e) {

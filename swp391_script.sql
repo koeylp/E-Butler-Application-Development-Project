@@ -425,6 +425,7 @@ BEGIN
 	END
 END;
 GO
+
 -------------------- tblDeliveryNOtification -----------------
 CREATE TRIGGER trig_delivery_notify ON tblDelivery
 AFTER UPDATE, INSERT
@@ -3294,14 +3295,6 @@ INSERT INTO tblServiceDetail
 	(provider_ID, service_ID, staff_ID,name,price,description,status)
 VALUES
 	('michelin_car_service', '31', '114', 'Car Baterry', 5, 'Get ready all the time. Helping you with the best service', 1)
---- bảng delivery ---
-/*insert into tblShipperCategory(username , name, status) values ('grab', 'Grab', 1)
-insert into tblShipperCategory(username , name, status) values ('shopee', 'Shopee Express', 1)
-insert into tblShipperCategory(username, name, status) values ('be', 'Be', 1)
-SELECT * FROM tblShipper
-SELECT * FROM tblUser*/
---INSERT INTO tblDelivery VALUES ('1', 'aaaa','shopee',null , 1)
-
 
 
 INSERT INTO tblShipper

@@ -50,6 +50,38 @@ public class ProductDAO {
     private static final String UPLOAD_PHOTO = "UPDATE tblProductDetail SET image = ? WHERE id = ?  ";
     
     private final String CANCEL_PRODUCT = "UPDATE tblOrder_Product_Detail set status = 4 where product_detail_ID = ? and order_ID = ? and status = 0";
+    private final String GET_TOTAL_PRODUCT = "select (opd.price * opd.quantity) as total from tblOrder o JOIN tblOrder_Product_Detail opd on o.order_ID = opd.order_ID where opd.order_ID = ? and opd.product_detail_ID = ? and o.payment = 'PayPal'";
+
+    public double getTotalProduct(int product_id, int order_ID) throws SQLException {
+        double total = 0;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_TOTAL_PRODUCT); 
+                ptm.setInt(2, product_id);
+                ptm.setInt(1, order_ID);
+                rs = ptm.executeQuery();
+                if(rs.next()) {
+                    total = rs.getDouble("total");
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+        return total;
+    }
     
     public boolean cancelOrder(int product_id, int order_ID) throws SQLException {
         Connection conn = null;

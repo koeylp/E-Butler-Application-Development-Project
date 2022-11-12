@@ -4,6 +4,7 @@
     Author     : thekh
 --%>
 
+<%@page import="com.ebutler.swp.dto.CustomerDTO"%>
 <%@page import="com.ebutler.swp.dto.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -47,11 +48,13 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" />
 
         <link rel="stylesheet" href="customer_css/profile-css.css" />
+
+        <link href="css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/grid.css">
         <link rel="stylesheet" href="css/base.css">
 
-
-        <link rel="stylesheet" href="customer_css/cart-css.css">
-        <link rel="stylesheet" href="css/guestPage.css">
+        <!-- My Stylesheet -->
+        <link rel="stylesheet" href="css/customer_profilePage.css">
         <link rel="stylesheet" href="css/customerPage.css">
 
         <title>E-Butler</title>
@@ -72,6 +75,8 @@
             <!-- Spinner End -->
             <%
                 UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
+                CustomerDTO customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
+                customer = (customer == null) ? new CustomerDTO() : customer;
             %>
             <!-- Navbar Start -->
             <div class="container-fluid nav-bar bg-transparent">
@@ -115,6 +120,10 @@
                                         <div style="cursor: pointer;" class="dropdown-item pad-0">
                                             <i class="fa-solid fa-lock"></i>
                                             <a href="MainController?action=GoToUserProfile&current_form=change_password">Change password</a>
+                                        </div>
+                                        <div style="justify-content: flex-start; cursor: pointer;" class="dropdown-item pad-0">
+                                            <i class="fa-solid fa-wallet"></i>
+                                            <a href="#!"><%=customer.getPoint()%> $</a>
                                         </div>
                                     </div>
                                     <div style="cursor: pointer;" class="dropdown-item pad-0">

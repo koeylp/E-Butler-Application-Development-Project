@@ -39,12 +39,15 @@ public class AddAddressController extends HttpServlet {
             AddressDAO addressDAO = new AddressDAO();
 
             int status = (addressDAO.CountAddress(login_user.getUsername()) > 0) ? 0 : 1;
-        
+
             AddressDTO address = new AddressDTO(city_id, street, login_user.getUsername(), status);
 
             if (addressDAO.InserAddress(address)) {
-                url = SUCCESS;
+                request.setAttribute("MESSAGE_SUCCESS", "Add new address successfully!");
+            } else {
+                request.setAttribute("MESSAGE_FAIL", "Add new address fail!");
             }
+            url = SUCCESS;
 
             request.setAttribute("CURRENT_FORM", current_form);
 

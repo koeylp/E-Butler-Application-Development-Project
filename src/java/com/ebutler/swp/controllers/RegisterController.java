@@ -11,7 +11,6 @@ import com.ebutler.swp.dao.UserDAO;
 import com.ebutler.swp.dto.CustomerDTO;
 import com.ebutler.swp.dto.ProviderDTO;
 import com.ebutler.swp.dto.RoleDTO;
-import com.ebutler.swp.utils.ValiUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -68,9 +67,10 @@ public class RegisterController extends HttpServlet {
             if (role_id.equals(CUSTOMER)) {
                 int gender = Integer.parseInt(request.getParameter("gender"));
                 String dob = request.getParameter("dob");
-
+                
 //                gửi lại thông tin đã nhập
                 CustomerDTO customer = new CustomerDTO(username, password, role_id, phone, email, name, gender, dob, "", 1);
+                
                 request.setAttribute("CUS_INFO", customer);
 
                 CustomerDTO customerError = new CustomerDTO();

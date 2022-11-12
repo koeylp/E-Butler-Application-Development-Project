@@ -123,6 +123,10 @@
                                             <i class="fa-solid fa-lock"></i>
                                             <a href="MainController?action=GoToUserProfile&current_form=change_password">Change password</a>
                                         </div>
+                                        <div style="justify-content: flex-start; cursor: pointer;" class="dropdown-item pad-0">
+                                            <i class="fa-solid fa-wallet"></i>
+                                            <a href="#!"><%=customer.getPoint()%> $</a>
+                                        </div>
                                     </div>
                                     <div style="cursor: pointer;" class="dropdown-item pad-0">
                                         <i style="transform: scale(-1, 1);" class="fa-solid fa-right-from-bracket"></i>

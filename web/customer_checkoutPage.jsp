@@ -124,6 +124,10 @@
                                             <i class="fa-solid fa-lock"></i>
                                             <a href="MainController?action=GoToUserProfile&current_form=change_password">Change password</a>
                                         </div>
+                                        <div style="justify-content: flex-start; cursor: pointer;" class="dropdown-item pad-0">
+                                            <i class="fa-solid fa-wallet"></i>
+                                            <a href="#!"><%=customer.getPoint()%> $</a>
+                                        </div>
                                     </div>
                                     <div style="cursor: pointer;" class="dropdown-item pad-0">
                                         <i style="transform: scale(-1, 1);" class="fa-solid fa-right-from-bracket"></i>
@@ -198,7 +202,7 @@
                                         </div>
                                     </div>
                                     <div class="flex-center">
-                                        <button type="button" style="--round: .5rem; background-color: #F9FAFB" class="txt-sm bold rounded-f border-no pad-0 change_info">Change</button>
+                                        <button type="button" style="--round: .5rem; background-color: transparent" class="txt-sm bold rounded-f border-no pad-0 change_info disabled"></button>
                                     </div>
                                 </div>
                                 <div style="width: 100%;border: 1px solid #E5E7EB;" class="info_detail detail hide">
@@ -241,7 +245,7 @@
                                 address_default = (address_default == null) ? new AddressDTO() : address_default;
 
                                 String shipping_address = (new_address.toString().isEmpty()) ? address_default.toString() : new_address.toString();
-                                
+
 
                             %>
                             <div class="relative m-y-32">
@@ -379,7 +383,7 @@
                                 <input type="hidden" name="action" value="Checkout">
                                 <input type="hidden" name="address" value="<%=shipping_address%>">
                                 <input id="total" type="hidden" name="total"/>
-                                <input type="hidden" name="total2" value="<%= total2 %>"
+                                <input type="hidden" name="total2" value="<%= total2%>"
 
                                        <!-- Payment method start -->
                                 <div class="relative m-y-32">
