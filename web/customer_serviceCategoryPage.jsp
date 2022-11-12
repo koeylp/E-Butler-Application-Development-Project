@@ -305,7 +305,6 @@
                                                         <%
                                                             }
                                                         %>
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -321,18 +320,7 @@
                         <%
                             }
                         %>
-                        <div class="row m-y-2">
-                            <div class="row">
-                                <div class="col l-6">
-                                    <ul class="row pad-1">
-                                        <li class="bold text-circle mx-1">1</li>
-                                        <li class="bold text-circle mx-1">2</li>
-                                        <li class="bold text-circle mx-1">3</li>
-                                        <li class="bold text-circle mx-1">4</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
                 <!-- Product List End -->
