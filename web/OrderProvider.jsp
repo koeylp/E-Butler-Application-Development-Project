@@ -17,7 +17,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>E-Butler | Product</title>
+        <title>E-Butler | Order</title>
         <link rel="icon" type="image/x-icon" href="https://scontent.fsgn2-4.fna.fbcdn.net/v/t1.15752-9/307058616_802160467603859_5558839303148788245_n.png?stp=dst-png_p1080x2048&_nc_cat=109&ccb=1-7&_nc_sid=ae9488&_nc_ohc=vGhbAQumiiwAX8TbYC2&tn=nHI45FEgylR7fWDG&_nc_ht=scontent.fsgn2-4.fna&oh=03_AVJuwn5Dqs20uZj9NKDP_eqwggpHhYGN5cC90Kw1btakKQ&oe=6363B3B1">
         <!-- <link href="../css/provider.css" rel="stylesheet"> -->
         <link href="./css/bootstrap1.min.css" rel="stylesheet">
@@ -150,7 +150,7 @@
                 <div class="mt-3 ms-5 d-flex justify-content-start ">
 
                     <div>
-                        <h2 style="font-weight:600 ;" class="">Service List</h2>
+                        <h2 style="font-weight:600 ;" class="">Order List</h2>
                     </div>
 
                     <!-- Modal -->                 
@@ -166,9 +166,27 @@
                                     <!-- Account -->
                                     <div class="card-body">
                                         <div class="d-flex align-items-start align-items-sm-center gap-4">
-                                            <img style="border-radius: 20%;"
-                                                 src="img/<%= provider.getLogo()%>"
-                                                 alt="user-avatar" class="d-block rounded w-50 avatar avatar-xl h-50" id="uploadedAvatar">
+                                            <%
+                                                if (provider.getLogo().contains("https")) {
+                                            %>
+                                            <img alt="user-avatar"
+                                                 src="<%= provider.getLogo()%>"
+                                                 class="d-block rounded w-50 avatar avatar-xl h-50" id="uploadedAvatar"/>
+                                            <%
+                                            } else if (provider.getLogo().isEmpty()) {
+                                            %>
+                                            <img alt="user-avatar"
+                                                 src="img/default-avatar.jpg"
+                                                 class="d-block rounded w-50 avatar avatar-xl h-50" id="uploadedAvatar"/>
+                                            <%
+                                            } else {
+                                            %>
+                                            <img  alt="user-avatar"
+                                                  src="img/<%= provider.getLogo()%>"
+                                                  class="d-block rounded w-50 avatar avatar-xl h-50" id="uploadedAvatar">
+                                            <%
+                                                }
+                                            %>
                                             <div class="button-wrapper">
                                                 <form method="POST" action="UploadPhotoController" enctype="multipart/form-data" >
                                                     <input type="file" name="file"/>
@@ -272,7 +290,7 @@
                                             <td> <%= order.getOrder_date()%></td>
 
                                             <td><%= order.getCustomer_ID()%></td>
-                                            <td><%= order.getTotal() %></td>
+                                            <td><%= order.getTotal()%></td>
 
                                             </td>
                                             <td>
@@ -394,9 +412,109 @@
 
             </div>
 
+            <%
+                String messageSuccess = (String) request.getAttribute("SUCCESS_MESS");
+                String messageError = (String) request.getAttribute("ERROR_MESS");
+
+                messageSuccess = (messageSuccess == null) ? "" : messageSuccess;
+                messageError = (messageError == null) ? "" : messageError;
+
+                if (!messageSuccess.isEmpty() || !messageError.isEmpty()) {
+            %>
+            <div id="my-toast">
+
+            </div>
+            <%
+                }
+            %>  
+
+            <!-- Footer End -->
+            <!-- Core JS -->
+            <script src="./js/providerMain.js"></script>
+            <!-- build:js assets/vendor/js/core.js -->
+            <script src="./vendor/libs/jquery/jquery.js"></script>
+            <script src="./vendor/libs/popper/popper.js"></script>
+            <script src="./vendor/js/bootstrap.js"></script>
+            <script src="./vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+            <script src="./vendor/js/menu.js"></script>
+
+
+            <script src="./vendor/libs/apex-charts/apexcharts.js"></script>
 
 
 
+            <script src="./js/providerMain.js"></script>
+
+
+            <script src="./js/dashboards-analytics.js"></script>
+
+            <script src="./js/provider.js"></script>
+
+            <script language="javascript">
+                                            const main = document.getElementById("my-toast");
+                                            if (main) {
+                                                const duration = 2000;
+                                                const toast = document.createElement("div");
+                                                // Auto remove toast
+                                                const autoRemoveId = setTimeout(function () {
+                                                    main.removeChild(toast);
+                                                }, duration + 1000);
+                                                // Remove toast when clicked
+                                                toast.onclick = function (e) {
+                                                    if (e.target.closest(".my-toast__close")) {
+                                                        main.removeChild(toast);
+                                                        clearTimeout(autoRemoveId);
+                                                    }
+                                                };
+
+                <%
+                    if (messageError.isEmpty() && !messageSuccess.isEmpty()) {
+                %>
+                                                toast.classList.add("my-toast", `my-toast--success`, "showing");
+
+                                                toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
+
+                                                toast.innerHTML =
+                                                        `<div class="my-toast__icon">
+                    <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="my-toast__body">
+                    <h3 class="my-toast__title">Thành công</h3>
+                        <p class="my-toast__msg"><%=messageSuccess%></p>
+                        </div>
+                    <div class="my-toast__close">
+                    <i class="fas fa-times"></i>
+                    </div>
+                            `;
+
+                <%
+                    }
+                %>
+
+                <%
+                    if (!messageError.isEmpty() && messageSuccess.isEmpty()) {
+                %>
+                                                toast.classList.add("my-toast", `my-toast--error`, "showing");
+                                                toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
+                                                toast.innerHTML =
+                                                        `<div class="my-toast__icon">
+                    <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="my-toast__body">
+                    <h3 class="my-toast__title">Thất bại</h3>
+                        <p class="my-toast__msg"><%=messageError%></p>
+                        </div>
+                    <div class="my-toast__close">
+                    <i class="fas fa-times"></i>
+                    </div>
+                    `;
+                <%
+                    }
+                %>
+                                                main.appendChild(toast);
+                                            }
+            </script>
 
 
 
