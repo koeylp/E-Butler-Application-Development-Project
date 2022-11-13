@@ -259,6 +259,7 @@
                     <div class="mt-3 ms-5 d-flex justify-content-start ">
                         <div>
                             <h2 style="font-weight:600 ;" class="">Delivery Details</h2>
+                            <h6 style="color: red">${requestScope.ErrorUpdateStatus}</h6> 
                         </div>
                     </div>
                     <!-- End Modal Edit -->
@@ -276,6 +277,7 @@
                         <div class="layout-container-fluid   " style="border-radius:5px ;">
                             <div class="d-flex justify-content-around mb-3">
                                 <div class="card my-3" style="width:300px ; height: 194px;">
+                                    
                                     <div class="card-body">
                                         <div class="border-bottom">
                                             <h6>Order Number<span
@@ -414,7 +416,7 @@
                                                     <button type="submit" name="action" value="Update_Delivery">Update Status</button>
                                                     <input type="hidden" name="Product_id" value="<%= orderDetail.getId()%>" /> 
                                                     <input type="hidden" name="orderID" value="<%= orderDetail.getOrder_ID()%>" /> 
-                                                    
+                                                    <input type="hidden" name="Product_Order_ID" value="<%= orderDetail.getProduct_detail_ID() %>" /> 
                                                 </td>
                                         </form>
                                         </tr>
