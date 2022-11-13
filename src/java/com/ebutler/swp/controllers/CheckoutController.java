@@ -41,24 +41,25 @@ public class CheckoutController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            request.setCharacterEncoding("UTF-8"); 
+            request.setCharacterEncoding("UTF-8");
             String total = request.getParameter("total");
             String total2 = request.getParameter("total2");
             String payment = request.getParameter("payment");
             String address = request.getParameter("address");
+            double pointBefore = Double.parseDouble(request.getParameter("point"));
 
             OrderDTO order = new OrderDTO();
             OrderDAO orderDao = new OrderDAO();
             CustomerDAO customerDao = new CustomerDAO();
             ProductDAO productDao = new ProductDAO();
             StaffDAO staffDao = new StaffDAO();
-            
+
             ConfirmDTO confirmation = new ConfirmDTO("Thank you for your order!", "We're sorry! Your order was unsuccessful");
             String statement = confirmation.getFail();
             HttpSession session = request.getSession();
-            
-            UserDTO login_user = (UserDTO)session.getAttribute("LOGIN_USER");
-            
+
+            UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
+
             if (session != null) {
                 if (total == null) {
                     total = (String) session.getAttribute("TOTAL");
@@ -121,12 +122,15 @@ public class CheckoutController extends HttpServlet {
                 }
                 if (statement == confirmation.getSuccess()) {
                     double point = (Double.parseDouble(total) / 100);
-                    if (Double.parseDouble(total) < Double.parseDouble(total2)) {
-                        customerDao.accumulatePoint(user.getUsername(), -customerDao.getPoint(user.getUsername()));
+                    if (pointBefore > 0) {
+                        if (Double.parseDouble(total) < Double.parseDouble(total2)) {
+                            if (pointBefore > Double.parseDouble(total2)) {
+                                customerDao.accumulatePoint(user.getUsername(), -Double.parseDouble(total2));
+                            } else {
+                                customerDao.accumulatePoint(user.getUsername(), -pointBefore);
+                            }
+                        }
                     }
-//                    if (point < 1) {
-//                        point = 1;
-//                    }
                     customerDao.accumulatePoint(user.getUsername(), point);
                     customer.setPoint(customerDao.getPoint(user.getUsername()));
                 }
@@ -135,27 +139,27 @@ public class CheckoutController extends HttpServlet {
             session.setAttribute("CART", null);
             session.setAttribute("CART_SERVICE", null);
             session.setAttribute("STATEMENT", statement);
-            
+
             String subject = "Your order has been processing.";
             String message = "<!DOCTYPE html>\n"
-                + "<html lang=\"en\">\n"
-                + "\n"
-                + "<head>\n"
-                + "</head>\n"
-                + "\n"
-                + "<body>\n"
-                + "    <h3 style=\"color: blue;\">Your order has been processing.</h3>\n"
-                + "    <div>Username :"+login_user.getUsername()+"</div>\n"
-                + "    <div>Phone : "+login_user.getPhone()+"</div>\n"
-                + "    <div>address :"+ address +"</div>\n" 
-                + "    <div>Your total bill:"+ total +"</div>\n"
-                + "    <h3 style=\"color: blue;\">Thank you very much!</h3>\n"
-                + "\n"
-                + "</body>\n"
-                + "\n"
-                + "</html>";
-           
-        Email.send(login_user.getEmail(), subject, message, Account.EMAIL, Account.PASSWORD); 
+                    + "<html lang=\"en\">\n"
+                    + "\n"
+                    + "<head>\n"
+                    + "</head>\n"
+                    + "\n"
+                    + "<body>\n"
+                    + "    <h3 style=\"color: blue;\">Your order has been processing.</h3>\n"
+                    + "    <div>Username: " + login_user.getUsername() + "</div>\n"
+                    + "    <div>Phone: " + login_user.getPhone() + "</div>\n"
+                    + "    <div>address: " + address + "</div>\n"
+                    + "    <div>Your total bill: " + total + "</div>\n"
+                    + "    <h3 style=\"color: blue;\">Thank you very much!</h3>\n"
+                    + "\n"
+                    + "</body>\n"
+                    + "\n"
+                    + "</html>";
+
+            Email.send(login_user.getEmail(), subject, message, Account.EMAIL, Account.PASSWORD);
 
             url = SUCCESS;
         } catch (Exception e) {
