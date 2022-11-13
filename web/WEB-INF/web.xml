@@ -545,6 +545,6 @@
         <session-timeout>60</session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>customer_confirmation.jsp</welcome-file>
+        <welcome-file>guest_landingPage.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
