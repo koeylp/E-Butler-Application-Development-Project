@@ -46,7 +46,7 @@ public class CheckoutController extends HttpServlet {
             String total2 = request.getParameter("total2");
             String payment = request.getParameter("payment");
             String address = request.getParameter("address");
-            double pointBefore = Double.parseDouble(request.getParameter("point"));
+            String pointBefore = request.getParameter("point");
 
             OrderDTO order = new OrderDTO();
             OrderDAO orderDao = new OrderDAO();
@@ -66,6 +66,15 @@ public class CheckoutController extends HttpServlet {
                 }
                 if (payment == null) {
                     payment = (String) session.getAttribute("PAYMENT");
+                }
+                if (total2 == null) {
+                    total2 = (String) session.getAttribute("TOTAL2");
+                }
+                if (address == null) {
+                    address = (String) session.getAttribute("ADDRESS");
+                }
+                if (pointBefore == null) {
+                    pointBefore = (String) session.getAttribute("POINT_BEFORE");
                 }
 
                 CustomerDTO customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
@@ -122,12 +131,12 @@ public class CheckoutController extends HttpServlet {
                 }
                 if (statement == confirmation.getSuccess()) {
                     double point = (Double.parseDouble(total) / 100);
-                    if (pointBefore > 0) {
+                    if ( Double.parseDouble(pointBefore) > 0) {
                         if (Double.parseDouble(total) < Double.parseDouble(total2)) {
-                            if (pointBefore > Double.parseDouble(total2)) {
+                            if (Double.parseDouble(pointBefore) > Double.parseDouble(total2)) {
                                 customerDao.accumulatePoint(user.getUsername(), -Double.parseDouble(total2));
                             } else {
-                                customerDao.accumulatePoint(user.getUsername(), -pointBefore);
+                                customerDao.accumulatePoint(user.getUsername(), -Double.parseDouble(pointBefore));
                             }
                         }
                     }

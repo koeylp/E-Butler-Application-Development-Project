@@ -26,17 +26,19 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "AuthorizePaymentController", urlPatterns = {"/AuthorizePaymentController"})
 public class AuthorizePaymentController extends HttpServlet {
 
-    private static final String ERROR = "errorPage.jsp";
-    
+
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
         try {
             String total = request.getParameter("total");
             String payment = request.getParameter("payment");
             String cardShipper = request.getParameter("card");
+            String total2 = request.getParameter("total2");
+            String address = request.getParameter("address");
+            String pointBefore = request.getParameter("point");
+
             if (cardShipper == null) {
                 cardShipper = "false";
             }
@@ -59,14 +61,14 @@ public class AuthorizePaymentController extends HttpServlet {
                 session.setAttribute("PAYMENT", payment);
                 session.setAttribute("CARD_SHIPPER", cardShipper);
                 session.setAttribute("CARD_PRICE", cardPrice);
-                
-                
+                session.setAttribute("TOTAL2", total2);
+                session.setAttribute("ADDRESS", address);
+                session.setAttribute("POINT_BEFORE", pointBefore);
 
             }
 
         } catch (PayPalRESTException e) {
             log("Error at AuthorizePaymentController: " + e.getMessage());
-            
         }
     }
 
