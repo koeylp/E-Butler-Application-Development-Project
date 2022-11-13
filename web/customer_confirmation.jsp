@@ -12,19 +12,20 @@
 <html>
 
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+        <meta charset="utf-8">
+        <title>E-Butler</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
-
-        <!-- Favicon -->
         <link rel="icon" type="image/png" href="img/logo-bulldog.png">
+        <!-- Icon FontAwesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
-            rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
+              rel="stylesheet">
 
         <!-- Icon Font Stylesheet -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -35,20 +36,9 @@
         <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
         <!-- Customized Bootstrap Stylesheet -->
-        <link href="customer_css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-
-
-        <!--form-->
-        <link rel="stylesheet"
-              href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css" />
-        <link rel="stylesheet"
-              href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" />
-
-        <link rel="stylesheet" href="customer_css/profile-css.css" />
-
+        <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
         <link rel="stylesheet" href="css/grid.css">
         <link rel="stylesheet" href="css/base.css">
@@ -56,8 +46,6 @@
         <!-- My Stylesheet -->
         <link rel="stylesheet" href="css/customer_profilePage.css">
         <link rel="stylesheet" href="css/customerPage.css">
-
-        <title>E-Butler</title>
     </head>
     <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'CUS'}">
         <c:redirect url="guest_loginPage.jsp"></c:redirect>
@@ -98,13 +86,13 @@
                                 <a href="LoadingProductAndServiceCategory#service" class="nav-link navigator">Service</a>
                             </div>
                             <a href="LoadingProductAndServiceCategory#help" class="nav-item nav-link navigator">Help</a>
-                            <!--                            <div class="search absolute hide">
-                                                            <a><i class="fa-solid fa-magnifying-glass"></i></a>
-                                                            <input
-                                                                style="flex: 1; background-color: transparent; border: none; outline: none; margin: 0 20px;"
-                                                                type="text" placeholder="Type and press enter">
-                                                            <a class="search-close opacity"><i class="fa-solid fa-xmark"></i></a>
-                                                        </div>-->
+                            <div class="search absolute hide">
+                                <a><i class="fa-solid fa-magnifying-glass"></i></a>
+                                <input
+                                    style="flex: 1; background-color: transparent; border: none; outline: none; margin: 0 20px;"
+                                    type="text" placeholder="Type and press enter">
+                                <a class="search-close opacity"><i class="fa-solid fa-xmark"></i></a>
+                            </div>
                             <div class="nav-item dropdown">
                                 <div class="nav-link">
                                     <div style="width: 1.5rem;" class="img rounded-f">
