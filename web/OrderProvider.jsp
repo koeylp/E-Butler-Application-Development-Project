@@ -272,7 +272,7 @@
                                             <td> <%= order.getOrder_date()%></td>
 
                                             <td><%= order.getCustomer_ID()%></td>
-                                            <td><%= order.getTotal()%></td>
+                                            <td><%= order.getTotal() %></td>
 
                                             </td>
                                             <td>

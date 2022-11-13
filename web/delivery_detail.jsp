@@ -398,7 +398,7 @@
                                                             %>
                                                         </div>
                                                         <div>
-                                                            <select class="form-select " name="DeliveryStatus" aria-label="Default select example">
+                                                            <select onchange="this.form.submit()" class="form-select " name="DeliveryStatus" aria-label="Default select example">
                                                                 <option selected value="0" >Change status</option>
                                                                 <option value="0">Pending</option>
                                                                 <option value="1">Goods Taken</option>
@@ -411,7 +411,8 @@
                                                     </div>
                                                 </td>
                                                 <td class="txt-md ">
-                                                    <button type="submit" name="action" value="Update_Delivery">Update Status</button>
+                                                    <!--<button type="submit" name="action" value="Update_Delivery">Update Status</button>-->
+                                                    <input type="hidden" name="action" value="Update_Delivery" /> 
                                                     <input type="hidden" name="Product_id" value="<%= orderDetail.getId()%>" /> 
                                                     <input type="hidden" name="orderID" value="<%= orderDetail.getOrder_ID()%>" /> 
                                                     

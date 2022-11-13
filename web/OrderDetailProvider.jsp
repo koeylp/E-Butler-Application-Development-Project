@@ -41,7 +41,7 @@
             href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
             rel="stylesheet" />
     </head>
-     <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'PRO'}">
+    <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'PRO'}">
         <c:redirect url="guest_loginPage.jsp"></c:redirect>
     </c:if>
 
@@ -153,7 +153,7 @@
                                         <div class="flexStatus">
                                             <li style="list-style:none ; padding-top: 6px ; padding-right: 8px "><i class="bx bx-calendar-event mx-2"></i>Status: </li>
                                                 <%
-                                                    int status = listDetailInfo.get(0).getStatus(); 
+                                                    int status = listDetailInfo.get(0).getStatus();
                                                     if (status == 0) {
                                                 %>
                                             <span class="badge bg-label-warning me-1 changeStatus">Pending</span>
@@ -161,15 +161,14 @@
                                             } else if (status == 1) {
 
                                             %>
-                                            <span class="badge bg-label-info me-1 changeStatus">InProgress</span>
-                                            <%                                                        
-                                                } else if (status == 2) {
+                                            <span class="badge bg-label-info me-1 changeStatus">In Progress</span>
+                                            <%                                            } else if (status == 2) {
                                             %>
                                             <span class="badge bg-label-success me-1 changeStatus">Done</span>
                                             <%
                                             } else if (status == 3) {
                                             %>
-                                            <span class="badge bg-label-danger me-1 changeStatus">Cancel</span> 
+                                            <span class="badge bg-label-danger me-1 changeStatus">Canceled</span> 
                                             <%
                                                 }
                                             %>
@@ -217,18 +216,19 @@
                                         <%
                                             Double total = 0.0;
                                             for (OrderDetailDTO orderDetail : listDetail) {
-                                                int quantity = orderDetail.getQuantity() ; 
+                                                int quantity = orderDetail.getQuantity();
                                                 if (quantity == 0) {
-                                                quantity = 1 ; 
-                                            }
-                                                total += orderDetail.getPrice() * quantity;
+                                                    quantity = 1;
+                                                }
+                                                if (orderDetail.getStatus() != 4)
+                                                    total += orderDetail.getPrice() * quantity;
                                         %>
                                         <tr>
                                             <td><%= orderDetail.getOrder_ID()%></td>
                                             <td><%= orderDetail.getName()%></td>
-                                            <td><%= quantity %></td>
+                                            <td><%= quantity%></td>
                                             <td><%= orderDetail.getPrice()%></td>
-                                            <td><%= orderDetail.getPrice() * quantity %></td> 
+                                            <td><%= orderDetail.getPrice() * quantity%></td> 
                                             <td class="txt-md ">
 
                                                 <div>
@@ -253,7 +253,7 @@
                                                     } else if (statusBelow == 4) {
                                                     %>
 
-                                                    <span class="badge bg-label-danger me-1 changeStatus">Cancel Order</span> 
+                                                    <span class="badge bg-label-danger me-1 changeStatus">Canceled Order</span> 
                                                     <%
                                                         }
                                                     %>
