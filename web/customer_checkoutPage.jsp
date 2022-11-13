@@ -104,7 +104,7 @@
                                     <div style="width: 1.5rem;" class="img rounded-f">
                                         <%   if (customer.getAvatar().isEmpty()) {
                                         %>
-                                        <img src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg" alt="">
+                                        <img src="img/default-avatar.jpg" alt="">
                                         <%
                                         } else {
                                         %>
@@ -383,7 +383,8 @@
                                 <input type="hidden" name="action" value="Checkout">
                                 <input type="hidden" name="address" value="<%=shipping_address%>">
                                 <input id="total" type="hidden" name="total"/>
-                                <input type="hidden" name="total2" value="<%= total2%>"
+                                <input type="hidden" name="total2" value="<%= total2%>"/>
+                                <input type="hidden" name="point" value="<%= customer.getPoint() %>"/>
 
                                        <!-- Payment method start -->
                                 <div class="relative m-y-32">
@@ -519,6 +520,12 @@
                                                 sub_total_service += service.getPrice();
                                     %>
                                     <div class="pad-y-12">
+
+                                        <div style="border-bottom: 1px solid #E5E7EB" class="flex-between pad-1">
+                                            <div class="flex-col flex-horizon-center">
+                                                <span class="txt-md bold"><%= service.getProviderName()%></span>
+                                            </div>
+                                        </div>
                                         <div class="order-card m-y-12">
                                             <div class="flex">
                                                 <div class="flex-center order-img">
@@ -528,20 +535,45 @@
                                                 <div style="flex: 1; margin-left: 1rem;" class="flex-col">
                                                     <div class="flex-between">
                                                         <div class="flex-col flex-horizon-center">
-                                                            <span class="txt-md bold"><%= service.getServiceName()%></span>
-                                                        </div>
 
-                                                        <div class="order-price txt-sm bold">
+                                                            <span class="txt-md bold"><%= service.getStaffName()%></span>
+
+                                                            <div class="flex-horizon-center flex-center">
+                                                                <span class="txt-sm">Service</span>
+                                                                <span class="m-x-12">:</span>
+                                                                <span class="txt-sm"><%= service.getServiceName()%></span>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="order-price bold txt-sm">
                                                             <span>
                                                                 $<%= service.getPrice()%>
                                                             </span>
                                                         </div>
-
+                                                    </div>
+                                                    <div style="height: 50%; " class="flex-end flex-col">
+                                                        <div class="flex-between">
+                                                            <%
+                                                                if (service.getStatus() == -1) {
+                                                            %>
+                                                            <span class="label txt-xs danger">
+                                                                <i class="fa-solid fa-ban"></i>
+                                                                In Working
+                                                            </span>
+                                                            <%
+                                                            } else {
+                                                            %>
+                                                            <span style="color: #30BF4E" class="label txt-xs safe">
+                                                                <i class="fa-solid fa-check"></i>
+                                                                Available
+                                                            </span>
+                                                            <%
+                                                                }
+                                                            %>
+                                                            
+                                                        </div>
                                                     </div>
 
-                                                    <div class="flex-col flex-horizon-center">
-                                                        <span class="txt-md bold">Staff: <%= service.getStaffName()%></span>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -683,7 +715,13 @@
                                     $("#point").click(function () {
                                         var total = document.getElementById('total1').value;
                                         var point = document.getElementById('point').value;
-                                        document.getElementById('total-input').innerText = ($(this).is(':checked')) ? total - point : total;
+                                        var final_point = total - point;
+                                        if (final_point < 0) {
+                                            final_point = 0;
+                                        }
+                                        document.getElementById('total-input').innerText = ($(this).is(':checked')) ? final_point : total;
+                                        
+                                        
                                     });
     </script>
 

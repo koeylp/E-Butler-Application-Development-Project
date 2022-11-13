@@ -101,9 +101,10 @@
                             <div class="nav-item dropdown">
                                 <div class="nav-link">
                                     <div style="width: 1.5rem;" class="img rounded-f">
-                                        <%   if (customer.getAvatar() == "") {
+                                        <%
+                                            if (customer.getAvatar().isEmpty()) {
                                         %>
-                                        <img src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg" alt="">
+                                        <img src="img/default-avatar.jpg" alt="">
                                         <%
                                         } else {
                                         %>
