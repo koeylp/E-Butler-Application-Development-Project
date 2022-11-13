@@ -162,9 +162,27 @@
 
                                 <div class="card-body">
                                     <div class="d-flex align-items-start align-items-sm-center gap-4">
-                                        <img style="border-radius: 20%;"
-                                             src="img/<%= provider.getLogo()%>"
-                                             alt="user-avatar" class="d-block rounded w-50 avatar avatar-xl h-50" id="uploadedAvatar">
+                                        <%
+                                            if (provider.getLogo().contains("https")) {
+                                        %>
+                                        <img alt="user-avatar"
+                                             src="<%= provider.getLogo()%>"
+                                             class="d-block rounded w-50 avatar avatar-xl h-50" id="uploadedAvatar"/>
+                                        <%
+                                        } else if (provider.getLogo().isEmpty()) {
+                                        %>
+                                        <img alt="user-avatar"
+                                             src="img/default-avatar.jpg"
+                                             class="d-block rounded w-50 avatar avatar-xl h-50" id="uploadedAvatar"/>
+                                        <%
+                                        } else {
+                                        %>
+                                        <img  alt="user-avatar"
+                                              src="img/<%= provider.getLogo()%>"
+                                              class="d-block rounded w-50 avatar avatar-xl h-50" id="uploadedAvatar">
+                                        <%
+                                            }
+                                        %>
                                         <div class="button-wrapper">
                                             <form method="POST" action="UploadPhotoController" enctype="multipart/form-data" >
                                                 <input type="file" name="file"/>

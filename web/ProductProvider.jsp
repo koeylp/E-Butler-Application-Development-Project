@@ -171,21 +171,21 @@
                                             <%
                                                 if (provider.getLogo().contains("https")) {
                                             %>
-                                            <img class="avatar avatar-md rounded-circle "
+                                            <img alt="user-avatar"
                                                  src="<%= provider.getLogo()%>"
-                                                 id="dropdownMenuButton" data-bs-toggle="dropdown" data-bs-display="static"/>
+                                                 class="d-block rounded w-50 avatar avatar-xl h-50" id="uploadedAvatar"/>
                                             <%
                                             } else if (provider.getLogo().isEmpty()) {
                                             %>
-                                            <img class="avatar avatar-md rounded-circle "
+                                            <img alt="user-avatar"
                                                  src="img/default-avatar.jpg"
-                                                 id="dropdownMenuButton" data-bs-toggle="dropdown" data-bs-display="static"/>
+                                                 class="d-block rounded w-50 avatar avatar-xl h-50" id="uploadedAvatar"/>
                                             <%
                                             } else {
                                             %>
-                                            <img  style="border-radius: 20%;"
+                                            <img  alt="user-avatar"
                                                   src="img/<%= provider.getLogo()%>"
-                                                  alt="user-avatar" class="d-block rounded w-50 avatar avatar-xl h-50" id="uploadedAvatar">
+                                                  class="d-block rounded w-50 avatar avatar-xl h-50" id="uploadedAvatar">
                                             <%
                                                 }
                                             %>

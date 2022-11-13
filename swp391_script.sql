@@ -2779,51 +2779,51 @@ VALUES
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '28', 'David Touliver', '110468009431', 'https://upload.wikimedia.org/wikipedia/commons/2/2a/Vinfast-D.Beckham-cropped.jpg', 1)
+	('michelin_car_service', '28', 'David Touliver', '110468009431', 'http://www.chinabank.ph/view-file/testimonials/YUdCoykkUf7AfVzZT4aCb17A0nAkum-metaZ3V5MS5wbmc=-.png', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '28', 'Jack', '109922120079', 'https://images.indianexpress.com/2020/09/6-12.jpg?w=350', 1)
+	('michelin_car_service', '28', 'Jack Son', '109922120079', 'https://image.shutterstock.com/image-vector/cool-beard-man-vector-logo-260nw-1719020434.jpg', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '29', 'Nguyen Quang Hai', '100192123000', 'https://img.a.transfermarkt.technology/portrait/big/419387-1520365816.jpg?lm=1', 1)
+	('michelin_car_service', '29', 'Nguyen Quang Dung', '100192123000', 'https://freesvg.org/img/myAvatar.png', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '29', 'Giang Cat Luong', '064192341294', 'https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=', 1)
+	('michelin_car_service', '29', 'Giang Cat Luong', '064192341294', 'https://images.vexels.com/media/users/3/145908/raw/52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '29', 'Nguyen The Anh', '001914456940', 'https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=', 1)
+	('michelin_car_service', '29', 'Nguyen The Anh', '001914456940', 'https://as2.ftcdn.net/v2/jpg/02/23/50/73/1000_F_223507324_jKl7xbsaEdUjGr42WzQeSazKRighVDU4.jpg', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '30', 'Lee Jong Suk', '111914456940', 'https://upload.wikimedia.org/wikipedia/commons/2/2e/Lee_Jong-suk_March_2018.png', 1)
+	('michelin_car_service', '30', 'Tran Cong Khoi', '111914456940', 'https://deadline.com/wp-content/uploads/2020/11/Stephen-Lang-Headshot-Matt-Sayles-e1605093774374.jpg', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '30', 'Tom Holland', '001914123940', 'https://www.biography.com/.image/t_share/MTQ4MTUwOTQyMDE1OTU2Nzk4/tom-holland-photo-jason-kempin-getty-images-801510482-profile.jpg', 1)
+	('michelin_car_service', '30', 'Tom Jerry', '001914123940', 'https://cdn.dribbble.com/users/1040983/screenshots/5807325/media/c3d495a1d644ae646190ee51a64607d5.png?compress=1&resize=400x300&vertical=top', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '30', 'Tran Thanh', '101914456940', 'https://event.mediacdn.vn/2020/10/20/tran-thanh-p-16031678576061691914167.png', 1)
+	('michelin_car_service', '30', 'Tran Cong Thanh', '101914456940', 'https://thumbs.dreamstime.com/b/happy-smiling-geek-hipster-beard-man-cool-avatar-geek-man-avatar-104871313.jpg', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '31', 'Le Duong Bao Lam', '121914456940', 'https://image.thanhnien.vn/w1024/Uploaded/2022/cqjwqlqjd/2021_12_18/182798855-343706077100782-2407850821191400562-n-3306.jpeg', 1)
+	('michelin_car_service', '31', 'Le Duong Bao', '121914456940', 'https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-Vector.png', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '31', 'Ngo Kien Huy', '031914456940', 'https://upload.wikimedia.org/wikipedia/commons/2/21/Ng%C3%B4_Ki%E1%BA%BFn_Huy_hosting_B%E1%BB%99_3_Si%C3%AAu_%C4%90%E1%BA%B3ng_SS2_EP13.jpg', 1)
+	('michelin_car_service', '31', 'Ngo Nhat Nam', '031914456940', 'https://images.assetsdelivery.com/compings_v2/yupiramos/yupiramos2004/yupiramos200436847.jpg', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '31', 'Noo Phuoc Thinh', '041914456940', 'https://i.scdn.co/image/ab67616d0000b273aa35e5acf7be9c9853b2ea40', 1)
+	('michelin_car_service', '31', 'Nguyen Phuoc Thinh', '041914456940', 'https://static.vecteezy.com/system/resources/previews/004/476/164/original/young-man-avatar-character-icon-free-vector.jpg', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '31', 'Robert Downey Jr.', '051914456940', 'https://www.biography.com/.image/t_share/MTkyMzgyNjk2ODA1MTE1NDMx/robert-downey-jr-gettyimages-1193444415.jpg', 1)
+	('michelin_car_service', '31', 'Nguyen Trong Dung', '051914456940', 'https://image.shutterstock.com/image-vector/isolated-avatar-afro-american-man-260nw-2012367269.jpg', 1)
 
 --Bảng detail service
 INSERT INTO tblServiceDetail
