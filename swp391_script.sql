@@ -2771,19 +2771,19 @@ GO
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '28', 'Lee Chong Wei', '011922001330', 'https://trangnguyensport.com/wp-content/uploads/2017/12/lee_chong_wei_trangnguyensport.jpg', 1)
+	('michelin_car_service', '28', 'Lee Chong Wei', '011922001330', 'https://cdn.icon-icons.com/icons2/1736/PNG/512/4043260-avatar-male-man-portrait_113269.png', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '28', 'Son Heung Min', '180461001565', 'https://photo-cms-sggp.zadn.vn/Uploaded/2022/negbflyrlys/2022_06_14/min_ssyk.jpg', 1)
+	('michelin_car_service', '28', 'Park Kim Son', '120461001575', 'https://www.pngitem.com/pimgs/m/576-5768840_cartoon-man-png-avatar-transparent-png.png', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '28', 'David Beckham', '110468009431', 'https://upload.wikimedia.org/wikipedia/commons/2/2a/Vinfast-D.Beckham-cropped.jpg', 1)
+	('michelin_car_service', '28', 'David Touliver', '110468009431', 'https://upload.wikimedia.org/wikipedia/commons/2/2a/Vinfast-D.Beckham-cropped.jpg', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '28', 'Cristiano Ronaldo', '109922120079', 'https://images.indianexpress.com/2020/09/6-12.jpg?w=350', 1)
+	('michelin_car_service', '28', 'Jack', '109922120079', 'https://images.indianexpress.com/2020/09/6-12.jpg?w=350', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES

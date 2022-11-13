@@ -94,13 +94,28 @@
 
                         <!-- On hover dropdown button -->
 
-                        <!-- <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a> -->
                         <div class="btn-group me-3">
-
-
+                            <%
+                                if (provider.getLogo().contains("https")) {
+                            %>
+                            <img class="avatar avatar-md rounded-circle "
+                                 src="<%= provider.getLogo()%>"
+                                 id="dropdownMenuButton" data-bs-toggle="dropdown" data-bs-display="static"/>
+                            <%
+                            } else if (provider.getLogo().isEmpty()) {
+                            %>
+                            <img class="avatar avatar-md rounded-circle "
+                                 src="img/default-avatar.jpg"
+                                 id="dropdownMenuButton" data-bs-toggle="dropdown" data-bs-display="static"/>
+                            <%
+                            } else {
+                            %>
                             <img class="avatar avatar-md rounded-circle "
                                  src="img/<%= provider.getLogo()%>"
                                  id="dropdownMenuButton" data-bs-toggle="dropdown" data-bs-display="static"/>
+                            <%
+                                }
+                            %>
 
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-start">
                                 <li><a data-bs-target="#basicModal1" data-bs-toggle="modal" class="dropdown-item" href="javascript:void(0);"><i class="bx bx-user m-2"></i>My Profile</a></li>
@@ -153,9 +168,28 @@
                                     <!-- Account -->
                                     <div class="card-body">
                                         <div class="d-flex align-items-start align-items-sm-center gap-4">
+                                            <%
+                                                if (provider.getLogo().contains("https")) {
+                                            %>
+                                            <img class="avatar avatar-md rounded-circle "
+                                                 src="<%= provider.getLogo()%>"
+                                                 id="dropdownMenuButton" data-bs-toggle="dropdown" data-bs-display="static"/>
+                                            <%
+                                            } else if (provider.getLogo().isEmpty()) {
+                                            %>
+                                            <img class="avatar avatar-md rounded-circle "
+                                                 src="img/default-avatar.jpg"
+                                                 id="dropdownMenuButton" data-bs-toggle="dropdown" data-bs-display="static"/>
+                                            <%
+                                            } else {
+                                            %>
                                             <img  style="border-radius: 20%;"
                                                   src="img/<%= provider.getLogo()%>"
                                                   alt="user-avatar" class="d-block rounded w-50 avatar avatar-xl h-50" id="uploadedAvatar">
+                                            <%
+                                                }
+                                            %>
+
                                             <div class="button-wrapper">
                                                 <form method="POST" action="UploadPhotoController" enctype="multipart/form-data" >
                                                     <input type="file" name="file"/>
