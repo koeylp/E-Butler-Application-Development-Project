@@ -1,3 +1,4 @@
+<%@page import="com.ebutler.swp.dto.ProductCartDTO"%>
 <%@page import="com.ebutler.swp.dto.ShipperCompanyDTO"%>
 <%@page import="com.ebutler.swp.dto.AddressDTO"%>
 <%@page import="com.ebutler.swp.dto.ServiceCartDTO"%>
@@ -6,7 +7,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.ebutler.swp.dto.ServiceDetailDTO"%>
-<%@page import="com.ebutler.swp.dto.ProductDetailDTO"%>
 <%@page import="com.ebutler.swp.dto.CustomerDTO"%>
 <%@page import="com.ebutler.swp.dto.CartDTO"%>
 <%@page import="com.ebutler.swp.dto.CartServiceDTO"%>
@@ -15,7 +15,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="utf-8">
         <title>E-Butler</title>
@@ -367,7 +366,7 @@
                             </div>
                             <%
                                 if (cart != null) {
-                                    for (ProductDetailDTO product : cart.getCart().values()) {
+                                    for (ProductCartDTO product : cart.getCart().values()) {
                                         total2 += product.getPrice() * product.getQuantity();
                                     }
                                 }
@@ -384,9 +383,9 @@
                                 <input type="hidden" name="address" value="<%=shipping_address%>">
                                 <input id="total" type="hidden" name="total"/>
                                 <input type="hidden" name="total2" value="<%= total2%>"/>
-                                <input type="hidden" name="point" value="<%= customer.getPoint() %>"/>
+                                <input type="hidden" name="point" value="<%= customer.getPoint()%>"/>
 
-                                       <!-- Payment method start -->
+                                <!-- Payment method start -->
                                 <div class="relative m-y-32">
                                     <div style="border: 1px solid #E5E7EB;" class="pad-2 flex-between">
                                         <div class="flex-between">
@@ -446,7 +445,7 @@
                                     <span>Order Summary</span>
                                 </div>
                                 <!-- Order head product-->
-                                <div style="background-color: #F9FAFB;" class="pad-1 m-y-12">
+                                <div style="background-color: #F0F8FF;" class="pad-1 m-y-12">
                                     <div class="flex-between flex-verticle-center">
                                         <span class="txt-lg bold">Product</span>
 
@@ -457,10 +456,15 @@
                                     <%
                                         double sub_product_total = 0;
                                         if (cart != null) {
-                                            for (ProductDetailDTO product : cart.getCart().values()) {
+                                            for (ProductCartDTO product : cart.getCart().values()) {
                                                 sub_product_total += product.getPrice() * product.getQuantity();
                                     %>
                                     <div class="pad-y-12">
+                                        <div style="border-bottom: 1px solid #E5E7EB" class="flex-between pad-1">
+                                            <div class="flex-col flex-horizon-center">
+                                                <span class="txt-md bold"><%= product.getProvider_name() %></span>
+                                            </div>
+                                        </div>
                                         <div class="order-card m-y-12">
                                             <div class="flex">
                                                 <div style="margin-left: 10px" class="flex-center order-img">
@@ -470,7 +474,7 @@
                                                 <div style="flex: 1; margin-left: 1rem;" class="flex-col">
                                                     <div class="flex-between">
                                                         <div class="flex-col flex-horizon-center">
-                                                            <span class="txt-md bold"><%= product.getName()%></span>
+                                                            <span class="txt-md bold"><%= product.getProduct_name()%></span>
                                                         </div>
 
                                                         <div class="order-price txt-sm bold">
@@ -504,7 +508,7 @@
 
                                 </div>
                                 <!-- Order head service -->
-                                <div style="background-color: #F9FAFB;" class="pad-1 m-y-12">
+                                <div style="background-color: #F0F8FF;" class="pad-1 m-y-12">
                                     <div class="flex-between flex-verticle-center">
                                         <span class="txt-lg bold">Service</span>
 
@@ -570,7 +574,7 @@
                                                             <%
                                                                 }
                                                             %>
-                                                            
+
                                                         </div>
                                                     </div>
 
@@ -720,8 +724,8 @@
                                             final_point = 0;
                                         }
                                         document.getElementById('total-input').innerText = ($(this).is(':checked')) ? final_point : total;
-                                        
-                                        
+
+
                                     });
     </script>
 

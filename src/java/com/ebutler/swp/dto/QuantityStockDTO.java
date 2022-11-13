@@ -12,7 +12,8 @@ import java.util.Map;
  * @author thekh
  */
 public class QuantityStockDTO {
-     private Map<String, Integer> quantityStock;
+
+    private Map<String, Integer> quantityStock;
 
     public QuantityStockDTO() {
     }
@@ -28,14 +29,12 @@ public class QuantityStockDTO {
     public void setQuantityStock(Map<String, Integer> quantityStock) {
         this.quantityStock = quantityStock;
     }
-    
-    public boolean checkExistById(ProductDetailDTO product) {
+
+    public boolean checkExistById(ProductCartDTO product) {
         return this.quantityStock.containsKey(product.getId());
     }
-    
-   
 
-    public boolean add(ProductDetailDTO product) {
+    public boolean add(ProductCartDTO product) {
         boolean check = false;
         if (this.quantityStock == null) {
             this.quantityStock = new HashMap<>();

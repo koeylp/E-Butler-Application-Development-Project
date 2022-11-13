@@ -1,5 +1,6 @@
 
 
+<%@page import="com.ebutler.swp.dto.ProductCartDTO"%>
 <%@page import="com.ebutler.swp.dto.CustomerDTO"%>
 <%@page import="com.ebutler.swp.dto.ServiceCartDTO"%>
 <%@page import="com.ebutler.swp.dto.UserDTO"%>
@@ -193,12 +194,17 @@
                                 <%
                                     double sub_product_total = 0;
                                     if (cart != null) {
-                                        for (ProductDetailDTO product : cart.getCart().values()) {
+                                        for (ProductCartDTO product : cart.getCart().values()) {
                                             sub_product_total += product.getPrice() * product.getQuantity();
                                 %>
                                 <form action="MainController" method="POST">
-                                    <div class="pad-2">
 
+                                    <div class="pad-2">
+                                        <div style="border-bottom: 1px solid #E5E7EB" class="flex-between pad-1">
+                                            <div class="flex-col flex-horizon-center">
+                                                <span class="txt-md bold"><%= product.getProvider_name()%></span>
+                                            </div>
+                                        </div>
                                         <div class="order-card m-y-12">
                                             <div class="flex">
                                                 <div class="flex-center order-img">
@@ -209,8 +215,9 @@
                                                     <div class="flex-between">
                                                         <div class="flex-col flex-horizon-center col l-6">
                                                             <div style="-webkit-line-clamp: 1;" class="ellipsis txt-lg m-y-0 bold">
-                                                                <p><%= product.getName()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                                                                <p><%= product.getProduct_name()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                                                             </div>
+
 
                                                             <div class="flex-vertical-center">
                                                                 <span class="txt-sm">Category</span>

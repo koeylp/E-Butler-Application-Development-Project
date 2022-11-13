@@ -6,6 +6,7 @@ package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.ProductDAO;
 import com.ebutler.swp.dto.CartDTO;
+import com.ebutler.swp.dto.ProductCartDTO;
 import com.ebutler.swp.dto.ProductDetailDTO;
 import com.ebutler.swp.dto.QuantityStockDTO;
 import java.io.IOException;
@@ -42,7 +43,7 @@ public class AddToCartController extends HttpServlet {
             HttpSession session = request.getSession();
             if (session != null) {
                 CartDTO cart = (CartDTO) session.getAttribute("CART");
-                ProductDetailDTO productDetail = dao.getProductByID(id);
+                ProductCartDTO productDetail = dao.getProductForCart(id);
                 QuantityStockDTO quantityStock = (QuantityStockDTO) session.getAttribute("STOCK");
                 if (quantityStock == null) {
                     quantityStock = new QuantityStockDTO();
@@ -55,7 +56,7 @@ public class AddToCartController extends HttpServlet {
                 cart.add(productDetail);
                 session.setAttribute("STOCK", quantityStock);
                 session.setAttribute("CART", cart);
-                request.setAttribute("ADD_SUCCESS", "Added " + quantity + " " + cart.getCart().get(id).getName() + " Successfully!");
+                request.setAttribute("ADD_SUCCESS", "Added " + quantity + " " + cart.getCart().get(id).getProduct_name() + " Successfully!");
 
                 if (quickview.equals("true")) {
                     url = SUCCESS_QUICKVIEW;

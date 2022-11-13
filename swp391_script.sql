@@ -1442,7 +1442,7 @@ VALUES
 INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
-	('homefurniture', '1', 'Tea Spoon Wooden Gold', 50, 7, 'https://cdn.shopify.com/s/files/1/0548/9229/8282/products/SHSPO-4ZSGOL_1_800x.png?v=1656403634' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
+	('homefurniture', '1', 'Tea Spoon Wooden Gold', 50, 7, 'https://cdn-amz.woka.io/images/I/71VDt3URLML._SR720,720_.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
 INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
@@ -1680,7 +1680,7 @@ INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
 	('bach_hoa_xanh', '5', 'Palmolive ShowerGel', 50, 15,
-		'https://www.cincottachemist.com.au/10280-product_zoom/palmolive-natural-shower-gel-milk-honey-1l.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
+		'https://aswaqrak.ae/pub/media/catalog/product/cache/9e61d75d633e5fc1a695bad0376a2475/c/c/8714789515656.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
 
 INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
@@ -2024,7 +2024,7 @@ INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
 	('homefurniture', '12', 'Bed With tail Drawer', 50, 890,
-		'https://sleepshop.ca/wp-content/uploads/2020/09/Webp.net-resizeimage-11.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
+		'https://i.pinimg.com/736x/a9/39/90/a93990110944eb88f736be83cf0edb08--bookcase-headboard-beds-online.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
 INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
@@ -2041,13 +2041,13 @@ INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
 	('zarahome', '13', 'Cottan Curtain', 50, 39,
-		'https://www.decorist.com/static/finds/product_images/full_size/125802-indigo-blue-cotton-morris-curtains-set-of-2.9dc3c0adc5f75fe11f9073f87299cf8f.png'
+		'https://assets.pbimgs.com/pbimgs/ab/images/dp/wcm/202243/0058/seaton-textured-cotton-curtain-2-z.jpg'
 , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
 INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
 	('homefurniture', '13', 'Cut-out Linen Curtain', 50, 49,
-		'https://www.decorist.com/static/cache-thumbnail/ee/33/ee3385ffe2210e41af5aa24806445a56.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
+		'https://i.pinimg.com/564x/86/70/c3/8670c3f39b057bc5dc74eb77ad15bbf2--velvet-curtains-blue-curtains.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
 INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
@@ -2058,7 +2058,7 @@ INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
 	('homefurniture', '14', 'Aberton 6 Door Wardrobe', 50, 500,
-		'https://akhonafurnishers.co.za/wp-content/uploads/2020/05/410-Mahogany-6-Doors-Imported-1030x706.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
+		'https://www.panemirates.com/images/pan-aberton-6-door-wardrobe-p40565-176939_image.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
 INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
@@ -3359,4 +3359,7 @@ INSERT INTO tblShipper
 	(username, password, name, status, wallet)
 VALUES
 	('shoppe5', '1', 'Le Ba Hau', 1, 0)
+
+
+
 

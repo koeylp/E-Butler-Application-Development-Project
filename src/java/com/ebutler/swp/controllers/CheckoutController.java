@@ -13,7 +13,7 @@ import com.ebutler.swp.dto.CartServiceDTO;
 import com.ebutler.swp.dto.ConfirmDTO;
 import com.ebutler.swp.dto.CustomerDTO;
 import com.ebutler.swp.dto.OrderDTO;
-import com.ebutler.swp.dto.ProductDetailDTO;
+import com.ebutler.swp.dto.ProductCartDTO;
 import com.ebutler.swp.dto.ServiceCartDTO;
 import com.ebutler.swp.dto.UserDTO;
 import com.ebutler.swp.email.Account;
@@ -78,7 +78,7 @@ public class CheckoutController extends HttpServlet {
                     int count = 0;
 
 //                  Check quantity
-                    for (ProductDetailDTO product : cart.getCart().values()) {
+                    for (ProductCartDTO product : cart.getCart().values()) {
                         if (productDao.checkQuantiy(product.getId(), product.getQuantity())) {
                             count++;
                         }
@@ -89,7 +89,7 @@ public class CheckoutController extends HttpServlet {
                         orderDao.insertOrder(java.sql.Date.valueOf(java.time.LocalDate.now()), user.getUsername(), 0, Double.parseDouble(total), payment);
                         int order_ID = orderDao.getAllOrder().size();
                         orderDao.insertDelivery(order_ID, address);
-                        for (ProductDetailDTO product : cart.getCart().values()) {
+                        for (ProductCartDTO product : cart.getCart().values()) {
 
                             orderDao.insertOrderDetail(product.getId(), order_ID, product.getQuantity(), product.getPrice(), 0);
                             productDao.setQuantiy(product.getId(), product.getQuantity());

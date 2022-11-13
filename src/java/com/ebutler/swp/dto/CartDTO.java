@@ -13,24 +13,24 @@ import java.util.Map;
  */
 public class CartDTO {
 
-    private Map<String, ProductDetailDTO> cart;
+    private Map<String, ProductCartDTO> cart;
 
     public CartDTO() {
     }
 
-    public CartDTO(Map<String, ProductDetailDTO> cart) {
+    public CartDTO(Map<String, ProductCartDTO> cart) {
         this.cart = cart;
     }
 
-    public Map<String, ProductDetailDTO> getCart() {
+    public Map<String, ProductCartDTO> getCart() {
         return cart;
     }
 
-    public void setCart(Map<String, ProductDetailDTO> cart) {
+    public void setCart(Map<String, ProductCartDTO> cart) {
         this.cart = cart;
     }
 
-    public boolean add(ProductDetailDTO product) {
+    public boolean add(ProductCartDTO product) {
         boolean check = false;
         if (this.cart == null) {
             this.cart = new HashMap<>();
@@ -45,7 +45,7 @@ public class CartDTO {
         return check;
     }
 
-    public boolean checkExistById(ProductDetailDTO product) {
+    public boolean checkExistById(ProductCartDTO product) {
         return this.cart.containsKey(product.getId());
     }
 
@@ -60,7 +60,7 @@ public class CartDTO {
         return check;
     }
 
-    public boolean update(String id, ProductDetailDTO product) {
+    public boolean update(String id, ProductCartDTO product) {
         boolean check = false;
         if (this.cart != null) {
             if (this.cart.containsKey(id)) {
