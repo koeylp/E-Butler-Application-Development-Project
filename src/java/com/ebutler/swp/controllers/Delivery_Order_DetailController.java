@@ -55,7 +55,9 @@ public class Delivery_Order_DetailController extends HttpServlet {
                     session.setAttribute("Info_Detail_Delivery", listDetailInfo);
                     session.setAttribute("customerID", customerID);
                 }
-            } else {
+            }else if (checkDelivery == null) {
+                session.setAttribute("ERROR_ASSIGN", "Assigned This Order Now To View Detail"); 
+            }else {
                 session.setAttribute("ERROR_ASSIGN", "This Order Has Been Assigned!!"); 
             }
 

@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class DeliveryDAO {
     private final String DELIVERY_LIST = "SELECT De.order_id, De.address,De.username_Shipper ,Ord.order_Date,Ord.customer_ID, Cus.name,Ord.total, De.status FROM (tblDelivery De JOIN tblOrder Ord ON De.order_id = Ord.order_ID) JOIN tblCustomer Cus ON Cus.username = Ord.customer_ID  ";
-    private final String DELIVERY_LIST_DEYAIL = "SELECT OPD.id, De.order_id, PD.name, OPD.quantity, PD.price, OPD.status FROM ( tblDelivery De JOIN tblOrder_Product_Detail OPD ON De.order_id = OPD.order_ID ) JOIN tblProductDetail PD ON PD.id = OPD.product_detail_ID  WHERE De.order_id = ? ";
+    private final String DELIVERY_LIST_DEYAIL = "SELECT OPD.id, De.order_id,OPD.product_detail_ID, PD.name, OPD.quantity, PD.price, OPD.status FROM ( tblDelivery De JOIN tblOrder_Product_Detail OPD ON De.order_id = OPD.order_ID ) JOIN tblProductDetail PD ON PD.id = OPD.product_detail_ID  WHERE De.order_id = ? ";
     private final String UPDATE_PRODUCT_ORDER = "UPDATE tblOrder_Product_Detail SET status = ? WHERE id = ? " ; 
     private final String UPDATE_DELIVERY = "UPDATE tblDelivery SET status = ? WHERE order_id = ?" ; 
     private final String UPDATE_ORDER = "UPDATE tblOrder SET status = ? WHERE order_ID = ? " ; 
@@ -30,6 +30,7 @@ public class DeliveryDAO {
     private final String FIND_SHIPPING_DETAIL = "SELECT nameCategory FROM tblShipper WHERE username = ? " ; 
     private final String ASSIGN_DELIVERY = "UPDATE tblDelivery SET username_Shipper = ? WHERE order_id = ? " ;
     private final String ASSIGN_DELIVERY_CHECKING = "SELECT username_Shipper FROM tblDelivery WHERE order_id = ? " ;
+    private final String CHECKING_DELIVERY_STATUS = "SELECT OPD.status FROM tblDelivery De JOIN tblOrder_Product_Detail OPD ON De.order_id = OPD.order_ID WHERE De.order_id = ? AND OPD.product_detail_ID = ? " ;
     
     
     
@@ -74,7 +75,7 @@ public class DeliveryDAO {
                 ptm.setInt(1, orderID);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
-                    listOrder.add(new OrderDetailDTO(rs.getInt(1), rs.getInt(2), 0, rs.getString(3), rs.getInt(4), rs.getDouble(5), 0, rs.getInt(6))); 
+                    listOrder.add(new OrderDetailDTO(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getInt(5), rs.getDouble(6), 0, rs.getInt(7))); 
                 }
             }
         } catch (Exception e) {
@@ -348,7 +349,36 @@ public class DeliveryDAO {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         
     }
-
+    public int getStatusDelivery(int orderID, int productID) throws SQLException {
+        int shippingStatus = 0 ; 
+        Connection conn = null ; 
+        PreparedStatement ptm = null ; 
+        ResultSet rs = null ; 
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(CHECKING_DELIVERY_STATUS); 
+                ptm.setInt(1, orderID);
+                ptm.setInt(2, productID);
+                rs = ptm.executeQuery() ;
+                if(rs.next()) {
+                    shippingStatus = rs.getInt(1) ;     
+                }
+            }
+        } catch (Exception e) {
+        }finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return shippingStatus ; 
+    }
 
 
 
