@@ -59,9 +59,10 @@
                     <nav class="navbar navbar-expand-lg  navbar-light py-0 px-5">
                         <a class="navbar-brand d-flex align-items-center text-center">
                             <div class="icon p-2 me-2">
+
                                 <img class="img-fluid"
                                      src="img/logo.png"
-                                     alt="Icon" style="width: 30px; height: 30px;">
+                                     alt="Icon" style="width: 30px; height: 30px;"/>
                             </div>
                             <h1 class="m-0 " style="color:#273A89 ;">E-Butler</h1>
                         </a>
@@ -93,11 +94,27 @@
                         <!-- <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a> -->
                         <div class="btn-group me-3">
 
+                            <%
+                                if (provider.getLogo().contains("https")) {
+                            %>
+                            <img class="avatar avatar-md rounded-circle "
+                                 src="<%= provider.getLogo()%>"
+                                 id="dropdownMenuButton" data-bs-toggle="dropdown" data-bs-display="static"/>
+                            <%
+                            } else if (provider.getLogo().isEmpty()) {
+                            %>
+                            <img class="avatar avatar-md rounded-circle "
+                                 src="img/default-avatar.jpg"
+                                 id="dropdownMenuButton" data-bs-toggle="dropdown" data-bs-display="static"/>
+                            <%
+                            } else {
+                            %>
                             <img class="avatar avatar-md rounded-circle "
                                  src="img/<%= provider.getLogo()%>"
-                                 id="dropdownMenuButton" data-bs-toggle="dropdown" data-bs-display="static">
-
-                            </img>
+                                 id="dropdownMenuButton" data-bs-toggle="dropdown" data-bs-display="static"/>
+                            <%
+                                }
+                            %>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-start">
                                 <li><a data-bs-target="#basicModal1" data-bs-toggle="modal" class="dropdown-item" href="javascript:void(0);"><i class="bx bx-user m-2"></i>My Profile</a></li>
                                 <li><a class="dropdown-item" href="changePassword.jsp"><i class="bx bx-lock m-2">
@@ -255,7 +272,7 @@
                                             <td> <%= order.getOrder_date()%></td>
 
                                             <td><%= order.getCustomer_ID()%></td>
-                                            <td><%= order.getTotal()%></td>
+                                            <td><%= order.getTotal() %></td>
 
                                             </td>
                                             <td>

@@ -11,17 +11,18 @@ import java.util.ArrayList;
  * @author Dang Viet
  */
 public class ProductDetailDTO {
-     private String id;
-     private String provider_ID;
-     private String product_ID;
-     private String name;
-     private int quantity;
-     private double price;
-     private String image;
-     private String description;
-     private int status;
-     
-     private ArrayList<ReviewDTO> review_list = new ArrayList<ReviewDTO>();
+
+    private String id;
+    private String provider_ID;
+    private String product_ID;
+    private String name;
+    private int quantity;
+    private double price;
+    private String image;
+    private String description;
+    private int status;
+
+    private ArrayList<ReviewDTO> review_list = new ArrayList<ReviewDTO>();
 
     public ProductDetailDTO() {
         this.id = "";
@@ -47,7 +48,7 @@ public class ProductDetailDTO {
         this.status = status;
     }
 
-    public ProductDetailDTO(String id, String name,  String image, double price,int quantity, String description, int status) {
+    public ProductDetailDTO(String id, String name, String image, double price, int quantity, String description, int status) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
@@ -141,6 +142,5 @@ public class ProductDetailDTO {
     public String toString() {
         return "ProductDetailDTO{" + "id=" + id + ", provider_ID=" + provider_ID + ", product_ID=" + product_ID + ", name=" + name + ", quantity=" + quantity + ", price=" + price + ", image=" + image + ", description=" + description + ", status=" + status + '}';
     }
-     
-     
+
 }

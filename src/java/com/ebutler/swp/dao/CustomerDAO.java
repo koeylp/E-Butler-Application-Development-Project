@@ -20,8 +20,8 @@ import java.util.List;
  */
 public class CustomerDAO {
 
-    private static final String INSERT = "INSERT INTO tblCustomer (username, password, role_ID, phone, email, name, gender, dob, avatar, status)\n"
-            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String INSERT = "INSERT INTO tblCustomer (username, password, role_ID, phone, email, name, gender, dob, avatar, point, status)\n"
+            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String GET_PRODUCT_CATEGORY_LIST = "SELECT category_ID, name, image\n"
             + "FROM tblProductCategory";
     private static final String GET_USER_PROFILE_INFO = "SELECT username, password, role_ID, phone, email, name, gender, dob, avatar, point, status\n"
@@ -52,6 +52,7 @@ public class CustomerDAO {
     private static final String GET_AVATAR = "SELECT avatar\n"
             + "FROM tblCustomer\n"
             + "WHERE username = ?";
+    private final String UPDATE_WALLET = "UPDATE tblCustomer SET point = ? WHERE username = ?";
 
     public boolean InsertCus(CustomerDTO customer) throws SQLException {
         Connection conn = null;
@@ -70,7 +71,8 @@ public class CustomerDAO {
                 ptm.setInt(7, customer.getGender());
                 ptm.setString(8, customer.getDob());
                 ptm.setString(9, customer.getAvatar());
-                ptm.setInt(10, customer.getStatus());
+                ptm.setDouble(10, customer.getPoint());
+                ptm.setInt(11, customer.getStatus());
                 return (ptm.executeUpdate() > 0) ? true : false;
             }
         } catch (Exception e) {
@@ -199,7 +201,7 @@ public class CustomerDAO {
                 ptm.setString(1, username);
                 rs = ptm.executeQuery();
                 if (rs.next()) {
-                    customer = new CustomerDTO(rs.getString("username"), rs.getString("password"), rs.getString("role_ID"), rs.getString("phone"), rs.getString("email"), rs.getString("name"), rs.getInt("gender"), rs.getString("dob"), rs.getString("avatar"), rs.getInt("point"), rs.getInt("status"));
+                    customer = new CustomerDTO(rs.getString("username"), rs.getString("password"), rs.getString("role_ID"), rs.getString("phone"), rs.getString("email"), rs.getString("name"), rs.getInt("gender"), rs.getString("dob"), rs.getString("avatar"), rs.getInt("point"),rs.getInt("status"));
                 }
             }
 
@@ -380,6 +382,32 @@ public class CustomerDAO {
         }
 
         return check;
+    }
+    
+    public boolean updateWallet(CustomerDTO customer) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UPDATE_WALLET);
+                ptm.setDouble(1, customer.getPoint());
+                ptm.setString(2, customer.getUsername());
+                return ptm.executeUpdate() > 0 ? true : false;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+        }
+
+        return false;
     }
 
     public static boolean uploadPhoto(String username, String path) throws SQLException {

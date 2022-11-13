@@ -5,6 +5,7 @@
 package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dto.CartDTO;
+import com.ebutler.swp.dto.ProductCartDTO;
 import com.ebutler.swp.dto.ProductDetailDTO;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -35,7 +36,7 @@ public class EditQuantityController extends HttpServlet {
             if (session != null) {
                 CartDTO cart = (CartDTO) session.getAttribute("CART");
                 if (cart != null) {
-                    ProductDetailDTO product = new ProductDetailDTO();
+                    ProductCartDTO product = new ProductCartDTO();
                     if (cart.getCart().containsKey(id)) {
                         product = cart.getCart().get(id);
                         product.setQuantity(quantity);

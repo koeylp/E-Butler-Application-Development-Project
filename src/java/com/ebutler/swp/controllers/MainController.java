@@ -278,7 +278,9 @@ public class MainController extends HttpServlet {
     private final String CREATE_SHIPPING_ADDRESS = "CreateShippingAddress";
     private final String CREATE_SHIPPING_ADDRESS_CONTROLLER = "CreateShippingAddressController";
     
-
+//    Cancel order
+    private final String CANCEL_ORDER = "CancelOrder";
+    private final String CANCEL_ORDER_CONTROLLER = "CancelOrderController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -450,6 +452,8 @@ public class MainController extends HttpServlet {
                 url = ASSIGN_NOW_CONTROLLER ; 
             } else if (action.equals(CREATE_SHIPPING_ADDRESS)) {
                 url = CREATE_SHIPPING_ADDRESS_CONTROLLER;
+            } else if (action.equals(CANCEL_ORDER)) {
+                url = CANCEL_ORDER_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

@@ -1,5 +1,7 @@
 
 
+<%@page import="com.ebutler.swp.dto.ServiceOrderedHistoryDTO"%>
+<%@page import="com.ebutler.swp.dto.ProductOrderHistoryDTO"%>
 <%@page import="com.ebutler.swp.dto.AddressDTO"%>
 <%@page import="com.ebutler.swp.dto.CityDTO"%>
 <%@page import="com.ebutler.swp.dto.ProvinceDTO"%>
@@ -49,6 +51,7 @@
         <link rel="stylesheet" href="css/guestPage.css">
         <link rel="stylesheet" href="css/customerPage.css">
         <link rel="stylesheet" href="css/customer_profilePage.css">
+        <link rel="stylesheet" href="css/toast.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
     <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'CUS'}">
@@ -90,6 +93,12 @@
             current_form = (current_form == null) ? "" : current_form;
             action_type = (action_type == null) ? "" : action_type;
             address_id = (address_id == null) ? "" : address_id;
+
+            String messageSuccess = (String) request.getAttribute("MESSAGE_SUCCESS");
+            String messageError = (String) request.getAttribute("MESSAGE_FAIL");
+
+            messageSuccess = (messageSuccess == null) ? "" : messageSuccess;
+            messageError = (messageError == null) ? "" : messageError;
         %>
         <div class="container-xxl bg-white p-0">
             <!-- Spinner Start -->
@@ -131,9 +140,10 @@
                             <div class="nav-item dropdown">
                                 <div class="nav-link">
                                     <div style="width: 1.5rem; height: 1.5rem;" class="img rounded-f">
-                                        <%   if (customer.getAvatar().isEmpty()) {
+                                        <%
+                                            if (customer.getAvatar().isEmpty()) {
                                         %>
-                                        <img src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg" alt="">
+                                        <img src="img/default-avatar.jpg" alt="">
                                         <%
                                         } else {
                                         %>
@@ -152,6 +162,10 @@
                                         <div style="cursor: pointer;" class="dropdown-item pad-0">
                                             <i class="fa-solid fa-lock"></i>
                                             <a href="MainController?action=GoToUserProfile&current_form=change_password">Change password</a>
+                                        </div>
+                                        <div style="justify-content: flex-start; cursor: pointer;" class="dropdown-item pad-0">
+                                            <i class="fa-solid fa-wallet"></i>
+                                            <a href="#!"><%=customer.getPoint()%> $</a>
                                         </div>
                                     </div>
                                     <div style="cursor: pointer;" class="dropdown-item pad-0">
@@ -182,9 +196,12 @@
                     <div style="border-top: 2px solid #E2E8F0; border-bottom: 2px solid #E2E8F0"
                          class="flex-vertical-center m-y-32">
                         <a class="relative txt-lg pad-y-32 navi--link account <%if (current_form.equals("account")) {%>bold<%}%>">Account info</a>
-                        <a class="relative txt-lg pad-y-32 navi--link order-his <%if (current_form.equals("order_history")) {%>bold<%}%>">My order</a>
                         <a href="MainController?action=ShowListAddress&current_form=address" class="relative txt-lg pad-y-32 navi--link address <%if (current_form.equals("address")) {%>bold<%}%>">My address</a>
                         <a class="relative txt-lg pad-y-32 navi--link password <%if (current_form.equals("change_password")) {%>bold<%}%>">Change password</a>
+                        <a class="relative txt-lg pad-y-32 navi--link order-product-his <%if (current_form.equals("order_product_history")) {%>bold<%}%>">My product order</a>
+                        <a class="relative txt-lg pad-y-32 navi--link order-service-his <%if (current_form.equals("order_service_history")) {%>bold<%}%>">My service order</a>
+                        <a class="relative txt-lg pad-y-32 navi--link order-pending <%if (current_form.equals("order_pending")) {%>bold<%}%>">Pending</a>
+                        <a class="relative txt-lg pad-y-32 navi--link order-canceled <%if (current_form.equals("order_canceled")) {%>bold<%}%>">Canceled</a>
                     </div>
                 </div>
             </div>
@@ -299,11 +316,226 @@
             </div>
             <!-- Account information end -->
 
-            <!-- Order history start -->
-            <div class="grid form order-his-form <%if (!current_form.equals("order_history")) {%>hide<%}%>">
+            <!-- Order product start -->
+            <div class="grid form order-product-his-form <%if (!current_form.equals("order_product_history")) {%>hide<%}%>">
                 <div class="grid wide">
                     <div class="flex-vertical-center m-y-32">
-                        <h1 class="txt-xl">Order History</h1>
+                        <h1 class="txt-xl">Order Product History</h1>
+                    </div>
+
+                    <div class="row m-y-32">
+                        <%
+                            ArrayList<ProductOrderHistoryDTO> product_history_list = (ArrayList<ProductOrderHistoryDTO>) session.getAttribute("ORDERED_PRODUCT_LIST_DELIVERED");
+                            product_history_list = (product_history_list == null) ? new ArrayList<ProductOrderHistoryDTO>() : product_history_list;
+
+//                            ArrayList<String> order_product_date = new ArrayList<>();
+                            ArrayList<Integer> product_order_id = new ArrayList<>();
+
+//                            for (ProductOrderHistoryDTO product : product_history_list) {
+//                                if (order_product_date.contains(product.getOrder_Date())) {
+//                                    continue;
+//                                }
+//
+//                                order_product_date.add(product.getOrder_Date());
+//                            }
+                            for (ProductOrderHistoryDTO product : product_history_list) {
+                                if (product_order_id.contains(product.getOrder_id())) {
+                                    continue;
+                                }
+
+                                product_order_id.add(product.getOrder_id());
+                            }
+
+                        %>
+
+                        <%                            for (int order : product_order_id) {
+
+                        %>
+                        <!-- Order item -->
+                        <div class="block-border flex-col grid m-y-32">
+                            <!-- Order head -->
+                            <div style="background-color: #F9FAFB;" class="flex-between pad-2">
+                                <div class="flex-col flex-horizon-center">
+                                    <span class="txt-lg bold">#<%=order%></span>
+                                    <div class="flex-center">
+                                        <%
+                                            for (ProductOrderHistoryDTO product : product_history_list) {
+                                                if (product.getOrder_id() == order) {
+                                        %>
+                                        <span class="txt-md"><%=product.getOrder_Date()%></span>
+                                        <span class="m-x-12">-</span>
+                                        <span class="delivered">delivered</span>
+                                        <%
+                                                    break;
+                                                }
+                                            }
+                                        %>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <%
+                                for (ProductOrderHistoryDTO product : product_history_list) {
+                                    if (product.getOrder_id() == order) {
+                            %>
+                            <!-- Order detail -->
+                            <div class="pad-1">
+                                <div class="order-card">
+                                    <div class="flex">
+                                        <div class="flex-center order-img">
+                                            <img style="width: 6.5rem; height: 6.5rem;" src="<%=product.getImage()%>"
+                                                 alt="">
+                                        </div>
+                                        <div style="flex: 1; margin-left: 1rem;" class="flex-col">
+                                            <div class="flex-between">
+                                                <div class="flex-col flex-horizon-center">
+                                                    <span class="txt-sm bold"><%=product.getProductName()%></span>
+                                                    <div class="flex-horizon-center flex-center">
+                                                        <span class="txt-xs">Product Category: <%=product.getProduct_category()%></span>
+                                                        <span class="m-x-12">|</span>
+                                                        <span class="txt-xs">Provider: <%=product.getProvider_name()%></span>
+                                                    </div>
+                                                </div>
+                                                <div class="order-price bold">
+                                                    <span>
+                                                        $<%=(product.getQuantity() * product.getPrice())%>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div style="height: 50%;" class="flex-end flex-col">
+                                                <span class="txt-sm bold">Quantity:  <%=product.getQuantity()%></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <%
+                                    }
+                                }
+                            %>
+
+                        </div>
+                        <%
+                            }
+                        %>
+                    </div>
+                </div>
+            </div>
+            <!-- Order product end -->
+
+
+            <!-- Order service start -->
+            <div class="grid form order-service-his-form <%if (!current_form.equals("order_service_history")) {%>hide<%}%>">
+                <div class="grid wide">
+                    <div class="flex-vertical-center m-y-32">
+                        <h1 class="txt-xl">Order Service History</h1>
+                    </div>
+
+                    <div class="row m-y-32">
+                        <%
+                            ArrayList<ServiceOrderedHistoryDTO> service_history_list = (ArrayList<ServiceOrderedHistoryDTO>) session.getAttribute("ORDERED_SERVICE_LIST_DELIVERED");
+                            service_history_list = (service_history_list == null) ? new ArrayList<ServiceOrderedHistoryDTO>() : service_history_list;
+
+//                            ArrayList<String> order_product_date = new ArrayList<>();
+                            ArrayList<Integer> serevice_order_id = new ArrayList<>();
+
+//                            for (ProductOrderHistoryDTO product : product_history_list) {
+//                                if (order_product_date.contains(product.getOrder_Date())) {
+//                                    continue;
+//                                }
+//
+//                                order_product_date.add(product.getOrder_Date());
+//                            }
+                            for (ServiceOrderedHistoryDTO service : service_history_list) {
+                                if (serevice_order_id.contains(service.getOrder_id())) {
+                                    continue;
+                                }
+
+                                serevice_order_id.add(service.getOrder_id());
+                            }
+
+                        %>
+
+                        <%                            for (int order : serevice_order_id) {
+
+                        %>
+                        <!-- Order item -->
+                        <div class="block-border flex-col grid m-y-32">
+                            <!-- Order head -->
+                            <div style="background-color: #F9FAFB;" class="flex-between pad-2">
+                                <div class="flex-col flex-horizon-center">
+                                    <span class="txt-lg bold">#<%=order%></span>
+                                    <div class="flex-center">
+                                        <%
+                                            for (ServiceOrderedHistoryDTO service : service_history_list) {
+                                                if (service.getOrder_id() == order) {
+                                        %>
+                                        <span class="txt-md"><%=service.getOrder_Date()%></span>
+                                        <span class="m-x-12">-</span>
+                                        <span class="delivered">delivered</span>
+                                        <%
+                                                    break;
+                                                }
+                                            }
+                                        %>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <%
+                                for (ServiceOrderedHistoryDTO service : service_history_list) {
+                                    if (service.getOrder_id() == order) {
+                            %>
+                            <!-- Order detail -->
+                            <div class="pad-1">
+                                <div class="order-card">
+                                    <div class="flex">
+                                        <div style="width: 6.5rem; height: 6.5rem;" class="flex-center order-img">
+                                            <img src="<%=service.getImage()%>"
+                                                 alt="">
+                                        </div>
+                                        <div style="flex: 1; margin-left: 1rem;" class="flex-col">
+                                            <div class="flex-between">
+                                                <div class="flex-col flex-horizon-center">
+                                                    <span class="txt-sm bold"><%=service.getStaff_name()%></span>
+                                                    <div class="flex-horizon-center flex-center">
+                                                        <span class="txt-xs"><%=service.getService_name()%></span>
+                                                        <span class="m-x-12">|</span>
+                                                        <span class="txt-xs">Provider: <%=service.getProvider_name()%></span>
+                                                    </div>
+                                                </div>
+                                                <div class="order-price bold">
+                                                    <span>
+                                                        $<%=service.getPayment()%>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div style="height: 50%;" class="flex-end flex-col">
+                                                <!--<span class="txt-md bold">Quantity:  </span>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <%
+                                    }
+                                }
+                            %>
+
+                        </div>
+                        <%
+                            }
+                        %>
+                    </div>
+                </div>
+            </div>
+            <!-- Order service end -->
+
+            <!-- Order pending start -->
+            <div class="grid form order-pending-form <%if (!current_form.equals("order_pending")) {%>hide<%}%>">
+                <div class="grid wide">
+                    <div class="flex-vertical-center m-y-32">
+                        <h1 class="txt-xl">Order Pending</h1>
                     </div>
 
                     <div class="row m-y-32">
@@ -312,32 +544,33 @@
                             <!-- Order head -->
                             <div style="background-color: #F9FAFB;" class="flex-between pad-2">
                                 <div class="flex-col flex-horizon-center">
-                                    <span class="txt-lg bold">#orderid</span>
+                                    <span class="txt-lg bold">#Product</span>
                                     <div class="flex-center">
-                                        <span class="txt-md">order-date</span>
+
+                                        <span class="txt-md">Status</span>
                                         <span class="m-x-12">-</span>
-                                        <span class="delivered">delivered</span>
+                                        <span class="pending">pending</span>
+
                                     </div>
                                 </div>
                             </div>
-                            <!-- Order detail -->
-                            <div class="pad-2">
-
-                                <c:forEach items="${sessionScope.ORDERED_PRODUCT_LIST_DELIVERED}" var="o">
-                                    <div class="order-card m-y-12">
+                            <c:forEach items="${sessionScope.ORDERED_PRODUCT_LIST_PENDING}" var="o">
+                                <!-- Order detail -->
+                                <div class="pad-1">
+                                    <div class="order-card">
                                         <div class="flex">
-                                            <div class="flex-center order-img">
+                                            <div style="width: 6.5rem; height: 6.5rem;" class="flex-center order-img">
                                                 <img src="${o.image}"
                                                      alt="">
                                             </div>
                                             <div style="flex: 1; margin-left: 1rem;" class="flex-col">
                                                 <div class="flex-between">
                                                     <div class="flex-col flex-horizon-center">
-                                                        <span class="txt-lg bold">${o.productName}</span>
-                                                        <div class="flex-horizon-center">
-                                                            <span class="txt-md">Shop</span>
+                                                        <span class="txt-sm bold">${o.productName}</span>
+                                                        <div class="flex-horizon-center flex-center">
+                                                            <span class="txt-xs">Product Category: ${o.product_category}</span>
                                                             <span class="m-x-12">|</span>
-                                                            <span class="txt-md">Provider: ${o.provider_name}</span>
+                                                            <span class="txt-xs">Provider: ${o.provider_name}</span>
                                                         </div>
                                                     </div>
                                                     <div class="order-price bold">
@@ -346,108 +579,47 @@
                                                         </span>
                                                     </div>
                                                 </div>
-                                                <div style="height: 50%;" class="flex-end flex-col">
-                                                    <span class="txt-md bold">Quantity:  ${o.quantity}</span>
+                                                <div style="height: 50%; align-items: flex-end;" class="flex-between">
+                                                    <span class="txt-sm bold">Quantity: ${o.quantity}</span>
+                                                    <a href="MainController?action=CancelOrder&current_form=order_pending&order_id=${o.order_id}&product_id=${o.id}" style="background-color: rgb( 219, 219, 219); border-radius: 0; box-shadow: none;" class="btn-sm border-no txt-md">Cancel</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </c:forEach>
-
-                                <c:forEach items="${sessionScope.ORDERED_SERVICE_LIST_DELIVERED}" var="o">
-                                    <div class="order-card m-y-12">
-                                        <div class="flex">
-                                            <div class="flex-center order-img">
-                                                <img src="${o.image}"
-                                                     alt="">
-                                            </div>
-                                            <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                                <div class="flex-between">
-                                                    <div class="flex-col flex-horizon-center">
-                                                        <span class="txt-lg bold">${o.service_name}</span>
-                                                        <div class="flex-horizon-center">
-                                                            <span class="txt-md">Service</span>
-                                                            <span class="m-x-12">|</span>
-                                                            <span class="txt-md">Provider: ${o.provider_name}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="order-price bold">
-                                                        <span>
-                                                            $${o.price}
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div style="height: 50%;" class="flex-end flex-col">
-                                                    <span class="txt-md bold">Staff's name:  ${o.staff_name}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </c:forEach>
-
-                            </div>
+                                </div>
+                            </c:forEach>
                         </div>
+
+                        <!-- Order item -->
                         <div class="block-border flex-col grid m-y-32">
                             <!-- Order head -->
                             <div style="background-color: #F9FAFB;" class="flex-between pad-2">
                                 <div class="flex-col flex-horizon-center">
-                                    <span class="txt-lg bold">#orderid</span>
+                                    <span class="txt-lg bold">#Service</span>
                                     <div class="flex-center">
-                                        <span class="txt-md">order-date</span>
+                                        <span class="txt-md">Status</span>
                                         <span class="m-x-12">-</span>
                                         <span class="pending">pending</span>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Order detail -->
-                            <div class="pad-2">
-                                <c:forEach items="${sessionScope.ORDERED_PRODUCT_LIST_PENDING}" var="o">
-                                    <div class="order-card m-y-12">
+                            <c:forEach items="${sessionScope.ORDERED_SERVICE_LIST_PENDING}" var="o">
+                                <!-- Order detail -->
+                                <div class="pad-1">
+                                    <div class="order-card">
                                         <div class="flex">
-                                            <div class="flex-center order-img">
+                                            <div style="width: 6.5rem; height: 6.5rem;" class="flex-center order-img">
                                                 <img src="${o.image}"
                                                      alt="">
                                             </div>
                                             <div style="flex: 1; margin-left: 1rem;" class="flex-col">
                                                 <div class="flex-between">
                                                     <div class="flex-col flex-horizon-center">
-                                                        <span class="txt-lg bold">${o.productName}</span>
-                                                        <div class="flex-horizon-center">
-                                                            <span class="txt-md">Product Category: ${o.product_category}</span>
+                                                        <span class="txt-sm bold">${o.staff_name}</span>
+                                                        <div class="flex-horizon-center flex-center">
+                                                            <span class="txt-xs">${o.service_name}</span>
                                                             <span class="m-x-12">|</span>
-                                                            <span class="txt-md">Provider: ${o.provider_name}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="order-price bold">
-                                                        <span>
-                                                            $${o.quantity * o.price}
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div style="height: 50%;" class="flex-end flex-col">
-                                                    <span class="txt-md bold">Quantity:  ${o.quantity}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </c:forEach>
-
-                                <!-- Service start -->
-                                <c:forEach items="${sessionScope.ORDERED_SERVICE_LIST_PENDING}" var="o">
-                                    <div class="order-card m-y-12">
-                                        <div class="flex">
-                                            <div class="flex-center order-img">
-                                                <img src="${o.image}"
-                                                     alt="">
-                                            </div>
-                                            <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                                <div class="flex-between">
-                                                    <div class="flex-col flex-horizon-center">
-                                                        <span class="txt-lg bold">${o.service_name}</span>
-                                                        <div class="flex-horizon-center">
-                                                            <span class="txt-md">Service</span>
-                                                            <span class="m-x-12">|</span>
-                                                            <span class="txt-md">Provider: ${o.provider_name}</span>
+                                                            <span class="txt-xs">Provider: ${o.provider_name}</span>
                                                         </div>
                                                     </div>
                                                     <div class="order-price bold">
@@ -457,105 +629,126 @@
                                                     </div>
                                                 </div>
                                                 <div style="height: 50%;" class="flex-end flex-col">
-                                                    <span class="txt-md bold">Staff's name:  ${o.staff_name}</span>
+                                                    <!--<span class="txt-md bold">Quantity:  </span>-->
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </c:forEach>
-                                <!-- Service end -->
-
-                                <!--                                <div class="order-card m-y-12">
-                                                                    <div class="flex">
-                                                                        <div class="flex-center order-img">
-                                                                            <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
-                                                                                 alt="">
-                                                                        </div>
-                                                                        <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                                                            <div class="flex-between">
-                                                                                <div class="flex-col flex-horizon-center">
-                                                                                    <span class="txt-lg bold">Product name</span>
-                                                                                    <div class="flex-horizon-center">
-                                                                                        <span class="txt-md">Product</span>
-                                                                                        <span class="m-x-12">|</span>
-                                                                                        <span class="txt-md">Product Category</span>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="order-price bold">
-                                                                                    <span>
-                                                                                        $369.000
-                                                                                    </span>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div style="height: 50%;" class="flex-end flex-col">
-                                                                                <span class="txt-md bold">Quantity: 1</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="order-card m-y-12">
-                                                                    <div class="flex">
-                                                                        <div class="flex-center order-img">
-                                                                            <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
-                                                                                 alt="">
-                                                                        </div>
-                                                                        <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                                                            <div class="flex-between">
-                                                                                <div class="flex-col flex-horizon-center">
-                                                                                    <span class="txt-lg bold">Product name</span>
-                                                                                    <div class="flex-horizon-center">
-                                                                                        <span class="txt-md">Product</span>
-                                                                                        <span class="m-x-12">|</span>
-                                                                                        <span class="txt-md">Product Category</span>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="order-price bold">
-                                                                                    <span>
-                                                                                        $369.000
-                                                                                    </span>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div style="height: 50%;" class="flex-end flex-col">
-                                                                                <span class="txt-md bold">Quantity: 1</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="order-card m-y-12">
-                                                                    <div class="flex">
-                                                                        <div class="flex-center order-img">
-                                                                            <img src="https://chisnghiax.com/ciseco/static/media/17.7701cf9446a6b588de67.png"
-                                                                                 alt="">
-                                                                        </div>
-                                                                        <div style="flex: 1; margin-left: 1rem;" class="flex-col">
-                                                                            <div class="flex-between">
-                                                                                <div class="flex-col flex-horizon-center">
-                                                                                    <span class="txt-lg bold">Product name</span>
-                                                                                    <div class="flex-horizon-center">
-                                                                                        <span class="txt-md">Product</span>
-                                                                                        <span class="m-x-12">|</span>
-                                                                                        <span class="txt-md">Product Category</span>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="order-price bold">
-                                                                                    <span>
-                                                                                        $369.000
-                                                                                    </span>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div style="height: 50%;" class="flex-end flex-col">
-                                                                                <span class="txt-md bold">Quantity: 1</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>-->
-
-                            </div>
+                                </div>
+                            </c:forEach>
                         </div>
+
                     </div>
                 </div>
             </div>
-            <!-- Order history end -->
+            <!-- Order pending end -->
+
+            <!-- Order cancel start -->
+            <div class="grid form order-canceled-form <%if (!current_form.equals("order-canceled-form")) {%>hide<%}%>">
+                <div class="grid wide">
+                    <div class="flex-vertical-center m-y-32">
+                        <h1 class="txt-xl">Order Canceled</h1>
+                    </div>
+
+                    <div class="row m-y-32">
+                        <%
+                            ArrayList<ProductOrderHistoryDTO> product_cancel_list = (ArrayList<ProductOrderHistoryDTO>) session.getAttribute("ORDERED_PRODUCT_LIST_CANCELED");
+                            product_cancel_list = (product_cancel_list == null) ? new ArrayList<ProductOrderHistoryDTO>() : product_cancel_list;
+
+//                            ArrayList<String> order_product_date = new ArrayList<>();
+                            ArrayList<Integer> product_order_canceled_id = new ArrayList<>();
+
+//                            for (ProductOrderHistoryDTO product : product_history_list) {
+//                                if (order_product_date.contains(product.getOrder_Date())) {
+//                                    continue;
+//                                }
+//
+//                                order_product_date.add(product.getOrder_Date());
+//                            }
+                            for (ProductOrderHistoryDTO product : product_cancel_list) {
+                                if (product_order_canceled_id.contains(product.getOrder_id())) {
+                                    continue;
+                                }
+
+                                product_order_canceled_id.add(product.getOrder_id());
+                            }
+
+                        %>
+
+                        <%                            for (int order : product_order_canceled_id) {
+
+                        %>
+                        <!-- Order item -->
+                        <div class="block-border flex-col grid m-y-32">
+                            <!-- Order head -->
+                            <div style="background-color: #F9FAFB;" class="flex-between pad-2">
+                                <div class="flex-col flex-horizon-center">
+                                    <span class="txt-lg bold">#<%=order%></span>
+                                    <div class="flex-center">
+                                        <%
+                                            for (ProductOrderHistoryDTO product : product_cancel_list) {
+                                                if (product.getOrder_id() == order) {
+                                        %>
+                                        <span class="txt-md"><%=product.getOrder_Date()%></span>
+                                        <span class="m-x-12">-</span>
+                                        <span style="color: rgb( 219, 219, 219)" class="delivered">Canceled</span>
+                                        <%
+                                                    break;
+                                                }
+                                            }
+                                        %>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <%
+                                for (ProductOrderHistoryDTO product : product_cancel_list) {
+                                    if (product.getOrder_id() == order) {
+                            %>
+                            <!-- Order detail -->
+                            <div class="pad-1">
+                                <div class="order-card">
+                                    <div class="flex">
+                                        <div class="flex-center order-img">
+                                            <img style="width: 6.5rem; height: 6.5rem;" src="<%=product.getImage()%>"
+                                                 alt="">
+                                        </div>
+                                        <div style="flex: 1; margin-left: 1rem;" class="flex-col">
+                                            <div class="flex-between">
+                                                <div class="flex-col flex-horizon-center">
+                                                    <span class="txt-sm bold"><%=product.getProductName()%></span>
+                                                    <div class="flex-horizon-center flex-center">
+                                                        <span class="txt-xs">Product Category: <%=product.getProduct_category()%></span>
+                                                        <span class="m-x-12">|</span>
+                                                        <span class="txt-xs">Provider: <%=product.getProvider_name()%></span>
+                                                    </div>
+                                                </div>
+                                                <div class="order-price bold">
+                                                    <span>
+                                                        $<%=(product.getQuantity() * product.getPrice())%>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div style="height: 50%;" class="flex-end flex-col">
+                                                <span class="txt-sm bold">Quantity:  <%=product.getQuantity()%></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <%
+                                    }
+                                }
+                            %>
+
+                        </div>
+                        <%
+                            }
+                        %>
+                    </div>
+                </div>
+            </div>
+            <!-- Order cancel start -->
 
             <!-- Change password start -->
             <div class="grid wide form password-form <%if (!current_form.equals("change_password")) {%>hide<%}%>">
@@ -918,6 +1111,14 @@
         <!-- Footer End -->
     </div>
 
+    <%
+        if (!messageSuccess.isEmpty()) {
+    %>
+    <div id="toast"></div>
+    <%
+        }
+    %>  
+
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 </div>
@@ -970,6 +1171,70 @@
                                                                                 reader.readAsDataURL(f);
                                                                             });
                                                                         }
+</script>
+<script language="javascript">
+    const main = document.getElementById("toast");
+    if (main) {
+        const duration = 2000;
+        const toast = document.createElement("div");
+        // Auto remove toast
+        const autoRemoveId = setTimeout(function () {
+            main.removeChild(toast);
+        }, duration + 1000);
+        // Remove toast when clicked
+        toast.onclick = function (e) {
+            if (e.target.closest(".toast__close")) {
+                main.removeChild(toast);
+                clearTimeout(autoRemoveId);
+            }
+        };
+
+    <%
+        if (messageError.isEmpty() && !messageSuccess.isEmpty()) {
+    %>
+        toast.classList.add("toast", `toast--success`, "showing");
+
+        toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
+
+        toast.innerHTML =
+                `<div class="toast__icon">
+            <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="toast__body">
+            <h3 class="toast__title">SUCCESS</h3>
+                <p class="toast__msg"><%=messageSuccess%></p>
+                </div>
+            <div class="toast__close">
+            <i class="fas fa-times"></i>
+            </div>
+                    `;
+
+    <%
+        }
+    %>
+
+    <%
+        if (!messageError.isEmpty() && messageSuccess.isEmpty()) {
+    %>
+        toast.classList.add("toast", `toast--error`);
+        toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
+        toast.innerHTML =
+                `<div class="toast__icon">
+            <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="toast__body">
+            <h3 class="toast__title">ERROR</h3>
+                <p class="toast__msg"><%=messageError%></p>
+                </div>
+            <div class="toast__close">
+            <i class="fas fa-times"></i>
+            </div>
+            `;
+    <%
+        }
+    %>
+        main.appendChild(toast);
+    }
 </script>
 </body>
 

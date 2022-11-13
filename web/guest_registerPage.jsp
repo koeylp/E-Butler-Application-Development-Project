@@ -275,7 +275,7 @@
                                 </div>
 
                                 <div class="auth-form__body">
-                                    <form action="MainController" method="POST">
+                                    <form id="register_form" action="MainController" method="POST">
                                         <input type="hidden" name="action" value="Register">
                                         <input type="hidden" name="isRegister" value="true">
                                         <input type="hidden" name="role_id" value="CUS">
@@ -295,70 +295,53 @@
 
                                             <div class="auth-form__block row">
                                                 <div class="auth-form__group col l-6">
-                                                    <input name="name" value="<%= googleUser.getName()%>" class="auth-form__input border-bottom m-y-0" required="" value="<%=customer.getName()%>" placeholder="Full Name">
-                                                    <div class="auth-form__aside">
-                                                        <%
-                                                            if (!customerError.getName().isEmpty()) {
-                                                        %>
-                                                        <span class="auth-form__notify">
-                                                            <i class="fa-solid fa-triangle-exclamation"></i>
-                                                            <p><%=customerError.getName()%></p>
-                                                        </span> 
-                                                        <%
-                                                            }
-                                                        %>
-                                                    </div>
+                                                    <input id="name_input" name="name" value="<%= googleUser.getName()%>" class="auth-form__input border-bottom m-y-0" required="" value="<%=customer.getName()%>" placeholder="Full Name">
+                                                    <span style="font-size: 0.875rem; font-weight: 700" class="form_message auth-form__notify"></span>
                                                 </div>
                                                 <div class="auth-form__group col l-6">
-                                                    <input name="username" class="auth-form__input border-bottom m-y-0" required="" value="<%=customer.getUsername()%>" placeholder="User Name">
-                                                    <div class="auth-form__aside">
-                                                        <%
-                                                            if (!customerError.getUsername().isEmpty()) {
-                                                        %>
-                                                        <span class="auth-form__notify">
-                                                            <i class="fa-solid fa-triangle-exclamation"></i>
-                                                            <p><%=customerError.getUsername()%></p>
-                                                        </span> 
-                                                        <%
-                                                            }
-                                                        %>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="auth-form__group">
-                                                <input type="email" name="email" value="<%= googleUser.getEmail()%>" class="auth-form__input border-bottom m-y-0" required="" value="<%=customer.getEmail()%>" placeholder="Email">
-                                                <div class="auth-form__aside">
+                                                    <input id="username_input" name="username" class="auth-form__input border-bottom m-y-0" required="" value="<%=customer.getUsername()%>" placeholder="User Name">
+                                                    <span style="font-size: 0.875rem; font-weight: 700" class="form_message auth-form__notify"></span>
                                                     <%
-                                                        if (!customerError.getEmail().isEmpty()) {
+                                                        if (!customerError.getUsername().isEmpty()) {
                                                     %>
                                                     <span class="auth-form__notify">
                                                         <i class="fa-solid fa-triangle-exclamation"></i>
-                                                        <p><%=customerError.getEmail()%></p>
+                                                        <p style="font-size: 0.875rem; font-weight: 700"><%=customerError.getUsername()%></p>
                                                     </span> 
                                                     <%
                                                         }
                                                     %>
-
                                                 </div>
                                             </div>
 
                                             <div class="auth-form__group">
-                                                <input type="tel" name="phone" class="auth-form__input border-bottom m-y-0" required="" value="<%=customer.getPhone()%>" placeholder="Phone">
-                                                <div class="auth-form__aside">
-                                                    <%
-                                                        if (!customerError.getPhone().isEmpty()) {
-                                                    %>
-                                                    <span class="auth-form__notify">
-                                                        <i class="fa-solid fa-triangle-exclamation"></i>
-                                                        <p><%=customerError.getPhone()%></p>
-                                                    </span> 
-                                                    <%
-                                                        }
-                                                    %>
+                                                <input id="email_input" type="email" name="email" value="<%= googleUser.getEmail()%>" class="auth-form__input border-bottom m-y-0" required="" value="<%=customer.getEmail()%>" placeholder="Email">
+                                                <span style="font-size: 0.875rem; font-weight: 700" class="form_message auth-form__notify"></span>
+                                                <%
+                                                    if (!customerError.getEmail().isEmpty()) {
+                                                %>
+                                                <span class="auth-form__notify">
+                                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                                    <p style="font-size: 0.875rem; font-weight: 700"><%=customerError.getEmail()%></p>
+                                                </span> 
+                                                <%
+                                                    }
+                                                %>
+                                            </div>
 
-                                                </div>
+                                            <div class="auth-form__group">
+                                                <input id="phone_input" type="tel" name="phone" class="auth-form__input border-bottom m-y-0" required="" value="<%=customer.getPhone()%>" placeholder="Phone">
+                                                <span style="font-size: 0.875rem; font-weight: 700" class="form_message auth-form__notify"></span>
+                                                <%
+                                                    if (!customerError.getPhone().isEmpty()) {
+                                                %>
+                                                <span class="auth-form__notify">
+                                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                                    <p style="font-size: 0.875rem; font-weight: 700"><%=customerError.getPhone()%></p>
+                                                </span> 
+                                                <%
+                                                    }
+                                                %>
                                             </div>
 
                                             <div class="flex-vetical-center m-y-0">
@@ -389,23 +372,13 @@
                                             </div>
 
                                             <div class="auth-form__group">
-                                                <input name="password" type="password" class="auth-form__input border-bottom m-y-0" required="" placeholder="Password">
+                                                <input id="password_input" name="password" type="password" class="auth-form__input border-bottom m-y-0" required="" placeholder="Password">
+                                                <span style="font-size: 0.875rem; font-weight: 700" class="form_message auth-form__notify"></span>
                                             </div>
 
                                             <div class="auth-form__group">
-                                                <input name="confirm_password" type="password" class="auth-form__input border-bottom m-y-0" required="" placeholder="Confirm Password">
-                                                <div class="auth-form__aside">
-                                                    <%
-                                                        if (!customerError.getPassword().isEmpty()) {
-                                                    %>
-                                                    <span class="auth-form__notify">
-                                                        <i class="fa-solid fa-triangle-exclamation"></i>
-                                                        <p><%=customerError.getPassword()%></p>
-                                                    </span> 
-                                                    <%
-                                                        }
-                                                    %>
-                                                </div>
+                                                <input id="confirm-password_input" name="confirm_password" type="password" class="auth-form__input border-bottom m-y-0" required="" placeholder="Confirm Password">
+                                                <span style="font-size: 0.875rem; font-weight: 700" class="form_message auth-form__notify"></span>
                                             </div>
                                         </div>
 
@@ -441,7 +414,7 @@
                                 </div>
 
                                 <div class="auth-form__body">
-                                    <form action="MainController" method="POST">
+                                    <form id="register_pro_form" action="MainController" method="POST">
                                         <input type="hidden" name="action" value="Register">
                                         <input type="hidden" name="isRegister" value="true">
                                         <input type="hidden" name="role_id" value="PRO">
@@ -461,90 +434,69 @@
 
                                             <div class="auth-form__block row">
                                                 <div class="auth-form__group col l-6">
-                                                    <input name="name" class="auth-form__input border-bottom m-y-0" required="" value="<%=provider.getName()%>" placeholder="Name Of Company">
-                                                    <div class="auth-form__aside">
-                                                        <%
-                                                            if (!providerError.getName().isEmpty()) {
-                                                        %>
-                                                        <span class="auth-form__notify">
-                                                            <i class="fa-solid fa-triangle-exclamation"></i>
-                                                            <p><%=providerError.getName()%></p>
-                                                        </span> 
-                                                        <%
-                                                            }
-                                                        %>
-                                                    </div>
+                                                    <input id="name_pro_input" name="name" class="auth-form__input border-bottom m-y-0" required="" value="<%=provider.getName()%>" placeholder="Name Of Company">
+                                                    <span style="font-size: 0.875rem; font-weight: 700" class="form_message auth-form__notify"></span>
                                                 </div>
                                                 <div class="auth-form__group col l-6">
-                                                    <input name="username" class="auth-form__input border-bottom m-y-0" required="" value="<%=provider.getUsername()%>" placeholder="Username">
+                                                    <input id="username_pro_input" name="username" class="auth-form__input border-bottom m-y-0" required="" value="<%=provider.getUsername()%>" placeholder="Username">
+                                                    <span style="font-size: 0.875rem; font-weight: 700" class="form_message auth-form__notify"></span>
                                                     <div class="auth-form__aside">
                                                         <%
                                                             if (!providerError.getUsername().isEmpty()) {
                                                         %>
                                                         <span class="auth-form__notify">
                                                             <i class="fa-solid fa-triangle-exclamation"></i>
-                                                            <p><%=providerError.getUsername()%></p>
+                                                            <p style="font-size: 0.875rem; font-weight: 700;"><%=providerError.getUsername()%></p>
                                                         </span> 
                                                         <%
                                                             }
                                                         %>
-
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="auth-form__group">
-                                                <input type="email" name="email" value="<%= googleUser.getEmail()%>" class="auth-form__input border-bottom m-y-0" required="" value="<%=provider.getEmail()%>" placeholder="Email">
+                                                <input id="email_pro_input" type="email" name="email" value="<%= googleUser.getEmail()%>" class="auth-form__input border-bottom m-y-0" required="" value="<%=provider.getEmail()%>" placeholder="Email">
+                                                <span style="font-size: 0.875rem; font-weight: 700" class="form_message auth-form__notify"></span>
                                                 <div class="auth-form__aside">
                                                     <%
                                                         if (!providerError.getEmail().isEmpty()) {
                                                     %>
                                                     <span class="auth-form__notify">
                                                         <i class="fa-solid fa-triangle-exclamation"></i>
-                                                        <p><%=providerError.getEmail()%></p>
+                                                        <p style="font-size: 0.875rem; font-weight: 700;"><%=providerError.getEmail()%></p>
                                                     </span> 
                                                     <%
                                                         }
                                                     %>
-
                                                 </div>
                                             </div>
 
                                             <div class="auth-form__group">
-                                                <input type="tel" name="phone" class="auth-form__input border-bottom m-y-0" required="" value="<%=provider.getPhone()%>" placeholder="Phone">
+                                                <input id="phone_pro_input" type="tel" name="phone" class="auth-form__input border-bottom m-y-0" required="" value="<%=provider.getPhone()%>" placeholder="Phone">
+                                                <span style="font-size: 0.875rem; font-weight: 700" class="form_message auth-form__notify"></span>
                                                 <div class="auth-form__aside">
                                                     <%
                                                         if (!providerError.getPhone().isEmpty()) {
                                                     %>
                                                     <span class="auth-form__notify">
                                                         <i class="fa-solid fa-triangle-exclamation"></i>
-                                                        <p><%=providerError.getPhone()%></p>
-                                                    </span> 
-                                                    <%
-                                                        }
-                                                    %>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="auth-form__group">
-                                                <input name="password" type="password" class="auth-form__input border-bottom m-y-0" required="" placeholder="Password">
-                                            </div>
-
-                                            <div class="auth-form__group">
-                                                <input name="confirm_password" type="password" class="auth-form__input border-bottom m-y-0" required="" placeholder="Confirm Password">
-                                                <div class="auth-form__aside">
-                                                    <%
-                                                        if (!providerError.getPassword().isEmpty()) {
-                                                    %>
-                                                    <span class="auth-form__notify">
-                                                        <i class="fa-solid fa-triangle-exclamation"></i>
-                                                        <p><%=providerError.getPassword()%></p>
+                                                        <p style="font-size: 0.875rem; font-weight: 700;"><%=providerError.getPhone()%></p>
                                                     </span> 
                                                     <%
                                                         }
                                                     %>
                                                 </div>
+                                            </div>
+
+                                            <div class="auth-form__group">
+                                                <input id="password_pro_input" name="password" type="password" class="auth-form__input border-bottom m-y-0" required="" placeholder="Password">
+                                                <span style="font-size: 0.875rem; font-weight: 700" class="form_message auth-form__notify"></span>
+                                            </div>
+
+                                            <div class="auth-form__group">
+                                                <input id="confirm-password_pro_input" name="confirm_password" type="password" class="auth-form__input border-bottom m-y-0" required="" placeholder="Confirm Password">
+                                                <span style="font-size: 0.875rem; font-weight: 700" class="form_message auth-form__notify"></span>
                                             </div>
                                         </div>
 
@@ -665,6 +617,7 @@
 
         <!-- Javascript -->
         <script src="js/register.js"></script>
+        <script src="js/validator.js"></script>
 
         <script language="javascript">
             const main = document.getElementById("toast");
@@ -705,6 +658,48 @@
             %>
                 main.appendChild(toast);
             }
+        </script>
+
+        <script>
+            Validator({
+                form: '#register_form',
+                errorSelector: '.form_message',
+                rules: [
+                    Validator.isRequired('#name_input'),
+                    Validator.isName('#name_input'),
+                    Validator.isRequired('#username_input'),
+                    Validator.isUserName('#username_input'),
+                    Validator.isRequired('#email_input'),
+                    Validator.isEmail('#email_input'),
+                    Validator.isRequired('#phone_input'),
+                    Validator.isPhone('#phone_input'),
+                    Validator.isRequired('#password_input'),
+                    Validator.isPassword('#password_input', 'password must be included at least 8 characters, 1 number, 1 lowercase/uppercase character'),
+                    Validator.isRequired('#confirm-password_input'),
+                    Validator.isMatch('#confirm-password_input', () => document.querySelector('#password_input').value)
+                ],
+            })
+
+            Validator({
+                form: '#register_pro_form',
+                errorSelector: '.form_message',
+                rules: [
+                    Validator.isRequired('#name_pro_input'),
+                    Validator.isName('#name_pro_input'),
+                    Validator.isRequired('#username_pro_input'),
+                    Validator.isUserName('#username_pro_input'),
+                    Validator.isRequired('#email_pro_input'),
+                    Validator.isEmail('#email_pro_input'),
+                    Validator.isRequired('#phone_pro_input'),
+                    Validator.isPhone('#phone_pro_input'),
+                    Validator.isRequired('#password_pro_input'),
+                    Validator.isPassword('#password_pro_input', 'password must be included at least 8 characters, 1 number, 1 lowercase/uppercase character'),
+                    Validator.isRequired('#confirm-password_pro_input'),
+                    Validator.isMatch('#confirm-password_pro_input', () => document.querySelector('#password_input').value)
+                ],
+                onSubmit: (formValues) => {
+                }
+            })
         </script>
     </body>
 

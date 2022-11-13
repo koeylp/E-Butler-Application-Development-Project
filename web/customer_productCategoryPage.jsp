@@ -101,9 +101,10 @@
                             <div class="nav-item dropdown">
                                 <div class="nav-link">
                                     <div style="width: 1.5rem;" class="img rounded-f">
-                                        <%   if (customer.getAvatar() == "") {
+                                        <%
+                                            if (customer.getAvatar().isEmpty()) {
                                         %>
-                                        <img src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg" alt="">
+                                        <img src="img/default-avatar.jpg" alt="">
                                         <%
                                         } else {
                                         %>
@@ -122,6 +123,10 @@
                                         <div style="cursor: pointer;" class="dropdown-item pad-0">
                                             <i class="fa-solid fa-lock"></i>
                                             <a href="MainController?action=GoToUserProfile&current_form=change_password">Change password</a>
+                                        </div>
+                                        <div style="justify-content: flex-start; cursor: pointer;" class="dropdown-item pad-0">
+                                            <i class="fa-solid fa-wallet"></i>
+                                            <a href="#!"><%=customer.getPoint()%> $</a>
                                         </div>
                                     </div>
                                     <div style="cursor: pointer;" class="dropdown-item pad-0">
@@ -228,18 +233,6 @@
                         <%
                             }
                         %>
-                        <div class="row m-y-2">
-                            <div class="row">
-                                <div class="col l-6">
-                                    <ul class="row pad-1">
-                                        <li class="bold text-circle mx-1">1</li>
-                                        <li class="bold text-circle mx-1">2</li>
-                                        <li class="bold text-circle mx-1">3</li>
-                                        <li class="bold text-circle mx-1">4</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <!-- Product List End -->

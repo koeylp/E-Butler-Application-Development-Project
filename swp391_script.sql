@@ -425,6 +425,7 @@ BEGIN
 	END
 END;
 GO
+
 -------------------- tblDeliveryNOtification -----------------
 CREATE TRIGGER trig_delivery_notify ON tblDelivery
 AFTER UPDATE, INSERT
@@ -1441,7 +1442,7 @@ VALUES
 INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
-	('homefurniture', '1', 'Tea Spoon Wooden Gold', 50, 7, 'https://cdn.shopify.com/s/files/1/0548/9229/8282/products/SHSPO-4ZSGOL_1_800x.png?v=1656403634' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
+	('homefurniture', '1', 'Tea Spoon Wooden Gold', 50, 7, 'https://cdn-amz.woka.io/images/I/71VDt3URLML._SR720,720_.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
 INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
@@ -1679,7 +1680,7 @@ INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
 	('bach_hoa_xanh', '5', 'Palmolive ShowerGel', 50, 15,
-		'https://www.cincottachemist.com.au/10280-product_zoom/palmolive-natural-shower-gel-milk-honey-1l.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
+		'https://aswaqrak.ae/pub/media/catalog/product/cache/9e61d75d633e5fc1a695bad0376a2475/c/c/8714789515656.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
 
 INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
@@ -2023,7 +2024,7 @@ INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
 	('homefurniture', '12', 'Bed With tail Drawer', 50, 890,
-		'https://sleepshop.ca/wp-content/uploads/2020/09/Webp.net-resizeimage-11.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
+		'https://i.pinimg.com/736x/a9/39/90/a93990110944eb88f736be83cf0edb08--bookcase-headboard-beds-online.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
 INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
@@ -2040,13 +2041,13 @@ INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
 	('zarahome', '13', 'Cottan Curtain', 50, 39,
-		'https://www.decorist.com/static/finds/product_images/full_size/125802-indigo-blue-cotton-morris-curtains-set-of-2.9dc3c0adc5f75fe11f9073f87299cf8f.png'
+		'https://assets.pbimgs.com/pbimgs/ab/images/dp/wcm/202243/0058/seaton-textured-cotton-curtain-2-z.jpg'
 , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
 INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
 	('homefurniture', '13', 'Cut-out Linen Curtain', 50, 49,
-		'https://www.decorist.com/static/cache-thumbnail/ee/33/ee3385ffe2210e41af5aa24806445a56.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
+		'https://i.pinimg.com/564x/86/70/c3/8670c3f39b057bc5dc74eb77ad15bbf2--velvet-curtains-blue-curtains.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
 INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
@@ -2057,7 +2058,7 @@ INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
 	('homefurniture', '14', 'Aberton 6 Door Wardrobe', 50, 500,
-		'https://akhonafurnishers.co.za/wp-content/uploads/2020/05/410-Mahogany-6-Doors-Imported-1030x706.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
+		'https://www.panemirates.com/images/pan-aberton-6-door-wardrobe-p40565-176939_image.jpg' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
 INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
@@ -2770,59 +2771,59 @@ GO
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '28', 'Lee Chong Wei', '011922001330', 'https://trangnguyensport.com/wp-content/uploads/2017/12/lee_chong_wei_trangnguyensport.jpg', 1)
+	('michelin_car_service', '28', 'Lee Chong Wei', '011922001330', 'https://cdn.icon-icons.com/icons2/1736/PNG/512/4043260-avatar-male-man-portrait_113269.png', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '28', 'Son Heung Min', '180461001565', 'https://photo-cms-sggp.zadn.vn/Uploaded/2022/negbflyrlys/2022_06_14/min_ssyk.jpg', 1)
+	('michelin_car_service', '28', 'Park Kim Son', '120461001575', 'https://www.pngitem.com/pimgs/m/576-5768840_cartoon-man-png-avatar-transparent-png.png', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '28', 'David Beckham', '110468009431', 'https://upload.wikimedia.org/wikipedia/commons/2/2a/Vinfast-D.Beckham-cropped.jpg', 1)
+	('michelin_car_service', '28', 'David Touliver', '110468009431', 'http://www.chinabank.ph/view-file/testimonials/YUdCoykkUf7AfVzZT4aCb17A0nAkum-metaZ3V5MS5wbmc=-.png', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '28', 'Cristiano Ronaldo', '109922120079', 'https://images.indianexpress.com/2020/09/6-12.jpg?w=350', 1)
+	('michelin_car_service', '28', 'Jack Son', '109922120079', 'https://image.shutterstock.com/image-vector/cool-beard-man-vector-logo-260nw-1719020434.jpg', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '29', 'Nguyen Quang Hai', '100192123000', 'https://img.a.transfermarkt.technology/portrait/big/419387-1520365816.jpg?lm=1', 1)
+	('michelin_car_service', '29', 'Nguyen Quang Dung', '100192123000', 'https://freesvg.org/img/myAvatar.png', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '29', 'Giang Cat Luong', '064192341294', 'https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=', 1)
+	('michelin_car_service', '29', 'Giang Cat Luong', '064192341294', 'https://images.vexels.com/media/users/3/145908/raw/52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '29', 'Nguyen The Anh', '001914456940', 'https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=', 1)
+	('michelin_car_service', '29', 'Nguyen The Anh', '001914456940', 'https://as2.ftcdn.net/v2/jpg/02/23/50/73/1000_F_223507324_jKl7xbsaEdUjGr42WzQeSazKRighVDU4.jpg', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '30', 'Lee Jong Suk', '111914456940', 'https://upload.wikimedia.org/wikipedia/commons/2/2e/Lee_Jong-suk_March_2018.png', 1)
+	('michelin_car_service', '30', 'Tran Cong Khoi', '111914456940', 'https://deadline.com/wp-content/uploads/2020/11/Stephen-Lang-Headshot-Matt-Sayles-e1605093774374.jpg', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '30', 'Tom Holland', '001914123940', 'https://www.biography.com/.image/t_share/MTQ4MTUwOTQyMDE1OTU2Nzk4/tom-holland-photo-jason-kempin-getty-images-801510482-profile.jpg', 1)
+	('michelin_car_service', '30', 'Tom Jerry', '001914123940', 'https://cdn.dribbble.com/users/1040983/screenshots/5807325/media/c3d495a1d644ae646190ee51a64607d5.png?compress=1&resize=400x300&vertical=top', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '30', 'Tran Thanh', '101914456940', 'https://event.mediacdn.vn/2020/10/20/tran-thanh-p-16031678576061691914167.png', 1)
+	('michelin_car_service', '30', 'Tran Cong Thanh', '101914456940', 'https://thumbs.dreamstime.com/b/happy-smiling-geek-hipster-beard-man-cool-avatar-geek-man-avatar-104871313.jpg', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '31', 'Le Duong Bao Lam', '121914456940', 'https://image.thanhnien.vn/w1024/Uploaded/2022/cqjwqlqjd/2021_12_18/182798855-343706077100782-2407850821191400562-n-3306.jpeg', 1)
+	('michelin_car_service', '31', 'Le Duong Bao', '121914456940', 'https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-Vector.png', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '31', 'Ngo Kien Huy', '031914456940', 'https://upload.wikimedia.org/wikipedia/commons/2/21/Ng%C3%B4_Ki%E1%BA%BFn_Huy_hosting_B%E1%BB%99_3_Si%C3%AAu_%C4%90%E1%BA%B3ng_SS2_EP13.jpg', 1)
+	('michelin_car_service', '31', 'Ngo Nhat Nam', '031914456940', 'https://images.assetsdelivery.com/compings_v2/yupiramos/yupiramos2004/yupiramos200436847.jpg', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '31', 'Noo Phuoc Thinh', '041914456940', 'https://i.scdn.co/image/ab67616d0000b273aa35e5acf7be9c9853b2ea40', 1)
+	('michelin_car_service', '31', 'Nguyen Phuoc Thinh', '041914456940', 'https://static.vecteezy.com/system/resources/previews/004/476/164/original/young-man-avatar-character-icon-free-vector.jpg', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '31', 'Robert Downey Jr.', '051914456940', 'https://www.biography.com/.image/t_share/MTkyMzgyNjk2ODA1MTE1NDMx/robert-downey-jr-gettyimages-1193444415.jpg', 1)
+	('michelin_car_service', '31', 'Nguyen Trong Dung', '051914456940', 'https://image.shutterstock.com/image-vector/isolated-avatar-afro-american-man-260nw-2012367269.jpg', 1)
 
 --Bảng detail service
 INSERT INTO tblServiceDetail
@@ -3294,14 +3295,6 @@ INSERT INTO tblServiceDetail
 	(provider_ID, service_ID, staff_ID,name,price,description,status)
 VALUES
 	('michelin_car_service', '31', '114', 'Car Baterry', 5, 'Get ready all the time. Helping you with the best service', 1)
---- bảng delivery ---
-/*insert into tblShipperCategory(username , name, status) values ('grab', 'Grab', 1)
-insert into tblShipperCategory(username , name, status) values ('shopee', 'Shopee Express', 1)
-insert into tblShipperCategory(username, name, status) values ('be', 'Be', 1)
-SELECT * FROM tblShipper
-SELECT * FROM tblUser*/
---INSERT INTO tblDelivery VALUES ('1', 'aaaa','shopee',null , 1)
-
 
 
 INSERT INTO tblShipper
@@ -3367,51 +3360,6 @@ INSERT INTO tblShipper
 VALUES
 	('shoppe5', '1', 'Le Ba Hau', 1, 0)
 
----- bảng shipper company -----
---UPDATE tblDelivery SET username_Shipper = 'shoppe1' WHERE order_id = '1'
-
---SELECT * FROM tblShipper
---- bảng shipper ---
-/*SELECT * FROM tblProductDetail
-SELECT * FROM tblOrder_Product_Detail
-SELECT * FROM tblOrder
-SELECT * FROM tblDelivery
-SELECT * FROM tblReviewProduct
-SELECT * FROM tblOrder_Product_Detail WHERE order_ID = 2 AND status = 3
-SELECT * FROM tblOrder_Product_Detail WHERE order_ID = 2
-select * from tblDelivery
-
-SELECT * FROM tblShipper
-DELETE tblOrder
-SELECT * FROM tblShipper
-SELECT * FROM tblShipperCategory
-SELECT * FROM tblShipperIncome
-DELETE tblOrder_Product_Detail 
-DELETE tblDelivery
-SELECT * FROM tblDelivery
-SELECT De.order_id, De.address,De.username_Shipper ,Ord.order_Date,Ord.customer_ID, Cus.name,Ord.total, De.status FROM (tblDelivery De JOIN tblOrder Ord ON De.order_id = Ord.order_ID) JOIN tblCustomer Cus ON Cus.username = Ord.customer_ID WHERE Ord.shipping = ? 
 
 
-SELECT * from tblUser WHERE username LIKE 'shoppe1' AND password LIKE '1' AND status = 1
-SELECT De.order_id, De.address,De.username_Shipper ,Ord.order_Date,Ord.customer_ID, Cus.name,Ord.total, De.status FROM (tblDelivery De JOIN tblOrder Ord ON De.order_id = Ord.order_ID) JOIN tblCustomer Cus ON Cus.username = Ord.customer_ID WHERE Ord.shipping = ?
-
-SELECT De.order_id, De.address,De.username_Shipper ,Ord.order_Date,Ord.customer_ID, Cus.name,Ord.total, De.status FROM (tblDelivery De JOIN tblOrder Ord ON De.order_id = Ord.order_ID) JOIN tblCustomer Cus ON Cus.username = Ord.customer_ID WHERE Ord.shipping = 'shopee1'
-SELECT nameCategory FROM tblShipper WHERE username = 'shopee1'
-
-SELECT OPD.id, De.order_id, PD.name, OPD.quantity, PD.price, OPD.status FROM ( tblDelivery De JOIN tblOrder_Product_Detail OPD ON De.order_id = OPD.order_ID ) JOIN tblProductDetail PD ON PD.id = OPD.product_detail_ID  WHERE De.order_id = '1' AND De.shipper_id =  'shopee'
-
-
-SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total , Ord.shipping, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = ?
-
-SELECT detail.id, detail.provider_ID, detail.product_ID, detail.name, detail.quantity, detail.price, detail.image, detail.description, detail.status FROM tblProduct product JOIN tblProductDetail detail on product.product_ID = detail.product_ID JOIN tblProductCategory cate ON cate.category_ID = product.category_ID 
-WHERE cate.category_ID = 'KC' AND product.product_ID = 3 ORDER BY id asc OFFSET 12 ROWS FETCH FIRST 12 ROWS ONLY*/
-
---UPDATE tblDelivery SET username_Shipper = ? WHERE order_id = ?
---SELECT username_Shipper FROM tblDelivery WHERE order_id = '1'
-/*SELECT * FROM tblUser
-SELECT * FROM tblDelivery
-SELECT * FROM tblOrder
-SELECT * FROM tblOrder_Product_Detail
-SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total ,  PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = ?
-SELECT De.order_id, De.address,De.username_Shipper ,Ord.order_Date,Ord.customer_ID, Cus.name,Ord.total, De.status FROM (tblDelivery De JOIN tblOrder Ord ON De.order_id = Ord.order_ID) JOIN tblCustomer Cus ON Cus.username = Ord.customer_ID */
 

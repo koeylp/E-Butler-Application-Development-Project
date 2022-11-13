@@ -4,14 +4,11 @@
  */
 package com.ebutler.swp.controllers;
 
+import com.ebutler.swp.dao.CustomerDAO;
 import com.ebutler.swp.dao.ProductDAO;
-import com.ebutler.swp.dto.CartDTO;
-import com.ebutler.swp.dto.ProductCartDTO;
-import com.ebutler.swp.dto.ProductDetailDTO;
-import com.ebutler.swp.dto.QuantityStockDTO;
+import com.ebutler.swp.dto.CustomerDTO;
 import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,53 +16,41 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author thekh
+ * @author Admin
  */
-@WebServlet(name = "AddToCartController", urlPatterns = {"/AddToCartController"})
-public class AddToCartController extends HttpServlet {
+public class CancelOrderController extends HttpServlet {
 
-    private static final String ERROR = "errorPage.jsp";
-    private static final String SUCCESS = "customer_productPage.jsp";
-    private static final String SUCCESS_QUICKVIEW = "customer_cart.jsp";
-
+    private final String ERROR = "errorPage.jsp";
+    private final String SUCCESS = "GoToUserProfileController";
+            
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String id = request.getParameter("product_ID");
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
-            String quickview = request.getParameter("quickview");
-            if (quickview == null) {
-                quickview = "false";
-            }
-            ProductDAO dao = new ProductDAO();
+            int product_id = Integer.parseInt(request.getParameter("product_id"));
+            int order_id = Integer.parseInt(request.getParameter("order_id"));
+            
             HttpSession session = request.getSession();
-            if (session != null) {
-                CartDTO cart = (CartDTO) session.getAttribute("CART");
-                ProductCartDTO productDetail = dao.getProductForCart(id);
-                QuantityStockDTO quantityStock = (QuantityStockDTO) session.getAttribute("STOCK");
-                if (quantityStock == null) {
-                    quantityStock = new QuantityStockDTO();
-                }
-                quantityStock.add(productDetail);
-                productDetail.setQuantity(quantity);
-                if (cart == null) {
-                    cart = new CartDTO();
-                }
-                cart.add(productDetail);
-                session.setAttribute("STOCK", quantityStock);
-                session.setAttribute("CART", cart);
-                request.setAttribute("ADD_SUCCESS", "Added " + quantity + " " + cart.getCart().get(id).getProduct_name() + " Successfully!");
-
-                if (quickview.equals("true")) {
-                    url = SUCCESS_QUICKVIEW;
-                } else {
-                    url = SUCCESS;
-                }
-            }
+            CustomerDAO customerDAO = new CustomerDAO();
+            
+            CustomerDTO login_customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
+            
+            ProductDAO productDAO = new ProductDAO();
+            
+            if(productDAO.cancelOrder(product_id, order_id)) {
+                request.setAttribute("MESSAGE_SUCCESS", "Cancel order product successfully!");
+                
+                login_customer.setPoint(login_customer.getPoint() + productDAO.getTotalProduct(product_id, order_id));
+                customerDAO.updateWallet(login_customer);
+                session.setAttribute("CURRENT_CUSTOMER", login_customer);
+            } else {
+                request.setAttribute("MESSAGE_FAIL", "Cancel order product fail!");
+            };
+            
+            url = SUCCESS;
         } catch (Exception e) {
-            log("Error at AddToCartController" + e.toString());
+            log("ERROR at CancelOrderController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

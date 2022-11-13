@@ -1,5 +1,6 @@
 
 
+<%@page import="com.ebutler.swp.dto.ProductCartDTO"%>
 <%@page import="com.ebutler.swp.dto.CustomerDTO"%>
 <%@page import="com.ebutler.swp.dto.ServiceCartDTO"%>
 <%@page import="com.ebutler.swp.dto.UserDTO"%>
@@ -97,9 +98,10 @@
                             <div class="nav-item dropdown">
                                 <div class="nav-link">
                                     <div style="width: 1.5rem;" class="img rounded-f">
-                                        <%   if (customer.getAvatar().isEmpty()) {
+                                        <%
+                                            if (customer.getAvatar().isEmpty()) {
                                         %>
-                                        <img src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg" alt="">
+                                        <img src="img/default-avatar.jpg" alt="">
                                         <%
                                         } else {
                                         %>
@@ -118,6 +120,10 @@
                                         <div style="cursor: pointer;" class="dropdown-item pad-0">
                                             <i class="fa-solid fa-lock"></i>
                                             <a href="MainController?action=GoToUserProfile&current_form=change_password">Change password</a>
+                                        </div>
+                                        <div style="justify-content: flex-start; cursor: pointer;" class="dropdown-item pad-0">
+                                            <i class="fa-solid fa-wallet"></i>
+                                            <a href="#!"><%=customer.getPoint()%> $</a>
                                         </div>
                                     </div>
                                     <div style="cursor: pointer;" class="dropdown-item pad-0">
@@ -188,12 +194,17 @@
                                 <%
                                     double sub_product_total = 0;
                                     if (cart != null) {
-                                        for (ProductDetailDTO product : cart.getCart().values()) {
+                                        for (ProductCartDTO product : cart.getCart().values()) {
                                             sub_product_total += product.getPrice() * product.getQuantity();
                                 %>
                                 <form action="MainController" method="POST">
-                                    <div class="pad-2">
 
+                                    <div class="pad-2">
+                                        <div style="border-bottom: 1px solid #E5E7EB" class="flex-between pad-1">
+                                            <div class="flex-col flex-horizon-center">
+                                                <span class="txt-md bold"><%= product.getProvider_name()%></span>
+                                            </div>
+                                        </div>
                                         <div class="order-card m-y-12">
                                             <div class="flex">
                                                 <div class="flex-center order-img">
@@ -204,8 +215,9 @@
                                                     <div class="flex-between">
                                                         <div class="flex-col flex-horizon-center col l-6">
                                                             <div style="-webkit-line-clamp: 1;" class="ellipsis txt-lg m-y-0 bold">
-                                                                <p><%= product.getName()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                                                                <p><%= product.getProduct_name()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                                                             </div>
+
 
                                                             <div class="flex-vertical-center">
                                                                 <span class="txt-sm">Category</span>
@@ -327,7 +339,7 @@
                                                                 <span class="m-x-12">:</span>
                                                                 <span class="txt-sm"><%= service.getServiceName()%></span>
                                                             </div>
-                                                            
+
                                                         </div>
                                                         <div class="order-price bold txt-sm">
                                                             <span>
