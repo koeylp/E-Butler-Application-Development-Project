@@ -45,7 +45,10 @@ public class AddServiceToCartController extends HttpServlet {
                 serviceCart = serviceDao.getServiceInfoByID(id);
                 if (cart.add(serviceCart)) {
                     session.setAttribute("CART_SERVICE", cart);
+                    request.setAttribute("MESSAGE_SUCCESS", "Booking service successfully!");
                     url = SUCCESS;
+                } else {
+                    request.setAttribute("MESSAGE_ERROR", "Booking service fail!");
                 }
 
             }

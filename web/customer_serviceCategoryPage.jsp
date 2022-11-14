@@ -42,6 +42,7 @@
         <!-- My Stylesheet -->
         <link rel="stylesheet" href="css/guestPage.css">
         <link rel="stylesheet" href="css/customerPage.css">
+        <link rel="stylesheet" href="css/toast.css">
     </head>
     <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'CUS'}">
         <c:redirect url="guest_loginPage.jsp"></c:redirect>
@@ -54,6 +55,12 @@
             customer = (customer == null) ? new CustomerDTO() : customer;
             String category_id = (String) session.getAttribute("CATEGORYID");
             String category_name = (String) request.getAttribute("CATEGORY_NAME");
+            
+            String messageSuccess = (String) request.getAttribute("MESSAGE_SUCCESS");
+            String messageError = (String) request.getAttribute("MESSAGE_ERROR");
+            
+            messageSuccess = (messageSuccess == null) ? "" : messageSuccess;
+            messageError = (messageError == null) ? "" : messageError;
 
             category_id = (category_id == null) ? "" : category_id;
             category_name = (category_name == null) ? "" : category_name;
@@ -231,12 +238,12 @@
                         <%
                             String current_form = request.getParameter("current_form");
                             String service_id = request.getParameter("service_category_id");
-                            
+
                             current_form = (current_form == null) ? "" : current_form;
                             service_id = (service_id == null) ? "" : service_id;
                         %>
 
-                        <div class="overlay fixed top bot left right flex-center <%if(!current_form.equals("booking") || !service_id.equals(service.getService_ID())) {%>hide<%}%>">
+                        <div class="overlay fixed top bot left right flex-center <%if (!current_form.equals("booking") || !service_id.equals(service.getService_ID())) {%>hide<%}%>">
                             <div class="popup relative pad-2 row">
                                 <div style="margin: -1.5rem 1rem; width: fit-content;"
                                      class="absolute p-0 right text-md opacity popup-close">
@@ -414,6 +421,14 @@
                 </div>
             </div>
 
+            <%
+            if (!messageSuccess.isEmpty() || !messageError.isEmpty()) {
+            %>
+            <div id="toast"></div>
+            <%
+                }
+            %>   
+
 
             <!-- Footer End -->
 
@@ -437,6 +452,70 @@
         <script src="js/access.js"></script>
         <script src="js/customer_productPage.js"></script>
 
+        <script language="javascript">
+                                    const main = document.getElementById("toast");
+                                    if (main) {
+                                        const duration = 2000;
+                                        const toast = document.createElement("div");
+                                        // Auto remove toast
+                                        const autoRemoveId = setTimeout(function () {
+                                            main.removeChild(toast);
+                                        }, duration + 1000);
+                                        // Remove toast when clicked
+                                        toast.onclick = function (e) {
+                                            if (e.target.closest(".toast__close")) {
+                                                main.removeChild(toast);
+                                                clearTimeout(autoRemoveId);
+                                            }
+                                        };
+
+            <%
+            if (messageError.isEmpty() && !messageSuccess.isEmpty()) {
+            %>
+                                        toast.classList.add("toast", `toast--success`, "showing");
+
+                                        toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
+
+                                        toast.innerHTML =
+                                                `<div class="toast__icon">
+            <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="toast__body">
+            <h3 class="toast__title">SUCCESS</h3>
+                <p class="toast__msg"><%=messageSuccess%></p>
+                </div>
+            <div class="toast__close">
+            <i class="fas fa-times"></i>
+            </div>
+                    `;
+
+            <%
+            }
+            %>
+
+            <%
+            if (!messageError.isEmpty() && messageSuccess.isEmpty()) {
+            %>
+                                        toast.classList.add("toast", `toast--error`, "showing");
+                                        toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
+                                        toast.innerHTML =
+                                                `<div class="toast__icon">
+            <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="toast__body">
+            <h3 class="toast__title">ERROR</h3>
+                <p class="toast__msg"><%=messageError%></p>
+                </div>
+            <div class="toast__close">
+            <i class="fas fa-times"></i>
+            </div>
+            `;
+            <%
+            }
+            %>
+                                        main.appendChild(toast);
+                                    }
+        </script><!-- comment -->
     </body>
 
 </html>
