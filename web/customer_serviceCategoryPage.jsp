@@ -228,7 +228,15 @@
                             </div>
                         </div>
 
-                        <div class="overlay fixed top bot left right flex-center hide">
+                        <%
+                            String current_form = request.getParameter("current_form");
+                            String service_id = request.getParameter("service_category_id");
+                            
+                            current_form = (current_form == null) ? "" : current_form;
+                            service_id = (service_id == null) ? "" : service_id;
+                        %>
+
+                        <div class="overlay fixed top bot left right flex-center <%if(!current_form.equals("booking") || !service_id.equals(service.getService_ID())) {%>hide<%}%>">
                             <div class="popup relative pad-2 row">
                                 <div style="margin: -1.5rem 1rem; width: fit-content;"
                                      class="absolute p-0 right text-md opacity popup-close">
@@ -296,7 +304,7 @@
                                                             if (staff.getStatus() == 1) {
                                                         %>
                                                         <div class="flex">
-                                                            <a href="MainController?action=AddServiceToCart&service_ID=<%= staff.getStaff_ID()%>">
+                                                            <a href="MainController?action=AddServiceToCart&service_category_id=<%=service.getService_ID()%>&current_form=booking&service_ID=<%= staff.getStaff_ID()%>">
                                                                 <button style="background-color: #0F172A; color: white"
                                                                         class="txt-xs bold">
                                                                     Book
