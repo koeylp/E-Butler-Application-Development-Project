@@ -142,13 +142,13 @@
 
             <div class="slider">
                 <div class="slider__main">
-                    <h1>LIÊN HỆ</h1>
+                    <h1>CONTACT</h1>
                 </div>
                 <div class="slider__main-title">
                     <a href="">
                         <i class="fa-solid fa-house"></i>
                         <i class="fa-solid fa-angle-right"></i>
-                        Liên hệ
+                        Contact
                     </a>
                 </div>
             </div>
