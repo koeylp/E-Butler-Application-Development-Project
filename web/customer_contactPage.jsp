@@ -184,8 +184,8 @@
                                 <label for="" value="complain">Complain</label>
                                 <input type="radio" value="Praise" name="issue-input" required="">
                                 <label for="" value="Praise">Praise</label>
-                                <input type="radio" value="orther" name="issue-input" required="">
-                                <label for="" value="orther">Orther problem</label>
+                                <input type="radio" value="other" name="issue-input" required="">
+                                <label for="" value="other">Other problem</label>
                             </div>
                         </div>
                         <textarea style="width: 100%; height: 100px; max-height: 100px; font-size: 1.4rem; font-weight: 300; padding: 8px;" name="content" id="" required=""></textarea>
