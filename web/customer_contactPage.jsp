@@ -164,7 +164,7 @@
                             <div style="margin-right: 1rem; color: #ea4335;">
                                 <i class="fa-regular fa-envelope"></i>
                             </div>
-                            <span style="color: #ea4335;">ebutler@gmail.com</span>
+                            <span style="color: #ea4335;">ebutlercomp@gmail.com</span>
                         </div>
                         <div style="font-size: 1.8rem; font-weight: 700;" class="flex">
                             <div style="margin-right: 1rem; color: #0f91f3;">
