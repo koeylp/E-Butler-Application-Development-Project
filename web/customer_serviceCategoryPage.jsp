@@ -90,6 +90,7 @@
                                 <a href="LoadingProductAndServiceCategory#service" class="nav-link navigator active">Service</a>
                             </div>
                             <a href="LoadingProductAndServiceCategory#help" class="nav-item nav-link navigator">Help</a>
+                            <a href="customer_contactPage.jsp" class="nav-item nav-link navigator">Contact</a>
                             <div class="search absolute hide">
                                 <a><i class="fa-solid fa-magnifying-glass"></i></a>
                                 <input

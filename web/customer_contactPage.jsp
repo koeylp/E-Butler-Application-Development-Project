@@ -1,10 +1,15 @@
+<%-- 
+    Document   : customer_confirmation.jsp
+    Created on : Oct 6, 2022, 10:28:49 PM
+    Author     : thekh
+--%>
+
 <%@page import="com.ebutler.swp.dto.CustomerDTO"%>
 <%@page import="com.ebutler.swp.dto.UserDTO"%>
-<%@page import="com.ebutler.swp.dto.ProductDTO"%>
-<%@page import="java.util.List"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
     <head>
         <meta charset="utf-8">
@@ -12,7 +17,6 @@
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
-        <link rel="stylesheet" href="./vendor/fonts/boxicons.css" />
         <link rel="icon" type="image/png" href="img/logo-bulldog.png">
         <!-- Icon FontAwesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
@@ -27,7 +31,6 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-
         <!-- Libraries Stylesheet -->
         <link href="lib/animate/animate.min.css" rel="stylesheet">
         <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
@@ -39,28 +42,18 @@
         <link href="css/style.css" rel="stylesheet">
         <link rel="stylesheet" href="css/grid.css">
         <link rel="stylesheet" href="css/base.css">
+        <link rel="stylesheet" href="css/contact_base.css">
 
         <!-- My Stylesheet -->
-        <link rel="stylesheet" href="css/guestPage.css">
+        <link rel="stylesheet" href="css/customer_profilePage.css">
         <link rel="stylesheet" href="css/customerPage.css">
-
-
-
+        <link rel="stylesheet" href="css/contact.css">
     </head>
     <c:if test="${sessionScope.LOGIN_USER == null || sessionScope.LOGIN_USER.getRole_id() != 'CUS'}">
         <c:redirect url="guest_loginPage.jsp"></c:redirect>
     </c:if>
 
     <body>
-        <%
-            List<ProductDTO> productList = (List<ProductDTO>) session.getAttribute("CUSTOMER_PRODUCT_LIST");
-            CustomerDTO customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
-            customer = (customer == null) ? new CustomerDTO() : customer;
-            String category_id = (String) session.getAttribute("CATEGORYID");
-
-            category_id = (category_id == null) ? "" : category_id;
-            UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
-        %>
         <div class="container-xxl bg-white p-0">
             <!-- Spinner Start -->
             <div id="spinner"
@@ -70,7 +63,11 @@
                 </div>
             </div>
             <!-- Spinner End -->
-
+            <%
+                UserDTO login_user = (UserDTO) session.getAttribute("LOGIN_USER");
+                CustomerDTO customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
+                customer = (customer == null) ? new CustomerDTO() : customer;
+            %>
             <!-- Navbar Start -->
             <div class="container-fluid nav-bar bg-transparent">
                 <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4 relative">
@@ -85,8 +82,8 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav ms-auto">
-                            <a href="LoadingProductAndServiceCategory" class="nav-item nav-link navigator">Home</a>
-                            <a href="LoadingProductAndServiceCategory#product" class="nav-item nav-link navigator active">Product</a>
+                            <a href="LoadingProductAndServiceCategory" class="nav-item nav-link active navigator">Home</a>
+                            <a href="LoadingProductAndServiceCategory#product" class="nav-item nav-link navigator">Product</a>
                             <div class="nav-item dropdown">
                                 <a href="LoadingProductAndServiceCategory#service" class="nav-link navigator">Service</a>
                             </div>
@@ -102,8 +99,7 @@
                             <div class="nav-item dropdown">
                                 <div class="nav-link">
                                     <div style="width: 1.5rem;" class="img rounded-f">
-                                        <%
-                                            if (customer.getAvatar().isEmpty()) {
+                                        <%   if (customer.getAvatar().isEmpty()) {
                                         %>
                                         <img src="img/default-avatar.jpg" alt="">
                                         <%
@@ -136,7 +132,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a class="nav-item nav-link search-open"><i class="fa-solid fa-magnifying-glass"></i></a>
+                            <a class="nav-item nav-link search-open "><i class="fa-solid fa-magnifying-glass"></i></a>
                             <a href="MainController?action=MoveToCart" class="nav-item nav-link"><i class="fa-solid fa-cart-shopping"></i></a>
                         </div>
                     </div>
@@ -144,110 +140,108 @@
             </div>
             <!-- Navbar End -->
 
-            <!-- Slider Start -->
-            <div class="grid relative">
-                <div class="col l-9 s-12 m-12 absolute abs-center left">
-                    <h1 class="m-y-2">Product Category</h1>
-                    <span class="txt-lg">We not only help you design exceptional products, but also make it easy for you
-                        to share your designs with more like-minded people.</span>
+            <div class="slider">
+                <div class="slider__main">
+                    <h1>LIÊN HỆ</h1>
                 </div>
-                <div style="background-color: var(--blue-bg);" class="row">
-                    <img src="https://chisnghiax.com/ciseco/static/media/Moon.bf27dc577d1acccaba48430d353dbbe0.svg">
+                <div class="slider__main-title">
+                    <a href="">
+                        <i class="fa-solid fa-house"></i>
+                        <i class="fa-solid fa-angle-right"></i>
+                        Liên hệ
+                    </a>
                 </div>
             </div>
-            <!-- Slider End -->
 
-            <!-- Product List Start -->
-            <div id="content" style="max-height: var(--list-h);" class="grid wide border-bot border-top">
-                <div class="grid">
-                    <div class="row m-y-2">
-                        <form style="padding: 0;" class="col l-10 s-8" action="MainController?action=SearchProductCategory" method="POST">
+            <div class="body__container grid">
+                <div class="form__heading-info">
+                    <p style="font-size: 1.6rem;"><span style="color: var(--primary-color);" class="txt-xl bold">E-butler</span> always wants to receive valuable feedback from customers to have the opportunity to improve products and services even more. Your contributions are always invaluable to us</p>
+                </div>
 
-                            <div style="min-width: 100%;" class="flex-center sort-btn">
-                                <a><i class="fa-solid fa-magnifying-glass"></i></a>
-                                <input
-                                    style="flex: 1; background-color: transparent;"
-                                    type="text" placeholder="Type and press enter..." class="border-no m-x-1" name="searchProductCategory">
-                                <a class="opacity"><i class="fa-solid fa-xmark"></i></a>
+                <div class="flex-center">
+                    <div style="width: 80%;" class="flex-around">
+                        <div style="font-size: 1.8rem; font-weight: 700;" class="flex">
+                            <div style="margin-right: 1rem; color: #ea4335;">
+                                <i class="fa-regular fa-envelope"></i>
                             </div>
-
-                        </form>
-
-                        <form style="padding: 0;" class="col l-2 s-4 flex-end" action="MainController" method="POST">
-                            <div class="sort-btn">
-                                <i class="fa-solid fa-sort"></i>
-                                <select name="action" style="text-align: center;" class="border-no select" name="" id="" onChange="this.form.submit()">
-                                    <option value="">Sort order</option>
-                                    <option value="WordProductCategoryUp">Name's increase</option>
-                                    <option value="WordProductCategoryDown">Name's decrease</option>
-                                </select>
+                            <span style="color: #ea4335;">ebutler@gmail.com</span>
+                        </div>
+                        <div style="font-size: 1.8rem; font-weight: 700;" class="flex">
+                            <div style="margin-right: 1rem; color: #0f91f3;">
+                                <i class="fa-brands fa-facebook"></i>
                             </div>
-                        </form>
+                            <a href="https://www.facebook.com/profile.php?id=100068867764033">Direct counseling</a>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="mx-5 mt-3">
-                        <nav aria-label="breadcrumb m-5">
-                            <ol class="breadcrumb breadcrumb-style1">
-                                <li class="breadcrumb-item">
-                                    <a href="LoadingProductAndServiceCategory">Home</a>
-                                </li>
-                                <li class="breadcrumb-item active">Product Category</li>
-                            </ol>
-                        </nav>
+                <form action="MainController">
+                    <div class="form__body-info"> 
+                        <div class="form__body-issue">
+                            <h1 style="color: var(--primary-color);">Feedback problem</h1>
+                            <div style="font-size: 1.6rem;" class="form__body-issue-input">
+                                <input type="radio" value="complain" name="issue-input" required="">
+                                <label for="" value="complain">Complain</label>
+                                <input type="radio" value="Praise" name="issue-input" required="">
+                                <label for="" value="Praise">Praise</label>
+                                <input type="radio" value="orther" name="issue-input" required="">
+                                <label for="" value="orther">Orther problem</label>
+                            </div>
+                        </div>
+                        <textarea style="width: 100%; height: 100px; max-height: 100px; font-size: 1.4rem; font-weight: 300; padding: 8px;" name="content" id="" required=""></textarea>
                     </div>
-
-                    <div class="row m-y-2">
-                        <!-- product item -->
-                        <%
-                            for (ProductDTO product : productList) {
-                        %> 
-                        <div class="col l-4 s-6 m-y-1 category_card">
-                            <a href="MainController?action=GoToProductDetailByType&product_ID=<%=product.getProduct_ID()%>&category_ID=<%=product.getCategory_ID()%>#content">
-                                <div style="height: 20rem; border-radius: 1.5rem; box-shadow: 2px 8px 40px rgb(0 0 0 / 8%); background-color: white; " class="relative pad-1 ">
-
-                                    <div class="absolute bot right">
-                                        <div class="category_decoration">
-                                        </div>
-                                    </div>
-                                    <div class="flex-col flex-between full-h">
-                                        <div class="flex-between">
-                                            <div style="height: 7rem; width: 7rem; background-color: #eaf2fc;" class="img rounded-f pad-1">
-                                                <img src="<%= product.getImage()%>"
-                                                     alt="">
-                                            </div>
-                                            <div class="flex-center">
-                                                <span class="txt-sm bold"><%= product.getDetail_list().size()%> products</span>
-                                            </div>
-                                        </div>
-                                        <div class="flex-horizon-center flex-col">
-                                            <span style="color: black" class="txt-xs">Manufacture</span>
-                                            <span class="txt-lg bold"><%= product.getName()%></span>
-                                        </div>
-                                        <div class="flex-horizon-center flex-col category_detail">
-                                            <a class="txt-sm">See Collection <i class="fa-solid fa-arrow-right m-x-0"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+                    <div style="border-top: 1px solid rgb(219, 219, 219); border-bottom: 1px solid rgb(219, 219, 219);"  class="pad-y-2 m-y-2">
+                        <div >
+                            <h1>Information confidentiality agreement</h1>
                         </div>
 
-                        <%
-                            }
-                        %>
+                        <div style="margin-left: 2rem;">
+                            <ul style="list-style-type: decimal; font-size: 1.6rem">
+                                <li class="m-y-0">E-butler will always keep customers' information confidential and comply with relevant information security laws.</li>
+                                <li class="m-y-0">E-butler may disclose personal information for the purpose of resolving customer complaints and grievances to:</li>
+                                <ul>
+                                    <li class="m-y-0">- Departments under E-butler Vietnam</li>
+                                    <li class="m-y-0">- An officially authorized third party from E-butler Vietnam to handle complaints and complaints of a serious nature.</li>
+                                </ul>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h1>* Note</h1>
+                        </div>
+
+                        <div style="margin-left: 2rem;">
+                            <ul style="list-style-type: decimal; font-size: 1.6rem;">
+                                <li class="m-y-0">Please provide accurate personal information so that E-butler can contact to resolve customer inquiries, feedback and complaints as quickly as possible..</li>
+                                <li class="m-y-0">Saturdays, Sundays, and public holidays will make the processing of your feedback slower than usual.</li>
+                            </ul>
+                        </div>
+
+                        <div class="m-y-2 flex-vertical-center">
+                            <div style="margin-right: 2rem;" class="flex-col">
+                                <input style="width: 3rem; height: 3rem" type="checkbox" name="" class="confirmation-check">
+                            </div>
+
+                            <span style="font-size: 1.6rem; font-weight: 700;" class="auth-form__policy-text">
+                                I confirm that the personal information provided above is completely accurate and agree to E-butler's use of such information for the purpose of responding to feedback.
+                            </span>
+                        </div>
                     </div>
-                </div>
-                <!-- Product List End -->
+                    <button id="btn-feedback" name="action" value="SendFeedBack" class="input__item--submit btn--disable" disabled>SEND FEEDBACK</button>
+
+                </form>
+
             </div>
 
-            <!-- Footer Start -->
 
-            <div class="container-fluid bg-dark text-white-50 footer pt-5  wow fadeIn m-y-2" data-wow-delay="0.1s">
+
+            <!-- Footer Start -->
+            <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5  wow fadeIn" data-wow-delay="0.1s">
                 <div class="container py-5">
                     <div class="row g-5">
                         <div class="col-lg-3 col-md-6">
                             <h5 class="text-white mb-4">Get In Touch</h5>
-                            <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>E2a-7, D1 Street, Long Thanh
-                                My, Thu Duc District, Ho Chi Minh City</p>
+                            <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i></p>
                             <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
                             <p class="mb-2"><i class="fa fa-envelope me-3"></i>SE1111@e-butler.com</p>
                             <div class="d-flex pt-2">
@@ -307,30 +301,40 @@
                     </div>
                 </div>
             </div>
-
-
             <!-- Footer End -->
-
-
-            <!-- Back to Top -->
-            <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
         </div>
 
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="lib/wow/wow.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/waypoints/waypoints.min.js"></script>
-        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
 
-        <!-- Template Javascript -->
-        <script src="js/main.js"></script>
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
-        <!-- javascript -->
-        <script src="js/access.js"></script>
-        <script src="js/customer_productPage.js"></script>
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
 
-    </body>
+    <!-- javascript -->
+    <script>
+        document.querySelector('.confirmation-check').addEventListener('click', EnableButton)
+
+        function EnableButton() {
+            var btn_feedback = document.getElementById('btn-feedback');
+            if (this.checked) {
+                btn_feedback.classList.remove("btn--disable");
+                btn_feedback.removeAttribute('disabled');
+            } else {
+                btn_feedback.classList.add("btn--disable");
+                btn_feedback.setAttribute('disabled', 'disabled');
+            }
+        }
+    </script>
+
+</body>
 
 </html>

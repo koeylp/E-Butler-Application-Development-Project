@@ -91,6 +91,7 @@
                                 <a href="LoadingProductAndServiceCategory#service" class="nav-link navigator">Service</a>
                             </div>
                             <a href="LoadingProductAndServiceCategory#help" class="nav-item nav-link navigator">Help</a>
+                            <a href="customer_contactPage.jsp" class="nav-item nav-link navigator">Contact</a>
                             <div class="search absolute hide">
                                 <a><i class="fa-solid fa-magnifying-glass"></i></a>
                                 <input
@@ -640,8 +641,8 @@
                     <div class="row g-5">
                         <div class="col-lg-3 col-md-6">
                             <h5 class="text-white mb-4">Get In Touch</h5>
-                            <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Lô E2a-7, ???ng D1, ?. D1, Long Th?nh
-                                M?, Thành Ph? Th? ??c, Thành ph? H? Chí Minh</p>
+                            <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>LÃ´ E2a-7, ???ng D1, ?. D1, Long Th?nh
+                                M?, ThÃ nh Ph? Th? ??c, ThÃ nh ph? H? ChÃ­ Minh</p>
                             <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
                             <p class="mb-2"><i class="fa fa-envelope me-3"></i>SE1111@e-butler.com</p>
                             <div class="d-flex pt-2">
