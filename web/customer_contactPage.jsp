@@ -159,7 +159,7 @@
                 </div>
 
                 <div class="flex-center">
-                    <div style="width: 80%;" class="flex-around">
+                    <div style="width: 80%;" class="flex-around flex-vertical-center">
                         <div style="font-size: 1.8rem; font-weight: 700;" class="flex">
                             <div style="margin-right: 1rem; color: #ea4335;">
                                 <i class="fa-regular fa-envelope"></i>
