@@ -20,17 +20,18 @@ import javax.servlet.http.HttpSession;
  */
 public class Customer_ContactController extends HttpServlet {
 
-    private final String ERROR = "customer_contactPage.jsp" ; 
-    private final String SUCCESS = "customer_contactPage.jsp" ;  
+    private final String ERROR = "errorPage.jsp";
+    private final String SUCCESS = "customer_contactPage.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR ; 
+        String url = ERROR;
         try {
-            String issue = request.getParameter("issue-input") ; 
-            String content = request.getParameter("content") ; 
-            HttpSession session = request.getSession() ; 
-            CustomerDTO customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER") ;
+            String issue = request.getParameter("issue-input");
+            String content = request.getParameter("content");
+            HttpSession session = request.getSession();
+            CustomerDTO customer = (CustomerDTO) session.getAttribute("CURRENT_CUSTOMER");
             String subject = "Your Problems has been processing.";
             String message = "<!DOCTYPE html>\n"
                     + "<html lang=\"en\">\n"
@@ -50,10 +51,8 @@ public class Customer_ContactController extends HttpServlet {
                     + "\n"
                     + "</html>";
 
-            Email.send(customer.getEmail(), subject, message, Account.EMAIL_EBUTLER, Account.PASSWORD_EBUTLER); 
-            
-            
-            
+            Email.send(customer.getEmail(), subject, message, Account.EMAIL_EBUTLER, Account.PASSWORD_EBUTLER);
+
             String subjectEbutler = "Customer Problem!.";
             String messageEbutler = "<!DOCTYPE html>\n"
                     + "<html lang=\"en\">\n"
@@ -70,9 +69,10 @@ public class Customer_ContactController extends HttpServlet {
                     + "\n"
                     + "</html>";
 
-            Email.send(Account.EMAIL_EBUTLER, subjectEbutler, messageEbutler, Account.EMAIL, Account.PASSWORD); 
+            Email.send(Account.EMAIL_EBUTLER, subjectEbutler, messageEbutler, Account.EMAIL, Account.PASSWORD);
+            url = SUCCESS;
         } catch (Exception e) {
-        }finally {
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

@@ -273,6 +273,10 @@
         <servlet-name>CancelOrderController</servlet-name>
         <servlet-class>com.ebutler.swp.controllers.CancelOrderController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Customer_ContactController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.Customer_ContactController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -540,6 +544,10 @@
     <servlet-mapping>
         <servlet-name>CancelOrderController</servlet-name>
         <url-pattern>/CancelOrderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Customer_ContactController</servlet-name>
+        <url-pattern>/Customer_ContactController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>60</session-timeout>
