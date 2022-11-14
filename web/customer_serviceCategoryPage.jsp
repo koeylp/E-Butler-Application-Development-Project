@@ -266,6 +266,7 @@
                                         <div class="row">
                                             <%
                                                 for (StaffDTO staff : service.getStaff_list()) {
+                                                    if (staff.getStatus() != 2) {
                                             %>
                                             <div style="margin-bottom: 1rem;" class="col l-4 relative">
                                                 <div style="background-color: #F8F8F8; border-radius: .5rem; height: 13rem;"
@@ -303,7 +304,7 @@
                                                             </a>
                                                         </div>
                                                         <%
-                                                        } else {
+                                                        } else if (staff.getStatus() == -1) {
                                                         %>
                                                         <span style="color: #F68B52" class="label txt-xs danger">
                                                             Busy
@@ -314,6 +315,10 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <%
+                                                }
+                                            %>
+
                                             <%
                                                 }
                                             %>

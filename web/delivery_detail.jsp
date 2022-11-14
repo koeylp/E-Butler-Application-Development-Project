@@ -105,9 +105,7 @@
                                                 <li>
                                                     <a ><i class="icon-user"></i> <span><%= shipper.getName()%></span></a>
                                                 </li>
-                                                <li>
-                                                    <a ><i class="icon-envelope-open"></i> <span>Inbox</span></a>
-                                                </li>
+                                                
 
                                                 <hr class="my-2">
 

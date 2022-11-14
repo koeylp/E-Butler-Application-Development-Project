@@ -114,9 +114,7 @@
                                                 <li>
                                                     <a ><i class="icon-user"></i> <span><%= shipper.getName()%></span></a>
                                                 </li>
-                                                <li>
-                                                    <a ><i class="icon-envelope-open"></i> <span>Inbox</span></a>
-                                                </li>
+                                                
 
                                                 <hr class="my-2">
                                                 <li><a href="MainController?action=LogoutProvider"><i class="icon-key"></i> <span>Logout</span></a></li>
