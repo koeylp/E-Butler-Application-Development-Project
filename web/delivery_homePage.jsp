@@ -22,7 +22,7 @@
         <title>E-butler</title>
 
         <!-- Favicon icon -->
-        <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="img/logo.png">
         <!-- Custom Stylesheet -->
         <link href="./plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
@@ -101,75 +101,11 @@
                                     <i class="fa-solid fa-wallet"></i>
                                 </a>
                             </li>
-                            <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
-                                    <i class="mdi mdi-bell-outline"></i>
-                                    <span class="badge badge-pill gradient-2 badge-primary">3</span>
-                                </a>
-                                <div class="drop-down animated fadeIn dropdown-menu dropdown-notfication">
-                                    <div class="dropdown-content-heading d-flex justify-content-between">
-                                        <span class="">2 New Notifications</span>  
 
-                                    </div>
-                                    <div class="dropdown-content-body">
-                                        <ul>
-                                            <li>
-                                                <a href="javascript:void()">
-                                                    <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
-                                                    <div class="notification-content">
-                                                        <h6 class="notification-heading">Events near you</h6>
-                                                        <span class="notification-text">Within next 5 days</span> 
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void()">
-                                                    <span class="mr-3 avatar-icon bg-danger-lighten-2"><i class="icon-present"></i></span>
-                                                    <div class="notification-content">
-                                                        <h6 class="notification-heading">Event Started</h6>
-                                                        <span class="notification-text">One hour ago</span> 
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void()">
-                                                    <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
-                                                    <div class="notification-content">
-                                                        <h6 class="notification-heading">Event Ended Successfully</h6>
-                                                        <span class="notification-text">One hour ago</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void()">
-                                                    <span class="mr-3 avatar-icon bg-danger-lighten-2"><i class="icon-present"></i></span>
-                                                    <div class="notification-content">
-                                                        <h6 class="notification-heading">Events to Join</h6>
-                                                        <span class="notification-text">After two days</span> 
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        </ul>
-
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="icons dropdown d-none d-md-flex">
-                                <a href="javascript:void(0)" class="log-user"  data-toggle="dropdown">
-                                    <span>English</span>  <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
-                                </a>
-                                <div class="drop-down dropdown-language animated fadeIn  dropdown-menu">
-                                    <div class="dropdown-content-body">
-                                        <ul>
-                                            <li><a href="javascript:void()">English</a></li>
-                                            <li><a href="javascript:void()">Dutch</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
                             <li class="icons dropdown">
                                 <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                                     <span class="activity active"></span>
-                                    <img src="images/user/1.png" height="40" width="40" alt="">
+                                    <img src="img/avatars/5.png" height="40" width="40" alt="">
                                 </div>
                                 <form action="MainController" method="Post">
                                     <div class="drop-down dropdown-profile   dropdown-menu">
@@ -183,10 +119,6 @@
                                                 </li>
 
                                                 <hr class="my-2">
-                                                <li>
-                                                    <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
-                                                </li>
-
                                                 <li><a href="MainController?action=LogoutProvider"><i class="icon-key"></i> <span>Logout</span></a></li>
                                             </ul>
                                         </div>
@@ -314,9 +246,16 @@
                                                 <div class="avatar-wrapper">
                                                     <div class="avatar">
                                                         <%
-                                                            String avatar = noti.getAvatar().isEmpty() ? "https://i.stack.imgur.com/l60Hf.png" : noti.getAvatar();
+                                                            if (noti.getAvatar().isEmpty()) {
                                                         %>
-                                                        <img src="img/avatars/<%=avatar%>" alt="avatar">
+                                                        <img src="img/default-avatar.jpg" alt="">
+                                                        <%
+                                                        } else {
+                                                        %>
+                                                        <img src="img/<%= noti.getAvatar()%>" alt="">
+                                                        <%
+                                                            }
+                                                        %>
                                                     </div>
                                                 </div>
                                                 <div class="content-wrapper">

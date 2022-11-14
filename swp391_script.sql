@@ -476,72 +476,72 @@ VALUES
 INSERT INTO tblProvider
 	(username, password , role_ID , phone , email , name , logo , status)
 VALUES
-	('bach_hoa_xanh' , '1' , 'PRO', '0344350704' , 'bachhoaxanhne@gmail.com', 'Bach Hoa Xanh', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
+	('bach_hoa_xanh' , '12345678' , 'PRO', '0344350704' , 'bachhoaxanhne@gmail.com', 'Bach Hoa Xanh', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
 INSERT INTO tblProvider
 	(username, password , role_ID , phone , email , name , logo , status)
 VALUES
-	('dien_may_cho_lon' , '1' , 'PRO', '0344350888' , 'dienmaycholonne@gmail.com', 'Dien May Cho Lon', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
+	('dien_may_cho_lon' , '12345678' , 'PRO', '0344350888' , 'dienmaycholonne@gmail.com', 'Dien May Cho Lon', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
 INSERT INTO tblProvider
 	(username, password , role_ID , phone , email , name , logo , status)
 VALUES
-	('cho_tot_tot' , '1' , 'PRO', '0344350987' , 'chototsieutot@gmail.com', 'Cho Tot', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
+	('cho_tot_tot' , '12345678' , 'PRO', '0344350987' , 'chototsieutot@gmail.com', 'Cho Tot', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
 INSERT INTO tblProvider
 	(username, password , role_ID , phone , email , name , logo , status)
 VALUES
-	('homepurnish' , '1' , 'PRO', '0344353379' , 'homefurnishings@gmail.com', 'Home Furnishings', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
+	('homepurnish' , '12345678' , 'PRO', '0344353379' , 'homefurnishings@gmail.com', 'Home Furnishings', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
 INSERT INTO tblProvider
 	(username, password , role_ID , phone , email , name , logo , status)
 VALUES
-	('zarahome' , '1' , 'PRO', '0366357979' , 'zarahome@gmail.com', 'Zara Home', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
+	('zarahome' , '12345678' , 'PRO', '0366357979' , 'zarahome@gmail.com', 'Zara Home', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
 INSERT INTO tblProvider
 	(username, password , role_ID , phone , email , name , logo , status)
 VALUES
-	('homefurniture' , '1' , 'PRO', '0966397979' , 'homeFurniture@gmail.com', 'Home Furniture', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
+	('homefurniture' , '12345678' , 'PRO', '0966397979' , 'homeFurniture@gmail.com', 'Home Furniture', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
 INSERT INTO tblProvider
 	(username, password , role_ID , phone , email , name , logo , status)
 VALUES
-	('getintouch' , '1' , 'PRO', '0966694321' , 'getintouch@gmail.com', 'Get In Touch', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
+	('getintouch' , '12345678' , 'PRO', '0966694321' , 'getintouch@gmail.com', 'Get In Touch', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
 INSERT INTO tblProvider
 	(username, password , role_ID , phone , email , name , logo , status)
 VALUES
-	('petro' , '1' , 'PRO', '0966691234' , 'petro@gmail.com', 'Petro', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
+	('petro' , '12345678' , 'PRO', '0966691234' , 'petro@gmail.com', 'Petro', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
 INSERT INTO tblProvider
 	(username, password , role_ID , phone , email , name , logo , status)
 VALUES
-	('minhchau' , '1' , 'PRO', '0966691235' , 'minhchau@gmail.com', 'Minh Chau Ceramic', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
+	('minhchau' , '12345678' , 'PRO', '0966691235' , 'minhchau@gmail.com', 'Minh Chau Ceramic', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
 --Theo Service
 INSERT INTO tblProvider
 	(username, password , role_ID , phone , email , name , logo , status)
 VALUES
-	('fptcompany' , '1' , 'PRO', '0966697979' , 'fptcompany@gmail.com', 'FPT', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
+	('fptcompany' , '12345678' , 'PRO', '0966697979' , 'fptcompany@gmail.com', 'FPT', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
 INSERT INTO tblProvider
 	(username, password , role_ID , phone , email , name , logo , status)
 VALUES
-	('moveronline' , '1' , 'PRO', '0918154849' , 'moveOnline@gmail.com', 'Mover Online', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
+	('moveronline' , '12345678' , 'PRO', '0918154849' , 'moveOnline@gmail.com', 'Mover Online', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
 INSERT INTO tblProvider
 	(username, password , role_ID , phone , email , name , logo , status)
 VALUES
-	('electrician' , '1' , 'PRO', '0918145999' , 'elec@gmail.com', 'Electrician', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
+	('electrician' , '12345678' , 'PRO', '0918145999' , 'elec@gmail.com', 'Electrician', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
 INSERT INTO tblProvider
 	(username, password , role_ID , phone , email , name , logo , status)
 VALUES
-	('homecleaning' , '1' , 'PRO', '0918149999' , 'homecleaning@gmail.com', 'Home Cleaning', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
+	('homecleaning' , '12345678' , 'PRO', '0918149999' , 'homecleaning@gmail.com', 'Home Cleaning', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
 INSERT INTO tblProvider
 	(username, password , role_ID , phone , email , name , logo , status)
 VALUES
-	('homeimprovement' , '1' , 'PRO', '0918134948' , 'homeimprovement@gmail.com', 'Home Improvement', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
+	('homeimprovement' , '12345678' , 'PRO', '0918134948' , 'homeimprovement@gmail.com', 'Home Improvement', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
 INSERT INTO tblProvider
 	(username, password , role_ID , phone , email , name , logo , status)
 VALUES
-	('plumbers' , '1' , 'PRO', '0918134945' , 'plumbers@gmail.com', 'Plumbers', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
+	('plumbers' , '12345678' , 'PRO', '0918134945' , 'plumbers@gmail.com', 'Plumbers', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
 INSERT INTO tblProvider
 	(username, password , role_ID , phone , email , name , logo , status)
 VALUES
-	('laundry' , '1' , 'PRO', '0918134947' , 'dryClean@gmail.com', 'Laundry / Dry Clean', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
+	('laundry' , '12345678' , 'PRO', '0918134947' , 'dryClean@gmail.com', 'Laundry / Dry Clean', 'https://thumbs.dreamstime.com/z/card-kitchen-shelves-cooking-utensils-retro-style-51223757.jpg', 1)
 INSERT INTO tblProvider
 	(username, password , role_ID , phone , email , name , logo , status)
 VALUES
-	('michelin_car_service' , '1' , 'PRO', '0918234947' , 'michelinlincar@gmail.com', 'Michelin Car Service', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIjRrt9Oxl-E2NTsmLUEX4rKFou5rEpwWt9K1P44AGM9jgvcbrC6cJiPZ69SyvsAEmaGY&usqp=CAU', 1)
+	('michelin_car_service' , '12345678' , 'PRO', '0918234947' , 'michelinlincar@gmail.com', 'Michelin Car Service', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIjRrt9Oxl-E2NTsmLUEX4rKFou5rEpwWt9K1P44AGM9jgvcbrC6cJiPZ69SyvsAEmaGY&usqp=CAU', 1)
 
 -- Bảng tỉnh/thành
 INSERT INTO tblProvince_City
@@ -1902,7 +1902,7 @@ VALUES
 INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
-	('dien_may_cho_lon', '10', 'Samsung SmartTV 55inch', 50, 1480,
+	('dien_may_cho_lon', '10', 'Samsung SmartTV 55inch', 50, 148,
 		'https://images.samsung.com/is/image/samsung/p6pim/vn/ua55au7002kxxv/gallery/vn-uhd-au7002-ua55au7002kxxv-531928752?$650_519_PNG$'
 , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
 INSERT INTO tblProductDetail
@@ -1943,13 +1943,13 @@ VALUES
 INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
-	('bach_hoa_xanh', '10', 'Sony SmartTV 55inch', 50, 1480,
+	('bach_hoa_xanh', '10', 'Sony SmartTV 55inch', 50, 148,
 		'https://d13o3tuo14g2wf.cloudfront.net/thumbnails%2Flarge%2FAsset+Hierarchy%2FConsumer+Assets%2FTelevision%2FBRAVIA+LCD+HDTV%2FFY+22%2FX85K%2FProduct+shots%2FX85K_55_65_75%2FeComm%2F1--X85K-65-Sony-FRNT.png.png?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9kMTNvM3R1bzE0ZzJ3Zi5jbG91ZGZyb250Lm5ldC90aHVtYm5haWxzJTJGbGFyZ2UlMkZBc3NldCtIaWVyYXJjaHklMkZDb25zdW1lcitBc3NldHMlMkZUZWxldmlzaW9uJTJGQlJBVklBK0xDRCtIRFRWJTJGRlkrMjIlMkZYODVLJTJGUHJvZHVjdCtzaG90cyUyRlg4NUtfNTVfNjVfNzUlMkZlQ29tbSUyRjEtLVg4NUstNjUtU29ueS1GUk5ULnBuZy5wbmciLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjIxNDU3NjIwMDB9fX1dfQ__&Signature=TSRDmdrCnA7UhvXLkMZLkzYIkCK-apxdu4nxJ66CSLOLOTxIm8L9Dcb9H7CGgJ5jQ7mEsuOy6PxyVqrw9CSk2xwmm3Ja03PTiRWAoMPwAPyYF9lkHN5vzgeiR7ipLUmia-i-rCX8kKm27bWgb~xK11EfSMfbvlaBQov9yQGgMjzY5yXfjmaQ~baIFdHJ-9Prvl8DdfBsxAu4r-6LmZfra3yRGk41lqPOksfde3XAp55YYbVzPLC6eLK28uaVlu~76T0g-h0SbxfLgL1nF9hA8~e04WVvzxuo2iI58C7LVJdxqhzW15bGFt0~zXE80FyN5KRryRjxoc3pGvLCItG9kQ__&Key-Pair-Id=K37BLT9C6HMMJ0'
 , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
 INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
-	('bach_hoa_xanh', '10', 'Sony SmartTV 55inch', 50, 1380,
+	('bach_hoa_xanh', '10', 'Sony SmartTV 55inch', 50, 138,
 		'https://d13o3tuo14g2wf.cloudfront.net/thumbnails%2Flarge%2FAsset+Hierarchy%2FConsumer+Assets%2FTelevision%2FBRAVIA+LCD+HDTV%2FFY+22%2FX85K%2FProduct+shots%2FX85K_55_65_75%2FeComm%2F1--X85K-65-Sony-FRNT.png.png?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9kMTNvM3R1bzE0ZzJ3Zi5jbG91ZGZyb250Lm5ldC90aHVtYm5haWxzJTJGbGFyZ2UlMkZBc3NldCtIaWVyYXJjaHklMkZDb25zdW1lcitBc3NldHMlMkZUZWxldmlzaW9uJTJGQlJBVklBK0xDRCtIRFRWJTJGRlkrMjIlMkZYODVLJTJGUHJvZHVjdCtzaG90cyUyRlg4NUtfNTVfNjVfNzUlMkZlQ29tbSUyRjEtLVg4NUstNjUtU29ueS1GUk5ULnBuZy5wbmciLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjIxNDU3NjIwMDB9fX1dfQ__&Signature=TSRDmdrCnA7UhvXLkMZLkzYIkCK-apxdu4nxJ66CSLOLOTxIm8L9Dcb9H7CGgJ5jQ7mEsuOy6PxyVqrw9CSk2xwmm3Ja03PTiRWAoMPwAPyYF9lkHN5vzgeiR7ipLUmia-i-rCX8kKm27bWgb~xK11EfSMfbvlaBQov9yQGgMjzY5yXfjmaQ~baIFdHJ-9Prvl8DdfBsxAu4r-6LmZfra3yRGk41lqPOksfde3XAp55YYbVzPLC6eLK28uaVlu~76T0g-h0SbxfLgL1nF9hA8~e04WVvzxuo2iI58C7LVJdxqhzW15bGFt0~zXE80FyN5KRryRjxoc3pGvLCItG9kQ__&Key-Pair-Id=K37BLT9C6HMMJ0'
 , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
 
@@ -1978,12 +1978,12 @@ VALUES
 INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
-	('zarahome', '11', 'Square Wood Mango Table', 50, 700,
+	('zarahome', '11', 'Square Wood Mango Table', 50, 100,
 		'https://5.imimg.com/data5/SELLER/Default/2022/5/ON/KL/IA/138536105/6-500x500.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
 INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
-	('zarahome', '11', 'Leather Sofa', 50, 1000,
+	('zarahome', '11', 'Leather Sofa', 50, 200,
 		'https://leathersofaco.com/reddot/uploads/img/content/cID_1307/canto-leather-sofa.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
 INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
@@ -1993,7 +1993,7 @@ VALUES
 INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
-	('zarahome', '11', 'Oak ArmChair', 50, 450,
+	('zarahome', '11', 'Oak ArmChair', 50, 200,
 		'https://cdn.shopify.com/s/files/1/0174/2162/products/DYKE_AND_DEAN_DE_MACHINEKAMER_Hans_Fauteuil_OAK_ARMCHAIR_GREY.png?v=1657655861'
 , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
 INSERT INTO tblProductDetail
@@ -2015,7 +2015,7 @@ VALUES
 INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
 VALUES
-	('homefurniture', '12', 'Wooden Box Bed', 50, 499,
+	('homefurniture', '12', 'Wooden Box Bed', 50, 309,
 		'https://www.godrejinterio.com/imagestore/B2C/MONC00016/MONC00016_01_1500x1500.png' , 'A large, silver-plated vegetable spoon with the matching potato spoon from WMFs Rome series.The spoons are ideal for serving a wide variety of vegetables.Great companion on an elegantly set dining table.' , 1 )
 INSERT INTO tblProductDetail
 	(provider_ID, product_ID, name, quantity, price, image, description, status)
@@ -2780,11 +2780,11 @@ VALUES
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '28', 'David Touliver', '110468009431', 'http://www.chinabank.ph/view-file/testimonials/YUdCoykkUf7AfVzZT4aCb17A0nAkum-metaZ3V5MS5wbmc=-.png', 1)
+	('michelin_car_service', '28', 'David Touliver', '110468009431', 'https://www.pennmedicine.org/-/media/images/miscellaneous/random%20generic%20photos/smiling_man_with_beard.ashx?mw=620&mh=408', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '28', 'Jack Son', '109922120079', 'https://image.shutterstock.com/image-vector/cool-beard-man-vector-logo-260nw-1719020434.jpg', 1)
+	('michelin_car_service', '28', 'Tran Thanh Hung', '109922120079', 'https://image.shutterstock.com/image-vector/cool-beard-man-vector-logo-260nw-1719020434.jpg', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
@@ -2792,7 +2792,7 @@ VALUES
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '29', 'Giang Cat Luong', '064192341294', 'https://images.vexels.com/media/users/3/145908/raw/52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg', 1)
+	('michelin_car_service', '29', 'Nguyen Truong Giang', '064192341294', 'https://images.vexels.com/media/users/3/145908/raw/52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
@@ -2804,7 +2804,7 @@ VALUES
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
-	('michelin_car_service', '30', 'Tom Jerry', '001914123940', 'https://cdn.dribbble.com/users/1040983/screenshots/5807325/media/c3d495a1d644ae646190ee51a64607d5.png?compress=1&resize=400x300&vertical=top', 1)
+	('michelin_car_service', '30', 'Le Quan Thanh', '001914123940', 'https://cdn.dribbble.com/users/1040983/screenshots/5807325/media/c3d495a1d644ae646190ee51a64607d5.png?compress=1&resize=400x300&vertical=top', 1)
 INSERT INTO tblStaff
 	(provider_ID,service_ID,name,id_card,avatar,status)
 VALUES
@@ -3301,22 +3301,22 @@ VALUES
 INSERT INTO tblShipper
 	(username, password, name,phone,MRC, status, wallet)
 VALUES
-	('ebulter1', '1', 'Nguyen Van A','0364613014' ,'006358',1, 0)
+	('ebutler1', '12345678', 'Nguyen Van A','0364613014' ,'006358',1, 0)
 INSERT INTO tblShipper
 	(username, password, name,phone,MRC, status, wallet)
 VALUES
-	('ebulter2', '1', 'Nguyen Anh Tuan','0311648204' ,'105358', 1, 0)
+	('ebutler2', '12345678', 'Nguyen Anh Tuan','0311648204' ,'105358', 1, 0)
 INSERT INTO tblShipper
 	(username, password, name,phone,MRC, status, wallet)
 VALUES
-	('ebulter3', '1', 'Nguyen Thi Hong','0944351304' ,'006497', 1, 0)
+	('ebutler3', '12345678', 'Nguyen Thi Hong','0944351304' ,'006497', 1, 0)
 INSERT INTO tblShipper
 	(username, password, name,phone,MRC, status, wallet)
 VALUES
-	('ebulter4', '1', 'Nguyen Manh Quang','0644315201' ,'009213', 1, 0)
+	('ebutler4', '12345678', 'Nguyen Manh Quang','0644315201' ,'009213', 1, 0)
 INSERT INTO tblShipper
 	(username, password, name,phone,MRC, status, wallet)
 VALUES
-	('ebulter5', '1', 'Le Ba Hau','0622942014' ,'613497', 1, 0)
+	('ebutler5', '12345678', 'Le Ba Hau','0622942014' ,'613497', 1, 0)
 
 
