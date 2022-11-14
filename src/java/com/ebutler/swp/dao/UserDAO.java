@@ -224,7 +224,7 @@ public class UserDAO {
                 ptm.setString(2, password);
                 rs = ptm.executeQuery() ; 
                 if(rs.next()) {
-                    newShipper = new ShipperDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDouble(5)) ; 
+                    newShipper = new ShipperDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDouble(7)) ; 
                 }
             }
         } catch (Exception e) {

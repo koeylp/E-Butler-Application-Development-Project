@@ -24,24 +24,24 @@ public class ServiceDAO {
 
     private static final String GET_SERVICE_CATEGORY_LIST = "SELECT category_ID, name, image\n"
             + "FROM tblServiceCategory";
-    
+
     private static final String GET_SERVICE_CATEGORY_SERVICE_ID = "SELECT distinct cate.category_ID, cate.name, cate.image, service.service_ID\n"
             + "FROM tblServiceCategory cate JOIN tblService service ON cate.category_ID = service.category_ID\n"
             + "WHERE cate.category_ID = ?";
-    
-    private static final String GET_SERVICE_LIST = "SELECT service_ID, category_ID, name, image\n"
-            + "FROM tblService\n"
-            + "WHERE category_ID = ?";
-    
+
+    private static final String GET_SERVICE_LIST = "SELECT DISTINCT s.service_ID, s.category_ID, s.name, s.image, sd.status\n"
+            + "FROM tblService s JOIN tblServiceDetail sd ON s.service_ID = sd.service_ID\n"
+            + "WHERE category_ID = ? AND sd.status = 1";
+
     private static final String SEARCH_SERVICE_CATEGORY = "SELECT service_ID, category_ID, name, image\n"
             + "FROM tblService\n"
             + "WHERE category_ID = ? AND name LIKE ?";
-    
+
     private static final String SORT_SERVICE_CATEGORY_WORD_UP = "SELECT service_ID, category_ID, name, image\n"
             + "FROM tblService\n"
             + "WHERE category_ID = ?\n"
             + "ORDER BY name ASC";
-    
+
     private static final String SORT_SERVICE_CATEGORY_WORD_DOWN = "SELECT service_ID, category_ID, name, image\n"
             + "FROM tblService\n"
             + "WHERE category_ID = ?\n"
@@ -51,7 +51,7 @@ public class ServiceDAO {
             + "FROM tblServiceCategory cate JOIN tblService service ON cate.category_ID = service.category_ID JOIN tblServiceDetail detail ON detail.service_ID = service.service_ID\n"
             + "WHERE cate.category_ID = ? AND service.service_ID = ?\n"
             + "ORDER BY detail.name ASC";
-    
+
     private static final String SORT_SERVICE_DETAIL_WORD_DOWN = "SELECT detail.id, detail.provider_ID, detail.service_ID, detail.staff_ID, detail.name, detail.price, detail.description, detail.status\n"
             + "FROM tblServiceCategory cate JOIN tblService service ON cate.category_ID = service.category_ID JOIN tblServiceDetail detail ON detail.service_ID = service.service_ID\n"
             + "WHERE cate.category_ID = ? AND service.service_ID = ?\n"
@@ -61,12 +61,12 @@ public class ServiceDAO {
             + "FROM tblServiceCategory cate JOIN tblService service ON cate.category_ID = service.category_ID JOIN tblServiceDetail detail ON detail.service_ID = service.service_ID\n"
             + "WHERE cate.category_ID = ? AND service.service_ID = ?\n"
             + "ORDER BY detail.price ASC";
-    
+
     private static final String SORT_SERVICE_DETAIL_PRICE_DOWN = "SELECT detail.id, detail.provider_ID, detail.service_ID, detail.staff_ID, detail.name, detail.price, detail.description, detail.status\n"
             + "FROM tblServiceCategory cate JOIN tblService service ON cate.category_ID = service.category_ID JOIN tblServiceDetail detail ON detail.service_ID = service.service_ID\n"
             + "WHERE cate.category_ID = ? AND service.service_ID = ?\n"
             + "ORDER BY detail.price DESC";
-    
+
     private static final String SEARCH_SERVICE_DETAIL_BY_NAME = "SELECT detail.id, detail.provider_ID, detail.service_ID, detail.staff_ID, detail.name, detail.price, detail.description, detail.status\n"
             + "FROM tblServiceCategory cate JOIN tblService service ON cate.category_ID = service.category_ID JOIN tblServiceDetail detail ON detail.service_ID = service.service_ID\n"
             + "WHERE cate.category_ID = ? AND service.service_ID = ? AND detail.name LIKE ?";
@@ -83,10 +83,9 @@ public class ServiceDAO {
             + "JOIN [tblStaff] st ON se.staff_ID = st.staff_ID\n"
             + "JOIN [tblProvider] pr ON se.provider_ID = pr.username\n"
             + "WHERE se.id = ?";
-   
-    
+
     private static final String UPLOAD_PHOTO = "UPDATE tblService SET image = ? WHERE service_ID = ?  ";
-    
+
     public static boolean uploadPhoto(String service_ID, String path) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -384,7 +383,9 @@ public class ServiceDAO {
             while (rs.next()) {
 //                lấy service_id
                 String service_id = rs.getString("service_ID");
-                list.add(new ServiceDTO(service_id, rs.getString("category_ID"), rs.getString("name"), rs.getString("image"), staffDAO.getListStaffByServiceDetail(service_id)));
+                list.add(new ServiceDTO(service_id, rs.getString("category_ID"), rs.getString("name"), rs.getString("image"), rs.getInt("status"), staffDAO.getListStaffByServiceDetail(service_id)
+            
+         ));
             }
         } catch (Exception e) {
             e.printStackTrace();
