@@ -11,4 +11,8 @@ package com.ebutler.swp.email;
 public class Account {
      public static final String EMAIL = "toanntse161325@fpt.edu.vn";
     public static final String PASSWORD = "nguyentrongtoan";
+    
+    
+    public static final String EMAIL_EBUTLER = "ebutlercomp@gmail.com";
+    public static final String PASSWORD_EBUTLER = "toiyeufpt";
 }
