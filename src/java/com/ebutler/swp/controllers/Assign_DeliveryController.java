@@ -49,7 +49,7 @@ public class Assign_DeliveryController extends HttpServlet {
             
             for (int i = 0; i < listDelivery.size(); i++) {
                 double total = listDelivery.get(i).getTotal();
-                double totalCheck = total / 2;
+                double totalCheck = total;
                 if(listDelivery.get(i).getOrderID() == orderID) {
                 if (totalCheck < shipper.getWallet()) {
                     
