@@ -210,7 +210,7 @@
                                 <div class="flex-col flex-between full-h">
                                     <div class="flex-between">
                                         <div style="height: 7rem; width: 7rem; background-color: #eaf2fc;" class="img rounded-f pad-1">
-                                            <img src="<%=service.getImage()%>"
+                                            <img src="<%= service.getImage()%>"
                                                  alt="">
                                         </div>
                                         <div class="flex-center">

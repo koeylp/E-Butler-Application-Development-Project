@@ -16,6 +16,7 @@ public class ServiceDTO {
     private String category_ID;
     private String name;
     private String image;
+    private int status;
     
 //    thêm staff_list
     private ArrayList<StaffDTO> staff_list;
@@ -25,9 +26,28 @@ public class ServiceDTO {
         this.category_ID = "";
         this.name = "";
         this.image = "";
+        this.status = 0;
         this.staff_list = new ArrayList<StaffDTO>();
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public ServiceDTO(String service_ID, String category_ID, String name, String image, int status, ArrayList<StaffDTO> staff_list) {
+        this.service_ID = service_ID;
+        this.category_ID = category_ID;
+        this.name = name;
+        this.image = image;
+        this.status = status;
+        this.staff_list = staff_list;
+    }
+
+    
     public ServiceDTO(String service_ID, String category_ID, String name, String image, ArrayList<StaffDTO> staff_list) {
         this.service_ID = service_ID;
         this.category_ID = category_ID;

@@ -3319,3 +3319,31 @@ INSERT INTO tblShipper
 VALUES
 	('ebutler5', '12345678', 'Le Ba Hau','0622942014' ,'613497', 1, 0)
 
+
+
+
+CREATE TABLE tblCustomer
+(
+	[username] nvarchar(30) PRIMARY KEY,
+	[password] [nvarchar](30) NOT NULL,
+	[role_ID] [nvarchar](10) REFERENCES tblUserRole(role_ID) NOT NULL,
+	[phone] nvarchar(11) NOT NULL,
+	[email] [nvarchar](30) UNIQUE NOT NULL,
+	[name] nvarchar(30) NOT NULL,
+	gender [int],
+	dob date,
+	avatar nvarchar(max),
+	point [decimal](9),
+	[status] [decimal](1)
+)
+GO
+
+INSERT INTO tblUser
+	(username, [password], role_ID, [phone], email, [status])
+VALUES
+	('baobaobao', '1', 'CUS' ,'0322654879', 1, 1)
+
+INSERT INTO tblUser
+	(username, [password], role_ID, [phone], email, [status])
+VALUES
+	('baobaobao', '1', 'CUS' ,'0322654879', 1, 1)
