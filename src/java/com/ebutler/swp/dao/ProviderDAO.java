@@ -12,6 +12,7 @@ import com.ebutler.swp.dto.ProductDetailDTO;
 import com.ebutler.swp.dto.ProviderDTO;
 import com.ebutler.swp.dto.ProviderServiceDTO1;
 import com.ebutler.swp.dto.ProviderStaffDTO;
+import com.ebutler.swp.dto.ShipperDTO;
 import com.ebutler.swp.utils.DBUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -78,7 +79,39 @@ public class ProviderDAO {
 
     private final String PROVIDER_DELETE_SERVICE_ORDER_DETAIL = "UPDATE tblOrder_Service_Detail SET status = 4 WHERE order_ID = ? ";
     private static final String UPLOAD_PHOTO = "UPDATE tblProvider SET logo = ? WHERE username = ?  ";
-
+    private final String SHIPPER_PROVIDER = "SELECT shi.name, shi.phone  FROM tblOrder ord JOIN tblDelivery De ON De.order_id = ord.order_ID JOIN tblShipper shi ON shi.username = De.username_Shipper  WHERE ord.order_ID = ? " ;
+    
+    
+    public ShipperDTO getShipperInfo(int orderID) throws SQLException {
+        ShipperDTO shipper = null ; 
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SHIPPER_PROVIDER);
+                ptm.setInt(1, orderID);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    shipper = new ShipperDTO(rs.getString(1), rs.getString(2)) ;
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return shipper;
+    }
+    
     public static boolean uploadPhoto(String username, String path) throws SQLException {
         boolean check = false;
         Connection conn = null;

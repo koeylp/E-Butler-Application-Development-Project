@@ -10,6 +10,7 @@ import com.ebutler.swp.dto.OrderDetailInfoDTO;
 import com.ebutler.swp.dto.ProductDetailDTO;
 import com.ebutler.swp.dto.ProviderDTO;
 import com.ebutler.swp.dto.ProviderServiceDTO1;
+import com.ebutler.swp.dto.ShipperDTO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -63,10 +64,12 @@ public class Provider_Order_DetailController extends HttpServlet {
                 listOrderDetail.add((OrderDetailDTO) listOrderDetail2);
             }
             if (listOrderDetail != null) {
+                ShipperDTO shipper = providerDAO.getShipperInfo(orderID) ;
                 url = SUCCESS;
                 session.setAttribute("Order_Detail", listOrderDetail);
                 session.setAttribute("Info_Detail", listDetailInfo);
                 session.setAttribute("customerID", customerID);
+                session.setAttribute("shipperInfo", shipper); 
             }
         } catch (Exception e) {
         } finally {

@@ -36,6 +36,7 @@ public class ProductDetailDTO {
         this.status = 0;
     }
 
+    
     public ProductDetailDTO(String id, String provider_ID, String product_ID, String name, int quantity, double price, String image, String description, int status) {
         this.id = id;
         this.provider_ID = provider_ID;

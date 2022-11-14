@@ -254,6 +254,8 @@ CREATE TABLE tblShipper
 	username nvarchar(30) PRIMARY KEY,
 	[password] nvarchar(30),
 	[name] nvarchar(30),
+	[phone] nvarchar(11),
+	[MRC] nvarchar(6),
 	[status] int,
 	wallet decimal(12)
 )
@@ -3298,68 +3300,24 @@ VALUES
 
 
 INSERT INTO tblShipper
-	(username, password, name, status, wallet)
+	(username, password, name,phone,MRC, status, wallet)
 VALUES
-	('grap1', '1', 'Nguyen Van A', 1, 0)
+	('ebulter1', '1', 'Nguyen Van A','0364613014' ,'006358',1, 0)
 INSERT INTO tblShipper
-	(username, password, name, status, wallet)
+	(username, password, name,phone,MRC, status, wallet)
 VALUES
-	('grap2', '1', 'Nguyen Anh Tuan', 1, 0)
+	('ebulter2', '1', 'Nguyen Anh Tuan','0311648204' ,'105358', 1, 0)
 INSERT INTO tblShipper
-	(username, password, name, status, wallet)
+	(username, password, name,phone,MRC, status, wallet)
 VALUES
-	('grap3', '1', 'Nguyen Thi Hong', 1, 0)
+	('ebulter3', '1', 'Nguyen Thi Hong','0944351304' ,'006497', 1, 0)
 INSERT INTO tblShipper
-	(username, password, name, status, wallet)
+	(username, password, name,phone,MRC, status, wallet)
 VALUES
-	('grap4', '1', 'Nguyen Manh Quang', 1, 0)
+	('ebulter4', '1', 'Nguyen Manh Quang','0644315201' ,'009213', 1, 0)
 INSERT INTO tblShipper
-	(username, password, name, status, wallet)
+	(username, password, name,phone,MRC, status, wallet)
 VALUES
-	('grap5', '1', 'Le Ba Hau', 1, 0)
-
-INSERT INTO tblShipper
-	(username, password, name, status, wallet)
-VALUES
-	('shopee1', '1', 'Nguyen Van Hoa', 1, 0)
-INSERT INTO tblShipper
-	(username, password, name, status, wallet)
-VALUES
-	('shopee2', '1', 'Nguyen Anh Tuan Hiep', 1, 0)
-INSERT INTO tblShipper
-	(username, password, name, status, wallet)
-VALUES
-	('shopee3', '1', 'Nguyen Thi Cam', 1, 0)
-INSERT INTO tblShipper
-	(username, password, name, status, wallet)
-VALUES
-	('shopee4', '1', 'Nguyen Manh Quang Anh', 1, 0)
-INSERT INTO tblShipper
-	(username, password, name, status, wallet)
-VALUES
-	('shopee5', '1', 'Le Ba Hung', 1, 0)
-
-INSERT INTO tblShipper
-	(username, password, name, status, wallet)
-VALUES
-	('shoppe1', '1', 'Nguyen Van A', 1, 0)
-INSERT INTO tblShipper
-	(username, password, name, status, wallet)
-VALUES
-	('shoppe2', '1', 'Nguyen Anh Tuan', 1, 0)
-INSERT INTO tblShipper
-	(username, password, name, status, wallet)
-VALUES
-	('shoppe3', '1', 'Nguyen Thi Hong', 1, 0)
-INSERT INTO tblShipper
-	(username, password, name, status, wallet)
-VALUES
-	('shoppe4', '1', 'Nguyen Manh Quang', 1, 0)
-INSERT INTO tblShipper
-	(username, password, name, status, wallet)
-VALUES
-	('shoppe5', '1', 'Le Ba Hau', 1, 0)
-
-
+	('ebulter5', '1', 'Le Ba Hau','0622942014' ,'613497', 1, 0)
 
 

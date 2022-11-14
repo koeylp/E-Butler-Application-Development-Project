@@ -12,11 +12,22 @@ public class ShipperDTO {
     private String username;
     private String password;
     private String name;
+    private String phone;
+    private String MRC;
     private int status;
     private double wallet;
     
     private double income;
 
+    public ShipperDTO(String name, String phone) {
+        this.name = name;
+        this.phone = phone;
+    }
+
+    
+
+    
+    
     public ShipperDTO() {
         this.username = "";
         this.password = "";
@@ -47,6 +58,15 @@ public class ShipperDTO {
         return username;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+    
+    
     public void setUsername(String username) {
         this.username = username;
     }

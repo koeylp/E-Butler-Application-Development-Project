@@ -4,6 +4,7 @@
     Author     : DELL
 --%>
 
+<%@page import="com.ebutler.swp.dto.ShipperDTO"%>
 <%@page import="com.ebutler.swp.dto.ProductErrorDTO"%>
 <%@page import="com.ebutler.swp.dto.ProductDetailDTO"%>
 <%@page import="com.ebutler.swp.dto.ProviderDTO"%>
@@ -155,9 +156,7 @@
                 <!-- End Modal Edit -->
                 <div class="mt-3 ms-5 d-flex justify-content-start ">
 
-                    <div>
-                        <h2 style="font-weight:600 ;" class="">Order List</h2>
-                    </div>
+                    
 
                     <!-- Modal -->                 
                     <div class="modal js-modal-create " id="basicModal1" aria-hidden="true">
@@ -256,6 +255,11 @@
                             listDetail = (List<OrderDetailDTO>) session.getAttribute("Order_Detail");
                             List<OrderDetailInfoDTO> listDetailInfo = new ArrayList();
                             listDetailInfo = (List<OrderDetailInfoDTO>) session.getAttribute("Info_Detail");
+                            ShipperDTO shipper = (ShipperDTO) session.getAttribute("shipperInfo"); 
+                            int checkShipper = 1 ; 
+                            if(shipper == null) {
+                                checkShipper = 0 ;
+                            }
 
                         %>
                         <div class="layout-container-fluid   " style="border-radius:5px ;">
@@ -305,19 +309,32 @@
                                 <div class="card my-3" style="width:300px ;height: fit-content;">
                                     <div class="card-body">
                                         <div class="border-bottom">
-                                            <h5>Customer</h5>
+                                            <h5>Customer & Shipper</h5>
                                         </div>
                                         <div class="py-2">
                                             <li style="list-style:none ;"><i class="bx bx-user mx-2"></i><%= listDetailInfo.get(0).getName()%></li>
                                             <li style="list-style:none ;"><i class="bx bx-phone mx-2"></i><%= listDetailInfo.get(0).getPhone()%></li>
                                             <li style="list-style:none ;"> <i class="bx bx-envelope mx-2"></i><%= listDetailInfo.get(0).getEmail()%></li> 
-                                            <li style="list-style:none ;"><i class="bx bx-map-pin mx-2"></i>Khu Công Nghệ Cao </li>
+                                            <%
+                                              String name = null ;
+                                              String phone = null ;
+                                               if (checkShipper == 0) {
+                                                   name = "Waiting For Delivery" ;
+                                                   phone = "Loading..." ;
+                                                } else {
+                                                phone = shipper.getPhone() ;
+                                                name = shipper.getName() ;
+                                                }
+                                            %>
+                                            <li style="list-style:none ;"><i class="bx bx-map-pin mx-2"></i> Shipper: <%= name %> </li>
+                                            <li style="list-style:none ;"><i class="bx bx-phone mx-2"></i> Shipper Phone: <%= phone %> </li>
                                         </div>
 
 
                                     </div>
 
                                 </div>
+                                        
                             </div>
 
 
