@@ -389,7 +389,6 @@ END;
 GO
 
 -------- shipper income ---------
---DROP TRIGGER trig_shipper_income
 CREATE TRIGGER trig_shipper_income ON tblDelivery
 AFTER UPDATE
 AS
@@ -408,9 +407,9 @@ BEGIN
 	FROM tblOrder o
 	WHERE o.order_ID = @order_id
 
-	SET @price = (select sum(price)
+	SET @price = (select sum(price * quantity)
 	from tblOrder_Product_Detail
-	where order_ID = @order_id) + 3 
+	where order_ID = @order_id)*0.03
 
 	IF (select COUNT(*)
 	from tblShipperIncome sibm
