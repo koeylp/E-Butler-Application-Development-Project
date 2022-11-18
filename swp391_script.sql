@@ -237,11 +237,13 @@ CREATE TABLE tblAdmin
 (
 	[user_Name] nvarchar(30) PRIMARY KEY NOT NULL ,
 	password nvarchar(30) NOT NULL ,
-	role_ID nvarchar(6) REFERENCES tblAdminRole(role_ID) NOT NULL
+	role_ID nvarchar(6) REFERENCES tblAdminRole(role_ID) NOT NULL,
+	status int
 )
 GO
 
-CREATE TABLE tblDeliveryNotification (
+CREATE TABLE tblDeliveryNotification
+(
 	id int IDENTITY(1, 1) PRIMARY KEY,
 	time datetime,
 	username nvarchar(30),
@@ -433,20 +435,24 @@ AFTER UPDATE, INSERT
 AS
 BEGIN
 	DECLARE @insert int, @update int
-	
-	select @update = COUNT(*) from inserted where status = 3
-	
-	select @insert = COUNT(*) from inserted where status = 0 and username_Shipper IS NULL
-	
+
+	select @update = COUNT(*)
+	from inserted
+	where status = 3
+
+	select @insert = COUNT(*)
+	from inserted
+	where status = 0 and username_Shipper IS NULL
+
 	IF (@insert = 0 and @update = 0) RETURN
 
 	DECLARE @time datetime, @username nvarchar(30), @message nvarchar(max), @status int
 
 	SELECT @username = o.customer_ID, @status = i.status
 	FROM inserted i JOIN tblOrder o ON i.order_id = o.order_ID;
-	
+
 	SET @time = CURRENT_TIMESTAMP
-	
+
 	IF (@status = 3)
 	BEGIN
 		SET @message = 'has received order on assigned address'
@@ -455,8 +461,11 @@ BEGIN
 	BEGIN
 		SET @message = 'has created new order on assigned address'
 	END
-	
-	INSERT INTO tblDeliveryNotification(time, username, message) VALUES (@time, @username, @message)
+
+	INSERT INTO tblDeliveryNotification
+		(time, username, message)
+	VALUES
+		(@time, @username, @message)
 END;
 GO
 -------------------------------------------------------- INSERT -----------------------------------------------------------------
@@ -3233,7 +3242,7 @@ VALUES
 	('fptcompany', '27', '98', 'Home CCTV', 5, 'Get ready all the time. Helping you with the best service', 1)
 INSERT INTO tblServiceDetail
 	(provider_ID, service_ID, staff_ID,name,price,description,status)
-VALUES 
+VALUES
 	('fptcompany', '27', '99', 'Home CCTV', 5, 'Get ready all the time. Helping you with the best service', 1)
 INSERT INTO tblServiceDetail
 	(provider_ID, service_ID, staff_ID,name,price,description,status)
@@ -3301,49 +3310,476 @@ VALUES
 INSERT INTO tblShipper
 	(username, password, name,phone,MRC, status, wallet)
 VALUES
-	('ebutler1', '12345678', 'Nguyen Van A','0364613014' ,'006358',1, 0)
+	('ebutler1', '12345678', 'Nguyen Van A', '0364613014' , '006358', 1, 0)
 INSERT INTO tblShipper
 	(username, password, name,phone,MRC, status, wallet)
 VALUES
-	('ebutler2', '12345678', 'Nguyen Anh Tuan','0311648204' ,'105358', 1, 0)
+	('ebutler2', '12345678', 'Nguyen Anh Tuan', '0311648204' , '105358', 1, 0)
 INSERT INTO tblShipper
 	(username, password, name,phone,MRC, status, wallet)
 VALUES
-	('ebutler3', '12345678', 'Nguyen Thi Hong','0944351304' ,'006497', 1, 0)
+	('ebutler3', '12345678', 'Nguyen Thi Hong', '0944351304' , '006497', 1, 0)
 INSERT INTO tblShipper
 	(username, password, name,phone,MRC, status, wallet)
 VALUES
-	('ebutler4', '12345678', 'Nguyen Manh Quang','0644315201' ,'009213', 1, 0)
+	('ebutler4', '12345678', 'Nguyen Manh Quang', '0644315201' , '009213', 1, 0)
 INSERT INTO tblShipper
 	(username, password, name,phone,MRC, status, wallet)
 VALUES
-	('ebutler5', '12345678', 'Le Ba Hau','0622942014' ,'613497', 1, 0)
+	('ebutler5', '12345678', 'Le Ba Hau', '0622942014' , '613497', 1, 0)
 
 
 
-
-CREATE TABLE tblCustomer
-(
-	[username] nvarchar(30) PRIMARY KEY,
-	[password] [nvarchar](30) NOT NULL,
-	[role_ID] [nvarchar](10) REFERENCES tblUserRole(role_ID) NOT NULL,
-	[phone] nvarchar(11) NOT NULL,
-	[email] [nvarchar](30) UNIQUE NOT NULL,
-	[name] nvarchar(30) NOT NULL,
-	gender [int],
-	dob date,
-	avatar nvarchar(max),
-	point [decimal](9),
-	[status] [decimal](1)
-)
-GO
-
-INSERT INTO tblUser
-	(username, [password], role_ID, [phone], email, [status])
+INSERT INTO tblCustomer
+	(username, [password], role_ID, [phone], email, [name], gender, dob, avatar, point, [status])
 VALUES
-	('baobaobao', '1', 'CUS' ,'0322654879', 1, 1)
+	('baobaobao', '1', 'CUS' , '0322654879', 'baobaobao@gmail.com', 'Doan Gia Bao', 1, '2022-02-02', '1.png' , 0, 1)
 
-INSERT INTO tblUser
-	(username, [password], role_ID, [phone], email, [status])
+INSERT INTO tblCustomer
+	(username, [password], role_ID, [phone], email, [name], gender, dob, avatar, point, [status])
 VALUES
-	('baobaobao', '1', 'CUS' ,'0322654879', 1, 1)
+	('vietvietviet', '1', 'CUS' , '0322654879', 'vietviet@gmail.com', 'Dang Hoang Viet', 1, '2022-02-02', '1.png' , 0, 1)
+
+INSERT INTO tblCustomer
+	(username, [password], role_ID, [phone], email, [name], gender, dob, avatar, point, [status])
+VALUES
+	('toantoantoan', '1', 'CUS' , '0322654879', 'toantona@gmail.com', 'Nguyen Trong Toan', 1, '2022-02-02', '1.png' , 0, 1)
+
+INSERT INTO tblCustomer
+	(username, [password], role_ID, [phone], email, [name], gender, dob, avatar, point, [status])
+VALUES
+	('giang_cat_luong', '1', 'CUS' , '0322654879', 'gianggiang@gmail.com', 'Nguyen Trong Toan', 1, '2022-02-02', '1.png' , 0, 1)
+
+INSERT INTO tblCustomer
+	(username, [password], role_ID, [phone], email, [name], gender, dob, avatar, point, [status])
+VALUES
+	('nganngan1234', '1', 'CUS' , '0322654879', 'nganngan@gmail.com', 'Cao Kim Ngan', 1, '2022-02-02', '1.png' , 0, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	( [username], [product_id], [comment], [rating], [status])
+VALUES
+	('giang_cat_luong' , 107, N'I like it! I like it ! 10 điểm cho chất lượng.', 5, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('baobaobao' , 107, N'Tv siêu xịn! Ước gì có thêm tiền để mua cái thứ 2.', 4, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('vietvietviet' , 107, N'Mẹ mới mua cho, thích cực!', 5, 1)
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('toantoantoan' , 107, N'Cũng được', 2, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('nganngan1234' , 107, N'Good', 4, 1)
+
+/*---------------*/
+
+INSERT INTO [tblReviewProduct]
+	( [username], [product_id], [comment], [rating], [status])
+VALUES
+	('giang_cat_luong' , 106, N'I like it! I like it ! 10 điểm cho chất lượng.', 5, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('baobaobao' , 106, N'Siêu xịn! Ước gì có thêm tiền để mua cái thứ 2.', 4, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('vietvietviet' , 106, N'Mẹ mới mua cho, thích cực!', 4, 1)
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('toantoantoan' , 106, N'Cũng được', 4, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('nganngan1234' , 106, N'Good', 4, 1)
+
+/*---------------*/
+
+INSERT INTO [tblReviewProduct]
+	( [username], [product_id], [comment], [rating], [status])
+VALUES
+	('giang_cat_luong' , 105, N'I like it! I like it ! 10 điểm cho chất lượng.', 5, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('baobaobao' , 105, N'Siêu xịn! Ước gì có thêm tiền để mua cái thứ 2.', 4, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('vietvietviet' , 105, N'Mẹ mới mua cho, thích cực!', 2, 1)
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('toantoantoan' , 105, N'Cũng được', 3, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('nganngan1234' , 105, N'Good', 4, 1)
+
+/*---------------*/
+
+INSERT INTO [tblReviewProduct]
+	( [username], [product_id], [comment], [rating], [status])
+VALUES
+	('giang_cat_luong' , 104, N'I like it! I like it ! 10 điểm cho chất lượng.', 5, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('baobaobao' , 104, N'Siêu xịn! Ước gì có thêm tiền để mua cái thứ 2.', 4, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('vietvietviet' , 104, N'Mẹ mới mua cho, thích cực!', 5, 1)
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('toantoantoan' , 104, N'Cũng được', 4, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES	
+	('nganngan1234' , 104, N'Good', 4, 1)
+
+/*---------------*/
+
+INSERT INTO [tblReviewProduct]
+	( [username], [product_id], [comment], [rating], [status])
+VALUES
+	('giang_cat_luong' , 103, N'I like it! I like it ! 10 điểm cho chất lượng.', 5, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('baobaobao' , 103, N'Siêu xịn! Ước gì có thêm tiền để mua cái thứ 2.', 4, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('vietvietviet' , 103, N'Mẹ mới mua cho, thích cực!', 5, 1)
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('toantoantoan' , 103, N'Cũng được', 2, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('nganngan1234' , 103, N'Good', 5, 1)
+
+/*---------------*/
+
+INSERT INTO [tblReviewProduct]
+	( [username], [product_id], [comment], [rating], [status])
+VALUES
+	('giang_cat_luong' , 102, N'I like it! I like it ! 10 điểm cho chất lượng.', 5, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('baobaobao' , 102, N'Siêu xịn! Ước gì có thêm tiền để mua cái thứ 2.', 4, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('vietvietviet' , 102, N'Mẹ mới mua cho, thích cực!', 5, 1)
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('toantoantoan' , 102, N'Cũng được', 5, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('nganngan1234' , 102, N'Good', 5, 1)
+
+/*---------------*/
+
+INSERT INTO [tblReviewProduct]
+	( [username], [product_id], [comment], [rating], [status])
+VALUES
+	('giang_cat_luong' , 101, N'I like it! I like it ! 10 điểm cho chất lượng.', 5, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('baobaobao' , 101, N'Siêu xịn! Ước gì có thêm tiền để mua cái thứ 2.', 4, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('vietvietviet' , 101, N'Mẹ mới mua cho, thích cực!', 4, 1)
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('toantoantoan' , 101, N'Cũng được', 4, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('nganngan1234' , 101, N'Good', 4, 1)
+
+/*---------------*/
+
+INSERT INTO [tblReviewProduct]
+	( [username], [product_id], [comment], [rating], [status])
+VALUES
+	('giang_cat_luong' , 100, N'I like it! I like it ! 10 điểm cho chất lượng.', 5, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('baobaobao' , 100, N'Siêu xịn! Ước gì có thêm tiền để mua cái thứ 2.', 4, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('vietvietviet' , 100, N'Mẹ mới mua cho, thích cực!', 5, 1)
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('toantoantoan' , 100, N'Cũng được', 4, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('nganngan1234' , 100, N'Good', 5, 1)
+
+/*---------------*/
+
+INSERT INTO [tblReviewProduct]
+	( [username], [product_id], [comment], [rating], [status])
+VALUES
+	('giang_cat_luong' , 108, N'I like it! I like it ! 10 điểm cho chất lượng.', 5, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('baobaobao' , 108, N'Siêu xịn! Ước gì có thêm tiền để mua cái thứ 2.', 4, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('vietvietviet' , 108, N'Mẹ mới mua cho, thích cực!', 5, 1)
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('toantoantoan' , 108, N'Cũng được', 2, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('nganngan1234' , 108, N'Good', 5, 1)
+
+/*---------------*/
+
+INSERT INTO [tblReviewProduct]
+	( [username], [product_id], [comment], [rating], [status])
+VALUES
+	('giang_cat_luong' , 109, N'I like it! I like it ! 10 điểm cho chất lượng.', 5, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('baobaobao' , 109, N'Siêu xịn! Ước gì có thêm tiền để mua cái thứ 2.', 4, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('vietvietviet' , 109, N'Mẹ mới mua cho, thích cực!', 5, 1)
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('toantoantoan' , 109, N'Cũng được', 3, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('nganngan1234' , 109, N'Good', 5, 1)
+
+/*---------------*/
+
+INSERT INTO [tblReviewProduct]
+	( [username], [product_id], [comment], [rating], [status])
+VALUES
+	('giang_cat_luong' , 120, N'I like it! I like it ! 10 điểm cho chất lượng.', 5, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('baobaobao' , 120, N'Siêu xịn! Ước gì có thêm tiền để mua cái thứ 2.', 5, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('vietvietviet' , 120, N'Mẹ mới mua cho, thích cực!', 5, 1)
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('toantoantoan' , 120, N'Cũng được', 5, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('nganngan1234' , 120, N'Good', 5, 1)
+
+
+/*---------------*/
+
+INSERT INTO [tblReviewProduct]
+	( [username], [product_id], [comment], [rating], [status])
+VALUES
+	('giang_cat_luong' , 121, N'I like it! I like it ! 10 điểm cho chất lượng.', 5, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('baobaobao' , 121, N'Siêu xịn! Ước gì có thêm tiền để mua cái thứ 2.', 4, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('vietvietviet' , 121, N'Mẹ mới mua cho, thích cực!', 5, 1)
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('toantoantoan' , 121, N'Cũng được', 3, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('nganngan1234' , 121, N'Good', 5, 1)
+
+/*---------------*/
+
+INSERT INTO [tblReviewProduct]
+	( [username], [product_id], [comment], [rating], [status])
+VALUES
+	('giang_cat_luong' , 122, N'I like it! I like it ! 10 điểm cho chất lượng.', 5, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('baobaobao' , 122, N'Siêu xịn! Ước gì có thêm tiền để mua cái thứ 2.', 4, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('vietvietviet' , 122, N'Mẹ mới mua cho, thích cực!', 5, 1)
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('toantoantoan' , 122, N'Cũng được', 3, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('nganngan1234' , 122, N'Good', 5, 1)
+
+
+/*---------------*/
+
+INSERT INTO [tblReviewProduct]
+	( [username], [product_id], [comment], [rating], [status])
+VALUES
+	('giang_cat_luong' , 123, N'I like it! I like it ! 10 điểm cho chất lượng.', 4, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('baobaobao' , 123, N'Siêu xịn! Ước gì có thêm tiền để mua cái thứ 2.', 4, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('vietvietviet' , 123, N'Mẹ mới mua cho, thích cực!', 5, 1)
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('toantoantoan' , 123, N'Cũng được', 3, 1)
+
+
+INSERT INTO [tblReviewProduct]
+	([username], [product_id], [comment], [rating], [status])
+VALUES
+	('nganngan1234' , 123, N'Good', 5, 1)
+
+insert into tblAdminRole(role_ID, role_Name) values ('MA', 'Admin Master')
+insert into tblAdminRole(role_ID, role_Name) values ('US', 'Admin User')
+insert into tblAdminRole(role_ID, role_Name) values ('RE', 'Admin Revenue')
+
+insert into tblAdmin(user_Name, password, role_ID, status) values('hieuMA', '1', 'MA', 1)
+insert into tblAdmin(user_Name, password, role_ID, status) values('hieuRE', '1', 'RE', 1)
+insert into tblAdmin(user_Name, password, role_ID, status) values('hieuUS', '1', 'US', 1)

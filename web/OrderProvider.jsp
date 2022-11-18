@@ -268,7 +268,7 @@
                                             <th>Orders ID</th>
                                             <th>Date</th>
                                             <th>Customer ID</th>
-                                            <th>Order Total</th>
+                                            
 
                                             <th>Status</th>
                                             <th>Actions</th>
@@ -290,7 +290,7 @@
                                             <td> <%= order.getOrder_date()%></td>
 
                                             <td><%= order.getCustomer_ID()%></td>
-                                            <td><%= order.getTotal()%></td>
+                                            
 
                                             </td>
                                             <td>
