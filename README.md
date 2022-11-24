@@ -31,3 +31,7 @@
   - Java JDK 1.8
   - Apache Tomcat 8.5.29
   - Jira
+
+
+## License & Copyright
+&copy; 2022 K
