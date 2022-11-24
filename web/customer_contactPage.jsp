@@ -181,7 +181,7 @@
                             <h1 style="color: var(--primary-color);">Feedback problem</h1>
                             <div style="font-size: 1.6rem;" class="form__body-issue-input">
                                 <input type="radio" value="complain" name="issue-input" required="">
-                                <label for="" value="complain">Complain</label>
+                                <label for="" value="complain">Complaint</label>
                                 <input type="radio" value="Praise" name="issue-input" required="">
                                 <label for="" value="Praise">Praise</label>
                                 <input type="radio" value="other" name="issue-input" required="">
