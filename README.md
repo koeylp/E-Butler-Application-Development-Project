@@ -9,3 +9,25 @@
   <img src="./screenshot/confirmation-screen.png" alt="Confirmation" width="45%"></img> &nbsp;&nbsp; <img src="./screenshot/provider-product-list-screen.png" alt="Product Management" width="45%"></img> 
   <img src="./screenshot/service-list-screen.png" alt="Service Management" width="45%"></img> &nbsp;&nbsp; <img src="./screenshot/provider-staff-management.png" alt="Staff Management" width="45%"></img>
 </div>
+
+### Technologies
+**1. Frontend**
+  - HTML, CSS, JavaScript
+  - Boostrap Framework
+
+**2. Backend**
+  - Java Language
+
+**3. Database**
+  - Microsoft SQL Server 
+
+**4. Other Technologies**
+- Oauth2
+- MVC2 Model
+- PayPal Integration
+
+**5. Tool**
+  - Netbeans 15
+  - Java JDK 1.8
+  - Apache Tomcat 8.5.29
+  - Jira
